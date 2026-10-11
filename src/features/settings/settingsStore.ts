@@ -64,11 +64,16 @@ export interface Settings extends Omit<ConversationSettings, 'systemPrompt'> {
   theme: ThemeSetting;
   enterToSend: boolean;
   showStats: boolean;
+  /** アプリのアイコンに今日の残りの枚数を出す（ホーム画面に追加したとき） */
+  appBadge: boolean;
   // ---- バックアップ ----
   /** 最後に学習データを書き出した日時 */
   lastBackupAt: number | null;
   /** バックアップの案内を出さない期限 */
   backupSnoozeUntil: number | null;
+  // ---- はじめての案内 ----
+  /** はじめての案内を終えた（または教材がすでにあって不要だった） */
+  onboarded: boolean;
 }
 
 export const DEFAULT_SETTINGS: Settings = {
@@ -113,9 +118,12 @@ export const DEFAULT_SETTINGS: Settings = {
   theme: 'system',
   enterToSend: true,
   showStats: false,
+  appBadge: true,
 
   lastBackupAt: null,
   backupSnoozeUntil: null,
+
+  onboarded: false,
 };
 
 interface SettingsState extends Settings {
@@ -135,6 +143,7 @@ export const useSettings = create<SettingsState>()(
           lastModelName: s.lastModelName,
           backendHints: s.backendHints,
           lastBackupAt: s.lastBackupAt,
+          onboarded: s.onboarded,
         })),
     }),
     {

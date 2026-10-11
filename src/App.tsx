@@ -7,6 +7,7 @@ import { useStartup } from '@/app/useStartup';
 import { useTheme } from '@/app/useTheme';
 import HomePage from '@/pages/HomePage';
 import { useSettings } from '@/features/settings/settingsStore';
+import { WelcomeDialog } from '@/features/welcome/WelcomeDialog';
 
 // ホーム以外のページは必要になってから読み込む
 const StudyPage = lazy(() => import('@/pages/StudyPage'));
@@ -42,6 +43,7 @@ export default function App() {
           </Switch>
         </Suspense>
       </AppLayout>
+      <WelcomeDialog />
       <Toaster
         theme={theme}
         position="top-center"

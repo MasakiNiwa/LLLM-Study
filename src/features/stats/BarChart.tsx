@@ -31,7 +31,9 @@ function dayLabel(day: string): string {
 export function BarChart({ data, unit, tableLabel, today }: BarChartProps) {
   const [hover, setHover] = useState<number | null>(null);
   const tableId = useId();
-  const max = Math.max(1, ...data.map((d) => d.value));
+  const peak = Math.max(0, ...data.map((d) => d.value));
+  // 高さの計算用（すべて 0 のときに 0 で割らない）
+  const max = Math.max(1, peak);
   const n = data.length;
   const slot = 100 / n;
   const gap = Math.min(0.6, slot * 0.2);
@@ -45,7 +47,7 @@ export function BarChart({ data, unit, tableLabel, today }: BarChartProps) {
           preserveAspectRatio="none"
           className="h-32 w-full overflow-visible"
           role="img"
-          aria-label={`${tableLabel}（最大 ${max} ${unit}）`}
+          aria-label={`${tableLabel}（最大 ${peak} ${unit}）`}
         >
           <line
             x1="0"
@@ -111,7 +113,7 @@ export function BarChart({ data, unit, tableLabel, today }: BarChartProps) {
       </div>
       <div className="mt-1 flex justify-between text-[0.7rem] text-slate-500 tabular-nums dark:text-slate-400">
         <span>{format(parseDayKey(data[0].day), 'M/d')}</span>
-        <span>最大 {max}</span>
+        <span>最大 {peak}</span>
         <span>{format(parseDayKey(data[n - 1].day), 'M/d')}</span>
       </div>
       <details className="mt-1 text-xs">

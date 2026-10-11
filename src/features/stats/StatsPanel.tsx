@@ -3,9 +3,12 @@ import { Loader2 } from 'lucide-react';
 import { Card } from '@/components/ui/Card';
 import { dataWorker } from '@/lib/data/client';
 import type { StatsData } from '@/lib/data/stats';
+import { Select } from '@/components/ui/Select';
 import { useSettings } from '@/features/settings/settingsStore';
+import { useLibrary } from '@/features/library/libraryStore';
 import { BarChart } from './BarChart';
 import { StateBar } from './StateBar';
+import { YearHeatmap } from './YearHeatmap';
 
 const DAYS = 30;
 
@@ -42,13 +45,21 @@ function ChartCard({
 /** 記録（統計）。集計は Data Worker で行う */
 export function StatsPanel({ today }: { today: string }) {
   const dayStart = useSettings((s) => s.dayStartHour);
+  const packs = useLibrary((s) => s.packs);
+  const [packId, setPackId] = useState('');
   const [data, setData] = useState<{ key: string; stats: StatsData } | null>(null);
-  const key = `${today}:${dayStart}`;
+  // 消された教材が選ばれたままにならないように
+  const scope = packs.some((p) => p.id === packId) ? packId : '';
+  const key = `${today}:${dayStart}:${scope}`;
+
+  useEffect(() => {
+    void useLibrary.getState().refresh();
+  }, []);
 
   useEffect(() => {
     let cancelled = false;
     dataWorker()
-      .stats(today, dayStart, DAYS, Date.now())
+      .stats(today, dayStart, DAYS, Date.now(), scope || undefined)
       .then(
         (stats) => !cancelled && setData({ key, stats }),
         (e) => console.warn('記録を集計できませんでした', e),
@@ -56,13 +67,28 @@ export function StatsPanel({ today }: { today: string }) {
     return () => {
       cancelled = true;
     };
-  }, [today, dayStart, key]);
+  }, [today, dayStart, scope, key]);
 
   const stats = data?.key === key ? data.stats : null;
+  const picker =
+    packs.length > 1 ? (
+      <Select
+        value={scope}
+        onChange={setPackId}
+        aria-label="集計する教材"
+        options={[
+          { value: '', label: 'すべての教材' },
+          ...packs.map((p) => ({ value: p.id, label: p.title })),
+        ]}
+      />
+    ) : null;
   if (!stats) {
     return (
-      <div className="flex justify-center py-10 text-slate-400">
-        <Loader2 className="size-6 animate-spin" />
+      <div className="space-y-4">
+        {picker}
+        <div className="flex justify-center py-10 text-slate-400">
+          <Loader2 className="size-6 animate-spin" />
+        </div>
       </div>
     );
   }
@@ -73,6 +99,7 @@ export function StatsPanel({ today }: { today: string }) {
 
   return (
     <div className="space-y-4">
+      {picker}
       <div className="grid grid-cols-2 gap-2 sm:grid-cols-4">
         <Tile label="学習した日" value={`${stats.studyDays}`} />
         <Tile
@@ -107,6 +134,10 @@ export function StatsPanel({ today }: { today: string }) {
           tableLabel="復習予定"
           today={today}
         />
+      </ChartCard>
+
+      <ChartCard title="この 1 年" description="色が濃いほどたくさん学習した日です">
+        <YearHeatmap today={today} year={stats.year} />
       </ChartCard>
 
       <ChartCard title="学習した回数" description={`直近 ${DAYS} 日`}>

@@ -8,12 +8,15 @@ import {
   Info,
   Keyboard,
   MonitorCheck,
+  PlayCircle,
   Scale,
   Sparkles,
   Wand2,
 } from 'lucide-react';
 import { PageBody, PageHeader } from '@/app/PageHeader';
 import { Section } from '@/components/ui/Card';
+import { Button } from '@/components/ui/Button';
+import { openWelcome } from '@/features/welcome/welcomeStore';
 import {
   FSRS_URL,
   FSRS_WIKI_URL,
@@ -141,6 +144,12 @@ export default function HelpPage() {
               </li>
             ))}
           </ol>
+          <div className="border-t border-slate-200 px-4 py-3 sm:px-5 dark:border-slate-800">
+            <Button size="sm" variant="secondary" onClick={openWelcome}>
+              <PlayCircle />
+              はじめての案内をもう一度見る
+            </Button>
+          </div>
         </Section>
 
         <Section
