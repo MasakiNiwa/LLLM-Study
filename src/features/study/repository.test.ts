@@ -100,3 +100,14 @@ describe('教材の切り替えと上限なし', () => {
     expect((await loadQueue({ ...settings, noDailyLimit: true }, now)).newCount).toBe(9);
   });
 });
+
+describe('出題を止める', () => {
+  it('止めた項目のカードは出題しない', async () => {
+    const { setItemSuspended } = await import('./cardActions');
+    await setItemSuspended('p/w0', true);
+    const plan = await loadQueue(settings, now);
+    expect(plan.queue.some((c) => c.itemKey === 'p/w0')).toBe(false);
+    await setItemSuspended('p/w0', false);
+    expect((await loadQueue(settings, now)).queue[0].itemKey).toBe('p/w0');
+  });
+});

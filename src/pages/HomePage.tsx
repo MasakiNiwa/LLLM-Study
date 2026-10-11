@@ -24,6 +24,7 @@ import { useSettings } from '@/features/settings/settingsStore';
 import { useTodayOverview } from '@/features/study/useTodayOverview';
 import { WeekStrip } from '@/features/calendar/WeekStrip';
 import { ScopePicker } from '@/features/study/ScopePicker';
+import { BackupReminder } from '@/features/home/BackupReminder';
 
 function ProgressRing({ value }: { value: number }) {
   const r = 34;
@@ -153,6 +154,8 @@ export default function HomePage() {
             </Link>
           </Card>
         )}
+
+        <BackupReminder />
 
         <Card className="grid grid-cols-3 gap-2 p-4">
           <Stat icon={<Flame />} value={`${overview?.streak ?? 0}日`} label="連続" />

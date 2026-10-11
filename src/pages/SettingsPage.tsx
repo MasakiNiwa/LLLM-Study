@@ -19,10 +19,9 @@ import { Field } from '@/components/ui/Field';
 import { Select } from '@/components/ui/Select';
 import { Slider } from '@/components/ui/Slider';
 import { Switch } from '@/components/ui/Switch';
-import { clearAllData, clearAllProgress, exportBackup, restoreBackup } from '@/lib/db/backup';
+import { clearAllData, clearAllProgress, restoreBackup } from '@/lib/db/backup';
 import { deleteAllStoredModels, isOpfsSupported } from '@/lib/llm/modelStorage';
 import { getVoices, isSpeechSupported, speak } from '@/lib/speech/tts';
-import { downloadText } from '@/lib/utils/download';
 import { cn } from '@/lib/utils/cn';
 import { errorMessage, formatBytes } from '@/lib/utils/format';
 import { CUSTOM_PERSONA_ID, PERSONAS } from '@/features/ai/personas';
@@ -45,6 +44,7 @@ import {
   type TypeAnswerMode,
 } from '@/features/settings/settingsStore';
 import { useStudy } from '@/features/study/studyStore';
+import { backupNow } from '@/features/home/backup';
 
 const CONTEXT_OPTIONS = [2048, 4096, 8192, 16384, 32768].map((n) => ({
   value: String(n),
@@ -151,16 +151,7 @@ export default function SettingsPage() {
     void refreshStored();
   };
 
-  const backup = async () => {
-    try {
-      const data = await exportBackup();
-      const date = data.exportedAt.slice(0, 10);
-      downloadText(`lllm-study-backup-${date}.json`, JSON.stringify(data), 'application/json');
-      toast.success('バックアップを書き出しました');
-    } catch (e) {
-      toast.error('書き出しに失敗しました', { description: errorMessage(e) });
-    }
-  };
+  const backup = () => backupNow();
 
   const restore = async () => {
     const text = restoreText.current;

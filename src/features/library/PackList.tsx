@@ -3,7 +3,7 @@ import {
   ArrowDown,
   ArrowUp,
   ChevronDown,
-  Pencil,
+  FileDown,
   Play,
   Plus,
   RotateCcw,
@@ -17,7 +17,6 @@ import { Card } from '@/components/ui/Card';
 import { ConfirmDialog } from '@/components/ui/ConfirmDialog';
 import { Switch } from '@/components/ui/Switch';
 import { db } from '@/lib/db/db';
-import type { ItemRecord } from '@/lib/db/types';
 import {
   movePack,
   resetPackProgress,
@@ -25,7 +24,6 @@ import {
   setPackTemplates,
   uninstallPack,
 } from '@/lib/packs/install';
-import { itemAnswer, itemSearchText, itemTitle } from '@/lib/packs/itemText';
 import type { ItemType, StudyItem } from '@/lib/packs/schema';
 import { subjectKey, subjectLabel } from '@/lib/packs/subjects';
 import { ITEM_TYPE_LABELS, TEMPLATES } from '@/lib/packs/templates';
@@ -34,7 +32,13 @@ import { useSettings } from '@/features/settings/settingsStore';
 import { useStudy } from '@/features/study/studyStore';
 import { cn } from '@/lib/utils/cn';
 import { errorMessage } from '@/lib/utils/format';
+import { dataWorker } from '@/lib/data/client';
+import { exportPack } from '@/lib/packs/exportPack';
+import { downloadText } from '@/lib/utils/download';
+import type { ItemSummary } from '@/lib/data/stats';
+import { setItemSuspended } from '@/features/study/cardActions';
 import { CardEditor } from './CardEditor';
+import { ItemRow } from './ItemRow';
 import { useLibrary, type PackWithStats } from './libraryStore';
 
 function StatsBar({ pack }: { pack: PackWithStats }) {
@@ -64,18 +68,38 @@ function ItemBrowser({
   packId: string;
   /** パックが更新されたら読み直す */
   version: number;
-  /** 指定すると項目をタップして編集できる（マイカード） */
+  /** 指定すると項目を編集できる（マイカード） */
   onEdit?: (item: StudyItem) => void;
 }) {
-  const [items, setItems] = useState<ItemRecord[] | null>(null);
+  const [items, setItems] = useState<ItemSummary[] | null>(null);
   const [query, setQuery] = useState('');
+  const [reload, setReload] = useState(0);
   useEffect(() => {
-    void db.items.where('packId').equals(packId).sortBy('order').then(setItems);
-  }, [packId, version]);
+    let cancelled = false;
+    void dataWorker()
+      .packItems(packId)
+      .then((r) => !cancelled && setItems(r));
+    return () => {
+      cancelled = true;
+    };
+  }, [packId, version, reload]);
   const filtered = useMemo(() => {
     const q = query.trim().toLowerCase();
-    return (items ?? []).filter((i) => !q || itemSearchText(i.item).includes(q)).slice(0, 200);
+    return (items ?? [])
+      .filter((i) => !q || `${i.title} ${i.answer}`.toLowerCase().includes(q))
+      .slice(0, 300);
   }, [items, query]);
+
+  const toggle = async (item: ItemSummary) => {
+    await setItemSuspended(item.key, item.status !== 'suspended');
+    setReload((n) => n + 1);
+    void useLibrary.getState().refresh();
+  };
+  const edit = async (key: string) => {
+    const rec = await db.items.get(key);
+    if (rec) onEdit?.(rec.item);
+  };
+
   return (
     <div className="space-y-2">
       <div className="relative">
@@ -87,34 +111,62 @@ function ItemBrowser({
           className="h-9 w-full rounded-xl border border-slate-300 bg-white pr-3 pl-9 text-sm dark:border-slate-700 dark:bg-slate-950"
         />
       </div>
-      <ul className="max-h-72 divide-y divide-slate-100 overflow-y-auto rounded-xl border border-slate-200 dark:divide-slate-800 dark:border-slate-800">
+      <ul className="max-h-80 divide-y divide-slate-100 overflow-y-auto rounded-xl border border-slate-200 dark:divide-slate-800 dark:border-slate-800">
         {filtered.map((i) => (
-          <li key={i.key} className="text-sm">
-            {onEdit ? (
-              <button
-                type="button"
-                onClick={() => onEdit(i.item)}
-                className="flex w-full items-center gap-2 px-3 py-2 text-left hover:bg-slate-50 dark:hover:bg-slate-800/50"
-              >
-                <span className="min-w-0 flex-1">
-                  <span className="block truncate font-medium">{itemTitle(i.item)}</span>
-                  <span className="block truncate text-xs text-slate-500">
-                    {itemAnswer(i.item)}
-                  </span>
-                </span>
-                <Pencil className="size-4 shrink-0 text-slate-400" />
-              </button>
-            ) : (
-              <div className="px-3 py-2">
-                <div className="truncate font-medium">{itemTitle(i.item)}</div>
-                <div className="truncate text-xs text-slate-500">{itemAnswer(i.item)}</div>
-              </div>
-            )}
-          </li>
+          <ItemRow
+            key={i.key}
+            item={i}
+            onToggleSuspend={() => void toggle(i)}
+            onEdit={onEdit ? () => void edit(i.key) : undefined}
+          />
         ))}
         {items && filtered.length === 0 && (
           <li className="px-3 py-4 text-center text-sm text-slate-500">見つかりません</li>
         )}
+      </ul>
+    </div>
+  );
+}
+
+/** すべての教材から項目を探した結果 */
+function GlobalItemSearch({ query }: { query: string }) {
+  const packs = useLibrary((s) => s.packs);
+  const [result, setResult] = useState<{ q: string; items: ItemSummary[] } | null>(null);
+  const [reload, setReload] = useState(0);
+  const q = query.trim();
+  useEffect(() => {
+    if (!q) return;
+    let cancelled = false;
+    const t = setTimeout(() => {
+      void dataWorker()
+        .searchItems(q, 50)
+        .then((items) => !cancelled && setResult({ q, items }));
+    }, 200);
+    return () => {
+      cancelled = true;
+      clearTimeout(t);
+    };
+  }, [q, reload]);
+  if (!q || result?.q !== q || result.items.length === 0) return null;
+  const titleOf = new Map(packs.map((p) => [p.id, p.title]));
+  return (
+    <div className="space-y-1.5">
+      <h3 className="px-1 text-sm font-medium text-slate-500 dark:text-slate-400">
+        項目の検索結果（{result.items.length >= 50 ? '50 件以上' : `${result.items.length} 件`}）
+      </h3>
+      <ul className="divide-y divide-slate-100 rounded-2xl border border-slate-200 bg-white dark:divide-slate-800 dark:border-slate-800 dark:bg-slate-900">
+        {result.items.map((i) => (
+          <ItemRow
+            key={i.key}
+            item={i}
+            packTitle={titleOf.get(i.packId)}
+            onToggleSuspend={() =>
+              void setItemSuspended(i.key, i.status !== 'suspended').then(() =>
+                setReload((n) => n + 1),
+              )
+            }
+          />
+        ))}
       </ul>
     </div>
   );
@@ -285,6 +337,26 @@ function PackCard({
             >
               <ArrowDown />
             </Button>
+            <Button
+              size="sm"
+              variant="ghost"
+              onClick={async () => {
+                try {
+                  const data = await exportPack(pack.id);
+                  downloadText(
+                    `${pack.id}.json`,
+                    JSON.stringify(data, null, 2),
+                    'application/json',
+                  );
+                } catch (e) {
+                  toast.error('書き出せませんでした', { description: errorMessage(e) });
+                }
+              }}
+              title="教材パック形式（JSON）で書き出す。共有や、外部 AI に続きを作ってもらうのに使えます"
+            >
+              <FileDown />
+              書き出す
+            </Button>
             <Button size="sm" variant="ghost" onClick={() => setConfirm('reset')}>
               <RotateCcw />
               最初からやり直す
@@ -386,13 +458,13 @@ export function PackList({ empty }: { empty: React.ReactNode }) {
   return (
     <div className="space-y-3">
       <div className="flex flex-wrap items-center gap-2">
-        {showTools && (
+        {packs.length > 0 && (
           <div className="relative min-w-0 flex-1">
             <Search className="pointer-events-none absolute top-1/2 left-3 size-4 -translate-y-1/2 text-slate-400" />
             <input
               value={query}
               onChange={(e) => setQuery(e.target.value)}
-              placeholder="教材を検索（タイトル・タグ）"
+              placeholder="教材・項目を検索"
               aria-label="教材を検索"
               className="h-10 w-full rounded-xl border border-slate-300 bg-white pr-3 pl-9 text-sm dark:border-slate-700 dark:bg-slate-950"
             />
@@ -447,9 +519,10 @@ export function PackList({ empty }: { empty: React.ReactNode }) {
               onEdit={(item) => setEditor({ item })}
             />
           ))}
-      {packs.length > 0 && visible.length === 0 && (
-        <p className="py-6 text-center text-sm text-slate-500">条件に合う教材がありません</p>
+      {packs.length > 0 && visible.length === 0 && !query.trim() && (
+        <p className="py-4 text-center text-sm text-slate-500">条件に合う教材がありません</p>
       )}
+      <GlobalItemSearch query={query} />
       <CardEditor open={editor !== null} editing={editor?.item} onClose={() => setEditor(null)} />
     </div>
   );

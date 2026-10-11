@@ -89,3 +89,29 @@ export interface StatsData {
   /** 学習済みカードの、いま思い出せる確率の平均（0〜1。学習済みが無ければ undefined） */
   averageRecall?: number;
 }
+
+/** 項目の学習状況（一覧・検索で表示する） */
+export type ItemStatus = 'new' | 'learning' | 'review' | 'mature' | 'suspended';
+
+export function itemStatus(
+  cards: Pick<CardRecord, 'state' | 'scheduled_days' | 'suspended'>[],
+): ItemStatus {
+  if (cards.length > 0 && cards.every((c) => c.suspended)) return 'suspended';
+  const active = cards.filter((c) => !c.suspended);
+  if (active.every((c) => c.state === 0)) return 'new';
+  if (active.some((c) => c.state === 1 || c.state === 3)) return 'learning';
+  return active.every((c) => c.state === 0 || c.scheduled_days >= MATURE_DAYS) &&
+    active.some((c) => c.state === 2)
+    ? 'mature'
+    : 'review';
+}
+
+export interface ItemSummary {
+  key: string;
+  packId: string;
+  title: string;
+  answer: string;
+  status: ItemStatus;
+  /** 次の復習予定（学習済みのとき） */
+  nextDue?: number;
+}

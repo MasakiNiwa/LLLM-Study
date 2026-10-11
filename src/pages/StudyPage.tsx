@@ -2,6 +2,7 @@ import { useEffect, useState } from 'react';
 import {
   CalendarDays,
   Eye,
+  EyeOff,
   House,
   Infinity as InfinityIcon,
   Keyboard,
@@ -9,6 +10,7 @@ import {
   Loader2,
   LogOut,
   PartyPopper,
+  TriangleAlert,
   Undo2,
   Wand2,
 } from 'lucide-react';
@@ -27,6 +29,7 @@ import { CardFace, type OrderResult } from '@/features/items/ItemCard';
 import { useEngine } from '@/features/engine/engineStore';
 import { useSettings } from '@/features/settings/settingsStore';
 import { AiAssistPanel } from '@/features/study/AiAssistPanel';
+import { LEECH_LAPSES } from '@/features/study/cardActions';
 import { AnswerInput } from '@/features/study/AnswerInput';
 import { AnswerResult } from '@/features/study/AnswerResult';
 import { RatingBar } from '@/features/study/RatingBar';
@@ -333,7 +336,17 @@ export default function StudyPage() {
                       {badge.label}
                     </span>
                   )}
+                  {current.card.reps > 0 && <span>復習 {current.card.reps} 回</span>}
                   {current.card.lapses > 0 && <span>忘れた回数 {current.card.lapses}</span>}
+                  <button
+                    type="button"
+                    onClick={() => void useStudy.getState().suspendCurrent()}
+                    className="ml-auto inline-flex items-center gap-1 rounded-md px-1.5 py-0.5 hover:bg-slate-100 hover:text-slate-700 dark:hover:bg-slate-800 dark:hover:text-slate-200"
+                    title="この項目を今後出題しない（教材の項目一覧から再開できます）"
+                  >
+                    <EyeOff className="size-3.5" />
+                    出題しない
+                  </button>
                 </div>
                 <div className="px-4 py-8 sm:px-8 sm:py-10" key={current.card.id}>
                   <CardFace
@@ -394,6 +407,22 @@ export default function StudyPage() {
                   )}
                 </div>
               </Card>
+              {revealed && current.card.lapses >= LEECH_LAPSES && (
+                <div className="flex flex-wrap items-center gap-2 rounded-2xl border border-amber-200 bg-amber-50 px-4 py-3 text-sm text-amber-900 dark:border-amber-900 dark:bg-amber-950/40 dark:text-amber-200">
+                  <TriangleAlert className="size-4 shrink-0" />
+                  <span className="min-w-0 flex-1">
+                    このカードは {current.card.lapses}{' '}
+                    回忘れています。覚え方を変えてみるか、いったん出題を止めるのも手です。
+                  </span>
+                  <Button
+                    size="sm"
+                    variant="secondary"
+                    onClick={() => void useStudy.getState().suspendCurrent()}
+                  >
+                    出題を止める
+                  </Button>
+                </div>
+              )}
               {revealed && <AiAssistPanel key={current.card.id} card={current.card} />}
             </div>
           </div>
