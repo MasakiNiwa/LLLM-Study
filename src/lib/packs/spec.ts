@@ -107,6 +107,41 @@ export function examplePack(types: readonly ItemType[]): StudyPack {
   };
 }
 
+/** 長文読解の例（本文 1 つと、それを参照する問題） */
+function readingExample(types: readonly ItemType[]): StudyPack {
+  const base = examplePack(types);
+  return {
+    ...base,
+    passages: [
+      {
+        id: 'r1',
+        title: 'A Letter from Kyoto',
+        text: 'Dear Emma,\nI arrived in Kyoto last Monday. The weather has been cold, but the temples are beautiful. Tomorrow I will visit Kinkaku-ji with my host family.\nBest,\nKen',
+        translation:
+          'エマへ\n先週の月曜日に京都に着きました。寒い日が続いていますが、お寺はとても美しいです。明日はホストファミリーと金閣寺を訪れます。\nケンより',
+      },
+    ],
+    items: [
+      {
+        id: 'r1-q1',
+        type: 'choice',
+        passage: 'r1',
+        question: 'ケンが京都に着いたのはいつですか。',
+        choices: ['先週の月曜日', '昨日', '今週の金曜日', '明日'],
+        answer: 0,
+        explanation: '"I arrived in Kyoto last Monday." とあります。',
+      },
+      {
+        id: 'r1-q2',
+        type: 'qa',
+        passage: 'r1',
+        question: 'ケンは明日、誰とどこを訪れますか。',
+        answer: 'ホストファミリーと金閣寺',
+      },
+    ],
+  };
+}
+
 const RULES = [
   `出力は JSON だけにする（前置きや説明文は付けない）。全体を 1 つの \`\`\`json コードブロックに入れてもよい`,
   `"format" は "${PACK_FORMAT}"、"version" は ${PACK_VERSION} にする`,
@@ -118,6 +153,7 @@ const RULES = [
   'テーマに合った種類を選ぶ（語学なら単語・フレーズ、知識や資格なら一問一答・穴埋め・選択問題など）。種類は組み合わせてもよい',
   '1 つの項目では 1 つのことだけを問い、答えが一つに決まるようにする。解説には覚えるための要点を短く書く',
   '事実と異なる内容を入れない。自信がない情報は省略する',
+  '長文読解・会話文の聞き取りなど、複数の問題が同じ本文を使うときは、本文をパックの "passages"（{ "id", "title", "text", "translation" }）に入れ、各問題の "passage" にその id を書く。本文は問題の上に表示される',
 ];
 
 /** 項目数の目安（細かい数は外部 AI に任せる） */
@@ -149,6 +185,8 @@ export interface MaterialRequest {
   targetLang?: string;
   explanationLang: string;
   extra: string;
+  /** 本文（passages）を使った長文読解形式にする */
+  reading?: boolean;
   /** 既存の教材を作り直す・増やすときの ID */
   packId?: string;
 }
@@ -175,6 +213,11 @@ export function buildMaterialPrompt(req: MaterialRequest, options: { schema: boo
   );
   if (req.targetLang?.trim()) lines.push(`- 学ぶ言語: ${req.targetLang.trim()}`);
   lines.push(`- 説明の言語: ${req.explanationLang.trim() || '日本語（ja）'}`);
+  if (req.reading) {
+    lines.push(
+      '- 形式: 長文読解。テーマに合う本文をいくつか "passages" に入れ、各本文について内容を問う問題を 3〜5 問ずつ作り、問題の "passage" で本文を参照する（本文の訳も "translation" に入れる）',
+    );
+  }
   if (req.packId) lines.push(`- パックの ID: ${req.packId}（この ID を使う）`);
   if (req.extra.trim()) lines.push(`- そのほかの要望: ${req.extra.trim()}`);
   lines.push(
@@ -187,7 +230,7 @@ export function buildMaterialPrompt(req: MaterialRequest, options: { schema: boo
     '',
     '## 例（形の参考。内容はテーマに合わせる）',
     '```json',
-    JSON.stringify(examplePack(types), null, 2),
+    JSON.stringify(req.reading ? readingExample(types) : examplePack(types), null, 2),
     '```',
   );
   if (options.schema) {

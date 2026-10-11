@@ -128,6 +128,7 @@ export function PromptBuilder({ onGoImport }: { onGoImport: () => void }) {
   const [explanationLang, setExplanationLang] = useState('日本語（ja）');
   const [extra, setExtra] = useState('');
   const [withSchema, setWithSchema] = useState(false);
+  const [reading, setReading] = useState(false);
 
   // 学ぶ言語は、語学の教材（分野が語学、または単語・フレーズを選んだ）のときだけ聞く
   const isLanguage =
@@ -145,6 +146,7 @@ export function PromptBuilder({ onGoImport }: { onGoImport: () => void }) {
           targetLang: isLanguage ? targetLang : undefined,
           explanationLang,
           extra,
+          reading,
         },
         { schema: withSchema },
       ),
@@ -158,6 +160,7 @@ export function PromptBuilder({ onGoImport }: { onGoImport: () => void }) {
       targetLang,
       explanationLang,
       extra,
+      reading,
       withSchema,
     ],
   );
@@ -279,6 +282,12 @@ export function PromptBuilder({ onGoImport }: { onGoImport: () => void }) {
             placeholder="例: 実務でよく使うものを優先して、解説には間違えやすいポイントを入れて"
             className="w-full rounded-xl border border-slate-300 bg-white p-3 text-sm dark:border-slate-700 dark:bg-slate-950"
           />
+        </Field>
+        <Field
+          label="長文読解にする"
+          hint="本文（文章・会話文）と、その内容を問う問題をセットで作ってもらいます"
+        >
+          <Switch checked={reading} onChange={setReading} label="長文読解にする" />
         </Field>
         <Field
           label="JSON Schema も含める"

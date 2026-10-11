@@ -3,7 +3,14 @@ import { beforeEach, describe, expect, it } from 'vitest';
 import { db } from '@/lib/db/db';
 import { installPack } from '@/lib/packs/install';
 import { DEFAULT_SETTINGS } from '@/features/settings/settingsStore';
-import { getTodayOverview, loadQueue, saveRating, undoRating } from './repository';
+import {
+  getPracticeCounts,
+  getTodayOverview,
+  loadPracticeCards,
+  loadQueue,
+  saveRating,
+  undoRating,
+} from './repository';
 
 const settings = { ...DEFAULT_SETTINGS, newPerDay: 3, fuzz: false };
 const now = new Date(2026, 9, 11, 9).getTime();
@@ -109,5 +116,20 @@ describe('出題を止める', () => {
     expect(plan.queue.some((c) => c.itemKey === 'p/w0')).toBe(false);
     await setItemSuspended('p/w0', false);
     expect((await loadQueue(settings, now)).queue[0].itemKey).toBe('p/w0');
+  });
+
+  it('おさらい: 今日間違えたカード・苦手なカードを選ぶ', async () => {
+    const [a, b, c] = (await loadQueue(settings, now)).queue;
+    await saveRating(a, 1, 1000, settings, now);
+    await saveRating(b, 3, 1000, settings, now);
+    await saveRating(c, 2, 1000, settings, now);
+    const counts = await getPracticeCounts(settings, now + 1000);
+    expect(counts).toEqual({ mistakes: 2, learned: 3 });
+    const mistakes = await loadPracticeCards(settings, 'mistakes', now + 1000);
+    expect(mistakes.map((x) => x.id).sort()).toEqual([a.id, c.id].sort());
+    const weak = await loadPracticeCards(settings, 'weak', now + 1000, 1);
+    expect(weak).toHaveLength(1);
+    const random = await loadPracticeCards(settings, 'random', now + 1000);
+    expect(random).toHaveLength(3);
   });
 });

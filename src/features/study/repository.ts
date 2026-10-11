@@ -6,7 +6,7 @@ import { db } from '@/lib/db/db';
 import { CardState, type CardRecord, type GradeValue, type ReviewRecord } from '@/lib/db/types';
 import { addDays, computeStreak, studyDayEnd, studyDayKey } from '@/lib/srs/day';
 import { buildQueue, type QueuePlan } from '@/lib/srs/queue';
-import { pickFsrsFields, rateCard } from '@/lib/srs/scheduler';
+import { pickFsrsFields, rateCard, retrievability } from '@/lib/srs/scheduler';
 import { getSchedulerOptions, type Settings } from '@/features/settings/settingsStore';
 
 /** 学習中のカードを、予定時刻より少し早めに出してよい幅 */
@@ -206,6 +206,82 @@ export async function undoRating(reviewId: number): Promise<CardRecord | undefin
     await db.cards.put(restored);
     return restored;
   });
+}
+
+/**
+ * おさらい（記録を残さない練習）で出すカードの選び方。
+ * - mistakes: 今日「もう一度」「難しい」にしたカード
+ * - weak: 学習済みのうち、いま思い出せる確率が低いカード（忘れた回数が多いほど優先）
+ * - random: 学習済みのカードからランダム
+ */
+export type PracticeKind = 'mistakes' | 'weak' | 'random';
+
+/** おさらいで一度に出すカードの数 */
+export const PRACTICE_LIMIT = 20;
+
+export interface PracticeCounts {
+  mistakes: number;
+  learned: number;
+}
+
+async function learnedInScope(settings: Settings): Promise<CardRecord[]> {
+  const enabled = await studyPackIds(settings);
+  return db.cards
+    .where('state')
+    .anyOf(CardState.Learning, CardState.Review, CardState.Relearning)
+    .filter(isActive(enabled))
+    .toArray();
+}
+
+async function mistakesToday(settings: Settings, now: number): Promise<CardRecord[]> {
+  const day = studyDayKey(now, settings.dayStartHour);
+  const enabled = await studyPackIds(settings);
+  const ids = [
+    ...new Set(
+      (await todayReviews(day))
+        .filter((r) => r.rating <= 2 && enabled.has(r.packId))
+        .map((r) => r.cardId),
+    ),
+  ];
+  const cards = await db.cards.bulkGet(ids);
+  return cards.filter((c): c is CardRecord => !!c && c.suspended === 0);
+}
+
+/** おさらいの選択肢に添える数 */
+export async function getPracticeCounts(
+  settings: Settings,
+  now = Date.now(),
+): Promise<PracticeCounts> {
+  const [mistakes, learned] = await Promise.all([
+    mistakesToday(settings, now),
+    learnedInScope(settings),
+  ]);
+  return { mistakes: mistakes.length, learned: learned.length };
+}
+
+/** おさらいで出すカード（スケジュールは変えない） */
+export async function loadPracticeCards(
+  settings: Settings,
+  kind: PracticeKind,
+  now = Date.now(),
+  limit = PRACTICE_LIMIT,
+): Promise<CardRecord[]> {
+  if (kind === 'mistakes') return (await mistakesToday(settings, now)).slice(0, limit);
+  const learned = await learnedInScope(settings);
+  if (kind === 'weak') {
+    const score = (c: CardRecord) => (retrievability(c, now) ?? 1) - 0.05 * c.lapses;
+    return learned
+      .map((c) => [score(c), c] as const)
+      .sort((a, b) => a[0] - b[0])
+      .slice(0, limit)
+      .map(([, c]) => c);
+  }
+  const rand = seededRandom(String(now));
+  return learned
+    .map((c) => [rand(), c] as const)
+    .sort((a, b) => a[0] - b[0])
+    .slice(0, limit)
+    .map(([, c]) => c);
 }
 
 /** 今日を含む直近 days 日の学習日の一覧（新しい順） */

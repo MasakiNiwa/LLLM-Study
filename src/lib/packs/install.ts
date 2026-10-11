@@ -91,13 +91,18 @@ export async function installPack(
 
     const oldItems = await db.items.where('packId').equals(pack.id).toArray();
     const oldKeys = new Set(oldItems.map((i) => i.key));
-    const itemRecords: ItemRecord[] = items.map((item, order) => ({
-      key: itemKey(pack.id, item.id),
-      packId: pack.id,
-      itemId: item.id,
-      order,
-      item,
-    }));
+    const passages = new Map((pack.passages ?? []).map((p) => [p.id, p]));
+    const itemRecords: ItemRecord[] = items.map((item, order) => {
+      const passage = item.passage ? passages.get(item.passage) : undefined;
+      return {
+        key: itemKey(pack.id, item.id),
+        packId: pack.id,
+        itemId: item.id,
+        order,
+        item,
+        ...(passage && { passage }),
+      };
+    });
     const newKeys = new Set(itemRecords.map((i) => i.key));
     const removedKeys = [...oldKeys].filter((k) => !newKeys.has(k));
 

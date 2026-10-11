@@ -1,0 +1,276 @@
+{
+  "format": "lllm-study-pack",
+  "version": 1,
+  "id": "en-reading-basic",
+  "title": "英語の長文読解 入門 20",
+  "description": "短い英文（お知らせ・メール・説明文・会話文）5 本と、その内容を問う問題 20 問。本文は問題の上に表示され、答えを見ると訳も確認できます（長文読解形式の教材の例でもあります）。",
+  "subject": "english",
+  "language": {
+    "target": "en",
+    "explanation": "ja"
+  },
+  "level": "中学〜高校基礎（CEFR A2〜B1）",
+  "tags": [
+    "英語",
+    "長文読解",
+    "リーディング"
+  ],
+  "author": "LLLM-Study",
+  "license": "MIT",
+  "source": "LLLM-Study オリジナル",
+  "revision": 1,
+  "passages": [
+    {
+      "id": "r-library",
+      "title": "A New Library",
+      "text": "Last month, a new library opened near Maple Station. It has three floors. The first floor has a café and books for children. The second floor is for magazines and newspapers, and the third floor is a quiet room for studying.\nThe library is open from 9 a.m. to 8 p.m. on weekdays, and from 10 a.m. to 6 p.m. on weekends. It is closed on Mondays. You can borrow up to five books for two weeks. If you want to use a computer, you need to make a reservation at the front desk.",
+      "translation": "先月、メープル駅の近くに新しい図書館が開館しました。3 階建てです。1 階にはカフェと子ども向けの本があります。2 階は雑誌と新聞、3 階は勉強用の静かな部屋です。\n開館時間は平日が午前 9 時から午後 8 時、週末が午前 10 時から午後 6 時です。月曜日は休館です。本は 5 冊まで 2 週間借りられます。コンピューターを使いたい場合は、受付で予約する必要があります。"
+    },
+    {
+      "id": "r-email",
+      "title": "An Email to a Coworker",
+      "text": "Hi Sarah,\nThank you for sending the sales report yesterday. I read it on the train this morning, and it looks great. However, I think the numbers for March are wrong. Could you check them again before the meeting on Thursday?\nAlso, I will be out of the office on Friday because I have to visit a client in Osaka. If you have any questions, please send me an email instead of calling.\nThanks,\nTom",
+      "translation": "サラさん\n昨日は売上報告書を送ってくれてありがとう。今朝、電車の中で読みましたが、とてもよくできています。ただ、3 月の数字が間違っていると思います。木曜日の会議の前にもう一度確認してもらえますか。\nそれから、金曜日は大阪の取引先を訪問しなければならないので、会社にいません。質問があれば、電話ではなくメールを送ってください。\nよろしく\nトム"
+    },
+    {
+      "id": "r-sleep",
+      "title": "Why Sleep Matters",
+      "text": "Many people think that sleeping less gives them more time to work or study. However, scientists say that this is not a good idea. While we sleep, our brains organize the information we learned during the day. Without enough sleep, it becomes harder to remember new things.\nMost adults need seven to nine hours of sleep each night. To sleep well, experts suggest going to bed at the same time every day and not using smartphones for an hour before bed, because the light from the screen can keep us awake.",
+      "translation": "睡眠を減らせば、仕事や勉強の時間が増えると考える人は多くいます。しかし科学者によると、それはよい考えではありません。眠っている間、脳はその日に学んだ情報を整理しています。十分に眠らないと、新しいことを覚えるのが難しくなります。\nほとんどの大人は毎晩 7〜9 時間の睡眠が必要です。よく眠るために、専門家は毎日同じ時間に寝ること、そして寝る前の 1 時間はスマートフォンを使わないことをすすめています。画面の光で目が覚めてしまうことがあるからです。"
+    },
+    {
+      "id": "r-dialogue",
+      "title": "At a Restaurant",
+      "text": "Server: Good evening. Do you have a reservation?\nMika: Yes, it's under the name Tanaka. A table for two at seven.\nServer: Ah, yes. I'm sorry, but your table isn't ready yet. Would you mind waiting about ten minutes?\nMika: That's fine. Can we wait at the bar?\nServer: Of course. And today's special is grilled salmon with lemon sauce.\nMika: That sounds good. My friend doesn't eat fish, though. Do you have any vegetarian dishes?\nServer: Yes, we have a mushroom pasta that's very popular.",
+      "translation": "店員: こんばんは。ご予約はされていますか。\nミカ: はい、田中の名前で。7 時に 2 名です。\n店員: はい、承っております。申し訳ありませんが、お席の準備がまだできておりません。10 分ほどお待ちいただけますか。\nミカ: 大丈夫です。バーで待ってもいいですか。\n店員: もちろんです。それから、本日のおすすめはサーモンのグリル、レモンソース添えです。\nミカ: おいしそうですね。でも友人は魚を食べないんです。ベジタリアン向けの料理はありますか。\n店員: はい、とても人気のきのこのパスタがございます。"
+    },
+    {
+      "id": "r-bike",
+      "title": "Bike Sharing in the City",
+      "text": "In the past few years, bike sharing has become popular in many cities. Users can rent a bike with a smartphone app and return it at any station in the city. It is cheaper than a taxi and often faster than a bus during rush hour.\nBike sharing is also good for the environment because bikes do not produce any gas. However, there are some problems. Some users leave bikes on the sidewalk, which can be dangerous for people walking. Because of this, some cities now charge an extra fee if a bike is not returned to a station.",
+      "translation": "ここ数年、多くの都市でシェアサイクルが人気になっています。利用者はスマートフォンのアプリで自転車を借り、市内のどのステーションにも返せます。タクシーより安く、ラッシュアワーにはバスより速いことも多いです。\n自転車は排気ガスを出さないので、シェアサイクルは環境にもやさしいです。しかし、問題もあります。歩道に自転車を置いていく利用者がいて、歩行者にとって危険なことがあります。そのため、ステーションに返却されなかった場合に追加料金を取る都市も出てきました。"
+    }
+  ],
+  "items": [
+    {
+      "id": "lib-1",
+      "type": "choice",
+      "passage": "r-library",
+      "question": "勉強用の静かな部屋は何階にありますか。",
+      "choices": [
+        "1 階",
+        "2 階",
+        "3 階",
+        "地下"
+      ],
+      "answer": 2,
+      "explanation": "\"the third floor is a quiet room for studying\" とあります。"
+    },
+    {
+      "id": "lib-2",
+      "type": "choice",
+      "passage": "r-library",
+      "question": "図書館が休館なのは何曜日ですか。",
+      "choices": [
+        "月曜日",
+        "水曜日",
+        "土曜日",
+        "日曜日"
+      ],
+      "answer": 0,
+      "explanation": "\"It is closed on Mondays.\" とあります。"
+    },
+    {
+      "id": "lib-3",
+      "type": "qa",
+      "passage": "r-library",
+      "question": "本は何冊まで、どのくらいの期間借りられますか。",
+      "answer": "5 冊まで 2 週間",
+      "explanation": "\"You can borrow up to five books for two weeks.\" up to 〜 は「〜まで（上限）」。"
+    },
+    {
+      "id": "lib-4",
+      "type": "cloze",
+      "passage": "r-library",
+      "text": "If you want to use a computer, you need to make a {{reservation}} at the front desk.",
+      "translation": "コンピューターを使いたい場合は、受付で予約する必要があります。",
+      "explanation": "make a reservation で「予約する」。"
+    },
+    {
+      "id": "mail-1",
+      "type": "choice",
+      "passage": "r-email",
+      "question": "トムがサラにお願いしていることは何ですか。",
+      "choices": [
+        "報告書を書き直すこと",
+        "3 月の数字を確認し直すこと",
+        "会議の日程を変えること",
+        "大阪に行くこと"
+      ],
+      "answer": 1,
+      "explanation": "\"Could you check them again before the meeting on Thursday?\" の them は the numbers for March を指します。"
+    },
+    {
+      "id": "mail-2",
+      "type": "choice",
+      "passage": "r-email",
+      "question": "トムが金曜日に会社にいないのはなぜですか。",
+      "choices": [
+        "休暇を取るから",
+        "体調が悪いから",
+        "大阪の取引先を訪問するから",
+        "電車が止まるから"
+      ],
+      "answer": 2,
+      "explanation": "\"because I have to visit a client in Osaka\" とあります。"
+    },
+    {
+      "id": "mail-3",
+      "type": "qa",
+      "passage": "r-email",
+      "question": "質問があるとき、トムはどのように連絡してほしいと言っていますか。",
+      "answer": "電話ではなくメールで",
+      "explanation": "\"please send me an email instead of calling\" instead of 〜 は「〜の代わりに」。"
+    },
+    {
+      "id": "mail-4",
+      "type": "order",
+      "passage": "r-email",
+      "answer": "Could you check them again before the meeting?",
+      "prompt": "会議の前にもう一度それらを確認してもらえますか。",
+      "explanation": "Could you 〜? はていねいな依頼の表現です。"
+    },
+    {
+      "id": "sleep-1",
+      "type": "choice",
+      "passage": "r-sleep",
+      "question": "眠っている間に脳がしていることとして、本文の内容に合うものはどれですか。",
+      "choices": [
+        "新しい情報を忘れている",
+        "その日に学んだ情報を整理している",
+        "何もせずに休んでいる",
+        "夢だけを見ている"
+      ],
+      "answer": 1,
+      "explanation": "\"our brains organize the information we learned during the day\" とあります。"
+    },
+    {
+      "id": "sleep-2",
+      "type": "qa",
+      "passage": "r-sleep",
+      "question": "ほとんどの大人に必要な睡眠時間は、毎晩どのくらいですか。",
+      "answer": "7〜9 時間",
+      "explanation": "\"Most adults need seven to nine hours of sleep each night.\""
+    },
+    {
+      "id": "sleep-3",
+      "type": "choice",
+      "passage": "r-sleep",
+      "question": "寝る前にスマートフォンを使わないほうがよい理由は何ですか。",
+      "choices": [
+        "電池がなくなるから",
+        "目が疲れるから",
+        "画面の光で目が覚めてしまうことがあるから",
+        "音がうるさいから"
+      ],
+      "answer": 2,
+      "explanation": "\"because the light from the screen can keep us awake\" keep 人 awake で「人を起きたままにする」。"
+    },
+    {
+      "id": "sleep-4",
+      "type": "cloze",
+      "passage": "r-sleep",
+      "text": "Without enough sleep, it becomes {{harder}} to remember new things.",
+      "translation": "十分に眠らないと、新しいことを覚えるのが難しくなります。",
+      "explanation": "it becomes harder to 〜 で「〜するのがより難しくなる」。"
+    },
+    {
+      "id": "rest-1",
+      "type": "choice",
+      "passage": "r-dialogue",
+      "question": "ミカたちがすぐに席に着けないのはなぜですか。",
+      "choices": [
+        "予約していなかったから",
+        "席の準備ができていないから",
+        "店が閉まっているから",
+        "人数が多すぎるから"
+      ],
+      "answer": 1,
+      "explanation": "\"your table isn't ready yet\" とあります。"
+    },
+    {
+      "id": "rest-2",
+      "type": "qa",
+      "passage": "r-dialogue",
+      "question": "ミカたちはどこで待つことにしましたか。",
+      "answer": "バー",
+      "explanation": "\"Can we wait at the bar?\" に店員が \"Of course.\" と答えています。"
+    },
+    {
+      "id": "rest-3",
+      "type": "choice",
+      "passage": "r-dialogue",
+      "question": "店員がミカの友人にすすめた料理はどれですか。",
+      "choices": [
+        "サーモンのグリル",
+        "きのこのパスタ",
+        "野菜のスープ",
+        "レモンケーキ"
+      ],
+      "answer": 1,
+      "explanation": "友人は魚を食べないので、店員は \"a mushroom pasta that's very popular\" をすすめています。"
+    },
+    {
+      "id": "rest-4",
+      "type": "cloze",
+      "passage": "r-dialogue",
+      "text": "Would you {{mind}} waiting about ten minutes?",
+      "translation": "10 分ほどお待ちいただけますか。",
+      "explanation": "Would you mind -ing? は「〜していただけますか」のていねいな依頼。後ろは動名詞（-ing）。"
+    },
+    {
+      "id": "bike-1",
+      "type": "choice",
+      "passage": "r-bike",
+      "question": "シェアサイクルの自転車はどこに返せますか。",
+      "choices": [
+        "借りたステーションだけ",
+        "市内のどのステーションでも",
+        "駅の駐輪場だけ",
+        "どこにでも置いてよい"
+      ],
+      "answer": 1,
+      "explanation": "\"return it at any station in the city\" とあります。"
+    },
+    {
+      "id": "bike-2",
+      "type": "choice",
+      "passage": "r-bike",
+      "question": "本文で挙げられているシェアサイクルの問題点は何ですか。",
+      "choices": [
+        "料金が高いこと",
+        "自転車が歩道に放置されること",
+        "アプリが使いにくいこと",
+        "自転車が足りないこと"
+      ],
+      "answer": 1,
+      "explanation": "\"Some users leave bikes on the sidewalk, which can be dangerous for people walking.\""
+    },
+    {
+      "id": "bike-3",
+      "type": "qa",
+      "passage": "r-bike",
+      "question": "シェアサイクルが環境にやさしいと言える理由は何ですか。",
+      "answer": "自転車は排気ガスを出さないから",
+      "explanation": "\"bikes do not produce any gas\" とあります。"
+    },
+    {
+      "id": "bike-4",
+      "type": "order",
+      "passage": "r-bike",
+      "answer": "It is cheaper than a taxi.",
+      "prompt": "それはタクシーより安い。",
+      "explanation": "比較級 + than 〜 で「〜より…」。"
+    }
+  ]
+}

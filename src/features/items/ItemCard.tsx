@@ -3,7 +3,7 @@
  * 種類を増やすときは lib/packs/schema.ts・templates.ts と、ここに表示を追加する。
  */
 import { useState, type ReactNode } from 'react';
-import { CheckCircle2, Lightbulb, Volume2, XCircle } from 'lucide-react';
+import { BookOpenText, CheckCircle2, Lightbulb, Volume2, XCircle } from 'lucide-react';
 import type { ItemRecord } from '@/lib/db/types';
 import { clozeAnswers, orderChunks, shuffleChunks } from '@/lib/packs/itemText';
 import { languageName } from '@/lib/speech/lang';
@@ -12,6 +12,7 @@ import type {
   ClozeItem,
   Example,
   OrderItem,
+  Passage,
   PhraseItem,
   QaItem,
   VocabItem,
@@ -505,6 +506,55 @@ function OrderFace({ item, side, lang, ordered, onOrder, seed }: FaceProps<Order
   );
 }
 
+/**
+ * 長文読解などの本文。表の面では問題の上に、裏の面では訳（あれば）を出す。
+ * 長い本文はこの枠の中でスクロールする。
+ */
+export function PassageBlock({
+  passage,
+  side,
+  lang,
+}: {
+  passage: Passage;
+  side: 'front' | 'back';
+  lang: string;
+}) {
+  if (side === 'back') {
+    if (!passage.translation) return null;
+    return (
+      <details className="mb-6 rounded-xl bg-slate-50 px-3 py-2 text-sm dark:bg-slate-800/50">
+        <summary className="cursor-pointer font-medium text-slate-600 dark:text-slate-300">
+          本文の訳
+        </summary>
+        <p className="mt-2 leading-relaxed whitespace-pre-line text-slate-700 dark:text-slate-300">
+          {passage.translation}
+        </p>
+      </details>
+    );
+  }
+  return (
+    <section
+      className="mb-6 rounded-xl border border-slate-200 bg-slate-50/70 text-left dark:border-slate-700 dark:bg-slate-800/40"
+      aria-label="本文"
+    >
+      <div className="flex items-center gap-2 border-b border-slate-200 px-3 py-1.5 text-xs font-semibold text-slate-500 dark:border-slate-700 dark:text-slate-400">
+        <BookOpenText className="size-4 shrink-0" />
+        <span className="min-w-0 flex-1 truncate">{passage.title ?? '本文'}</span>
+        <SpeakButton text={passage.text} lang={lang} />
+      </div>
+      <p
+        lang={lang}
+        className="max-h-56 overflow-y-auto px-3 py-2.5 leading-relaxed whitespace-pre-line sm:max-h-80"
+      >
+        {passage.text}
+      </p>
+      {passage.source && (
+        <p className="px-3 pb-2 text-right text-[0.7rem] text-slate-400">出典: {passage.source}</p>
+      )}
+    </section>
+  );
+}
+
 /** 並べ替えの結果 */
 export interface OrderResult {
   built: string[];
@@ -540,6 +590,39 @@ export interface CardFaceProps {
 }
 
 export function CardFace({
+  record,
+  template,
+  side,
+  lang = 'en-US',
+  chosen,
+  onChoose,
+  ordered,
+  onOrder,
+  seed,
+}: CardFaceProps) {
+  const face = (
+    <Face
+      record={record}
+      template={template}
+      side={side}
+      lang={lang}
+      chosen={chosen}
+      onChoose={onChoose}
+      ordered={ordered}
+      onOrder={onOrder}
+      seed={seed}
+    />
+  );
+  if (!record.passage) return face;
+  return (
+    <>
+      <PassageBlock passage={record.passage} side={side} lang={lang} />
+      {face}
+    </>
+  );
+}
+
+function Face({
   record,
   template,
   side,

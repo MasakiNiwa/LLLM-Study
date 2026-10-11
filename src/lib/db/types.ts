@@ -1,4 +1,4 @@
-import type { ItemType, StudyItem, StudyPack } from '@/lib/packs/schema';
+import type { ItemType, Passage, StudyItem, StudyPack } from '@/lib/packs/schema';
 import type { UserItemDraft } from '@/lib/packs/userPack';
 
 /** カードの学習状態（ts-fsrs の State と同じ値） */
@@ -38,6 +38,8 @@ export interface ItemRecord {
   /** パック内の並び順 */
   order: number;
   item: StudyItem;
+  /** 項目が参照する本文（取り込み時にパックの passages からコピーしておく） */
+  passage?: Passage;
 }
 
 /** FSRS のカード状態（日時はすべてエポックミリ秒） */

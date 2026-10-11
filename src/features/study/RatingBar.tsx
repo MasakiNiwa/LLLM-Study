@@ -39,10 +39,19 @@ interface RatingBarProps {
   /** アプリがすすめる評価（選択問題の正誤など） */
   recommended?: GradeValue;
   disabled?: boolean;
+  /** おさらい: 次回の間隔の代わりに、もう一度出すかどうかを添える */
+  practice?: boolean;
 }
 
+const PRACTICE_NOTES: Record<GradeValue, string> = {
+  1: 'すぐもう一度',
+  2: '少しあとで',
+  3: 'おしまい',
+  4: 'おしまい',
+};
+
 /** 4 段階の評価ボタン。次回の間隔（FSRS の計算結果）を添える */
-export function RatingBar({ card, now, onRate, recommended, disabled }: RatingBarProps) {
+export function RatingBar({ card, now, onRate, recommended, disabled, practice }: RatingBarProps) {
   const settings = useSettings();
   const showIntervals = settings.showIntervals;
   const opts = getSchedulerOptions(settings);
@@ -70,8 +79,12 @@ export function RatingBar({ card, now, onRate, recommended, disabled }: RatingBa
           )}
         >
           <span>{label}</span>
-          {showIntervals && (
-            <span className="text-[0.7rem] font-normal opacity-75">{preview[grade]}</span>
+          {practice ? (
+            <span className="text-[0.7rem] font-normal opacity-75">{PRACTICE_NOTES[grade]}</span>
+          ) : (
+            showIntervals && (
+              <span className="text-[0.7rem] font-normal opacity-75">{preview[grade]}</span>
+            )
           )}
         </button>
       ))}

@@ -35,6 +35,25 @@ describe('parsePackText', () => {
     }
   });
 
+  it('存在しない本文や重複した本文 ID を指摘する', () => {
+    const r = parsePackText(
+      JSON.stringify({
+        ...minimal,
+        passages: [
+          { id: 'p1', text: 'a' },
+          { id: 'p1', text: 'b' },
+        ],
+        items: [{ ...minimal.items[0], passage: 'nope' }],
+      }),
+    );
+    expect(r.ok).toBe(false);
+    if (!r.ok) {
+      const paths = r.issues.map((i) => i.path);
+      expect(paths).toContain('passages[1].id');
+      expect(paths).toContain('items[0].passage');
+    }
+  });
+
   it('形式の誤りを場所付きで返す', () => {
     const r = parsePackText(
       JSON.stringify({

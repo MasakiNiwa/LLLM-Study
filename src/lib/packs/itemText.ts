@@ -84,7 +84,8 @@ export function speakText(item: StudyItem): string | undefined {
 
 /** LLM に渡す項目の内容（ID や空の値を除いたコンパクトな形） */
 export function itemForLlm(item: StudyItem): Record<string, unknown> {
-  const { id: _id, ...rest } = item;
+  // passage は本文の ID なので渡さない（本文そのものは呼び出し側で添える）
+  const { id: _id, passage: _p, ...rest } = item;
   const out: Record<string, unknown> = {};
   for (const [k, v] of Object.entries(rest)) {
     if (v === undefined || (Array.isArray(v) && v.length === 0)) continue;

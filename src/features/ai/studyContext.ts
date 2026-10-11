@@ -20,6 +20,13 @@ function round(n: number, digits = 2): number {
 }
 
 /** カード 1 枚の学習状況（AI 向け） */
+/** AI に渡す本文の最大文字数 */
+const PASSAGE_LIMIT = 1500;
+
+function truncate(text: string, max: number): string {
+  return text.length > max ? `${text.slice(0, max)}…（以下省略）` : text;
+}
+
 export async function cardForLlm(
   card: CardRecord,
   options: { revealed: boolean; now?: number },
@@ -35,6 +42,16 @@ export async function cardForLlm(
     question_style: templateLabel(item.item.type, card.template),
     answer_shown: options.revealed,
     content: itemForLlm(item.item),
+    // 長文読解などの本文（長すぎるとコンテキストを圧迫するので先頭だけ）
+    ...(item.passage && {
+      passage: {
+        title: item.passage.title,
+        text: truncate(item.passage.text, PASSAGE_LIMIT),
+        translation: options.revealed
+          ? item.passage.translation && truncate(item.passage.translation, PASSAGE_LIMIT)
+          : undefined,
+      },
+    }),
     progress: {
       state: STATE_LABELS[card.state],
       reviews: card.reps,

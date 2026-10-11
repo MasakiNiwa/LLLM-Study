@@ -17,6 +17,7 @@
 - テーマに合った種類を選ぶ（語学なら単語・フレーズ、知識や資格なら一問一答・穴埋め・選択問題など）。種類は組み合わせてもよい
 - 1 つの項目では 1 つのことだけを問い、答えが一つに決まるようにする。解説には覚えるための要点を短く書く
 - 事実と異なる内容を入れない。自信がない情報は省略する
+- 長文読解・会話文の聞き取りなど、複数の問題が同じ本文を使うときは、本文をパックの "passages"（{ "id", "title", "text", "translation" }）に入れ、各問題の "passage" にその id を書く。本文は問題の上に表示される
 
 ## パック全体のキー
 
@@ -231,6 +232,51 @@
       "minimum": 1,
       "maximum": 9007199254740991
     },
+    "passages": {
+      "description": "複数の項目が共有する本文（長文読解など）。項目の passage で参照する",
+      "maxItems": 500,
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string",
+            "pattern": "^[A-Za-z0-9][A-Za-z0-9._-]{0,63}$",
+            "description": "本文の ID（項目の passage から参照する）"
+          },
+          "title": {
+            "description": "本文のタイトル",
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 300
+          },
+          "text": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 6000,
+            "description": "本文（学ぶ言語）"
+          },
+          "translation": {
+            "description": "本文の訳（説明の言語）",
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 6000
+          },
+          "source": {
+            "description": "出典",
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 300
+          }
+        },
+        "required": [
+          "id",
+          "text"
+        ],
+        "additionalProperties": false,
+        "description": "本文（長文読解・会話文など）"
+      }
+    },
     "items": {
       "minItems": 1,
       "maxItems": 5000,
@@ -264,6 +310,11 @@
                 "type": "string",
                 "minLength": 1,
                 "maxLength": 2000
+              },
+              "passage": {
+                "description": "この項目が参照する本文の ID（passages の id）。本文を問題の上に表示する",
+                "type": "string",
+                "pattern": "^[A-Za-z0-9][A-Za-z0-9._-]{0,63}$"
               },
               "term": {
                 "type": "string",
@@ -386,6 +437,11 @@
                 "minLength": 1,
                 "maxLength": 2000
               },
+              "passage": {
+                "description": "この項目が参照する本文の ID（passages の id）。本文を問題の上に表示する",
+                "type": "string",
+                "pattern": "^[A-Za-z0-9][A-Za-z0-9._-]{0,63}$"
+              },
               "phrase": {
                 "type": "string",
                 "minLength": 1,
@@ -468,6 +524,11 @@
                 "minLength": 1,
                 "maxLength": 2000
               },
+              "passage": {
+                "description": "この項目が参照する本文の ID（passages の id）。本文を問題の上に表示する",
+                "type": "string",
+                "pattern": "^[A-Za-z0-9][A-Za-z0-9._-]{0,63}$"
+              },
               "question": {
                 "type": "string",
                 "minLength": 1,
@@ -534,6 +595,11 @@
                 "minLength": 1,
                 "maxLength": 2000
               },
+              "passage": {
+                "description": "この項目が参照する本文の ID（passages の id）。本文を問題の上に表示する",
+                "type": "string",
+                "pattern": "^[A-Za-z0-9][A-Za-z0-9._-]{0,63}$"
+              },
               "text": {
                 "type": "string",
                 "minLength": 1,
@@ -592,6 +658,11 @@
                 "type": "string",
                 "minLength": 1,
                 "maxLength": 2000
+              },
+              "passage": {
+                "description": "この項目が参照する本文の ID（passages の id）。本文を問題の上に表示する",
+                "type": "string",
+                "pattern": "^[A-Za-z0-9][A-Za-z0-9._-]{0,63}$"
               },
               "question": {
                 "type": "string",
@@ -659,6 +730,11 @@
                 "type": "string",
                 "minLength": 1,
                 "maxLength": 2000
+              },
+              "passage": {
+                "description": "この項目が参照する本文の ID（passages の id）。本文を問題の上に表示する",
+                "type": "string",
+                "pattern": "^[A-Za-z0-9][A-Za-z0-9._-]{0,63}$"
               },
               "answer": {
                 "type": "string",

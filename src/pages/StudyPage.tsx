@@ -32,6 +32,7 @@ import { AiAssistPanel } from '@/features/study/AiAssistPanel';
 import { LEECH_LAPSES } from '@/features/study/cardActions';
 import { AnswerInput } from '@/features/study/AnswerInput';
 import { AnswerResult } from '@/features/study/AnswerResult';
+import { PracticePicker } from '@/features/study/PracticePicker';
 import { RatingBar } from '@/features/study/RatingBar';
 import { ScopePicker } from '@/features/study/ScopePicker';
 import { ReactionBubble } from '@/features/study/ReactionBubble';
@@ -62,6 +63,7 @@ function SessionSummary() {
   const persona = getPersona(personaId, custom);
   const aiReady = useEngine((s) => s.status === 'ready');
   const unlimited = useSettings((s) => s.noDailyLimit);
+  const practice = useStudy((s) => s.mode === 'practice');
   const [endedAt] = useState(() => Date.now());
   const [message] = useState(() => {
     const list = stats.done > 0 ? persona.finish : persona.allDone;
@@ -75,7 +77,13 @@ function SessionSummary() {
       </div>
       <div>
         <h2 className="text-xl font-bold">
-          {stats.done > 0 ? '今日の学習が終わりました' : '今は学習するカードがありません'}
+          {practice
+            ? stats.done > 0
+              ? 'おさらいが終わりました'
+              : 'おさらいするカードがありません'
+            : stats.done > 0
+              ? '今日の学習が終わりました'
+              : '今は学習するカードがありません'}
         </h2>
         <p className="mt-2 text-slate-600 dark:text-slate-400">
           <span className="mr-1" aria-hidden>
@@ -104,8 +112,14 @@ function SessionSummary() {
           </div>
         </Card>
       )}
-      <ScopePicker />
-      {!unlimited && (
+      {practice ? (
+        <Button variant="secondary" size="sm" onClick={() => void useStudy.getState().start()}>
+          今日の学習に戻る
+        </Button>
+      ) : (
+        <ScopePicker />
+      )}
+      {!unlimited && !practice && (
         <Button
           variant="ghost"
           size="sm"
@@ -118,6 +132,7 @@ function SessionSummary() {
           上限なしで続ける
         </Button>
       )}
+      <PracticePicker key={`${practice}:${stats.done}`} stacked />
       <div className="flex flex-wrap justify-center gap-2">
         {aiReady && stats.done > 0 && (
           <Link href="/quiz">
@@ -159,6 +174,7 @@ export default function StudyPage() {
   const queueLength = useStudy((s) => s.queue.length);
   const stats = useStudy((s) => s.stats);
   const canUndo = useStudy((s) => s.undoStack.length > 0);
+  const practice = useStudy((s) => s.mode === 'practice');
   const { start, reveal, rate, undo, end } = useStudy.getState();
   const autoSpeak = useSettings((s) => s.autoSpeak);
   const speechRate = useSettings((s) => s.speechRate);
@@ -256,7 +272,7 @@ export default function StudyPage() {
   return (
     <>
       <PageHeader
-        title="学習"
+        title={practice ? 'おさらい' : '学習'}
         meta={
           status === 'studying' && (
             <span className="font-mono text-sm text-slate-500 tabular-nums">
@@ -328,7 +344,13 @@ export default function StudyPage() {
         <>
           <div className="min-h-0 flex-1 overflow-y-auto">
             <div className="mx-auto w-full max-w-2xl space-y-4 px-3 py-4 sm:px-4 sm:py-6">
-              <ScopePicker />
+              {practice ? (
+                <p className="rounded-xl bg-accent-50 px-3 py-2 text-xs text-accent-900 dark:bg-accent-900/20 dark:text-accent-200">
+                  おさらい中です。評価は記録されず、復習の予定も変わりません。思い出せなかったカードは少しあとにもう一度出ます。
+                </p>
+              ) : (
+                <ScopePicker />
+              )}
               <Card className="relative overflow-hidden">
                 <div className="flex items-center gap-2 border-b border-slate-100 px-4 py-2 text-xs text-slate-500 dark:border-slate-800">
                   {badge && (
@@ -437,6 +459,7 @@ export default function StudyPage() {
                   now={shownAt}
                   onRate={(g) => void rate(g)}
                   recommended={recommended}
+                  practice={practice}
                 />
               ) : isChoice || isOrder ? (
                 <p className="flex h-14 items-center justify-center text-sm text-slate-500">
