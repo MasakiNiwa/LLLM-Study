@@ -1,4 +1,4 @@
-import { useMemo, useState } from 'react';
+import { useMemo, useState, type ReactNode } from 'react';
 import { Copy, FileDown, FileJson, Wand2 } from 'lucide-react';
 import { toast } from 'sonner';
 import { Button } from '@/components/ui/Button';
@@ -6,7 +6,13 @@ import { Section } from '@/components/ui/Card';
 import { Field } from '@/components/ui/Field';
 import { Switch } from '@/components/ui/Switch';
 import { ITEM_TYPES, packJsonSchema, type ItemType } from '@/lib/packs/schema';
-import { buildMaterialPrompt, buildSpecMarkdown, ITEM_TYPE_GUIDES } from '@/lib/packs/spec';
+import {
+  AMOUNT_LABELS,
+  buildMaterialPrompt,
+  buildSpecMarkdown,
+  ITEM_TYPE_GUIDES,
+  type MaterialAmount,
+} from '@/lib/packs/spec';
 import { ITEM_TYPE_LABELS } from '@/lib/packs/templates';
 import { copyText, downloadText } from '@/lib/utils/download';
 import { cn } from '@/lib/utils/cn';
@@ -14,49 +20,146 @@ import { cn } from '@/lib/utils/cn';
 const inputClass =
   'h-10 w-full rounded-xl border border-slate-300 bg-white px-3 text-sm dark:border-slate-700 dark:bg-slate-950';
 
-const PRESETS: { label: string; topic: string; level: string; types: ItemType[] }[] = [
+/** 分野の候補（任意。語学のときだけ「学ぶ言語」を聞く） */
+const SUBJECTS = [
+  '語学',
+  '資格・検定',
+  '学校の勉強',
+  '仕事・実務',
+  '教養',
+  'プログラミング',
+] as const;
+const LANGUAGE_SUBJECT = '語学';
+
+interface Preset {
+  label: string;
+  topic: string;
+  subject: (typeof SUBJECTS)[number];
+  level: string;
+  types: ItemType[];
+}
+
+const PRESETS: Preset[] = [
   {
     label: 'TOEIC 頻出単語',
     topic: 'TOEIC によく出る単語',
+    subject: '語学',
     level: 'TOEIC 600 点',
     types: ['vocab'],
   },
   {
     label: '旅行英会話',
     topic: '海外旅行で使う英会話フレーズ（空港・ホテル・レストラン）',
+    subject: '語学',
     level: '初級',
     types: ['phrase'],
   },
   {
-    label: 'ビジネスメール',
-    topic: 'ビジネスメールでよく使う英語表現',
-    level: '中級',
-    types: ['phrase', 'cloze'],
+    label: '簿記 3 級',
+    topic: '日商簿記 3 級の仕訳と勘定科目',
+    subject: '資格・検定',
+    level: '簿記 3 級',
+    types: [],
   },
-  { label: '英文法の確認', topic: '中学で習う英文法', level: '中学', types: ['cloze', 'choice'] },
+  {
+    label: 'IT パスポート',
+    topic: 'IT パスポート試験の頻出用語',
+    subject: '資格・検定',
+    level: '入門',
+    types: [],
+  },
+  {
+    label: '日本史の流れ',
+    topic: '日本史の主な出来事と人物（古代〜近代）',
+    subject: '学校の勉強',
+    level: '中学〜高校',
+    types: [],
+  },
+  {
+    label: 'JavaScript 基礎',
+    topic: 'JavaScript の基本文法と組み込み関数',
+    subject: 'プログラミング',
+    level: '入門',
+    types: [],
+  },
 ];
+
+function Chip({
+  active,
+  onClick,
+  children,
+  title,
+}: {
+  active: boolean;
+  onClick: () => void;
+  children: ReactNode;
+  title?: string;
+}) {
+  return (
+    <button
+      type="button"
+      aria-pressed={active}
+      onClick={onClick}
+      title={title}
+      className={cn(
+        'rounded-xl border px-3 py-1.5 text-sm transition-colors',
+        active
+          ? 'border-accent-500 bg-accent-50 text-accent-800 dark:bg-accent-900/30 dark:text-accent-200'
+          : 'border-slate-300 hover:bg-slate-100 dark:border-slate-700 dark:hover:bg-slate-800',
+      )}
+    >
+      {children}
+    </button>
+  );
+}
 
 /**
  * 外部の高性能 AI（ChatGPT / Claude / Gemini など）に教材を作ってもらうためのプロンプトを組み立てる。
  * 仕様はアプリの zod スキーマから作るので、渡した形式どおりの JSON がそのまま取り込める。
+ * 細かい数や種類は「おまかせ」にして、テーマに合わせて外部 AI に決めてもらえる。
  */
 export function PromptBuilder({ onGoImport }: { onGoImport: () => void }) {
   const [topic, setTopic] = useState('');
+  const [subject, setSubject] = useState<string>('');
   const [level, setLevel] = useState('');
-  const [count, setCount] = useState(30);
-  const [types, setTypes] = useState<ItemType[]>(['vocab']);
+  const [amount, setAmount] = useState<MaterialAmount>('auto');
+  const [types, setTypes] = useState<ItemType[]>([]);
   const [targetLang, setTargetLang] = useState('英語（en）');
   const [explanationLang, setExplanationLang] = useState('日本語（ja）');
   const [extra, setExtra] = useState('');
   const [withSchema, setWithSchema] = useState(false);
 
+  // 学ぶ言語は、語学の教材（分野が語学、または単語・フレーズを選んだ）のときだけ聞く
+  const isLanguage =
+    subject === LANGUAGE_SUBJECT || types.some((t) => t === 'vocab' || t === 'phrase');
+
   const prompt = useMemo(
     () =>
       buildMaterialPrompt(
-        { topic, level, count, types, targetLang, explanationLang, extra },
+        {
+          topic,
+          subject,
+          level,
+          amount,
+          types,
+          targetLang: isLanguage ? targetLang : undefined,
+          explanationLang,
+          extra,
+        },
         { schema: withSchema },
       ),
-    [topic, level, count, types, targetLang, explanationLang, extra, withSchema],
+    [
+      topic,
+      subject,
+      level,
+      amount,
+      types,
+      isLanguage,
+      targetLang,
+      explanationLang,
+      extra,
+      withSchema,
+    ],
   );
 
   const toggleType = (t: ItemType) =>
@@ -67,7 +170,7 @@ export function PromptBuilder({ onGoImport }: { onGoImport: () => void }) {
       <Section
         title="AI に教材を作ってもらう"
         icon={<Wand2 />}
-        description="条件を入れてプロンプトをコピーし、ChatGPT・Claude・Gemini などに貼り付けます。返ってきた JSON を「取り込む」に貼り付ければ完了です。"
+        description="テーマを入れてプロンプトをコピーし、ChatGPT・Claude・Gemini などに貼り付けます。返ってきた JSON を「取り込む」に貼り付ければ完了です。語学以外の教材も作れます。"
       >
         <div className="flex flex-wrap gap-2 px-4 py-3 sm:px-5">
           {PRESETS.map((p) => (
@@ -76,6 +179,7 @@ export function PromptBuilder({ onGoImport }: { onGoImport: () => void }) {
               type="button"
               onClick={() => {
                 setTopic(p.topic);
+                setSubject(p.subject);
                 setLevel(p.level);
                 setTypes(p.types);
               }}
@@ -90,66 +194,73 @@ export function PromptBuilder({ onGoImport }: { onGoImport: () => void }) {
             id="pb-topic"
             value={topic}
             onChange={(e) => setTopic(e.target.value)}
-            placeholder="例: 料理に関する英単語、IT 用語、日本史の年号…"
+            placeholder="例: 簿記の勘定科目、世界の首都、統計の基本用語、料理の英単語…"
             className={inputClass}
           />
         </Field>
-        <div className="grid sm:grid-cols-2">
-          <Field label="レベル" htmlFor="pb-level" stacked>
-            <input
-              id="pb-level"
-              value={level}
-              onChange={(e) => setLevel(e.target.value)}
-              placeholder="例: 中学、CEFR B1、TOEIC 700"
-              className={inputClass}
-            />
-          </Field>
-          <Field label="項目数" htmlFor="pb-count" stacked>
-            <input
-              id="pb-count"
-              type="number"
-              min={1}
-              max={300}
-              value={count}
-              onChange={(e) => setCount(Math.max(1, Math.min(300, Number(e.target.value) || 1)))}
-              className={inputClass}
-            />
-          </Field>
-        </div>
-        <Field
-          label="項目の種類"
-          stacked
-          hint="複数選べます。単語帳以外の教材（一問一答・穴埋め・選択問題）も作れます"
-        >
+        <Field label="分野（任意）" stacked>
           <div className="flex flex-wrap gap-2">
-            {ITEM_TYPES.map((t) => (
-              <button
-                key={t}
-                type="button"
-                aria-pressed={types.includes(t)}
-                onClick={() => toggleType(t)}
-                title={ITEM_TYPE_GUIDES[t]}
-                className={cn(
-                  'rounded-xl border px-3 py-1.5 text-sm transition-colors',
-                  types.includes(t)
-                    ? 'border-accent-500 bg-accent-50 text-accent-800 dark:bg-accent-900/30 dark:text-accent-200'
-                    : 'border-slate-300 hover:bg-slate-100 dark:border-slate-700 dark:hover:bg-slate-800',
-                )}
+            {SUBJECTS.map((s) => (
+              <Chip
+                key={s}
+                active={subject === s}
+                onClick={() => setSubject(subject === s ? '' : s)}
               >
-                {ITEM_TYPE_LABELS[t]}
-              </button>
+                {s}
+              </Chip>
             ))}
           </div>
         </Field>
-        <div className="grid sm:grid-cols-2">
-          <Field label="学ぶ言語" htmlFor="pb-target" stacked>
-            <input
-              id="pb-target"
-              value={targetLang}
-              onChange={(e) => setTargetLang(e.target.value)}
-              className={inputClass}
-            />
-          </Field>
+        <Field label="レベル（任意）" htmlFor="pb-level" stacked>
+          <input
+            id="pb-level"
+            value={level}
+            onChange={(e) => setLevel(e.target.value)}
+            placeholder="例: 入門、中学、3 級、実務レベル"
+            className={inputClass}
+          />
+        </Field>
+        <Field label="量" stacked hint="細かい数はテーマに合わせて外部 AI が決めます">
+          <div className="flex flex-wrap gap-2">
+            {(Object.keys(AMOUNT_LABELS) as MaterialAmount[]).map((a) => (
+              <Chip key={a} active={amount === a} onClick={() => setAmount(a)}>
+                {AMOUNT_LABELS[a]}
+              </Chip>
+            ))}
+          </div>
+        </Field>
+        <Field
+          label="項目の種類"
+          stacked
+          hint="おまかせなら、テーマに合う種類を外部 AI が選びます（組み合わせることもあります）"
+        >
+          <div className="flex flex-wrap gap-2">
+            <Chip active={types.length === 0} onClick={() => setTypes([])}>
+              おまかせ
+            </Chip>
+            {ITEM_TYPES.map((t) => (
+              <Chip
+                key={t}
+                active={types.includes(t)}
+                onClick={() => toggleType(t)}
+                title={ITEM_TYPE_GUIDES[t]}
+              >
+                {ITEM_TYPE_LABELS[t]}
+              </Chip>
+            ))}
+          </div>
+        </Field>
+        <div className={cn('grid', isLanguage && 'sm:grid-cols-2')}>
+          {isLanguage && (
+            <Field label="学ぶ言語" htmlFor="pb-target" stacked>
+              <input
+                id="pb-target"
+                value={targetLang}
+                onChange={(e) => setTargetLang(e.target.value)}
+                className={inputClass}
+              />
+            </Field>
+          )}
           <Field label="説明の言語" htmlFor="pb-expl" stacked>
             <input
               id="pb-expl"
@@ -165,7 +276,7 @@ export function PromptBuilder({ onGoImport }: { onGoImport: () => void }) {
             value={extra}
             onChange={(e) => setExtra(e.target.value)}
             rows={2}
-            placeholder="例: 例文はビジネスの場面で、語源の説明を notes に入れて"
+            placeholder="例: 実務でよく使うものを優先して、解説には間違えやすいポイントを入れて"
             className="w-full rounded-xl border border-slate-300 bg-white p-3 text-sm dark:border-slate-700 dark:bg-slate-950"
           />
         </Field>

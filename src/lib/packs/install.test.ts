@@ -2,7 +2,13 @@ import 'fake-indexeddb/auto';
 import { beforeEach, describe, expect, it } from 'vitest';
 import { db } from '@/lib/db/db';
 import type { StudyPack } from './schema';
-import { installPack, resetPackProgress, setPackTemplates, uninstallPack } from './install';
+import {
+  installPack,
+  movePack,
+  resetPackProgress,
+  setPackTemplates,
+  uninstallPack,
+} from './install';
 
 function pack(items: StudyPack['items']): StudyPack {
   return { format: 'lllm-study-pack', version: 1, id: 'p1', title: 'P1', items };
@@ -56,5 +62,14 @@ describe('installPack', () => {
     expect(await db.packs.count()).toBe(0);
     expect(await db.cards.count()).toBe(0);
     expect(await db.items.count()).toBe(0);
+  });
+
+  it('並び順を入れ替える', async () => {
+    await installPack(pack([w('a')]), 'import');
+    await installPack({ ...pack([w('b')]), id: 'p2', title: 'P2' }, 'import');
+    await movePack('p2', -1);
+    expect((await db.packs.orderBy('order').toArray()).map((p) => p.id)).toEqual(['p2', 'p1']);
+    await movePack('p2', -1); // 先頭より上には動かない
+    expect((await db.packs.orderBy('order').first())?.id).toBe('p2');
   });
 });

@@ -58,10 +58,14 @@ export const TOOL_DECLARATIONS: ToolDeclaration[] = [
             '"vocab"（単語）・"phrase"（フレーズ）・"qa"（一問一答）のどれか。英語の値をそのまま書く',
         },
         front: { type: 'string', description: '単語・フレーズ・問題' },
-        back: { type: 'string', description: '意味・答え（単語の意味が複数なら「、」で区切る）' },
+        back: {
+          type: 'string',
+          description:
+            '意味・答え。辞書のように簡潔に書き、口調や語尾（「〜にゃ」「〜だよ」など）は付けない。単語の意味が複数なら「、」で区切る',
+        },
         example: { type: 'string', description: '例文（任意）' },
         example_translation: { type: 'string', description: '例文の訳（任意）' },
-        notes: { type: 'string', description: '補足（任意）' },
+        notes: { type: 'string', description: '補足（任意。口調や語尾は付けない）' },
       },
       required: ['type', 'front', 'back'],
     },

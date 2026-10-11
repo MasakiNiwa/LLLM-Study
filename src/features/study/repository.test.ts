@@ -62,3 +62,41 @@ describe('repository', () => {
     expect((await loadQueue(settings, now)).queue).toHaveLength(0);
   });
 });
+
+describe('教材の切り替えと上限なし', () => {
+  beforeEach(async () => {
+    await installPack(
+      {
+        format: 'lllm-study-pack',
+        version: 1,
+        id: 'q',
+        title: 'Q',
+        items: Array.from({ length: 4 }, (_, i) => ({
+          id: `x${i}`,
+          type: 'qa' as const,
+          question: `Q${i}`,
+          answer: 'A',
+        })),
+      },
+      'import',
+      { now },
+    );
+  });
+
+  it('教材を絞るとその教材だけ出し、上限もその教材の中で数える', async () => {
+    const [first] = (await loadQueue(settings, now)).queue;
+    await saveRating(first, 3, 1000, settings, now);
+    const plan = await loadQueue({ ...settings, focusPackId: 'q' }, now + 1000);
+    expect(plan.queue.every((c) => c.packId === 'q')).toBe(true);
+    expect(plan.newCount).toBe(3);
+  });
+
+  it('無効にした教材でも、絞り込めば学習できる', async () => {
+    await db.packs.update('q', { enabled: false });
+    expect((await loadQueue({ ...settings, focusPackId: 'q' }, now)).newCount).toBe(3);
+  });
+
+  it('上限なしなら新しいカードをすべて出す', async () => {
+    expect((await loadQueue({ ...settings, noDailyLimit: true }, now)).newCount).toBe(9);
+  });
+});

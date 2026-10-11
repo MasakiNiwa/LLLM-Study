@@ -32,8 +32,15 @@ export interface TodayOverview {
   packCount: number;
 }
 
-async function enabledPackIds(): Promise<Set<string>> {
+/**
+ * 学習の対象にする教材。教材を絞っていればその 1 つ（無効にしていても対象にする）、
+ * そうでなければ有効なすべての教材。
+ */
+export async function studyPackIds(settings: Pick<Settings, 'focusPackId'>): Promise<Set<string>> {
   const packs = await db.packs.toArray();
+  if (settings.focusPackId && packs.some((p) => p.id === settings.focusPackId)) {
+    return new Set([settings.focusPackId]);
+  }
   return new Set(packs.filter((p) => p.enabled).map((p) => p.id));
 }
 
@@ -87,7 +94,7 @@ async function todayReviews(day: string): Promise<ReviewRecord[]> {
 export async function loadQueue(settings: Settings, now = Date.now()): Promise<QueuePlan> {
   const day = studyDayKey(now, settings.dayStartHour);
   const end = studyDayEnd(day, settings.dayStartHour);
-  const enabled = await enabledPackIds();
+  const enabled = await studyPackIds(settings);
   const active = isActive(enabled);
   const started = await db.cards
     .where('state')
@@ -98,15 +105,17 @@ export async function loadQueue(settings: Settings, now = Date.now()): Promise<Q
     (c) => c.state !== CardState.Review && c.due <= now + LEARN_AHEAD_MS,
   );
   const reviews = started.filter((c) => c.state === CardState.Review && c.due < end);
-  const done = await todayReviews(day);
+  // 1 日の上限は、学習の対象にしている教材の中で数える（教材を切り替えたら、その教材の分を出せる）
+  const done = (await todayReviews(day)).filter((r) => enabled.has(r.packId));
+  const unlimited = settings.noDailyLimit;
   return buildQueue({
     learning,
     reviews,
     newCards: await newCandidates(enabled, settings, day),
     newDoneToday: new Set(done.filter((r) => r.state === CardState.New).map((r) => r.cardId)).size,
     reviewsDoneToday: done.filter((r) => r.state === CardState.Review).length,
-    newPerDay: settings.newPerDay,
-    maxReviewsPerDay: settings.maxReviewsPerDay,
+    newPerDay: unlimited ? Infinity : settings.newPerDay,
+    maxReviewsPerDay: unlimited ? Infinity : settings.maxReviewsPerDay,
   });
 }
 

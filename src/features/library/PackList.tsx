@@ -1,5 +1,16 @@
 import { useEffect, useMemo, useState } from 'react';
-import { ChevronDown, Pencil, Plus, RotateCcw, Search, Trash2 } from 'lucide-react';
+import {
+  ArrowDown,
+  ArrowUp,
+  ChevronDown,
+  Pencil,
+  Play,
+  Plus,
+  RotateCcw,
+  Search,
+  Trash2,
+} from 'lucide-react';
+import { useLocation } from 'wouter';
 import { toast } from 'sonner';
 import { Button } from '@/components/ui/Button';
 import { Card } from '@/components/ui/Card';
@@ -8,6 +19,7 @@ import { Switch } from '@/components/ui/Switch';
 import { db } from '@/lib/db/db';
 import type { ItemRecord } from '@/lib/db/types';
 import {
+  movePack,
   resetPackProgress,
   setPackEnabled,
   setPackTemplates,
@@ -15,7 +27,11 @@ import {
 } from '@/lib/packs/install';
 import { itemAnswer, itemSearchText, itemTitle } from '@/lib/packs/itemText';
 import type { ItemType, StudyItem } from '@/lib/packs/schema';
+import { subjectKey, subjectLabel } from '@/lib/packs/subjects';
 import { ITEM_TYPE_LABELS, TEMPLATES } from '@/lib/packs/templates';
+import { Select } from '@/components/ui/Select';
+import { useSettings } from '@/features/settings/settingsStore';
+import { useStudy } from '@/features/study/studyStore';
 import { cn } from '@/lib/utils/cn';
 import { errorMessage } from '@/lib/utils/format';
 import { CardEditor } from './CardEditor';
@@ -104,8 +120,28 @@ function ItemBrowser({
   );
 }
 
-function PackCard({ pack, onEdit }: { pack: PackWithStats; onEdit: (item: StudyItem) => void }) {
+function PackCard({
+  pack,
+  onEdit,
+  first,
+  last,
+}: {
+  pack: PackWithStats;
+  onEdit: (item: StudyItem) => void;
+  /** 並び順で先頭・末尾か（上へ・下へボタンの無効化） */
+  first: boolean;
+  last: boolean;
+}) {
   const refresh = useLibrary((s) => s.refresh);
+  const focused = useSettings((s) => s.focusPackId === pack.id);
+  const [, navigate] = useLocation();
+
+  /** この教材だけを学習する（学習中のセッションは新しい条件で始め直す） */
+  const studyThis = () => {
+    useSettings.getState().update({ focusPackId: pack.id });
+    useStudy.getState().end();
+    navigate('/study');
+  };
   const [open, setOpen] = useState(false);
   const [confirm, setConfirm] = useState<null | 'reset' | 'delete'>(null);
 
@@ -137,9 +173,17 @@ function PackCard({ pack, onEdit }: { pack: PackWithStats; onEdit: (item: StudyI
       <div className="flex items-start gap-3 p-4">
         <div className="min-w-0 flex-1 space-y-2">
           <div>
-            <div className="font-semibold">{pack.title}</div>
+            <div className="font-semibold">
+              {pack.title}
+              {focused && (
+                <span className="ml-2 rounded-md bg-accent-100 px-1.5 py-0.5 align-middle text-[0.7rem] font-medium text-accent-800 dark:bg-accent-900/40 dark:text-accent-200">
+                  学習中の教材
+                </span>
+              )}
+            </div>
             <div className="text-xs text-slate-500 dark:text-slate-400">
-              {pack.itemCount} 項目 · {pack.itemTypes.map((t) => ITEM_TYPE_LABELS[t]).join('・')}
+              {subjectLabel(subjectKey(pack.subject))} · {pack.itemCount} 項目 ·{' '}
+              {pack.itemTypes.map((t) => ITEM_TYPE_LABELS[t]).join('・')}
               {pack.origin === 'sample' && ' · サンプル'}
               {pack.origin === 'user' && ' · 自分で作ったカード'}
             </div>
@@ -156,6 +200,17 @@ function PackCard({ pack, onEdit }: { pack: PackWithStats; onEdit: (item: StudyI
           }
           label={`${pack.title} を学習する`}
         />
+      </div>
+      <div className="flex items-center gap-2 px-4 pb-3">
+        <Button size="sm" variant={focused ? 'primary' : 'secondary'} onClick={studyThis}>
+          <Play />
+          この教材を学習
+        </Button>
+        {pack.stats.due > 0 && (
+          <span className="text-xs text-slate-500 dark:text-slate-400">
+            復習 {pack.stats.due} 枚
+          </span>
+        )}
       </div>
       <button
         type="button"
@@ -210,6 +265,26 @@ function PackCard({ pack, onEdit }: { pack: PackWithStats; onEdit: (item: StudyI
             <span className="font-mono">id: {pack.id}</span>
           </div>
           <div className="flex flex-wrap justify-end gap-2">
+            <Button
+              size="sm"
+              variant="ghost"
+              disabled={first}
+              onClick={() => void run(() => movePack(pack.id, -1), '並び順を変えました')}
+              aria-label="上へ"
+              title="上へ（新しいカードを先に出す）"
+            >
+              <ArrowUp />
+            </Button>
+            <Button
+              size="sm"
+              variant="ghost"
+              disabled={last}
+              onClick={() => void run(() => movePack(pack.id, 1), '並び順を変えました')}
+              aria-label="下へ"
+              title="下へ"
+            >
+              <ArrowDown />
+            </Button>
             <Button size="sm" variant="ghost" onClick={() => setConfirm('reset')}>
               <RotateCcw />
               最初からやり直す
@@ -248,23 +323,133 @@ function PackCard({ pack, onEdit }: { pack: PackWithStats; onEdit: (item: StudyI
   );
 }
 
-/** 取り込んだ教材の一覧 */
+type SortKey = 'order' | 'name' | 'due' | 'new' | 'recent';
+
+const SORT_OPTIONS: { value: SortKey; label: string }[] = [
+  { value: 'order', label: '並び順' },
+  { value: 'name', label: '名前' },
+  { value: 'due', label: '復習が多い順' },
+  { value: 'new', label: '未学習が多い順' },
+  { value: 'recent', label: '追加・更新が新しい順' },
+];
+
+function sortPacks(packs: PackWithStats[], key: SortKey): PackWithStats[] {
+  const list = [...packs];
+  switch (key) {
+    case 'name':
+      return list.sort((a, b) => a.title.localeCompare(b.title, 'ja'));
+    case 'due':
+      return list.sort((a, b) => b.stats.due - a.stats.due || a.order - b.order);
+    case 'new':
+      return list.sort((a, b) => b.stats.newCards - a.stats.newCards || a.order - b.order);
+    case 'recent':
+      return list.sort((a, b) => b.updatedAt - a.updatedAt);
+    default:
+      return list.sort((a, b) => a.order - b.order);
+  }
+}
+
+/** 取り込んだ教材の一覧（検索・分野での絞り込み・並べ替え） */
 export function PackList({ empty }: { empty: React.ReactNode }) {
   const packs = useLibrary((s) => s.packs);
   const loaded = useLibrary((s) => s.loaded);
   const [editor, setEditor] = useState<{ item: StudyItem | null } | null>(null);
+  const [query, setQuery] = useState('');
+  const [subject, setSubject] = useState<string | null>(null);
+  const [sort, setSort] = useState<SortKey>('order');
+
+  const subjects = useMemo(() => {
+    const counts = new Map<string, number>();
+    for (const p of packs)
+      counts.set(subjectKey(p.subject), (counts.get(subjectKey(p.subject)) ?? 0) + 1);
+    return [...counts.entries()];
+  }, [packs]);
+
+  const ordered = useMemo(() => sortPacks(packs, 'order'), [packs]);
+  const visible = useMemo(() => {
+    const q = query.trim().toLowerCase();
+    const filtered = packs.filter(
+      (p) =>
+        (!subject || subjectKey(p.subject) === subject) &&
+        (!q ||
+          [p.title, p.description, p.level, ...(p.tags ?? [])]
+            .filter(Boolean)
+            .join(' ')
+            .toLowerCase()
+            .includes(q)),
+    );
+    return sortPacks(filtered, sort);
+  }, [packs, query, subject, sort]);
+
   if (!loaded) return null;
+  const showTools = packs.length >= 2;
   return (
     <div className="space-y-3">
-      <div className="flex justify-end">
-        <Button size="sm" variant="secondary" onClick={() => setEditor({ item: null })}>
+      <div className="flex flex-wrap items-center gap-2">
+        {showTools && (
+          <div className="relative min-w-0 flex-1">
+            <Search className="pointer-events-none absolute top-1/2 left-3 size-4 -translate-y-1/2 text-slate-400" />
+            <input
+              value={query}
+              onChange={(e) => setQuery(e.target.value)}
+              placeholder="教材を検索（タイトル・タグ）"
+              aria-label="教材を検索"
+              className="h-10 w-full rounded-xl border border-slate-300 bg-white pr-3 pl-9 text-sm dark:border-slate-700 dark:bg-slate-950"
+            />
+          </div>
+        )}
+        <Button
+          size="sm"
+          variant="secondary"
+          className="ml-auto"
+          onClick={() => setEditor({ item: null })}
+        >
           <Plus />
           カードを作る
         </Button>
       </div>
+      {showTools && (
+        <div className="flex flex-wrap items-center gap-2">
+          {subjects.length >= 2 &&
+            [null, ...subjects.map(([k]) => k)].map((k) => (
+              <button
+                key={k ?? 'all'}
+                type="button"
+                aria-pressed={subject === k}
+                onClick={() => setSubject(k)}
+                className={cn(
+                  'rounded-full border px-3 py-1 text-xs transition-colors',
+                  subject === k
+                    ? 'border-accent-500 bg-accent-50 text-accent-800 dark:bg-accent-900/30 dark:text-accent-200'
+                    : 'border-slate-300 hover:bg-slate-100 dark:border-slate-700 dark:hover:bg-slate-800',
+                )}
+              >
+                {k === null ? 'すべて' : subjectLabel(k)}
+              </button>
+            ))}
+          <Select
+            value={sort}
+            onChange={setSort}
+            options={SORT_OPTIONS}
+            aria-label="並べ替え"
+            className="ml-auto w-44"
+          />
+        </div>
+      )}
       {packs.length === 0
         ? empty
-        : packs.map((p) => <PackCard key={p.id} pack={p} onEdit={(item) => setEditor({ item })} />)}
+        : visible.map((p) => (
+            <PackCard
+              key={p.id}
+              pack={p}
+              first={ordered[0]?.id === p.id}
+              last={ordered[ordered.length - 1]?.id === p.id}
+              onEdit={(item) => setEditor({ item })}
+            />
+          ))}
+      {packs.length > 0 && visible.length === 0 && (
+        <p className="py-6 text-center text-sm text-slate-500">条件に合う教材がありません</p>
+      )}
       <CardEditor open={editor !== null} editing={editor?.item} onClose={() => setEditor(null)} />
     </div>
   );

@@ -12,8 +12,10 @@
 - "id" はパックを表す英数字の ID（例: "en-basic-verbs-001"）。同じ教材を作り直すときは同じ ID と各項目の ID を使い、"revision" を増やす（学習記録が引き継がれる）
 - 各項目の "id" はパック内で一意にする（例: "v-take", "p-no-worries"）
 - 各項目の "type" で種類を指定する。種類ごとに必須のキーが違う
-- 説明・意味・訳は「説明の言語」で、見出し語・例文は「学ぶ言語」で書く
-- 学習者が覚えやすいよう、意味は主要なものから順に、例文は短く自然なものにする
+- "subject" には分野を表す短い英語（例: english, bookkeeping, history, programming）を入れる
+- 説明・意味・訳・解説は「説明の言語」で書く。語学の教材では、見出し語・例文を「学ぶ言語」で書く
+- テーマに合った種類を選ぶ（語学なら単語・フレーズ、知識や資格なら一問一答・穴埋め・選択問題など）。種類は組み合わせてもよい
+- 1 つの項目では 1 つのことだけを問い、答えが一つに決まるようにする。解説には覚えるための要点を短く書く
 - 事実と異なる内容を入れない。自信がない情報は省略する
 
 ## パック全体のキー
@@ -99,31 +101,30 @@
       ]
     },
     {
-      "id": "q-past-of-go",
+      "id": "q-longest-river",
       "type": "qa",
-      "question": "go の過去形は？",
-      "answer": "went",
-      "explanation": "go は不規則動詞（go - went - gone）。"
+      "question": "日本で最も長い川は？",
+      "answer": "信濃川",
+      "explanation": "長さは約 367 km。長野県では千曲川と呼ばれる。"
     },
     {
-      "id": "c-look-forward",
+      "id": "c-boiling-point",
       "type": "cloze",
-      "text": "I look {{forward}} to seeing you.",
-      "translation": "お会いできるのを楽しみにしています。",
-      "hint": "「前方を見る」"
+      "text": "1 気圧のもとで、水は約 {{100}} ℃で沸騰する。",
+      "hint": "温度の単位はセルシウス度"
     },
     {
-      "id": "ch-since-for",
+      "id": "ch-edo-shogunate",
       "type": "choice",
-      "question": "I have lived here ___ 2020.",
+      "question": "江戸幕府を開いた人物は？",
       "choices": [
-        "for",
-        "since",
-        "from",
-        "at"
+        "織田信長",
+        "豊臣秀吉",
+        "徳川家康",
+        "足利尊氏"
       ],
-      "answer": 1,
-      "explanation": "起点（〜以来）を表すときは since。期間には for を使う。"
+      "answer": 2,
+      "explanation": "1603 年に征夷大将軍となり、江戸に幕府を開いた。"
     }
   ]
 }

@@ -14,6 +14,7 @@ import { useEngine } from '@/features/engine/engineStore';
 import { parseQuiz, quizPrompt, type QuizQuestion } from '@/features/quiz/quizGen';
 import { pickQuizItems, type QuizPick } from '@/features/quiz/quizSelect';
 import { SpeakButton } from '@/features/items/ItemCard';
+import { speechLang } from '@/lib/speech/lang';
 import { useSettings } from '@/features/settings/settingsStore';
 
 const COUNT = 5;
@@ -34,12 +35,13 @@ async function generate(pick: QuizPick): Promise<QuizQuestion | null> {
   for (let i = 0; i <= RETRIES; i++) {
     const r = await runOneshot({
       task: 'assist',
-      prompt: quizPrompt(pick.item),
+      prompt: quizPrompt(pick.item, pick.lang),
+      plain: true,
       maxOutputTokens: 200,
     });
     if (r.cancelled) return null;
     const q = parseQuiz(r.text, pick.item, pick.itemKey);
-    if (typeof q !== 'string') return q;
+    if (typeof q !== 'string') return { ...q, lang: pick.lang };
   }
   return null;
 }
@@ -208,7 +210,10 @@ export default function QuizPage() {
                       answer={current ? question.answer : undefined}
                     />
                     {current && (
-                      <SpeakButton text={question.sentence.replace('___', question.answer)} />
+                      <SpeakButton
+                        text={question.sentence.replace('___', question.answer)}
+                        lang={speechLang(question.lang)}
+                      />
                     )}
                   </div>
                   {question.translation && (

@@ -206,6 +206,7 @@ function EditorBody({ editing, onClose }: { editing: StudyItem | null; onClose: 
       const r = await runOneshot({
         task: 'assist',
         prompt: draftPrompt(form.type, form.head.trim()),
+        plain: true,
       });
       const draft = parseDraft(r.text, form.type);
       if (!draft) throw new Error('AI の下書きを読み取れませんでした。もう一度試してください');

@@ -14,6 +14,8 @@ export interface OneshotOptions {
   task: Exclude<AiTask, 'chat'>;
   prompt: string;
   maxOutputTokens?: number;
+  /** true: 性格（口調）を付けず、教材づくり用の中立なシステムプロンプトで生成する */
+  plain?: boolean;
   /** 生成中の本文（フレームごとにまとめて呼ばれる） */
   onText?: (text: string) => void;
 }
@@ -22,6 +24,10 @@ export interface OneshotResult {
   text: string;
   cancelled: boolean;
 }
+
+/** カードの下書きや問題づくりなど、口調を付けたくない生成に使う */
+const PLAIN_SYSTEM_PROMPT =
+  'あなたは正確な学習教材を作るアシスタントです。指示された形式どおりに、簡潔で正確な内容だけを出力します。口調や語尾の飾りは付けません。';
 
 export async function runOneshot(opts: OneshotOptions): Promise<OneshotResult> {
   if (useEngine.getState().status !== 'ready') throw new Error('AI モデルが読み込まれていません');
@@ -39,7 +45,7 @@ export async function runOneshot(opts: OneshotOptions): Promise<OneshotResult> {
       {
         mode: 'oneshot',
         settings: {
-          systemPrompt: buildSystemPrompt(s, { tools: false }),
+          systemPrompt: opts.plain ? PLAIN_SYSTEM_PROMPT : buildSystemPrompt(s, { tools: false }),
           temperature: s.temperature,
           topK: s.topK,
           topP: s.topP,

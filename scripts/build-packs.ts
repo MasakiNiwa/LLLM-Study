@@ -26,6 +26,7 @@ interface SampleIndexEntry {
   id: string;
   title: string;
   description?: string;
+  subject?: string;
   level?: string;
   tags?: string[];
   revision: number;
@@ -55,6 +56,7 @@ for (const file of readdirSync(packsDir)
     id: pack.id,
     title: pack.title,
     description: pack.description,
+    subject: pack.subject,
     level: pack.level,
     tags: pack.tags,
     revision: pack.revision ?? 1,
