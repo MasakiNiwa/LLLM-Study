@@ -139,3 +139,17 @@
     visibility: hidden;
   }
 }
+
+/* ---- グラフ（記録ページ）の色。ダークモードは同じ色相を暗い背景向けに選び直したもの ---- */
+:root {
+  --viz-orange: #eb6834;
+  --viz-aqua: #1baf7a;
+  --viz-blue: #2a78d6;
+  --viz-neutral: #cbd5e1;
+}
+.dark {
+  --viz-orange: #d95926;
+  --viz-aqua: #199e70;
+  --viz-blue: #3987e5;
+  --viz-neutral: #475569;
+}

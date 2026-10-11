@@ -8,7 +8,8 @@ export type CardStateValue = (typeof CardState)[keyof typeof CardState];
 export const Grade = { Again: 1, Hard: 2, Good: 3, Easy: 4 } as const;
 export type GradeValue = (typeof Grade)[keyof typeof Grade];
 
-export type PackOrigin = 'sample' | 'import';
+/** sample: 同梱のサンプル、import: 取り込んだ教材、user: 自分で作ったカード（マイカード） */
+export type PackOrigin = 'sample' | 'import' | 'user';
 
 /** 取り込んだ教材パック（項目は items テーブルに分けて持つ） */
 export interface PackRecord extends Omit<StudyPack, 'items' | 'format' | 'version'> {

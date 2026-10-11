@@ -1,8 +1,11 @@
 import { useMemo, useState } from 'react';
-import { ChevronLeft, ChevronRight } from 'lucide-react';
+import { BarChart3, CalendarDays, ChevronLeft, ChevronRight } from 'lucide-react';
+import { useLocation, useParams } from 'wouter';
 import { PageBody, PageHeader } from '@/app/PageHeader';
 import { Button } from '@/components/ui/Button';
 import { Card } from '@/components/ui/Card';
+import { Tabs } from '@/components/ui/Tabs';
+import { StatsPanel } from '@/features/stats/StatsPanel';
 import { addDays, formatDayKey } from '@/lib/srs/day';
 import { DayDetail } from '@/features/calendar/DayDetail';
 import { MonthCalendar } from '@/features/calendar/MonthCalendar';
@@ -26,8 +29,34 @@ function Summary({ label, value }: { label: string; value: string }) {
   );
 }
 
+const TABS = [
+  { value: 'month' as const, label: 'カレンダー', icon: <CalendarDays /> },
+  { value: 'stats' as const, label: '記録', icon: <BarChart3 /> },
+];
+
 export default function CalendarPage() {
+  const params = useParams<{ tab?: string }>();
+  const [, navigate] = useLocation();
+  const tab = params.tab === 'stats' ? 'stats' : 'month';
   const today = useStudyToday();
+  return (
+    <>
+      <PageHeader title="カレンダー" />
+      <PageBody>
+        <Tabs
+          value={tab}
+          items={TABS}
+          onChange={(t) =>
+            navigate(t === 'stats' ? '/calendar/stats' : '/calendar', { replace: true })
+          }
+        />
+        {tab === 'stats' ? <StatsPanel today={today} /> : <MonthView today={today} />}
+      </PageBody>
+    </>
+  );
+}
+
+function MonthView({ today }: { today: string }) {
   const [ty, tm] = today.split('-').map(Number);
   const [ym, setYm] = useState({ y: ty, m: tm });
   const [selected, setSelected] = useState(today);
@@ -57,66 +86,63 @@ export default function CalendarPage() {
 
   return (
     <>
-      <PageHeader title="カレンダー" />
-      <PageBody>
-        <Card className="grid grid-cols-4 gap-2 px-2 py-3">
-          <Summary label="連続日数" value={`${overview?.streak ?? 0}`} />
-          <Summary label="今月の学習日" value={`${monthStats.studyDays}`} />
-          <Summary label="今月の回数" value={`${monthStats.reviews}`} />
-          <Summary label="今月の時間(分)" value={`${monthStats.minutes}`} />
-        </Card>
+      <Card className="grid grid-cols-4 gap-2 px-2 py-3">
+        <Summary label="連続日数" value={`${overview?.streak ?? 0}`} />
+        <Summary label="今月の学習日" value={`${monthStats.studyDays}`} />
+        <Summary label="今月の回数" value={`${monthStats.reviews}`} />
+        <Summary label="今月の時間(分)" value={`${monthStats.minutes}`} />
+      </Card>
 
-        <Card className="p-3 sm:p-4">
-          <div className="mb-3 flex items-center gap-2">
-            <Button size="icon" variant="ghost" onClick={() => move(-1)} aria-label="前の月">
-              <ChevronLeft />
-            </Button>
-            <h2 className="flex-1 text-center text-lg font-semibold tabular-nums">
-              {ym.y}年 {ym.m}月
-            </h2>
-            <Button size="icon" variant="ghost" onClick={() => move(1)} aria-label="次の月">
-              <ChevronRight />
-            </Button>
-          </div>
-          <MonthCalendar
-            days={days}
-            month={ym.m}
-            today={today}
-            selected={selected}
-            data={data}
-            onSelect={setSelected}
-          />
-          <div className="mt-3 flex flex-wrap items-center justify-between gap-2 text-xs text-slate-500">
-            <div className="flex items-center gap-1">
-              少ない
-              {HEAT_CLASSES.map((c, i) => (
-                <span key={i} className={`size-3 rounded ${c}`} />
-              ))}
-              多い
-            </div>
-            <span>未来の日付の数字は復習予定の枚数</span>
-            {(ym.y !== ty || ym.m !== tm) && (
-              <Button
-                size="sm"
-                variant="ghost"
-                onClick={() => {
-                  setYm({ y: ty, m: tm });
-                  setSelected(today);
-                }}
-              >
-                今日へ
-              </Button>
-            )}
-          </div>
-        </Card>
-
-        <DayDetail
-          day={selected}
+      <Card className="p-3 sm:p-4">
+        <div className="mb-3 flex items-center gap-2">
+          <Button size="icon" variant="ghost" onClick={() => move(-1)} aria-label="前の月">
+            <ChevronLeft />
+          </Button>
+          <h2 className="flex-1 text-center text-lg font-semibold tabular-nums">
+            {ym.y}年 {ym.m}月
+          </h2>
+          <Button size="icon" variant="ghost" onClick={() => move(1)} aria-label="次の月">
+            <ChevronRight />
+          </Button>
+        </div>
+        <MonthCalendar
+          days={days}
+          month={ym.m}
           today={today}
-          activity={data?.activity[selected]}
-          forecast={data?.forecast[selected]}
+          selected={selected}
+          data={data}
+          onSelect={setSelected}
         />
-      </PageBody>
+        <div className="mt-3 flex flex-wrap items-center justify-between gap-2 text-xs text-slate-500">
+          <div className="flex items-center gap-1">
+            少ない
+            {HEAT_CLASSES.map((c, i) => (
+              <span key={i} className={`size-3 rounded ${c}`} />
+            ))}
+            多い
+          </div>
+          <span>未来の日付の数字は復習予定の枚数</span>
+          {(ym.y !== ty || ym.m !== tm) && (
+            <Button
+              size="sm"
+              variant="ghost"
+              onClick={() => {
+                setYm({ y: ty, m: tm });
+                setSelected(today);
+              }}
+            >
+              今日へ
+            </Button>
+          )}
+        </div>
+      </Card>
+
+      <DayDetail
+        day={selected}
+        today={today}
+        activity={data?.activity[selected]}
+        forecast={data?.forecast[selected]}
+      />
     </>
   );
 }

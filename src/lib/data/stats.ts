@@ -47,3 +47,45 @@ export function summarizeForecast(
   }
   return out;
 }
+
+export interface CardStateSummary {
+  /** 未学習 */
+  newCards: number;
+  /** 学習中・再学習中（分単位のステップ） */
+  learning: number;
+  /** 復習中（間隔 21 日未満） */
+  young: number;
+  /** 定着（間隔 21 日以上） */
+  mature: number;
+}
+
+/** 間隔がこの日数以上のカードを「定着」とみなす（Anki などと同じ基準） */
+export const MATURE_DAYS = 21;
+
+export function summarizeStates(
+  cards: Pick<CardRecord, 'state' | 'scheduled_days' | 'suspended'>[],
+): CardStateSummary {
+  const s: CardStateSummary = { newCards: 0, learning: 0, young: 0, mature: 0 };
+  for (const c of cards) {
+    if (c.suspended) continue;
+    if (c.state === 0) s.newCards++;
+    else if (c.state === 2) {
+      if (c.scheduled_days >= MATURE_DAYS) s.mature++;
+      else s.young++;
+    } else s.learning++;
+  }
+  return s;
+}
+
+export interface StatsData {
+  states: CardStateSummary;
+  /** 過去 days 日の学習日ごとの活動（古い順。学習していない日も含む） */
+  history: { day: string; reviews: number; correct: number; ms: number }[];
+  /** 今日から days 日の復習予定（今日は期限切れを含む） */
+  forecast: { day: string; count: number }[];
+  totalReviews: number;
+  totalMs: number;
+  studyDays: number;
+  /** 学習済みカードの、いま思い出せる確率の平均（0〜1。学習済みが無ければ undefined） */
+  averageRecall?: number;
+}

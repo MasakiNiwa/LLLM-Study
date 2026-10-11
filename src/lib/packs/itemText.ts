@@ -82,3 +82,44 @@ export function itemForLlm(item: StudyItem): Record<string, unknown> {
   if (item.type === 'choice') out.correct_choice = item.choices[item.answer];
   return out;
 }
+
+/** 入力して答え合わせするときの正解。入力に向かないカード（選択問題）は undefined */
+export function expectedAnswer(
+  item: StudyItem,
+  template: string,
+): { accepted: string[] } | { blanks: string[] } | undefined {
+  switch (item.type) {
+    case 'vocab':
+      return template === 'recall'
+        ? { accepted: [item.term] }
+        : { accepted: meaningCandidates(item.meanings) };
+    case 'phrase':
+      return template === 'recall'
+        ? { accepted: [item.phrase] }
+        : { accepted: meaningCandidates([item.meaning]) };
+    case 'qa':
+      return { accepted: [item.answer] };
+    case 'cloze':
+      return { blanks: clozeAnswers(item.text) };
+    case 'choice':
+      return undefined;
+  }
+}
+
+/** 意味の候補（「（時間が）かかる」→「かかる」、「取る・持つ」→「取る」「持つ」なども正解にする） */
+function meaningCandidates(meanings: string[]): string[] {
+  const out = new Set<string>();
+  for (const m of meanings) {
+    out.add(m);
+    const bare = m.replace(/[（(][^）)]*[）)]/g, '').trim();
+    for (const part of [bare, ...bare.split(/[・、,／/]/)]) {
+      if (part.trim()) out.add(part.trim());
+    }
+  }
+  return [...out];
+}
+
+/** 入力が「学ぶ言語の語句」を答えるものか（入力欄の言語ヒント用） */
+export function answersInTargetLanguage(item: StudyItem, template: string): boolean {
+  return template === 'recall' || item.type === 'cloze';
+}

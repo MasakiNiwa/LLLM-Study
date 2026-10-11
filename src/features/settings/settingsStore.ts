@@ -14,6 +14,9 @@ export type ReactionMode = 'off' | 'template' | 'llm';
 
 export type NewCardOrder = 'pack' | 'random';
 
+/** 答えを入力して答え合わせするカード。recall: 単語・フレーズを答えるカードと穴埋め、all: すべて */
+export type TypeAnswerMode = 'off' | 'recall' | 'all';
+
 export interface Settings extends Omit<ConversationSettings, 'systemPrompt'> {
   // ---- 学習（アルゴリズム） ----
   newPerDay: number;
@@ -28,6 +31,7 @@ export interface Settings extends Omit<ConversationSettings, 'systemPrompt'> {
   newCardOrder: NewCardOrder;
   // ---- 学習（表示・音声） ----
   showIntervals: boolean;
+  typeAnswer: TypeAnswerMode;
   autoSpeak: boolean;
   speechRate: number;
   /** 読み上げの声（voiceURI。空なら自動） */
@@ -69,6 +73,7 @@ export const DEFAULT_SETTINGS: Settings = {
   newCardOrder: 'pack',
 
   showIntervals: true,
+  typeAnswer: 'off',
   autoSpeak: false,
   speechRate: 0.9,
   speechVoice: '',

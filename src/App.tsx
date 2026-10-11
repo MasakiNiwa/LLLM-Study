@@ -29,7 +29,7 @@ export default function App() {
           <Switch>
             <Route path="/study" component={StudyPage} />
             <Route path="/library/:tab?" component={LibraryPage} />
-            <Route path="/calendar" component={CalendarPage} />
+            <Route path="/calendar/:tab?" component={CalendarPage} />
             <Route path="/chat" component={ChatPage} />
             <Route path="/models" component={ModelsPage} />
             <Route path="/settings" component={SettingsPage} />
