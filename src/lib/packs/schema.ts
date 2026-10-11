@@ -240,7 +240,7 @@ export const PackSchema = z
       seen.add(item.id);
     });
   })
-  .describe('ローカルLLM学習アプリの教材パック');
+  .describe('LLLM Study の教材パック');
 
 export type Example = z.infer<typeof ExampleSchema>;
 export type Passage = z.infer<typeof PassageSchema>;

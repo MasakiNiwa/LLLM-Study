@@ -108,9 +108,7 @@ export function WelcomeDialog() {
           <div className="text-center">
             <img src="./favicon.svg" alt="" className="mx-auto size-14" />
             <h3 className="mt-2 text-lg font-bold">自分のペースで、AI と一緒に</h3>
-            <p className="text-sm text-slate-600 dark:text-slate-400">
-              ローカルLLM学習アプリへようこそ。
-            </p>
+            <p className="text-sm text-slate-600 dark:text-slate-400">LLLM Study へようこそ。</p>
           </div>
           <ul className="space-y-3">
             <Point

@@ -26,9 +26,15 @@ export interface CatalogModel {
   official: boolean;
   /** false: GPU Artisan のストリーミング読み込みに非対応（最初から通常の GPU 読み込みを試す） */
   streamingLoad: boolean;
+  /** false: ダウンロードの一覧には出さない（他のサイトで保存済みなら名前の表示には使う） */
+  recommended: boolean;
 }
 
-/** 表示順 = おすすめ順。公式 Web 版を優先し、Qwen3 は WebGPU が無い端末向けの代替 */
+/**
+ * 表示順 = おすすめ順。公式 Web 版を優先する。
+ * Qwen3 0.6B は速度・回答の質ともに学習の相手としては実用に届かないため、ダウンロードの一覧からは外している
+ * （同じ github.io の他のサイトで保存済みなら読み込める）。
+ */
 export const MODEL_CATALOG: CatalogModel[] = [
   {
     kind: 'chat',
@@ -41,6 +47,7 @@ export const MODEL_CATALOG: CatalogModel[] = [
     gpuOnly: true,
     official: true,
     streamingLoad: true,
+    recommended: true,
   },
   {
     kind: 'chat',
@@ -53,6 +60,7 @@ export const MODEL_CATALOG: CatalogModel[] = [
     gpuOnly: true,
     official: true,
     streamingLoad: true,
+    recommended: true,
   },
   {
     kind: 'chat',
@@ -65,6 +73,7 @@ export const MODEL_CATALOG: CatalogModel[] = [
     gpuOnly: false,
     official: false,
     streamingLoad: false,
+    recommended: false,
   },
 ];
 

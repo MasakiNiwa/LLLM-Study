@@ -675,5 +675,5 @@
     "items"
   ],
   "additionalProperties": false,
-  "description": "ローカルLLM学習アプリの教材パック"
+  "description": "LLLM Study の教材パック"
 }

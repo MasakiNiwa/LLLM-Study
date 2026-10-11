@@ -2,7 +2,6 @@ import type { ReactNode } from 'react';
 import {
   BookOpen,
   Brain,
-  Code2,
   Cpu,
   ExternalLink,
   Info,
@@ -15,7 +14,8 @@ import {
   Wand2,
 } from 'lucide-react';
 import { PageBody, PageHeader } from '@/app/PageHeader';
-import { Section } from '@/components/ui/Card';
+import { Card, Section } from '@/components/ui/Card';
+import { ModelStatusChip } from '@/features/engine/ModelStatusChip';
 import { Button } from '@/components/ui/Button';
 import { openWelcome } from '@/features/welcome/welcomeStore';
 import {
@@ -23,6 +23,8 @@ import {
   FSRS_WIKI_URL,
   LITERTLM_DOCS_URL,
   LITERTLM_URL,
+  APP_TAGLINE,
+  APP_TITLE,
   REPOSITORY_URL,
   TRY_LOCAL_URL,
 } from '@/lib/constants';
@@ -58,7 +60,7 @@ function Kbd({ children }: { children: ReactNode }) {
 const STEPS = [
   {
     title: '教材を追加する',
-    body: '「教材」画面の「サンプル」から教材を追加します。英単語・フレーズ・句動詞・英文法のサンプルがあります。',
+    body: '「教材」画面の「サンプル」から教材を追加します。英単語・フレーズ・句動詞・英文法・長文読解・簿記のサンプルがあります。',
   },
   {
     title: '毎日学習する',
@@ -67,6 +69,10 @@ const STEPS = [
   {
     title: 'カレンダーで振り返る',
     body: '「カレンダー」画面で、毎日の学習量（色の濃さ）と、これからの復習予定（数字）を確認できます。日付をタップすると、その日に学習した項目や復習予定の項目が見られます。「記録」タブでは、カードの定着状況・復習予定の見通し・学習回数のグラフを見られます。',
+  },
+  {
+    title: '学習画面を見やすくする',
+    body: '学習画面の右上の「Aa」で、カードの文字の大きさ（小・標準・大・特大）と、余白を詰める表示を選べます。画面の高さが低い端末では、自動で余白を詰めます。右上の ↺ で学習を中断して、学習画面を最初の状態に戻せます（ここまでの評価は記録に残ります）。',
   },
   {
     title: '答えを入力して確認する（任意）',
@@ -82,15 +88,15 @@ const STEPS = [
   },
   {
     title: 'AI パートナーを呼ぶ（任意）',
-    body: '「AI モデル」画面でモデル（おすすめは Gemma 4 E2B の Web 版）をダウンロードすると、カードの解説・例文づくり・覚え方の相談や、学習についてのチャットができます。AI はこの端末のブラウザの中で動き、内容が外部に送信されることはありません。',
+    body: '「AI モデル」画面（ホームなどに出ているモデル名を押すと開きます）でモデル（おすすめは Gemma 4 E2B の Web 版）をダウンロードすると、カードの解説・例文づくり・覚え方の相談や、学習についてのチャットができます。AI はこの端末のブラウザの中で動き、内容が外部に送信されることはありません。',
   },
   {
     title: 'AI と一緒に練習する（任意）',
-    body: 'AI モデルを読み込むと、ホームから「AI 例文クイズ」ができます。思い出しにくくなっている単語をアプリが選び、AI が教材にない例文で穴埋め問題を作ります（採点はアプリ。復習の予定は変わりません）。チャットで「〇〇をカードにして」と頼むと、AI がカードを提案し、「追加」を押すとマイカードに入ります。',
+    body: 'AI モデルを読み込むと、「AI練習」（スマホは下のナビ、PC は左のメニュー）から「例文クイズ」ができます。思い出しにくくなっている単語をアプリが選び、AI が教材にない例文で穴埋め問題を作ります（採点はアプリ。復習の予定は変わりません）。チャットで「〇〇をカードにして」と頼むと、AI がカードを提案し、「追加」を押すとマイカードに入ります。',
   },
   {
     title: '会話練習（任意）',
-    body: 'AI モデルを読み込むと、ホームやチャット画面から「会話練習」ができます。場面（カフェ・ホテルなど）を選ぶと AI が役を演じて話しかけてきます。終わったら「添削してもらう」で直してもらい、覚えたい表現は「カードにする」でマイカードに追加できます。',
+    body: 'AI モデルを読み込むと、「AI練習」から「会話練習」ができます。場面（カフェ・ホテルなど）を選ぶと AI が役を演じて話しかけてきます。終わったら「添削してもらう」で直してもらい、覚えたい表現は「カードにする」でマイカードに追加できます。',
   },
   {
     title: '聞き取り・並べ替え',
@@ -131,7 +137,33 @@ export default function HelpPage() {
     <>
       <PageHeader title="ヘルプ" />
       <PageBody>
-        <Section title="ローカルLLM学習アプリについて" icon={<Info />}>
+        <Card className="space-y-3 p-4 sm:p-5">
+          <div className="flex items-center gap-3">
+            <img src="./favicon.svg" alt="" className="size-12" />
+            <div className="min-w-0">
+              <h2 className="text-lg font-bold">{APP_TITLE}</h2>
+              <p className="text-sm text-slate-500 dark:text-slate-400">{APP_TAGLINE}</p>
+            </div>
+          </div>
+          <dl className="grid grid-cols-[auto_1fr] gap-x-4 gap-y-1 text-sm">
+            <dt className="text-slate-500 dark:text-slate-400">バージョン</dt>
+            <dd className="font-mono">v{__APP_VERSION__}</dd>
+            <dt className="text-slate-500 dark:text-slate-400">推論エンジン</dt>
+            <dd className="font-mono">LiteRT-LM {__LITERTLM_VERSION__}</dd>
+            <dt className="text-slate-500 dark:text-slate-400">AI モデル</dt>
+            <dd>
+              <ModelStatusChip className="max-w-56" />
+            </dd>
+            <dt className="text-slate-500 dark:text-slate-400">ライセンス</dt>
+            <dd>MIT License</dd>
+            <dt className="text-slate-500 dark:text-slate-400">ソースコード</dt>
+            <dd className="min-w-0 truncate">
+              <ExtLink href={REPOSITORY_URL}>GitHub</ExtLink>
+            </dd>
+          </dl>
+        </Card>
+
+        <Section title="このアプリについて" icon={<Info />} collapsible storageKey="help">
           <Body>
             <p>
               <strong>自分のペースで使える、ローカル LLM タイプの学習アプリ</strong>です。
@@ -151,7 +183,7 @@ export default function HelpPage() {
           </Body>
         </Section>
 
-        <Section title="使い方" icon={<BookOpen />}>
+        <Section collapsible storageKey="help" defaultOpen title="使い方" icon={<BookOpen />}>
           <ol className="space-y-3 px-4 py-3.5 sm:px-5">
             {STEPS.map((s, i) => (
               <li key={s.title} className="flex gap-3">
@@ -174,6 +206,8 @@ export default function HelpPage() {
         </Section>
 
         <Section
+          collapsible
+          storageKey="help"
           title="評価のしかた"
           icon={<Brain />}
           description="正直に評価するほど、復習のタイミングが合ってきます"
@@ -205,7 +239,7 @@ export default function HelpPage() {
           </Body>
         </Section>
 
-        <Section title="キーボード操作（PC）" icon={<Keyboard />}>
+        <Section collapsible storageKey="help" title="キーボード操作（PC）" icon={<Keyboard />}>
           <Body>
             <ul className="space-y-1.5">
               <li>
@@ -221,7 +255,7 @@ export default function HelpPage() {
           </Body>
         </Section>
 
-        <Section title="教材の形式" icon={<Wand2 />}>
+        <Section collapsible storageKey="help" title="教材の形式" icon={<Wand2 />}>
           <Body>
             <p>
               教材は JSON 形式（教材パック）です。単語・フレーズ・一問一答・穴埋め・選択問題の 5
@@ -238,7 +272,7 @@ export default function HelpPage() {
           </Body>
         </Section>
 
-        <Section title="AI モデルについて" icon={<Sparkles />}>
+        <Section collapsible storageKey="help" title="AI モデルについて" icon={<Sparkles />}>
           <Body>
             <p>
               AI は Google の <ExtLink href={LITERTLM_URL}>LiteRT-LM</ExtLink> を Web Worker +
@@ -256,6 +290,8 @@ export default function HelpPage() {
         </Section>
 
         <Section
+          collapsible
+          storageKey="help"
           title="動作環境チェック"
           icon={<MonitorCheck />}
           description="このブラウザの対応状況"
@@ -263,12 +299,11 @@ export default function HelpPage() {
           <CapabilityCheck />
         </Section>
 
-        <Section title="WebGPU が使えないとき" icon={<Cpu />}>
+        <Section collapsible storageKey="help" title="WebGPU が使えないとき" icon={<Cpu />}>
           <Body>
             <p>
-              設定のバックエンドが「自動」なら、WebGPU が使えない端末では
-              CPU（WebAssembly）で実行します。ただし Gemma 4 の Web 版は WebGPU 専用のため、CPU では
-              Qwen3 0.6B など CPU にも対応したモデルを使ってください。
+              AI モデル（Gemma 4 の Web 版）は WebGPU 専用です。WebGPU が使えない端末では AI
+              の機能（チャット・解説・例文クイズなど）は使えませんが、学習・記録・教材の管理はそのまま使えます。
             </p>
             <ul className="list-disc space-y-1.5 pl-5 text-slate-600 dark:text-slate-400">
               <li>Chrome / Edge を最新版に更新する（Android は Android 12 以降）</li>
@@ -285,14 +320,19 @@ export default function HelpPage() {
                 Protection）がオンになっていると、Chrome で WebGPU が止められていることがあります。
                 オフにすると使えるようになる場合がありますが、
                 <strong>端末全体の保護が弱まります</strong>
-                。危険性を理解したうえで、ご自身の判断で試してください（無理にオフにする必要はありません。CPU
-                対応のモデルなら、そのまま使えます）。
+                。危険性を理解したうえで、ご自身の判断で試してください（無理にオフにする必要はありません。AI
+                の機能を使わなければ、そのままで学習できます）。
               </li>
             </ul>
           </Body>
         </Section>
 
-        <Section title="ホーム画面に追加（アプリとして使う）" icon={<Smartphone />}>
+        <Section
+          collapsible
+          storageKey="help"
+          title="ホーム画面に追加（アプリとして使う）"
+          icon={<Smartphone />}
+        >
           <Body>
             <p>
               ブラウザのメニューの「ホーム画面に追加」（「アプリをインストール」）で、アプリとして起動できます。一度開けば、オフラインでも起動できます。
@@ -304,22 +344,10 @@ export default function HelpPage() {
           </Body>
         </Section>
 
-        <Section title="ソースコード" icon={<Code2 />}>
+        <Section collapsible storageKey="help" title="クレジットとライセンス" icon={<Scale />}>
           <Body>
             <p>
-              このアプリはオープンソースです。不具合の報告や改善の提案は GitHub
-              リポジトリまでお願いします。
-            </p>
-            <p>
-              <ExtLink href={REPOSITORY_URL}>{REPOSITORY_URL.replace('https://', '')}</ExtLink>
-            </p>
-          </Body>
-        </Section>
-
-        <Section title="クレジットとライセンス" icon={<Scale />}>
-          <Body>
-            <p>
-              <strong>ローカルLLM学習アプリ</strong>は{' '}
+              <strong>{APP_TITLE}</strong> は{' '}
               <ExtLink href={`${REPOSITORY_URL}/blob/main/LICENSE`}>MIT License</ExtLink>{' '}
               で公開されています。
             </p>
@@ -348,10 +376,6 @@ export default function HelpPage() {
           </Body>
           <LicenseList />
         </Section>
-
-        <p className="pb-2 text-center text-xs text-slate-400">
-          ローカルLLM学習アプリ v{__APP_VERSION__} · LiteRT-LM {__LITERTLM_VERSION__}
-        </p>
       </PageBody>
     </>
   );

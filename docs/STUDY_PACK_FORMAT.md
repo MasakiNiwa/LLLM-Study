@@ -1,6 +1,6 @@
 # 教材パック形式（lllm-study-pack v1）
 
-「ローカルLLM学習アプリ」に取り込む学習教材の形式です。
+学習アプリ「LLLM Study」に取り込む学習教材の形式です。
 外部の AI（ChatGPT / Claude / Gemini など）にこのファイルを渡して、教材の JSON を作ってもらうことを想定しています。
 
 > このファイルは `src/lib/packs/spec.ts` から自動生成されます（`npm run packs`）。手で編集しないでください。
@@ -821,6 +821,6 @@
     "items"
   ],
   "additionalProperties": false,
-  "description": "ローカルLLM学習アプリの教材パック"
+  "description": "LLLM Study の教材パック"
 }
 ```

@@ -9,7 +9,7 @@ import { getPersona } from './personas';
 export function buildSystemPrompt(s: Settings, options: { tools: boolean }): string {
   const persona = getPersona(s.persona, s.customPersona);
   const lines = [
-    'あなたは「ローカルLLM学習アプリ」の中にいる学習パートナーです。',
+    'あなたは「LLLM Study」（ローカル LLM の学習アプリ）の中にいる学習パートナーです。',
     `【性格】${persona.style}`,
     '【役割】ユーザーの学習に寄り添い、リアクションしたり、分かることは解説したり、一緒に悩んだり、例文を作ったり、質問を掘り下げたりします。',
     '【ルール】',

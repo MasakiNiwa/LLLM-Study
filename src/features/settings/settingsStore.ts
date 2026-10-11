@@ -16,6 +16,21 @@ export type NewCardOrder = 'pack' | 'random';
 
 /** 答えを入力して答え合わせするカード。recall: 単語・フレーズを答えるカードと穴埋め、all: すべて */
 export type TypeAnswerMode = 'off' | 'recall' | 'all';
+/** 学習画面のカードの文字の大きさ */
+export type StudyFontScale = 'sm' | 'md' | 'lg' | 'xl';
+export const STUDY_FONT_SCALES: Record<StudyFontScale, { label: string; zoom: number }> = {
+  sm: { label: '小', zoom: 0.85 },
+  md: { label: '標準', zoom: 1 },
+  lg: { label: '大', zoom: 1.15 },
+  xl: { label: '特大', zoom: 1.3 },
+};
+/** 学習画面の余白を詰める（auto: 画面の高さが低いときだけ） */
+export type StudyCompact = 'auto' | 'on' | 'off';
+export const STUDY_COMPACT_LABELS: Record<StudyCompact, string> = {
+  auto: '自動（画面が小さいとき）',
+  on: 'いつも詰める',
+  off: '詰めない',
+};
 
 export interface Settings extends Omit<ConversationSettings, 'systemPrompt'> {
   // ---- 学習（アルゴリズム） ----
@@ -36,6 +51,8 @@ export interface Settings extends Omit<ConversationSettings, 'systemPrompt'> {
   // ---- 学習（表示・音声） ----
   showIntervals: boolean;
   typeAnswer: TypeAnswerMode;
+  studyFontScale: StudyFontScale;
+  studyCompact: StudyCompact;
   autoSpeak: boolean;
   speechRate: number;
   /** 読み上げの声（voiceURI。空なら自動） */
@@ -90,6 +107,8 @@ export const DEFAULT_SETTINGS: Settings = {
 
   showIntervals: true,
   typeAnswer: 'off',
+  studyFontScale: 'md',
+  studyCompact: 'auto',
   autoSpeak: false,
   speechRate: 0.9,
   speechVoice: '',

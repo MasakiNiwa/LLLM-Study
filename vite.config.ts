@@ -28,7 +28,7 @@ export default defineConfig({
       manifest: {
         // アプリを見分ける ID（変えると別のアプリとして扱われるので、今後は変えない）
         id: 'lllm-study',
-        name: 'ローカルLLM学習アプリ',
+        name: 'LLLM Study',
         short_name: 'LLLM Study',
         description: '自分のペースで使えるローカルLLMタイプの学習アプリ',
         lang: 'ja',

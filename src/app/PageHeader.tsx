@@ -1,8 +1,7 @@
-import { useEffect, useRef, useState, type ReactNode } from 'react';
-import { EllipsisVertical } from 'lucide-react';
-import { Link } from 'wouter';
+import type { ReactNode } from 'react';
+import { Link, useLocation } from 'wouter';
 import { cn } from '@/lib/utils/cn';
-import { SUB_NAV_ITEMS } from './navItems';
+import { HELP_ITEM } from './navItems';
 
 interface PageHeaderProps {
   title: string;
@@ -12,58 +11,27 @@ interface PageHeaderProps {
   actions?: ReactNode;
   /** スマホではタイトルを隠す（下部ナビで現在地が分かるため。ヘッダーの幅を確保） */
   hideTitleOnMobile?: boolean;
+  /** スマホのヘルプのボタンを出さない（ヘッダーのボタンが多いページ） */
+  hideHelp?: boolean;
 }
 
-/** スマホ用: 下部ナビに入りきらないページ（AI モデル・設定・ヘルプ）へのメニュー */
-function MobileMenu() {
-  const [open, setOpen] = useState(false);
-  const ref = useRef<HTMLDivElement>(null);
-
-  useEffect(() => {
-    if (!open) return;
-    const onDown = (e: PointerEvent) => {
-      if (!ref.current?.contains(e.target as Node)) setOpen(false);
-    };
-    const onKey = (e: KeyboardEvent) => e.key === 'Escape' && setOpen(false);
-    document.addEventListener('pointerdown', onDown);
-    document.addEventListener('keydown', onKey);
-    return () => {
-      document.removeEventListener('pointerdown', onDown);
-      document.removeEventListener('keydown', onKey);
-    };
-  }, [open]);
-
+/** スマホ用: ヘッダー右端のヘルプ（PC はサイドバーにある） */
+function MobileHelp() {
+  const [location] = useLocation();
+  if (location === HELP_ITEM.to) return null;
   return (
-    <div ref={ref} className="relative md:hidden">
-      <button
-        type="button"
-        aria-label="メニュー"
-        aria-expanded={open}
-        onClick={() => setOpen((v) => !v)}
-        className="flex size-10 items-center justify-center rounded-xl text-slate-600 hover:bg-slate-200/70 dark:text-slate-300 dark:hover:bg-slate-800"
-      >
-        <EllipsisVertical className="size-5" />
-      </button>
-      {open && (
-        <div className="absolute top-11 right-0 z-30 w-48 animate-fade-in overflow-hidden rounded-2xl border border-slate-200 bg-white py-1 shadow-lg dark:border-slate-700 dark:bg-slate-900">
-          {SUB_NAV_ITEMS.map(({ to, label, icon: Icon }) => (
-            <Link
-              key={to}
-              href={to}
-              onClick={() => setOpen(false)}
-              className="flex items-center gap-3 px-4 py-3 text-sm hover:bg-slate-50 dark:hover:bg-slate-800"
-            >
-              <Icon className="size-5 text-slate-500" />
-              {label}
-            </Link>
-          ))}
-        </div>
-      )}
-    </div>
+    <Link
+      href={HELP_ITEM.to}
+      aria-label={HELP_ITEM.label}
+      title={HELP_ITEM.label}
+      className="flex size-10 items-center justify-center rounded-xl text-slate-600 hover:bg-slate-200/70 md:hidden dark:text-slate-300 dark:hover:bg-slate-800"
+    >
+      <HELP_ITEM.icon className="size-5" />
+    </Link>
   );
 }
 
-export function PageHeader({ title, meta, actions, hideTitleOnMobile }: PageHeaderProps) {
+export function PageHeader({ title, meta, actions, hideTitleOnMobile, hideHelp }: PageHeaderProps) {
   return (
     <header className="pt-safe sticky top-0 z-20 shrink-0 border-b border-slate-200 bg-slate-50/85 backdrop-blur-md dark:border-slate-800 dark:bg-slate-950/85">
       <div className="flex h-14 items-center gap-2 px-3 sm:px-4">
@@ -79,7 +47,7 @@ export function PageHeader({ title, meta, actions, hideTitleOnMobile }: PageHead
         {meta && <div className="min-w-0">{meta}</div>}
         <div className="ml-auto flex items-center gap-1">
           {actions}
-          <MobileMenu />
+          {!hideHelp && <MobileHelp />}
         </div>
       </div>
     </header>

@@ -24,7 +24,7 @@ describe('explainLoadError', () => {
   });
 
   it('WebGPU が無いとき、WebGPU 専用モデルには CPU ではなく別モデルを勧める', () => {
-    expect(explainLoadError('webgpu', 'gemma-4-E2B-it-web.litertlm')).toContain('Qwen3');
+    expect(explainLoadError('webgpu', 'gemma-4-E2B-it-web.litertlm')).toContain('WebGPU 専用');
     expect(explainLoadError('webgpu', 'Qwen3-0.6B.litertlm')).toContain('CPU で読み込めます');
   });
 });

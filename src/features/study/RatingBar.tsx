@@ -41,6 +41,8 @@ interface RatingBarProps {
   disabled?: boolean;
   /** おさらい: 次回の間隔の代わりに、もう一度出すかどうかを添える */
   practice?: boolean;
+  /** 余白を詰めた表示（ボタンを少し低くする） */
+  compact?: boolean;
 }
 
 const PRACTICE_NOTES: Record<GradeValue, string> = {
@@ -51,7 +53,15 @@ const PRACTICE_NOTES: Record<GradeValue, string> = {
 };
 
 /** 4 段階の評価ボタン。次回の間隔（FSRS の計算結果）を添える */
-export function RatingBar({ card, now, onRate, recommended, disabled, practice }: RatingBarProps) {
+export function RatingBar({
+  card,
+  now,
+  onRate,
+  recommended,
+  disabled,
+  practice,
+  compact,
+}: RatingBarProps) {
   const settings = useSettings();
   const showIntervals = settings.showIntervals;
   const opts = getSchedulerOptions(settings);
@@ -72,7 +82,8 @@ export function RatingBar({ card, now, onRate, recommended, disabled, practice }
           onClick={() => onRate(grade)}
           aria-keyshortcuts={String(grade)}
           className={cn(
-            'flex h-14 flex-col items-center justify-center rounded-xl border text-sm font-semibold transition-all active:scale-95 disabled:opacity-50',
+            'flex flex-col items-center justify-center rounded-xl border text-sm font-semibold transition-all active:scale-95 disabled:opacity-50',
+            compact ? 'h-12' : 'h-14',
             className,
             recommended === grade &&
               'ring-2 ring-accent-500 ring-offset-2 dark:ring-offset-slate-950',

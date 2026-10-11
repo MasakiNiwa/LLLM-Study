@@ -36,14 +36,14 @@ export function classifyLoadError(message: string): LoadErrorKind {
 export function explainLoadError(kind: LoadErrorKind, fileName: string): string | undefined {
   const webHint = isBrowserCompatibleName(fileName)
     ? ''
-    : ' ファイル名が「-web.litertlm」で終わる Web 版か、Qwen3 0.6B などブラウザで動作確認されたモデルを使ってください。';
+    : ' ファイル名が「-web.litertlm」で終わる Web 版（Gemma 4 E2B / E4B）を使ってください。';
   switch (kind) {
     case 'webgpu':
       return isGpuOnlyModel(fileName)
-        ? 'この端末では WebGPU が使えないようです。このモデルは WebGPU 専用のため、Qwen3 0.6B など CPU でも動くモデルを使ってください。'
+        ? 'この端末では WebGPU が使えないようです。このモデルは WebGPU 専用のため、この端末では AI 機能を使えません（学習はそのまま使えます）。ヘルプの「WebGPU が使えないとき」も参考にしてください。'
         : 'この端末では WebGPU が使えないようです。CPU で読み込めます。';
     case 'gpu-only':
-      return 'このモデル（Gemma 4 の Web 版）は WebGPU 専用で、CPU では動きません。WebGPU を有効にするか、Qwen3 0.6B など CPU でも動くモデルを使ってください。';
+      return 'このモデル（Gemma 4 の Web 版）は WebGPU 専用で、CPU では動きません。WebGPU を有効にするか、設定のバックエンドを「自動」か「GPU」にしてください。';
     case 'streaming-unsupported':
       return `このモデルファイルは、Web 版 LiteRT-LM がまだ対応していない形式を含んでいます。${webHint}`;
     case 'invalid-file':
@@ -51,7 +51,7 @@ export function explainLoadError(kind: LoadErrorKind, fileName: string): string 
     case 'memory':
       return isBrowserCompatibleName(fileName)
         ? 'メモリが不足しています。他のタブやアプリを閉じるか、より小さいモデル・短い文脈長を試してください。'
-        : 'メモリが不足しています。Web 版ではないモデルはファイル全体を一度にメモリへ確保する必要があり、スマホでは容量が足りないことがあります。ファイル名が「-web.litertlm」で終わる Web 版か、Qwen3 0.6B などの小さいモデルを使ってください。';
+        : 'メモリが不足しています。Web 版ではないモデルはファイル全体を一度にメモリへ確保する必要があり、スマホでは容量が足りないことがあります。ファイル名が「-web.litertlm」で終わる Web 版を使ってください。';
     default:
       return isBrowserCompatibleName(fileName) ? undefined : webHint.trim();
   }

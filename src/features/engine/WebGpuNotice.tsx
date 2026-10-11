@@ -42,14 +42,12 @@ export function WebGpuNotice({ className }: { className?: string }) {
       )}
       <div className="space-y-1">
         <p className="font-medium">
-          {gpuForced
-            ? 'この端末では WebGPU が使えません'
-            : 'この端末では WebGPU が使えないため CPU で実行します'}
+          {gpuForced ? 'この端末では WebGPU が使えません' : 'この端末では WebGPU が使えません'}
         </p>
         <p className="opacity-90">
           {gpuForced
             ? '設定のバックエンドが GPU になっているため読み込みに失敗します。「自動」か「CPU」に変更してください。'
-            : 'Gemma 4 の Web 版は WebGPU 専用のため使えません。CPU でも動く Qwen3 0.6B（「モデル」画面からダウンロード可）を使ってください。'}{' '}
+            : 'AI モデル（Gemma 4 の Web 版）は WebGPU 専用のため、このままでは AI 機能を使えません。学習はそのまま使えます。'}{' '}
           <Link href="/help" className="underline underline-offset-2">
             WebGPU を有効にする方法
           </Link>

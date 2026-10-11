@@ -2,7 +2,7 @@
 
 同じ GitHub ユーザーの GitHub Pages で公開している複数の Web アプリで、
 ダウンロードした AI モデルを**共有**し、**ブラウザの外にバックアップ**できるようにするための取り決めです。
-本アプリ（ローカルLLM学習アプリ）と [Try Local](https://github.com/MasakiNiwa/Try-Local) はこの仕様で実装しています（`src/lib/llm/modelStorage.ts`）。今後作るサイトも同じ仕様で実装します。
+本アプリ（LLLM Study）と [Try Local](https://github.com/MasakiNiwa/Try-Local) はこの仕様で実装しています（`src/lib/llm/modelStorage.ts`）。今後作るサイトも同じ仕様で実装します。
 
 > この文書は Try Local の [docs/SHARED_MODEL_STORAGE.md](https://github.com/MasakiNiwa/Try-Local/blob/main/docs/SHARED_MODEL_STORAGE.md) と同じ内容です。仕様を変えるときは両方を揃えてください。
 
@@ -100,4 +100,4 @@ new BroadcastChannel('shared-models').postMessage({ type: 'changed', by: 'My App
 
 ## 履歴
 
-- v1（2026-10）: 初版（Try Local で策定）。ローカルLLM学習アプリも v1 で対応
+- v1（2026-10）: 初版（Try Local で策定）。LLLM Study も v1 で対応
