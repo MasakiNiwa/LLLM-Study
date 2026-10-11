@@ -15,6 +15,7 @@ import {
   summarizeForecast,
   summarizeStates,
   itemStatus,
+  yearStart,
   type CalendarData,
   type ItemSummary,
   type StatsData,
@@ -63,23 +64,40 @@ const api = {
     };
   },
 
-  /** 記録ページの集計（過去 days 日・今後 days 日） */
-  async stats(today: string, dayStartHour: number, days: number, now: number): Promise<StatsData> {
+  /**
+   * 記録ページの集計（過去 days 日・今後 days 日と、1 年ぶんの学習日ごとの回数）。
+   * packId を渡すとその教材だけに絞る。
+   */
+  async stats(
+    today: string,
+    dayStartHour: number,
+    days: number,
+    now: number,
+    packId?: string,
+  ): Promise<StatsData> {
     const from = addDays(today, -(days - 1));
-    const [cards, recent, totalReviews, allDays] = await Promise.all([
-      db.cards.toArray(),
-      db.reviews.where('day').between(from, today, true, true).toArray(),
-      db.reviews.count(),
-      db.reviews.orderBy('day').uniqueKeys(),
+    const yearFrom = yearStart(today);
+    const first = from < yearFrom ? from : yearFrom;
+    const inPack = (r: { packId: string }) => !packId || r.packId === packId;
+    const [cards, recent] = await Promise.all([
+      packId ? db.cards.where('packId').equals(packId).toArray() : db.cards.toArray(),
+      db.reviews.where('day').between(first, today, true, true).filter(inPack).toArray(),
     ]);
     let totalMs = 0;
+    let totalReviews = 0;
+    const allDays = new Set<string>();
     await db.reviews.each((r) => {
+      if (!inPack(r)) return;
       totalMs += r.durationMs;
+      totalReviews++;
+      allDays.add(r.day);
     });
     const activity = summarizeActivity(recent);
     const forecastMap = summarizeForecast(cards, today, dayStartHour);
     const learned = cards.filter((c) => c.state !== 0 && !c.suspended);
     const recall = learned.map((c) => retrievability(c, now) ?? 0);
+    const year: Record<string, number> = {};
+    for (const [day, a] of Object.entries(activity)) if (day >= yearFrom) year[day] = a.reviews;
     return {
       states: summarizeStates(cards),
       history: Array.from({ length: days }, (_, i) => {
@@ -91,9 +109,10 @@ const api = {
         const day = addDays(today, i);
         return { day, count: forecastMap[day] ?? 0 };
       }),
+      year,
       totalReviews,
       totalMs,
-      studyDays: allDays.length,
+      studyDays: allDays.size,
       averageRecall: recall.length ? recall.reduce((a, b) => a + b, 0) / recall.length : undefined,
     };
   },

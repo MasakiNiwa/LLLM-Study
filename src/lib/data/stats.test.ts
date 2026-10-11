@@ -1,6 +1,14 @@
 import { describe, expect, it } from 'vitest';
 import type { ReviewRecord } from '@/lib/db/types';
-import { itemStatus, summarizeActivity, summarizeForecast, summarizeStates } from './stats';
+import {
+  itemStatus,
+  summarizeActivity,
+  summarizeForecast,
+  summarizeStates,
+  yearStart,
+  YEAR_WEEKS,
+} from './stats';
+import { diffDays, parseDayKey } from '@/lib/srs/day';
 
 describe('stats', () => {
   it('日ごとの活動を集計する', () => {
@@ -56,5 +64,17 @@ describe('itemStatus', () => {
     expect(itemStatus([c(2, 5)])).toBe('review');
     expect(itemStatus([c(2, 30), c(0)])).toBe('mature');
     expect(itemStatus([c(2, 30, 1)])).toBe('suspended');
+  });
+});
+
+describe('yearStart', () => {
+  it('今日を含む週から 52 週前の日曜日', () => {
+    for (const today of ['2026-10-11', '2026-10-14', '2026-10-17']) {
+      const start = yearStart(today);
+      expect(parseDayKey(start).getDay()).toBe(0);
+      const span = diffDays(start, today);
+      expect(span).toBeGreaterThanOrEqual((YEAR_WEEKS - 1) * 7);
+      expect(span).toBeLessThan(YEAR_WEEKS * 7);
+    }
   });
 });

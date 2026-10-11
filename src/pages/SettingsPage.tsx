@@ -22,9 +22,9 @@ import { Switch } from '@/components/ui/Switch';
 import { clearAllData, clearAllProgress, restoreBackup } from '@/lib/db/backup';
 import { deleteAllStoredModels, isOpfsSupported } from '@/lib/llm/modelStorage';
 import { getVoices, isSpeechSupported, speak } from '@/lib/speech/tts';
-import { cn } from '@/lib/utils/cn';
 import { errorMessage, formatBytes } from '@/lib/utils/format';
-import { CUSTOM_PERSONA_ID, PERSONAS } from '@/features/ai/personas';
+import { CUSTOM_PERSONA_ID } from '@/features/ai/personas';
+import { PersonaPicker } from '@/features/ai/PersonaPicker';
 import { useChat } from '@/features/chat/chatStore';
 import { useEngine } from '@/features/engine/engineStore';
 import { useLibrary } from '@/features/library/libraryStore';
@@ -364,40 +364,7 @@ export default function SettingsPage() {
         <Section title="AI パートナー" icon={<Bot />} description="性格と、AI にどこまで任せるか">
           <div className="space-y-2 px-4 py-3.5 sm:px-5">
             <div className="text-sm font-medium">性格</div>
-            <div className="grid gap-2 sm:grid-cols-2">
-              {[
-                ...PERSONAS,
-                {
-                  id: CUSTOM_PERSONA_ID,
-                  name: 'カスタム',
-                  emoji: '✨',
-                  tagline: '性格を自分で書く',
-                },
-              ].map((p) => (
-                <button
-                  key={p.id}
-                  type="button"
-                  aria-pressed={s.persona === p.id}
-                  onClick={() => update({ persona: p.id })}
-                  className={cn(
-                    'flex items-start gap-3 rounded-xl border p-3 text-left transition-colors',
-                    s.persona === p.id
-                      ? 'border-accent-500 bg-accent-50 dark:bg-accent-900/20'
-                      : 'border-slate-200 hover:bg-slate-50 dark:border-slate-700 dark:hover:bg-slate-800/50',
-                  )}
-                >
-                  <span className="text-2xl" aria-hidden>
-                    {p.emoji}
-                  </span>
-                  <span className="min-w-0">
-                    <span className="block text-sm font-semibold">{p.name}</span>
-                    <span className="block text-xs text-slate-500 dark:text-slate-400">
-                      {p.tagline}
-                    </span>
-                  </span>
-                </button>
-              ))}
-            </div>
+            <PersonaPicker value={s.persona} onChange={(persona) => update({ persona })} />
             {s.persona === CUSTOM_PERSONA_ID && (
               <textarea
                 value={s.customPersona}
@@ -582,6 +549,13 @@ export default function SettingsPage() {
               }))}
               className="w-44"
             />
+          </Field>
+          <Field
+            label="アイコンに残りの枚数を出す"
+            htmlFor="app-badge"
+            hint="ホーム画面に追加したとき、アプリのアイコンに今日の残りを数字で表示します（対応している端末のみ）"
+          >
+            <Switch id="app-badge" checked={s.appBadge} onChange={(v) => update({ appBadge: v })} />
           </Field>
         </Section>
 

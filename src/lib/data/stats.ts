@@ -2,7 +2,7 @@
  * カレンダー・記録画面の集計（純粋関数。Data Worker から呼ぶ）。
  */
 import type { CardRecord, ReviewRecord } from '@/lib/db/types';
-import { studyDayKey } from '@/lib/srs/day';
+import { addDays, parseDayKey, studyDayKey } from '@/lib/srs/day';
 
 export interface DayActivity {
   /** 評価した回数 */
@@ -83,6 +83,8 @@ export interface StatsData {
   history: { day: string; reviews: number; correct: number; ms: number }[];
   /** 今日から days 日の復習予定（今日は期限切れを含む） */
   forecast: { day: string; count: number }[];
+  /** 1 年ぶん（yearStart(today) から今日まで）の学習日ごとの回数。学習した日だけ */
+  year: Record<string, number>;
   totalReviews: number;
   totalMs: number;
   studyDays: number;
@@ -114,4 +116,13 @@ export interface ItemSummary {
   status: ItemStatus;
   /** 次の復習予定（学習済みのとき） */
   nextDue?: number;
+}
+
+/** 1 年のヒートマップに並べる週の数 */
+export const YEAR_WEEKS = 53;
+
+/** 1 年のヒートマップの最初の日（today を含む週から 52 週前の日曜日） */
+export function yearStart(today: string): string {
+  const weekday = parseDayKey(today).getDay();
+  return addDays(today, -weekday - (YEAR_WEEKS - 1) * 7);
 }
