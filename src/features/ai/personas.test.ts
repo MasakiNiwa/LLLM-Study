@@ -1,0 +1,30 @@
+import { describe, expect, it } from 'vitest';
+import { getPersona, greetingText, PERSONAS, reactionText } from './personas';
+
+describe('personas', () => {
+  it('すべての性格に必要なテンプレートがある', () => {
+    for (const p of PERSONAS) {
+      for (const g of [1, 2, 3, 4] as const) expect(p.reactions[g].length).toBeGreaterThan(0);
+      expect(p.due.every((t) => t.includes('{n}'))).toBe(true);
+      expect(p.streak.every((t) => t.includes('{n}'))).toBe(true);
+    }
+  });
+
+  it('5 連続正解ごとに連続の言葉になる', () => {
+    const p = getPersona('buddy');
+    expect(reactionText(p, 3, 5, 0)).toContain('5');
+    expect(PERSONAS[0].reactions[3]).toContain(reactionText(p, 3, 4, 0));
+  });
+
+  it('あいさつに残り枚数が入る', () => {
+    const p = getPersona('teacher');
+    expect(greetingText(p, { hour: 9, remaining: 12, packCount: 1 }, 0)).toContain('12');
+    expect(greetingText(p, { hour: 9, remaining: 0, packCount: 0 }, 0)).toBe(p.noPacks[0]);
+  });
+
+  it('カスタムは説明文を使い、空なら既定の性格', () => {
+    expect(getPersona('custom', '関西弁で話す').style).toBe('関西弁で話す');
+    expect(getPersona('custom', '').style).toBe(PERSONAS[0].style);
+    expect(getPersona('unknown').id).toBe('buddy');
+  });
+});

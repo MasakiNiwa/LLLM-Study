@@ -1,0 +1,1109 @@
+{
+  "format": "lllm-study-pack",
+  "version": 1,
+  "id": "en-core-verbs",
+  "title": "英語の基本動詞 40",
+  "description": "日常会話でよく使う基本動詞 40 語。意味の広がりをつかめるよう、主な意味・例文・よく使う組み合わせ・コアイメージを収録しています。",
+  "subject": "english",
+  "language": {
+    "target": "en",
+    "explanation": "ja"
+  },
+  "level": "中学〜高校基礎（CEFR A1〜A2）",
+  "tags": [
+    "英単語",
+    "動詞",
+    "基礎"
+  ],
+  "author": "LLLM-Study",
+  "license": "MIT",
+  "source": "LLLM-Study オリジナル（高頻度の基本語を中心に選定）",
+  "revision": 1,
+  "items": [
+    {
+      "id": "v-take",
+      "type": "vocab",
+      "term": "take",
+      "reading": "/teɪk/",
+      "pos": "動詞",
+      "meanings": [
+        "取る",
+        "（時間・労力が）かかる",
+        "連れて行く・持って行く"
+      ],
+      "examples": [
+        {
+          "text": "It takes ten minutes to walk to the station.",
+          "translation": "駅まで歩いて10分かかる。"
+        },
+        {
+          "text": "Take an umbrella with you.",
+          "translation": "傘を持って行きなさい。"
+        }
+      ],
+      "collocations": [
+        "take a break",
+        "take a photo",
+        "take part in"
+      ],
+      "notes": "コアイメージは「自分のところへ取り込む」。"
+    },
+    {
+      "id": "v-make",
+      "type": "vocab",
+      "term": "make",
+      "reading": "/meɪk/",
+      "pos": "動詞",
+      "meanings": [
+        "作る",
+        "（人に）〜させる",
+        "（結果的に）〜になる"
+      ],
+      "examples": [
+        {
+          "text": "She made a cake for her friend.",
+          "translation": "彼女は友だちにケーキを作った。"
+        },
+        {
+          "text": "The movie made me cry.",
+          "translation": "その映画で泣いてしまった。"
+        }
+      ],
+      "collocations": [
+        "make a mistake",
+        "make a decision",
+        "make money"
+      ],
+      "notes": "コアイメージは「手を加えて形にする」。make + 人 + 動詞の原形で「させる」。"
+    },
+    {
+      "id": "v-get",
+      "type": "vocab",
+      "term": "get",
+      "reading": "/ɡet/",
+      "pos": "動詞",
+      "meanings": [
+        "手に入れる・もらう",
+        "（ある状態に）なる",
+        "着く"
+      ],
+      "examples": [
+        {
+          "text": "I got a letter from my grandmother.",
+          "translation": "祖母から手紙をもらった。"
+        },
+        {
+          "text": "It's getting dark.",
+          "translation": "暗くなってきた。"
+        }
+      ],
+      "collocations": [
+        "get up",
+        "get home",
+        "get better"
+      ],
+      "notes": "コアイメージは「（ない状態から）ある状態へ移る」。"
+    },
+    {
+      "id": "v-give",
+      "type": "vocab",
+      "term": "give",
+      "reading": "/ɡɪv/",
+      "pos": "動詞",
+      "meanings": [
+        "与える・あげる",
+        "（行為を）する"
+      ],
+      "examples": [
+        {
+          "text": "He gave me a nice watch.",
+          "translation": "彼は素敵な時計をくれた。"
+        },
+        {
+          "text": "Let me give it a try.",
+          "translation": "やってみるね。"
+        }
+      ],
+      "collocations": [
+        "give up",
+        "give a speech",
+        "give it a try"
+      ],
+      "notes": "「相手のほうへ移す」イメージ。give + 人 + 物 の語順。"
+    },
+    {
+      "id": "v-go",
+      "type": "vocab",
+      "term": "go",
+      "reading": "/ɡoʊ/",
+      "pos": "動詞",
+      "meanings": [
+        "行く",
+        "（物事が）進む",
+        "（ある状態に）なる"
+      ],
+      "examples": [
+        {
+          "text": "How did the interview go?",
+          "translation": "面接はどうだった？"
+        },
+        {
+          "text": "The milk went bad.",
+          "translation": "牛乳が腐った。"
+        }
+      ],
+      "collocations": [
+        "go out",
+        "go on",
+        "go wrong"
+      ],
+      "notes": "話し手・基準点から「離れていく」イメージ。悪い変化に使われやすい。"
+    },
+    {
+      "id": "v-come",
+      "type": "vocab",
+      "term": "come",
+      "reading": "/kʌm/",
+      "pos": "動詞",
+      "meanings": [
+        "来る",
+        "（相手のところへ）行く",
+        "（ある状態に）なる"
+      ],
+      "examples": [
+        {
+          "text": "I'm coming!",
+          "translation": "今行くよ！"
+        },
+        {
+          "text": "My dream came true.",
+          "translation": "夢がかなった。"
+        }
+      ],
+      "collocations": [
+        "come back",
+        "come true",
+        "come up with"
+      ],
+      "notes": "話の中心に「近づいてくる」イメージ。相手のところへ行くときも come。"
+    },
+    {
+      "id": "v-have",
+      "type": "vocab",
+      "term": "have",
+      "reading": "/hæv/",
+      "pos": "動詞",
+      "meanings": [
+        "持っている",
+        "食べる・飲む",
+        "〜させる・してもらう"
+      ],
+      "examples": [
+        {
+          "text": "Do you have a minute?",
+          "translation": "ちょっと時間ある？"
+        },
+        {
+          "text": "I had my hair cut.",
+          "translation": "髪を切ってもらった。"
+        }
+      ],
+      "collocations": [
+        "have lunch",
+        "have a good time",
+        "have to"
+      ],
+      "notes": "「自分の領域にある」イメージ。"
+    },
+    {
+      "id": "v-keep",
+      "type": "vocab",
+      "term": "keep",
+      "reading": "/kiːp/",
+      "pos": "動詞",
+      "meanings": [
+        "保つ・取っておく",
+        "〜し続ける",
+        "（約束などを）守る"
+      ],
+      "examples": [
+        {
+          "text": "Keep the change.",
+          "translation": "おつりは取っておいて。"
+        },
+        {
+          "text": "She kept talking for an hour.",
+          "translation": "彼女は1時間話し続けた。"
+        }
+      ],
+      "collocations": [
+        "keep in touch",
+        "keep a promise",
+        "keep going"
+      ],
+      "notes": "「ある状態をそのまま保つ」イメージ。keep + -ing で「〜し続ける」。"
+    },
+    {
+      "id": "v-put",
+      "type": "vocab",
+      "term": "put",
+      "reading": "/pʊt/",
+      "pos": "動詞",
+      "meanings": [
+        "置く",
+        "（ある状態に）する",
+        "（言葉で）表す"
+      ],
+      "examples": [
+        {
+          "text": "Put your bag on the chair.",
+          "translation": "かばんを椅子に置いて。"
+        },
+        {
+          "text": "Let me put it another way.",
+          "translation": "別の言い方をさせて。"
+        }
+      ],
+      "collocations": [
+        "put on",
+        "put off",
+        "put away"
+      ],
+      "notes": "「ある場所・状態に位置させる」イメージ。過去形・過去分詞も put。"
+    },
+    {
+      "id": "v-bring",
+      "type": "vocab",
+      "term": "bring",
+      "reading": "/brɪŋ/",
+      "pos": "動詞",
+      "meanings": [
+        "持ってくる・連れてくる",
+        "もたらす"
+      ],
+      "examples": [
+        {
+          "text": "Can you bring me some water?",
+          "translation": "水を持ってきてくれる？"
+        },
+        {
+          "text": "Spring brings warm weather.",
+          "translation": "春は暖かい天気をもたらす。"
+        }
+      ],
+      "collocations": [
+        "bring back",
+        "bring up",
+        "bring about"
+      ],
+      "notes": "話の中心へ「持ってくる」。反対に持って行くのは take。"
+    },
+    {
+      "id": "v-run",
+      "type": "vocab",
+      "term": "run",
+      "reading": "/rʌn/",
+      "pos": "動詞",
+      "meanings": [
+        "走る",
+        "経営する・運営する",
+        "（機械などが）動く"
+      ],
+      "examples": [
+        {
+          "text": "He runs a small café.",
+          "translation": "彼は小さなカフェを経営している。"
+        },
+        {
+          "text": "The app runs on any phone.",
+          "translation": "そのアプリはどのスマホでも動く。"
+        }
+      ],
+      "collocations": [
+        "run out of",
+        "run into",
+        "run a business"
+      ],
+      "notes": "「途切れずに動き続ける」イメージ。"
+    },
+    {
+      "id": "v-set",
+      "type": "vocab",
+      "term": "set",
+      "reading": "/set/",
+      "pos": "動詞",
+      "meanings": [
+        "置く・設定する",
+        "（日時などを）決める",
+        "（太陽が）沈む"
+      ],
+      "examples": [
+        {
+          "text": "I set my alarm for six.",
+          "translation": "目覚ましを6時にセットした。"
+        },
+        {
+          "text": "Let's set a date for the party.",
+          "translation": "パーティーの日を決めよう。"
+        }
+      ],
+      "collocations": [
+        "set up",
+        "set a goal",
+        "set off"
+      ],
+      "notes": "「決まった位置にきちんと置く」イメージ。"
+    },
+    {
+      "id": "v-turn",
+      "type": "vocab",
+      "term": "turn",
+      "reading": "/tɜːrn/",
+      "pos": "動詞",
+      "meanings": [
+        "曲がる・回す",
+        "（ある状態に）なる",
+        "向ける"
+      ],
+      "examples": [
+        {
+          "text": "Turn left at the corner.",
+          "translation": "その角を左に曲がって。"
+        },
+        {
+          "text": "The leaves turned red.",
+          "translation": "葉が赤くなった。"
+        }
+      ],
+      "collocations": [
+        "turn on",
+        "turn off",
+        "turn down"
+      ],
+      "notes": "「向きを変える」イメージ。"
+    },
+    {
+      "id": "v-look",
+      "type": "vocab",
+      "term": "look",
+      "reading": "/lʊk/",
+      "pos": "動詞",
+      "meanings": [
+        "見る",
+        "〜に見える"
+      ],
+      "examples": [
+        {
+          "text": "Look at this picture.",
+          "translation": "この写真を見て。"
+        },
+        {
+          "text": "You look tired.",
+          "translation": "疲れているみたいだね。"
+        }
+      ],
+      "collocations": [
+        "look for",
+        "look after",
+        "look forward to"
+      ],
+      "notes": "自分から意識して「視線を向ける」。"
+    },
+    {
+      "id": "v-see",
+      "type": "vocab",
+      "term": "see",
+      "reading": "/siː/",
+      "pos": "動詞",
+      "meanings": [
+        "見える・会う",
+        "分かる"
+      ],
+      "examples": [
+        {
+          "text": "I see what you mean.",
+          "translation": "言いたいことは分かるよ。"
+        },
+        {
+          "text": "See you tomorrow.",
+          "translation": "また明日。"
+        }
+      ],
+      "collocations": [
+        "see a doctor",
+        "I see",
+        "see off"
+      ],
+      "notes": "自然に「目に入る」。look は意識して見る。"
+    },
+    {
+      "id": "v-find",
+      "type": "vocab",
+      "term": "find",
+      "reading": "/faɪnd/",
+      "pos": "動詞",
+      "meanings": [
+        "見つける",
+        "（〜だと）分かる・思う"
+      ],
+      "examples": [
+        {
+          "text": "I found my keys under the sofa.",
+          "translation": "ソファーの下で鍵を見つけた。"
+        },
+        {
+          "text": "I found the book interesting.",
+          "translation": "その本はおもしろいと思った。"
+        }
+      ],
+      "collocations": [
+        "find out",
+        "find a way"
+      ],
+      "notes": "find + 物 + 形容詞で「〜だと感じる」。"
+    },
+    {
+      "id": "v-think",
+      "type": "vocab",
+      "term": "think",
+      "reading": "/θɪŋk/",
+      "pos": "動詞",
+      "meanings": [
+        "思う・考える"
+      ],
+      "examples": [
+        {
+          "text": "I think it's a good idea.",
+          "translation": "いい考えだと思う。"
+        },
+        {
+          "text": "Let me think about it.",
+          "translation": "ちょっと考えさせて。"
+        }
+      ],
+      "collocations": [
+        "think about",
+        "think of",
+        "think over"
+      ],
+      "notes": "think about は「じっくり考える」、think of は「思いつく・思い浮かべる」。"
+    },
+    {
+      "id": "v-know",
+      "type": "vocab",
+      "term": "know",
+      "reading": "/noʊ/",
+      "pos": "動詞",
+      "meanings": [
+        "知っている",
+        "分かる"
+      ],
+      "examples": [
+        {
+          "text": "Do you know where the station is?",
+          "translation": "駅がどこか知ってる？"
+        },
+        {
+          "text": "You never know.",
+          "translation": "先のことは分からないよ。"
+        }
+      ],
+      "collocations": [
+        "you know",
+        "as far as I know",
+        "let me know"
+      ],
+      "notes": "k は発音しない。状態を表すので普通は進行形にしない。"
+    },
+    {
+      "id": "v-feel",
+      "type": "vocab",
+      "term": "feel",
+      "reading": "/fiːl/",
+      "pos": "動詞",
+      "meanings": [
+        "感じる",
+        "〜な気分だ",
+        "（手で）触ってみる"
+      ],
+      "examples": [
+        {
+          "text": "I feel much better today.",
+          "translation": "今日はずっと気分がいい。"
+        },
+        {
+          "text": "Feel free to ask.",
+          "translation": "遠慮なく聞いてね。"
+        }
+      ],
+      "collocations": [
+        "feel like",
+        "feel free to"
+      ],
+      "notes": "feel like + -ing で「〜したい気分」。"
+    },
+    {
+      "id": "v-leave",
+      "type": "vocab",
+      "term": "leave",
+      "reading": "/liːv/",
+      "pos": "動詞",
+      "meanings": [
+        "出発する・去る",
+        "置いていく・残す",
+        "（ある状態の）ままにする"
+      ],
+      "examples": [
+        {
+          "text": "I left my phone at home.",
+          "translation": "スマホを家に忘れた。"
+        },
+        {
+          "text": "Leave the door open.",
+          "translation": "ドアを開けたままにしておいて。"
+        }
+      ],
+      "collocations": [
+        "leave for",
+        "leave a message",
+        "leave behind"
+      ],
+      "notes": "「そこから離れて、あとに残す」イメージ。"
+    },
+    {
+      "id": "v-hold",
+      "type": "vocab",
+      "term": "hold",
+      "reading": "/hoʊld/",
+      "pos": "動詞",
+      "meanings": [
+        "持つ・握る",
+        "（会などを）開く",
+        "保つ"
+      ],
+      "examples": [
+        {
+          "text": "Hold on a second.",
+          "translation": "ちょっと待って。"
+        },
+        {
+          "text": "The meeting will be held on Monday.",
+          "translation": "会議は月曜日に開かれる。"
+        }
+      ],
+      "collocations": [
+        "hold on",
+        "hold a meeting",
+        "hold up"
+      ],
+      "notes": "「しっかりつかんで保つ」イメージ。"
+    },
+    {
+      "id": "v-break",
+      "type": "vocab",
+      "term": "break",
+      "reading": "/breɪk/",
+      "pos": "動詞",
+      "meanings": [
+        "壊す・割る",
+        "（規則・約束を）破る",
+        "休憩する"
+      ],
+      "examples": [
+        {
+          "text": "Who broke the window?",
+          "translation": "誰が窓を割ったの？"
+        },
+        {
+          "text": "Let's break for lunch.",
+          "translation": "昼食休憩にしよう。"
+        }
+      ],
+      "collocations": [
+        "break down",
+        "break a promise",
+        "take a break"
+      ],
+      "notes": "「ひと続きのものを断ち切る」イメージ。"
+    },
+    {
+      "id": "v-carry",
+      "type": "vocab",
+      "term": "carry",
+      "reading": "/ˈkæri/",
+      "pos": "動詞",
+      "meanings": [
+        "運ぶ・持ち歩く",
+        "（店が商品を）置いている"
+      ],
+      "examples": [
+        {
+          "text": "I always carry a water bottle.",
+          "translation": "いつも水筒を持ち歩いている。"
+        },
+        {
+          "text": "Do you carry this in a larger size?",
+          "translation": "これの大きいサイズはありますか。"
+        }
+      ],
+      "collocations": [
+        "carry on",
+        "carry out"
+      ],
+      "notes": "「持ったまま移動する」イメージ。"
+    },
+    {
+      "id": "v-call",
+      "type": "vocab",
+      "term": "call",
+      "reading": "/kɔːl/",
+      "pos": "動詞",
+      "meanings": [
+        "電話する",
+        "呼ぶ",
+        "（〜と）名づける"
+      ],
+      "examples": [
+        {
+          "text": "I'll call you later.",
+          "translation": "あとで電話するね。"
+        },
+        {
+          "text": "We call him Ken.",
+          "translation": "私たちは彼をケンと呼んでいる。"
+        }
+      ],
+      "collocations": [
+        "call back",
+        "call off",
+        "be called"
+      ],
+      "notes": "call off は「中止する」。"
+    },
+    {
+      "id": "v-let",
+      "type": "vocab",
+      "term": "let",
+      "reading": "/let/",
+      "pos": "動詞",
+      "meanings": [
+        "〜させる・許す"
+      ],
+      "examples": [
+        {
+          "text": "Let me help you.",
+          "translation": "手伝わせて。"
+        },
+        {
+          "text": "Let's go!",
+          "translation": "行こう！"
+        }
+      ],
+      "collocations": [
+        "let me know",
+        "let go",
+        "let down"
+      ],
+      "notes": "let + 人 + 動詞の原形。make と違い「本人の望みどおりにさせる」。"
+    },
+    {
+      "id": "v-show",
+      "type": "vocab",
+      "term": "show",
+      "reading": "/ʃoʊ/",
+      "pos": "動詞",
+      "meanings": [
+        "見せる",
+        "示す・案内する"
+      ],
+      "examples": [
+        {
+          "text": "Can you show me the way?",
+          "translation": "道を教えてもらえますか。"
+        },
+        {
+          "text": "The data shows a clear trend.",
+          "translation": "データははっきりした傾向を示している。"
+        }
+      ],
+      "collocations": [
+        "show up",
+        "show around",
+        "show off"
+      ],
+      "notes": "show up は「（予定の場所に）現れる」。"
+    },
+    {
+      "id": "v-tell",
+      "type": "vocab",
+      "term": "tell",
+      "reading": "/tel/",
+      "pos": "動詞",
+      "meanings": [
+        "伝える・言う",
+        "見分ける"
+      ],
+      "examples": [
+        {
+          "text": "Tell me about your trip.",
+          "translation": "旅行の話を聞かせて。"
+        },
+        {
+          "text": "I can't tell the difference.",
+          "translation": "違いが分からない。"
+        }
+      ],
+      "collocations": [
+        "tell a lie",
+        "tell the truth",
+        "tell A from B"
+      ],
+      "notes": "tell + 人 + 内容。say は発言そのもの、tell は相手に伝えることに重点。"
+    },
+    {
+      "id": "v-try",
+      "type": "vocab",
+      "term": "try",
+      "reading": "/traɪ/",
+      "pos": "動詞",
+      "meanings": [
+        "試す・やってみる",
+        "努力する"
+      ],
+      "examples": [
+        {
+          "text": "Try this cake. It's delicious.",
+          "translation": "このケーキ食べてみて。おいしいよ。"
+        },
+        {
+          "text": "I'll try my best.",
+          "translation": "ベストを尽くします。"
+        }
+      ],
+      "collocations": [
+        "try on",
+        "try to",
+        "give it a try"
+      ],
+      "notes": "try to do は「〜しようと努力する」、try doing は「試しに〜してみる」。"
+    },
+    {
+      "id": "v-use",
+      "type": "vocab",
+      "term": "use",
+      "reading": "/juːz/",
+      "pos": "動詞",
+      "meanings": [
+        "使う"
+      ],
+      "examples": [
+        {
+          "text": "Can I use your pen?",
+          "translation": "ペンを借りてもいい？"
+        },
+        {
+          "text": "I used to live in Osaka.",
+          "translation": "以前は大阪に住んでいた。"
+        }
+      ],
+      "collocations": [
+        "use up",
+        "used to"
+      ],
+      "notes": "動詞は /juːz/、名詞は /juːs/。used to は「以前は〜だった」。"
+    },
+    {
+      "id": "v-work",
+      "type": "vocab",
+      "term": "work",
+      "reading": "/wɜːrk/",
+      "pos": "動詞",
+      "meanings": [
+        "働く",
+        "（機械などが）動く",
+        "うまくいく"
+      ],
+      "examples": [
+        {
+          "text": "My phone doesn't work.",
+          "translation": "スマホが動かない。"
+        },
+        {
+          "text": "Your plan worked!",
+          "translation": "あなたの計画、うまくいったね！"
+        }
+      ],
+      "collocations": [
+        "work out",
+        "work on",
+        "work from home"
+      ],
+      "notes": "walk /wɔːk/ と発音を区別する。"
+    },
+    {
+      "id": "v-hear",
+      "type": "vocab",
+      "term": "hear",
+      "reading": "/hɪr/",
+      "pos": "動詞",
+      "meanings": [
+        "聞こえる",
+        "（話を）聞く・耳にする"
+      ],
+      "examples": [
+        {
+          "text": "Can you hear me?",
+          "translation": "聞こえる？"
+        },
+        {
+          "text": "I heard that you got a new job.",
+          "translation": "新しい仕事についたって聞いたよ。"
+        }
+      ],
+      "collocations": [
+        "hear from",
+        "hear about"
+      ],
+      "notes": "自然に「耳に入る」。listen は意識して聞く。"
+    },
+    {
+      "id": "v-meet",
+      "type": "vocab",
+      "term": "meet",
+      "reading": "/miːt/",
+      "pos": "動詞",
+      "meanings": [
+        "会う・出会う",
+        "（条件・期待を）満たす"
+      ],
+      "examples": [
+        {
+          "text": "Nice to meet you.",
+          "translation": "はじめまして。"
+        },
+        {
+          "text": "We need to meet the deadline.",
+          "translation": "締め切りに間に合わせないといけない。"
+        }
+      ],
+      "collocations": [
+        "meet up",
+        "meet the deadline",
+        "meet needs"
+      ],
+      "notes": "初対面は Nice to meet you、2回目以降は Nice to see you。"
+    },
+    {
+      "id": "v-pay",
+      "type": "vocab",
+      "term": "pay",
+      "reading": "/peɪ/",
+      "pos": "動詞",
+      "meanings": [
+        "払う",
+        "割に合う"
+      ],
+      "examples": [
+        {
+          "text": "Can I pay by card?",
+          "translation": "カードで払えますか。"
+        },
+        {
+          "text": "Hard work pays off.",
+          "translation": "努力は報われる。"
+        }
+      ],
+      "collocations": [
+        "pay for",
+        "pay attention to",
+        "pay off"
+      ],
+      "notes": "pay attention to で「〜に注意を払う」。"
+    },
+    {
+      "id": "v-send",
+      "type": "vocab",
+      "term": "send",
+      "reading": "/send/",
+      "pos": "動詞",
+      "meanings": [
+        "送る"
+      ],
+      "examples": [
+        {
+          "text": "I'll send you the file.",
+          "translation": "ファイルを送るね。"
+        },
+        {
+          "text": "Please send my regards to your family.",
+          "translation": "ご家族によろしくお伝えください。"
+        }
+      ],
+      "collocations": [
+        "send back",
+        "send out"
+      ],
+      "notes": "過去形・過去分詞は sent。"
+    },
+    {
+      "id": "v-spend",
+      "type": "vocab",
+      "term": "spend",
+      "reading": "/spend/",
+      "pos": "動詞",
+      "meanings": [
+        "（お金を）使う",
+        "（時間を）過ごす"
+      ],
+      "examples": [
+        {
+          "text": "I spent the weekend at home.",
+          "translation": "週末は家で過ごした。"
+        },
+        {
+          "text": "How much did you spend?",
+          "translation": "いくら使ったの？"
+        }
+      ],
+      "collocations": [
+        "spend time",
+        "spend money on"
+      ],
+      "notes": "spend + 時間 + -ing で「〜して時間を過ごす」。"
+    },
+    {
+      "id": "v-stand",
+      "type": "vocab",
+      "term": "stand",
+      "reading": "/stænd/",
+      "pos": "動詞",
+      "meanings": [
+        "立つ",
+        "我慢する（否定文で）"
+      ],
+      "examples": [
+        {
+          "text": "I can't stand the noise.",
+          "translation": "その騒音には耐えられない。"
+        },
+        {
+          "text": "Please stand in line.",
+          "translation": "列に並んでください。"
+        }
+      ],
+      "collocations": [
+        "stand up",
+        "stand for",
+        "stand out"
+      ],
+      "notes": "stand for は「〜を表す」。UN stands for United Nations."
+    },
+    {
+      "id": "v-win",
+      "type": "vocab",
+      "term": "win",
+      "reading": "/wɪn/",
+      "pos": "動詞",
+      "meanings": [
+        "勝つ",
+        "（賞などを）勝ち取る"
+      ],
+      "examples": [
+        {
+          "text": "Our team won the game.",
+          "translation": "私たちのチームが試合に勝った。"
+        },
+        {
+          "text": "She won first prize.",
+          "translation": "彼女は1等賞を取った。"
+        }
+      ],
+      "collocations": [
+        "win a prize",
+        "win over"
+      ],
+      "notes": "win の目的語は試合・賞。相手に勝つは beat。"
+    },
+    {
+      "id": "v-lose",
+      "type": "vocab",
+      "term": "lose",
+      "reading": "/luːz/",
+      "pos": "動詞",
+      "meanings": [
+        "失う・なくす",
+        "負ける",
+        "（体重が）減る"
+      ],
+      "examples": [
+        {
+          "text": "I lost my wallet.",
+          "translation": "財布をなくした。"
+        },
+        {
+          "text": "I want to lose weight.",
+          "translation": "体重を減らしたい。"
+        }
+      ],
+      "collocations": [
+        "lose weight",
+        "lose one's way",
+        "lose track of"
+      ],
+      "notes": "発音は /luːz/。形容詞 loose /luːs/（ゆるい）と区別。"
+    },
+    {
+      "id": "v-catch",
+      "type": "vocab",
+      "term": "catch",
+      "reading": "/kætʃ/",
+      "pos": "動詞",
+      "meanings": [
+        "捕まえる",
+        "（乗り物に）間に合う",
+        "（病気に）かかる"
+      ],
+      "examples": [
+        {
+          "text": "I caught the last train.",
+          "translation": "終電に間に合った。"
+        },
+        {
+          "text": "I caught a cold.",
+          "translation": "風邪をひいた。"
+        }
+      ],
+      "collocations": [
+        "catch up with",
+        "catch a cold",
+        "catch on"
+      ],
+      "notes": "「動いているものをパッとつかむ」イメージ。"
+    },
+    {
+      "id": "v-choose",
+      "type": "vocab",
+      "term": "choose",
+      "reading": "/tʃuːz/",
+      "pos": "動詞",
+      "meanings": [
+        "選ぶ"
+      ],
+      "examples": [
+        {
+          "text": "You can choose any color you like.",
+          "translation": "好きな色を選んでいいよ。"
+        },
+        {
+          "text": "I chose the red one.",
+          "translation": "赤いのを選んだ。"
+        }
+      ],
+      "collocations": [
+        "choose between",
+        "choose from"
+      ],
+      "notes": "過去形 chose、過去分詞 chosen。名詞は choice。"
+    }
+  ]
+}

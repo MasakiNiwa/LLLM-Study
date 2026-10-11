@@ -1,0 +1,276 @@
+{
+  "format": "lllm-study-pack",
+  "version": 1,
+  "id": "en-grammar-check",
+  "title": "英文法チェック 24",
+  "description": "つまずきやすい文法ポイントを、穴埋め 12 問と選択問題 12 問で確認します（単語帳以外の教材の例でもあります）。",
+  "subject": "english",
+  "language": {
+    "target": "en",
+    "explanation": "ja"
+  },
+  "level": "中学〜高校基礎",
+  "tags": [
+    "英文法",
+    "穴埋め",
+    "選択問題"
+  ],
+  "author": "LLLM-Study",
+  "license": "MIT",
+  "source": "LLLM-Study オリジナル",
+  "revision": 1,
+  "items": [
+    {
+      "id": "c-since",
+      "type": "cloze",
+      "text": "I have lived in Tokyo {{since}} 2020.",
+      "translation": "2020年から東京に住んでいる。",
+      "hint": "起点を表す前置詞",
+      "explanation": "現在完了で「いつから」を言うときは since + 起点。期間なら for（for five years）。"
+    },
+    {
+      "id": "c-used-to",
+      "type": "cloze",
+      "text": "I {{used to}} play the piano when I was a child.",
+      "translation": "子どものころはピアノを弾いていた。",
+      "hint": "今はしていない過去の習慣",
+      "explanation": "used to + 動詞の原形で「以前は〜していた（今はしていない）」。"
+    },
+    {
+      "id": "c-look-forward",
+      "type": "cloze",
+      "text": "We look forward to {{hearing}} from you.",
+      "translation": "ご連絡をお待ちしております。",
+      "hint": "to のあとの形",
+      "explanation": "look forward to の to は前置詞なので、あとは -ing 形。"
+    },
+    {
+      "id": "c-if-were",
+      "type": "cloze",
+      "text": "If I {{were}} you, I would take the job.",
+      "translation": "私があなたなら、その仕事を受けるよ。",
+      "hint": "仮定法",
+      "explanation": "現実と違う仮定では、主語が I でも were を使うのが基本。"
+    },
+    {
+      "id": "c-have-been",
+      "type": "cloze",
+      "text": "I {{have been}} to Paris twice.",
+      "translation": "パリには2回行ったことがある。",
+      "hint": "経験を表す現在完了",
+      "explanation": "have been to は「行ったことがある」。have gone to は「行ってしまった（今はいない）」。"
+    },
+    {
+      "id": "c-too-to",
+      "type": "cloze",
+      "text": "This coffee is {{too}} hot to drink.",
+      "translation": "このコーヒーは熱すぎて飲めない。",
+      "hint": "too ... to",
+      "explanation": "too + 形容詞 + to do で「〜すぎて…できない」。"
+    },
+    {
+      "id": "c-enough",
+      "type": "cloze",
+      "text": "He is old {{enough}} to drive.",
+      "translation": "彼は運転できる年齢だ。",
+      "hint": "形容詞の後ろに置く語",
+      "explanation": "enough は形容詞の後ろ、名詞の前（enough money）に置く。"
+    },
+    {
+      "id": "c-so-that",
+      "type": "cloze",
+      "text": "I got up early {{so that}} I could catch the first train.",
+      "translation": "始発に乗れるように早起きした。",
+      "hint": "目的を表す接続詞",
+      "explanation": "so that + 主語 + can/could で「〜できるように」。"
+    },
+    {
+      "id": "c-make-do",
+      "type": "cloze",
+      "text": "My boss made me {{work}} late.",
+      "translation": "上司に遅くまで働かされた。",
+      "hint": "使役動詞の後ろの形",
+      "explanation": "make + 人 + 動詞の原形（to は付けない）。"
+    },
+    {
+      "id": "c-be-used-to",
+      "type": "cloze",
+      "text": "I'm used to {{getting}} up early.",
+      "translation": "早起きには慣れている。",
+      "hint": "be used to のあと",
+      "explanation": "be used to + 名詞/-ing で「〜に慣れている」。used to do（以前は〜した）と区別。"
+    },
+    {
+      "id": "c-which",
+      "type": "cloze",
+      "text": "This is the book {{which}} changed my life.",
+      "translation": "これが私の人生を変えた本だ。",
+      "hint": "物を説明する関係代名詞",
+      "explanation": "先行詞が物なら which / that、人なら who / that。"
+    },
+    {
+      "id": "c-unless",
+      "type": "cloze",
+      "text": "You won't pass {{unless}} you study.",
+      "translation": "勉強しないと合格しないよ。",
+      "hint": "「〜でない限り」",
+      "explanation": "unless = if ... not。"
+    },
+    {
+      "id": "q-for-since",
+      "type": "choice",
+      "question": "I have known her ___ ten years.",
+      "choices": [
+        "since",
+        "for",
+        "from",
+        "during"
+      ],
+      "answer": 1,
+      "explanation": "期間（10年間）を表すので for。起点なら since。"
+    },
+    {
+      "id": "q-much-many",
+      "type": "choice",
+      "question": "How ___ water do you drink a day?",
+      "choices": [
+        "many",
+        "much",
+        "lot",
+        "few"
+      ],
+      "answer": 1,
+      "explanation": "water は数えられない名詞なので much。"
+    },
+    {
+      "id": "q-in-on-at",
+      "type": "choice",
+      "question": "The meeting is ___ Monday morning.",
+      "choices": [
+        "in",
+        "at",
+        "on",
+        "by"
+      ],
+      "answer": 2,
+      "explanation": "特定の日（の朝）には on。in the morning でも、曜日が付くと on Monday morning。"
+    },
+    {
+      "id": "q-did",
+      "type": "choice",
+      "question": "Where ___ you go last weekend?",
+      "choices": [
+        "do",
+        "did",
+        "were",
+        "have"
+      ],
+      "answer": 1,
+      "explanation": "last weekend は過去なので did。"
+    },
+    {
+      "id": "q-comparative",
+      "type": "choice",
+      "question": "This box is ___ than that one.",
+      "choices": [
+        "heavy",
+        "heavier",
+        "heaviest",
+        "more heavy"
+      ],
+      "answer": 1,
+      "explanation": "比較級は heavier。y で終わる語は y を i に変えて -er。"
+    },
+    {
+      "id": "q-present-perfect",
+      "type": "choice",
+      "question": "I ___ my homework yet.",
+      "choices": [
+        "didn't finish",
+        "haven't finished",
+        "don't finish",
+        "wasn't finished"
+      ],
+      "answer": 1,
+      "explanation": "yet（まだ）は現在完了の否定文でよく使う。"
+    },
+    {
+      "id": "q-gerund",
+      "type": "choice",
+      "question": "I enjoy ___ in the park.",
+      "choices": [
+        "walk",
+        "to walk",
+        "walking",
+        "walked"
+      ],
+      "answer": 2,
+      "explanation": "enjoy のあとは -ing（動名詞）。to 不定詞はとらない。"
+    },
+    {
+      "id": "q-infinitive",
+      "type": "choice",
+      "question": "I decided ___ abroad.",
+      "choices": [
+        "study",
+        "to study",
+        "studying",
+        "studied"
+      ],
+      "answer": 1,
+      "explanation": "decide のあとは to 不定詞。"
+    },
+    {
+      "id": "q-passive",
+      "type": "choice",
+      "question": "This bridge was ___ in 1990.",
+      "choices": [
+        "build",
+        "built",
+        "building",
+        "builds"
+      ],
+      "answer": 1,
+      "explanation": "受け身は be + 過去分詞。build - built - built。"
+    },
+    {
+      "id": "q-article",
+      "type": "choice",
+      "question": "She is ___ honest person.",
+      "choices": [
+        "a",
+        "an",
+        "the",
+        "（何も入れない）"
+      ],
+      "answer": 1,
+      "explanation": "honest の h は発音しないので母音で始まり、an を使う。"
+    },
+    {
+      "id": "q-who-which",
+      "type": "choice",
+      "question": "The man ___ lives next door is a doctor.",
+      "choices": [
+        "which",
+        "who",
+        "whose",
+        "what"
+      ],
+      "answer": 1,
+      "explanation": "先行詞が人（the man）で、後ろに動詞が続くので who。"
+    },
+    {
+      "id": "q-would-like",
+      "type": "choice",
+      "question": "___ you like some tea?",
+      "choices": [
+        "Do",
+        "Would",
+        "Are",
+        "Will"
+      ],
+      "answer": 1,
+      "explanation": "Would you like ...? で「〜はいかがですか」と丁寧にすすめる。"
+    }
+  ]
+}

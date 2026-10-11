@@ -1,0 +1,9 @@
+node_modules
+dist
+*.local
+*.tsbuildinfo
+.vite
+coverage
+.DS_Store
+# build-time generated
+public/licenses.json

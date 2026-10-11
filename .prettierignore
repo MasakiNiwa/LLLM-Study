@@ -1,0 +1,8 @@
+dist
+node_modules
+package-lock.json
+THIRD_PARTY_NOTICES.md
+public/licenses.json
+public/packs
+public/schema
+docs/STUDY_PACK_FORMAT.md
