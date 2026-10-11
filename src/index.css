@@ -1,0 +1,141 @@
+@import 'tailwindcss';
+
+@custom-variant dark (&:where(.dark, .dark *));
+
+@theme {
+  --font-sans:
+    system-ui, -apple-system, 'Segoe UI', 'Hiragino Sans', 'Hiragino Kaku Gothic ProN',
+    'Noto Sans JP', Meiryo, sans-serif;
+  --font-mono:
+    ui-monospace, SFMono-Regular, 'SF Mono', Menlo, Consolas, 'Liberation Mono', monospace;
+
+  --color-accent-50: oklch(0.97 0.02 275);
+  --color-accent-100: oklch(0.94 0.04 275);
+  --color-accent-200: oklch(0.88 0.08 275);
+  --color-accent-300: oklch(0.8 0.12 275);
+  --color-accent-400: oklch(0.7 0.16 275);
+  --color-accent-500: oklch(0.6 0.2 275);
+  --color-accent-600: oklch(0.52 0.22 275);
+  --color-accent-700: oklch(0.46 0.2 275);
+  --color-accent-800: oklch(0.39 0.16 275);
+  --color-accent-900: oklch(0.33 0.12 275);
+
+  --animate-fade-in: fade-in 0.18s ease-out;
+  @keyframes fade-in {
+    from {
+      opacity: 0;
+      transform: translateY(4px);
+    }
+    to {
+      opacity: 1;
+      transform: none;
+    }
+  }
+}
+
+@layer base {
+  html,
+  body,
+  #root {
+    height: 100%;
+  }
+  html {
+    -webkit-tap-highlight-color: transparent;
+    text-size-adjust: 100%;
+  }
+  body {
+    @apply bg-slate-50 text-slate-900 antialiased dark:bg-slate-950 dark:text-slate-100;
+    overscroll-behavior: none;
+  }
+  :focus-visible {
+    @apply outline-2 outline-offset-2 outline-accent-500;
+  }
+  button {
+    cursor: pointer;
+  }
+  button:disabled {
+    cursor: not-allowed;
+  }
+  dialog::backdrop {
+    background: rgb(15 23 42 / 0.5);
+    backdrop-filter: blur(2px);
+  }
+}
+
+@utility pb-safe {
+  padding-bottom: env(safe-area-inset-bottom);
+}
+@utility pt-safe {
+  padding-top: env(safe-area-inset-top);
+}
+
+/* ---- チャットのメッセージ（Markdown） ---- */
+.prose-chat {
+  @apply text-[0.95rem] leading-relaxed break-words;
+}
+.prose-chat > * + * {
+  @apply mt-3;
+}
+.prose-chat h1 {
+  @apply text-xl font-bold;
+}
+.prose-chat h2 {
+  @apply text-lg font-bold;
+}
+.prose-chat h3,
+.prose-chat h4 {
+  @apply font-bold;
+}
+.prose-chat ul {
+  @apply list-disc pl-6;
+}
+.prose-chat ol {
+  @apply list-decimal pl-6;
+}
+.prose-chat li + li {
+  @apply mt-1;
+}
+.prose-chat a {
+  @apply text-accent-700 underline underline-offset-2 dark:text-accent-300;
+}
+.prose-chat blockquote {
+  @apply border-l-4 border-slate-300 pl-3 text-slate-600 dark:border-slate-600 dark:text-slate-400;
+}
+.prose-chat :not(pre) > code {
+  @apply rounded bg-slate-200/70 px-1.5 py-0.5 font-mono text-[0.85em] dark:bg-slate-700/70;
+}
+.prose-chat pre {
+  @apply overflow-x-auto rounded-lg bg-slate-900 p-3 font-mono text-[0.82rem] leading-normal text-slate-100 dark:border dark:border-slate-800 dark:bg-black/50;
+}
+.prose-chat table {
+  @apply block overflow-x-auto border-collapse text-sm;
+}
+.prose-chat th,
+.prose-chat td {
+  @apply border border-slate-300 px-2 py-1 dark:border-slate-600;
+}
+.prose-chat th {
+  @apply bg-slate-100 dark:bg-slate-800;
+}
+.prose-chat hr {
+  @apply border-slate-300 dark:border-slate-700;
+}
+
+/* 生成中カーソル */
+.streaming-caret::after {
+  content: '';
+  display: inline-block;
+  width: 0.5em;
+  height: 1em;
+  margin-left: 2px;
+  vertical-align: -0.15em;
+  border-radius: 2px;
+  background: currentColor;
+  opacity: 0.6;
+  animation: caret-blink 1s steps(2, start) infinite;
+}
+@keyframes caret-blink {
+  to {
+    visibility: hidden;
+  }
+}

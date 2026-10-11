@@ -1,2 +1,85 @@
-# LLLM-Study
-ローカルLLM学習アプリ
+# ローカルLLM学習アプリ（LLLM-Study）
+
+**自分のペースで使える、ローカル LLM タイプの学習アプリ**
+
+記憶のアルゴリズム（FSRS）で復習のタイミングを管理し、その上にブラウザの中で動くローカル AI（Gemma 4 など）が
+学習パートナーとして乗っています。教材は外部の高性能な AI に作ってもらい、取り込んで使えます。
+
+🌐 **公開ページ**: https://masakiniwa.github.io/LLLM-Study/
+
+## 特長
+
+- 🧠 **FSRS で記憶に残る復習** — 最新の間隔反復アルゴリズム（FSRS-6）が、忘れかけた頃に復習を出します。
+  評価ボタンには次の復習までの間隔を表示。取り消しもできます
+- 📅 **カレンダーで学習履歴** — 毎日の学習量を濃淡で、これからの復習予定を枚数で表示。日ごとの詳細も見られます
+- 🤖 **AI パートナー（ローカル LLM）** — 性格タイプ（ともだち・先生・コーチ・ねこ先輩・執事・カスタム）を選べます。
+  評価へのひとこと、解説・例文・覚え方、一緒に悩む、チャットでの掘り下げ
+- 🧩 **AI に全部を任せない設計** — 復習の予定や正誤はプログラムが決め、AI はその上に乗ります。
+  アプリの状態は構造化データ（JSON）で AI に渡し、学習記録は AI がツール（関数呼び出し）で調べます
+- ✍️ **教材は外部の AI に作ってもらう** — 条件を入れてプロンプトをコピーし、ChatGPT・Claude・Gemini などに貼り付け。
+  返ってきた JSON を取り込むだけ。単語・フレーズ・一問一答・穴埋め・選択問題に対応
+- 📚 **サンプル教材** — 英語の基本動詞・日常会話フレーズ・句動詞・英文法チェック（今後も追加予定）
+- 💾 **モデルの共有とバックアップ** — ダウンロードしたモデルは同じ github.io の他のサイト（[Try Local](https://masakiniwa.github.io/Try-Local/) など）と共有。
+  端末のファイルとして書き出すこともできます
+- 🔒 **すべて端末内** — 教材・学習記録・AI の推論はブラウザ内。外部に送信されません
+- 📱 **スマホ / PC 両対応・PWA** — スマホは下部ナビゲーション。ホーム画面に追加すればオフラインでも起動
+
+## 使い方
+
+1. 「教材」→「サンプル」から教材を追加（または「AI で作る」でプロンプトを作り、外部の AI が返した JSON を「取り込む」）
+2. 「学習」でカードを見て思い出し、「答えを見る」→ 4 段階で評価
+3. 「カレンダー」で学習履歴と復習予定を確認
+4. （任意）「AI モデル」で Gemma 4 E2B（Web 版）などをダウンロードすると、AI パートナーが使えます
+
+推奨環境: WebGPU に対応した最新の Chrome / Edge（PC・Android）。学習カードだけならモデルは不要です。
+
+## 開発
+
+```bash
+npm install
+npm run dev        # 開発サーバー
+npm run build      # 本番ビルド（dist/）
+npm run lint       # ESLint
+npm run typecheck  # TypeScript
+npm test           # Vitest
+npm run format     # Prettier
+npm run packs      # サンプル教材の検証と、一覧・JSON Schema・仕様書の生成
+npm run licenses   # サードパーティのライセンス一覧の生成
+```
+
+`main` ブランチへの push で GitHub Actions が GitHub Pages にデプロイします
+（リポジトリの Settings → Pages → Source を **GitHub Actions** にしてください）。
+
+### サンプル教材を追加するには
+
+`public/packs/<パックの id>.json` に [教材パック形式](docs/STUDY_PACK_FORMAT.md) の JSON を置き、`npm run packs` を実行して
+生成された `public/packs/index.json` などと一緒にコミットします（CI で形式を検証します）。
+
+## ドキュメント
+
+- [仕様書・ロードマップ](docs/SPEC.md)
+- [教材パック形式](docs/STUDY_PACK_FORMAT.md)（外部 AI に渡す仕様書。自動生成）
+- [共通モデル保存仕様](docs/SHARED_MODEL_STORAGE.md)（github.io のサイト間でモデルを共有する取り決め）
+
+## 技術スタック
+
+| 分野          | 採用技術                                                                                            |
+| ------------- | --------------------------------------------------------------------------------------------------- |
+| 記憶          | [ts-fsrs](https://github.com/open-spaced-repetition/ts-fsrs)（FSRS-6）                              |
+| 推論エンジン  | [@litert-lm/core](https://www.npmjs.com/package/@litert-lm/core)（LiteRT-LM JS API, WebGPU / Wasm） |
+| データ        | Dexie（IndexedDB）, zod（教材の検証・JSON Schema）, date-fns                                        |
+| ビルド        | Vite, TypeScript                                                                                    |
+| UI            | React, Tailwind CSS, lucide-react, sonner, react-markdown                                           |
+| 状態管理      | Zustand                                                                                             |
+| ルーティング  | wouter（ハッシュルーティング）                                                                      |
+| Worker 通信   | Comlink（Engine Worker・Data Worker）                                                               |
+| テスト / 品質 | Vitest, fake-indexeddb, ESLint, Prettier                                                            |
+
+## ライセンス
+
+[MIT License](LICENSE)
+
+利用しているサードパーティ製ソフトウェアの一覧は [THIRD_PARTY_NOTICES.md](THIRD_PARTY_NOTICES.md)
+（ライセンス全文はアプリのヘルプ画面）を参照してください。
+サンプル教材は本リポジトリのオリジナルです（MIT）。
+AI モデルは本リポジトリに含まれず、各モデルのライセンス・利用規約が適用されます。

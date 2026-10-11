@@ -1,0 +1,497 @@
+{
+  "format": "lllm-study-pack",
+  "version": 1,
+  "id": "en-phrasal-verbs",
+  "title": "よく使う句動詞 30",
+  "description": "pick up / find out / give up など、会話にひんぱんに出てくる句動詞 30 個。動詞＋前置詞・副詞の組み合わせで意味が変わる表現を集めました。",
+  "subject": "english",
+  "language": {
+    "target": "en",
+    "explanation": "ja"
+  },
+  "level": "中級（CEFR A2〜B1）",
+  "tags": [
+    "英単語",
+    "句動詞"
+  ],
+  "author": "LLLM-Study",
+  "license": "MIT",
+  "source": "LLLM-Study オリジナル",
+  "revision": 1,
+  "items": [
+    {
+      "id": "pv-pick-up",
+      "type": "vocab",
+      "term": "pick up",
+      "pos": "句動詞",
+      "meanings": [
+        "拾い上げる",
+        "（車で）迎えに行く",
+        "（自然に）身につける"
+      ],
+      "examples": [
+        {
+          "text": "I'll pick you up at the station.",
+          "translation": "駅まで迎えに行くね。"
+        }
+      ],
+      "notes": "up は「上へ・完全に」。"
+    },
+    {
+      "id": "pv-find-out",
+      "type": "vocab",
+      "term": "find out",
+      "pos": "句動詞",
+      "meanings": [
+        "（調べて）分かる・知る"
+      ],
+      "examples": [
+        {
+          "text": "I need to find out what happened.",
+          "translation": "何が起きたのか確かめないと。"
+        }
+      ]
+    },
+    {
+      "id": "pv-give-up",
+      "type": "vocab",
+      "term": "give up",
+      "pos": "句動詞",
+      "meanings": [
+        "あきらめる",
+        "（習慣を）やめる"
+      ],
+      "examples": [
+        {
+          "text": "Don't give up!",
+          "translation": "あきらめないで！"
+        }
+      ],
+      "notes": "give up -ing で「〜するのをやめる」。"
+    },
+    {
+      "id": "pv-look-for",
+      "type": "vocab",
+      "term": "look for",
+      "pos": "句動詞",
+      "meanings": [
+        "探す"
+      ],
+      "examples": [
+        {
+          "text": "I'm looking for my glasses.",
+          "translation": "メガネを探しているんだ。"
+        }
+      ]
+    },
+    {
+      "id": "pv-look-after",
+      "type": "vocab",
+      "term": "look after",
+      "pos": "句動詞",
+      "meanings": [
+        "世話をする"
+      ],
+      "examples": [
+        {
+          "text": "Can you look after my cat this weekend?",
+          "translation": "今週末、猫の世話をしてくれる？"
+        }
+      ],
+      "notes": "take care of とほぼ同じ意味。"
+    },
+    {
+      "id": "pv-look-forward-to",
+      "type": "vocab",
+      "term": "look forward to",
+      "pos": "句動詞",
+      "meanings": [
+        "楽しみにする"
+      ],
+      "examples": [
+        {
+          "text": "I'm looking forward to the trip.",
+          "translation": "旅行を楽しみにしている。"
+        }
+      ],
+      "notes": "to のあとは名詞か -ing（to see ではなく to seeing）。"
+    },
+    {
+      "id": "pv-put-on",
+      "type": "vocab",
+      "term": "put on",
+      "pos": "句動詞",
+      "meanings": [
+        "身につける・着る"
+      ],
+      "examples": [
+        {
+          "text": "Put on your coat. It's cold.",
+          "translation": "コートを着て。寒いよ。"
+        }
+      ],
+      "notes": "「着る動作」は put on、「着ている状態」は wear。"
+    },
+    {
+      "id": "pv-take-off",
+      "type": "vocab",
+      "term": "take off",
+      "pos": "句動詞",
+      "meanings": [
+        "脱ぐ",
+        "（飛行機が）離陸する",
+        "急に人気が出る"
+      ],
+      "examples": [
+        {
+          "text": "Please take off your shoes here.",
+          "translation": "ここで靴を脱いでください。"
+        }
+      ]
+    },
+    {
+      "id": "pv-turn-on",
+      "type": "vocab",
+      "term": "turn on",
+      "pos": "句動詞",
+      "meanings": [
+        "（電気・機械を）つける"
+      ],
+      "examples": [
+        {
+          "text": "Could you turn on the light?",
+          "translation": "電気をつけてくれる？"
+        }
+      ],
+      "notes": "反対は turn off。"
+    },
+    {
+      "id": "pv-turn-down",
+      "type": "vocab",
+      "term": "turn down",
+      "pos": "句動詞",
+      "meanings": [
+        "（音量などを）下げる",
+        "断る"
+      ],
+      "examples": [
+        {
+          "text": "He turned down the job offer.",
+          "translation": "彼は仕事のオファーを断った。"
+        }
+      ]
+    },
+    {
+      "id": "pv-put-off",
+      "type": "vocab",
+      "term": "put off",
+      "pos": "句動詞",
+      "meanings": [
+        "延期する"
+      ],
+      "examples": [
+        {
+          "text": "Don't put off until tomorrow what you can do today.",
+          "translation": "今日できることを明日に延ばすな。"
+        }
+      ],
+      "notes": "postpone のくだけた言い方。"
+    },
+    {
+      "id": "pv-call-off",
+      "type": "vocab",
+      "term": "call off",
+      "pos": "句動詞",
+      "meanings": [
+        "中止する"
+      ],
+      "examples": [
+        {
+          "text": "The game was called off because of rain.",
+          "translation": "雨で試合は中止になった。"
+        }
+      ],
+      "notes": "cancel とほぼ同じ意味。"
+    },
+    {
+      "id": "pv-come-up-with",
+      "type": "vocab",
+      "term": "come up with",
+      "pos": "句動詞",
+      "meanings": [
+        "（考えなどを）思いつく"
+      ],
+      "examples": [
+        {
+          "text": "She came up with a great idea.",
+          "translation": "彼女はすばらしいアイデアを思いついた。"
+        }
+      ]
+    },
+    {
+      "id": "pv-get-along-with",
+      "type": "vocab",
+      "term": "get along with",
+      "pos": "句動詞",
+      "meanings": [
+        "〜とうまくやっていく"
+      ],
+      "examples": [
+        {
+          "text": "I get along well with my coworkers.",
+          "translation": "同僚とうまくやっている。"
+        }
+      ]
+    },
+    {
+      "id": "pv-run-out-of",
+      "type": "vocab",
+      "term": "run out of",
+      "pos": "句動詞",
+      "meanings": [
+        "〜を使い果たす・切らす"
+      ],
+      "examples": [
+        {
+          "text": "We've run out of milk.",
+          "translation": "牛乳を切らしちゃった。"
+        }
+      ]
+    },
+    {
+      "id": "pv-figure-out",
+      "type": "vocab",
+      "term": "figure out",
+      "pos": "句動詞",
+      "meanings": [
+        "理解する・解決策を見つける"
+      ],
+      "examples": [
+        {
+          "text": "I can't figure out how to use this app.",
+          "translation": "このアプリの使い方が分からない。"
+        }
+      ]
+    },
+    {
+      "id": "pv-set-up",
+      "type": "vocab",
+      "term": "set up",
+      "pos": "句動詞",
+      "meanings": [
+        "準備する・設置する",
+        "設立する"
+      ],
+      "examples": [
+        {
+          "text": "Let's set up the tent before it gets dark.",
+          "translation": "暗くなる前にテントを張ろう。"
+        }
+      ]
+    },
+    {
+      "id": "pv-show-up",
+      "type": "vocab",
+      "term": "show up",
+      "pos": "句動詞",
+      "meanings": [
+        "（約束の場所に）現れる"
+      ],
+      "examples": [
+        {
+          "text": "He didn't show up for the meeting.",
+          "translation": "彼は会議に来なかった。"
+        }
+      ]
+    },
+    {
+      "id": "pv-hang-out",
+      "type": "vocab",
+      "term": "hang out",
+      "pos": "句動詞",
+      "meanings": [
+        "（友だちと）ぶらぶら過ごす"
+      ],
+      "examples": [
+        {
+          "text": "Do you want to hang out this weekend?",
+          "translation": "今週末、一緒に遊ばない？"
+        }
+      ]
+    },
+    {
+      "id": "pv-check-out",
+      "type": "vocab",
+      "term": "check out",
+      "pos": "句動詞",
+      "meanings": [
+        "調べる・見てみる",
+        "（ホテルを）チェックアウトする"
+      ],
+      "examples": [
+        {
+          "text": "Check out this video!",
+          "translation": "この動画見てみて！"
+        }
+      ]
+    },
+    {
+      "id": "pv-work-out",
+      "type": "vocab",
+      "term": "work out",
+      "pos": "句動詞",
+      "meanings": [
+        "運動する・鍛える",
+        "うまくいく"
+      ],
+      "examples": [
+        {
+          "text": "I work out at the gym three times a week.",
+          "translation": "週3回ジムで運動している。"
+        }
+      ]
+    },
+    {
+      "id": "pv-go-over",
+      "type": "vocab",
+      "term": "go over",
+      "pos": "句動詞",
+      "meanings": [
+        "見直す・確認する"
+      ],
+      "examples": [
+        {
+          "text": "Let's go over the plan once more.",
+          "translation": "もう一度計画を確認しよう。"
+        }
+      ]
+    },
+    {
+      "id": "pv-catch-up",
+      "type": "vocab",
+      "term": "catch up",
+      "pos": "句動詞",
+      "meanings": [
+        "追いつく",
+        "近況を話す"
+      ],
+      "examples": [
+        {
+          "text": "Let's get coffee and catch up.",
+          "translation": "コーヒーでも飲みながら近況を話そう。"
+        }
+      ],
+      "notes": "catch up with 人 で「〜に追いつく」。"
+    },
+    {
+      "id": "pv-bring-up",
+      "type": "vocab",
+      "term": "bring up",
+      "pos": "句動詞",
+      "meanings": [
+        "（話題を）持ち出す",
+        "育てる"
+      ],
+      "examples": [
+        {
+          "text": "Why did you bring that up?",
+          "translation": "なんでその話を出したの？"
+        }
+      ]
+    },
+    {
+      "id": "pv-break-down",
+      "type": "vocab",
+      "term": "break down",
+      "pos": "句動詞",
+      "meanings": [
+        "故障する",
+        "（感情的に）取り乱す"
+      ],
+      "examples": [
+        {
+          "text": "My car broke down on the highway.",
+          "translation": "高速道路で車が故障した。"
+        }
+      ]
+    },
+    {
+      "id": "pv-carry-on",
+      "type": "vocab",
+      "term": "carry on",
+      "pos": "句動詞",
+      "meanings": [
+        "続ける"
+      ],
+      "examples": [
+        {
+          "text": "Sorry to interrupt. Please carry on.",
+          "translation": "お邪魔してすみません。続けてください。"
+        }
+      ],
+      "notes": "continue とほぼ同じ意味。"
+    },
+    {
+      "id": "pv-fill-out",
+      "type": "vocab",
+      "term": "fill out",
+      "pos": "句動詞",
+      "meanings": [
+        "（書類に）記入する"
+      ],
+      "examples": [
+        {
+          "text": "Please fill out this form.",
+          "translation": "この用紙に記入してください。"
+        }
+      ],
+      "notes": "fill in もほぼ同じ意味。"
+    },
+    {
+      "id": "pv-get-over",
+      "type": "vocab",
+      "term": "get over",
+      "pos": "句動詞",
+      "meanings": [
+        "（病気・困難から）立ち直る"
+      ],
+      "examples": [
+        {
+          "text": "It took me a week to get over the cold.",
+          "translation": "風邪が治るのに1週間かかった。"
+        }
+      ]
+    },
+    {
+      "id": "pv-look-up",
+      "type": "vocab",
+      "term": "look up",
+      "pos": "句動詞",
+      "meanings": [
+        "（辞書などで）調べる"
+      ],
+      "examples": [
+        {
+          "text": "Look up the word in the dictionary.",
+          "translation": "その単語を辞書で調べて。"
+        }
+      ]
+    },
+    {
+      "id": "pv-take-after",
+      "type": "vocab",
+      "term": "take after",
+      "pos": "句動詞",
+      "meanings": [
+        "（親などに）似ている"
+      ],
+      "examples": [
+        {
+          "text": "She takes after her mother.",
+          "translation": "彼女は母親似だ。"
+        }
+      ],
+      "notes": "血縁のある年上の人に似ているときに使う。"
+    }
+  ]
+}

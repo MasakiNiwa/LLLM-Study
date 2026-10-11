@@ -1,0 +1,72 @@
+{
+  "version": 1,
+  "packs": [
+    {
+      "file": "en-core-verbs.json",
+      "id": "en-core-verbs",
+      "title": "英語の基本動詞 40",
+      "description": "日常会話でよく使う基本動詞 40 語。意味の広がりをつかめるよう、主な意味・例文・よく使う組み合わせ・コアイメージを収録しています。",
+      "level": "中学〜高校基礎（CEFR A1〜A2）",
+      "tags": [
+        "英単語",
+        "動詞",
+        "基礎"
+      ],
+      "revision": 1,
+      "itemCount": 40,
+      "itemTypes": [
+        "vocab"
+      ]
+    },
+    {
+      "file": "en-daily-phrases.json",
+      "id": "en-daily-phrases",
+      "title": "日常会話フレーズ 40",
+      "description": "あいさつ・あいづち・お願い・買い物など、日常会話ですぐ使える定番フレーズ 40 個。使う場面と例文つき。",
+      "level": "初級〜中級（CEFR A2〜B1）",
+      "tags": [
+        "英会話",
+        "フレーズ"
+      ],
+      "revision": 1,
+      "itemCount": 40,
+      "itemTypes": [
+        "phrase"
+      ]
+    },
+    {
+      "file": "en-grammar-check.json",
+      "id": "en-grammar-check",
+      "title": "英文法チェック 24",
+      "description": "つまずきやすい文法ポイントを、穴埋め 12 問と選択問題 12 問で確認します（単語帳以外の教材の例でもあります）。",
+      "level": "中学〜高校基礎",
+      "tags": [
+        "英文法",
+        "穴埋め",
+        "選択問題"
+      ],
+      "revision": 1,
+      "itemCount": 24,
+      "itemTypes": [
+        "cloze",
+        "choice"
+      ]
+    },
+    {
+      "file": "en-phrasal-verbs.json",
+      "id": "en-phrasal-verbs",
+      "title": "よく使う句動詞 30",
+      "description": "pick up / find out / give up など、会話にひんぱんに出てくる句動詞 30 個。動詞＋前置詞・副詞の組み合わせで意味が変わる表現を集めました。",
+      "level": "中級（CEFR A2〜B1）",
+      "tags": [
+        "英単語",
+        "句動詞"
+      ],
+      "revision": 1,
+      "itemCount": 30,
+      "itemTypes": [
+        "vocab"
+      ]
+    }
+  ]
+}

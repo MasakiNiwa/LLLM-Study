@@ -1,0 +1,563 @@
+{
+  "format": "lllm-study-pack",
+  "version": 1,
+  "id": "en-daily-phrases",
+  "title": "日常会話フレーズ 40",
+  "description": "あいさつ・あいづち・お願い・買い物など、日常会話ですぐ使える定番フレーズ 40 個。使う場面と例文つき。",
+  "subject": "english",
+  "language": {
+    "target": "en",
+    "explanation": "ja"
+  },
+  "level": "初級〜中級（CEFR A2〜B1）",
+  "tags": [
+    "英会話",
+    "フレーズ"
+  ],
+  "author": "LLLM-Study",
+  "license": "MIT",
+  "source": "LLLM-Study オリジナル",
+  "revision": 1,
+  "items": [
+    {
+      "id": "p-how-is-it-going",
+      "type": "phrase",
+      "phrase": "How's it going?",
+      "meaning": "調子はどう？",
+      "situation": "友だち・同僚へのあいさつ",
+      "examples": [
+        {
+          "text": "Hey, Tom! How's it going?",
+          "translation": "やあ、トム！調子どう？"
+        }
+      ],
+      "notes": "返事は Pretty good. / Not bad. など。How are you? よりくだけた言い方。"
+    },
+    {
+      "id": "p-long-time-no-see",
+      "type": "phrase",
+      "phrase": "Long time no see.",
+      "meaning": "久しぶり。",
+      "situation": "しばらく会っていなかった人に",
+      "examples": [
+        {
+          "text": "Long time no see! You look great.",
+          "translation": "久しぶり！元気そうだね。"
+        }
+      ],
+      "notes": "くだけた表現。丁寧には It's been a long time."
+    },
+    {
+      "id": "p-whats-up",
+      "type": "phrase",
+      "phrase": "What's up?",
+      "meaning": "どうしたの？／最近どう？",
+      "situation": "気軽なあいさつ・用件を聞くとき",
+      "examples": [
+        {
+          "text": "What's up? You look worried.",
+          "translation": "どうしたの？心配そうだけど。"
+        }
+      ],
+      "notes": "あいさつなら Not much. と返すことが多い。"
+    },
+    {
+      "id": "p-no-worries",
+      "type": "phrase",
+      "phrase": "No worries.",
+      "meaning": "気にしないで／大丈夫だよ",
+      "situation": "お礼や謝罪への軽い返事",
+      "examples": [
+        {
+          "text": "A: Sorry I'm late. B: No worries.",
+          "translation": "A: 遅れてごめん。B: 大丈夫だよ。"
+        }
+      ]
+    },
+    {
+      "id": "p-my-pleasure",
+      "type": "phrase",
+      "phrase": "My pleasure.",
+      "meaning": "どういたしまして（喜んで）",
+      "situation": "お礼への丁寧な返事",
+      "examples": [
+        {
+          "text": "A: Thank you for your help. B: My pleasure.",
+          "translation": "A: 手伝ってくれてありがとう。B: どういたしまして。"
+        }
+      ],
+      "notes": "You're welcome. よりも「喜んでやった」気持ちが伝わる。"
+    },
+    {
+      "id": "p-excuse-me",
+      "type": "phrase",
+      "phrase": "Excuse me.",
+      "meaning": "すみません",
+      "situation": "人に声をかける・前を通るとき",
+      "examples": [
+        {
+          "text": "Excuse me, is this seat taken?",
+          "translation": "すみません、この席は空いていますか。"
+        }
+      ],
+      "notes": "謝罪には I'm sorry. を使う。"
+    },
+    {
+      "id": "p-could-you-say-that-again",
+      "type": "phrase",
+      "phrase": "Could you say that again?",
+      "meaning": "もう一度言っていただけますか。",
+      "situation": "聞き取れなかったとき",
+      "examples": [
+        {
+          "text": "Sorry, could you say that again?",
+          "translation": "すみません、もう一度言っていただけますか。"
+        }
+      ],
+      "notes": "Pardon? や Sorry? だけでも通じる。"
+    },
+    {
+      "id": "p-what-do-you-mean",
+      "type": "phrase",
+      "phrase": "What do you mean?",
+      "meaning": "どういう意味？",
+      "situation": "相手の意図を確かめるとき",
+      "examples": [
+        {
+          "text": "What do you mean by \"later\"?",
+          "translation": "「あとで」ってどういう意味？"
+        }
+      ],
+      "notes": "言い方によっては責めるように聞こえるので、口調に注意。"
+    },
+    {
+      "id": "p-i-see",
+      "type": "phrase",
+      "phrase": "I see.",
+      "meaning": "なるほど／分かりました",
+      "situation": "相手の説明に納得したとき",
+      "examples": [
+        {
+          "text": "A: The store closes at eight. B: I see.",
+          "translation": "A: お店は8時に閉まるよ。B: なるほど。"
+        }
+      ]
+    },
+    {
+      "id": "p-that-makes-sense",
+      "type": "phrase",
+      "phrase": "That makes sense.",
+      "meaning": "なるほど、納得です",
+      "situation": "説明に合点がいったとき",
+      "examples": [
+        {
+          "text": "Oh, that makes sense now. Thanks!",
+          "translation": "ああ、それで納得。ありがとう！"
+        }
+      ]
+    },
+    {
+      "id": "p-sounds-good",
+      "type": "phrase",
+      "phrase": "Sounds good.",
+      "meaning": "いいね",
+      "situation": "提案に賛成するとき",
+      "examples": [
+        {
+          "text": "A: How about pizza tonight? B: Sounds good!",
+          "translation": "A: 今夜はピザにしない？B: いいね！"
+        }
+      ],
+      "notes": "Sounds great. / Sounds like a plan. も同じように使える。"
+    },
+    {
+      "id": "p-im-in",
+      "type": "phrase",
+      "phrase": "I'm in.",
+      "meaning": "乗った！／参加する",
+      "situation": "誘いに乗るとき",
+      "examples": [
+        {
+          "text": "A: We're going to karaoke. B: I'm in!",
+          "translation": "A: カラオケ行くんだけど。B: 行く！"
+        }
+      ],
+      "notes": "Count me in. も同じ意味。"
+    },
+    {
+      "id": "p-let-me-think",
+      "type": "phrase",
+      "phrase": "Let me think about it.",
+      "meaning": "ちょっと考えさせて",
+      "situation": "すぐに決められないとき",
+      "examples": [
+        {
+          "text": "It's a great offer, but let me think about it.",
+          "translation": "いい話だけど、少し考えさせて。"
+        }
+      ],
+      "notes": "やんわり断るときにも使われる。"
+    },
+    {
+      "id": "p-i-dont-get-it",
+      "type": "phrase",
+      "phrase": "I don't get it.",
+      "meaning": "よく分からない",
+      "situation": "理解できないとき",
+      "examples": [
+        {
+          "text": "I read it twice, but I still don't get it.",
+          "translation": "2回読んだけど、まだよく分からない。"
+        }
+      ],
+      "notes": "get = understand のくだけた言い方。"
+    },
+    {
+      "id": "p-never-mind",
+      "type": "phrase",
+      "phrase": "Never mind.",
+      "meaning": "気にしないで／何でもない",
+      "situation": "言いかけたことを取り消すとき",
+      "examples": [
+        {
+          "text": "Never mind. It's not important.",
+          "translation": "気にしないで。大したことじゃないから。"
+        }
+      ]
+    },
+    {
+      "id": "p-take-your-time",
+      "type": "phrase",
+      "phrase": "Take your time.",
+      "meaning": "ゆっくりでいいよ",
+      "situation": "相手を急がせたくないとき",
+      "examples": [
+        {
+          "text": "No rush. Take your time.",
+          "translation": "急がなくていいよ。ゆっくりで。"
+        }
+      ]
+    },
+    {
+      "id": "p-go-ahead",
+      "type": "phrase",
+      "phrase": "Go ahead.",
+      "meaning": "どうぞ",
+      "situation": "許可・順番をゆずるとき",
+      "examples": [
+        {
+          "text": "A: Can I ask a question? B: Sure, go ahead.",
+          "translation": "A: 質問してもいい？B: もちろん、どうぞ。"
+        }
+      ]
+    },
+    {
+      "id": "p-after-you",
+      "type": "phrase",
+      "phrase": "After you.",
+      "meaning": "お先にどうぞ",
+      "situation": "ドアや順番をゆずるとき",
+      "examples": [
+        {
+          "text": "Please, after you.",
+          "translation": "どうぞ、お先に。"
+        }
+      ]
+    },
+    {
+      "id": "p-help-yourself",
+      "type": "phrase",
+      "phrase": "Help yourself.",
+      "meaning": "ご自由にどうぞ",
+      "situation": "食べ物などをすすめるとき",
+      "examples": [
+        {
+          "text": "There's coffee in the kitchen. Help yourself.",
+          "translation": "台所にコーヒーがあるよ。ご自由にどうぞ。"
+        }
+      ]
+    },
+    {
+      "id": "p-its-up-to-you",
+      "type": "phrase",
+      "phrase": "It's up to you.",
+      "meaning": "あなた次第だよ／任せるよ",
+      "situation": "相手に決めてもらうとき",
+      "examples": [
+        {
+          "text": "A: Where should we eat? B: It's up to you.",
+          "translation": "A: どこで食べる？B: 任せるよ。"
+        }
+      ]
+    },
+    {
+      "id": "p-i-cant-wait",
+      "type": "phrase",
+      "phrase": "I can't wait.",
+      "meaning": "待ちきれない／楽しみ！",
+      "situation": "楽しみなことがあるとき",
+      "examples": [
+        {
+          "text": "The concert is tomorrow. I can't wait!",
+          "translation": "コンサートは明日。待ちきれない！"
+        }
+      ],
+      "notes": "I can't wait to see you. のように to + 動詞を続けられる。"
+    },
+    {
+      "id": "p-good-luck",
+      "type": "phrase",
+      "phrase": "Good luck!",
+      "meaning": "がんばって！",
+      "situation": "試験・挑戦の前の人に",
+      "examples": [
+        {
+          "text": "Good luck on your exam!",
+          "translation": "試験がんばってね！"
+        }
+      ],
+      "notes": "日本語の「がんばって」に近いが、運を祈るニュアンス。"
+    },
+    {
+      "id": "p-you-did-it",
+      "type": "phrase",
+      "phrase": "You did it!",
+      "meaning": "やったね！",
+      "situation": "相手が成功したとき",
+      "examples": [
+        {
+          "text": "You passed the test? You did it!",
+          "translation": "テスト受かったの？やったね！"
+        }
+      ]
+    },
+    {
+      "id": "p-thats-too-bad",
+      "type": "phrase",
+      "phrase": "That's too bad.",
+      "meaning": "それは残念だね",
+      "situation": "残念な話を聞いたとき",
+      "examples": [
+        {
+          "text": "A: I can't come to the party. B: That's too bad.",
+          "translation": "A: パーティーに行けないんだ。B: それは残念。"
+        }
+      ]
+    },
+    {
+      "id": "p-i-feel-you",
+      "type": "phrase",
+      "phrase": "I know how you feel.",
+      "meaning": "気持ち、分かるよ",
+      "situation": "共感を示すとき",
+      "examples": [
+        {
+          "text": "I know how you feel. I was nervous too.",
+          "translation": "気持ち分かるよ。私も緊張したもん。"
+        }
+      ]
+    },
+    {
+      "id": "p-what-do-you-think",
+      "type": "phrase",
+      "phrase": "What do you think?",
+      "meaning": "どう思う？",
+      "situation": "相手の意見を聞くとき",
+      "examples": [
+        {
+          "text": "I want to change jobs. What do you think?",
+          "translation": "転職したいんだ。どう思う？"
+        }
+      ]
+    },
+    {
+      "id": "p-im-not-sure",
+      "type": "phrase",
+      "phrase": "I'm not sure.",
+      "meaning": "よく分からない／確信がない",
+      "situation": "はっきり答えられないとき",
+      "examples": [
+        {
+          "text": "I'm not sure, but I think it starts at seven.",
+          "translation": "確かじゃないけど、7時に始まると思う。"
+        }
+      ]
+    },
+    {
+      "id": "p-it-depends",
+      "type": "phrase",
+      "phrase": "It depends.",
+      "meaning": "場合によるね",
+      "situation": "一概に言えないとき",
+      "examples": [
+        {
+          "text": "A: Is it far? B: It depends on the traffic.",
+          "translation": "A: 遠い？B: 道の混み具合によるね。"
+        }
+      ],
+      "notes": "It depends on ... で「〜次第」。"
+    },
+    {
+      "id": "p-lets-call-it-a-day",
+      "type": "phrase",
+      "phrase": "Let's call it a day.",
+      "meaning": "今日はここまでにしよう",
+      "situation": "作業を切り上げるとき",
+      "examples": [
+        {
+          "text": "It's already nine. Let's call it a day.",
+          "translation": "もう9時だ。今日はここまでにしよう。"
+        }
+      ]
+    },
+    {
+      "id": "p-im-on-my-way",
+      "type": "phrase",
+      "phrase": "I'm on my way.",
+      "meaning": "今向かっているところ",
+      "situation": "移動中を伝えるとき",
+      "examples": [
+        {
+          "text": "I'm on my way. I'll be there in ten minutes.",
+          "translation": "今向かってる。10分で着くよ。"
+        }
+      ]
+    },
+    {
+      "id": "p-see-you-later",
+      "type": "phrase",
+      "phrase": "See you later.",
+      "meaning": "またね",
+      "situation": "別れのあいさつ",
+      "examples": [
+        {
+          "text": "Bye! See you later.",
+          "translation": "じゃあね！またね。"
+        }
+      ],
+      "notes": "その日にまた会わなくても使える。See you. と短くしてもよい。"
+    },
+    {
+      "id": "p-have-a-good-one",
+      "type": "phrase",
+      "phrase": "Have a good one.",
+      "meaning": "よい一日を／じゃあね",
+      "situation": "別れ際の気軽なあいさつ",
+      "examples": [
+        {
+          "text": "Thanks! Have a good one.",
+          "translation": "ありがとう！よい一日を。"
+        }
+      ],
+      "notes": "Have a nice day. のくだけた言い方。"
+    },
+    {
+      "id": "p-keep-me-posted",
+      "type": "phrase",
+      "phrase": "Keep me posted.",
+      "meaning": "進展があったら教えて",
+      "situation": "経過を知らせてほしいとき",
+      "examples": [
+        {
+          "text": "Good luck with the interview. Keep me posted!",
+          "translation": "面接がんばって。どうだったか教えてね！"
+        }
+      ]
+    },
+    {
+      "id": "p-i-owe-you-one",
+      "type": "phrase",
+      "phrase": "I owe you one.",
+      "meaning": "恩に着るよ／借りができたね",
+      "situation": "助けてもらったとき",
+      "examples": [
+        {
+          "text": "Thanks for covering my shift. I owe you one.",
+          "translation": "シフト代わってくれてありがとう。恩に着るよ。"
+        }
+      ]
+    },
+    {
+      "id": "p-no-way",
+      "type": "phrase",
+      "phrase": "No way!",
+      "meaning": "まさか！／絶対いや！",
+      "situation": "驚き・強い拒否",
+      "examples": [
+        {
+          "text": "No way! You met a movie star?",
+          "translation": "まさか！映画スターに会ったの？"
+        }
+      ],
+      "notes": "驚き（本当に？）にも、拒否（絶対だめ）にも使う。"
+    },
+    {
+      "id": "p-for-here-or-to-go",
+      "type": "phrase",
+      "phrase": "For here or to go?",
+      "meaning": "店内でお召し上がりですか、お持ち帰りですか。",
+      "situation": "カフェ・ファストフード店で",
+      "examples": [
+        {
+          "text": "A: For here or to go? B: To go, please.",
+          "translation": "A: 店内ですか、お持ち帰りですか。B: 持ち帰りでお願いします。"
+        }
+      ],
+      "notes": "イギリスでは Eat in or take away? と言うことが多い。"
+    },
+    {
+      "id": "p-can-i-get",
+      "type": "phrase",
+      "phrase": "Can I get ...?",
+      "meaning": "〜をください",
+      "situation": "注文するとき",
+      "examples": [
+        {
+          "text": "Can I get a medium latte, please?",
+          "translation": "ラテのMサイズをください。"
+        }
+      ],
+      "notes": "I'd like ... はより丁寧。"
+    },
+    {
+      "id": "p-how-much-is-this",
+      "type": "phrase",
+      "phrase": "How much is this?",
+      "meaning": "これはいくらですか。",
+      "situation": "買い物で値段を聞くとき",
+      "examples": [
+        {
+          "text": "Excuse me, how much is this jacket?",
+          "translation": "すみません、このジャケットはいくらですか。"
+        }
+      ]
+    },
+    {
+      "id": "p-just-looking",
+      "type": "phrase",
+      "phrase": "I'm just looking.",
+      "meaning": "見ているだけです",
+      "situation": "店員に声をかけられたとき",
+      "examples": [
+        {
+          "text": "A: Can I help you? B: I'm just looking, thanks.",
+          "translation": "A: 何かお探しですか。B: 見ているだけです、ありがとう。"
+        }
+      ]
+    },
+    {
+      "id": "p-could-you-do-me-a-favor",
+      "type": "phrase",
+      "phrase": "Could you do me a favor?",
+      "meaning": "お願いがあるんだけど",
+      "situation": "頼みごとを切り出すとき",
+      "examples": [
+        {
+          "text": "Could you do me a favor? Can you water my plants?",
+          "translation": "お願いがあるんだけど、植物に水をやってくれる？"
+        }
+      ],
+      "notes": "Can you do me a favor? はよりくだけた言い方。"
+    }
+  ]
+}
