@@ -48,3 +48,13 @@ describe('weeklySummary', () => {
     expect(json.weak_items).toEqual([{ title: 'take', lapses: 3 }]);
   });
 });
+
+describe('reviewPrompt の指示', () => {
+  it('苦手な項目が無ければ触れないよう伝え、先週が 0 なら比較させない', () => {
+    const s = weeklySummary(stats([...Array(23).fill(0), 5, 0, 0, 0, 0, 0, 0]));
+    const p = reviewPrompt(s, [], 'すべての教材');
+    expect(p).toContain('苦手な項目には触れない');
+    expect(p).toContain('先週との比較はしない');
+    expect(reviewPrompt(s, [{ title: 'take', lapses: 2 }], 'x')).toContain('weak_items の中から');
+  });
+});

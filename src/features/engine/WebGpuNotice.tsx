@@ -5,6 +5,10 @@ import { cn } from '@/lib/utils/cn';
 import { useSettings } from '@/features/settings/settingsStore';
 import { useEngine } from './engineStore';
 
+function isAndroid(): boolean {
+  return typeof navigator !== 'undefined' && /Android/i.test(navigator.userAgent);
+}
+
 /**
  * WebGPU が使えない端末向けの案内。
  * 自動設定なら CPU で動くこと、GPU 固定ならエラーになることを知らせる。
@@ -50,6 +54,12 @@ export function WebGpuNotice({ className }: { className?: string }) {
             WebGPU を有効にする方法
           </Link>
         </p>
+        {isAndroid() && (
+          <p className="text-xs opacity-80">
+            Android では、OS の「高度な保護」がオンだと WebGPU
+            が止められていることがあります（オフにすると端末の保護が弱まるため、詳しくはヘルプを読んでから判断してください）。
+          </p>
+        )}
       </div>
     </div>
   );

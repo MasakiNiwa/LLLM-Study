@@ -15,11 +15,16 @@ import { reviewPrompt, summaryLines, weeklySummary } from './review';
 
 /** 苦手な項目として AI に渡す数 */
 const WEAK_ITEMS = 5;
+/** 思い出せる確率（%）がこれより低ければ苦手とみなす */
+const WEAK_RECALL = 85;
 
 /** 苦手な項目（AI に渡すので長い問題文は短くする） */
 async function weakItems(packId?: string) {
   const weak = await dataWorker().weakItems(Date.now(), WEAK_ITEMS, packId);
-  return weak.map((w) => ({ title: w.title.slice(0, 60), lapses: w.lapses }));
+  // 本当に苦手なものだけ（忘れたことがある・思い出せる確率が下がっている）。無ければ AI に渡さない
+  return weak
+    .filter((w) => w.lapses > 0 || w.recall < WEAK_RECALL)
+    .map((w) => ({ title: w.title.slice(0, 60), lapses: w.lapses }));
 }
 
 /**
