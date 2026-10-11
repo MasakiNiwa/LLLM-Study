@@ -8,6 +8,7 @@ import {
   resetPackProgress,
   setPackTemplates,
   uninstallPack,
+  updatePackItem,
 } from './install';
 
 function pack(items: StudyPack['items']): StudyPack {
@@ -71,5 +72,20 @@ describe('installPack', () => {
     expect((await db.packs.orderBy('order').toArray()).map((p) => p.id)).toEqual(['p2', 'p1']);
     await movePack('p2', -1); // 先頭より上には動かない
     expect((await db.packs.orderBy('order').first())?.id).toBe('p2');
+  });
+
+  it('項目を 1 つ直す（学習記録は残し、種類と ID は変えられない）', async () => {
+    await installPack(pack([w('a', 'tke'), w('b')]), 'import');
+    const card = (await db.cards.where('itemKey').equals('p1/a').first())!;
+    await db.cards.put({ ...card, reps: 3 });
+    await updatePackItem('p1/a', w('a', 'take'));
+    const rec = await db.items.get('p1/a');
+    expect(rec?.item).toMatchObject({ term: 'take' });
+    expect((await db.cards.get(card.id))?.reps).toBe(3);
+    await expect(updatePackItem('p1/a', w('x'))).rejects.toThrow('ID');
+    await expect(
+      updatePackItem('p1/a', { id: 'a', type: 'qa', question: 'q', answer: 'a' }),
+    ).rejects.toThrow('種類');
+    await expect(updatePackItem('p1/a', { ...w('a'), passage: 'nope' })).rejects.toThrow('本文');
   });
 });

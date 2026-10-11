@@ -613,10 +613,18 @@ export function CardFace({
       seed={seed}
     />
   );
-  if (!record.passage) return face;
+  const image = record.item.image;
+  if (!record.passage && !image) return face;
   return (
     <>
-      <PassageBlock passage={record.passage} side={side} lang={lang} />
+      {record.passage && <PassageBlock passage={record.passage} side={side} lang={lang} />}
+      {image && side === 'front' && (
+        <img
+          src={image}
+          alt="問題の画像"
+          className="mx-auto mb-5 max-h-56 rounded-xl object-contain sm:max-h-72"
+        />
+      )}
       {face}
     </>
   );

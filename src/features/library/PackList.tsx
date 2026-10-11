@@ -17,6 +17,7 @@ import { Card } from '@/components/ui/Card';
 import { ConfirmDialog } from '@/components/ui/ConfirmDialog';
 import { Switch } from '@/components/ui/Switch';
 import { db } from '@/lib/db/db';
+import type { ItemRecord } from '@/lib/db/types';
 import {
   movePack,
   resetPackProgress,
@@ -39,6 +40,7 @@ import type { ItemSummary } from '@/lib/data/stats';
 import { setItemSuspended } from '@/features/study/cardActions';
 import { CardEditor } from './CardEditor';
 import { ItemRow } from './ItemRow';
+import { ItemJsonEditor } from './ItemJsonEditor';
 import { useLibrary, type PackWithStats } from './libraryStore';
 
 function StatsBar({ pack }: { pack: PackWithStats }) {
@@ -68,10 +70,11 @@ function ItemBrowser({
   packId: string;
   /** パックが更新されたら読み直す */
   version: number;
-  /** 指定すると項目を編集できる（マイカード） */
+  /** マイカードの編集（指定しなければ、項目の中身を JSON で直す） */
   onEdit?: (item: StudyItem) => void;
 }) {
   const [items, setItems] = useState<ItemSummary[] | null>(null);
+  const [fixing, setFixing] = useState<ItemRecord | null>(null);
   const [query, setQuery] = useState('');
   const [reload, setReload] = useState(0);
   useEffect(() => {
@@ -97,7 +100,9 @@ function ItemBrowser({
   };
   const edit = async (key: string) => {
     const rec = await db.items.get(key);
-    if (rec) onEdit?.(rec.item);
+    if (!rec) return;
+    if (onEdit) onEdit(rec.item);
+    else setFixing(rec);
   };
 
   return (
@@ -117,13 +122,18 @@ function ItemBrowser({
             key={i.key}
             item={i}
             onToggleSuspend={() => void toggle(i)}
-            onEdit={onEdit ? () => void edit(i.key) : undefined}
+            onEdit={() => void edit(i.key)}
           />
         ))}
         {items && filtered.length === 0 && (
           <li className="px-3 py-4 text-center text-sm text-slate-500">見つかりません</li>
         )}
       </ul>
+      <ItemJsonEditor
+        record={fixing}
+        onClose={() => setFixing(null)}
+        onSaved={() => setReload((n) => n + 1)}
+      />
     </div>
   );
 }
