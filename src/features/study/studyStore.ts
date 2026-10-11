@@ -107,6 +107,23 @@ async function withItem(card: CardRecord): Promise<StudyCard | null> {
 }
 
 export const useStudy = create<StudyState>()((set, get) => {
+  /**
+   * 評価・取り消し・出題停止は DB への保存を伴うので、1 つずつ順に行う。
+   * 連打やキーの連続入力で同じカードの評価が二重に保存されないよう、処理中の操作は無視する。
+   */
+  let busy = false;
+  const exclusive =
+    <A extends unknown[]>(fn: (...args: A) => Promise<void>) =>
+    async (...args: A): Promise<void> => {
+      if (busy) return;
+      busy = true;
+      try {
+        await fn(...args);
+      } finally {
+        busy = false;
+      }
+    };
+
   /** キューの先頭から、項目が見つかるカードを取り出して表示する */
   const showNext = async (queue: CardRecord[]) => {
     const rest = [...queue];
@@ -192,7 +209,7 @@ export const useStudy = create<StudyState>()((set, get) => {
       useAiFocus.getState().setStudyCard(get().current!.card.id, true);
     },
 
-    async rate(grade) {
+    rate: exclusive(async (grade: GradeValue) => {
       const { current, queue, shownAt, stats, mode } = get();
       if (!current) return;
       const now = Date.now();
@@ -261,9 +278,9 @@ export const useStudy = create<StudyState>()((set, get) => {
         console.error(e);
         toast.error('評価を保存できませんでした', { description: errorMessage(e) });
       }
-    },
+    }),
 
-    async undo() {
+    undo: exclusive(async () => {
       const stack = [...get().undoStack];
       const entry = stack.pop();
       if (!entry) return;
@@ -278,9 +295,9 @@ export const useStudy = create<StudyState>()((set, get) => {
       } catch (e) {
         toast.error('取り消せませんでした', { description: errorMessage(e) });
       }
-    },
+    }),
 
-    async suspendCurrent() {
+    suspendCurrent: exclusive(async () => {
       const { current, queue } = get();
       if (!current) return;
       const key = current.card.itemKey;
@@ -302,7 +319,7 @@ export const useStudy = create<StudyState>()((set, get) => {
       } catch (e) {
         toast.error('出題を止められませんでした', { description: errorMessage(e) });
       }
-    },
+    }),
 
     end() {
       set({ status: 'idle', mode: 'srs', queue: [], current: null, revealed: false });

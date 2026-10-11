@@ -258,6 +258,16 @@
                   "minLength": 1,
                   "maxLength": 300
                 }
+              },
+              "forms": {
+                "description": "活用形・変化形（例: took, taken）。不規則なものだけでよい。AI 例文クイズの答えの確認に使う",
+                "maxItems": 12,
+                "type": "array",
+                "items": {
+                  "type": "string",
+                  "minLength": 1,
+                  "maxLength": 300
+                }
               }
             },
             "required": [
@@ -351,6 +361,16 @@
                   "additionalProperties": false,
                   "description": "例文"
                 }
+              },
+              "forms": {
+                "description": "活用した形（例: took part in）。AI 例文クイズの答えの確認に使う",
+                "maxItems": 12,
+                "type": "array",
+                "items": {
+                  "type": "string",
+                  "minLength": 1,
+                  "maxLength": 300
+                }
               }
             },
             "required": [
@@ -412,6 +432,16 @@
                 "minLength": 1,
                 "maxLength": 2000,
                 "description": "答え"
+              },
+              "accepted": {
+                "description": "ほかに正解にしてよい答え（別解・略称・表記揺れ）。答えを入力して答え合わせするときに使う",
+                "maxItems": 10,
+                "type": "array",
+                "items": {
+                  "type": "string",
+                  "minLength": 1,
+                  "maxLength": 300
+                }
               },
               "explanation": {
                 "description": "解説",

@@ -16,6 +16,19 @@ import { useSettings } from '@/features/settings/settingsStore';
 import { resolveBackend } from './backend';
 import { findCatalogModel, isEmbeddingModelName, isGpuOnlyModel } from '@/lib/llm/modelCatalog';
 import { classifyLoadError, explainLoadError } from './loadErrors';
+import { isAiBusy } from '@/features/ai/aiBusy';
+
+/**
+ * AI が応答を生成している間は、モデルの読み込み・切り替え・解放をしない
+ * （生成中のモデルを入れ替えると、応答が途中で失敗したり状態が食い違ったりするため）。
+ */
+function blockedByGeneration(): boolean {
+  if (!isAiBusy()) return false;
+  toast.error('AI が応答を生成中です', {
+    description: '生成が終わるか、止めてからもう一度お試しください',
+  });
+  return true;
+}
 
 export { resolveBackend } from './backend';
 
@@ -75,6 +88,7 @@ export const useEngine = create<EngineState>()((set, get) => ({
 
   async load(source, backendOverride, isFallback = false) {
     if (get().status === 'loading') return false;
+    if (!isFallback && blockedByGeneration()) return false;
     const settings = useSettings.getState();
     const name = source.kind === 'file' ? source.file.name : source.name;
     const webgpu = get().webgpu ?? (await get().detectWebGpu());
@@ -198,6 +212,7 @@ export const useEngine = create<EngineState>()((set, get) => ({
     }
   },
   async unload() {
+    if (blockedByGeneration()) return;
     await llm.unloadModel().catch(() => llm.terminate());
     set({ status: 'empty', model: null, progress: null, error: null });
   },

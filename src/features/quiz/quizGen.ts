@@ -5,11 +5,11 @@
  * - AI は例文の穴埋め問題を JSON で作る
  * - アプリが形と内容（空欄が 1 つ・答えが元の語句と関係があるか）を検証し、採点もプログラムが行う
  */
-import { distance } from 'fastest-levenshtein';
 import { z } from 'zod';
 import { normalizeAnswer } from '@/lib/srs/answerCheck';
 import { languageName } from '@/lib/speech/lang';
 import { extractJson } from '@/lib/packs/parse';
+import { isEnglishLike, isInflectionOf } from '@/lib/packs/inflection';
 import type { PhraseItem, VocabItem } from '@/lib/packs/schema';
 
 export type QuizSource = VocabItem | PhraseItem;
@@ -51,17 +51,23 @@ export function quizPrompt(item: QuizSource, lang?: string): string {
   ].join('\n');
 }
 
-/** 答えが元の語句（またはその活用形）と言えるか。ゆるめに判定する */
-export function relatesToTarget(answer: string, target: string): boolean {
+/**
+ * 答えが元の語句（またはその活用形）と言えるか。
+ * - 教材の forms（活用形の指定）にあれば正しい
+ * - 英語は規則変化と主な不規則動詞から作った活用形と照らし合わせる（take → takes / took / taken）
+ * - それ以外の言語は、語幹（最後の 1 文字を除いた部分）が同じなら正しい（食べる → 食べた）
+ * 判定できない形（教材にない不規則変化など）はその問題を作り直す。
+ */
+export function relatesToTarget(answer: string, target: string, forms: string[] = []): boolean {
   const a = normalizeAnswer(answer);
   const t = normalizeAnswer(target);
   if (!a || !t) return false;
-  if (a.includes(t) || t.includes(a)) return true;
-  // 語尾の変化（pick up → picked up）や不規則変化（take → took）を許す。
-  // go → went のように形が大きく変わるものは判定できないので、その問題は作り直す
-  const head = Math.min(3, t.length);
-  if (a.slice(0, head) === t.slice(0, head)) return true;
-  return a[0] === t[0] && distance(a, t) <= Math.max(3, Math.floor(t.length / 2));
+  if (a === t) return true;
+  if (forms.some((f) => normalizeAnswer(f) === a)) return true;
+  if (isEnglishLike(t) && isEnglishLike(a)) return isInflectionOf(a, t, forms);
+  if (a.includes(t)) return true;
+  const stem = t.length >= 2 ? t.slice(0, -1) : t;
+  return a.startsWith(stem) && a.length <= t.length + 3;
 }
 
 /** AI の出力から問題を取り出す。使えなければ理由（文字列） */
@@ -78,7 +84,7 @@ export function parseQuiz(text: string, item: QuizSource, itemKey: string): Quiz
   const blanks = q.sentence.match(/_{2,}/g) ?? [];
   if (blanks.length !== 1) return '例文の空欄が 1 つではありません';
   const target = targetOf(item);
-  if (!relatesToTarget(q.answer, target)) return '答えが出題した語句と合っていません';
+  if (!relatesToTarget(q.answer, target, item.forms)) return '答えが出題した語句と合っていません';
   return {
     itemKey,
     target,

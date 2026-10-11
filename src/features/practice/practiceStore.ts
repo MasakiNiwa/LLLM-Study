@@ -11,6 +11,7 @@ import { createId } from '@/lib/utils/id';
 import { useAiBusy } from '@/features/ai/aiBusy';
 import { runOneshot } from '@/features/ai/oneshot';
 import { splitThinking } from '@/features/chat/thinking';
+import { estimateTokens, trimHistory } from '@/features/chat/historyBudget';
 import { useEngine } from '@/features/engine/engineStore';
 import { useSettings } from '@/features/settings/settingsStore';
 import {
@@ -78,19 +79,26 @@ export const usePractice = create<PracticeState>()((set, get) => {
     };
     const toTurn = (m: PracticeMessage): ChatTurn => ({ id: m.id, role: m.role, text: m.text });
     try {
+      const systemPrompt = rolePlayPrompt(config);
+      const userTurn = toTurn(user);
       await llm.generate(
         {
           mode: 'chat',
           settings: {
-            systemPrompt: rolePlayPrompt(config),
+            systemPrompt,
             temperature: s.temperature,
             topK: s.topK,
             topP: s.topP,
             maxOutputTokens: 256,
             enableThinking: false,
           },
-          history: history.filter((m) => m.text).map(toTurn),
-          message: toTurn(user),
+          // 長い会話でも文脈長を超えないよう、古い発言から削って渡す
+          history: trimHistory(history.filter((m) => m.text).map(toTurn), {
+            maxNumTokens: s.maxNumTokens,
+            maxOutputTokens: 256,
+            reserved: estimateTokens(systemPrompt) + estimateTokens(userTurn.text) + 64,
+          }),
+          message: userTurn,
           assistantId,
         },
         (ev) => {

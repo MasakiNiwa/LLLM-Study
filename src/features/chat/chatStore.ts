@@ -14,6 +14,7 @@ import type { ChatTurn, GenerationStats } from '@/lib/llm/types';
 import { errorMessage } from '@/lib/utils/format';
 import { createId } from '@/lib/utils/id';
 import { useAiBusy } from '@/features/ai/aiBusy';
+import { estimateTokens, trimHistory } from './historyBudget';
 import { useAiFocus } from '@/features/ai/focusStore';
 import { getConversationSettings } from '@/features/ai/prompt';
 import { buildAppState, formatAppState } from '@/features/ai/studyContext';
@@ -40,6 +41,8 @@ interface ChatState {
   regenerate: () => Promise<void>;
   stop: () => void;
   clear: () => Promise<void>;
+  /** DB の内容で表示を作り直す（バックアップの復元のあとなど。DB は消さない） */
+  reload: () => Promise<void>;
   /** AI が提案したカードをマイカードに追加する */
   addProposal: (messageId: string, index: number) => Promise<void>;
 }
@@ -119,15 +122,27 @@ export const useChat = create<ChatState>()((set, get) => {
     };
 
     try {
+      const conversation = getConversationSettings(settings, { tools });
+      const messageText = user.context ? `${user.context}\n\n${user.text}` : user.text;
+      // 会話が長くなっても文脈長を超えないよう、古い履歴から削って渡す
+      const trimmed = trimHistory(toHistory(history), {
+        maxNumTokens: settings.maxNumTokens,
+        maxOutputTokens: settings.maxOutputTokens,
+        reserved:
+          estimateTokens(conversation.systemPrompt ?? '') +
+          (tools ? estimateTokens(JSON.stringify(TOOL_DECLARATIONS)) : 0) +
+          estimateTokens(messageText) +
+          64,
+      });
       const result = await llm.generate(
         {
           mode: 'chat',
-          settings: getConversationSettings(settings, { tools }),
-          history: toHistory(history),
+          settings: conversation,
+          history: trimmed,
           message: {
             id: user.id,
             role: 'user',
-            text: user.context ? `${user.context}\n\n${user.text}` : user.text,
+            text: messageText,
           },
           assistantId,
           tools: tools ? TOOL_DECLARATIONS : undefined,
@@ -271,6 +286,15 @@ export const useChat = create<ChatState>()((set, get) => {
       } catch (e) {
         toast.error('追加できませんでした', { description: errorMessage(e) });
       }
+    },
+
+    async reload() {
+      if (get().isGenerating) llm.cancel();
+      useAiFocus.getState().attach(null);
+      // 会話の内容が入れ替わるので、モデル側の会話（KV キャッシュ）も作り直す
+      void llm.resetConversation();
+      const records = await db.chat.orderBy('createdAt').toArray();
+      set({ messages: records.map((r) => ({ ...r, status: r.error ? 'error' : 'done' })) });
     },
 
     async clear() {

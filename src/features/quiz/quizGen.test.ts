@@ -8,8 +8,30 @@ describe('relatesToTarget', () => {
     expect(relatesToTarget('takes', 'take')).toBe(true);
     expect(relatesToTarget('took', 'take')).toBe(true);
     expect(relatesToTarget('picked up', 'pick up')).toBe(true);
-    expect(relatesToTarget('went', 'go')).toBe(false); // 形が大きく変わるものは作り直す
+    expect(relatesToTarget('taken', 'take')).toBe(true);
+    expect(relatesToTarget('went', 'go')).toBe(true); // 主な不規則動詞は表で持つ
+    expect(relatesToTarget('picked it up', 'pick up')).toBe(true);
+    expect(relatesToTarget('looking forward to', 'look forward to')).toBe(true);
+    expect(relatesToTarget('stopped', 'stop')).toBe(true);
+    expect(relatesToTarget('studies', 'study')).toBe(true);
     expect(relatesToTarget('banana', 'take')).toBe(false);
+  });
+
+  it('つづりが似ているだけの別の語は受け付けない', () => {
+    for (const w of ['table', 'task', 'tape', 'tale', 'ta']) {
+      expect(relatesToTarget(w, 'take')).toBe(false);
+    }
+    expect(relatesToTarget('look up to', 'look forward to')).toBe(false);
+  });
+
+  it('教材の forms で活用形を指定できる', () => {
+    expect(relatesToTarget('swam', 'swimx')).toBe(false);
+    expect(relatesToTarget('swam', 'swimx', ['swam'])).toBe(true);
+  });
+
+  it('英語以外は語幹で判定する', () => {
+    expect(relatesToTarget('食べた', '食べる')).toBe(true);
+    expect(relatesToTarget('食事', '食べる')).toBe(false);
   });
 });
 

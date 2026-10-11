@@ -84,6 +84,16 @@ export function speakText(item: StudyItem): string | undefined {
   }
 }
 
+/**
+ * 自動で読み上げるタイミング。
+ * - front: 問題を表示したとき（意味を答えるカード・聞き取り）
+ * - back: 答えを見たあと（読むと答えが分かってしまうもの: 単語を答えるカード・穴埋め・並べ替え）
+ */
+export function speakTiming(item: StudyItem, template: string): 'front' | 'back' {
+  if (item.type === 'cloze' || item.type === 'order') return 'back';
+  return template === 'recall' ? 'back' : 'front';
+}
+
 /** LLM に渡す項目の内容（ID や空の値を除いたコンパクトな形） */
 export function itemForLlm(item: StudyItem): Record<string, unknown> {
   // passage は本文の ID なので渡さない（本文そのものは呼び出し側で添える）
@@ -115,7 +125,7 @@ export function expectedAnswer(
         ? { accepted: [item.phrase] }
         : { accepted: meaningCandidates([item.meaning]) };
     case 'qa':
-      return { accepted: [item.answer] };
+      return { accepted: [item.answer, ...(item.accepted ?? [])] };
     case 'cloze':
       return { blanks: clozeAnswers(item.text) };
     case 'choice':

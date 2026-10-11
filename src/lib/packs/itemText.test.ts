@@ -5,6 +5,7 @@ import {
   expectedAnswer,
   itemAnswer,
   itemForLlm,
+  speakTiming,
   itemSearchText,
   orderChunks,
   shuffleChunks,
@@ -40,6 +41,25 @@ describe('itemText', () => {
       answer: 1,
       correct_choice: 'y',
     });
+  });
+
+  it('読み上げのタイミング: 答えが分かってしまうものは答えを見たあと', () => {
+    const v = { id: 'v', type: 'vocab' as const, term: 'take', meanings: ['取る'] };
+    expect(speakTiming(v, 'recognize')).toBe('front');
+    expect(speakTiming(v, 'recall')).toBe('back');
+    expect(speakTiming({ id: 'c', type: 'cloze', text: 'a {{b}}' }, 'basic')).toBe('back');
+    expect(speakTiming({ id: 'o', type: 'order', answer: 'a b' }, 'basic')).toBe('back');
+  });
+
+  it('一問一答の別解も正解にする', () => {
+    const qa = {
+      id: 'q',
+      type: 'qa' as const,
+      question: 'q',
+      answer: '売掛金',
+      accepted: ['売掛'],
+    };
+    expect(expectedAnswer(qa, 'basic')).toEqual({ accepted: ['売掛金', '売掛'] });
   });
 
   it('答え合わせの正解（意味は括弧や区切りを外した候補も含む）', () => {
