@@ -1,7 +1,7 @@
 import { useCallback, useEffect, useState } from 'react';
 import { useLibrary } from '@/features/library/libraryStore';
 import { useSettings } from '@/features/settings/settingsStore';
-import { setAppBadge } from '@/lib/utils/badge';
+import { showAppBadge } from './appBadge';
 import { getTodayOverview, type TodayOverview } from './repository';
 
 /** 今日の学習状況（画面を開いたとき・前面に戻ったときに読み直す） */
@@ -18,12 +18,11 @@ export function useTodayOverview(): { overview: TodayOverview | null; reload: ()
   const packs = useLibrary((s) => s.packs);
 
   const reload = useCallback(() => {
-    const settings = useSettings.getState();
-    void getTodayOverview(settings).then(
+    void getTodayOverview(useSettings.getState()).then(
       (o) => {
         setOverview(o);
         // アプリのアイコンに今日の残りの枚数を出す
-        setAppBadge(settings.appBadge ? o.plannedNew + o.plannedReviews + o.plannedLearning : 0);
+        showAppBadge(o);
       },
       (e) => console.warn('今日の状況を取得できませんでした', e),
     );

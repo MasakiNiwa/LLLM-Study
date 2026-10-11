@@ -6,6 +6,7 @@ import type { StatsData } from '@/lib/data/stats';
 import { Select } from '@/components/ui/Select';
 import { useSettings } from '@/features/settings/settingsStore';
 import { useLibrary } from '@/features/library/libraryStore';
+import { useAiBusy } from '@/features/ai/aiBusy';
 import { BarChart } from './BarChart';
 import { StateBar } from './StateBar';
 import { YearHeatmap } from './YearHeatmap';
@@ -47,6 +48,8 @@ function ChartCard({
 export function StatsPanel({ today }: { today: string }) {
   const dayStart = useSettings((s) => s.dayStartHour);
   const packs = useLibrary((s) => s.packs);
+  // ふりかえりの生成中は教材を切り替えない（生成中の表示と止めるボタンが消えてしまうため）
+  const reviewing = useAiBusy((s) => s.task === 'review');
   const [packId, setPackId] = useState('');
   const [data, setData] = useState<{ key: string; stats: StatsData } | null>(null);
   // 消された教材が選ばれたままにならないように
@@ -76,6 +79,7 @@ export function StatsPanel({ today }: { today: string }) {
       <Select
         value={scope}
         onChange={setPackId}
+        disabled={reviewing}
         aria-label="集計する教材"
         options={[
           { value: '', label: 'すべての教材' },

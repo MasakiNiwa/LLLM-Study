@@ -6,7 +6,7 @@ import { Card } from '@/components/ui/Card';
 import { Chip } from '@/components/ui/Chip';
 import { Select } from '@/components/ui/Select';
 import { Switch } from '@/components/ui/Switch';
-import { parseTable, tableToPack, type TableItemType } from '@/lib/packs/table';
+import { parseTableRows, tableToPack, type TableItemType } from '@/lib/packs/table';
 import { installParsedPack } from './packActions';
 import { useLibrary } from './libraryStore';
 
@@ -48,20 +48,25 @@ export function TableImport({ onInstalled }: { onInstalled?: () => void }) {
   const packs = useLibrary((s) => s.packs);
 
   const deferred = useDeferredValue(text);
-  const rows = useMemo(() => (deferred.trim() ? parseTable(deferred) : []), [deferred]);
+  const parsed = useMemo(() => (deferred.trim() ? parseTableRows(deferred) : []), [deferred]);
+  const rows = useMemo(() => parsed.map((r) => r.cells), [parsed]);
   // 見出し行の有無は、選ばれていなければ中身から推測する
   const hasHeader = header ?? looksLikeHeader(rows[0]);
   const result = useMemo(
     () =>
       rows.length
-        ? tableToPack(rows, {
-            type,
-            title,
-            header: hasHeader,
-            targetLang: type === 'vocab' ? lang || undefined : undefined,
-          })
+        ? tableToPack(
+            rows,
+            {
+              type,
+              title,
+              header: hasHeader,
+              targetLang: type === 'vocab' ? lang || undefined : undefined,
+            },
+            parsed.map((r) => r.line),
+          )
         : null,
-    [rows, type, title, hasHeader, lang],
+    [rows, parsed, type, title, hasHeader, lang],
   );
   const existing = result?.ok ? packs.find((p) => p.id === result.pack.id) : undefined;
   const preview = rows.slice(hasHeader ? 1 : 0, (hasHeader ? 1 : 0) + 5);
@@ -131,7 +136,8 @@ export function TableImport({ onInstalled }: { onInstalled?: () => void }) {
         </div>
         <textarea
           value={text}
-          onChange={(e) => load(e.target.value)}
+          // 手で直しているときは、見出し行の選択をそのまま残す
+          onChange={(e) => setText(e.target.value)}
           rows={6}
           spellCheck={false}
           aria-label="表（CSV・TSV）"

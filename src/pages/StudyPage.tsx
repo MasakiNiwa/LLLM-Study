@@ -180,22 +180,25 @@ export default function StudyPage() {
   const speechRate = useSettings((s) => s.speechRate);
   const speechVoice = useSettings((s) => s.speechVoice);
   // 選択問題で選んだ番号（カードごと）
-  const [choice, setChoice] = useState<{ cardId: string; index: number } | null>(null);
+  const [choice, setChoice] = useState<{ showKey: string; index: number } | null>(null);
   // 並べ替えの結果（カードごと）
-  const [order, setOrder] = useState<{ cardId: string; result: OrderResult } | null>(null);
-  const ordered = order && order.cardId === current?.card.id ? order.result : undefined;
-  const chosen = choice && choice.cardId === current?.card.id ? choice.index : undefined;
+  const [order, setOrder] = useState<{ showKey: string; result: OrderResult } | null>(null);
   const shownAt = useStudy((s) => s.shownAt);
+  // 同じカードがもう一度出たとき（おさらい・学習中のステップ）に前の答えを持ち越さないよう、
+  // 回答の状態は「カード + 表示した時刻」ごとに持つ
+  const showKey = current ? `${current.card.id}:${shownAt}` : '';
+  const ordered = order && order.showKey === showKey ? order.result : undefined;
+  const chosen = choice && choice.showKey === showKey ? choice.index : undefined;
   const typeAnswer = useSettings((s) => s.typeAnswer);
   const updateSettings = useSettings((s) => s.update);
   // 入力した答えと答え合わせの結果（カードごと）
   const [typed, setTyped] = useState<{
-    cardId: string;
+    showKey: string;
     answer: string;
     check: AnswerCheck;
     verdict: AnswerVerdict;
   } | null>(null);
-  const typedNow = typed && typed.cardId === current?.card.id ? typed : null;
+  const typedNow = typed && typed.showKey === showKey ? typed : null;
 
   // ページを開いたら今日のキューで始める
   useEffect(() => {
@@ -203,8 +206,7 @@ export default function StudyPage() {
     if (st === 'idle' || st === 'done') void useStudy.getState().start();
   }, []);
 
-  // カードが変わったら、設定に応じて読み上げる
-  const cardId = current?.card.id;
+  // カードを表示したら（同じカードの再表示も含む）、設定に応じて読み上げる
   useEffect(() => {
     const cur = useStudy.getState().current;
     const text = cur && speakText(cur.item.item);
@@ -216,7 +218,7 @@ export default function StudyPage() {
       void speak(text, { lang: cur.lang, rate: speechRate, voiceURI });
     }
     return () => stopSpeaking();
-  }, [cardId, autoSpeak, speechRate, speechVoice]);
+  }, [showKey, autoSpeak, speechRate, speechVoice]);
 
   const isChoice = current?.item.item.type === 'choice';
   const isOrder = current?.item.item.type === 'order';
@@ -370,7 +372,7 @@ export default function StudyPage() {
                     出題しない
                   </button>
                 </div>
-                <div className="px-4 py-8 sm:px-8 sm:py-10" key={current.card.id}>
+                <div className="px-4 py-8 sm:px-8 sm:py-10" key={showKey}>
                   <CardFace
                     record={current.item}
                     template={current.card.template}
@@ -378,13 +380,13 @@ export default function StudyPage() {
                     side="front"
                     chosen={chosen}
                     onChoose={(index) => {
-                      setChoice({ cardId: current.card.id, index });
+                      setChoice({ showKey, index });
                       reveal();
                     }}
                     ordered={ordered}
                     seed={`${current.card.id}:${current.card.reps}`}
                     onOrder={(result) => {
-                      setOrder({ cardId: current.card.id, result });
+                      setOrder({ showKey, result });
                       reveal();
                     }}
                   />
@@ -399,7 +401,7 @@ export default function StudyPage() {
                       onSubmit={(answer) => {
                         const check = checkAnswer(answer, expected);
                         setTyped({
-                          cardId: current.card.id,
+                          showKey,
                           answer,
                           check,
                           verdict: check.verdict,
@@ -445,7 +447,7 @@ export default function StudyPage() {
                   </Button>
                 </div>
               )}
-              {revealed && <AiAssistPanel key={current.card.id} card={current.card} />}
+              {revealed && <AiAssistPanel key={showKey} card={current.card} />}
             </div>
           </div>
           <div className="pb-safe shrink-0 border-t border-slate-200 bg-slate-50/90 backdrop-blur-md dark:border-slate-800 dark:bg-slate-950/90">

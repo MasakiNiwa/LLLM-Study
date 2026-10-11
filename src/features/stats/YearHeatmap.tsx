@@ -1,4 +1,4 @@
-import { useMemo, useState } from 'react';
+import { useEffect, useMemo, useRef, useState } from 'react';
 import { cn } from '@/lib/utils/cn';
 import { addDays, parseDayKey } from '@/lib/srs/day';
 import { YEAR_WEEKS, yearStart } from '@/lib/data/stats';
@@ -17,6 +17,12 @@ function dayLabel(day: string): string {
  */
 export function YearHeatmap({ today, year }: { today: string; year: Record<string, number> }) {
   const [selected, setSelected] = useState<string | null>(null);
+  const scrollRef = useRef<HTMLDivElement>(null);
+  // 最初だけ今日の側（右端）までスクロールする（日を選んだときに戻されないように）
+  useEffect(() => {
+    const el = scrollRef.current;
+    if (el) el.scrollLeft = el.scrollWidth;
+  }, []);
   const start = yearStart(today);
   const weeks = useMemo(
     () =>
@@ -35,17 +41,12 @@ export function YearHeatmap({ today, year }: { today: string; year: Record<strin
 
   return (
     <div className="space-y-2">
-      <div
-        className="flex overflow-x-auto p-1"
-        ref={(el) => {
-          if (el) el.scrollLeft = el.scrollWidth;
-        }}
-      >
+      <div className="flex overflow-x-auto p-1" ref={scrollRef}>
         <div
           // スマホは 1 マス 12px で横スクロール、PC は幅いっぱいに 1 年ぶんを並べる
           className="grid w-max min-w-full shrink-0 gap-[2px] [--cell:0.75rem] md:[--cell:0.5rem]"
           style={{ gridTemplateColumns: `auto repeat(${YEAR_WEEKS}, minmax(var(--cell), 1fr))` }}
-          role="img"
+          role="group"
           aria-label={`この 1 年で ${studied} 日、合計 ${total} 回学習しました`}
         >
           <span />

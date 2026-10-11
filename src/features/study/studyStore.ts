@@ -15,6 +15,7 @@ import { useAiFocus } from '@/features/ai/focusStore';
 import { getPersona, reactionText } from '@/features/ai/personas';
 import { useSettings } from '@/features/settings/settingsStore';
 import { setItemSuspended } from './cardActions';
+import { refreshAppBadge } from './appBadge';
 import {
   LEARN_AHEAD_MS,
   loadPracticeCards,
@@ -125,6 +126,8 @@ export const useStudy = create<StudyState>()((set, get) => {
       rest.shift();
     }
     set({ queue: [], current: null, revealed: false, status: 'done' });
+    // 学習を終えたらアイコンの数字も更新する（アプリを閉じても古い数字が残らないように）
+    void refreshAppBadge();
     useAiFocus.getState().setStudyCard(null, false);
   };
 

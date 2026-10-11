@@ -22,13 +22,30 @@ export function detectDelimiter(text: string): '\t' | ',' {
   return text.includes('\t') ? '\t' : ',';
 }
 
-/** CSV・TSV を行と列に分ける（ダブルクォートで囲んだ値の中の区切り・改行・"" に対応） */
-export function parseTable(text: string, delimiter = detectDelimiter(text)): string[][] {
-  const rows: string[][] = [];
+export interface TableRow {
+  cells: string[];
+  /** 元のテキストで何行目から始まるか（1 始まり。エラーの場所を示すのに使う） */
+  line: number;
+}
+
+/**
+ * CSV・TSV を行と列に分ける（ダブルクォートで囲んだ値の中の区切り・改行・"" に対応）。
+ * 空行と、Anki の書き出しに付く「#separator:tab」などの設定行は飛ばす。
+ */
+export function parseTableRows(text: string, delimiter = detectDelimiter(text)): TableRow[] {
+  const rows: TableRow[] = [];
   let row: string[] = [];
   let field = '';
   let quoted = false;
+  let line = 1;
+  let rowLine = 1;
   const src = text.replace(/^\uFEFF/, '');
+  const endRow = () => {
+    row.push(field);
+    rows.push({ cells: row, line: rowLine });
+    row = [];
+    field = '';
+  };
   for (let i = 0; i < src.length; i++) {
     const ch = src[i];
     if (quoted) {
@@ -37,7 +54,10 @@ export function parseTable(text: string, delimiter = detectDelimiter(text)): str
           field += '"';
           i++;
         } else quoted = false;
-      } else field += ch;
+      } else {
+        if (ch === '\n') line++;
+        field += ch;
+      }
     } else if (ch === '"' && field === '') {
       quoted = true;
     } else if (ch === delimiter) {
@@ -45,27 +65,31 @@ export function parseTable(text: string, delimiter = detectDelimiter(text)): str
       field = '';
     } else if (ch === '\n' || ch === '\r') {
       if (ch === '\r' && src[i + 1] === '\n') i++;
-      row.push(field);
-      rows.push(row);
-      row = [];
-      field = '';
+      endRow();
+      line++;
+      rowLine = line;
     } else field += ch;
   }
-  row.push(field);
-  rows.push(row);
-  return (
-    rows
-      .map((r) => r.map(cleanCell))
-      // 空行と、Anki の書き出しに付く「#separator:tab」などの設定行は飛ばす
-      .filter((r) => r.some((c) => c !== '') && !/^#[a-z ]+:/i.test(r[0] ?? ''))
-  );
+  endRow();
+  return rows
+    .map((r) => ({ ...r, cells: r.cells.map(cleanCell) }))
+    .filter((r) => r.cells.some((c) => c !== '') && !/^#[a-z ]+:/i.test(r.cells[0] ?? ''));
 }
+
+/** CSV・TSV を行と列に分ける（行番号が要らないとき） */
+export function parseTable(text: string, delimiter = detectDelimiter(text)): string[][] {
+  return parseTableRows(text, delimiter).map((r) => r.cells);
+}
+
+/** Anki などが書き出す HTML のタグ（「List<String>」のような普通の文字は消さない） */
+const HTML_TAG =
+  /<\/?(?:b|i|u|s|em|strong|span|div|p|font|sup|sub|ruby|rb|rt|rp|img|a|li|ul|ol|hr|code|mark|small|big|h[1-6])\b[^>]*>/gi;
 
 /** セルの HTML（Anki の書き出しなど）を取り除いて整える */
 function cleanCell(value: string): string {
   return value
     .replace(/<br\s*\/?>/gi, '\n')
-    .replace(/<[^>]+>/g, '')
+    .replace(HTML_TAG, '')
     .replace(/&nbsp;/g, ' ')
     .replace(/&lt;/g, '<')
     .replace(/&gt;/g, '>')
@@ -91,16 +115,22 @@ function splitMeanings(value: string): string[] {
     .slice(0, 8);
 }
 
-/** 表を教材パックにする。検証結果は JSON の取り込みと同じ形で返す */
-export function tableToPack(rows: string[][], options: TableOptions): ParseResult {
+/**
+ * 表を教材パックにする。検証結果は JSON の取り込みと同じ形で返す。
+ * lines を渡すと、エラーの場所を元のテキストの行番号で示す（無ければ表の何行目か）。
+ */
+export function tableToPack(
+  rows: string[][],
+  options: TableOptions,
+  lines?: number[],
+): ParseResult {
   const first = options.header ? 1 : 0;
-  // 表の何行目か（1 始まり）を覚えておき、エラーの場所を行で示す
   const usable = rows
-    .map((r, i) => ({ r, line: i + 1 }))
+    .map((r, i) => ({ r, line: lines?.[i] ?? i + 1 }))
     .slice(first)
     .filter(({ r }) => (r[0] ?? '') !== '' && (r[1] ?? '') !== '');
   const skipped = rows.length - first - usable.length;
-  const lines = usable.map((u) => u.line);
+  const itemLines = usable.map((u) => u.line);
   const used = new Map<string, number>();
   const items: StudyItem[] = usable.map(({ r }) => {
     const [front, back, extra] = r;
@@ -152,7 +182,7 @@ export function tableToPack(rows: string[][], options: TableOptions): ParseResul
       ok: false,
       error: '表の内容に問題があります',
       issues: result.error.issues.slice(0, 50).map((i) => ({
-        path: describePath(i.path, lines),
+        path: describePath(i.path, itemLines),
         message: i.message,
       })),
     };

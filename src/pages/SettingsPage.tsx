@@ -25,6 +25,7 @@ import { getVoices, isSpeechSupported, speak } from '@/lib/speech/tts';
 import { errorMessage, formatBytes } from '@/lib/utils/format';
 import { CUSTOM_PERSONA_ID } from '@/features/ai/personas';
 import { PersonaPicker } from '@/features/ai/PersonaPicker';
+import { refreshAppBadge } from '@/features/study/appBadge';
 import { useChat } from '@/features/chat/chatStore';
 import { useEngine } from '@/features/engine/engineStore';
 import { useLibrary } from '@/features/library/libraryStore';
@@ -555,7 +556,14 @@ export default function SettingsPage() {
             htmlFor="app-badge"
             hint="ホーム画面に追加したとき、アプリのアイコンに今日の残りを数字で表示します（対応している端末のみ）"
           >
-            <Switch id="app-badge" checked={s.appBadge} onChange={(v) => update({ appBadge: v })} />
+            <Switch
+              id="app-badge"
+              checked={s.appBadge}
+              onChange={(v) => {
+                update({ appBadge: v });
+                void refreshAppBadge();
+              }}
+            />
           </Field>
         </Section>
 
