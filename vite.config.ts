@@ -26,6 +26,10 @@ export default defineConfig({
       injectRegister: false,
       includeAssets: ['favicon.svg', 'icons/apple-touch-icon.png'],
       manifest: {
+        // アプリを見分ける ID。省略すると start_url から決まるが、Android の Chrome が
+        // 「インストール済み」と誤って覚えてしまい追加できなくなることがあったため、明示する。
+        // （変えると別のアプリとして扱われるので、今後は変えない）
+        id: 'lllm-study',
         name: 'ローカルLLM学習アプリ',
         short_name: 'LLLM Study',
         description: '自分のペースで使えるローカルLLMタイプの学習アプリ',
