@@ -1,0 +1,109 @@
+import { useState } from 'react';
+import { CheckCircle2, CircleDot, Loader2, Sparkles, XCircle } from 'lucide-react';
+import { toast } from 'sonner';
+import { Button } from '@/components/ui/Button';
+import type { CardRecord } from '@/lib/db/types';
+import type { AnswerCheck, AnswerVerdict } from '@/lib/srs/answerCheck';
+import { cn } from '@/lib/utils/cn';
+import { errorMessage } from '@/lib/utils/format';
+import { useAiBusy } from '@/features/ai/aiBusy';
+import { judgePrompt, parseJudge, type JudgeResult } from '@/features/ai/judge';
+import { runOneshot } from '@/features/ai/oneshot';
+import { getPersona } from '@/features/ai/personas';
+import { cardForLlm } from '@/features/ai/studyContext';
+import { useEngine } from '@/features/engine/engineStore';
+import { useSettings } from '@/features/settings/settingsStore';
+
+const VIEW: Record<AnswerVerdict, { label: string; icon: typeof CheckCircle2; className: string }> =
+  {
+    correct: {
+      label: '正解',
+      icon: CheckCircle2,
+      className: 'bg-emerald-50 text-emerald-800 dark:bg-emerald-950/40 dark:text-emerald-200',
+    },
+    close: {
+      label: '惜しい',
+      icon: CircleDot,
+      className: 'bg-amber-50 text-amber-800 dark:bg-amber-950/40 dark:text-amber-200',
+    },
+    wrong: {
+      label: '不正解',
+      icon: XCircle,
+      className: 'bg-rose-50 text-rose-800 dark:bg-rose-950/40 dark:text-rose-200',
+    },
+  };
+
+interface AnswerResultProps {
+  card: CardRecord;
+  answer: string;
+  check: AnswerCheck;
+  /** AI の判定で評価のおすすめが変わったとき */
+  onJudged: (verdict: AnswerVerdict) => void;
+}
+
+/** 入力した答えの答え合わせの結果。プログラムの判定に、必要なら AI の判定を重ねる */
+export function AnswerResult({ card, answer, check, onJudged }: AnswerResultProps) {
+  const ready = useEngine((s) => s.status === 'ready');
+  const busy = useAiBusy((s) => s.task !== null);
+  const personaId = useSettings((s) => s.persona);
+  const custom = useSettings((s) => s.customPersona);
+  const [judging, setJudging] = useState(false);
+  const [judge, setJudge] = useState<JudgeResult | null>(null);
+  const verdict = judge?.verdict ?? check.verdict;
+  const view = VIEW[verdict];
+  const Icon = view.icon;
+
+  const askAi = async () => {
+    const json = await cardForLlm(card, { revealed: true });
+    if (!json) return;
+    setJudging(true);
+    try {
+      const r = await runOneshot({
+        task: 'assist',
+        prompt: judgePrompt(json, answer, check.expected),
+        maxOutputTokens: 200,
+      });
+      const parsed = parseJudge(r.text);
+      if (!parsed) throw new Error('AI の判定を読み取れませんでした');
+      setJudge(parsed);
+      onJudged(parsed.verdict);
+    } catch (e) {
+      toast.error('AI に判定してもらえませんでした', { description: errorMessage(e) });
+    } finally {
+      setJudging(false);
+    }
+  };
+
+  return (
+    <div className={cn('mt-6 space-y-2 rounded-xl px-4 py-3 text-sm', view.className)}>
+      <div className="flex flex-wrap items-center gap-x-3 gap-y-1">
+        <span className="inline-flex items-center gap-1 font-semibold">
+          <Icon className="size-4" />
+          {view.label}
+          {judge && <span className="text-xs font-normal opacity-75">（AI の判定）</span>}
+        </span>
+        <span className="min-w-0 break-words">
+          あなたの答え: <strong>{answer || '（空欄）'}</strong>
+        </span>
+      </div>
+      {verdict !== 'correct' && !judge && <p className="opacity-90">正解: {check.expected}</p>}
+      {judge && (
+        <p>
+          <span aria-hidden>{getPersona(personaId, custom).emoji} </span>
+          {judge.comment}
+        </p>
+      )}
+      {check.verdict !== 'correct' && !judge && answer.trim() && ready && (
+        <Button
+          size="sm"
+          variant="secondary"
+          disabled={judging || busy}
+          onClick={() => void askAi()}
+        >
+          {judging ? <Loader2 className="animate-spin" /> : <Sparkles />}
+          言い換えかも？ AI に判定してもらう
+        </Button>
+      )}
+    </div>
+  );
+}

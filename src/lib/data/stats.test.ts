@@ -1,6 +1,6 @@
 import { describe, expect, it } from 'vitest';
 import type { ReviewRecord } from '@/lib/db/types';
-import { summarizeActivity, summarizeForecast } from './stats';
+import { summarizeActivity, summarizeForecast, summarizeStates } from './stats';
 
 describe('stats', () => {
   it('日ごとの活動を集計する', () => {
@@ -25,5 +25,21 @@ describe('stats', () => {
       4,
     );
     expect(f).toEqual({ '2026-10-11': 1, '2026-10-13': 1 });
+  });
+});
+
+describe('summarizeStates', () => {
+  it('間隔 21 日以上を定着として数え、停止中は除く', () => {
+    const c = (state: 0 | 1 | 2 | 3, scheduled_days = 0, suspended: 0 | 1 = 0) => ({
+      state,
+      scheduled_days,
+      suspended,
+    });
+    expect(summarizeStates([c(0), c(1), c(3), c(2, 5), c(2, 21), c(2, 40), c(2, 40, 1)])).toEqual({
+      newCards: 1,
+      learning: 2,
+      young: 1,
+      mature: 2,
+    });
   });
 });

@@ -1,5 +1,5 @@
 import { useEffect, useMemo, useState } from 'react';
-import { ChevronDown, RotateCcw, Search, Trash2 } from 'lucide-react';
+import { ChevronDown, Pencil, Plus, RotateCcw, Search, Trash2 } from 'lucide-react';
 import { toast } from 'sonner';
 import { Button } from '@/components/ui/Button';
 import { Card } from '@/components/ui/Card';
@@ -14,10 +14,11 @@ import {
   uninstallPack,
 } from '@/lib/packs/install';
 import { itemAnswer, itemSearchText, itemTitle } from '@/lib/packs/itemText';
-import type { ItemType } from '@/lib/packs/schema';
+import type { ItemType, StudyItem } from '@/lib/packs/schema';
 import { ITEM_TYPE_LABELS, TEMPLATES } from '@/lib/packs/templates';
 import { cn } from '@/lib/utils/cn';
 import { errorMessage } from '@/lib/utils/format';
+import { CardEditor } from './CardEditor';
 import { useLibrary, type PackWithStats } from './libraryStore';
 
 function StatsBar({ pack }: { pack: PackWithStats }) {
@@ -39,12 +40,22 @@ function StatsBar({ pack }: { pack: PackWithStats }) {
   );
 }
 
-function ItemBrowser({ packId }: { packId: string }) {
+function ItemBrowser({
+  packId,
+  version,
+  onEdit,
+}: {
+  packId: string;
+  /** パックが更新されたら読み直す */
+  version: number;
+  /** 指定すると項目をタップして編集できる（マイカード） */
+  onEdit?: (item: StudyItem) => void;
+}) {
   const [items, setItems] = useState<ItemRecord[] | null>(null);
   const [query, setQuery] = useState('');
   useEffect(() => {
     void db.items.where('packId').equals(packId).sortBy('order').then(setItems);
-  }, [packId]);
+  }, [packId, version]);
   const filtered = useMemo(() => {
     const q = query.trim().toLowerCase();
     return (items ?? []).filter((i) => !q || itemSearchText(i.item).includes(q)).slice(0, 200);
@@ -62,9 +73,27 @@ function ItemBrowser({ packId }: { packId: string }) {
       </div>
       <ul className="max-h-72 divide-y divide-slate-100 overflow-y-auto rounded-xl border border-slate-200 dark:divide-slate-800 dark:border-slate-800">
         {filtered.map((i) => (
-          <li key={i.key} className="px-3 py-2 text-sm">
-            <div className="truncate font-medium">{itemTitle(i.item)}</div>
-            <div className="truncate text-xs text-slate-500">{itemAnswer(i.item)}</div>
+          <li key={i.key} className="text-sm">
+            {onEdit ? (
+              <button
+                type="button"
+                onClick={() => onEdit(i.item)}
+                className="flex w-full items-center gap-2 px-3 py-2 text-left hover:bg-slate-50 dark:hover:bg-slate-800/50"
+              >
+                <span className="min-w-0 flex-1">
+                  <span className="block truncate font-medium">{itemTitle(i.item)}</span>
+                  <span className="block truncate text-xs text-slate-500">
+                    {itemAnswer(i.item)}
+                  </span>
+                </span>
+                <Pencil className="size-4 shrink-0 text-slate-400" />
+              </button>
+            ) : (
+              <div className="px-3 py-2">
+                <div className="truncate font-medium">{itemTitle(i.item)}</div>
+                <div className="truncate text-xs text-slate-500">{itemAnswer(i.item)}</div>
+              </div>
+            )}
           </li>
         ))}
         {items && filtered.length === 0 && (
@@ -75,7 +104,7 @@ function ItemBrowser({ packId }: { packId: string }) {
   );
 }
 
-function PackCard({ pack }: { pack: PackWithStats }) {
+function PackCard({ pack, onEdit }: { pack: PackWithStats; onEdit: (item: StudyItem) => void }) {
   const refresh = useLibrary((s) => s.refresh);
   const [open, setOpen] = useState(false);
   const [confirm, setConfirm] = useState<null | 'reset' | 'delete'>(null);
@@ -112,6 +141,7 @@ function PackCard({ pack }: { pack: PackWithStats }) {
             <div className="text-xs text-slate-500 dark:text-slate-400">
               {pack.itemCount} 項目 · {pack.itemTypes.map((t) => ITEM_TYPE_LABELS[t]).join('・')}
               {pack.origin === 'sample' && ' · サンプル'}
+              {pack.origin === 'user' && ' · 自分で作ったカード'}
             </div>
           </div>
           <StatsBar pack={pack} />
@@ -167,7 +197,11 @@ function PackCard({ pack }: { pack: PackWithStats }) {
           </div>
           <div className="space-y-2">
             <h3 className="text-sm font-medium">項目</h3>
-            <ItemBrowser packId={pack.id} />
+            <ItemBrowser
+              packId={pack.id}
+              version={pack.updatedAt}
+              onEdit={pack.origin === 'user' ? onEdit : undefined}
+            />
           </div>
           <div className="flex flex-wrap gap-x-4 gap-y-1 text-xs text-slate-500">
             {pack.level && <span>レベル: {pack.level}</span>}
@@ -218,13 +252,20 @@ function PackCard({ pack }: { pack: PackWithStats }) {
 export function PackList({ empty }: { empty: React.ReactNode }) {
   const packs = useLibrary((s) => s.packs);
   const loaded = useLibrary((s) => s.loaded);
+  const [editor, setEditor] = useState<{ item: StudyItem | null } | null>(null);
   if (!loaded) return null;
-  if (packs.length === 0) return <>{empty}</>;
   return (
     <div className="space-y-3">
-      {packs.map((p) => (
-        <PackCard key={p.id} pack={p} />
-      ))}
+      <div className="flex justify-end">
+        <Button size="sm" variant="secondary" onClick={() => setEditor({ item: null })}>
+          <Plus />
+          カードを作る
+        </Button>
+      </div>
+      {packs.length === 0
+        ? empty
+        : packs.map((p) => <PackCard key={p.id} pack={p} onEdit={(item) => setEditor({ item })} />)}
+      <CardEditor open={editor !== null} editing={editor?.item} onClose={() => setEditor(null)} />
     </div>
   );
 }

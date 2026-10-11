@@ -34,6 +34,7 @@ import {
   NEW_CARD_ORDER_LABELS,
   REACTION_LABELS,
   THEME_LABELS,
+  TYPE_ANSWER_LABELS,
 } from '@/features/settings/labels';
 import {
   useSettings,
@@ -41,6 +42,7 @@ import {
   type NewCardOrder,
   type ReactionMode,
   type ThemeSetting,
+  type TypeAnswerMode,
 } from '@/features/settings/settingsStore';
 import { useStudy } from '@/features/study/studyStore';
 
@@ -230,6 +232,22 @@ export default function SettingsPage() {
               onChange={(v) => update({ dayStartHour: Number(v) })}
               options={[0, 1, 2, 3, 4, 5, 6].map((h) => ({ value: String(h), label: `${h}:00` }))}
               className="w-28"
+            />
+          </Field>
+          <Field
+            label="答えを入力して答え合わせ"
+            htmlFor="type-answer"
+            hint="プログラムが判定し、評価のおすすめを示します（学習画面の ⌨ ボタンでも切り替え）"
+            stacked
+          >
+            <Select
+              id="type-answer"
+              value={s.typeAnswer}
+              onChange={(v) => update({ typeAnswer: v as TypeAnswerMode })}
+              options={(Object.keys(TYPE_ANSWER_LABELS) as TypeAnswerMode[]).map((v) => ({
+                value: v,
+                label: TYPE_ANSWER_LABELS[v],
+              }))}
             />
           </Field>
           <Field

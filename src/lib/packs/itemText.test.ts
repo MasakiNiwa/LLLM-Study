@@ -1,5 +1,12 @@
 import { describe, expect, it } from 'vitest';
-import { clozeAnswers, clozeFull, itemAnswer, itemForLlm, itemSearchText } from './itemText';
+import {
+  clozeAnswers,
+  clozeFull,
+  expectedAnswer,
+  itemAnswer,
+  itemForLlm,
+  itemSearchText,
+} from './itemText';
 
 describe('itemText', () => {
   it('穴埋め', () => {
@@ -30,6 +37,21 @@ describe('itemText', () => {
       choices: ['x', 'y'],
       answer: 1,
       correct_choice: 'y',
+    });
+  });
+
+  it('答え合わせの正解（意味は括弧や区切りを外した候補も含む）', () => {
+    const item = {
+      id: 'a',
+      type: 'vocab' as const,
+      term: 'take',
+      meanings: ['取る', '（時間が）かかる', '連れて行く・持って行く'],
+    };
+    expect(expectedAnswer(item, 'recall')).toEqual({ accepted: ['take'] });
+    const r = expectedAnswer(item, 'recognize') as { accepted: string[] };
+    expect(r.accepted).toEqual(expect.arrayContaining(['取る', 'かかる', '持って行く']));
+    expect(expectedAnswer({ id: 'c', type: 'cloze', text: 'a {{b}} c {{d}}' }, 'basic')).toEqual({
+      blanks: ['b', 'd'],
     });
   });
 });

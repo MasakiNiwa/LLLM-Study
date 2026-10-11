@@ -3,6 +3,7 @@ import {
   CalendarDays,
   Eye,
   House,
+  Keyboard,
   Library,
   Loader2,
   LogOut,
@@ -15,16 +16,21 @@ import { Button } from '@/components/ui/Button';
 import { Card } from '@/components/ui/Card';
 import { Progress } from '@/components/ui/Progress';
 import type { GradeValue } from '@/lib/db/types';
-import { speakText } from '@/lib/packs/itemText';
+import { answersInTargetLanguage, expectedAnswer, speakText } from '@/lib/packs/itemText';
+import { checkAnswer, type AnswerCheck, type AnswerVerdict } from '@/lib/srs/answerCheck';
 import { speak, stopSpeaking } from '@/lib/speech/tts';
 import { formatDuration } from '@/lib/utils/format';
 import { getPersona } from '@/features/ai/personas';
 import { CardFace } from '@/features/items/ItemCard';
 import { useSettings } from '@/features/settings/settingsStore';
 import { AiAssistPanel } from '@/features/study/AiAssistPanel';
+import { AnswerInput } from '@/features/study/AnswerInput';
+import { AnswerResult } from '@/features/study/AnswerResult';
 import { RatingBar } from '@/features/study/RatingBar';
 import { ReactionBubble } from '@/features/study/ReactionBubble';
 import { useStudy } from '@/features/study/studyStore';
+
+const VERDICT_GRADE: Record<AnswerVerdict, GradeValue> = { correct: 3, close: 2, wrong: 1 };
 
 const STATE_BADGE = {
   0: { label: '新規', className: 'bg-sky-100 text-sky-800 dark:bg-sky-900/40 dark:text-sky-200' },
@@ -130,6 +136,16 @@ export default function StudyPage() {
   const [choice, setChoice] = useState<{ cardId: string; index: number } | null>(null);
   const chosen = choice && choice.cardId === current?.card.id ? choice.index : undefined;
   const shownAt = useStudy((s) => s.shownAt);
+  const typeAnswer = useSettings((s) => s.typeAnswer);
+  const updateSettings = useSettings((s) => s.update);
+  // 入力した答えと答え合わせの結果（カードごと）
+  const [typed, setTyped] = useState<{
+    cardId: string;
+    answer: string;
+    check: AnswerCheck;
+    verdict: AnswerVerdict;
+  } | null>(null);
+  const typedNow = typed && typed.cardId === current?.card.id ? typed : null;
 
   // ページを開いたら今日のキューで始める
   useEffect(() => {
@@ -149,12 +165,20 @@ export default function StudyPage() {
   }, [cardId, autoSpeak, speechRate, speechVoice]);
 
   const isChoice = current?.item.item.type === 'choice';
+  const expected = current ? expectedAnswer(current.item.item, current.card.template) : undefined;
+  const shouldType =
+    !!current &&
+    !!expected &&
+    typeAnswer !== 'off' &&
+    (typeAnswer === 'all' || answersInTargetLanguage(current.item.item, current.card.template));
   const recommended: GradeValue | undefined =
     isChoice && chosen !== undefined && current?.item.item.type === 'choice'
       ? chosen === current.item.item.answer
         ? 3
         : 1
-      : undefined;
+      : typedNow
+        ? VERDICT_GRADE[typedNow.verdict]
+        : undefined;
 
   // キーボード操作: Space / Enter で答えを見る、1〜4 で評価、Ctrl+Z で取り消し
   useEffect(() => {
@@ -200,6 +224,22 @@ export default function StudyPage() {
         actions={
           status === 'studying' && (
             <>
+              <Button
+                size="icon"
+                variant={typeAnswer !== 'off' ? 'secondary' : 'ghost'}
+                onClick={() =>
+                  updateSettings({ typeAnswer: typeAnswer === 'off' ? 'recall' : 'off' })
+                }
+                aria-pressed={typeAnswer !== 'off'}
+                aria-label="答えを入力して答え合わせ"
+                title={
+                  typeAnswer !== 'off'
+                    ? '答えの入力: オン（単語・フレーズを答えるカードと穴埋め）'
+                    : '答えの入力: オフ'
+                }
+              >
+                <Keyboard />
+              </Button>
               <Button
                 size="icon"
                 variant="ghost"
@@ -265,6 +305,33 @@ export default function StudyPage() {
                       reveal();
                     }}
                   />
+                  {shouldType && !revealed && expected && (
+                    <AnswerInput
+                      targetLanguage={answersInTargetLanguage(
+                        current.item.item,
+                        current.card.template,
+                      )}
+                      blanks={'blanks' in expected ? expected.blanks.length : undefined}
+                      onSubmit={(answer) => {
+                        const check = checkAnswer(answer, expected);
+                        setTyped({
+                          cardId: current.card.id,
+                          answer,
+                          check,
+                          verdict: check.verdict,
+                        });
+                        reveal();
+                      }}
+                    />
+                  )}
+                  {revealed && typedNow && (
+                    <AnswerResult
+                      card={current.card}
+                      answer={typedNow.answer}
+                      check={typedNow.check}
+                      onJudged={(verdict) => setTyped({ ...typedNow, verdict })}
+                    />
+                  )}
                   {revealed && (
                     <div className="mt-6 animate-fade-in border-t border-dashed border-slate-200 pt-6 dark:border-slate-700">
                       <CardFace
@@ -298,13 +365,13 @@ export default function StudyPage() {
                 </p>
               ) : (
                 <Button
-                  variant="primary"
+                  variant={shouldType ? 'secondary' : 'primary'}
                   size="lg"
                   className="h-14 w-full text-base"
                   onClick={reveal}
                 >
                   <Eye />
-                  答えを見る
+                  {shouldType ? 'わからない・答えを見る' : '答えを見る'}
                 </Button>
               )}
             </div>

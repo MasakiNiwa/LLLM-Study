@@ -12,6 +12,7 @@
 | **comlink** | 4.4.2 | Apache-2.0 | https://github.com/GoogleChromeLabs/comlink |
 | **date-fns** | 4.4.0 | MIT | https://github.com/date-fns/date-fns |
 | **dexie** | 4.4.6 | Apache-2.0 | https://github.com/dexie/Dexie.js |
+| **fastest-levenshtein** | 1.0.16 | MIT | https://github.com/ka-weihe/fastest-levenshtein |
 | **lucide-react** | 1.55.0 | ISC | https://github.com/lucide-icons/lucide |
 | **react** | 19.3.0 | MIT | https://github.com/react/react |
 | **react-dom** | 19.3.0 | MIT | https://github.com/react/react |
