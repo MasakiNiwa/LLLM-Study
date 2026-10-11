@@ -9,6 +9,7 @@ import { useLibrary } from '@/features/library/libraryStore';
 import { BarChart } from './BarChart';
 import { StateBar } from './StateBar';
 import { YearHeatmap } from './YearHeatmap';
+import { WeeklyReview } from './WeeklyReview';
 
 const DAYS = 30;
 
@@ -100,6 +101,12 @@ export function StatsPanel({ today }: { today: string }) {
   return (
     <div className="space-y-4">
       {picker}
+      <WeeklyReview
+        key={key}
+        stats={stats}
+        packId={scope || undefined}
+        scope={packs.find((p) => p.id === scope)?.title ?? 'すべての教材'}
+      />
       <div className="grid grid-cols-2 gap-2 sm:grid-cols-4">
         <Tile label="学習した日" value={`${stats.studyDays}`} />
         <Tile

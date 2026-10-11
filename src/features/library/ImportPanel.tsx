@@ -1,16 +1,53 @@
 import { useRef, useState } from 'react';
-import { AlertTriangle, CheckCircle2, ClipboardPaste, Eraser, FileUp, Loader2 } from 'lucide-react';
+import {
+  AlertTriangle,
+  CheckCircle2,
+  ClipboardPaste,
+  Eraser,
+  FileJson,
+  FileUp,
+  Loader2,
+  Table2,
+} from 'lucide-react';
 import { toast } from 'sonner';
 import { Button } from '@/components/ui/Button';
 import { Card } from '@/components/ui/Card';
+import { Chip } from '@/components/ui/Chip';
 import type { ParseResult } from '@/lib/packs/parse';
 import { ITEM_TYPE_LABELS } from '@/lib/packs/templates';
 import { errorMessage } from '@/lib/utils/format';
 import { installParsedPack, parsePackInWorker } from './packActions';
 import { useLibrary } from './libraryStore';
+import { TableImport } from './TableImport';
+
+type ImportMode = 'json' | 'table';
+
+/** 教材の取り込み（教材パックの JSON / 表の CSV・TSV） */
+export function ImportPanel({ onInstalled }: { onInstalled?: () => void }) {
+  const [mode, setMode] = useState<ImportMode>('json');
+  return (
+    <div className="space-y-3">
+      <div className="flex flex-wrap gap-2" role="group" aria-label="取り込む形式">
+        <Chip active={mode === 'json'} onClick={() => setMode('json')}>
+          <FileJson className="mr-1 inline size-4 align-[-3px]" />
+          教材パック（JSON）
+        </Chip>
+        <Chip active={mode === 'table'} onClick={() => setMode('table')}>
+          <Table2 className="mr-1 inline size-4 align-[-3px]" />
+          表（CSV・TSV）
+        </Chip>
+      </div>
+      {mode === 'json' ? (
+        <JsonImport onInstalled={onInstalled} />
+      ) : (
+        <TableImport onInstalled={onInstalled} />
+      )}
+    </div>
+  );
+}
 
 /** 外部 AI が作った教材（JSON）を貼り付け・ファイルで取り込む */
-export function ImportPanel({ onInstalled }: { onInstalled?: () => void }) {
+function JsonImport({ onInstalled }: { onInstalled?: () => void }) {
   const [text, setText] = useState('');
   const [result, setResult] = useState<ParseResult | null>(null);
   const [checking, setChecking] = useState(false);

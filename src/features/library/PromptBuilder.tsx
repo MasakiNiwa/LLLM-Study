@@ -1,10 +1,11 @@
-import { useMemo, useState, type ReactNode } from 'react';
+import { useMemo, useState } from 'react';
 import { Copy, FileDown, FileJson, Wand2 } from 'lucide-react';
 import { toast } from 'sonner';
 import { Button } from '@/components/ui/Button';
 import { Section } from '@/components/ui/Card';
 import { Field } from '@/components/ui/Field';
 import { Switch } from '@/components/ui/Switch';
+import { Chip } from '@/components/ui/Chip';
 import { ITEM_TYPES, packJsonSchema, type ItemType } from '@/lib/packs/schema';
 import {
   AMOUNT_LABELS,
@@ -83,35 +84,6 @@ const PRESETS: Preset[] = [
     types: [],
   },
 ];
-
-function Chip({
-  active,
-  onClick,
-  children,
-  title,
-}: {
-  active: boolean;
-  onClick: () => void;
-  children: ReactNode;
-  title?: string;
-}) {
-  return (
-    <button
-      type="button"
-      aria-pressed={active}
-      onClick={onClick}
-      title={title}
-      className={cn(
-        'rounded-xl border px-3 py-1.5 text-sm transition-colors',
-        active
-          ? 'border-accent-500 bg-accent-50 text-accent-800 dark:bg-accent-900/30 dark:text-accent-200'
-          : 'border-slate-300 hover:bg-slate-100 dark:border-slate-700 dark:hover:bg-slate-800',
-      )}
-    >
-      {children}
-    </button>
-  );
-}
 
 /**
  * 外部の高性能 AI（ChatGPT / Claude / Gemini など）に教材を作ってもらうためのプロンプトを組み立てる。
