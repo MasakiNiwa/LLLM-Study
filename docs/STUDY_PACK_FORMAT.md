@@ -39,9 +39,9 @@
 
 | type | 名前 | 内容 |
 | --- | --- | --- |
-| vocab | 単語 | 単語。term（見出し語）と meanings（意味の配列）が必須。reading（IPA）・pos（品詞）・examples（例文と訳）・collocations・synonyms・antonyms・notes は任意 |
+| vocab | 単語 | 単語。term（見出し語）と meanings（意味の配列）が必須。reading（IPA）・pos（品詞）・examples（例文と訳）・collocations・synonyms・antonyms・forms（不規則な活用形。例: took, taken）・notes は任意 |
 | phrase | フレーズ | フレーズ・表現。phrase と meaning が必須。situation（使う場面）・examples・notes は任意 |
-| qa | 一問一答 | 一問一答（どの分野にも使える）。question と answer が必須。explanation・hints は任意 |
+| qa | 一問一答 | 一問一答（どの分野にも使える）。question と answer が必須。accepted（別解・略称・表記揺れなど、正解にしてよい答え）・explanation・hints は任意 |
 | cloze | 穴埋め | 穴埋め。text の中で答えにする部分を {{ }} で囲む（例: "I look {{forward}} to it."）。translation・hint・explanation は任意 |
 | choice | 選択問題 | 選択問題。question・choices（2〜6 個）・answer（正解の番号。0 始まり）が必須。explanation は任意 |
 | order | 並べ替え | 並べ替え。answer（正しい文）が必須。chunks（並べ替える語句を正しい順に。日本語など空白で区切らない言語では必須）・prompt（訳や問題文）・explanation は任意 |
@@ -404,6 +404,16 @@
                   "minLength": 1,
                   "maxLength": 300
                 }
+              },
+              "forms": {
+                "description": "活用形・変化形（例: took, taken）。不規則なものだけでよい。AI 例文クイズの答えの確認に使う",
+                "maxItems": 12,
+                "type": "array",
+                "items": {
+                  "type": "string",
+                  "minLength": 1,
+                  "maxLength": 300
+                }
               }
             },
             "required": [
@@ -497,6 +507,16 @@
                   "additionalProperties": false,
                   "description": "例文"
                 }
+              },
+              "forms": {
+                "description": "活用した形（例: took part in）。AI 例文クイズの答えの確認に使う",
+                "maxItems": 12,
+                "type": "array",
+                "items": {
+                  "type": "string",
+                  "minLength": 1,
+                  "maxLength": 300
+                }
               }
             },
             "required": [
@@ -558,6 +578,16 @@
                 "minLength": 1,
                 "maxLength": 2000,
                 "description": "答え"
+              },
+              "accepted": {
+                "description": "ほかに正解にしてよい答え（別解・略称・表記揺れ）。答えを入力して答え合わせするときに使う",
+                "maxItems": 10,
+                "type": "array",
+                "items": {
+                  "type": "string",
+                  "minLength": 1,
+                  "maxLength": 300
+                }
               },
               "explanation": {
                 "description": "解説",

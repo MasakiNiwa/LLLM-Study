@@ -23,7 +23,12 @@ import { Button } from '@/components/ui/Button';
 import { Card } from '@/components/ui/Card';
 import { Progress } from '@/components/ui/Progress';
 import type { GradeValue } from '@/lib/db/types';
-import { answersInTargetLanguage, expectedAnswer, speakText } from '@/lib/packs/itemText';
+import {
+  answersInTargetLanguage,
+  expectedAnswer,
+  speakText,
+  speakTiming,
+} from '@/lib/packs/itemText';
 import { checkAnswer, type AnswerCheck, type AnswerVerdict } from '@/lib/srs/answerCheck';
 import { speak, stopSpeaking } from '@/lib/speech/tts';
 import { formatDuration } from '@/lib/utils/format';
@@ -214,19 +219,32 @@ export default function StudyPage() {
     if (st === 'idle' || st === 'done') void useStudy.getState().start();
   }, []);
 
-  // カードを表示したら（同じカードの再表示も含む）、設定に応じて読み上げる
+  // カードを表示したら（同じカードの再表示も含む）、設定に応じて読み上げる。
+  // 読むと答えが分かってしまうもの（穴埋め・並べ替え・単語を答えるカード）は答えを見たあとに読む
   useEffect(() => {
     const cur = useStudy.getState().current;
     const text = cur && speakText(cur.item.item);
     // 聞き取りカードは設定に関係なく、表示したら音声を流す
     const listen = cur?.card.template === 'listen';
-    if (cur && text && (listen || (autoSpeak && cur.card.template !== 'recall'))) {
+    const front = cur && speakTiming(cur.item.item, cur.card.template) === 'front';
+    if (cur && text && (listen || (autoSpeak && front))) {
       // 設定で選ぶ声は英語用なので、ほかの言語の教材では端末の既定の声を使う
       const voiceURI = cur.lang.startsWith('en') ? speechVoice || undefined : undefined;
       void speak(text, { lang: cur.lang, rate: speechRate, voiceURI });
     }
     return () => stopSpeaking();
   }, [showKey, autoSpeak, speechRate, speechVoice]);
+
+  useEffect(() => {
+    if (!revealed || !autoSpeak) return;
+    const cur = useStudy.getState().current;
+    const text = cur && speakText(cur.item.item);
+    if (!cur || !text || cur.card.template === 'listen') return;
+    if (speakTiming(cur.item.item, cur.card.template) !== 'back') return;
+    const voiceURI = cur.lang.startsWith('en') ? speechVoice || undefined : undefined;
+    void speak(text, { lang: cur.lang, rate: speechRate, voiceURI });
+    // 止めるのはカードが変わったとき（上の effect の後片付け）
+  }, [revealed, showKey, autoSpeak, speechRate, speechVoice]);
 
   const isChoice = current?.item.item.type === 'choice';
   const isOrder = current?.item.item.type === 'order';

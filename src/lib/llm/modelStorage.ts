@@ -140,7 +140,8 @@ export async function deleteAllStoredModels(): Promise<void> {
 }
 
 /**
- * ストリームを共通保存領域に書き込む。失敗・中断時は書きかけのファイルを残さない。
+ * ストリームを共通保存領域に書き込む。失敗・中断時は書きかけのファイルを残さず、
+ * 同名のモデルがすでにあった場合はそれを残す（上書きのダウンロードに失敗しても消えない）。
  * （createWritable は一時ファイルに書き、close 時に置き換えるので、他のサイトから途中の状態は見えない）
  */
 export async function saveModelStream(
@@ -157,6 +158,11 @@ export async function saveModelStream(
   void navigator.storage.persist?.().catch(() => false);
 
   await withLock(name, async () => {
+    // 同名のモデルがすでにあるか（上書きに失敗しても、元のモデルは消さない）
+    const existed = await dir.getFileHandle(name).then(
+      () => true,
+      () => false,
+    );
     const handle = await dir.getFileHandle(name, { create: true });
     const writable = await handle.createWritable();
     let written = 0;
@@ -173,7 +179,10 @@ export async function saveModelStream(
         )
         .pipeTo(writable, { signal: options.signal });
     } catch (e) {
-      await dir.removeEntry(name).catch(() => undefined);
+      // 書きかけの内容は捨てる（close する前なら元のファイルは置き換わらない）
+      await writable.abort().catch(() => undefined);
+      // 今回新しく作ったファイルだけを消す。既存のモデル（他のサイトが保存したものを含む）は残す
+      if (!existed) await dir.removeEntry(name).catch(() => undefined);
       throw e;
     }
     await writeMeta(dir, {

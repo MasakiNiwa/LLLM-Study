@@ -238,6 +238,11 @@ function QaFace({ item, side }: FaceProps<QaItem>) {
   return (
     <div className="space-y-4">
       <p className="text-center text-lg font-medium whitespace-pre-line">{item.answer}</p>
+      {item.accepted?.length ? (
+        <p className="text-center text-sm text-slate-500 dark:text-slate-400">
+          別解: {item.accepted.join('・')}
+        </p>
+      ) : null}
       <Explanation text={item.explanation} />
       <Notes text={item.notes} />
     </div>

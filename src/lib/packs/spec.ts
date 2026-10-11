@@ -18,9 +18,9 @@ import { ITEM_TYPE_LABELS } from './templates.ts';
 
 export const ITEM_TYPE_GUIDES: Record<ItemType, string> = {
   vocab:
-    '単語。term（見出し語）と meanings（意味の配列）が必須。reading（IPA）・pos（品詞）・examples（例文と訳）・collocations・synonyms・antonyms・notes は任意',
+    '単語。term（見出し語）と meanings（意味の配列）が必須。reading（IPA）・pos（品詞）・examples（例文と訳）・collocations・synonyms・antonyms・forms（不規則な活用形。例: took, taken）・notes は任意',
   phrase: 'フレーズ・表現。phrase と meaning が必須。situation（使う場面）・examples・notes は任意',
-  qa: '一問一答（どの分野にも使える）。question と answer が必須。explanation・hints は任意',
+  qa: '一問一答（どの分野にも使える）。question と answer が必須。accepted（別解・略称・表記揺れなど、正解にしてよい答え）・explanation・hints は任意',
   cloze:
     '穴埋め。text の中で答えにする部分を {{ }} で囲む（例: "I look {{forward}} to it."）。translation・hint・explanation は任意',
   choice:

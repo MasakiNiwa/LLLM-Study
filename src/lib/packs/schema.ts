@@ -73,6 +73,13 @@ export const VocabItemSchema = z
     collocations: z.array(shortText).max(8).optional().describe('よく使う組み合わせ'),
     synonyms: z.array(shortText).max(8).optional(),
     antonyms: z.array(shortText).max(8).optional(),
+    forms: z
+      .array(shortText)
+      .max(12)
+      .optional()
+      .describe(
+        '活用形・変化形（例: took, taken）。不規則なものだけでよい。AI 例文クイズの答えの確認に使う',
+      ),
   })
   .describe('単語カード');
 
@@ -85,6 +92,11 @@ export const PhraseItemSchema = z
     meaning: shortText.describe('意味（説明の言語）'),
     situation: shortText.optional().describe('使う場面'),
     examples: z.array(ExampleSchema).max(5).optional(),
+    forms: z
+      .array(shortText)
+      .max(12)
+      .optional()
+      .describe('活用した形（例: took part in）。AI 例文クイズの答えの確認に使う'),
   })
   .describe('フレーズカード');
 
@@ -95,6 +107,13 @@ export const QaItemSchema = z
     ...itemBase,
     question: longText.describe('問題'),
     answer: longText.describe('答え'),
+    accepted: z
+      .array(shortText)
+      .max(10)
+      .optional()
+      .describe(
+        'ほかに正解にしてよい答え（別解・略称・表記揺れ）。答えを入力して答え合わせするときに使う',
+      ),
     explanation: longText.optional().describe('解説'),
     hints: z.array(shortText).max(3).optional().describe('ヒント（弱いものから順に）'),
   })

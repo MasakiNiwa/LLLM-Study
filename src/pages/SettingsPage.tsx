@@ -168,7 +168,8 @@ export default function SettingsPage() {
     if (!text) return;
     try {
       const r = await restoreBackup(text);
-      await useChat.getState().clear();
+      // 復元したチャット履歴を表示し直す（clear() は DB まで消してしまうので使わない）
+      await useChat.getState().reload();
       afterDataChange();
       toast.success('バックアップから復元しました', {
         description: `教材 ${r.packs} 件・学習記録 ${r.reviews} 件`,

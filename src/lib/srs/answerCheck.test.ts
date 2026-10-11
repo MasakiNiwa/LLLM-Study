@@ -42,4 +42,9 @@ describe('checkAnswer', () => {
     );
     expect(checkAnswer('forward', { blanks: ['forward', 'seeing'] }).verdict).toBe('wrong');
   });
+
+  it('穴の数より多く答えたら不正解（空の余りは気にしない）', () => {
+    expect(checkAnswer('forward / incorrect', { blanks: ['forward'] }).verdict).toBe('wrong');
+    expect(checkAnswer('forward /', { blanks: ['forward'] }).verdict).toBe('correct');
+  });
 });

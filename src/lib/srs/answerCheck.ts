@@ -63,11 +63,16 @@ export function checkAnswer(
   if ('blanks' in expected) {
     const parts = input.split(/[/／]/);
     const results = expected.blanks.map((b, i) => checkOne(parts[i] ?? '', [b]));
-    const verdict: AnswerVerdict = results.every((r) => r.verdict === 'correct')
-      ? 'correct'
-      : results.every((r) => r.verdict !== 'wrong')
-        ? 'close'
-        : 'wrong';
+    // 穴の数より多く答えていたら不正解（「forward / incorrect」のように候補を並べて当てるのを防ぐ）。
+    // 末尾の「/」など、空の余りは気にしない
+    const extra = parts.slice(expected.blanks.length).some((p) => p.trim() !== '');
+    const verdict: AnswerVerdict = extra
+      ? 'wrong'
+      : results.every((r) => r.verdict === 'correct')
+        ? 'correct'
+        : results.every((r) => r.verdict !== 'wrong')
+          ? 'close'
+          : 'wrong';
     return { verdict, expected: expected.blanks.join(' / '), recommended: RECOMMENDED[verdict] };
   }
   const r = checkOne(input, expected.accepted);
