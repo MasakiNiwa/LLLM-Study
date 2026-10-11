@@ -26,7 +26,12 @@ export function SpeakButton({ text, lang = 'en-US' }: { text: string; lang?: str
       type="button"
       onClick={(e) => {
         e.stopPropagation();
-        void speak(text, { lang, rate, voiceURI: voice || undefined });
+        // 設定で選ぶ声は英語用なので、ほかの言語では端末の既定の声を使う
+        void speak(text, {
+          lang,
+          rate,
+          voiceURI: lang.startsWith('en') ? voice || undefined : undefined,
+        });
       }}
       aria-label="読み上げる"
       title="読み上げる"

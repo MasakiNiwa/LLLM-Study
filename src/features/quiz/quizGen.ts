@@ -8,6 +8,7 @@
 import { distance } from 'fastest-levenshtein';
 import { z } from 'zod';
 import { normalizeAnswer } from '@/lib/srs/answerCheck';
+import { languageName } from '@/lib/speech/lang';
 import { extractJson } from '@/lib/packs/parse';
 import type { PhraseItem, VocabItem } from '@/lib/packs/schema';
 
@@ -21,6 +22,8 @@ export interface QuizQuestion {
   sentence: string;
   answer: string;
   translation?: string;
+  /** 教材の学ぶ言語（読み上げ用） */
+  lang?: string;
 }
 
 const QuizSchema = z.object({
@@ -33,11 +36,12 @@ export function targetOf(item: QuizSource): string {
   return item.type === 'vocab' ? item.term : item.phrase;
 }
 
-export function quizPrompt(item: QuizSource): string {
+/** lang: 教材の学ぶ言語（BCP 47。省略時は英語） */
+export function quizPrompt(item: QuizSource, lang?: string): string {
   const target = targetOf(item);
   const meaning = item.type === 'vocab' ? item.meanings.join('、') : item.meaning;
   return [
-    `「${target}」（意味: ${meaning}）を使った、自然で短い英語の例文を 1 つ作り、穴埋め問題にしてください。`,
+    `「${target}」（意味: ${meaning}）を使った、自然で短い${languageName(lang)}の例文を 1 つ作り、穴埋め問題にしてください。`,
     `- 例文の中の「${target}」（活用形でもよい）の部分を ___ にする（空欄は 1 つだけ）`,
     '- answer には空欄に入る語句をそのまま書く',
     '- translation には例文全体の日本語訳を書く',

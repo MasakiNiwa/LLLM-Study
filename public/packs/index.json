@@ -6,6 +6,7 @@
       "id": "en-core-verbs",
       "title": "英語の基本動詞 40",
       "description": "日常会話でよく使う基本動詞 40 語。意味の広がりをつかめるよう、主な意味・例文・よく使う組み合わせ・コアイメージを収録しています。",
+      "subject": "english",
       "level": "中学〜高校基礎（CEFR A1〜A2）",
       "tags": [
         "英単語",
@@ -23,6 +24,7 @@
       "id": "en-daily-phrases",
       "title": "日常会話フレーズ 40",
       "description": "あいさつ・あいづち・お願い・買い物など、日常会話ですぐ使える定番フレーズ 40 個。使う場面と例文つき。",
+      "subject": "english",
       "level": "初級〜中級（CEFR A2〜B1）",
       "tags": [
         "英会話",
@@ -39,6 +41,7 @@
       "id": "en-grammar-check",
       "title": "英文法チェック 24",
       "description": "つまずきやすい文法ポイントを、穴埋め 12 問と選択問題 12 問で確認します（単語帳以外の教材の例でもあります）。",
+      "subject": "english",
       "level": "中学〜高校基礎",
       "tags": [
         "英文法",
@@ -57,6 +60,7 @@
       "id": "en-phrasal-verbs",
       "title": "よく使う句動詞 30",
       "description": "pick up / find out / give up など、会話にひんぱんに出てくる句動詞 30 個。動詞＋前置詞・副詞の組み合わせで意味が変わる表現を集めました。",
+      "subject": "english",
       "level": "中級（CEFR A2〜B1）",
       "tags": [
         "英単語",
@@ -66,6 +70,30 @@
       "itemCount": 30,
       "itemTypes": [
         "vocab"
+      ]
+    },
+    {
+      "file": "ja-bookkeeping-accounts-001.json",
+      "id": "ja-bookkeeping-accounts-001",
+      "title": "簿記の勘定科目100問：基礎から1級・実務まで",
+      "description": "日本基準を前提に、勘定科目の意味・使い分け、仕訳、決算整理、収益認識、税効果、連結、工業簿記を学ぶ100項目。一問一答34問、穴埋め33問、選択問題33問。消費税の明示がない設例では消費税を考慮しない。科目名は代表例であり、実務では自社の勘定科目体系に対応させる。リースの設例は企業会計基準第34号を適用する場合を明示。1級の全出題範囲の網羅ではなく、科目理解と実務判断に重点を置く。",
+      "subject": "bookkeeping",
+      "level": "簿記3級の基礎～簿記1級相当",
+      "tags": [
+        "簿記",
+        "勘定科目",
+        "経理実務",
+        "日本基準",
+        "決算整理",
+        "連結会計",
+        "工業簿記"
+      ],
+      "revision": 1,
+      "itemCount": 100,
+      "itemTypes": [
+        "qa",
+        "cloze",
+        "choice"
       ]
     }
   ]

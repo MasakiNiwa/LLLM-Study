@@ -267,8 +267,8 @@ export default function HelpPage() {
                 License）— Open Spaced Repetition の皆さんによる研究と実装
               </li>
               <li>
-                サンプル教材: 本アプリのオリジナル（MIT
-                License）。日常でよく使う高頻度の基本語・定番表現を中心に選んでいます
+                サンプル教材: 本アプリの作者が作成したものです（AI
+                を利用して作成したものを含みます）。作り方や出典は、各教材の詳細に表示しています
               </li>
               <li>
                 AI

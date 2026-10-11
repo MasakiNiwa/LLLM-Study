@@ -3,6 +3,7 @@ import {
   CalendarDays,
   Eye,
   House,
+  Infinity as InfinityIcon,
   Keyboard,
   Library,
   Loader2,
@@ -29,6 +30,7 @@ import { AiAssistPanel } from '@/features/study/AiAssistPanel';
 import { AnswerInput } from '@/features/study/AnswerInput';
 import { AnswerResult } from '@/features/study/AnswerResult';
 import { RatingBar } from '@/features/study/RatingBar';
+import { ScopePicker } from '@/features/study/ScopePicker';
 import { ReactionBubble } from '@/features/study/ReactionBubble';
 import { useStudy } from '@/features/study/studyStore';
 
@@ -56,6 +58,7 @@ function SessionSummary() {
   const custom = useSettings((s) => s.customPersona);
   const persona = getPersona(personaId, custom);
   const aiReady = useEngine((s) => s.status === 'ready');
+  const unlimited = useSettings((s) => s.noDailyLimit);
   const [endedAt] = useState(() => Date.now());
   const [message] = useState(() => {
     const list = stats.done > 0 ? persona.finish : persona.allDone;
@@ -97,6 +100,20 @@ function SessionSummary() {
             <div className="text-xs text-slate-500">時間</div>
           </div>
         </Card>
+      )}
+      <ScopePicker />
+      {!unlimited && (
+        <Button
+          variant="ghost"
+          size="sm"
+          onClick={() => {
+            useSettings.getState().update({ noDailyLimit: true });
+            void useStudy.getState().start();
+          }}
+        >
+          <InfinityIcon />
+          上限なしで続ける
+        </Button>
       )}
       <div className="flex flex-wrap justify-center gap-2">
         {aiReady && stats.done > 0 && (
@@ -167,10 +184,12 @@ export default function StudyPage() {
   // カードが変わったら、設定に応じて読み上げる
   const cardId = current?.card.id;
   useEffect(() => {
-    const item = useStudy.getState().current?.item.item;
-    const text = item && speakText(item);
-    if (autoSpeak && text && useStudy.getState().current?.card.template !== 'recall') {
-      void speak(text, { rate: speechRate, voiceURI: speechVoice || undefined });
+    const cur = useStudy.getState().current;
+    const text = cur && speakText(cur.item.item);
+    if (autoSpeak && cur && text && cur.card.template !== 'recall') {
+      // 設定で選ぶ声は英語用なので、ほかの言語の教材では端末の既定の声を使う
+      const voiceURI = cur.lang.startsWith('en') ? speechVoice || undefined : undefined;
+      void speak(text, { lang: cur.lang, rate: speechRate, voiceURI });
     }
     return () => stopSpeaking();
   }, [cardId, autoSpeak, speechRate, speechVoice]);
@@ -296,6 +315,7 @@ export default function StudyPage() {
         <>
           <div className="min-h-0 flex-1 overflow-y-auto">
             <div className="mx-auto w-full max-w-2xl space-y-4 px-3 py-4 sm:px-4 sm:py-6">
+              <ScopePicker />
               <Card className="relative overflow-hidden">
                 <div className="flex items-center gap-2 border-b border-slate-100 px-4 py-2 text-xs text-slate-500 dark:border-slate-800">
                   {badge && (
@@ -309,6 +329,7 @@ export default function StudyPage() {
                   <CardFace
                     record={current.item}
                     template={current.card.template}
+                    lang={current.lang}
                     side="front"
                     chosen={chosen}
                     onChoose={(index) => {
@@ -322,6 +343,7 @@ export default function StudyPage() {
                         current.item.item,
                         current.card.template,
                       )}
+                      lang={current.lang}
                       blanks={'blanks' in expected ? expected.blanks.length : undefined}
                       onSubmit={(answer) => {
                         const check = checkAnswer(answer, expected);
@@ -348,6 +370,7 @@ export default function StudyPage() {
                       <CardFace
                         record={current.item}
                         template={current.card.template}
+                        lang={current.lang}
                         side="back"
                         chosen={chosen}
                       />

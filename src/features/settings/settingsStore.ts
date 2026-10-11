@@ -21,6 +21,10 @@ export interface Settings extends Omit<ConversationSettings, 'systemPrompt'> {
   // ---- 学習（アルゴリズム） ----
   newPerDay: number;
   maxReviewsPerDay: number;
+  /** true: 1 日の上限を設けない（新しいカードも復習もあるだけ出す） */
+  noDailyLimit: boolean;
+  /** 学習する教材を 1 つに絞る（null: 有効なすべての教材） */
+  focusPackId: string | null;
   /** 目標の記憶保持率 */
   retention: number;
   maxIntervalDays: number;
@@ -65,6 +69,8 @@ export interface Settings extends Omit<ConversationSettings, 'systemPrompt'> {
 export const DEFAULT_SETTINGS: Settings = {
   newPerDay: 15,
   maxReviewsPerDay: 200,
+  noDailyLimit: false,
+  focusPackId: null,
   retention: 0.9,
   maxIntervalDays: 36500,
   fuzz: true,

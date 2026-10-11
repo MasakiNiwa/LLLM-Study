@@ -10,10 +10,14 @@ import type { QuizSource } from './quizGen';
 export interface QuizPick {
   itemKey: string;
   item: QuizSource;
+  /** 教材の学ぶ言語（BCP 47） */
+  lang?: string;
 }
 
 export async function pickQuizItems(count: number, now = Date.now()): Promise<QuizPick[]> {
-  const enabled = new Set((await db.packs.toArray()).filter((p) => p.enabled).map((p) => p.id));
+  const packs = await db.packs.toArray();
+  const enabled = new Set(packs.filter((p) => p.enabled).map((p) => p.id));
+  const langOf = new Map(packs.map((p) => [p.id, p.language?.target]));
   const cards = (await db.cards.toArray()).filter((c) => enabled.has(c.packId) && !c.suspended);
   // 項目ごとに一番思い出しにくいカードの確率で並べる
   const score = new Map<string, number>();
@@ -27,7 +31,7 @@ export async function pickQuizItems(count: number, now = Date.now()): Promise<Qu
     const items = await db.items.bulkGet(keys.slice(i, i + 50));
     for (const it of items) {
       if (it && (it.item.type === 'vocab' || it.item.type === 'phrase')) {
-        picks.push({ itemKey: it.key, item: it.item });
+        picks.push({ itemKey: it.key, item: it.item, lang: langOf.get(it.packId) });
         if (picks.length >= count) break;
       }
     }

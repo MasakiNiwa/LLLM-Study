@@ -9,6 +9,7 @@ import { create } from 'zustand';
 import { db } from '@/lib/db/db';
 import type { CardRecord, GradeValue, ItemRecord } from '@/lib/db/types';
 import { requeuePosition } from '@/lib/srs/queue';
+import { speechLang } from '@/lib/speech/lang';
 import { errorMessage } from '@/lib/utils/format';
 import { useAiFocus } from '@/features/ai/focusStore';
 import { getPersona, reactionText } from '@/features/ai/personas';
@@ -18,6 +19,8 @@ import { LEARN_AHEAD_MS, loadQueue, saveRating, undoRating } from './repository'
 export interface StudyCard {
   card: CardRecord;
   item: ItemRecord;
+  /** 読み上げに使う言語タグ（教材の学ぶ言語） */
+  lang: string;
 }
 
 export interface SessionStats {
@@ -78,8 +81,8 @@ function emptyStats(): SessionStats {
 }
 
 async function withItem(card: CardRecord): Promise<StudyCard | null> {
-  const item = await db.items.get(card.itemKey);
-  return item ? { card, item } : null;
+  const [item, pack] = await Promise.all([db.items.get(card.itemKey), db.packs.get(card.packId)]);
+  return item ? { card, item, lang: speechLang(pack?.language?.target) } : null;
 }
 
 export const useStudy = create<StudyState>()((set, get) => {

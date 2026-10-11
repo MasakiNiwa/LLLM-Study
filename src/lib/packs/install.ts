@@ -160,3 +160,19 @@ export async function resetPackProgress(packId: string): Promise<void> {
     );
   });
 }
+
+/**
+ * 教材の並び順を 1 つ上（-1）・下（+1）に動かす。
+ * 並び順は一覧の表示順と、新しいカードを出す優先順位に使う。
+ */
+export async function movePack(packId: string, direction: -1 | 1): Promise<void> {
+  await db.transaction('rw', db.packs, async () => {
+    const packs = await db.packs.orderBy('order').toArray();
+    const i = packs.findIndex((p) => p.id === packId);
+    const j = i + direction;
+    if (i < 0 || j < 0 || j >= packs.length) return;
+    // order が重複していても確実に入れ替わるよう、全体を振り直す
+    [packs[i], packs[j]] = [packs[j], packs[i]];
+    await db.packs.bulkPut(packs.map((p, k) => ({ ...p, order: k + 1 })));
+  });
+}

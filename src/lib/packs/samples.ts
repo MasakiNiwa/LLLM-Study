@@ -9,6 +9,7 @@ export interface SampleEntry {
   id: string;
   title: string;
   description?: string;
+  subject?: string;
   level?: string;
   tags?: string[];
   revision: number;

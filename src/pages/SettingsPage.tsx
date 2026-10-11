@@ -209,6 +209,17 @@ export default function SettingsPage() {
               onChange={(v) => update({ maxReviewsPerDay: v })}
             />
           </Field>
+          <Field
+            label="1 日の上限なし"
+            htmlFor="no-limit"
+            hint="オンにすると、上の 2 つの上限を使わず、あるだけ出します（学習画面からも切り替え可）"
+          >
+            <Switch
+              id="no-limit"
+              checked={s.noDailyLimit}
+              onChange={(v) => update({ noDailyLimit: v })}
+            />
+          </Field>
           <Field label="新しいカードの順番" htmlFor="new-order">
             <Select
               id="new-order"

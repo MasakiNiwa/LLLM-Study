@@ -5,12 +5,14 @@ import { Button } from '@/components/ui/Button';
 interface AnswerInputProps {
   /** 学ぶ言語で答えるか（英語ならスペルチェック・自動大文字を切る） */
   targetLanguage: boolean;
+  /** 学ぶ言語の言語タグ（入力欄の lang 属性） */
+  lang?: string;
   blanks?: number;
   onSubmit: (answer: string) => void;
 }
 
 /** 答えを入力する欄（Enter で答え合わせ） */
-export function AnswerInput({ targetLanguage, blanks, onSubmit }: AnswerInputProps) {
+export function AnswerInput({ targetLanguage, lang = 'en', blanks, onSubmit }: AnswerInputProps) {
   const [value, setValue] = useState('');
   return (
     <form
@@ -28,7 +30,7 @@ export function AnswerInput({ targetLanguage, blanks, onSubmit }: AnswerInputPro
         autoCapitalize={targetLanguage ? 'none' : undefined}
         autoCorrect={targetLanguage ? 'off' : undefined}
         spellCheck={false}
-        lang={targetLanguage ? 'en' : 'ja'}
+        lang={targetLanguage ? lang : 'ja'}
         enterKeyHint="done"
         aria-label="答え"
         placeholder={

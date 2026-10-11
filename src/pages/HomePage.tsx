@@ -21,6 +21,7 @@ import { SampleList } from '@/features/library/SampleList';
 import { useSettings } from '@/features/settings/settingsStore';
 import { useTodayOverview } from '@/features/study/useTodayOverview';
 import { WeekStrip } from '@/features/calendar/WeekStrip';
+import { ScopePicker } from '@/features/study/ScopePicker';
 
 function ProgressRing({ value }: { value: number }) {
   const r = 34;
@@ -115,6 +116,7 @@ export default function HomePage() {
           </Card>
         ) : (
           <Card className="p-4 sm:p-5">
+            <ScopePicker className="mb-4" />
             <div className="flex items-center gap-4">
               <div className="relative">
                 <ProgressRing value={done + remaining > 0 ? done / (done + remaining) : 0} />

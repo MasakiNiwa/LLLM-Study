@@ -2,6 +2,7 @@ import { useEffect, useState } from 'react';
 import { Check, Download, Loader2, RefreshCw } from 'lucide-react';
 import { Button } from '@/components/ui/Button';
 import { fetchSampleIndex, type SampleEntry } from '@/lib/packs/samples';
+import { subjectKey, subjectLabel } from '@/lib/packs/subjects';
 import { ITEM_TYPE_LABELS } from '@/lib/packs/templates';
 import { errorMessage } from '@/lib/utils/format';
 import { installSample } from './packActions';
@@ -48,6 +49,7 @@ export function SampleList({ compact }: { compact?: boolean }) {
                 <p className="mt-0.5 text-sm text-slate-600 dark:text-slate-400">{s.description}</p>
               )}
               <div className="mt-1 flex flex-wrap gap-x-3 gap-y-0.5 text-xs text-slate-500 dark:text-slate-400">
+                <span>{subjectLabel(subjectKey(s.subject))}</span>
                 <span>{s.itemCount} 項目</span>
                 <span>{s.itemTypes.map((t) => ITEM_TYPE_LABELS[t]).join('・')}</span>
                 {s.level && <span>{s.level}</span>}
