@@ -1,10 +1,18 @@
+import { ChevronRight } from 'lucide-react';
 import { Link } from 'wouter';
 import { cn } from '@/lib/utils/cn';
 import { formatPercent } from '@/lib/utils/format';
 import { useEngine } from './engineStore';
 
 /** 現在のモデル状態を表示する小さなチップ（クリックでモデル画面へ） */
-export function ModelStatusChip({ className }: { className?: string }) {
+export function ModelStatusChip({
+  className,
+  plain,
+}: {
+  className?: string;
+  /** リンクにせず状態だけを表示する（リンクの中に置くとき） */
+  plain?: boolean;
+}) {
   const status = useEngine((s) => s.status);
   const model = useEngine((s) => s.model);
   const loadingName = useEngine((s) => s.loadingName);
@@ -29,10 +37,25 @@ export function ModelStatusChip({ className }: { className?: string }) {
     label = '読み込みエラー';
   }
 
+  if (plain) {
+    return (
+      <span
+        className={cn(
+          'inline-flex max-w-full min-w-0 items-center gap-2 rounded-full border border-slate-200 bg-white px-3 py-1.5 text-xs font-medium text-slate-700 dark:border-slate-700 dark:bg-slate-900 dark:text-slate-300',
+          className,
+        )}
+      >
+        <span className={cn('size-2 shrink-0 rounded-full', dot)} />
+        <span className="truncate">{label}</span>
+      </span>
+    );
+  }
+
   return (
     <Link
       href="/models"
-      title={label}
+      title={`AI モデル: ${label}（押すとモデルの画面へ）`}
+      aria-label={`AI モデル: ${label}。モデルの画面を開く`}
       className={cn(
         'inline-flex max-w-full min-w-0 items-center gap-2 rounded-full border border-slate-200 bg-white px-3 py-1.5 text-xs font-medium text-slate-700 transition-colors hover:bg-slate-100 dark:border-slate-700 dark:bg-slate-900 dark:text-slate-300 dark:hover:bg-slate-800',
         className,
@@ -40,6 +63,7 @@ export function ModelStatusChip({ className }: { className?: string }) {
     >
       <span className={cn('size-2 shrink-0 rounded-full', dot)} />
       <span className="truncate">{label}</span>
+      <ChevronRight className="-mr-1 size-3.5 shrink-0 text-slate-400" />
     </Link>
   );
 }

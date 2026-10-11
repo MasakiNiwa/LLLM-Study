@@ -8,7 +8,9 @@ import {
   Keyboard,
   Library,
   Loader2,
-  LogOut,
+  Layers,
+  Play,
+  RotateCcw,
   PartyPopper,
   TriangleAlert,
   Undo2,
@@ -16,6 +18,7 @@ import {
 } from 'lucide-react';
 import { Link } from 'wouter';
 import { PageHeader } from '@/app/PageHeader';
+import { cn } from '@/lib/utils/cn';
 import { Button } from '@/components/ui/Button';
 import { Card } from '@/components/ui/Card';
 import { Progress } from '@/components/ui/Progress';
@@ -33,6 +36,9 @@ import { LEECH_LAPSES } from '@/features/study/cardActions';
 import { AnswerInput } from '@/features/study/AnswerInput';
 import { AnswerResult } from '@/features/study/AnswerResult';
 import { PracticePicker } from '@/features/study/PracticePicker';
+import { StudyDisplayMenu } from '@/features/study/StudyDisplayMenu';
+import { useStudyLayout } from '@/features/study/useStudyLayout';
+import { ConfirmDialog } from '@/components/ui/ConfirmDialog';
 import { RatingBar } from '@/features/study/RatingBar';
 import { ScopePicker } from '@/features/study/ScopePicker';
 import { ReactionBubble } from '@/features/study/ReactionBubble';
@@ -175,6 +181,8 @@ export default function StudyPage() {
   const stats = useStudy((s) => s.stats);
   const canUndo = useStudy((s) => s.undoStack.length > 0);
   const practice = useStudy((s) => s.mode === 'practice');
+  const [resetOpen, setResetOpen] = useState(false);
+  const { compact, zoom } = useStudyLayout();
   const { start, reveal, rate, undo, end } = useStudy.getState();
   const autoSpeak = useSettings((s) => s.autoSpeak);
   const speechRate = useSettings((s) => s.speechRate);
@@ -275,55 +283,61 @@ export default function StudyPage() {
     <>
       <PageHeader
         title={practice ? 'おさらい' : '学習'}
+        hideTitleOnMobile={status === 'studying'}
+        hideHelp
         meta={
           status === 'studying' && (
-            <span className="font-mono text-sm text-slate-500 tabular-nums">
+            <span className="font-mono text-sm whitespace-nowrap text-slate-500 tabular-nums">
+              {practice && <span className="mr-1 font-sans sm:hidden">おさらい</span>}
               残り {queueLength}
             </span>
           )
         }
         actions={
-          status === 'studying' && (
-            <>
-              <Button
-                size="icon"
-                variant={typeAnswer !== 'off' ? 'secondary' : 'ghost'}
-                onClick={() =>
-                  updateSettings({ typeAnswer: typeAnswer === 'off' ? 'recall' : 'off' })
-                }
-                aria-pressed={typeAnswer !== 'off'}
-                aria-label="答えを入力して答え合わせ"
-                title={
-                  typeAnswer !== 'off'
-                    ? '答えの入力: オン（単語・フレーズを答えるカードと穴埋め）'
-                    : '答えの入力: オフ'
-                }
-              >
-                <Keyboard />
-              </Button>
-              <Button
-                size="icon"
-                variant="ghost"
-                onClick={() => void undo()}
-                disabled={!canUndo}
-                aria-label="直前の評価を取り消す"
-                title="直前の評価を取り消す（Ctrl+Z）"
-              >
-                <Undo2 />
-              </Button>
-              <Link href="/">
+          <>
+            {status === 'studying' && (
+              <>
+                <Button
+                  size="icon"
+                  variant={typeAnswer !== 'off' ? 'secondary' : 'ghost'}
+                  onClick={() =>
+                    updateSettings({ typeAnswer: typeAnswer === 'off' ? 'recall' : 'off' })
+                  }
+                  aria-pressed={typeAnswer !== 'off'}
+                  aria-label="答えを入力して答え合わせ"
+                  title={
+                    typeAnswer !== 'off'
+                      ? '答えの入力: オン（単語・フレーズを答えるカードと穴埋め）'
+                      : '答えの入力: オフ'
+                  }
+                >
+                  <Keyboard />
+                </Button>
                 <Button
                   size="icon"
                   variant="ghost"
-                  aria-label="学習をやめる"
-                  title="学習をやめる"
-                  onClick={end}
+                  onClick={() => void undo()}
+                  disabled={!canUndo}
+                  aria-label="直前の評価を取り消す"
+                  title="直前の評価を取り消す（Ctrl+Z）"
                 >
-                  <LogOut />
+                  <Undo2 />
                 </Button>
-              </Link>
-            </>
-          )
+              </>
+            )}
+            <StudyDisplayMenu />
+            {(status === 'studying' || status === 'done') && (
+              <Button
+                size="icon"
+                variant="ghost"
+                aria-label="学習を中断してリセット"
+                title="学習を中断してリセット"
+                onClick={() => (status === 'studying' ? setResetOpen(true) : end())}
+              >
+                <RotateCcw />
+              </Button>
+            )}
+          </>
         }
       />
       {status === 'studying' && (
@@ -345,12 +359,18 @@ export default function StudyPage() {
       {status === 'studying' && current && (
         <>
           <div className="min-h-0 flex-1 overflow-y-auto">
-            <div className="mx-auto w-full max-w-2xl space-y-4 px-3 py-4 sm:px-4 sm:py-6">
+            <div
+              className={cn(
+                'mx-auto w-full max-w-2xl px-3 sm:px-4',
+                compact ? 'space-y-2 py-2' : 'space-y-4 py-4 sm:py-6',
+              )}
+            >
               {practice ? (
                 <p className="rounded-xl bg-accent-50 px-3 py-2 text-xs text-accent-900 dark:bg-accent-900/20 dark:text-accent-200">
                   おさらい中です。評価は記録されず、復習の予定も変わりません。思い出せなかったカードは少しあとにもう一度出ます。
                 </p>
-              ) : (
+              ) : compact ? null : (
+                // 余白を詰めるときは省く（教材の切り替えは学習を始める前・終えたあとの画面でもできる）
                 <ScopePicker />
               )}
               <Card className="relative overflow-hidden">
@@ -372,7 +392,12 @@ export default function StudyPage() {
                     出題しない
                   </button>
                 </div>
-                <div className="px-4 py-8 sm:px-8 sm:py-10" key={showKey}>
+                <div
+                  className={compact ? 'px-3 py-4 sm:px-6 sm:py-5' : 'px-4 py-8 sm:px-8 sm:py-10'}
+                  // 文字の大きさの設定に合わせてカードの中身を拡大・縮小する
+                  style={zoom !== 1 ? { zoom } : undefined}
+                  key={showKey}
+                >
                   <CardFace
                     record={current.item}
                     template={current.card.template}
@@ -450,9 +475,19 @@ export default function StudyPage() {
               {revealed && <AiAssistPanel key={showKey} card={current.card} />}
             </div>
           </div>
-          <div className="pb-safe shrink-0 border-t border-slate-200 bg-slate-50/90 backdrop-blur-md dark:border-slate-800 dark:bg-slate-950/90">
-            <div className="mx-auto w-full max-w-2xl space-y-2 px-3 py-3 sm:px-4">
-              <div className="h-9">
+          <div className="pb-safe relative shrink-0 border-t border-slate-200 bg-slate-50/90 backdrop-blur-md dark:border-slate-800 dark:bg-slate-950/90">
+            <div
+              className={cn(
+                'mx-auto w-full max-w-2xl px-3 sm:px-4',
+                compact ? 'py-2' : 'space-y-2 py-3',
+              )}
+            >
+              {/* 余白を詰めるときは、ひとことをボタンの上に重ねて表示する（高さを取らない） */}
+              <div
+                className={
+                  compact ? 'pointer-events-none absolute inset-x-3 bottom-full mb-2' : 'h-9'
+                }
+              >
                 <ReactionBubble />
               </div>
               {revealed ? (
@@ -462,16 +497,22 @@ export default function StudyPage() {
                   onRate={(g) => void rate(g)}
                   recommended={recommended}
                   practice={practice}
+                  compact={compact}
                 />
               ) : isChoice || isOrder ? (
-                <p className="flex h-14 items-center justify-center text-sm text-slate-500">
+                <p
+                  className={cn(
+                    'flex items-center justify-center text-sm text-slate-500',
+                    compact ? 'h-12' : 'h-14',
+                  )}
+                >
                   {isChoice ? '答えを選んでください' : '語句を正しい順に並べてください'}
                 </p>
               ) : (
                 <Button
                   variant={shouldType ? 'secondary' : 'primary'}
                   size="lg"
-                  className="h-14 w-full text-base"
+                  className={cn('w-full text-base', compact ? 'h-12' : 'h-14')}
                   onClick={reveal}
                 >
                   <Eye />
@@ -483,12 +524,37 @@ export default function StudyPage() {
         </>
       )}
       {status === 'idle' && (
-        <div className="flex flex-1 items-center justify-center">
-          <Button variant="primary" onClick={() => void start()}>
-            学習を始める
-          </Button>
+        <div className="min-h-0 flex-1 overflow-y-auto">
+          <div className="mx-auto flex w-full max-w-md flex-col items-center gap-4 px-4 py-10 text-center">
+            <div className="flex size-14 items-center justify-center rounded-full bg-accent-100 text-accent-700 dark:bg-accent-900/40 dark:text-accent-300">
+              <Layers className="size-7" />
+            </div>
+            <div>
+              <h2 className="text-lg font-bold">学習を始めましょう</h2>
+              <p className="mt-1 text-sm text-slate-500 dark:text-slate-400">
+                今日の分を読み直してから始めます
+              </p>
+            </div>
+            <ScopePicker />
+            <Button variant="primary" size="lg" className="w-full" onClick={() => void start()}>
+              <Play />
+              学習を始める
+            </Button>
+            <PracticePicker stacked />
+          </div>
         </div>
       )}
+      <ConfirmDialog
+        open={resetOpen}
+        title="学習を中断しますか？"
+        description="今の学習をやめて、学習画面を最初の状態に戻します。ここまでの評価は記録に残ります。"
+        confirmLabel="中断する"
+        onConfirm={() => {
+          setResetOpen(false);
+          end();
+        }}
+        onClose={() => setResetOpen(false)}
+      />
     </>
   );
 }

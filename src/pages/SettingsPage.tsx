@@ -5,7 +5,9 @@ import {
   Database,
   Gauge,
   GraduationCap,
+  ChevronRight,
   HardDrive,
+  MonitorSmartphone,
   Palette,
   RotateCcw,
   Volume2,
@@ -37,7 +39,11 @@ import {
   TYPE_ANSWER_LABELS,
 } from '@/features/settings/labels';
 import {
+  STUDY_COMPACT_LABELS,
+  STUDY_FONT_SCALES,
   useSettings,
+  type StudyCompact,
+  type StudyFontScale,
   type BackendSetting,
   type NewCardOrder,
   type ReactionMode,
@@ -45,6 +51,8 @@ import {
   type TypeAnswerMode,
 } from '@/features/settings/settingsStore';
 import { useStudy } from '@/features/study/studyStore';
+import { ModelStatusChip } from '@/features/engine/ModelStatusChip';
+import { Link } from 'wouter';
 import { backupNow } from '@/features/home/backup';
 
 const CONTEXT_OPTIONS = [2048, 4096, 8192, 16384, 32768].map((n) => ({
@@ -175,6 +183,9 @@ export default function SettingsPage() {
       <PageHeader title="設定" />
       <PageBody>
         <Section
+          collapsible
+          storageKey="settings"
+          defaultOpen
           title="学習"
           icon={<GraduationCap />}
           description="1 日に出すカードの量と、1 日の区切り"
@@ -237,6 +248,47 @@ export default function SettingsPage() {
               className="w-28"
             />
           </Field>
+        </Section>
+
+        <Section
+          title="学習画面"
+          icon={<MonitorSmartphone />}
+          description="文字の大きさ・答えの入力・評価ボタンの表示"
+          collapsible
+          storageKey="settings"
+        >
+          <Field
+            label="カードの文字の大きさ"
+            htmlFor="font-scale"
+            hint="学習画面の右上の「Aa」からも変えられます"
+          >
+            <Select
+              id="font-scale"
+              value={s.studyFontScale}
+              onChange={(v) => update({ studyFontScale: v as StudyFontScale })}
+              options={(Object.keys(STUDY_FONT_SCALES) as StudyFontScale[]).map((v) => ({
+                value: v,
+                label: STUDY_FONT_SCALES[v].label,
+              }))}
+              className="w-28"
+            />
+          </Field>
+          <Field
+            label="余白を詰めて表示"
+            htmlFor="study-compact"
+            hint="カードが画面に収まりにくいときに"
+            stacked
+          >
+            <Select
+              id="study-compact"
+              value={s.studyCompact}
+              onChange={(v) => update({ studyCompact: v as StudyCompact })}
+              options={(Object.keys(STUDY_COMPACT_LABELS) as StudyCompact[]).map((v) => ({
+                value: v,
+                label: STUDY_COMPACT_LABELS[v],
+              }))}
+            />
+          </Field>
           <Field
             label="答えを入力して答え合わせ"
             htmlFor="type-answer"
@@ -267,6 +319,8 @@ export default function SettingsPage() {
         </Section>
 
         <Section
+          collapsible
+          storageKey="settings"
           title="記憶のアルゴリズム（FSRS）"
           icon={<Brain />}
           description="復習のタイミングは FSRS が計算します。AI が勝手に決めることはありません"
@@ -315,7 +369,13 @@ export default function SettingsPage() {
           </Field>
         </Section>
 
-        <Section title="読み上げ" icon={<Volume2 />} description="端末の音声で英語を読み上げます">
+        <Section
+          collapsible
+          storageKey="settings"
+          title="読み上げ"
+          icon={<Volume2 />}
+          description="端末の音声で英語を読み上げます"
+        >
           {isSpeechSupported() ? (
             <>
               <Field label="カードを表示したら自動で読み上げる" htmlFor="auto-speak">
@@ -362,7 +422,26 @@ export default function SettingsPage() {
           )}
         </Section>
 
-        <Section title="AI パートナー" icon={<Bot />} description="性格と、AI にどこまで任せるか">
+        <Section
+          collapsible
+          storageKey="settings"
+          title="AI パートナー"
+          icon={<Bot />}
+          description="性格と、AI にどこまで任せるか"
+        >
+          <Link
+            href="/models"
+            className="flex items-center gap-3 px-4 py-3.5 text-sm hover:bg-slate-50 sm:px-5 dark:hover:bg-slate-800/40"
+          >
+            <span className="min-w-0 flex-1">
+              <span className="block font-medium">AI モデル</span>
+              <span className="block text-xs text-slate-500 dark:text-slate-400">
+                ダウンロード・読み込み・保存済みモデルの管理
+              </span>
+            </span>
+            <ModelStatusChip plain className="max-w-40" />
+            <ChevronRight className="size-5 shrink-0 text-slate-400" />
+          </Link>
           <div className="space-y-2 px-4 py-3.5 sm:px-5">
             <div className="text-sm font-medium">性格</div>
             <PersonaPicker value={s.persona} onChange={(persona) => update({ persona })} />
@@ -422,7 +501,13 @@ export default function SettingsPage() {
           </Field>
         </Section>
 
-        <Section title="生成" icon={<Gauge />} description="AI の応答のしかた（次の送信から反映）">
+        <Section
+          collapsible
+          storageKey="settings"
+          title="AI の応答・チャット"
+          icon={<Gauge />}
+          description="応答のしかたと、チャットの操作（次の送信から反映）"
+        >
           <Field
             label="Temperature"
             htmlFor="temperature"
@@ -480,7 +565,9 @@ export default function SettingsPage() {
         </Section>
 
         <Section
-          title="エンジン"
+          collapsible
+          storageKey="settings"
+          title="AI エンジン"
           icon={<HardDrive />}
           description="変更後はモデルの再読み込みが必要です"
         >
@@ -538,7 +625,7 @@ export default function SettingsPage() {
           </Field>
         </Section>
 
-        <Section title="表示" icon={<Palette />}>
+        <Section collapsible storageKey="settings" title="表示" icon={<Palette />}>
           <Field label="テーマ" htmlFor="theme">
             <Select
               id="theme"
@@ -568,6 +655,8 @@ export default function SettingsPage() {
         </Section>
 
         <Section
+          collapsible
+          storageKey="settings"
           title="データ"
           icon={<Database />}
           description="データはすべてこの端末のブラウザ内に保存されています"

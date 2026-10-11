@@ -196,7 +196,7 @@ export function buildMaterialPrompt(req: MaterialRequest, options: { schema: boo
   const auto = req.types.length === 0;
   const types = auto ? (Object.keys(ITEM_TYPE_GUIDES) as ItemType[]) : req.types;
   const lines = [
-    '「ローカルLLM学習アプリ」に取り込む学習教材を、下の形式の JSON で作ってください。',
+    '学習アプリ「LLLM Study」に取り込む学習教材を、下の形式の JSON で作ってください。',
     '',
     '## 作ってほしい教材',
     `- テーマ: ${req.topic.trim() || '（おまかせ）'}`,
@@ -251,7 +251,7 @@ export function buildSpecMarkdown(): string {
   return [
     `# 教材パック形式（${PACK_FORMAT} v${PACK_VERSION}）`,
     '',
-    '「ローカルLLM学習アプリ」に取り込む学習教材の形式です。',
+    '学習アプリ「LLLM Study」に取り込む学習教材の形式です。',
     '外部の AI（ChatGPT / Claude / Gemini など）にこのファイルを渡して、教材の JSON を作ってもらうことを想定しています。',
     '',
     '> このファイルは `src/lib/packs/spec.ts` から自動生成されます（`npm run packs`）。手で編集しないでください。',

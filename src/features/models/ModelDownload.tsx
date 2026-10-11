@@ -151,7 +151,7 @@ export function ModelDownload() {
     >
       <DownloadProgressCard />
       <div className="divide-y divide-slate-100 dark:divide-slate-800">
-        {MODEL_CATALOG.filter((m) => m.kind === 'chat').map((m) => (
+        {MODEL_CATALOG.filter((m) => m.kind === 'chat' && m.recommended).map((m) => (
           <CatalogRow
             key={m.file}
             model={m}
