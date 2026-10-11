@@ -7,7 +7,7 @@
 import { db } from '@/lib/db/db';
 import type { CardRecord, ItemRecord, PackOrigin, PackRecord } from '@/lib/db/types';
 import { newFsrsFields } from '@/lib/srs/scheduler';
-import type { ItemType, StudyPack } from './schema';
+import type { ItemType, StudyItem, StudyPack } from './schema';
 import { defaultTemplates } from './templates';
 
 export interface InstallSummary {
@@ -179,5 +179,26 @@ export async function movePack(packId: string, direction: -1 | 1): Promise<void>
     // order が重複していても確実に入れ替わるよう、全体を振り直す
     [packs[i], packs[j]] = [packs[j], packs[i]];
     await db.packs.bulkPut(packs.map((p, k) => ({ ...p, order: k + 1 })));
+  });
+}
+
+/**
+ * 取り込んだ教材の項目を 1 つだけ直す（誤字の修正など）。学習記録はそのまま残す。
+ * 種類と ID は変えられない（カードの型と学習記録が項目の種類・ID に結びついているため）。
+ * 教材を取り込み直す（サンプルの更新を含む）と、ここでの修正は上書きされる。
+ */
+export async function updatePackItem(key: string, item: StudyItem): Promise<void> {
+  await db.transaction('rw', [db.packs, db.items], async () => {
+    const rec = await db.items.get(key);
+    if (!rec) throw new Error('項目が見つかりません');
+    if (rec.item.type !== item.type) throw new Error('項目の種類は変えられません');
+    if (rec.item.id !== item.id) throw new Error('項目の ID は変えられません');
+    const pack = await db.packs.get(rec.packId);
+    if (!pack) throw new Error('教材が見つかりません');
+    const passage = item.passage ? pack.passages?.find((p) => p.id === item.passage) : undefined;
+    if (item.passage && !passage) throw new Error(`本文「${item.passage}」がこの教材にありません`);
+    const { passage: _old, ...rest } = rec;
+    await db.items.put({ ...rest, item, ...(passage && { passage }) });
+    await db.packs.update(pack.id, { updatedAt: Date.now() });
   });
 }

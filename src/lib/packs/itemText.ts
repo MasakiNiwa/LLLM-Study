@@ -62,7 +62,9 @@ export function itemSearchText(item: StudyItem): string {
     else if (Array.isArray(v)) v.forEach(walk);
     else if (v && typeof v === 'object') Object.values(v).forEach(walk);
   };
-  walk(item);
+  // 画像（data URL）は検索の対象にしない
+  const { image: _image, ...rest } = item;
+  walk(rest);
   return parts.join(' ').toLowerCase();
 }
 
@@ -85,12 +87,14 @@ export function speakText(item: StudyItem): string | undefined {
 /** LLM に渡す項目の内容（ID や空の値を除いたコンパクトな形） */
 export function itemForLlm(item: StudyItem): Record<string, unknown> {
   // passage は本文の ID なので渡さない（本文そのものは呼び出し側で添える）
-  const { id: _id, passage: _p, ...rest } = item;
+  const { id: _id, passage: _p, image, ...rest } = item;
   const out: Record<string, unknown> = {};
   for (const [k, v] of Object.entries(rest)) {
     if (v === undefined || (Array.isArray(v) && v.length === 0)) continue;
     out[k] = v;
   }
+  // 画像そのものは渡さない（モデルは画像を読めないため、あることだけ伝える）
+  if (image) out.has_image = true;
   if (item.type === 'choice') out.correct_choice = item.choices[item.answer];
   if (item.type === 'order') out.chunks = orderChunks(item);
   return out;

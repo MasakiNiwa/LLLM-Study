@@ -47,6 +47,17 @@ const itemBase = {
   passage: id
     .optional()
     .describe('この項目が参照する本文の ID（passages の id）。本文を問題の上に表示する'),
+  image: z
+    .string()
+    .max(1_000_000)
+    .regex(
+      /^data:image\/(png|jpeg|webp|gif);base64,[A-Za-z0-9+/=]+$/,
+      '画像は data URL（data:image/...;base64,...）で埋め込んでください',
+    )
+    .optional()
+    .describe(
+      '問題の上に表示する画像（data URL で埋め込む。外部の URL は使えない）。通常はアプリ内で追加するので、外部 AI は省略する',
+    ),
 };
 
 /** 単語 */

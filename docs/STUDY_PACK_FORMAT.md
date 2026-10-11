@@ -316,6 +316,12 @@
                 "type": "string",
                 "pattern": "^[A-Za-z0-9][A-Za-z0-9._-]{0,63}$"
               },
+              "image": {
+                "description": "問題の上に表示する画像（data URL で埋め込む。外部の URL は使えない）。通常はアプリ内で追加するので、外部 AI は省略する",
+                "type": "string",
+                "maxLength": 1000000,
+                "pattern": "^data:image\\/(png|jpeg|webp|gif);base64,[A-Za-z0-9+/=]+$"
+              },
               "term": {
                 "type": "string",
                 "minLength": 1,
@@ -442,6 +448,12 @@
                 "type": "string",
                 "pattern": "^[A-Za-z0-9][A-Za-z0-9._-]{0,63}$"
               },
+              "image": {
+                "description": "問題の上に表示する画像（data URL で埋め込む。外部の URL は使えない）。通常はアプリ内で追加するので、外部 AI は省略する",
+                "type": "string",
+                "maxLength": 1000000,
+                "pattern": "^data:image\\/(png|jpeg|webp|gif);base64,[A-Za-z0-9+/=]+$"
+              },
               "phrase": {
                 "type": "string",
                 "minLength": 1,
@@ -529,6 +541,12 @@
                 "type": "string",
                 "pattern": "^[A-Za-z0-9][A-Za-z0-9._-]{0,63}$"
               },
+              "image": {
+                "description": "問題の上に表示する画像（data URL で埋め込む。外部の URL は使えない）。通常はアプリ内で追加するので、外部 AI は省略する",
+                "type": "string",
+                "maxLength": 1000000,
+                "pattern": "^data:image\\/(png|jpeg|webp|gif);base64,[A-Za-z0-9+/=]+$"
+              },
               "question": {
                 "type": "string",
                 "minLength": 1,
@@ -600,6 +618,12 @@
                 "type": "string",
                 "pattern": "^[A-Za-z0-9][A-Za-z0-9._-]{0,63}$"
               },
+              "image": {
+                "description": "問題の上に表示する画像（data URL で埋め込む。外部の URL は使えない）。通常はアプリ内で追加するので、外部 AI は省略する",
+                "type": "string",
+                "maxLength": 1000000,
+                "pattern": "^data:image\\/(png|jpeg|webp|gif);base64,[A-Za-z0-9+/=]+$"
+              },
               "text": {
                 "type": "string",
                 "minLength": 1,
@@ -663,6 +687,12 @@
                 "description": "この項目が参照する本文の ID（passages の id）。本文を問題の上に表示する",
                 "type": "string",
                 "pattern": "^[A-Za-z0-9][A-Za-z0-9._-]{0,63}$"
+              },
+              "image": {
+                "description": "問題の上に表示する画像（data URL で埋め込む。外部の URL は使えない）。通常はアプリ内で追加するので、外部 AI は省略する",
+                "type": "string",
+                "maxLength": 1000000,
+                "pattern": "^data:image\\/(png|jpeg|webp|gif);base64,[A-Za-z0-9+/=]+$"
               },
               "question": {
                 "type": "string",
@@ -735,6 +765,12 @@
                 "description": "この項目が参照する本文の ID（passages の id）。本文を問題の上に表示する",
                 "type": "string",
                 "pattern": "^[A-Za-z0-9][A-Za-z0-9._-]{0,63}$"
+              },
+              "image": {
+                "description": "問題の上に表示する画像（data URL で埋め込む。外部の URL は使えない）。通常はアプリ内で追加するので、外部 AI は省略する",
+                "type": "string",
+                "maxLength": 1000000,
+                "pattern": "^data:image\\/(png|jpeg|webp|gif);base64,[A-Za-z0-9+/=]+$"
               },
               "answer": {
                 "type": "string",

@@ -16,6 +16,7 @@ import { useAiBusy } from '@/features/ai/aiBusy';
 import { draftPrompt, parseDraft, type DraftType } from '@/features/ai/draft';
 import { runOneshot } from '@/features/ai/oneshot';
 import { useEngine } from '@/features/engine/engineStore';
+import { ImagePicker } from '@/features/items/ImagePicker';
 import { useLibrary } from './libraryStore';
 
 /** フォームの値（どの種類でも同じ形で持ち、保存時に項目へ変換する） */
@@ -31,6 +32,8 @@ interface Form {
   example: string;
   exampleTranslation: string;
   notes: string;
+  /** 画像（data URL）。無ければ空文字 */
+  image: string;
 }
 
 const EMPTY: Form = {
@@ -45,6 +48,7 @@ const EMPTY: Form = {
   example: '',
   exampleTranslation: '',
   notes: '',
+  image: '',
 };
 
 const TYPE_TABS = [
@@ -59,6 +63,7 @@ function fromItem(item: UserItemDraft | StudyItem): Form {
   f.example = ex?.text ?? '';
   f.exampleTranslation = ex?.translation ?? '';
   f.notes = item.notes ?? '';
+  f.image = item.image ?? '';
   if (item.type === 'vocab') {
     Object.assign(f, {
       type: 'vocab',
@@ -94,6 +99,7 @@ function toDraft(f: Form): UserItemDraft {
     ? [{ text: f.example.trim(), translation: opt(f.exampleTranslation) }]
     : undefined;
   const notes = opt(f.notes);
+  const image = opt(f.image);
   switch (f.type) {
     case 'vocab':
       return {
@@ -107,6 +113,7 @@ function toDraft(f: Form): UserItemDraft {
           .filter(Boolean),
         examples,
         notes,
+        image,
       };
     case 'phrase':
       return {
@@ -116,6 +123,7 @@ function toDraft(f: Form): UserItemDraft {
         situation: opt(f.situation),
         examples,
         notes,
+        image,
       };
     case 'qa':
       return {
@@ -124,6 +132,7 @@ function toDraft(f: Form): UserItemDraft {
         answer: f.answer.trim(),
         explanation: opt(f.explanation),
         notes,
+        image,
       };
   }
 }
@@ -215,7 +224,8 @@ function EditorBody({ editing, onClose }: { editing: StudyItem | null; onClose: 
       setForm((f) => {
         const next = { ...f };
         for (const k of Object.keys(filled) as (keyof Form)[]) {
-          if (k !== 'type' && !String(f[k]).trim()) (next[k] as string) = filled[k];
+          if (k !== 'type' && k !== 'image' && !String(f[k]).trim())
+            (next[k] as string) = filled[k];
         }
         return next;
       });
@@ -332,6 +342,13 @@ function EditorBody({ editing, onClose }: { editing: StudyItem | null; onClose: 
           </Row>
         </>
       )}
+      <div className="space-y-1">
+        <span className="text-sm font-medium">画像（任意）</span>
+        <ImagePicker value={form.image} onChange={(image) => set({ image })} />
+        <span className="block text-xs text-slate-500">
+          問題の上に表示します（図や写真で覚えたいときに）。画像は縮小してこの端末に保存します
+        </span>
+      </div>
       <Row label="メモ（任意）">
         <textarea
           rows={2}
