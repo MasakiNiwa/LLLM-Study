@@ -20,6 +20,7 @@ const SUGGESTIONS = [
   '苦手な単語を教えて',
   'take の使い方を例文で教えて',
   '覚えた単語でクイズを出して',
+  '「serendipity」をカードにして',
 ];
 
 const CARD_SUGGESTIONS = [

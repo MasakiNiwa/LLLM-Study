@@ -1,4 +1,5 @@
 import type { ItemType, StudyItem, StudyPack } from '@/lib/packs/schema';
+import type { UserItemDraft } from '@/lib/packs/userPack';
 
 /** カードの学習状態（ts-fsrs の State と同じ値） */
 export const CardState = { New: 0, Learning: 1, Review: 2, Relearning: 3 } as const;
@@ -101,6 +102,8 @@ export interface ChatRecord {
   thinking?: string;
   /** モデルが使ったツールの名前 */
   tools?: string[];
+  /** AI が提案したカード（ユーザーが「追加」を押すとマイカードに保存する） */
+  proposals?: { draft: UserItemDraft; added?: boolean }[];
   createdAt: number;
   error?: string;
 }

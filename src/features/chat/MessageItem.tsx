@@ -5,6 +5,7 @@ import { cn } from '@/lib/utils/cn';
 import { formatDuration } from '@/lib/utils/format';
 import { TOOL_LABELS } from '@/features/ai/tools';
 import { useChat, type ChatMessage } from './chatStore';
+import { ProposalCard } from './ProposalCard';
 
 const Markdown = lazy(() => import('./markdown/Markdown'));
 
@@ -151,6 +152,14 @@ export const MessageItem = memo(function MessageItem({
             <TypingDots />
           ) : null}
         </div>
+        {message.proposals?.map((p, i) => (
+          <ProposalCard
+            key={i}
+            draft={p.draft}
+            added={p.added}
+            onAdd={() => void useChat.getState().addProposal(message.id, i)}
+          />
+        ))}
         {message.status === 'error' && (
           <p className="flex items-start gap-1.5 text-sm text-rose-600 dark:text-rose-400">
             <AlertCircle className="mt-0.5 size-4 shrink-0" />

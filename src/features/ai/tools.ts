@@ -9,6 +9,8 @@ import { db } from '@/lib/db/db';
 import { CardState } from '@/lib/db/types';
 import type { JsonValue, ToolCallInfo, ToolDeclaration } from '@/lib/llm/types';
 import { itemAnswer, itemSearchText, itemTitle } from '@/lib/packs/itemText';
+import { ItemSchema } from '@/lib/packs/schema';
+import type { UserItemDraft } from '@/lib/packs/userPack';
 import { addDays } from '@/lib/srs/day';
 import { retrievability } from '@/lib/srs/scheduler';
 import { getTodayOverview } from '@/features/study/repository';
@@ -40,6 +42,27 @@ export const TOOL_DECLARATIONS: ToolDeclaration[] = [
     parameters: {
       type: 'object',
       properties: { limit: { type: 'integer', description: '最大件数（既定 5）' } },
+    },
+  },
+  {
+    name: 'propose_card',
+    description:
+      'ユーザーのマイカードに追加するカードを提案する。カードは画面に表示され、ユーザーが「追加」を押したときだけ保存される。新しい単語や表現を教えたときや、ユーザーが覚えたいと言ったときに使う',
+    parameters: {
+      type: 'object',
+      properties: {
+        type: {
+          type: 'string',
+          enum: ['vocab', 'phrase', 'qa'],
+          description: 'vocab: 単語、phrase: フレーズ、qa: 一問一答',
+        },
+        front: { type: 'string', description: '単語・フレーズ・問題' },
+        back: { type: 'string', description: '意味・答え（単語の意味が複数なら「、」で区切る）' },
+        example: { type: 'string', description: '例文（任意）' },
+        example_translation: { type: 'string', description: '例文の訳（任意）' },
+        notes: { type: 'string', description: '補足（任意）' },
+      },
+      required: ['type', 'front', 'back'],
     },
   },
   {
@@ -161,8 +184,64 @@ async function getReviewHistory(
   };
 }
 
-export async function executeTool(call: ToolCallInfo, settings: Settings): Promise<JsonValue> {
+/** propose_card の引数を、検証済みのマイカードの下書きにする。形が合わなければエラー文 */
+export function proposalFromArgs(
+  args: Record<string, JsonValue | undefined>,
+): UserItemDraft | string {
+  const str = (v: JsonValue | undefined) => (typeof v === 'string' ? v.trim() : '');
+  const type = str(args.type);
+  const front = str(args.front);
+  const back = str(args.back);
+  const example = str(args.example);
+  const examples = example
+    ? [{ text: example, translation: str(args.example_translation) || undefined }]
+    : undefined;
+  const notes = str(args.notes) || undefined;
+  const raw =
+    type === 'vocab'
+      ? {
+          type,
+          term: front,
+          meanings: back
+            .split(/[、,]/)
+            .map((m) => m.trim())
+            .filter(Boolean),
+          examples,
+          notes,
+        }
+      : type === 'phrase'
+        ? { type, phrase: front, meaning: back, examples, notes }
+        : type === 'qa'
+          ? { type, question: front, answer: back, notes }
+          : null;
+  if (!raw) return 'type は vocab / phrase / qa のどれかにしてください';
+  const r = ItemSchema.safeParse({ ...raw, id: 'proposal' });
+  if (!r.success) return `カードの形式が正しくありません: ${r.error.issues[0]?.message ?? ''}`;
+  const { id: _id, ...draft } = r.data;
+  return draft as UserItemDraft;
+}
+
+export interface ToolContext {
+  /** propose_card で提案されたカードを画面に出す */
+  onProposal?: (draft: UserItemDraft) => void;
+}
+
+export async function executeTool(
+  call: ToolCallInfo,
+  settings: Settings,
+  ctx: ToolContext = {},
+): Promise<JsonValue> {
   switch (call.name) {
+    case 'propose_card': {
+      const draft = proposalFromArgs(call.arguments);
+      if (typeof draft === 'string') return { error: draft };
+      if (!ctx.onProposal) return { error: 'この画面ではカードを提案できません' };
+      ctx.onProposal(draft);
+      return {
+        status: 'shown_to_user',
+        note: 'カードを画面に表示しました。ユーザーが「追加」を押すとマイカードに保存されます。保存されたとは言わないでください',
+      };
+    }
     case 'get_study_status':
       return getStudyStatus(settings);
     case 'search_items':
@@ -181,4 +260,5 @@ export const TOOL_LABELS: Record<string, string> = {
   search_items: '教材を検索',
   get_weak_items: '苦手な項目を確認',
   get_review_history: '学習履歴を確認',
+  propose_card: 'カードを提案',
 };

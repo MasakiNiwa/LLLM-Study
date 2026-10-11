@@ -1,5 +1,14 @@
 import { useEffect, useState } from 'react';
-import { ArrowRight, Clock, Flame, GraduationCap, Library, Play, Sparkles } from 'lucide-react';
+import {
+  ArrowRight,
+  Clock,
+  Flame,
+  GraduationCap,
+  Library,
+  Play,
+  Sparkles,
+  Wand2,
+} from 'lucide-react';
 import { Link } from 'wouter';
 import { PageBody, PageHeader } from '@/app/PageHeader';
 import { Button } from '@/components/ui/Button';
@@ -166,6 +175,23 @@ export default function HomePage() {
             <WeekStrip />
           </Card>
         </Link>
+
+        {engineStatus === 'ready' && !noPacks && (
+          <Link href="/quiz" className="block">
+            <Card className="flex items-center gap-3 p-4 transition-colors hover:bg-slate-50 dark:hover:bg-slate-800/50">
+              <div className="flex size-10 items-center justify-center rounded-xl bg-accent-100 text-accent-700 dark:bg-accent-900/40 dark:text-accent-300">
+                <Wand2 className="size-5" />
+              </div>
+              <div className="min-w-0 flex-1">
+                <div className="font-semibold">AI 例文クイズ</div>
+                <p className="text-sm text-slate-500 dark:text-slate-400">
+                  忘れかけた単語を、AI が作る新しい例文で腕だめし
+                </p>
+              </div>
+              <ArrowRight className="size-5 text-slate-400" />
+            </Card>
+          </Link>
+        )}
 
         <Link href={engineStatus === 'ready' ? '/chat' : '/models'} className="block">
           <Card className="flex items-center gap-3 p-4 transition-colors hover:bg-slate-50 dark:hover:bg-slate-800/50">
