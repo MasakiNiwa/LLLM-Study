@@ -54,7 +54,8 @@ export const TOOL_DECLARATIONS: ToolDeclaration[] = [
         type: {
           type: 'string',
           enum: ['vocab', 'phrase', 'qa'],
-          description: 'vocab: 単語、phrase: フレーズ、qa: 一問一答',
+          description:
+            '"vocab"（単語）・"phrase"（フレーズ）・"qa"（一問一答）のどれか。英語の値をそのまま書く',
         },
         front: { type: 'string', description: '単語・フレーズ・問題' },
         back: { type: 'string', description: '意味・答え（単語の意味が複数なら「、」で区切る）' },
@@ -184,17 +185,57 @@ async function getReviewHistory(
   };
 }
 
+/** AI が付けがちな別名（word・表現・question など）を、カードの種類に直す */
+const TYPE_ALIASES: Record<string, 'vocab' | 'phrase' | 'qa'> = {
+  vocab: 'vocab',
+  vocabulary: 'vocab',
+  word: 'vocab',
+  words: 'vocab',
+  term: 'vocab',
+  単語: 'vocab',
+  英単語: 'vocab',
+  phrase: 'phrase',
+  phrases: 'phrase',
+  expression: 'phrase',
+  idiom: 'phrase',
+  sentence: 'phrase',
+  フレーズ: 'phrase',
+  表現: 'phrase',
+  熟語: 'phrase',
+  qa: 'qa',
+  'q&a': 'qa',
+  question: 'qa',
+  quiz: 'qa',
+  問題: 'qa',
+  一問一答: 'qa',
+};
+
+/** 種類の指定が無い・分からないときは中身から推測する（? があれば問題、空白を含めばフレーズ） */
+export function proposalType(type: string, front: string): 'vocab' | 'phrase' | 'qa' {
+  const known = TYPE_ALIASES[type.trim().toLowerCase()];
+  if (known) return known;
+  if (/[?？]/.test(front)) return 'qa';
+  return /\s/.test(front.trim()) ? 'phrase' : 'vocab';
+}
+
 /** propose_card の引数を、検証済みのマイカードの下書きにする。形が合わなければエラー文 */
 export function proposalFromArgs(
   args: Record<string, JsonValue | undefined>,
 ): UserItemDraft | string {
-  const str = (v: JsonValue | undefined) => (typeof v === 'string' ? v.trim() : '');
-  const type = str(args.type);
-  const front = str(args.front);
-  const back = str(args.back);
-  const example = str(args.example);
+  const str = (v: JsonValue | undefined) =>
+    typeof v === 'string'
+      ? v.trim()
+      : Array.isArray(v)
+        ? v.filter((x) => typeof x === 'string').join('、')
+        : '';
+  // 小さいモデルは引数名を言い換えることがあるので、よくある別名も受け付ける
+  const pick = (...keys: string[]) => keys.map((k) => str(args[k])).find(Boolean) ?? '';
+  const front = pick('front', 'term', 'word', 'phrase', 'question');
+  const back = pick('back', 'meaning', 'meanings', 'answer', 'definition');
+  const type = proposalType(str(args.type), front);
+  const example = pick('example', 'example_sentence');
   const examples = example
-    ? [{ text: example, translation: str(args.example_translation) || undefined }]
+    ? [{ text: example, translation: pick('example_translation', 'translation') || undefined }]
     : undefined;
   const notes = str(args.notes) || undefined;
   const raw =
@@ -211,10 +252,7 @@ export function proposalFromArgs(
         }
       : type === 'phrase'
         ? { type, phrase: front, meaning: back, examples, notes }
-        : type === 'qa'
-          ? { type, question: front, answer: back, notes }
-          : null;
-  if (!raw) return 'type は vocab / phrase / qa のどれかにしてください';
+        : { type, question: front, answer: back, notes };
   const r = ItemSchema.safeParse({ ...raw, id: 'proposal' });
   if (!r.success) return `カードの形式が正しくありません: ${r.error.issues[0]?.message ?? ''}`;
   const { id: _id, ...draft } = r.data;

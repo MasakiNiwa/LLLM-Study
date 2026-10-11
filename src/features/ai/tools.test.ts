@@ -86,6 +86,26 @@ describe('tools', () => {
 
   it('形式に合わない提案はエラーを返す', () => {
     expect(typeof proposalFromArgs({ type: 'vocab', front: 'x', back: '' })).toBe('string');
-    expect(typeof proposalFromArgs({ type: 'other', front: 'x', back: 'y' })).toBe('string');
+    expect(typeof proposalFromArgs({ front: '', back: 'y' })).toBe('string');
+  });
+
+  it('種類の別名や引数名の言い換えを受け付け、分からなければ中身から推測する', () => {
+    expect(
+      proposalFromArgs({ type: 'word', front: 'serendipity', back: '偶然の幸運' }),
+    ).toMatchObject({ type: 'vocab', term: 'serendipity' });
+    expect(
+      proposalFromArgs({ type: '表現', term: 'No worries', meaning: '気にしないで' }),
+    ).toMatchObject({ type: 'phrase', phrase: 'No worries' });
+    expect(
+      proposalFromArgs({ type: 'other', front: 'take a break', back: '休憩する' }),
+    ).toMatchObject({ type: 'phrase' });
+    expect(proposalFromArgs({ front: 'go の過去形は？', answer: 'went' })).toMatchObject({
+      type: 'qa',
+      answer: 'went',
+    });
+    expect(proposalFromArgs({ word: 'apple', meanings: ['りんご', 'リンゴの木'] })).toMatchObject({
+      type: 'vocab',
+      meanings: ['りんご', 'リンゴの木'],
+    });
   });
 });
