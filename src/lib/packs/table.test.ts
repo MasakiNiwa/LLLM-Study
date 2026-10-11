@@ -1,5 +1,5 @@
 import { describe, expect, it } from 'vitest';
-import { detectDelimiter, parseTable, tableToPack } from './table';
+import { detectDelimiter, parseTable, parseTableRows, tableToPack } from './table';
 
 describe('parseTable', () => {
   it('タブ区切りとカンマ区切りを読み分ける', () => {
@@ -19,6 +19,26 @@ describe('parseTable', () => {
       ['line1\nline2', 'say "hi"'],
       ['bold\nnext', '<tag> & more'],
     ]);
+  });
+});
+
+describe('parseTableRows', () => {
+  it('HTML のタグだけを取り除き、普通の < > は残す', () => {
+    expect(parseTable('List<String>\tx<y>z\n<b>x</b><br>y\t<div>z</div>')).toEqual([
+      ['List<String>', 'x<y>z'],
+      ['x\ny', 'z'],
+    ]);
+  });
+
+  it('元のテキストの行番号を覚える（空行・設定行・セル内の改行を数える）', () => {
+    const rows = parseTableRows('#separator:tab\n\na\t"1\n2"\nb\tB\n');
+    expect(rows.map((r) => r.line)).toEqual([3, 5]);
+    const r = tableToPack(
+      rows.map((x) => x.cells).concat([['c', 'x'.repeat(2100)]]),
+      { type: 'qa', title: 'T', header: false },
+      [...rows.map((x) => x.line), 9],
+    );
+    expect(!r.ok && r.issues[0].path).toBe('9 行目（answer）');
   });
 });
 
