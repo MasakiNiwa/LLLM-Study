@@ -1,0 +1,168 @@
+/**
+ * 会話練習の状態。会話は保存しない（練習ごとに新しく始める）。
+ * AI の会話は Worker のチャット用の会話（KV キャッシュ）を使い、メインのチャットとは履歴を分ける。
+ */
+import { toast } from 'sonner';
+import { create } from 'zustand';
+import { llm } from '@/lib/llm/client';
+import type { ChatTurn } from '@/lib/llm/types';
+import { errorMessage } from '@/lib/utils/format';
+import { createId } from '@/lib/utils/id';
+import { useAiBusy } from '@/features/ai/aiBusy';
+import { runOneshot } from '@/features/ai/oneshot';
+import { splitThinking } from '@/features/chat/thinking';
+import { useEngine } from '@/features/engine/engineStore';
+import { useSettings } from '@/features/settings/settingsStore';
+import {
+  feedbackPrompt,
+  OPENING_MESSAGE,
+  parseFeedback,
+  rolePlayPrompt,
+  type Feedback,
+  type PracticeConfig,
+} from './scenarios';
+
+export interface PracticeMessage {
+  id: string;
+  role: 'user' | 'assistant';
+  text: string;
+  /** 画面に出さない（最初の合図） */
+  hidden?: boolean;
+  streaming?: boolean;
+}
+
+interface PracticeState {
+  config: PracticeConfig | null;
+  messages: PracticeMessage[];
+  generating: boolean;
+  feedback: Feedback | null;
+  feedbackLoading: boolean;
+  start: (config: PracticeConfig) => Promise<void>;
+  send: (text: string) => Promise<void>;
+  stop: () => void;
+  requestFeedback: () => Promise<void>;
+  reset: () => void;
+}
+
+export const usePractice = create<PracticeState>()((set, get) => {
+  const generate = async (history: PracticeMessage[], user: PracticeMessage) => {
+    const config = get().config;
+    if (!config) return;
+    if (useEngine.getState().status !== 'ready') {
+      toast.error('AI モデルが読み込まれていません');
+      return;
+    }
+    if (useAiBusy.getState().task) {
+      toast.info('AI が別の応答を生成中です。少し待ってから送ってください');
+      return;
+    }
+    const s = useSettings.getState();
+    const assistantId = createId();
+    set({
+      messages: [
+        ...history,
+        user,
+        { id: assistantId, role: 'assistant', text: '', streaming: true },
+      ],
+      generating: true,
+    });
+    useAiBusy.setState({ task: 'practice' });
+    let raw = '';
+    let raf = 0;
+    const flush = () => {
+      raf = 0;
+      const text = splitThinking(raw).answer;
+      set((st) => ({
+        messages: st.messages.map((m) => (m.id === assistantId ? { ...m, text } : m)),
+      }));
+    };
+    const toTurn = (m: PracticeMessage): ChatTurn => ({ id: m.id, role: m.role, text: m.text });
+    try {
+      await llm.generate(
+        {
+          mode: 'chat',
+          settings: {
+            systemPrompt: rolePlayPrompt(config),
+            temperature: s.temperature,
+            topK: s.topK,
+            topP: s.topP,
+            maxOutputTokens: 256,
+            enableThinking: false,
+          },
+          history: history.filter((m) => m.text).map(toTurn),
+          message: toTurn(user),
+          assistantId,
+        },
+        (ev) => {
+          if (ev.type !== 'delta' || ev.channel) return;
+          raw += ev.text;
+          if (!raf) raf = requestAnimationFrame(flush);
+        },
+      );
+      cancelAnimationFrame(raf);
+      flush();
+    } catch (e) {
+      cancelAnimationFrame(raf);
+      toast.error('AI が応答できませんでした', { description: errorMessage(e) });
+    } finally {
+      useAiBusy.setState({ task: null });
+      set((st) => ({
+        generating: false,
+        messages: st.messages
+          .map((m) => (m.id === assistantId ? { ...m, streaming: false } : m))
+          .filter((m) => m.role === 'user' || m.text),
+      }));
+    }
+  };
+
+  return {
+    config: null,
+    messages: [],
+    generating: false,
+    feedback: null,
+    feedbackLoading: false,
+
+    async start(config) {
+      if (get().generating) llm.cancel();
+      set({ config, messages: [], feedback: null });
+      await generate([], { id: createId(), role: 'user', text: OPENING_MESSAGE, hidden: true });
+    },
+
+    async send(text) {
+      const trimmed = text.trim();
+      if (!trimmed || get().generating) return;
+      await generate(get().messages, { id: createId(), role: 'user', text: trimmed });
+    },
+
+    stop() {
+      if (get().generating) llm.cancel();
+    },
+
+    async requestFeedback() {
+      const { config, messages } = get();
+      const utterances = messages.filter((m) => m.role === 'user' && !m.hidden).map((m) => m.text);
+      if (!config || utterances.length === 0) return;
+      set({ feedbackLoading: true });
+      try {
+        const r = await runOneshot({
+          task: 'assist',
+          prompt: feedbackPrompt(config.lang, utterances.slice(-12)),
+          maxOutputTokens: 1024,
+          plain: true,
+        });
+        const fb = parseFeedback(r.text);
+        if (!fb) throw new Error('AI の添削結果を読み取れませんでした。もう一度試してください');
+        set({ feedback: fb });
+      } catch (e) {
+        toast.error('添削してもらえませんでした', { description: errorMessage(e) });
+      } finally {
+        set({ feedbackLoading: false });
+      }
+    },
+
+    reset() {
+      if (get().generating) llm.cancel();
+      set({ config: null, messages: [], feedback: null });
+    },
+  };
+});

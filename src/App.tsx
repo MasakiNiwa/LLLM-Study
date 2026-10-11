@@ -14,6 +14,7 @@ const LibraryPage = lazy(() => import('@/pages/LibraryPage'));
 const CalendarPage = lazy(() => import('@/pages/CalendarPage'));
 const ChatPage = lazy(() => import('@/pages/ChatPage'));
 const QuizPage = lazy(() => import('@/pages/QuizPage'));
+const PracticePage = lazy(() => import('@/pages/PracticePage'));
 const ModelsPage = lazy(() => import('@/pages/ModelsPage'));
 const SettingsPage = lazy(() => import('@/pages/SettingsPage'));
 const HelpPage = lazy(() => import('@/pages/HelpPage'));
@@ -33,6 +34,7 @@ export default function App() {
             <Route path="/calendar/:tab?" component={CalendarPage} />
             <Route path="/chat" component={ChatPage} />
             <Route path="/quiz" component={QuizPage} />
+            <Route path="/practice" component={PracticePage} />
             <Route path="/models" component={ModelsPage} />
             <Route path="/settings" component={SettingsPage} />
             <Route path="/help" component={HelpPage} />

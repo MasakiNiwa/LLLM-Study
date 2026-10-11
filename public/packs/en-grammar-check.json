@@ -2,8 +2,8 @@
   "format": "lllm-study-pack",
   "version": 1,
   "id": "en-grammar-check",
-  "title": "英文法チェック 24",
-  "description": "つまずきやすい文法ポイントを、穴埋め 12 問と選択問題 12 問で確認します（単語帳以外の教材の例でもあります）。",
+  "title": "英文法チェック 30",
+  "description": "つまずきやすい文法ポイントを、穴埋め 12 問・選択問題 12 問・並べ替え 6 問で確認します（単語帳以外の教材の例でもあります）。",
   "subject": "english",
   "language": {
     "target": "en",
@@ -13,12 +13,13 @@
   "tags": [
     "英文法",
     "穴埋め",
-    "選択問題"
+    "選択問題",
+    "並べ替え"
   ],
   "author": "LLLM-Study",
   "license": "MIT",
   "source": "LLLM-Study オリジナル",
-  "revision": 1,
+  "revision": 2,
   "items": [
     {
       "id": "c-since",
@@ -271,6 +272,48 @@
       ],
       "answer": 1,
       "explanation": "Would you like ...? で「〜はいかがですか」と丁寧にすすめる。"
+    },
+    {
+      "id": "o-never-been",
+      "type": "order",
+      "prompt": "私は一度もパリに行ったことがない。",
+      "answer": "I have never been to Paris.",
+      "explanation": "have never been to 〜 で「〜に行ったことがない」（現在完了の経験）。"
+    },
+    {
+      "id": "o-indirect-question",
+      "type": "order",
+      "prompt": "駅がどこか教えていただけますか。",
+      "answer": "Could you tell me where the station is?",
+      "explanation": "文の中に入った疑問文（間接疑問）は「疑問詞＋主語＋動詞」の語順。where is the station とはしない。"
+    },
+    {
+      "id": "o-omitted-relative",
+      "type": "order",
+      "prompt": "これは私が昨日買った本です。",
+      "answer": "This is the book I bought yesterday.",
+      "explanation": "目的格の関係代名詞（which / that）は省略できる。the book (that) I bought。"
+    },
+    {
+      "id": "o-superlative",
+      "type": "order",
+      "prompt": "彼女はクラスで一番背が高い女の子だ。",
+      "answer": "She is the tallest girl in our class.",
+      "explanation": "最上級は the + -est。範囲を表すときは in（場所・集団）や of（複数のもの）を使う。"
+    },
+    {
+      "id": "o-formal-subject",
+      "type": "order",
+      "prompt": "約束を守ることは大切だ。",
+      "answer": "It is important to keep your promise.",
+      "explanation": "It is ... to 〜 で「〜することは…だ」。It は形式上の主語で、本当の主語は to 以下。"
+    },
+    {
+      "id": "o-look-forward",
+      "type": "order",
+      "prompt": "お会いできるのを楽しみにしています。",
+      "answer": "I am looking forward to seeing you.",
+      "explanation": "look forward to の to は前置詞なので、あとは -ing 形（seeing）。"
     }
   ]
 }

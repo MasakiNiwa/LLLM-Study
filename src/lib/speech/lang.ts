@@ -39,3 +39,16 @@ export function speechLang(code: string | undefined): string {
 export function languageName(code: string | undefined): string {
   return NAMES[base(code)] ?? code ?? '英語';
 }
+
+/**
+ * 読み上げる文の文字から言語を補正する。
+ * 教材に言語の指定が無く英語とみなした場合でも、かな・ハングルを含む文はその言語で読む。
+ */
+export function adjustSpeechLang(text: string, lang: string): string {
+  if (!lang.toLowerCase().startsWith('en')) return lang;
+  if (/[぀-ヿ]/.test(text)) return 'ja-JP';
+  if (/[가-힯]/.test(text)) return 'ko-KR';
+  // 漢字だけの文は日本語として読む（このアプリの利用者の多くは日本語話者のため）
+  if (/[一-鿿]/.test(text)) return 'ja-JP';
+  return lang;
+}

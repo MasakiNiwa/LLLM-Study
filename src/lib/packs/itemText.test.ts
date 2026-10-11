@@ -6,6 +6,8 @@ import {
   itemAnswer,
   itemForLlm,
   itemSearchText,
+  orderChunks,
+  shuffleChunks,
 } from './itemText';
 
 describe('itemText', () => {
@@ -53,5 +55,19 @@ describe('itemText', () => {
     expect(expectedAnswer({ id: 'c', type: 'cloze', text: 'a {{b}} c {{d}}' }, 'basic')).toEqual({
       blanks: ['b', 'd'],
     });
+  });
+
+  it('並べ替え: 語句の取り出しと、正しい順にならないシャッフル', () => {
+    const chunks = orderChunks({ answer: 'I have never been to Paris.' });
+    expect(chunks).toEqual(['I', 'have', 'never', 'been', 'to', 'Paris.']);
+    expect(orderChunks({ answer: '私は学生です', chunks: ['私は', '学生', 'です'] })).toHaveLength(
+      3,
+    );
+    for (const seed of ['a', 'b', 'c', 'd']) {
+      const idx = shuffleChunks(chunks, seed);
+      expect([...idx].sort()).toEqual([0, 1, 2, 3, 4, 5]);
+      expect(idx.map((i) => chunks[i])).not.toEqual(chunks);
+    }
+    expect(shuffleChunks(chunks, 'x')).toEqual(shuffleChunks(chunks, 'x'));
   });
 });

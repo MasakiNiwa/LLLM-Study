@@ -2,7 +2,7 @@
  * 項目の種類ごとのテキスト表現（一覧の見出し・検索・読み上げ・LLM に渡す形）。
  * React の表示は features/items/ に置き、ここは UI に依存しない処理だけにする。
  */
-import type { StudyItem } from './schema';
+import type { OrderItem, StudyItem } from './schema';
 
 /** 穴埋めの {{ }} を取り除いた完全な文 */
 export function clozeFull(text: string): string {
@@ -12,6 +12,11 @@ export function clozeFull(text: string): string {
 /** 穴埋めの答え（{{ }} の中身） */
 export function clozeAnswers(text: string): string[] {
   return [...text.matchAll(/\{\{([^{}]+)\}\}/g)].map((m) => m[1]);
+}
+
+/** 並べ替えの語句（正しい順）。chunks が無ければ answer を空白で区切る */
+export function orderChunks(item: Pick<OrderItem, 'answer' | 'chunks'>): string[] {
+  return item.chunks ?? item.answer.trim().split(/\s+/);
 }
 
 /** 一覧やカレンダーに出す見出し */
@@ -26,6 +31,8 @@ export function itemTitle(item: StudyItem): string {
       return item.question;
     case 'cloze':
       return clozeFull(item.text);
+    case 'order':
+      return item.prompt ?? item.answer;
   }
 }
 
@@ -42,6 +49,8 @@ export function itemAnswer(item: StudyItem): string {
       return clozeAnswers(item.text).join(' / ');
     case 'choice':
       return item.choices[item.answer] ?? '';
+    case 'order':
+      return item.answer;
   }
 }
 
@@ -66,6 +75,8 @@ export function speakText(item: StudyItem): string | undefined {
       return item.phrase;
     case 'cloze':
       return clozeFull(item.text);
+    case 'order':
+      return item.answer;
     default:
       return undefined;
   }
@@ -80,6 +91,7 @@ export function itemForLlm(item: StudyItem): Record<string, unknown> {
     out[k] = v;
   }
   if (item.type === 'choice') out.correct_choice = item.choices[item.answer];
+  if (item.type === 'order') out.chunks = orderChunks(item);
   return out;
 }
 
@@ -90,11 +102,11 @@ export function expectedAnswer(
 ): { accepted: string[] } | { blanks: string[] } | undefined {
   switch (item.type) {
     case 'vocab':
-      return template === 'recall'
+      return template === 'recall' || template === 'listen'
         ? { accepted: [item.term] }
         : { accepted: meaningCandidates(item.meanings) };
     case 'phrase':
-      return template === 'recall'
+      return template === 'recall' || template === 'listen'
         ? { accepted: [item.phrase] }
         : { accepted: meaningCandidates([item.meaning]) };
     case 'qa':
@@ -102,6 +114,7 @@ export function expectedAnswer(
     case 'cloze':
       return { blanks: clozeAnswers(item.text) };
     case 'choice':
+    case 'order':
       return undefined;
   }
 }
@@ -121,5 +134,30 @@ function meaningCandidates(meanings: string[]): string[] {
 
 /** 入力が「学ぶ言語の語句」を答えるものか（入力欄の言語ヒント用） */
 export function answersInTargetLanguage(item: StudyItem, template: string): boolean {
-  return template === 'recall' || item.type === 'cloze';
+  return template === 'recall' || template === 'listen' || item.type === 'cloze';
+}
+
+/** 決まった種から作る疑似乱数（同じカードなら同じ並びになる） */
+function seeded(seed: string) {
+  let h = 2166136261;
+  for (let i = 0; i < seed.length; i++) h = Math.imul(h ^ seed.charCodeAt(i), 16777619);
+  return () => {
+    h = Math.imul(h ^ (h >>> 15), 2246822507);
+    h = Math.imul(h ^ (h >>> 13), 3266489909);
+    return ((h ^= h >>> 16) >>> 0) / 4294967296;
+  };
+}
+
+/** 語句をシャッフルする（正しい順のままにはしない） */
+export function shuffleChunks(chunks: string[], seed: string): number[] {
+  const idx = chunks.map((_, i) => i);
+  const rand = seeded(seed);
+  for (let attempt = 0; attempt < 5; attempt++) {
+    for (let i = idx.length - 1; i > 0; i--) {
+      const j = Math.floor(rand() * (i + 1));
+      [idx[i], idx[j]] = [idx[j], idx[i]];
+    }
+    if (idx.some((v, i) => chunks[v] !== chunks[i])) return idx;
+  }
+  return idx.slice(1).concat(idx[0]);
 }

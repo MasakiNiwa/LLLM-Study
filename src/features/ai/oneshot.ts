@@ -11,7 +11,7 @@ import { buildSystemPrompt } from './prompt';
 import { useAiBusy, type AiTask } from './aiBusy';
 
 export interface OneshotOptions {
-  task: Exclude<AiTask, 'chat'>;
+  task: Exclude<AiTask, 'chat' | 'practice'>;
   prompt: string;
   maxOutputTokens?: number;
   /** true: 性格（口調）を付けず、教材づくり用の中立なシステムプロンプトで生成する */
