@@ -1,7 +1,7 @@
 {
   "name": "lllm-study",
   "private": true,
-  "version": "0.5.0",
+  "version": "0.6.0",
   "description": "ローカルLLM学習アプリ — 自分のペースで使えるローカルLLMタイプの学習アプリ",
   "license": "MIT",
   "type": "module",

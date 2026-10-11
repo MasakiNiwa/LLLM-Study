@@ -1,6 +1,6 @@
 import { describe, expect, it } from 'vitest';
 import type { ReviewRecord } from '@/lib/db/types';
-import { summarizeActivity, summarizeForecast, summarizeStates } from './stats';
+import { itemStatus, summarizeActivity, summarizeForecast, summarizeStates } from './stats';
 
 describe('stats', () => {
   it('日ごとの活動を集計する', () => {
@@ -41,5 +41,20 @@ describe('summarizeStates', () => {
       young: 1,
       mature: 2,
     });
+  });
+});
+
+describe('itemStatus', () => {
+  const c = (state: 0 | 1 | 2 | 3, scheduled_days = 0, suspended: 0 | 1 = 0) => ({
+    state,
+    scheduled_days,
+    suspended,
+  });
+  it('項目のカードから状態を決める', () => {
+    expect(itemStatus([c(0)])).toBe('new');
+    expect(itemStatus([c(2, 30), c(1)])).toBe('learning');
+    expect(itemStatus([c(2, 5)])).toBe('review');
+    expect(itemStatus([c(2, 30), c(0)])).toBe('mature');
+    expect(itemStatus([c(2, 30, 1)])).toBe('suspended');
   });
 });

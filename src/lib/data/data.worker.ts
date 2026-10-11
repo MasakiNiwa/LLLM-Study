@@ -14,9 +14,34 @@ import {
   summarizeActivity,
   summarizeForecast,
   summarizeStates,
+  itemStatus,
   type CalendarData,
+  type ItemSummary,
   type StatsData,
 } from './stats';
+import { itemAnswer, itemSearchText, itemTitle } from '@/lib/packs/itemText';
+import type { CardRecord, ItemRecord } from '@/lib/db/types';
+
+async function summarize(items: ItemRecord[]): Promise<ItemSummary[]> {
+  const cards = await db.cards
+    .where('itemKey')
+    .anyOf(items.map((i) => i.key))
+    .toArray();
+  const byItem = new Map<string, CardRecord[]>();
+  for (const c of cards) byItem.set(c.itemKey, [...(byItem.get(c.itemKey) ?? []), c]);
+  return items.map((i) => {
+    const cs = byItem.get(i.key) ?? [];
+    const learned = cs.filter((c) => c.state !== 0 && !c.suspended);
+    return {
+      key: i.key,
+      packId: i.packId,
+      title: itemTitle(i.item),
+      answer: itemAnswer(i.item),
+      status: itemStatus(cs),
+      nextDue: learned.length ? Math.min(...learned.map((c) => c.due)) : undefined,
+    };
+  });
+}
 
 const api = {
   parsePack(text: string) {
@@ -71,6 +96,22 @@ const api = {
       studyDays: allDays.length,
       averageRecall: recall.length ? recall.reduce((a, b) => a + b, 0) / recall.length : undefined,
     };
+  },
+
+  /** 1 つの教材の項目一覧（学習状況つき。教材内の順番） */
+  async packItems(packId: string): Promise<ItemSummary[]> {
+    return summarize(await db.items.where('packId').equals(packId).sortBy('order'));
+  },
+
+  /** すべての教材から項目を探す（大文字小文字は区別しない） */
+  async searchItems(query: string, limit: number): Promise<ItemSummary[]> {
+    const q = query.trim().toLowerCase();
+    if (!q) return [];
+    const items = await db.items
+      .filter((i) => itemSearchText(i.item).includes(q))
+      .limit(limit)
+      .toArray();
+    return summarize(items);
   },
 
   /** 学習した日の一覧（連続日数・記録の表示用） */

@@ -14,6 +14,7 @@ import { errorMessage } from '@/lib/utils/format';
 import { useAiFocus } from '@/features/ai/focusStore';
 import { getPersona, reactionText } from '@/features/ai/personas';
 import { useSettings } from '@/features/settings/settingsStore';
+import { setItemSuspended } from './cardActions';
 import { LEARN_AHEAD_MS, loadQueue, saveRating, undoRating } from './repository';
 
 export interface StudyCard {
@@ -67,6 +68,8 @@ interface StudyState {
   reveal: () => void;
   rate: (grade: GradeValue) => Promise<void>;
   undo: () => Promise<void>;
+  /** 表示中の項目の出題を止めて、次のカードへ進む */
+  suspendCurrent: () => Promise<void>;
   end: () => void;
 }
 
@@ -204,6 +207,30 @@ export const useStudy = create<StudyState>()((set, get) => {
         toast('直前の評価を取り消しました');
       } catch (e) {
         toast.error('取り消せませんでした', { description: errorMessage(e) });
+      }
+    },
+
+    async suspendCurrent() {
+      const { current, queue } = get();
+      if (!current) return;
+      const key = current.card.itemKey;
+      try {
+        await setItemSuspended(key, true);
+        await showNext(queue.filter((c) => c.itemKey !== key));
+        toast('この項目を出題しないようにしました', {
+          description: '「教材」の項目一覧から再開できます',
+          action: {
+            label: '元に戻す',
+            onClick: () =>
+              void (async () => {
+                await setItemSuspended(key, false);
+                const card = await db.cards.get(current.card.id);
+                if (card) await showNext([card, ...(get().current ? get().queue : [])]);
+              })(),
+          },
+        });
+      } catch (e) {
+        toast.error('出題を止められませんでした', { description: errorMessage(e) });
       }
     },
 
