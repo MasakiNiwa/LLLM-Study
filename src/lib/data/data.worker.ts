@@ -133,6 +133,37 @@ const api = {
     return summarize(items);
   },
 
+  /** 苦手な項目（いま思い出せる確率が低く、忘れた回数が多い順。ふりかえり用） */
+  async weakItems(
+    now: number,
+    limit: number,
+    packId?: string,
+  ): Promise<{ title: string; lapses: number; recall: number }[]> {
+    const cards = (
+      packId
+        ? await db.cards.where('packId').equals(packId).toArray()
+        : await db.cards.where('state').anyOf(1, 2, 3).toArray()
+    ).filter((c) => c.state !== 0 && !c.suspended);
+    const scored = cards
+      .map((c) => ({ c, recall: retrievability(c, now) ?? 1 }))
+      .sort((a, b) => a.recall - 0.05 * a.c.lapses - (b.recall - 0.05 * b.c.lapses));
+    const seen = new Set<string>();
+    const picked: { key: string; lapses: number; recall: number }[] = [];
+    for (const { c, recall } of scored) {
+      if (seen.has(c.itemKey)) continue;
+      seen.add(c.itemKey);
+      picked.push({ key: c.itemKey, lapses: c.lapses, recall });
+      if (picked.length >= limit) break;
+    }
+    const items = await db.items.bulkGet(picked.map((p) => p.key));
+    return picked.flatMap((p, i) => {
+      const item = items[i];
+      return item
+        ? [{ title: itemTitle(item.item), lapses: p.lapses, recall: Math.round(p.recall * 100) }]
+        : [];
+    });
+  },
+
   /** 学習した日の一覧（連続日数・記録の表示用） */
   async studyDays(): Promise<string[]> {
     return (await db.reviews.orderBy('day').uniqueKeys()) as string[];
