@@ -75,6 +75,27 @@
       ]
     },
     {
+      "file": "en-reading-basic.json",
+      "id": "en-reading-basic",
+      "title": "英語の長文読解 入門 20",
+      "description": "短い英文（お知らせ・メール・説明文・会話文）5 本と、その内容を問う問題 20 問。本文は問題の上に表示され、答えを見ると訳も確認できます（長文読解形式の教材の例でもあります）。",
+      "subject": "english",
+      "level": "中学〜高校基礎（CEFR A2〜B1）",
+      "tags": [
+        "英語",
+        "長文読解",
+        "リーディング"
+      ],
+      "revision": 1,
+      "itemCount": 20,
+      "itemTypes": [
+        "choice",
+        "qa",
+        "cloze",
+        "order"
+      ]
+    },
+    {
       "file": "ja-bookkeeping-accounts-001.json",
       "id": "ja-bookkeeping-accounts-001",
       "title": "簿記の勘定科目100問：基礎から1級・実務まで",

@@ -15,7 +15,14 @@ import { useAiFocus } from '@/features/ai/focusStore';
 import { getPersona, reactionText } from '@/features/ai/personas';
 import { useSettings } from '@/features/settings/settingsStore';
 import { setItemSuspended } from './cardActions';
-import { LEARN_AHEAD_MS, loadQueue, saveRating, undoRating } from './repository';
+import {
+  LEARN_AHEAD_MS,
+  loadPracticeCards,
+  loadQueue,
+  saveRating,
+  undoRating,
+  type PracticeKind,
+} from './repository';
 
 export interface StudyCard {
   card: CardRecord;
@@ -53,8 +60,16 @@ export interface LastRating {
   correctStreak: number;
 }
 
+/** srs: 今日の学習（評価を記録してスケジュールを進める）、practice: おさらい（記録しない） */
+export type StudyMode = 'srs' | 'practice';
+
+/** おさらいで「もう一度」「難しい」にしたカードを、何枚あとにもう一度出すか */
+const PRACTICE_REQUEUE: Partial<Record<GradeValue, number>> = { 1: 2, 2: 5 };
+
 interface StudyState {
   status: 'idle' | 'loading' | 'studying' | 'done';
+  mode: StudyMode;
+  practiceKind: PracticeKind | null;
   queue: CardRecord[];
   current: StudyCard | null;
   revealed: boolean;
@@ -65,6 +80,8 @@ interface StudyState {
   undoStack: UndoEntry[];
   lastRating: LastRating | null;
   start: () => Promise<void>;
+  /** おさらいを始める（評価は記録せず、スケジュールも変えない） */
+  startPractice: (kind: PracticeKind) => Promise<void>;
   reveal: () => void;
   rate: (grade: GradeValue) => Promise<void>;
   undo: () => Promise<void>;
@@ -113,6 +130,8 @@ export const useStudy = create<StudyState>()((set, get) => {
 
   return {
     status: 'idle',
+    mode: 'srs',
+    practiceKind: null,
     queue: [],
     current: null,
     revealed: false,
@@ -123,7 +142,14 @@ export const useStudy = create<StudyState>()((set, get) => {
     lastRating: null,
 
     async start() {
-      set({ status: 'loading', stats: emptyStats(), undoStack: [], lastRating: null });
+      set({
+        status: 'loading',
+        mode: 'srs',
+        practiceKind: null,
+        stats: emptyStats(),
+        undoStack: [],
+        lastRating: null,
+      });
       try {
         const plan = await loadQueue(useSettings.getState());
         set({
@@ -137,6 +163,26 @@ export const useStudy = create<StudyState>()((set, get) => {
       }
     },
 
+    async startPractice(kind) {
+      set({
+        status: 'loading',
+        mode: 'practice',
+        practiceKind: kind,
+        stats: emptyStats(),
+        undoStack: [],
+        lastRating: null,
+      });
+      try {
+        const cards = await loadPracticeCards(useSettings.getState(), kind);
+        set({ planned: { new: 0, review: cards.length, learning: 0 } });
+        await showNext(cards);
+      } catch (e) {
+        console.error(e);
+        toast.error('おさらいを始められませんでした', { description: errorMessage(e) });
+        set({ status: 'idle', mode: 'srs' });
+      }
+    },
+
     reveal() {
       if (!get().current || get().revealed) return;
       set({ revealed: true });
@@ -144,15 +190,46 @@ export const useStudy = create<StudyState>()((set, get) => {
     },
 
     async rate(grade) {
-      const { current, queue, shownAt, stats } = get();
+      const { current, queue, shownAt, stats, mode } = get();
       if (!current) return;
       const now = Date.now();
+      const settings = useSettings.getState();
+      const nextStats = (correctStreak: number): SessionStats => ({
+        ...stats,
+        done: stats.done + 1,
+        ratings: { ...stats.ratings, [grade]: stats.ratings[grade] + 1 },
+        correctStreak,
+        bestStreak: Math.max(stats.bestStreak, correctStreak),
+      });
+      const reaction = (correctStreak: number) =>
+        reactionText(getPersona(settings.persona, settings.customPersona), grade, correctStreak);
+      if (mode === 'practice') {
+        // おさらいは記録しない。思い出せなかったカードは少しあとにもう一度出す
+        const rest = queue.slice(1);
+        const gap = PRACTICE_REQUEUE[grade];
+        if (gap !== undefined) rest.splice(Math.min(gap, rest.length), 0, current.card);
+        const correctStreak = grade >= 3 ? stats.correctStreak + 1 : 0;
+        set({
+          stats: nextStats(correctStreak),
+          lastRating: {
+            grade,
+            cardId: current.card.id,
+            nextDue: current.card.due,
+            at: now,
+            reaction: reaction(correctStreak),
+            done: stats.done + 1,
+            correctStreak,
+          },
+        });
+        await showNext(rest);
+        return;
+      }
       try {
         const { card, reviewId } = await saveRating(
           current.card,
           grade,
           now - shownAt,
-          useSettings.getState(),
+          settings,
           now,
         );
         const rest = queue.slice(1);
@@ -161,13 +238,7 @@ export const useStudy = create<StudyState>()((set, get) => {
         const correct = grade >= 3;
         const correctStreak = correct ? stats.correctStreak + 1 : 0;
         set({
-          stats: {
-            ...stats,
-            done: stats.done + 1,
-            ratings: { ...stats.ratings, [grade]: stats.ratings[grade] + 1 },
-            correctStreak,
-            bestStreak: Math.max(stats.bestStreak, correctStreak),
-          },
+          stats: nextStats(correctStreak),
           undoStack: [
             ...get().undoStack.slice(-19),
             { reviewId, before: current.card, requeued: pos >= 0, statsBefore: stats },
@@ -177,11 +248,7 @@ export const useStudy = create<StudyState>()((set, get) => {
             cardId: card.id,
             nextDue: card.due,
             at: now,
-            reaction: reactionText(
-              getPersona(useSettings.getState().persona, useSettings.getState().customPersona),
-              grade,
-              correctStreak,
-            ),
+            reaction: reaction(correctStreak),
             done: stats.done + 1,
             correctStreak,
           },
@@ -235,7 +302,7 @@ export const useStudy = create<StudyState>()((set, get) => {
     },
 
     end() {
-      set({ status: 'idle', queue: [], current: null, revealed: false });
+      set({ status: 'idle', mode: 'srs', queue: [], current: null, revealed: false });
       useAiFocus.getState().setStudyCard(null, false);
     },
   };

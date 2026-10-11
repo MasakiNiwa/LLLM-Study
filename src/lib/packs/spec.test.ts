@@ -30,6 +30,15 @@ describe('buildMaterialPrompt', () => {
     expect(p).toContain('JSON Schema');
   });
 
+  it('長文読解では本文つきの例を示し、その例も取り込める形', () => {
+    const p = buildMaterialPrompt({ ...base, reading: true }, { schema: false });
+    expect(p).toContain('形式: 長文読解');
+    const json = p.split('```json\n')[1].split('\n```')[0];
+    const r = parsePackText(json);
+    expect(r.ok).toBe(true);
+    if (r.ok) expect(r.pack.passages).toHaveLength(1);
+  });
+
   it('例のパックはそのまま取り込める形', () => {
     for (const types of [
       ['vocab', 'phrase'],

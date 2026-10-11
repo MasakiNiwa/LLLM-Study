@@ -10,7 +10,7 @@ import {
   Sparkles,
   Wand2,
 } from 'lucide-react';
-import { Link } from 'wouter';
+import { Link, useLocation } from 'wouter';
 import { cn } from '@/lib/utils/cn';
 import { PageBody, PageHeader } from '@/app/PageHeader';
 import { Button } from '@/components/ui/Button';
@@ -24,6 +24,7 @@ import { useSettings } from '@/features/settings/settingsStore';
 import { useTodayOverview } from '@/features/study/useTodayOverview';
 import { WeekStrip } from '@/features/calendar/WeekStrip';
 import { ScopePicker } from '@/features/study/ScopePicker';
+import { PracticePicker } from '@/features/study/PracticePicker';
 import { BackupReminder } from '@/features/home/BackupReminder';
 
 function ProgressRing({ value }: { value: number }) {
@@ -76,6 +77,7 @@ export default function HomePage() {
   const packCount = useLibrary((s) => s.packs.length);
   const libraryLoaded = useLibrary((s) => s.loaded);
   const persona = getPersona(personaId, custom);
+  const [, navigate] = useLocation();
 
   useEffect(() => {
     void useLibrary.getState().refresh();
@@ -152,6 +154,13 @@ export default function HomePage() {
                 {remaining > 0 ? '学習を始める' : '今日の分は完了！（確認する）'}
               </Button>
             </Link>
+            {overview && remaining === 0 && (
+              <PracticePicker
+                key={done}
+                className="mt-4 border-t border-slate-100 pt-4 dark:border-slate-800"
+                onStart={() => navigate('/study')}
+              />
+            )}
           </Card>
         )}
 

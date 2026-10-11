@@ -23,6 +23,7 @@ export async function exportPack(packId: string): Promise<StudyPack> {
     license: pack.license,
     source: pack.source,
     revision: pack.revision,
+    passages: pack.passages,
     items: items.map((i) => i.item),
   });
 }
