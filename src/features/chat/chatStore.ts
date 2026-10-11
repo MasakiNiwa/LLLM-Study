@@ -19,7 +19,9 @@ import { getConversationSettings } from '@/features/ai/prompt';
 import { buildAppState, formatAppState } from '@/features/ai/studyContext';
 import { executeTool, TOOL_DECLARATIONS, TOOL_LABELS } from '@/features/ai/tools';
 import { useEngine } from '@/features/engine/engineStore';
+import { useLibrary } from '@/features/library/libraryStore';
 import { useSettings } from '@/features/settings/settingsStore';
+import { addUserItem } from '@/lib/packs/userPack';
 import { splitThinking } from './thinking';
 
 export interface ChatMessage extends ChatRecord {
@@ -38,6 +40,8 @@ interface ChatState {
   regenerate: () => Promise<void>;
   stop: () => void;
   clear: () => Promise<void>;
+  /** AI が提案したカードをマイカードに追加する */
+  addProposal: (messageId: string, index: number) => Promise<void>;
 }
 
 function toHistory(messages: ChatMessage[]): ChatTurn[] {
@@ -144,7 +148,19 @@ export const useChat = create<ChatState>()((set, get) => {
           dirty = true;
           if (!raf) raf = requestAnimationFrame(flush);
         },
-        tools ? (call) => executeTool(call, useSettings.getState()) : undefined,
+        tools
+          ? (call) =>
+              executeTool(call, useSettings.getState(), {
+                onProposal: (draft) =>
+                  set((st) => ({
+                    messages: st.messages.map((m) =>
+                      m.id === assistantId
+                        ? { ...m, proposals: [...(m.proposals ?? []), { draft }] }
+                        : m,
+                    ),
+                  })),
+              })
+          : undefined,
       );
       cancelAnimationFrame(raf);
       dirty = true;
@@ -236,6 +252,25 @@ export const useChat = create<ChatState>()((set, get) => {
 
     stop() {
       if (get().isGenerating) llm.cancel();
+    },
+
+    async addProposal(messageId, index) {
+      const message = get().messages.find((m) => m.id === messageId);
+      const proposal = message?.proposals?.[index];
+      if (!message || !proposal || proposal.added) return;
+      try {
+        await addUserItem(proposal.draft);
+        const updated: ChatMessage = {
+          ...message,
+          proposals: message.proposals!.map((p, i) => (i === index ? { ...p, added: true } : p)),
+        };
+        set((st) => ({ messages: st.messages.map((m) => (m.id === messageId ? updated : m)) }));
+        persistMessage(updated);
+        void useLibrary.getState().refresh();
+        toast.success('マイカードに追加しました', { description: '次の学習から出題されます' });
+      } catch (e) {
+        toast.error('追加できませんでした', { description: errorMessage(e) });
+      }
     },
 
     async clear() {

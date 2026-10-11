@@ -9,6 +9,7 @@ import {
   LogOut,
   PartyPopper,
   Undo2,
+  Wand2,
 } from 'lucide-react';
 import { Link } from 'wouter';
 import { PageHeader } from '@/app/PageHeader';
@@ -22,6 +23,7 @@ import { speak, stopSpeaking } from '@/lib/speech/tts';
 import { formatDuration } from '@/lib/utils/format';
 import { getPersona } from '@/features/ai/personas';
 import { CardFace } from '@/features/items/ItemCard';
+import { useEngine } from '@/features/engine/engineStore';
 import { useSettings } from '@/features/settings/settingsStore';
 import { AiAssistPanel } from '@/features/study/AiAssistPanel';
 import { AnswerInput } from '@/features/study/AnswerInput';
@@ -53,6 +55,7 @@ function SessionSummary() {
   const personaId = useSettings((s) => s.persona);
   const custom = useSettings((s) => s.customPersona);
   const persona = getPersona(personaId, custom);
+  const aiReady = useEngine((s) => s.status === 'ready');
   const [endedAt] = useState(() => Date.now());
   const [message] = useState(() => {
     const list = stats.done > 0 ? persona.finish : persona.allDone;
@@ -96,6 +99,14 @@ function SessionSummary() {
         </Card>
       )}
       <div className="flex flex-wrap justify-center gap-2">
+        {aiReady && stats.done > 0 && (
+          <Link href="/quiz">
+            <Button variant="secondary">
+              <Wand2 />
+              AI 例文クイズ
+            </Button>
+          </Link>
+        )}
         {stats.done === 0 && (
           <Link href="/library">
             <Button variant="secondary">

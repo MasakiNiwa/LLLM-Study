@@ -4,7 +4,7 @@ import { db } from '@/lib/db/db';
 import { installPack } from '@/lib/packs/install';
 import { DEFAULT_SETTINGS } from '@/features/settings/settingsStore';
 import { saveRating } from '@/features/study/repository';
-import { executeTool } from './tools';
+import { executeTool, proposalFromArgs } from './tools';
 
 beforeEach(async () => {
   await db.delete();
@@ -64,5 +64,28 @@ describe('tools', () => {
     expect(await executeTool({ name: 'nope', arguments: {} }, DEFAULT_SETTINGS)).toHaveProperty(
       'error',
     );
+  });
+
+  it('カードの提案は画面に渡し、勝手に保存しない', async () => {
+    const proposals: unknown[] = [];
+    const r = await executeTool(
+      {
+        name: 'propose_card',
+        arguments: { type: 'vocab', front: 'serendipity', back: '偶然の幸運、思いがけない発見' },
+      },
+      DEFAULT_SETTINGS,
+      { onProposal: (d) => proposals.push(d) },
+    );
+    expect(r).toMatchObject({ status: 'shown_to_user' });
+    expect(proposals[0]).toMatchObject({
+      term: 'serendipity',
+      meanings: ['偶然の幸運', '思いがけない発見'],
+    });
+    expect(await db.packs.get('my-cards')).toBeUndefined();
+  });
+
+  it('形式に合わない提案はエラーを返す', () => {
+    expect(typeof proposalFromArgs({ type: 'vocab', front: 'x', back: '' })).toBe('string');
+    expect(typeof proposalFromArgs({ type: 'other', front: 'x', back: 'y' })).toBe('string');
   });
 });
