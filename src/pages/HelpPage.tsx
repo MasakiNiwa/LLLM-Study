@@ -10,6 +10,7 @@ import {
   MonitorCheck,
   PlayCircle,
   Scale,
+  Smartphone,
   Sparkles,
   Wand2,
 } from 'lucide-react';
@@ -279,7 +280,28 @@ export default function HelpPage() {
                 PC では <code className="font-mono text-xs">chrome://settings/system</code>
                 の「グラフィック アクセラレーションが使用可能な場合は使用する」をオンにする
               </li>
+              <li>
+                Android で GPU があるのに使えない場合、OS の「高度な保護」（Advanced
+                Protection）がオンになっていると、Chrome で WebGPU が止められていることがあります。
+                オフにすると使えるようになる場合がありますが、
+                <strong>端末全体の保護が弱まります</strong>
+                。危険性を理解したうえで、ご自身の判断で試してください（無理にオフにする必要はありません。CPU
+                対応のモデルなら、そのまま使えます）。
+              </li>
             </ul>
+          </Body>
+        </Section>
+
+        <Section title="ホーム画面に追加（アプリとして使う）" icon={<Smartphone />}>
+          <Body>
+            <p>
+              ブラウザのメニューの「ホーム画面に追加」（「アプリをインストール」）で、アプリとして起動できます。一度開けば、オフラインでも起動できます。
+            </p>
+            <p className="text-slate-600 dark:text-slate-400">
+              Android
+              で「このアプリはすでにインストールされています」と表示されるのに見つからないときは、ホーム画面ではなくアプリ一覧（ドロワー）に入っていることがあります。「設定」→「アプリ」に「LLLM
+              Study」があれば、そこから開くか、アンインストールしてから追加し直してください。
+            </p>
           </Body>
         </Section>
 
