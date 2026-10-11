@@ -20,6 +20,7 @@ export const ITEM_TYPE_LABELS: Record<ItemType, string> = {
   qa: '一問一答',
   cloze: '穴埋め',
   choice: '選択問題',
+  order: '並べ替え',
 };
 
 export const TEMPLATES: Record<ItemType, TemplateDef[]> = {
@@ -36,6 +37,12 @@ export const TEMPLATES: Record<ItemType, TemplateDef[]> = {
       description: '意味を見て単語を思い出す（難しめ）',
       defaultEnabled: false,
     },
+    {
+      id: 'listen',
+      label: '聞いて答える',
+      description: '音声だけを聞いて意味を思い出す（聞き取りの練習）',
+      defaultEnabled: false,
+    },
   ],
   phrase: [
     {
@@ -50,6 +57,12 @@ export const TEMPLATES: Record<ItemType, TemplateDef[]> = {
       description: '意味を見てフレーズを思い出す（難しめ）',
       defaultEnabled: false,
     },
+    {
+      id: 'listen',
+      label: '聞いて答える',
+      description: '音声だけを聞いて意味を思い出す（聞き取りの練習）',
+      defaultEnabled: false,
+    },
   ],
   qa: [
     { id: 'basic', label: '答える', description: '問題を見て答えを思い出す', defaultEnabled: true },
@@ -58,6 +71,14 @@ export const TEMPLATES: Record<ItemType, TemplateDef[]> = {
     { id: 'basic', label: '穴を埋める', description: '文の空欄を思い出す', defaultEnabled: true },
   ],
   choice: [{ id: 'basic', label: '選ぶ', description: '選択肢から答える', defaultEnabled: true }],
+  order: [
+    {
+      id: 'basic',
+      label: '並べ替える',
+      description: '語句を正しい順に並べる',
+      defaultEnabled: true,
+    },
+  ],
 };
 
 export function defaultTemplates(types: Iterable<ItemType>): Partial<Record<ItemType, string[]>> {

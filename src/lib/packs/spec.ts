@@ -25,6 +25,8 @@ export const ITEM_TYPE_GUIDES: Record<ItemType, string> = {
     '穴埋め。text の中で答えにする部分を {{ }} で囲む（例: "I look {{forward}} to it."）。translation・hint・explanation は任意',
   choice:
     '選択問題。question・choices（2〜6 個）・answer（正解の番号。0 始まり）が必須。explanation は任意',
+  order:
+    '並べ替え。answer（正しい文）が必須。chunks（並べ替える語句を正しい順に。日本語など空白で区切らない言語では必須）・prompt（訳や問題文）・explanation は任意',
 };
 
 const EXAMPLE_ITEMS: Record<ItemType, StudyPack['items'][number]> = {
@@ -78,6 +80,13 @@ const EXAMPLE_ITEMS: Record<ItemType, StudyPack['items'][number]> = {
     choices: ['織田信長', '豊臣秀吉', '徳川家康', '足利尊氏'],
     answer: 2,
     explanation: '1603 年に征夷大将軍となり、江戸に幕府を開いた。',
+  },
+  order: {
+    id: 'o-never-been',
+    type: 'order',
+    prompt: '私は一度もパリに行ったことがない。',
+    answer: 'I have never been to Paris.',
+    explanation: 'have never been to 〜 で「〜に行ったことがない」（経験）。',
   },
 };
 

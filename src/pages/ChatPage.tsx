@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { Eraser, Sparkles } from 'lucide-react';
+import { Eraser, MessagesSquare, Sparkles } from 'lucide-react';
 import { Link } from 'wouter';
 import { PageHeader } from '@/app/PageHeader';
 import { Button } from '@/components/ui/Button';
@@ -102,17 +102,30 @@ export default function ChatPage() {
         meta={<ModelStatusChip className="max-w-36 md:hidden" />}
         hideTitleOnMobile
         actions={
-          <Button
-            variant="ghost"
-            size="sm"
-            onClick={() => setConfirming(true)}
-            disabled={!hasMessages}
-            aria-label="会話をクリア"
-            title="会話をクリア"
-          >
-            <Eraser />
-            クリア
-          </Button>
+          <>
+            <Link href="/practice">
+              <Button
+                variant="ghost"
+                size="sm"
+                aria-label="会話練習"
+                title="会話練習（ロールプレイ）"
+              >
+                <MessagesSquare />
+                <span className="hidden sm:inline">会話練習</span>
+              </Button>
+            </Link>
+            <Button
+              variant="ghost"
+              size="sm"
+              onClick={() => setConfirming(true)}
+              disabled={!hasMessages}
+              aria-label="会話をクリア"
+              title="会話をクリア"
+            >
+              <Eraser />
+              クリア
+            </Button>
+          </>
         }
       />
       {!ready ? (

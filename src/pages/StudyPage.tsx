@@ -23,7 +23,7 @@ import { checkAnswer, type AnswerCheck, type AnswerVerdict } from '@/lib/srs/ans
 import { speak, stopSpeaking } from '@/lib/speech/tts';
 import { formatDuration } from '@/lib/utils/format';
 import { getPersona } from '@/features/ai/personas';
-import { CardFace } from '@/features/items/ItemCard';
+import { CardFace, type OrderResult } from '@/features/items/ItemCard';
 import { useEngine } from '@/features/engine/engineStore';
 import { useSettings } from '@/features/settings/settingsStore';
 import { AiAssistPanel } from '@/features/study/AiAssistPanel';
@@ -162,6 +162,9 @@ export default function StudyPage() {
   const speechVoice = useSettings((s) => s.speechVoice);
   // 選択問題で選んだ番号（カードごと）
   const [choice, setChoice] = useState<{ cardId: string; index: number } | null>(null);
+  // 並べ替えの結果（カードごと）
+  const [order, setOrder] = useState<{ cardId: string; result: OrderResult } | null>(null);
+  const ordered = order && order.cardId === current?.card.id ? order.result : undefined;
   const chosen = choice && choice.cardId === current?.card.id ? choice.index : undefined;
   const shownAt = useStudy((s) => s.shownAt);
   const typeAnswer = useSettings((s) => s.typeAnswer);
@@ -186,7 +189,9 @@ export default function StudyPage() {
   useEffect(() => {
     const cur = useStudy.getState().current;
     const text = cur && speakText(cur.item.item);
-    if (autoSpeak && cur && text && cur.card.template !== 'recall') {
+    // 聞き取りカードは設定に関係なく、表示したら音声を流す
+    const listen = cur?.card.template === 'listen';
+    if (cur && text && (listen || (autoSpeak && cur.card.template !== 'recall'))) {
       // 設定で選ぶ声は英語用なので、ほかの言語の教材では端末の既定の声を使う
       const voiceURI = cur.lang.startsWith('en') ? speechVoice || undefined : undefined;
       void speak(text, { lang: cur.lang, rate: speechRate, voiceURI });
@@ -195,6 +200,7 @@ export default function StudyPage() {
   }, [cardId, autoSpeak, speechRate, speechVoice]);
 
   const isChoice = current?.item.item.type === 'choice';
+  const isOrder = current?.item.item.type === 'order';
   const expected = current ? expectedAnswer(current.item.item, current.card.template) : undefined;
   const shouldType =
     !!current &&
@@ -206,9 +212,13 @@ export default function StudyPage() {
       ? chosen === current.item.item.answer
         ? 3
         : 1
-      : typedNow
-        ? VERDICT_GRADE[typedNow.verdict]
-        : undefined;
+      : ordered
+        ? ordered.correct
+          ? 3
+          : 1
+        : typedNow
+          ? VERDICT_GRADE[typedNow.verdict]
+          : undefined;
 
   // キーボード操作: Space / Enter で答えを見る、1〜4 で評価、Ctrl+Z で取り消し
   useEffect(() => {
@@ -223,7 +233,7 @@ export default function StudyPage() {
         return;
       }
       if (!st.revealed && (e.key === ' ' || e.key === 'Enter')) {
-        if (st.current.item.item.type === 'choice') return;
+        if (st.current.item.item.type === 'choice' || st.current.item.item.type === 'order') return;
         e.preventDefault();
         st.reveal();
         return;
@@ -336,6 +346,12 @@ export default function StudyPage() {
                       setChoice({ cardId: current.card.id, index });
                       reveal();
                     }}
+                    ordered={ordered}
+                    seed={`${current.card.id}:${current.card.reps}`}
+                    onOrder={(result) => {
+                      setOrder({ cardId: current.card.id, result });
+                      reveal();
+                    }}
                   />
                   {shouldType && !revealed && expected && (
                     <AnswerInput
@@ -393,9 +409,9 @@ export default function StudyPage() {
                   onRate={(g) => void rate(g)}
                   recommended={recommended}
                 />
-              ) : isChoice ? (
+              ) : isChoice || isOrder ? (
                 <p className="flex h-14 items-center justify-center text-sm text-slate-500">
-                  答えを選んでください
+                  {isChoice ? '答えを選んでください' : '語句を正しい順に並べてください'}
                 </p>
               ) : (
                 <Button

@@ -76,3 +76,27 @@ describe('parsePackText', () => {
     if (!r.ok) expect(r.error).toContain('パック全体');
   });
 });
+
+describe('並べ替え（order）', () => {
+  const pack = (item: Record<string, unknown>) =>
+    JSON.stringify({ format: 'lllm-study-pack', version: 1, id: 'o', title: 'O', items: [item] });
+
+  it('空白で区切れる文は chunks を省略できる', () => {
+    expect(parsePackText(pack({ id: 'a', type: 'order', answer: 'I like it.' })).ok).toBe(true);
+  });
+  it('chunks をつなげると answer になること', () => {
+    expect(
+      parsePackText(
+        pack({ id: 'a', type: 'order', answer: '私は学生です', chunks: ['私は', '学生', 'です'] }),
+      ).ok,
+    ).toBe(true);
+    expect(
+      parsePackText(
+        pack({ id: 'a', type: 'order', answer: '私は学生です', chunks: ['私は', '先生', 'です'] }),
+      ).ok,
+    ).toBe(false);
+  });
+  it('空白の無い文で chunks が無ければエラー', () => {
+    expect(parsePackText(pack({ id: 'a', type: 'order', answer: '私は学生です' })).ok).toBe(false);
+  });
+});

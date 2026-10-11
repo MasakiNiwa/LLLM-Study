@@ -5,11 +5,13 @@ import {
   Flame,
   GraduationCap,
   Library,
+  MessagesSquare,
   Play,
   Sparkles,
   Wand2,
 } from 'lucide-react';
 import { Link } from 'wouter';
+import { cn } from '@/lib/utils/cn';
 import { PageBody, PageHeader } from '@/app/PageHeader';
 import { Button } from '@/components/ui/Button';
 import { Card } from '@/components/ui/Card';
@@ -178,21 +180,29 @@ export default function HomePage() {
           </Card>
         </Link>
 
-        {engineStatus === 'ready' && !noPacks && (
-          <Link href="/quiz" className="block">
-            <Card className="flex items-center gap-3 p-4 transition-colors hover:bg-slate-50 dark:hover:bg-slate-800/50">
-              <div className="flex size-10 items-center justify-center rounded-xl bg-accent-100 text-accent-700 dark:bg-accent-900/40 dark:text-accent-300">
-                <Wand2 className="size-5" />
-              </div>
-              <div className="min-w-0 flex-1">
-                <div className="font-semibold">AI 例文クイズ</div>
-                <p className="text-sm text-slate-500 dark:text-slate-400">
-                  忘れかけた単語を、AI が作る新しい例文で腕だめし
+        {engineStatus === 'ready' && (
+          <div className="grid grid-cols-2 gap-3">
+            {!noPacks && (
+              <Link href="/quiz" className="block">
+                <Card className="h-full p-4 transition-colors hover:bg-slate-50 dark:hover:bg-slate-800/50">
+                  <Wand2 className="size-6 text-accent-600" />
+                  <div className="mt-2 font-semibold">AI 例文クイズ</div>
+                  <p className="text-xs text-slate-500 dark:text-slate-400">
+                    忘れかけた単語を新しい例文で
+                  </p>
+                </Card>
+              </Link>
+            )}
+            <Link href="/practice" className={cn('block', noPacks && 'col-span-2')}>
+              <Card className="h-full p-4 transition-colors hover:bg-slate-50 dark:hover:bg-slate-800/50">
+                <MessagesSquare className="size-6 text-accent-600" />
+                <div className="mt-2 font-semibold">会話練習</div>
+                <p className="text-xs text-slate-500 dark:text-slate-400">
+                  場面を決めて AI とロールプレイ
                 </p>
-              </div>
-              <ArrowRight className="size-5 text-slate-400" />
-            </Card>
-          </Link>
+              </Card>
+            </Link>
+          </div>
         )}
 
         <Link href={engineStatus === 'ready' ? '/chat' : '/models'} className="block">

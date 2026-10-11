@@ -12,6 +12,9 @@ describe('pickVoice', () => {
   it('指定の声を優先する', () => {
     expect(pickVoice(voices, 'en', 'en-remote')?.voiceURI).toBe('en-remote');
   });
+  it('指定の声でも言語が違えば使わない', () => {
+    expect(pickVoice(voices, 'ja', 'en-gb')?.voiceURI).toBe('ja');
+  });
   it('無ければ undefined', () => {
     expect(pickVoice(voices, 'fr')).toBeUndefined();
   });

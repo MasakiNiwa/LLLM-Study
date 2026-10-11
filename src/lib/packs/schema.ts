@@ -105,15 +105,50 @@ export const ChoiceItemSchema = z
   })
   .describe('選択問題カード');
 
+/** 比較用: 空白を取り除いて小文字にする */
+function compact(s: string): string {
+  return s.replace(/\s+/g, '').toLowerCase();
+}
+
+/** 並べ替え（語句を正しい順に並べる。正誤はアプリが判定する） */
+export const OrderItemSchema = z
+  .object({
+    type: z.literal('order'),
+    ...itemBase,
+    answer: longText.describe('正しい順に並べた文（例: I have never been to Paris.）'),
+    chunks: z
+      .array(shortText)
+      .min(2)
+      .max(12)
+      .optional()
+      .describe(
+        '並べ替える語句（正しい順）。省略すると answer を空白で区切る。日本語など空白で区切らない言語では必ず指定する',
+      ),
+    prompt: longText
+      .optional()
+      .describe('問題文・訳など（例: 私は一度もパリに行ったことがない。）'),
+    explanation: longText.optional(),
+  })
+  .refine((v) => !v.chunks || compact(v.chunks.join('')) === compact(v.answer), {
+    message: 'chunks をつなげると answer と同じ文になるようにしてください',
+    path: ['chunks'],
+  })
+  .refine((v) => v.chunks || v.answer.trim().split(/\s+/).length >= 2, {
+    message: '空白で区切れない文は chunks で語句を指定してください',
+    path: ['chunks'],
+  })
+  .describe('並べ替えカード');
+
 export const ItemSchema = z.discriminatedUnion('type', [
   VocabItemSchema,
   PhraseItemSchema,
   QaItemSchema,
   ClozeItemSchema,
   ChoiceItemSchema,
+  OrderItemSchema,
 ]);
 
-export const ITEM_TYPES = ['vocab', 'phrase', 'qa', 'cloze', 'choice'] as const;
+export const ITEM_TYPES = ['vocab', 'phrase', 'qa', 'cloze', 'choice', 'order'] as const;
 
 export const PackSchema = z
   .object({
@@ -163,6 +198,7 @@ export type PhraseItem = z.infer<typeof PhraseItemSchema>;
 export type QaItem = z.infer<typeof QaItemSchema>;
 export type ClozeItem = z.infer<typeof ClozeItemSchema>;
 export type ChoiceItem = z.infer<typeof ChoiceItemSchema>;
+export type OrderItem = z.infer<typeof OrderItemSchema>;
 export type StudyItem = z.infer<typeof ItemSchema>;
 export type ItemType = StudyItem['type'];
 export type StudyPack = z.infer<typeof PackSchema>;

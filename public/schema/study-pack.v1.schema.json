@@ -486,6 +486,71 @@
             ],
             "additionalProperties": false,
             "description": "選択問題カード"
+          },
+          {
+            "type": "object",
+            "properties": {
+              "type": {
+                "type": "string",
+                "const": "order"
+              },
+              "id": {
+                "type": "string",
+                "pattern": "^[A-Za-z0-9][A-Za-z0-9._-]{0,63}$",
+                "description": "パック内で一意な ID（更新時に学習記録を引き継ぐキー。後から変えない）"
+              },
+              "tags": {
+                "description": "分類用のタグ",
+                "maxItems": 20,
+                "type": "array",
+                "items": {
+                  "type": "string",
+                  "minLength": 1,
+                  "maxLength": 40
+                }
+              },
+              "notes": {
+                "description": "補足・語法・注意点など",
+                "type": "string",
+                "minLength": 1,
+                "maxLength": 2000
+              },
+              "answer": {
+                "type": "string",
+                "minLength": 1,
+                "maxLength": 2000,
+                "description": "正しい順に並べた文（例: I have never been to Paris.）"
+              },
+              "chunks": {
+                "description": "並べ替える語句（正しい順）。省略すると answer を空白で区切る。日本語など空白で区切らない言語では必ず指定する",
+                "minItems": 2,
+                "maxItems": 12,
+                "type": "array",
+                "items": {
+                  "type": "string",
+                  "minLength": 1,
+                  "maxLength": 300
+                }
+              },
+              "prompt": {
+                "description": "問題文・訳など（例: 私は一度もパリに行ったことがない。）",
+                "type": "string",
+                "minLength": 1,
+                "maxLength": 2000
+              },
+              "explanation": {
+                "type": "string",
+                "minLength": 1,
+                "maxLength": 2000
+              }
+            },
+            "required": [
+              "type",
+              "id",
+              "answer"
+            ],
+            "additionalProperties": false,
+            "description": "並べ替えカード"
           }
         ]
       }

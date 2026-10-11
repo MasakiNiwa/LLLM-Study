@@ -39,20 +39,22 @@
     {
       "file": "en-grammar-check.json",
       "id": "en-grammar-check",
-      "title": "英文法チェック 24",
-      "description": "つまずきやすい文法ポイントを、穴埋め 12 問と選択問題 12 問で確認します（単語帳以外の教材の例でもあります）。",
+      "title": "英文法チェック 30",
+      "description": "つまずきやすい文法ポイントを、穴埋め 12 問・選択問題 12 問・並べ替え 6 問で確認します（単語帳以外の教材の例でもあります）。",
       "subject": "english",
       "level": "中学〜高校基礎",
       "tags": [
         "英文法",
         "穴埋め",
-        "選択問題"
+        "選択問題",
+        "並べ替え"
       ],
-      "revision": 1,
-      "itemCount": 24,
+      "revision": 2,
+      "itemCount": 30,
       "itemTypes": [
         "cloze",
-        "choice"
+        "choice",
+        "order"
       ]
     },
     {

@@ -1,3 +1,5 @@
+import { adjustSpeechLang } from './lang';
+
 /**
  * 読み上げ（ブラウザ標準の Web Speech API）。端末の音声を使うのでオフラインでも動くことが多い。
  */
@@ -27,11 +29,12 @@ export function pickVoice(
   lang: string,
   voiceURI?: string,
 ): SpeechSynthesisVoice | undefined {
-  if (voiceURI) {
-    const v = voices.find((x) => x.voiceURI === voiceURI);
-    if (v) return v;
-  }
   const base = lang.toLowerCase().split('-')[0];
+  if (voiceURI) {
+    // 指定の声でも、読む言語と違う言語の声なら使わない
+    const v = voices.find((x) => x.voiceURI === voiceURI);
+    if (v && v.lang.toLowerCase().split(/[-_]/)[0] === base) return v;
+  }
   const candidates = voices.filter((v) => v.lang.toLowerCase().split(/[-_]/)[0] === base);
   return (
     candidates.find((v) => v.localService && v.default) ??
@@ -45,7 +48,7 @@ export async function speak(
   options: { lang?: string; rate?: number; voiceURI?: string } = {},
 ): Promise<void> {
   if (!isSpeechSupported() || !text.trim()) return;
-  const lang = options.lang ?? 'en-US';
+  const lang = adjustSpeechLang(text, options.lang ?? 'en-US');
   const voice = pickVoice(await getVoices(), lang, options.voiceURI);
   speechSynthesis.cancel();
   const u = new SpeechSynthesisUtterance(text);

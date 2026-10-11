@@ -43,6 +43,7 @@
 | qa | 一問一答 | 一問一答（どの分野にも使える）。question と answer が必須。explanation・hints は任意 |
 | cloze | 穴埋め | 穴埋め。text の中で答えにする部分を {{ }} で囲む（例: "I look {{forward}} to it."）。translation・hint・explanation は任意 |
 | choice | 選択問題 | 選択問題。question・choices（2〜6 個）・answer（正解の番号。0 始まり）が必須。explanation は任意 |
+| order | 並べ替え | 並べ替え。answer（正しい文）が必須。chunks（並べ替える語句を正しい順に。日本語など空白で区切らない言語では必須）・prompt（訳や問題文）・explanation は任意 |
 
 どの種類にも `id`（必須）・`tags`・`notes` を付けられます。
 
@@ -125,6 +126,13 @@
       ],
       "answer": 2,
       "explanation": "1603 年に征夷大将軍となり、江戸に幕府を開いた。"
+    },
+    {
+      "id": "o-never-been",
+      "type": "order",
+      "prompt": "私は一度もパリに行ったことがない。",
+      "answer": "I have never been to Paris.",
+      "explanation": "have never been to 〜 で「〜に行ったことがない」（経験）。"
     }
   ]
 }
@@ -623,6 +631,71 @@
             ],
             "additionalProperties": false,
             "description": "選択問題カード"
+          },
+          {
+            "type": "object",
+            "properties": {
+              "type": {
+                "type": "string",
+                "const": "order"
+              },
+              "id": {
+                "type": "string",
+                "pattern": "^[A-Za-z0-9][A-Za-z0-9._-]{0,63}$",
+                "description": "パック内で一意な ID（更新時に学習記録を引き継ぐキー。後から変えない）"
+              },
+              "tags": {
+                "description": "分類用のタグ",
+                "maxItems": 20,
+                "type": "array",
+                "items": {
+                  "type": "string",
+                  "minLength": 1,
+                  "maxLength": 40
+                }
+              },
+              "notes": {
+                "description": "補足・語法・注意点など",
+                "type": "string",
+                "minLength": 1,
+                "maxLength": 2000
+              },
+              "answer": {
+                "type": "string",
+                "minLength": 1,
+                "maxLength": 2000,
+                "description": "正しい順に並べた文（例: I have never been to Paris.）"
+              },
+              "chunks": {
+                "description": "並べ替える語句（正しい順）。省略すると answer を空白で区切る。日本語など空白で区切らない言語では必ず指定する",
+                "minItems": 2,
+                "maxItems": 12,
+                "type": "array",
+                "items": {
+                  "type": "string",
+                  "minLength": 1,
+                  "maxLength": 300
+                }
+              },
+              "prompt": {
+                "description": "問題文・訳など（例: 私は一度もパリに行ったことがない。）",
+                "type": "string",
+                "minLength": 1,
+                "maxLength": 2000
+              },
+              "explanation": {
+                "type": "string",
+                "minLength": 1,
+                "maxLength": 2000
+              }
+            },
+            "required": [
+              "type",
+              "id",
+              "answer"
+            ],
+            "additionalProperties": false,
+            "description": "並べ替えカード"
           }
         ]
       }
