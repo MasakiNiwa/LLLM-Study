@@ -1,6 +1,7 @@
 import type { BackendKind } from '@/lib/llm/types';
 import type {
   BackendSetting,
+  DarkPalette,
   NewCardOrder,
   ReactionMode,
   ThemeSetting,
@@ -24,6 +25,12 @@ export const THEME_LABELS: Record<ThemeSetting, string> = {
   system: 'システムに合わせる',
   light: 'ライト',
   dark: 'ダーク',
+};
+
+export const DARK_PALETTE_LABELS: Record<DarkPalette, { label: string; hint: string }> = {
+  neutral: { label: '落ち着いたグレー', hint: '色味のないグレー。いちばん目にやさしい' },
+  warm: { label: 'あたたかいグレー', hint: 'ほんのり暖かいグレーと、くすんだテラコッタ' },
+  vivid: { label: '鮮やか', hint: '以前の配色（濃紺と鮮やかな色）' },
 };
 
 export const REACTION_LABELS: Record<ReactionMode, string> = {

@@ -10,6 +10,7 @@ LLLM Study は、**ローカル LLM を使うアプリと、github.io のサイ�
 | [SHARED_MODEL_STORAGE.md](SHARED_MODEL_STORAGE.md) | 同じ github.io のサイト間で AI モデルを共有する保存領域の仕様（OPFS・ロック・通知・バックアップ）                                           | **モデルを扱うなら必ず従う** |
 | [LOCAL_LLM_GUIDE.md](LOCAL_LLM_GUIDE.md)           | ブラウザ内で LLM（LiteRT-LM）を動かす組み込み方。コピーして使うファイル・読み込みとフォールバック・生成・AI に任せすぎない設計・PWA・テスト | 参考にする                   |
 | [UI_GUIDE.md](UI_GUIDE.md)                         | スマホ / PC の画面の作り方と部品（ボトムシートの払う操作・折りたたみ見出しなど）                                                            | 参考にする                   |
+| [DARK_THEME.md](DARK_THEME.md)                     | 落ち着いたダークテーマの考え方と作り方（青みのないグレー・彩度を抑えたアクセントと状態の色・CSS 変数の差し替え）                            | 参考にする                   |
 | [SPEC.md](SPEC.md)                                 | LLLM Study の仕様とロードマップ                                                                                                             | このアプリ固有               |
 | [STUDY_PACK_FORMAT.md](STUDY_PACK_FORMAT.md)       | 教材パックの形式（自動生成）                                                                                                                | このアプリ固有               |
 
@@ -20,6 +21,7 @@ LLLM Study は、**ローカル LLM を使うアプリと、github.io のサイ�
 - [ ] ヘルプにリポジトリへのリンク・クレジット・ライセンスを置く（アプリのヘッダーには GitHub のアイコンを置かない。リリース履歴へのリンクは置かない）
 - [ ] CI: `licenses:check` → `format:check` → `lint` → `typecheck` → `test` → `build`
 - [ ] スマホは下部ナビ、PC はサイドバー（[UI_GUIDE.md](UI_GUIDE.md)）
+- [ ] ダークモードは落ち着いた配色にする（[DARK_THEME.md](DARK_THEME.md)）。ヘッダーにライト・ダークの切り替えを置く
 - [ ] 重い処理は Web Worker へ。GPU（WebGPU）が使えるなら使い、使えない端末でも動く部分は動くようにする
 - [ ] ローカル LLM を使うなら:
   - [ ] [共通モデル保存領域](SHARED_MODEL_STORAGE.md) に従う（`shared-models/`・Web Locks・BroadcastChannel・アプリ名）
