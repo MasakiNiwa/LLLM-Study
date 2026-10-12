@@ -47,7 +47,7 @@ interface AnswerResultProps {
 /** 入力した答えの答え合わせの結果。プログラムの判定に、必要なら AI の判定を重ねる */
 export function AnswerResult({ card, answer, check, verdict, onJudged }: AnswerResultProps) {
   const ready = useEngine((s) => s.status === 'ready');
-  const busy = useAiBusy((s) => s.task !== null);
+  const busy = useAiBusy((s) => s.task !== null && s.task !== 'reaction');
   const personaId = useSettings((s) => s.persona);
   const custom = useSettings((s) => s.customPersona);
   const [judging, setJudging] = useState(false);
@@ -67,6 +67,8 @@ export function AnswerResult({ card, answer, check, verdict, onJudged }: AnswerR
         prompt: judgePrompt(json, answer, check?.expected ?? ''),
         maxOutputTokens: 200,
       });
+      // 止めた（カードが変わったなど）ときは、途中までの出力を判定に使わない
+      if (r.cancelled) return;
       const parsed = parseJudge(r.text);
       if (!parsed) throw new Error('AI の判定を読み取れませんでした');
       setJudge(parsed);

@@ -4,6 +4,7 @@ import { toast } from 'sonner';
 import { cn } from '@/lib/utils/cn';
 import { formatDuration } from '@/lib/utils/format';
 import { TOOL_LABELS } from '@/features/ai/tools';
+import { useEngine } from '@/features/engine/engineStore';
 import { useChat, type ChatMessage } from './chatStore';
 import { ProposalCard } from './ProposalCard';
 
@@ -81,6 +82,8 @@ export const MessageItem = memo(function MessageItem({
   emoji,
 }: MessageItemProps) {
   const regenerate = useChat((s) => s.regenerate);
+  // モデルが読み込まれていないときは作り直せないので、ボタンを出さない
+  const engineReady = useEngine((s) => s.status === 'ready');
   const toolActivity = useChat((s) => (isLast ? s.toolActivity : null));
   const [showThought, setShowThought] = useState(false);
 
@@ -172,7 +175,7 @@ export const MessageItem = memo(function MessageItem({
         {!streaming && (
           <div className="flex items-center gap-0.5">
             {message.text && <CopyButton text={message.text} />}
-            {isLast && !busy && (
+            {isLast && !busy && engineReady && (
               <ActionButton label="もう一度生成" onClick={() => void regenerate()}>
                 <RotateCcw />
               </ActionButton>

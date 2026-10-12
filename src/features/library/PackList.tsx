@@ -228,7 +228,9 @@ function PackCard({
     }
     void run(
       () => setPackTemplates(pack.id, { ...pack.templates, [type]: next }),
-      on ? 'カードを追加しました' : 'カードを外しました（そのカードの学習記録も削除しました）',
+      on
+        ? 'カードを追加しました（以前の学習記録があれば引き継ぎます）'
+        : 'カードを外しました（学習記録は残り、戻すと再開します）',
     );
   };
 

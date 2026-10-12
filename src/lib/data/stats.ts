@@ -98,8 +98,10 @@ export type ItemStatus = 'new' | 'learning' | 'review' | 'mature' | 'suspended';
 export function itemStatus(
   cards: Pick<CardRecord, 'state' | 'scheduled_days' | 'suspended'>[],
 ): ItemStatus {
-  if (cards.length > 0 && cards.every((c) => c.suspended)) return 'suspended';
-  const active = cards.filter((c) => !c.suspended);
+  // 型を外して休止しているカード（suspended = 2）は数えない（すべて休止なら出題停止と同じ扱い）
+  const shown = cards.filter((c) => c.suspended !== 2);
+  if (cards.length > 0 && shown.every((c) => c.suspended)) return 'suspended';
+  const active = shown.filter((c) => !c.suspended);
   if (active.every((c) => c.state === 0)) return 'new';
   if (active.some((c) => c.state === 1 || c.state === 3)) return 'learning';
   return active.every((c) => c.state === 0 || c.scheduled_days >= MATURE_DAYS) &&

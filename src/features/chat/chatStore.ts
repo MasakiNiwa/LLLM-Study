@@ -14,6 +14,7 @@ import type { ChatTurn, GenerationStats } from '@/lib/llm/types';
 import { errorMessage } from '@/lib/utils/format';
 import { createId } from '@/lib/utils/id';
 import { useAiBusy } from '@/features/ai/aiBusy';
+import { isAiBusyExceptReaction, preemptReaction } from '@/features/ai/oneshot';
 import { estimateTokens, trimHistory } from './historyBudget';
 import { useAiFocus } from '@/features/ai/focusStore';
 import { getConversationSettings } from '@/features/ai/prompt';
@@ -37,7 +38,12 @@ interface ChatState {
   /** 実行中のツールの表示名 */
   toolActivity: string | null;
   init: () => Promise<void>;
-  send: (text: string) => Promise<void>;
+  /**
+   * 送信する。受け付けたら true（入力欄を空にしてよい）、AI が使えない・ほかの処理中なら false
+   * （入力した文章はそのまま残す）
+   */
+  send: (text: string) => boolean;
+  /** 最後の応答を作り直す。新しい応答ができるまで、元の応答は消さない */
   regenerate: () => Promise<void>;
   stop: () => void;
   clear: () => Promise<void>;
@@ -73,16 +79,30 @@ function persistMessage(m: ChatMessage): void {
 export const useChat = create<ChatState>()((set, get) => {
   let initPromise: Promise<void> | null = null;
 
-  const generate = async (history: ChatMessage[], user: ChatMessage) => {
+  /** 今すぐ生成を始められるか（できなければ理由を知らせる） */
+  const canGenerate = (): boolean => {
     if (useEngine.getState().status !== 'ready') {
       toast.error('AI モデルが読み込まれていません', {
         description: '「モデル」画面でモデルを読み込んでください',
       });
-      return;
+      return false;
     }
+    if (isAiBusyExceptReaction() || get().isGenerating) {
+      toast.info('AI が別の応答を生成中です。少し待ってから送ってください');
+      return false;
+    }
+    return true;
+  };
+
+  type Outcome = { status: 'rejected' } | { status: 'done' | 'cancelled' | 'error'; id: string };
+
+  const generate = async (history: ChatMessage[], user: ChatMessage): Promise<Outcome> => {
+    if (!canGenerate()) return { status: 'rejected' };
+    // 評価への「ひとこと」を生成中なら止めて譲ってもらう
+    await preemptReaction();
     if (useAiBusy.getState().task) {
       toast.info('AI が別の応答を生成中です。少し待ってから送ってください');
-      return;
+      return { status: 'rejected' };
     }
     const settings = useSettings.getState();
     const tools = settings.useTools;
@@ -185,12 +205,14 @@ export const useChat = create<ChatState>()((set, get) => {
         stats: result.stats,
         tools: usedTools.length ? usedTools : undefined,
       });
+      return { status: result.status, id: assistantId };
     } catch (e) {
       cancelAnimationFrame(raf);
       const message = errorMessage(e);
       console.error(e);
       patchAssistant({ ...view(), status: 'error', error: message });
       toast.error('生成中にエラーが発生しました', { description: message });
+      return { status: 'error', id: assistantId };
     } finally {
       useAiBusy.setState({ task: null });
       set({ isGenerating: false, toolActivity: null });
@@ -239,30 +261,44 @@ export const useChat = create<ChatState>()((set, get) => {
       return initPromise;
     },
 
-    async send(text) {
+    send(text) {
       const trimmed = text.trim();
-      if (!trimmed || get().isGenerating) return;
-      const history = get().messages;
-      const user: ChatMessage = {
-        id: createId(),
-        role: 'user',
-        text: trimmed,
-        context: await contextFor(history),
-        createdAt: Date.now(),
-        status: 'done',
-      };
-      await generate(history, user);
+      if (!trimmed || !canGenerate()) return false;
+      void (async () => {
+        const history = get().messages;
+        const user: ChatMessage = {
+          id: createId(),
+          role: 'user',
+          text: trimmed,
+          context: await contextFor(history),
+          createdAt: Date.now(),
+          status: 'done',
+        };
+        await generate(history, user);
+      })();
+      return true;
     },
 
     async regenerate() {
-      const { messages, isGenerating } = get();
-      if (isGenerating) return;
+      const { messages } = get();
       let i = messages.length - 1;
       while (i >= 0 && messages[i].role !== 'user') i--;
-      if (i < 0) return;
-      const removed = messages.slice(i + 1).map((m) => m.id);
-      if (removed.length) await db.chat.bulkDelete(removed);
-      await generate(messages.slice(0, i), messages[i]);
+      if (i < 0 || !canGenerate()) return;
+      const old = messages.slice(i + 1);
+      const outcome = await generate(messages.slice(0, i), messages[i]);
+      if (outcome.status === 'rejected') return;
+      const fresh = get().messages.find((m) => m.id === outcome.id);
+      if (outcome.status === 'done' && fresh?.text) {
+        // 新しい応答ができてから、元の応答を消す
+        if (old.length) await db.chat.bulkDelete(old.map((m) => m.id));
+        return;
+      }
+      // 止めた・失敗した: 元の応答に戻す（新しい応答は保存しない）
+      await db.chat.delete(outcome.id);
+      set((st) => ({
+        messages: [...st.messages.filter((m) => m.id !== outcome.id), ...old],
+      }));
+      toast.info('元の応答に戻しました');
     },
 
     stop() {

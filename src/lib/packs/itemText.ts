@@ -116,12 +116,13 @@ export function expectedAnswer(
   template: string,
 ): { accepted: string[] } | { blanks: string[] } | undefined {
   switch (item.type) {
+    // 聞き取り（listen）は、表の指示どおり「聞こえた語句の意味」を答える
     case 'vocab':
-      return template === 'recall' || template === 'listen'
+      return template === 'recall'
         ? { accepted: [item.term] }
         : { accepted: meaningCandidates(item.meanings) };
     case 'phrase':
-      return template === 'recall' || template === 'listen'
+      return template === 'recall'
         ? { accepted: [item.phrase] }
         : { accepted: meaningCandidates([item.meaning]) };
     case 'qa':
@@ -149,7 +150,7 @@ function meaningCandidates(meanings: string[]): string[] {
 
 /** 入力が「学ぶ言語の語句」を答えるものか（入力欄の言語ヒント用） */
 export function answersInTargetLanguage(item: StudyItem, template: string): boolean {
-  return template === 'recall' || template === 'listen' || item.type === 'cloze';
+  return template === 'recall' || item.type === 'cloze';
 }
 
 /** 決まった種から作る疑似乱数（同じカードなら同じ並びになる） */

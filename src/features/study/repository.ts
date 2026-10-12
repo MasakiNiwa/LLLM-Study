@@ -155,7 +155,19 @@ export interface RatedCard {
   reviewId: number;
 }
 
-/** 評価を保存する（カードの更新と記録の追加を 1 つのトランザクションで） */
+/** 評価しようとしたカード・項目・教材が、すでに削除されていた */
+export class StaleCardError extends Error {
+  constructor() {
+    super('このカードの教材が削除・変更されたため、評価を保存しませんでした');
+    this.name = 'StaleCardError';
+  }
+}
+
+/**
+ * 評価を保存する（カードの更新と記録の追加を 1 つのトランザクションで）。
+ * 保存の直前に、カード・項目・教材がまだあるかを確かめ、最新のカードをもとに計算する
+ * （画面に出していたあいだに教材が削除・リセットされても、古いカードで上書きしない）。
+ */
 export async function saveRating(
   card: CardRecord,
   grade: GradeValue,
@@ -164,34 +176,40 @@ export async function saveRating(
   now = Date.now(),
 ): Promise<RatedCard> {
   const day = studyDayKey(now, settings.dayStartHour);
-  const { fields } = rateCard(card, grade, now, getSchedulerOptions(settings));
-  const next: CardRecord = {
-    ...card,
-    ...fields,
-    introducedDay: card.introducedDay ?? day,
-  };
-  const review: ReviewRecord = {
-    cardId: card.id,
-    packId: card.packId,
-    itemKey: card.itemKey,
-    rating: grade,
-    state: card.state,
-    review: now,
-    day,
-    // 放置していた時間まで数えないよう上限を設ける
-    durationMs: Math.min(durationMs, 5 * 60_000),
-    nextDue: next.due,
-    scheduled_days: next.scheduled_days,
-    elapsed_days: card.last_review ? (now - card.last_review) / 86_400_000 : 0,
-    stability: next.stability,
-    difficulty: next.difficulty,
-    prev: { ...pickFsrsFields(card), introducedDay: card.introducedDay },
-  };
-  const reviewId = await db.transaction('rw', [db.cards, db.reviews], async () => {
+  return db.transaction('rw', [db.cards, db.reviews, db.items, db.packs], async () => {
+    const [stored, item, pack] = await Promise.all([
+      db.cards.get(card.id),
+      db.items.get(card.itemKey),
+      db.packs.get(card.packId),
+    ]);
+    if (!stored || !item || !pack) throw new StaleCardError();
+    const { fields } = rateCard(stored, grade, now, getSchedulerOptions(settings));
+    const next: CardRecord = {
+      ...stored,
+      ...fields,
+      introducedDay: stored.introducedDay ?? day,
+    };
+    const review: ReviewRecord = {
+      cardId: stored.id,
+      packId: stored.packId,
+      itemKey: stored.itemKey,
+      rating: grade,
+      state: stored.state,
+      review: now,
+      day,
+      // 放置していた時間まで数えないよう上限を設ける
+      durationMs: Math.min(durationMs, 5 * 60_000),
+      nextDue: next.due,
+      scheduled_days: next.scheduled_days,
+      elapsed_days: stored.last_review ? (now - stored.last_review) / 86_400_000 : 0,
+      stability: next.stability,
+      difficulty: next.difficulty,
+      prev: { ...pickFsrsFields(stored), introducedDay: stored.introducedDay },
+    };
     await db.cards.put(next);
-    return (await db.reviews.add(review)) as number;
+    const reviewId = (await db.reviews.add(review)) as number;
+    return { card: next, reviewId };
   });
-  return { card: next, reviewId };
 }
 
 /** 直前の評価を取り消して、評価前のカードに戻す */

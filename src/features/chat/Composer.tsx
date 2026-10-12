@@ -4,6 +4,7 @@ import { Button } from '@/components/ui/Button';
 import { cn } from '@/lib/utils/cn';
 import { useEngine } from '@/features/engine/engineStore';
 import { useSettings } from '@/features/settings/settingsStore';
+import { useAiBusy } from '@/features/ai/aiBusy';
 import { useChat } from './chatStore';
 
 /** タッチ主体の端末では Enter は改行にする */
@@ -18,12 +19,15 @@ export function Composer({ initialText = '' }: { initialText?: string }) {
   const stop = useChat((s) => s.stop);
   const ready = useEngine((s) => s.status === 'ready');
   const enterToSend = useSettings((s) => s.enterToSend);
+  // ほかの AI の処理（例文クイズ・会話練習など）の最中は送れない（ひとことは譲ってもらえる）
+  const otherBusy = useAiBusy((s) => s.task !== null && s.task !== 'reaction' && s.task !== 'chat');
 
-  const canSend = ready && !isGenerating && text.trim().length > 0;
+  const canSend = ready && !isGenerating && !otherBusy && text.trim().length > 0;
 
   const submit = () => {
     if (!canSend) return;
-    void send(text);
+    // 受け付けられなかったとき（AI がほかの処理中など）は、書いた文章を残す
+    if (!send(text)) return;
     setText('');
     // スマホではキーボードを閉じずにそのまま次を打てるようにフォーカスを維持
     ref.current?.focus();
@@ -55,7 +59,13 @@ export function Composer({ initialText = '' }: { initialText?: string }) {
           onChange={(e) => setText(e.target.value)}
           onKeyDown={onKeyDown}
           rows={1}
-          placeholder={ready ? 'AI に話しかける…' : 'まず AI モデルを読み込んでください'}
+          placeholder={
+            !ready
+              ? 'まず AI モデルを読み込んでください'
+              : otherBusy
+                ? 'AI がほかの処理中です（終わったら送れます）'
+                : 'AI に話しかける…'
+          }
           enterKeyHint={enterToSend ? 'send' : 'enter'}
           aria-label="メッセージ"
           className="max-h-48 min-h-10 flex-1 resize-none bg-transparent py-2 text-base leading-6 outline-none [field-sizing:content] placeholder:text-slate-400 focus-visible:outline-none"

@@ -51,7 +51,11 @@ describe('installPack', () => {
     await setPackTemplates('p1', { vocab: ['recognize', 'recall'] });
     expect(await db.cards.count()).toBe(2);
     await setPackTemplates('p1', { vocab: ['recall'] });
-    expect((await db.cards.toArray()).map((c) => c.id)).toEqual(['p1/a#recall']);
+    // 外した型のカードは消さずに休止（記録を残す）
+    expect((await db.cards.toArray()).map((c) => [c.id, c.suspended])).toEqual([
+      ['p1/a#recall', 0],
+      ['p1/a#recognize', 2],
+    ]);
   });
 
   it('やり直しと削除', async () => {

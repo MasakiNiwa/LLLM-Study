@@ -6,6 +6,7 @@
  */
 import { toast } from 'sonner';
 import { create } from 'zustand';
+import { onLibraryChange } from '@/lib/db/changes';
 import { db } from '@/lib/db/db';
 import type { CardRecord, GradeValue, ItemRecord } from '@/lib/db/types';
 import { requeuePosition } from '@/lib/srs/queue';
@@ -23,6 +24,7 @@ import {
   loadPracticeCards,
   loadQueue,
   saveRating,
+  StaleCardError,
   undoRating,
   type PracticeKind,
 } from './repository';
@@ -65,6 +67,18 @@ export interface LastRating {
   userAnswer?: { text: string; verdict: AnswerVerdict | null };
 }
 
+/** 選択・並べ替え・時間切れなど、表示中のカードへの答え方（画面を移っても保つ） */
+export interface CardResponse {
+  /** どの表示に対する答えか */
+  shownAt: number;
+  /** 選択問題で選んだ番号 */
+  choice?: number;
+  /** 並べ替えの結果 */
+  order?: { built: string[]; correct: boolean };
+  /** テストモードで時間切れになった */
+  timedOut?: boolean;
+}
+
 /** 表示中のカードにユーザーが書いた答えと、答え合わせの結果 */
 export interface WrittenAnswer {
   /** どの表示に対する答えか（同じカードの再表示と区別する） */
@@ -101,6 +115,8 @@ interface StudyState {
   lastRating: LastRating | null;
   /** 表示中のカードに書いた答え */
   answer: WrittenAnswer | null;
+  /** 表示中のカードへの答え方（選択・並べ替え・時間切れ） */
+  response: CardResponse | null;
   /** 学習を中断した（ほかの画面から戻っても、自分で始めるまで再開しない） */
   interrupted: boolean;
   start: () => Promise<void>;
@@ -108,9 +124,16 @@ interface StudyState {
   startPractice: (kind: PracticeKind) => Promise<void>;
   reveal: () => void;
   /** 書いた答えで答え合わせして、答えを表示する */
-  submitAnswer: (text: string) => void;
-  /** AI の判定などで、書いた答えの判定を変える */
-  setAnswerVerdict: (verdict: AnswerVerdict) => void;
+  /** 穴埋めの空欄が 2 つ以上なら、空欄ごとの答えを配列で渡す */
+  submitAnswer: (answer: string | string[]) => void;
+  /** AI の判定などで、書いた答えの判定を変える（shownAt の表示のままのときだけ） */
+  setAnswerVerdict: (verdict: AnswerVerdict, shownAt: number) => void;
+  /** 選択問題で選ぶ（答えを表示する） */
+  choose: (index: number) => void;
+  /** 並べ替えの答え合わせをする（答えを表示する） */
+  submitOrder: (result: { built: string[]; correct: boolean }) => void;
+  /** テストモードの時間切れ（答えを表示する） */
+  timeOut: () => void;
   rate: (grade: GradeValue) => Promise<void>;
   undo: () => Promise<void>;
   /** 表示中の項目の出題を止めて、次のカードへ進む */
@@ -118,6 +141,11 @@ interface StudyState {
   end: () => void;
   /** 学習を中断して、学習画面を最初の状態に戻す（評価済みの記録は残る） */
   interrupt: () => void;
+  /**
+   * 教材が変わったとき（削除・更新・進捗のリセットなど）、その教材のカードを持つ学習を終える。
+   * 学習画面に戻ると、新しい内容で始め直す。packIds が null ならどの教材でも終える。
+   */
+  invalidate: (packIds: string[] | null) => void;
 }
 
 function emptyStats(): SessionStats {
@@ -153,11 +181,18 @@ export const useStudy = create<StudyState>()((set, get) => {
       }
     };
 
+  /**
+   * 学習の世代。始める・終える・中断するたびに増やし、待っているあいだに世代が変わった
+   * 古い処理（評価の保存・キューの読み込みなど）が、新しい画面の状態を上書きしないようにする。
+   */
+  let session = 0;
+
   /** キューの先頭から、項目が見つかるカードを取り出して表示する */
-  const showNext = async (queue: CardRecord[]) => {
+  const showNext = async (queue: CardRecord[], gen = session) => {
     const rest = [...queue];
     while (rest.length > 0) {
       const next = await withItem(rest[0]);
+      if (gen !== session) return;
       if (next) {
         set({
           queue: rest,
@@ -167,27 +202,35 @@ export const useStudy = create<StudyState>()((set, get) => {
           revealedAt: null,
           status: 'studying',
           answer: null,
+          response: null,
         });
         useAiFocus.getState().setStudyCard(next.card.id, false);
         return;
       }
       rest.shift();
     }
-    set({ queue: [], current: null, revealed: false, status: 'done', answer: null });
+    set({
+      queue: [],
+      current: null,
+      revealed: false,
+      status: 'done',
+      answer: null,
+      response: null,
+    });
     // 学習を終えたらアイコンの数字も更新する（アプリを閉じても古い数字が残らないように）
     void refreshAppBadge();
     useAiFocus.getState().setStudyCard(null, false);
   };
 
   /** 評価したあと次のカードへ。学習全体の制限時間を過ぎていたら、そこで終える */
-  const advance = async (rest: CardRecord[]) => {
+  const advance = async (rest: CardRecord[], gen: number) => {
     const limit = useSettings.getState().sessionTimeLimit;
     if (limit > 0 && rest.length > 0 && Date.now() - get().stats.startedAt >= limit * 60_000) {
-      await showNext([]);
-      set({ timeUp: true });
+      await showNext([], gen);
+      if (gen === session) set({ timeUp: true });
       return;
     }
-    await showNext(rest);
+    await showNext(rest, gen);
   };
 
   return {
@@ -205,9 +248,11 @@ export const useStudy = create<StudyState>()((set, get) => {
     undoStack: [],
     lastRating: null,
     answer: null,
+    response: null,
     interrupted: false,
 
     async start() {
+      const gen = ++session;
       set({
         status: 'loading',
         interrupted: false,
@@ -220,18 +265,20 @@ export const useStudy = create<StudyState>()((set, get) => {
       });
       try {
         const plan = await loadQueue(useSettings.getState());
+        if (gen !== session) return;
         set({
           planned: { new: plan.newCount, review: plan.reviewCount, learning: plan.learningCount },
         });
-        await showNext(plan.queue);
+        await showNext(plan.queue, gen);
       } catch (e) {
         console.error(e);
         toast.error('学習を始められませんでした', { description: errorMessage(e) });
-        set({ status: 'idle' });
+        if (gen === session) set({ status: 'idle' });
       }
     },
 
     async startPractice(kind) {
+      const gen = ++session;
       set({
         status: 'loading',
         interrupted: false,
@@ -244,12 +291,13 @@ export const useStudy = create<StudyState>()((set, get) => {
       });
       try {
         const cards = await loadPracticeCards(useSettings.getState(), kind);
+        if (gen !== session) return;
         set({ planned: { new: 0, review: cards.length, learning: 0 } });
-        await showNext(cards);
+        await showNext(cards, gen);
       } catch (e) {
         console.error(e);
         toast.error('おさらいを始められませんでした', { description: errorMessage(e) });
-        set({ status: 'idle', mode: 'srs' });
+        if (gen === session) set({ status: 'idle', mode: 'srs' });
       }
     },
 
@@ -259,11 +307,12 @@ export const useStudy = create<StudyState>()((set, get) => {
       useAiFocus.getState().setStudyCard(get().current!.card.id, true);
     },
 
-    submitAnswer(text) {
+    submitAnswer(input) {
       const { current, revealed, shownAt } = get();
       if (!current || revealed) return;
       const expected = expectedAnswer(current.item.item, current.card.template);
-      const check = expected ? checkAnswer(text, expected) : null;
+      const check = expected ? checkAnswer(input, expected) : null;
+      const text = Array.isArray(input) ? input.map((p) => p.trim()).join(' / ') : input;
       // 一問一答や意味を答えるカードは言い換えが多く、完全一致しなければ「不正解」とは言い切れない。
       // そのときは判定を出さず、正解と見比べてもらう（AI があれば AI に判定してもらえる）
       const free =
@@ -274,14 +323,39 @@ export const useStudy = create<StudyState>()((set, get) => {
       get().reveal();
     },
 
-    setAnswerVerdict(verdict) {
+    setAnswerVerdict(verdict, shownAt) {
+      // AI の判定が遅れて返ってきたとき、次のカードの答えを書き換えないようにする
       const { answer } = get();
-      if (answer) set({ answer: { ...answer, verdict } });
+      if (answer && answer.shownAt === shownAt && get().shownAt === shownAt) {
+        set({ answer: { ...answer, verdict } });
+      }
+    },
+
+    choose(index) {
+      const { current, revealed, shownAt } = get();
+      if (!current || revealed) return;
+      set({ response: { shownAt, choice: index } });
+      get().reveal();
+    },
+
+    submitOrder(result) {
+      const { current, revealed, shownAt } = get();
+      if (!current || revealed) return;
+      set({ response: { shownAt, order: result } });
+      get().reveal();
+    },
+
+    timeOut() {
+      const { current, revealed, shownAt } = get();
+      if (!current || revealed) return;
+      set({ response: { shownAt, timedOut: true } });
+      get().reveal();
     },
 
     rate: exclusive(async (grade: GradeValue) => {
       const { current, queue, shownAt, stats, mode } = get();
       if (!current) return;
+      const gen = session;
       const now = Date.now();
       const settings = useSettings.getState();
       const writtenAnswer = () => {
@@ -316,7 +390,7 @@ export const useStudy = create<StudyState>()((set, get) => {
             userAnswer: writtenAnswer(),
           },
         });
-        await advance(rest);
+        await advance(rest, gen);
         return;
       }
       try {
@@ -327,6 +401,8 @@ export const useStudy = create<StudyState>()((set, get) => {
           settings,
           now,
         );
+        // 保存を待つあいだに中断・教材の変更などがあれば、記録は残して画面はそのまま
+        if (gen !== session) return;
         const rest = queue.slice(1);
         const pos = requeuePosition(rest, card, now, LEARN_AHEAD_MS);
         if (pos >= 0) rest.splice(pos, 0, card);
@@ -349,8 +425,14 @@ export const useStudy = create<StudyState>()((set, get) => {
             userAnswer: writtenAnswer(),
           },
         });
-        await advance(rest);
+        await advance(rest, gen);
       } catch (e) {
+        if (e instanceof StaleCardError) {
+          // 教材が削除・変更されていた: 古いカードでは続けず、学習を終える（戻ると始め直す）
+          toast.info(e.message);
+          if (gen === session) get().end();
+          return;
+        }
         console.error(e);
         toast.error('評価を保存できませんでした', { description: errorMessage(e) });
       }
@@ -360,13 +442,14 @@ export const useStudy = create<StudyState>()((set, get) => {
       const stack = [...get().undoStack];
       const entry = stack.pop();
       if (!entry) return;
+      const gen = session;
       try {
         const restored = await undoRating(entry.reviewId);
-        if (!restored) return;
+        if (!restored || gen !== session) return;
         let rest = get().current ? [...get().queue] : [];
         if (entry.requeued) rest = rest.filter((c) => c.id !== entry.before.id);
-        set({ undoStack: stack, stats: entry.statsBefore, lastRating: null });
-        await showNext([restored, ...rest]);
+        set({ undoStack: stack, stats: entry.statsBefore, lastRating: null, timeUp: false });
+        await showNext([restored, ...rest], gen);
         toast('直前の評価を取り消しました');
       } catch (e) {
         toast.error('取り消せませんでした', { description: errorMessage(e) });
@@ -377,16 +460,20 @@ export const useStudy = create<StudyState>()((set, get) => {
       const { current, queue } = get();
       if (!current) return;
       const key = current.card.itemKey;
+      const gen = session;
       try {
-        await setItemSuspended(key, true);
-        await showNext(queue.filter((c) => c.itemKey !== key));
+        await setItemSuspended(key, true, { notify: false });
+        await showNext(
+          queue.filter((c) => c.itemKey !== key),
+          gen,
+        );
         toast('この項目を出題しないようにしました', {
           description: '「教材」の項目一覧から再開できます',
           action: {
             label: '元に戻す',
             onClick: () =>
               void (async () => {
-                await setItemSuspended(key, false);
+                await setItemSuspended(key, false, { notify: false });
                 const card = await db.cards.get(current.card.id);
                 if (card) await showNext([card, ...(get().current ? get().queue : [])]);
               })(),
@@ -403,7 +490,22 @@ export const useStudy = create<StudyState>()((set, get) => {
       set({ interrupted: true });
     },
 
+    invalidate(packIds) {
+      const st = get();
+      if (st.status === 'idle') return;
+      const ids = packIds && new Set(packIds);
+      const touches =
+        !ids ||
+        (st.current && ids.has(st.current.card.packId)) ||
+        st.queue.some((c) => ids.has(c.packId)) ||
+        st.undoStack.some((u) => ids.has(u.before.packId)) ||
+        // 読み込み中は、どの教材のカードを読んでいるか分からないので始め直す
+        st.status === 'loading';
+      if (touches) get().end();
+    },
+
     end() {
+      session++;
       set({
         status: 'idle',
         mode: 'srs',
@@ -411,9 +513,13 @@ export const useStudy = create<StudyState>()((set, get) => {
         current: null,
         revealed: false,
         answer: null,
+        response: null,
         interrupted: false,
       });
       useAiFocus.getState().setStudyCard(null, false);
     },
   };
 });
+
+// 教材の削除・更新・進捗のリセットなどを知らせてもらい、古いカードで学習を続けないようにする
+onLibraryChange((packIds) => useStudy.getState().invalidate(packIds));

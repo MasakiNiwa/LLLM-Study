@@ -9,7 +9,7 @@ import type { ChatTurn } from '@/lib/llm/types';
 import { errorMessage } from '@/lib/utils/format';
 import { createId } from '@/lib/utils/id';
 import { useAiBusy } from '@/features/ai/aiBusy';
-import { runOneshot } from '@/features/ai/oneshot';
+import { isAiBusyExceptReaction, preemptReaction, runOneshot } from '@/features/ai/oneshot';
 import { splitThinking } from '@/features/chat/thinking';
 import { estimateTokens, trimHistory } from '@/features/chat/historyBudget';
 import { useEngine } from '@/features/engine/engineStore';
@@ -40,24 +40,32 @@ interface PracticeState {
   feedback: Feedback | null;
   feedbackLoading: boolean;
   start: (config: PracticeConfig) => Promise<void>;
-  send: (text: string) => Promise<void>;
+  /** 受け付けたら true（入力欄を空にしてよい）、AI が使えない・ほかの処理中なら false */
+  send: (text: string) => boolean;
   stop: () => void;
   requestFeedback: () => Promise<void>;
   reset: () => void;
 }
 
 export const usePractice = create<PracticeState>()((set, get) => {
-  const generate = async (history: PracticeMessage[], user: PracticeMessage) => {
-    const config = get().config;
-    if (!config) return;
+  /** 今すぐ生成を始められるか（できなければ理由を知らせる） */
+  const canGenerate = (): boolean => {
     if (useEngine.getState().status !== 'ready') {
       toast.error('AI モデルが読み込まれていません');
-      return;
+      return false;
     }
-    if (useAiBusy.getState().task) {
+    if (isAiBusyExceptReaction() || get().generating) {
       toast.info('AI が別の応答を生成中です。少し待ってから送ってください');
-      return;
+      return false;
     }
+    return true;
+  };
+
+  const generate = async (history: PracticeMessage[], user: PracticeMessage) => {
+    const config = get().config;
+    if (!config || !canGenerate()) return;
+    await preemptReaction();
+    if (useAiBusy.getState().task) return;
     const s = useSettings.getState();
     const assistantId = createId();
     set({
@@ -137,10 +145,11 @@ export const usePractice = create<PracticeState>()((set, get) => {
       await generate([], { id: createId(), role: 'user', text: OPENING_MESSAGE, hidden: true });
     },
 
-    async send(text) {
+    send(text) {
       const trimmed = text.trim();
-      if (!trimmed || get().generating) return;
-      await generate(get().messages, { id: createId(), role: 'user', text: trimmed });
+      if (!trimmed || !canGenerate()) return false;
+      void generate(get().messages, { id: createId(), role: 'user', text: trimmed });
+      return true;
     },
 
     stop() {

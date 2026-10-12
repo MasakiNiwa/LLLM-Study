@@ -58,14 +58,20 @@ const RECOMMENDED: Record<AnswerVerdict, GradeValue> = { correct: 3, close: 2, w
 
 /**
  * accepted: 正解の候補（どれか 1 つに合えばよい）
- * blanks: 穴埋めのように複数の答えが順番に必要な場合の各正解（入力は「/」区切り）
+ * blanks: 穴埋めのように複数の答えが順番に必要な場合の各正解。
+ *   入力は空欄ごとの配列で渡す。文字列で渡したときは、空欄が 1 つならそのまま
+ *   （「1/2」「and/or」のような答えを分けない）、2 つ以上なら「/」で区切ったものとして扱う
  */
 export function checkAnswer(
-  input: string,
+  input: string | string[],
   expected: { accepted: string[] } | { blanks: string[] },
 ): AnswerCheck {
   if ('blanks' in expected) {
-    const parts = input.split(/[/／]/);
+    const parts = Array.isArray(input)
+      ? input
+      : expected.blanks.length === 1
+        ? [input.replace(/[/／\s]+$/, '')]
+        : input.split(/[/／]/);
     const results = expected.blanks.map((b, i) => checkOne(parts[i] ?? '', [b]));
     // 穴の数より多く答えていたら不正解（「forward / incorrect」のように候補を並べて当てるのを防ぐ）。
     // 末尾の「/」など、空の余りは気にしない
@@ -79,6 +85,6 @@ export function checkAnswer(
           : 'wrong';
     return { verdict, expected: expected.blanks.join(' / '), recommended: RECOMMENDED[verdict] };
   }
-  const r = checkOne(input, expected.accepted);
+  const r = checkOne(Array.isArray(input) ? input.join(' ') : input, expected.accepted);
   return { ...r, recommended: RECOMMENDED[r.verdict] };
 }

@@ -1,5 +1,5 @@
 import { describe, expect, it } from 'vitest';
-import { parseQuiz, relatesToTarget } from './quizGen';
+import { gradeQuiz, parseQuiz, relatesToTarget } from './quizGen';
 
 const take = { id: 'v-take', type: 'vocab' as const, term: 'take', meanings: ['取る'] };
 
@@ -53,5 +53,18 @@ describe('parseQuiz', () => {
       'string',
     );
     expect(typeof parseQuiz('むずかしいです', take, 'k')).toBe('string');
+  });
+});
+
+describe('gradeQuiz', () => {
+  const q = { answer: 'went', target: 'go' };
+  it('空欄に入る形だけを正解にする', () => {
+    expect(gradeQuiz('went', q)).toMatchObject({ check: { verdict: 'correct' }, baseForm: false });
+  });
+  it('元の形を書いたら「惜しい」にして、形を直すよう伝える', () => {
+    expect(gradeQuiz('go', q)).toMatchObject({ check: { verdict: 'close' }, baseForm: true });
+  });
+  it('答えが元の形と同じなら、そのまま正解', () => {
+    expect(gradeQuiz('take', { answer: 'take', target: 'take' }).check.verdict).toBe('correct');
   });
 });

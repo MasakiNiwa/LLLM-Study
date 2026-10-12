@@ -22,7 +22,13 @@ import { Field } from '@/components/ui/Field';
 import { Select } from '@/components/ui/Select';
 import { Slider } from '@/components/ui/Slider';
 import { Switch } from '@/components/ui/Switch';
-import { clearAllData, clearAllProgress, restoreBackup } from '@/lib/db/backup';
+import {
+  applyBackup,
+  clearAllData,
+  clearAllProgress,
+  parseBackup,
+  type ParsedBackup,
+} from '@/lib/db/backup';
 import { deleteAllStoredModels, isOpfsSupported } from '@/lib/llm/modelStorage';
 import { getVoices, isSpeechSupported, speak } from '@/lib/speech/tts';
 import { errorMessage, formatBytes } from '@/lib/utils/format';
@@ -43,6 +49,7 @@ import {
   CARD_TIME_LIMITS,
   SESSION_TIME_LIMITS,
   cardLimitLabel,
+  sanitizeSettings,
   sessionLimitLabel,
   STUDY_COMPACT_LABELS,
   STUDY_FONT_SCALES,
@@ -145,7 +152,8 @@ export default function SettingsPage() {
   const storedCount = useEngine((st) => st.storedModels.length);
   const webgpu = useEngine((st) => st.webgpu);
   const [confirm, setConfirm] = useState<ConfirmKind>(null);
-  const restoreText = useRef<string | null>(null);
+  // 読み取って検証済みのバックアップ（確認画面で内容を見せてから置き換える）
+  const [pendingRestore, setPendingRestore] = useState<ParsedBackup | null>(null);
   const restoreInput = useRef<HTMLInputElement>(null);
 
   const afterDataChange = () => {
@@ -168,19 +176,23 @@ export default function SettingsPage() {
   const backup = () => backupNow();
 
   const restore = async () => {
-    const text = restoreText.current;
-    restoreText.current = null;
-    if (!text) return;
+    const b = pendingRestore;
+    setPendingRestore(null);
+    if (!b) return;
     try {
-      const r = await restoreBackup(text);
+      await applyBackup(b);
+      // 設定も入っていれば、端末ごとの設定（モデルなど）以外を戻す
+      if (b.settings) update(sanitizeSettings(b.settings));
       // 復元したチャット履歴を表示し直す（clear() は DB まで消してしまうので使わない）
       await useChat.getState().reload();
       afterDataChange();
       toast.success('バックアップから復元しました', {
-        description: `教材 ${r.packs} 件・学習記録 ${r.reviews} 件`,
+        description: `教材 ${b.packs.length} 件・学習記録 ${b.reviews.length} 件${b.settings ? '・設定' : ''}`,
       });
     } catch (e) {
-      toast.error('復元できませんでした', { description: errorMessage(e) });
+      toast.error('復元できませんでした（今のデータはそのままです）', {
+        description: errorMessage(e),
+      });
     }
   };
 
@@ -727,13 +739,16 @@ export default function SettingsPage() {
           </Field>
           <Field
             label="学習データのバックアップ"
-            hint="教材・学習記録・チャットを JSON ファイルに書き出します"
+            hint="教材・学習記録・チャット・設定を JSON ファイルに書き出します（AI モデルなど端末ごとの設定は含みません）"
           >
             <Button size="sm" variant="secondary" onClick={() => void backup()}>
               書き出す
             </Button>
           </Field>
-          <Field label="バックアップから復元" hint="今のデータはすべて置き換わります">
+          <Field
+            label="バックアップから復元"
+            hint="内容を確かめてから、今のデータをすべて置き換えます"
+          >
             <Button size="sm" variant="secondary" onClick={() => restoreInput.current?.click()}>
               ファイルを選ぶ
             </Button>
@@ -746,8 +761,15 @@ export default function SettingsPage() {
                 const file = e.target.files?.[0];
                 e.target.value = '';
                 if (!file) return;
-                restoreText.current = await file.text();
-                setConfirm('restore');
+                try {
+                  // 置き換える前に、全件を検証する（問題があれば今のデータには触れない）
+                  setPendingRestore(parseBackup(await file.text()));
+                  setConfirm('restore');
+                } catch (err) {
+                  toast.error('このファイルからは復元できません', {
+                    description: errorMessage(err),
+                  });
+                }
               }}
             />
           </Field>
@@ -816,7 +838,25 @@ export default function SettingsPage() {
       <ConfirmDialog
         open={confirm === 'restore'}
         title="バックアップから復元しますか？"
-        description="今の教材・学習記録・チャットはすべてバックアップの内容に置き換わります。"
+        description={
+          pendingRestore && (
+            <>
+              <span className="block">
+                今の教材・学習記録・チャットは、すべてバックアップの内容に置き換わります。
+              </span>
+              <span className="mt-2 block rounded-lg bg-slate-100 px-3 py-2 text-xs dark:bg-slate-800">
+                {pendingRestore.exportedAt &&
+                  `${pendingRestore.exportedAt.slice(0, 10)} に書き出したバックアップ: `}
+                教材 {pendingRestore.packs.length} 件・カード {pendingRestore.cards.length}{' '}
+                枚・学習記録 {pendingRestore.reviews.length} 件・チャット{' '}
+                {pendingRestore.chat.length} 件
+                {pendingRestore.settings ? '・設定（モデルなど端末ごとの設定は除く）' : ''}
+                {pendingRestore.skippedReviews > 0 &&
+                  `（対応するカードのない学習記録 ${pendingRestore.skippedReviews} 件は除きます）`}
+              </span>
+            </>
+          )
+        }
         confirmLabel="復元"
         danger
         onConfirm={() => void restore()}
