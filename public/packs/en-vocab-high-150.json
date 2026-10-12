@@ -1,0 +1,3843 @@
+{
+  "format": "lllm-study-pack",
+  "version": 1,
+  "id": "en-vocab-high-150",
+  "title": "高校英単語 150（英検 2 級レベル）",
+  "description": "高校の教科書や英検 2 級・大学入学共通テストでよく出る 150 語を、基本から順に 3 ステップで学びます。ステップ1（高1レベル：increase・society・various など）、ステップ2（高2レベル：achieve・environment・available など）、ステップ3（英検 2 級レベル：maintain・pollution・efficient など）が各 50 語です。どの語にも発音記号・品詞・主な意味・例文と訳・よく使う組み合わせを付け、メモには派生語（decide → decision など）と、affect と effect、rise と raise、effective と efficient のような紛らわしい語の使い分けをまとめました。形式は単語 150 語。前の段階は「中学英単語 150（基礎の総復習）」（en-vocab-junior-150）で、基本動詞は「英語の基本動詞 40」（en-core-verbs）とあわせると効果的です。次は「上級英単語 150（大学・ビジネス・英検準 1 級）」（en-vocab-advanced-150）へステップアップできます。",
+  "subject": "english",
+  "language": {
+    "target": "en",
+    "explanation": "ja"
+  },
+  "level": "高校（CEFR A2〜B1）",
+  "tags": [
+    "英単語",
+    "高校",
+    "英検2級",
+    "受験"
+  ],
+  "author": "LLLM-Study",
+  "license": "MIT",
+  "source": "LLLM-Study オリジナル（AI を利用して作成）",
+  "revision": 1,
+  "items": [
+    {
+      "id": "hv-increase",
+      "type": "vocab",
+      "term": "increase",
+      "reading": "/ɪnˈkriːs/",
+      "pos": "動詞／名詞",
+      "meanings": [
+        "増える",
+        "増やす"
+      ],
+      "examples": [
+        {
+          "text": "The number of foreign visitors has increased.",
+          "translation": "外国人観光客の数が増えた。"
+        }
+      ],
+      "collocations": [
+        "increase by 10%",
+        "an increase in"
+      ],
+      "notes": "動詞はアクセントが後ろ（in-CREASE）、名詞「増加」は前（IN-crease /ˈɪnkriːs/）。「〜の増加」は an increase in 〜。反対は decrease。",
+      "tags": [
+        "ステップ1",
+        "動詞"
+      ]
+    },
+    {
+      "id": "hv-improve",
+      "type": "vocab",
+      "term": "improve",
+      "reading": "/ɪmˈpruːv/",
+      "pos": "動詞",
+      "meanings": [
+        "改善する",
+        "上達する"
+      ],
+      "examples": [
+        {
+          "text": "Your English has improved a lot.",
+          "translation": "あなたの英語はずいぶん上達した。"
+        }
+      ],
+      "collocations": [
+        "improve skills",
+        "improve the quality of"
+      ],
+      "notes": "自動詞（よくなる）と他動詞（よくする）の両方で使える。名詞は improvement。",
+      "tags": [
+        "ステップ1",
+        "動詞"
+      ]
+    },
+    {
+      "id": "hv-develop",
+      "type": "vocab",
+      "term": "develop",
+      "reading": "/dɪˈveləp/",
+      "pos": "動詞",
+      "meanings": [
+        "発達させる",
+        "開発する",
+        "発展する"
+      ],
+      "examples": [
+        {
+          "text": "The company developed a new app.",
+          "translation": "その会社は新しいアプリを開発した。"
+        }
+      ],
+      "collocations": [
+        "developing country",
+        "develop a skill"
+      ],
+      "notes": "名詞は development。developing country は「発展途上国」、developed country は「先進国」。",
+      "tags": [
+        "ステップ1",
+        "動詞"
+      ]
+    },
+    {
+      "id": "hv-provide",
+      "type": "vocab",
+      "term": "provide",
+      "reading": "/prəˈvaɪd/",
+      "pos": "動詞",
+      "meanings": [
+        "提供する",
+        "与える"
+      ],
+      "examples": [
+        {
+          "text": "The hotel provides free Wi-Fi.",
+          "translation": "そのホテルは無料の Wi-Fi を提供している。"
+        }
+      ],
+      "collocations": [
+        "provide A with B",
+        "provide B for A"
+      ],
+      "notes": "provide A with B ＝ provide B for / to A（A に B を与える）。名詞 provision は「供給・規定」。",
+      "tags": [
+        "ステップ1",
+        "動詞"
+      ]
+    },
+    {
+      "id": "hv-include",
+      "type": "vocab",
+      "term": "include",
+      "reading": "/ɪnˈkluːd/",
+      "pos": "動詞",
+      "meanings": [
+        "含む"
+      ],
+      "examples": [
+        {
+          "text": "The price includes tax.",
+          "translation": "その価格には税金が含まれている。"
+        }
+      ],
+      "collocations": [
+        "including 〜",
+        "be included in"
+      ],
+      "notes": "反対は exclude（除外する）。including 〜 で「〜を含めて」。形容詞は inclusive。",
+      "tags": [
+        "ステップ1",
+        "動詞"
+      ]
+    },
+    {
+      "id": "hv-allow",
+      "type": "vocab",
+      "term": "allow",
+      "reading": "/əˈlaʊ/",
+      "pos": "動詞",
+      "meanings": [
+        "許す",
+        "可能にする"
+      ],
+      "examples": [
+        {
+          "text": "My parents allowed me to go to the concert.",
+          "translation": "両親は私がコンサートに行くのを許してくれた。"
+        }
+      ],
+      "collocations": [
+        "allow 人 to do",
+        "be allowed to do"
+      ],
+      "notes": "発音は「アラウ」。allow 人 to do に対し、let は let 人 do（原形）。permit は allow よりかたい。名詞 allowance は「手当・こづかい」。",
+      "tags": [
+        "ステップ1",
+        "動詞"
+      ]
+    },
+    {
+      "id": "hv-avoid",
+      "type": "vocab",
+      "term": "avoid",
+      "reading": "/əˈvɔɪd/",
+      "pos": "動詞",
+      "meanings": [
+        "避ける"
+      ],
+      "examples": [
+        {
+          "text": "You should avoid eating too much sugar.",
+          "translation": "砂糖のとりすぎは避けるべきだ。"
+        }
+      ],
+      "collocations": [
+        "avoid doing",
+        "avoid traffic"
+      ],
+      "notes": "後ろは動名詞（avoid doing）で、to 不定詞はとらない。unavoidable は「避けられない」。",
+      "tags": [
+        "ステップ1",
+        "動詞"
+      ]
+    },
+    {
+      "id": "hv-cause",
+      "type": "vocab",
+      "term": "cause",
+      "reading": "/kɔːz/",
+      "pos": "動詞／名詞",
+      "meanings": [
+        "引き起こす",
+        "原因（名詞）"
+      ],
+      "examples": [
+        {
+          "text": "Heavy rain caused the flood.",
+          "translation": "大雨が洪水を引き起こした。"
+        }
+      ],
+      "collocations": [
+        "cause damage",
+        "cause 人 to do",
+        "cause and effect"
+      ],
+      "notes": "主に悪い結果を引き起こすときに使う。名詞の cause は「原因」、reason は「理由（説明）」と使い分ける。",
+      "tags": [
+        "ステップ1",
+        "動詞"
+      ]
+    },
+    {
+      "id": "hv-compare",
+      "type": "vocab",
+      "term": "compare",
+      "reading": "/kəmˈper/",
+      "pos": "動詞",
+      "meanings": [
+        "比べる",
+        "たとえる"
+      ],
+      "examples": [
+        {
+          "text": "Compare your answer with your partner's.",
+          "translation": "自分の答えをパートナーの答えと比べなさい。"
+        }
+      ],
+      "collocations": [
+        "compare A with B",
+        "compared to 〜",
+        "compare A to B"
+      ],
+      "notes": "compare A with B は「比較する」、compare A to B は「A を B にたとえる」の意味にもなる。名詞は comparison。",
+      "tags": [
+        "ステップ1",
+        "動詞"
+      ]
+    },
+    {
+      "id": "hv-describe",
+      "type": "vocab",
+      "term": "describe",
+      "reading": "/dɪˈskraɪb/",
+      "pos": "動詞",
+      "meanings": [
+        "説明する",
+        "描写する"
+      ],
+      "examples": [
+        {
+          "text": "Can you describe the man you saw?",
+          "translation": "見た男性の特徴を説明できますか。"
+        }
+      ],
+      "collocations": [
+        "describe A as B"
+      ],
+      "notes": "様子・特徴を言葉で表すこと。他動詞なので describe about とはしない。名詞は description。",
+      "tags": [
+        "ステップ1",
+        "動詞"
+      ]
+    },
+    {
+      "id": "hv-discuss",
+      "type": "vocab",
+      "term": "discuss",
+      "reading": "/dɪˈskʌs/",
+      "pos": "動詞",
+      "meanings": [
+        "話し合う"
+      ],
+      "examples": [
+        {
+          "text": "We discussed the problem in class.",
+          "translation": "授業でその問題について話し合った。"
+        }
+      ],
+      "collocations": [
+        "discuss a plan"
+      ],
+      "notes": "他動詞なので discuss about 〜 とはしない（talk about 〜 なら about が必要）。名詞は discussion。",
+      "tags": [
+        "ステップ1",
+        "動詞"
+      ]
+    },
+    {
+      "id": "hv-express",
+      "type": "vocab",
+      "term": "express",
+      "reading": "/ɪkˈspres/",
+      "pos": "動詞",
+      "meanings": [
+        "表現する"
+      ],
+      "examples": [
+        {
+          "text": "It is hard to express my feelings in English.",
+          "translation": "自分の気持ちを英語で表現するのは難しい。"
+        }
+      ],
+      "collocations": [
+        "express oneself",
+        "express thanks"
+      ],
+      "notes": "名詞 expression（表現・表情）。形容詞では「急行の」（express train）。",
+      "tags": [
+        "ステップ1",
+        "動詞"
+      ]
+    },
+    {
+      "id": "hv-expect",
+      "type": "vocab",
+      "term": "expect",
+      "reading": "/ɪkˈspekt/",
+      "pos": "動詞",
+      "meanings": [
+        "予期する",
+        "期待する"
+      ],
+      "examples": [
+        {
+          "text": "I didn't expect so many people to come.",
+          "translation": "こんなに多くの人が来るとは予想していなかった。"
+        }
+      ],
+      "collocations": [
+        "expect 人 to do",
+        "as expected"
+      ],
+      "notes": "日本語の「期待する」より「（当然）そうなると思う」が中心で、悪いことにも使う。名詞は expectation。",
+      "tags": [
+        "ステップ1",
+        "動詞"
+      ]
+    },
+    {
+      "id": "hv-notice",
+      "type": "vocab",
+      "term": "notice",
+      "reading": "/ˈnoʊtɪs/",
+      "pos": "動詞／名詞",
+      "meanings": [
+        "気づく",
+        "通知・掲示（名詞）"
+      ],
+      "examples": [
+        {
+          "text": "Did you notice the change?",
+          "translation": "その変化に気づいた？"
+        }
+      ],
+      "collocations": [
+        "notice 人 doing",
+        "without notice"
+      ],
+      "notes": "見たり聞いたりして「気づく」。名詞では「お知らせ・掲示」。without notice は「予告なしに」。",
+      "tags": [
+        "ステップ1",
+        "動詞"
+      ]
+    },
+    {
+      "id": "hv-mention",
+      "type": "vocab",
+      "term": "mention",
+      "reading": "/ˈmenʃən/",
+      "pos": "動詞",
+      "meanings": [
+        "言及する",
+        "話に出す"
+      ],
+      "examples": [
+        {
+          "text": "He didn't mention the accident.",
+          "translation": "彼はその事故のことに触れなかった。"
+        }
+      ],
+      "collocations": [
+        "Don't mention it.",
+        "not to mention 〜"
+      ],
+      "notes": "他動詞なので mention about とはしない。Don't mention it. は「どういたしまして」、not to mention 〜 は「〜は言うまでもなく」。",
+      "tags": [
+        "ステップ1",
+        "動詞"
+      ]
+    },
+    {
+      "id": "hv-prefer",
+      "type": "vocab",
+      "term": "prefer",
+      "reading": "/prɪˈfɜːr/",
+      "pos": "動詞",
+      "meanings": [
+        "〜のほうを好む"
+      ],
+      "examples": [
+        {
+          "text": "I prefer tea to coffee.",
+          "translation": "コーヒーより紅茶のほうが好きだ。"
+        }
+      ],
+      "collocations": [
+        "prefer A to B",
+        "prefer to do"
+      ],
+      "notes": "「B より A」は than ではなく to（prefer A to B）。過去形は r を重ねて preferred。名詞は preference。",
+      "tags": [
+        "ステップ1",
+        "動詞"
+      ]
+    },
+    {
+      "id": "hv-accept",
+      "type": "vocab",
+      "term": "accept",
+      "reading": "/əkˈsept/",
+      "pos": "動詞",
+      "meanings": [
+        "受け入れる",
+        "受け取る"
+      ],
+      "examples": [
+        {
+          "text": "She accepted the invitation.",
+          "translation": "彼女はその招待を受けた。"
+        }
+      ],
+      "collocations": [
+        "accept an offer",
+        "accept responsibility"
+      ],
+      "notes": "反対は refuse / reject。名詞は acceptance。つづりの似た except（〜を除いて）と区別。",
+      "tags": [
+        "ステップ1",
+        "動詞"
+      ]
+    },
+    {
+      "id": "hv-realize",
+      "type": "vocab",
+      "term": "realize",
+      "reading": "/ˈriːəlaɪz/",
+      "pos": "動詞",
+      "meanings": [
+        "気づく・悟る",
+        "実現する"
+      ],
+      "examples": [
+        {
+          "text": "I realized that I had made a mistake.",
+          "translation": "自分が間違えたことに気づいた。"
+        }
+      ],
+      "collocations": [
+        "realize a dream"
+      ],
+      "notes": "notice は五感で気づく、realize は頭で「はっと理解する」。「（夢を）実現する」の意味もある。名詞は realization。",
+      "tags": [
+        "ステップ1",
+        "動詞"
+      ]
+    },
+    {
+      "id": "hv-society",
+      "type": "vocab",
+      "term": "society",
+      "reading": "/səˈsaɪəti/",
+      "pos": "名詞",
+      "meanings": [
+        "社会"
+      ],
+      "examples": [
+        {
+          "text": "We live in an aging society.",
+          "translation": "私たちは高齢化社会に生きている。"
+        }
+      ],
+      "collocations": [
+        "modern society",
+        "member of society"
+      ],
+      "notes": "形容詞は social（社会の）。「社会」全体を言うときはふつう the を付けない。",
+      "tags": [
+        "ステップ1",
+        "名詞"
+      ]
+    },
+    {
+      "id": "hv-government",
+      "type": "vocab",
+      "term": "government",
+      "reading": "/ˈɡʌvərnmənt/",
+      "pos": "名詞",
+      "meanings": [
+        "政府"
+      ],
+      "examples": [
+        {
+          "text": "The government announced a new policy.",
+          "translation": "政府は新しい政策を発表した。"
+        }
+      ],
+      "collocations": [
+        "local government",
+        "the Japanese government"
+      ],
+      "notes": "動詞 govern（治める）+ -ment。つづりの n を落としやすい（gover-n-ment）。",
+      "tags": [
+        "ステップ1",
+        "名詞"
+      ]
+    },
+    {
+      "id": "hv-economy",
+      "type": "vocab",
+      "term": "economy",
+      "reading": "/ɪˈkɑːnəmi/",
+      "pos": "名詞",
+      "meanings": [
+        "経済"
+      ],
+      "examples": [
+        {
+          "text": "The economy is growing slowly.",
+          "translation": "経済はゆっくりと成長している。"
+        }
+      ],
+      "collocations": [
+        "global economy",
+        "economy class"
+      ],
+      "notes": "economic は「経済の」（economic growth）、economical は「節約になる」（an economical car）と使い分ける。",
+      "tags": [
+        "ステップ1",
+        "名詞"
+      ]
+    },
+    {
+      "id": "hv-industry",
+      "type": "vocab",
+      "term": "industry",
+      "reading": "/ˈɪndəstri/",
+      "pos": "名詞",
+      "meanings": [
+        "産業",
+        "工業"
+      ],
+      "examples": [
+        {
+          "text": "Tourism is an important industry in Okinawa.",
+          "translation": "観光は沖縄で重要な産業だ。"
+        }
+      ],
+      "collocations": [
+        "car industry",
+        "tourism industry"
+      ],
+      "notes": "industrial は「産業の・工業の」、industrious は「勤勉な」と意味が違う。アクセントは先頭。",
+      "tags": [
+        "ステップ1",
+        "名詞"
+      ]
+    },
+    {
+      "id": "hv-population",
+      "type": "vocab",
+      "term": "population",
+      "reading": "/ˌpɑːpjəˈleɪʃən/",
+      "pos": "名詞",
+      "meanings": [
+        "人口"
+      ],
+      "examples": [
+        {
+          "text": "Japan's population is decreasing.",
+          "translation": "日本の人口は減少している。"
+        }
+      ],
+      "collocations": [
+        "large population",
+        "population growth"
+      ],
+      "notes": "人口が「多い / 少ない」は large / small（many / few とはしない）。「〜の人口は？」は What is the population of 〜?。",
+      "tags": [
+        "ステップ1",
+        "名詞"
+      ]
+    },
+    {
+      "id": "hv-research",
+      "type": "vocab",
+      "term": "research",
+      "reading": "/ˈriːsɜːrtʃ, rɪˈsɜːrtʃ/",
+      "pos": "名詞",
+      "meanings": [
+        "研究",
+        "調査"
+      ],
+      "examples": [
+        {
+          "text": "He does research on climate change.",
+          "translation": "彼は気候変動の研究をしている。"
+        }
+      ],
+      "collocations": [
+        "do research",
+        "research on"
+      ],
+      "notes": "数えられない名詞なので a research / researches とはしない。動詞としても使い、researcher は「研究者」。",
+      "tags": [
+        "ステップ1",
+        "名詞"
+      ]
+    },
+    {
+      "id": "hv-result",
+      "type": "vocab",
+      "term": "result",
+      "reading": "/rɪˈzʌlt/",
+      "pos": "名詞",
+      "meanings": [
+        "結果"
+      ],
+      "examples": [
+        {
+          "text": "The test results will be announced tomorrow.",
+          "translation": "テストの結果は明日発表される。"
+        }
+      ],
+      "collocations": [
+        "as a result",
+        "result in",
+        "result from"
+      ],
+      "notes": "動詞の result in 〜 は「（結果的に）〜になる」、result from 〜 は「〜から生じる」で向きが逆。as a result は「その結果」。",
+      "tags": [
+        "ステップ1",
+        "名詞"
+      ]
+    },
+    {
+      "id": "hv-situation",
+      "type": "vocab",
+      "term": "situation",
+      "reading": "/ˌsɪtʃuˈeɪʃən/",
+      "pos": "名詞",
+      "meanings": [
+        "状況",
+        "立場"
+      ],
+      "examples": [
+        {
+          "text": "The situation is getting worse.",
+          "translation": "状況は悪化している。"
+        }
+      ],
+      "collocations": [
+        "in this situation",
+        "economic situation"
+      ],
+      "notes": "condition が「状態（の良しあし）」なのに対し、situation は「置かれている状況」全体を指す。",
+      "tags": [
+        "ステップ1",
+        "名詞"
+      ]
+    },
+    {
+      "id": "hv-condition",
+      "type": "vocab",
+      "term": "condition",
+      "reading": "/kənˈdɪʃən/",
+      "pos": "名詞",
+      "meanings": [
+        "状態",
+        "条件"
+      ],
+      "examples": [
+        {
+          "text": "The car is in good condition.",
+          "translation": "その車は状態がよい。"
+        }
+      ],
+      "collocations": [
+        "in good condition",
+        "living conditions",
+        "on condition that 〜"
+      ],
+      "notes": "「生活環境・労働条件」は living / working conditions と複数形。on condition that 〜 は「〜という条件で」。",
+      "tags": [
+        "ステップ1",
+        "名詞"
+      ]
+    },
+    {
+      "id": "hv-purpose",
+      "type": "vocab",
+      "term": "purpose",
+      "reading": "/ˈpɜːrpəs/",
+      "pos": "名詞",
+      "meanings": [
+        "目的"
+      ],
+      "examples": [
+        {
+          "text": "What is the purpose of your visit?",
+          "translation": "訪問の目的は何ですか。"
+        }
+      ],
+      "collocations": [
+        "on purpose",
+        "for the purpose of"
+      ],
+      "notes": "on purpose は「わざと」。aim は「ねらい」、goal は「最終的な到達点」。",
+      "tags": [
+        "ステップ1",
+        "名詞"
+      ]
+    },
+    {
+      "id": "hv-method",
+      "type": "vocab",
+      "term": "method",
+      "reading": "/ˈmeθəd/",
+      "pos": "名詞",
+      "meanings": [
+        "方法"
+      ],
+      "examples": [
+        {
+          "text": "This is a new method of teaching English.",
+          "translation": "これは英語を教える新しい方法だ。"
+        }
+      ],
+      "collocations": [
+        "method of 〜",
+        "teaching method"
+      ],
+      "notes": "way よりかたく、体系立った「方式・手法」。",
+      "tags": [
+        "ステップ1",
+        "名詞"
+      ]
+    },
+    {
+      "id": "hv-ability",
+      "type": "vocab",
+      "term": "ability",
+      "reading": "/əˈbɪləti/",
+      "pos": "名詞",
+      "meanings": [
+        "能力"
+      ],
+      "examples": [
+        {
+          "text": "She has the ability to speak four languages.",
+          "translation": "彼女は4か国語を話す能力がある。"
+        }
+      ],
+      "collocations": [
+        "the ability to do"
+      ],
+      "notes": "形容詞 able（be able to do）の名詞形。反対は inability。skill は練習で身につけた「技能」。",
+      "tags": [
+        "ステップ1",
+        "名詞"
+      ]
+    },
+    {
+      "id": "hv-knowledge",
+      "type": "vocab",
+      "term": "knowledge",
+      "reading": "/ˈnɑːlɪdʒ/",
+      "pos": "名詞",
+      "meanings": [
+        "知識"
+      ],
+      "examples": [
+        {
+          "text": "He has a lot of knowledge about history.",
+          "translation": "彼は歴史について豊富な知識がある。"
+        }
+      ],
+      "collocations": [
+        "knowledge of",
+        "basic knowledge"
+      ],
+      "notes": "動詞 know の名詞形。k は発音せず「ナリッジ」。数えられない名詞。",
+      "tags": [
+        "ステップ1",
+        "名詞"
+      ]
+    },
+    {
+      "id": "hv-skill",
+      "type": "vocab",
+      "term": "skill",
+      "reading": "/skɪl/",
+      "pos": "名詞",
+      "meanings": [
+        "技能",
+        "腕前"
+      ],
+      "examples": [
+        {
+          "text": "Communication skills are important at work.",
+          "translation": "仕事ではコミュニケーション能力が大切だ。"
+        }
+      ],
+      "collocations": [
+        "language skills",
+        "improve one's skills"
+      ],
+      "notes": "形容詞は skilled / skillful（熟練した）。ability より「訓練で身につけた具体的な技術」。",
+      "tags": [
+        "ステップ1",
+        "名詞"
+      ]
+    },
+    {
+      "id": "hv-tradition",
+      "type": "vocab",
+      "term": "tradition",
+      "reading": "/trəˈdɪʃən/",
+      "pos": "名詞",
+      "meanings": [
+        "伝統"
+      ],
+      "examples": [
+        {
+          "text": "We should keep our local traditions.",
+          "translation": "地元の伝統を守るべきだ。"
+        }
+      ],
+      "collocations": [
+        "follow a tradition",
+        "by tradition"
+      ],
+      "notes": "custom は「（社会の）慣習」、habit は「個人の癖」。形容詞は traditional。",
+      "tags": [
+        "ステップ1",
+        "名詞"
+      ]
+    },
+    {
+      "id": "hv-generation",
+      "type": "vocab",
+      "term": "generation",
+      "reading": "/ˌdʒenəˈreɪʃən/",
+      "pos": "名詞",
+      "meanings": [
+        "世代"
+      ],
+      "examples": [
+        {
+          "text": "The festival has been passed down from generation to generation.",
+          "translation": "その祭りは代々受け継がれてきた。"
+        }
+      ],
+      "collocations": [
+        "future generations",
+        "from generation to generation",
+        "generation gap"
+      ],
+      "notes": "the younger generation は「若い世代」。動詞 generate は「生み出す」。",
+      "tags": [
+        "ステップ1",
+        "名詞"
+      ]
+    },
+    {
+      "id": "hv-behavior",
+      "type": "vocab",
+      "term": "behavior",
+      "reading": "/bɪˈheɪvjər/",
+      "pos": "名詞",
+      "meanings": [
+        "行動",
+        "ふるまい"
+      ],
+      "examples": [
+        {
+          "text": "His behavior in class was terrible.",
+          "translation": "授業中の彼の態度はひどかった。"
+        }
+      ],
+      "collocations": [
+        "human behavior",
+        "good behavior"
+      ],
+      "notes": "動詞は behave（ふるまう）。イギリス英語のつづりは behaviour。ふつう数えられない名詞。",
+      "tags": [
+        "ステップ1",
+        "名詞"
+      ]
+    },
+    {
+      "id": "hv-effort",
+      "type": "vocab",
+      "term": "effort",
+      "reading": "/ˈefərt/",
+      "pos": "名詞",
+      "meanings": [
+        "努力"
+      ],
+      "examples": [
+        {
+          "text": "She made a great effort to win.",
+          "translation": "彼女は勝つために大いに努力した。"
+        }
+      ],
+      "collocations": [
+        "make an effort",
+        "without effort"
+      ],
+      "notes": "「努力する」は make an effort（do an effort とはしない）。",
+      "tags": [
+        "ステップ1",
+        "名詞"
+      ]
+    },
+    {
+      "id": "hv-ancient",
+      "type": "vocab",
+      "term": "ancient",
+      "reading": "/ˈeɪnʃənt/",
+      "pos": "形容詞",
+      "meanings": [
+        "古代の"
+      ],
+      "examples": [
+        {
+          "text": "We studied ancient Rome.",
+          "translation": "私たちは古代ローマについて学んだ。"
+        }
+      ],
+      "collocations": [
+        "ancient history",
+        "ancient times"
+      ],
+      "notes": "old よりずっと昔の「古代の」。発音は「エインシェント」。反対は modern。",
+      "tags": [
+        "ステップ1",
+        "形容詞"
+      ]
+    },
+    {
+      "id": "hv-modern",
+      "type": "vocab",
+      "term": "modern",
+      "reading": "/ˈmɑːdərn/",
+      "pos": "形容詞",
+      "meanings": [
+        "現代の",
+        "近代的な"
+      ],
+      "examples": [
+        {
+          "text": "Smartphones are part of modern life.",
+          "translation": "スマートフォンは現代の生活の一部だ。"
+        }
+      ],
+      "collocations": [
+        "modern technology",
+        "modern art"
+      ],
+      "notes": "アクセントは先頭（MO-dern）。「最新式の」ニュアンスもある。",
+      "tags": [
+        "ステップ1",
+        "形容詞"
+      ]
+    },
+    {
+      "id": "hv-traditional",
+      "type": "vocab",
+      "term": "traditional",
+      "reading": "/trəˈdɪʃənəl/",
+      "pos": "形容詞",
+      "meanings": [
+        "伝統的な"
+      ],
+      "examples": [
+        {
+          "text": "Kimono is traditional Japanese clothing.",
+          "translation": "着物は日本の伝統的な衣服だ。"
+        }
+      ],
+      "collocations": [
+        "traditional culture",
+        "traditional food"
+      ],
+      "notes": "名詞は tradition。副詞は traditionally（伝統的に・従来）。",
+      "tags": [
+        "ステップ1",
+        "形容詞"
+      ]
+    },
+    {
+      "id": "hv-various",
+      "type": "vocab",
+      "term": "various",
+      "reading": "/ˈveriəs/",
+      "pos": "形容詞",
+      "meanings": [
+        "さまざまな"
+      ],
+      "examples": [
+        {
+          "text": "There are various ways to learn English.",
+          "translation": "英語を学ぶ方法はさまざまある。"
+        }
+      ],
+      "collocations": [
+        "various kinds of",
+        "for various reasons"
+      ],
+      "notes": "後ろの名詞は複数形。名詞 variety（a variety of 〜＝さまざまな〜）、動詞 vary（異なる・変わる）。",
+      "tags": [
+        "ステップ1",
+        "形容詞"
+      ]
+    },
+    {
+      "id": "hv-similar",
+      "type": "vocab",
+      "term": "similar",
+      "reading": "/ˈsɪmələr/",
+      "pos": "形容詞",
+      "meanings": [
+        "似ている"
+      ],
+      "examples": [
+        {
+          "text": "My idea is similar to yours.",
+          "translation": "私の考えはあなたのと似ている。"
+        }
+      ],
+      "collocations": [
+        "similar to"
+      ],
+      "notes": "「〜に似ている」は similar to 〜（with ではない）。same は「同じ」、similar は「似ている」。名詞は similarity。",
+      "tags": [
+        "ステップ1",
+        "形容詞"
+      ]
+    },
+    {
+      "id": "hv-serious",
+      "type": "vocab",
+      "term": "serious",
+      "reading": "/ˈsɪriəs/",
+      "pos": "形容詞",
+      "meanings": [
+        "深刻な",
+        "まじめな",
+        "本気の"
+      ],
+      "examples": [
+        {
+          "text": "Air pollution is a serious problem.",
+          "translation": "大気汚染は深刻な問題だ。"
+        }
+      ],
+      "collocations": [
+        "serious problem",
+        "Are you serious?"
+      ],
+      "notes": "Are you serious? は「本気で言ってるの？」。副詞は seriously。",
+      "tags": [
+        "ステップ1",
+        "形容詞"
+      ]
+    },
+    {
+      "id": "hv-positive",
+      "type": "vocab",
+      "term": "positive",
+      "reading": "/ˈpɑːzətɪv/",
+      "pos": "形容詞",
+      "meanings": [
+        "前向きな",
+        "肯定的な",
+        "陽性の"
+      ],
+      "examples": [
+        {
+          "text": "She always has a positive attitude.",
+          "translation": "彼女はいつも前向きな姿勢だ。"
+        }
+      ],
+      "collocations": [
+        "positive attitude",
+        "positive effect"
+      ],
+      "notes": "反対は negative。検査で「陽性の」の意味もある。",
+      "tags": [
+        "ステップ1",
+        "形容詞"
+      ]
+    },
+    {
+      "id": "hv-negative",
+      "type": "vocab",
+      "term": "negative",
+      "reading": "/ˈneɡətɪv/",
+      "pos": "形容詞",
+      "meanings": [
+        "否定的な",
+        "悪い",
+        "陰性の"
+      ],
+      "examples": [
+        {
+          "text": "Too much screen time can have a negative effect on sleep.",
+          "translation": "画面を見る時間が長すぎると睡眠に悪影響を与えることがある。"
+        }
+      ],
+      "collocations": [
+        "negative effect",
+        "negative opinion"
+      ],
+      "notes": "negative effect / impact は「悪影響」。反対は positive。検査で「陰性の」の意味もある。",
+      "tags": [
+        "ステップ1",
+        "形容詞"
+      ]
+    },
+    {
+      "id": "hv-local",
+      "type": "vocab",
+      "term": "local",
+      "reading": "/ˈloʊkəl/",
+      "pos": "形容詞",
+      "meanings": [
+        "地元の",
+        "その地域の"
+      ],
+      "examples": [
+        {
+          "text": "We buy vegetables from local farmers.",
+          "translation": "私たちは地元の農家から野菜を買う。"
+        }
+      ],
+      "collocations": [
+        "local government",
+        "local people"
+      ],
+      "notes": "日本語の「ローカル（いなかの）」と違い、田舎という意味はない。「その土地の」という意味。",
+      "tags": [
+        "ステップ1",
+        "形容詞"
+      ]
+    },
+    {
+      "id": "hv-public",
+      "type": "vocab",
+      "term": "public",
+      "reading": "/ˈpʌblɪk/",
+      "pos": "形容詞",
+      "meanings": [
+        "公共の",
+        "公の"
+      ],
+      "examples": [
+        {
+          "text": "Please be quiet in public places.",
+          "translation": "公共の場所では静かにしてください。"
+        }
+      ],
+      "collocations": [
+        "public transportation",
+        "in public",
+        "public opinion"
+      ],
+      "notes": "反対は private。in public は「人前で」。名詞 the public は「一般の人々」。",
+      "tags": [
+        "ステップ1",
+        "形容詞"
+      ]
+    },
+    {
+      "id": "hv-recently",
+      "type": "vocab",
+      "term": "recently",
+      "reading": "/ˈriːsəntli/",
+      "pos": "副詞",
+      "meanings": [
+        "最近"
+      ],
+      "examples": [
+        {
+          "text": "I have recently started jogging.",
+          "translation": "最近ジョギングを始めた。"
+        }
+      ],
+      "notes": "過去形・現在完了形と使う。現在の習慣を言う「最近」は these days / nowadays で、recently は現在形とは使わない。",
+      "tags": [
+        "ステップ1",
+        "副詞・接続詞"
+      ]
+    },
+    {
+      "id": "hv-especially",
+      "type": "vocab",
+      "term": "especially",
+      "reading": "/ɪˈspeʃəli/",
+      "pos": "副詞",
+      "meanings": [
+        "特に"
+      ],
+      "examples": [
+        {
+          "text": "I like fruit, especially apples.",
+          "translation": "果物、特にりんごが好きだ。"
+        }
+      ],
+      "notes": "強調したい語の直前に置くのが基本で、文頭にはふつう置かない。specially は「（特定の目的のために）特別に」。",
+      "tags": [
+        "ステップ1",
+        "副詞・接続詞"
+      ]
+    },
+    {
+      "id": "hv-instead",
+      "type": "vocab",
+      "term": "instead",
+      "reading": "/ɪnˈsted/",
+      "pos": "副詞",
+      "meanings": [
+        "その代わりに"
+      ],
+      "examples": [
+        {
+          "text": "I didn't go out. Instead, I stayed home and read.",
+          "translation": "出かけなかった。代わりに家で読書をした。"
+        }
+      ],
+      "collocations": [
+        "instead of 〜"
+      ],
+      "notes": "instead of 〜 は「〜の代わりに」（instead of coffee）。単独の instead は副詞。",
+      "tags": [
+        "ステップ1",
+        "副詞・接続詞"
+      ]
+    },
+    {
+      "id": "hv-although",
+      "type": "vocab",
+      "term": "although",
+      "reading": "/ɔːlˈðoʊ/",
+      "pos": "接続詞",
+      "meanings": [
+        "〜だけれども"
+      ],
+      "examples": [
+        {
+          "text": "Although it was cold, we went swimming.",
+          "translation": "寒かったけれども、私たちは泳ぎに行った。"
+        }
+      ],
+      "notes": "though よりややかたい。Although …, but … のように but といっしょには使わない。",
+      "tags": [
+        "ステップ1",
+        "副詞・接続詞"
+      ]
+    },
+    {
+      "id": "hv-achieve",
+      "type": "vocab",
+      "term": "achieve",
+      "reading": "/əˈtʃiːv/",
+      "pos": "動詞",
+      "meanings": [
+        "達成する"
+      ],
+      "examples": [
+        {
+          "text": "She worked hard to achieve her goal.",
+          "translation": "彼女は目標を達成するために懸命に努力した。"
+        }
+      ],
+      "collocations": [
+        "achieve a goal",
+        "achieve success"
+      ],
+      "notes": "努力して「成し遂げる」こと。名詞は achievement（業績・達成）。accomplish もほぼ同じ意味。",
+      "tags": [
+        "ステップ2",
+        "動詞"
+      ]
+    },
+    {
+      "id": "hv-consider",
+      "type": "vocab",
+      "term": "consider",
+      "reading": "/kənˈsɪdər/",
+      "pos": "動詞",
+      "meanings": [
+        "よく考える",
+        "〜とみなす"
+      ],
+      "examples": [
+        {
+          "text": "I'm considering studying abroad.",
+          "translation": "留学しようかと考えている。"
+        }
+      ],
+      "collocations": [
+        "consider doing",
+        "consider A (to be) B"
+      ],
+      "notes": "後ろは動名詞（consider doing）。considerate（思いやりのある）と considerable（かなりの）は意味が違う。名詞は consideration。",
+      "tags": [
+        "ステップ2",
+        "動詞"
+      ]
+    },
+    {
+      "id": "hv-reduce",
+      "type": "vocab",
+      "term": "reduce",
+      "reading": "/rɪˈduːs/",
+      "pos": "動詞",
+      "meanings": [
+        "減らす"
+      ],
+      "examples": [
+        {
+          "text": "We need to reduce plastic waste.",
+          "translation": "プラスチックごみを減らす必要がある。"
+        }
+      ],
+      "collocations": [
+        "reduce costs",
+        "reduce stress"
+      ],
+      "notes": "名詞は reduction。decrease は「減る」（自動詞）にも使うが、reduce は主に「減らす」（他動詞）。",
+      "tags": [
+        "ステップ2",
+        "動詞"
+      ]
+    },
+    {
+      "id": "hv-require",
+      "type": "vocab",
+      "term": "require",
+      "reading": "/rɪˈkwaɪər/",
+      "pos": "動詞",
+      "meanings": [
+        "必要とする",
+        "要求する"
+      ],
+      "examples": [
+        {
+          "text": "This job requires a lot of patience.",
+          "translation": "この仕事にはかなりの忍耐が必要だ。"
+        }
+      ],
+      "collocations": [
+        "be required to do",
+        "required subject"
+      ],
+      "notes": "need よりかたい語。be required to do は「〜することが求められる（義務）」。名詞は requirement（必要条件）。",
+      "tags": [
+        "ステップ2",
+        "動詞"
+      ]
+    },
+    {
+      "id": "hv-suggest",
+      "type": "vocab",
+      "term": "suggest",
+      "reading": "/səɡˈdʒest/",
+      "pos": "動詞",
+      "meanings": [
+        "提案する",
+        "それとなく示す"
+      ],
+      "examples": [
+        {
+          "text": "I suggested going to the beach.",
+          "translation": "浜辺に行こうと提案した。"
+        }
+      ],
+      "collocations": [
+        "suggest doing",
+        "suggest that 〜"
+      ],
+      "notes": "suggest 人 to do とはせず、suggest doing や suggest (that) 人 (should) do にする。名詞は suggestion。",
+      "tags": [
+        "ステップ2",
+        "動詞"
+      ]
+    },
+    {
+      "id": "hv-prevent",
+      "type": "vocab",
+      "term": "prevent",
+      "reading": "/prɪˈvent/",
+      "pos": "動詞",
+      "meanings": [
+        "防ぐ",
+        "妨げる"
+      ],
+      "examples": [
+        {
+          "text": "The rain prevented us from playing outside.",
+          "translation": "雨のせいで外で遊べなかった。"
+        }
+      ],
+      "collocations": [
+        "prevent A from doing",
+        "prevent disease"
+      ],
+      "notes": "prevent A from doing（A が〜するのを妨げる）が重要。protect は「守る」、prevent は「起こらないようにする」。名詞は prevention。",
+      "tags": [
+        "ステップ2",
+        "動詞"
+      ]
+    },
+    {
+      "id": "hv-involve",
+      "type": "vocab",
+      "term": "involve",
+      "reading": "/ɪnˈvɑːlv/",
+      "pos": "動詞",
+      "meanings": [
+        "含む・伴う",
+        "巻き込む"
+      ],
+      "examples": [
+        {
+          "text": "The job involves a lot of travel.",
+          "translation": "その仕事には出張が多く伴う。"
+        }
+      ],
+      "collocations": [
+        "be involved in",
+        "involve doing"
+      ],
+      "notes": "be involved in 〜 は「〜に関わっている・巻き込まれている」。名詞は involvement。",
+      "tags": [
+        "ステップ2",
+        "動詞"
+      ]
+    },
+    {
+      "id": "hv-depend",
+      "type": "vocab",
+      "term": "depend",
+      "reading": "/dɪˈpend/",
+      "pos": "動詞",
+      "meanings": [
+        "頼る",
+        "〜次第である"
+      ],
+      "examples": [
+        {
+          "text": "It depends on the weather.",
+          "translation": "それは天気次第だ。"
+        }
+      ],
+      "collocations": [
+        "depend on",
+        "It depends."
+      ],
+      "notes": "depend on 〜 で「〜に頼る・〜次第だ」。形容詞 dependent（依存した）、反対は independent。",
+      "tags": [
+        "ステップ2",
+        "動詞"
+      ]
+    },
+    {
+      "id": "hv-recognize",
+      "type": "vocab",
+      "term": "recognize",
+      "reading": "/ˈrekəɡnaɪz/",
+      "pos": "動詞",
+      "meanings": [
+        "（見て）それとわかる",
+        "認める"
+      ],
+      "examples": [
+        {
+          "text": "I didn't recognize him with his new haircut.",
+          "translation": "髪型が変わっていて彼だとわからなかった。"
+        }
+      ],
+      "collocations": [
+        "recognize A as B"
+      ],
+      "notes": "以前から知っているものを「見分ける」こと。「（価値・事実を）認める」の意味もある。名詞は recognition。",
+      "tags": [
+        "ステップ2",
+        "動詞"
+      ]
+    },
+    {
+      "id": "hv-affect",
+      "type": "vocab",
+      "term": "affect",
+      "reading": "/əˈfekt/",
+      "pos": "動詞",
+      "meanings": [
+        "影響する"
+      ],
+      "examples": [
+        {
+          "text": "Lack of sleep affects your health.",
+          "translation": "睡眠不足は健康に影響する。"
+        }
+      ],
+      "collocations": [
+        "be affected by"
+      ],
+      "notes": "動詞 affect と名詞 effect（影響）を区別する。他動詞なので affect on とはしない（have an effect on なら on が必要）。",
+      "tags": [
+        "ステップ2",
+        "動詞"
+      ]
+    },
+    {
+      "id": "hv-influence",
+      "type": "vocab",
+      "term": "influence",
+      "reading": "/ˈɪnfluəns/",
+      "pos": "名詞／動詞",
+      "meanings": [
+        "影響（力）",
+        "影響を与える"
+      ],
+      "examples": [
+        {
+          "text": "My teacher had a big influence on me.",
+          "translation": "先生は私に大きな影響を与えた。"
+        }
+      ],
+      "collocations": [
+        "have an influence on",
+        "under the influence of"
+      ],
+      "notes": "affect が直接的な変化に使われやすいのに対し、influence は考え方や行動への間接的・長期的な影響によく使う。形容詞は influential。",
+      "tags": [
+        "ステップ2",
+        "動詞"
+      ]
+    },
+    {
+      "id": "hv-encourage",
+      "type": "vocab",
+      "term": "encourage",
+      "reading": "/ɪnˈkɜːrɪdʒ/",
+      "pos": "動詞",
+      "meanings": [
+        "励ます",
+        "促す"
+      ],
+      "examples": [
+        {
+          "text": "My parents encouraged me to try again.",
+          "translation": "両親はもう一度挑戦するよう私を励ました。"
+        }
+      ],
+      "collocations": [
+        "encourage 人 to do"
+      ],
+      "notes": "en-（〜にする）+ courage（勇気）。反対は discourage（やる気をなくさせる）。名詞は encouragement。",
+      "tags": [
+        "ステップ2",
+        "動詞"
+      ]
+    },
+    {
+      "id": "hv-support",
+      "type": "vocab",
+      "term": "support",
+      "reading": "/səˈpɔːrt/",
+      "pos": "動詞／名詞",
+      "meanings": [
+        "支える",
+        "支持する",
+        "支援（名詞）"
+      ],
+      "examples": [
+        {
+          "text": "Thank you for your support.",
+          "translation": "ご支援ありがとうございます。"
+        }
+      ],
+      "collocations": [
+        "support a team",
+        "financial support"
+      ],
+      "notes": "応援するチームにも使う（Which team do you support?）。supporter は「支持者」。",
+      "tags": [
+        "ステップ2",
+        "動詞"
+      ]
+    },
+    {
+      "id": "hv-survive",
+      "type": "vocab",
+      "term": "survive",
+      "reading": "/sərˈvaɪv/",
+      "pos": "動詞",
+      "meanings": [
+        "生き残る",
+        "〜を切り抜ける"
+      ],
+      "examples": [
+        {
+          "text": "Only a few animals survived the fire.",
+          "translation": "その火事を生き延びた動物はわずかだった。"
+        }
+      ],
+      "collocations": [
+        "survive an accident",
+        "survive on"
+      ],
+      "notes": "他動詞で survive the war（戦争を生き延びる）とも言える。名詞は survival、survivor（生存者）。",
+      "tags": [
+        "ステップ2",
+        "動詞"
+      ]
+    },
+    {
+      "id": "hv-contribute",
+      "type": "vocab",
+      "term": "contribute",
+      "reading": "/kənˈtrɪbjuːt/",
+      "pos": "動詞",
+      "meanings": [
+        "貢献する",
+        "寄付する",
+        "一因となる"
+      ],
+      "examples": [
+        {
+          "text": "She contributed a lot to the team's success.",
+          "translation": "彼女はチームの成功に大きく貢献した。"
+        }
+      ],
+      "collocations": [
+        "contribute to"
+      ],
+      "notes": "contribute to 〜 は「〜に貢献する」だが、悪い結果の「一因となる」にも使う。名詞は contribution。",
+      "tags": [
+        "ステップ2",
+        "動詞"
+      ]
+    },
+    {
+      "id": "hv-recommend",
+      "type": "vocab",
+      "term": "recommend",
+      "reading": "/ˌrekəˈmend/",
+      "pos": "動詞",
+      "meanings": [
+        "勧める",
+        "推薦する"
+      ],
+      "examples": [
+        {
+          "text": "I recommend this book to everyone.",
+          "translation": "この本はみんなに勧めたい。"
+        }
+      ],
+      "collocations": [
+        "recommend doing",
+        "recommend that 〜"
+      ],
+      "notes": "つづりは c が1つ、m が2つ。recommend doing や recommend that 人 (should) do の形で使う。名詞は recommendation。",
+      "tags": [
+        "ステップ2",
+        "動詞"
+      ]
+    },
+    {
+      "id": "hv-apply",
+      "type": "vocab",
+      "term": "apply",
+      "reading": "/əˈplaɪ/",
+      "pos": "動詞",
+      "meanings": [
+        "申し込む",
+        "当てはまる",
+        "応用する"
+      ],
+      "examples": [
+        {
+          "text": "I applied for a part-time job.",
+          "translation": "アルバイトに応募した。"
+        }
+      ],
+      "collocations": [
+        "apply for",
+        "apply to"
+      ],
+      "notes": "apply for 〜 は「〜を求めて申し込む」、apply to 〜 は「〜に当てはまる・〜（の組織）に申し込む」。名詞は application、applicant（応募者）。",
+      "tags": [
+        "ステップ2",
+        "動詞"
+      ]
+    },
+    {
+      "id": "hv-replace",
+      "type": "vocab",
+      "term": "replace",
+      "reading": "/rɪˈpleɪs/",
+      "pos": "動詞",
+      "meanings": [
+        "取り替える",
+        "〜に取って代わる"
+      ],
+      "examples": [
+        {
+          "text": "We replaced the old printer with a new one.",
+          "translation": "古いプリンターを新しいものに取り替えた。"
+        }
+      ],
+      "collocations": [
+        "replace A with B"
+      ],
+      "notes": "replace A with B で「A を B と取り替える」。名詞は replacement。",
+      "tags": [
+        "ステップ2",
+        "動詞"
+      ]
+    },
+    {
+      "id": "hv-remove",
+      "type": "vocab",
+      "term": "remove",
+      "reading": "/rɪˈmuːv/",
+      "pos": "動詞",
+      "meanings": [
+        "取り除く",
+        "脱ぐ"
+      ],
+      "examples": [
+        {
+          "text": "Please remove your shoes here.",
+          "translation": "ここで靴を脱いでください。"
+        }
+      ],
+      "collocations": [
+        "remove A from B"
+      ],
+      "notes": "take off / take away よりかたい語。名詞は removal。",
+      "tags": [
+        "ステップ2",
+        "動詞"
+      ]
+    },
+    {
+      "id": "hv-environment",
+      "type": "vocab",
+      "term": "environment",
+      "reading": "/ɪnˈvaɪrənmənt/",
+      "pos": "名詞",
+      "meanings": [
+        "環境"
+      ],
+      "examples": [
+        {
+          "text": "We must protect the environment.",
+          "translation": "私たちは環境を守らなければならない。"
+        }
+      ],
+      "collocations": [
+        "the natural environment",
+        "environmental problems"
+      ],
+      "notes": "「自然環境」の意味では the environment と the を付ける。形容詞は environmental。つづりの n に注意（enviro-n-ment）。",
+      "tags": [
+        "ステップ2",
+        "名詞"
+      ]
+    },
+    {
+      "id": "hv-opportunity",
+      "type": "vocab",
+      "term": "opportunity",
+      "reading": "/ˌɑːpərˈtuːnəti/",
+      "pos": "名詞",
+      "meanings": [
+        "機会"
+      ],
+      "examples": [
+        {
+          "text": "This is a great opportunity to practice English.",
+          "translation": "これは英語を練習するよい機会だ。"
+        }
+      ],
+      "collocations": [
+        "take the opportunity",
+        "equal opportunity"
+      ],
+      "notes": "chance より「（よい）好機」の意味が強く、ややかたい。chance は「可能性・偶然」の意味にもなる。",
+      "tags": [
+        "ステップ2",
+        "名詞"
+      ]
+    },
+    {
+      "id": "hv-benefit",
+      "type": "vocab",
+      "term": "benefit",
+      "reading": "/ˈbenɪfɪt/",
+      "pos": "名詞／動詞",
+      "meanings": [
+        "利益",
+        "恩恵"
+      ],
+      "examples": [
+        {
+          "text": "Exercise has many health benefits.",
+          "translation": "運動には健康上の利点がたくさんある。"
+        }
+      ],
+      "collocations": [
+        "benefit from",
+        "for the benefit of"
+      ],
+      "notes": "動詞の benefit from 〜 は「〜から恩恵を受ける」。形容詞 beneficial（有益な）。profit は主に「金銭的な利益」。",
+      "tags": [
+        "ステップ2",
+        "名詞"
+      ]
+    },
+    {
+      "id": "hv-advantage",
+      "type": "vocab",
+      "term": "advantage",
+      "reading": "/ədˈvæntɪdʒ/",
+      "pos": "名詞",
+      "meanings": [
+        "有利な点",
+        "長所"
+      ],
+      "examples": [
+        {
+          "text": "One advantage of living in a city is convenience.",
+          "translation": "都会に住む利点の一つは便利さだ。"
+        }
+      ],
+      "collocations": [
+        "take advantage of",
+        "have an advantage over"
+      ],
+      "notes": "反対は disadvantage（不利な点）。take advantage of 〜 は「〜を利用する・（人の好意などに）つけこむ」。",
+      "tags": [
+        "ステップ2",
+        "名詞"
+      ]
+    },
+    {
+      "id": "hv-effect",
+      "type": "vocab",
+      "term": "effect",
+      "reading": "/ɪˈfekt/",
+      "pos": "名詞",
+      "meanings": [
+        "影響",
+        "効果",
+        "結果"
+      ],
+      "examples": [
+        {
+          "text": "The medicine had a good effect.",
+          "translation": "その薬はよく効いた。"
+        }
+      ],
+      "collocations": [
+        "have an effect on",
+        "side effect",
+        "cause and effect"
+      ],
+      "notes": "名詞 effect と動詞 affect を区別する。形容詞は effective（効果的な）。side effect は「副作用」。",
+      "tags": [
+        "ステップ2",
+        "名詞"
+      ]
+    },
+    {
+      "id": "hv-evidence",
+      "type": "vocab",
+      "term": "evidence",
+      "reading": "/ˈevɪdəns/",
+      "pos": "名詞",
+      "meanings": [
+        "証拠",
+        "根拠"
+      ],
+      "examples": [
+        {
+          "text": "There is no evidence that he stole the money.",
+          "translation": "彼がその金を盗んだという証拠はない。"
+        }
+      ],
+      "collocations": [
+        "scientific evidence",
+        "evidence of"
+      ],
+      "notes": "数えられない名詞（a piece of evidence）。形容詞は evident（明らかな）。proof は「決定的な証明」。",
+      "tags": [
+        "ステップ2",
+        "名詞"
+      ]
+    },
+    {
+      "id": "hv-experiment",
+      "type": "vocab",
+      "term": "experiment",
+      "reading": "/ɪkˈsperɪmənt/",
+      "pos": "名詞",
+      "meanings": [
+        "実験"
+      ],
+      "examples": [
+        {
+          "text": "We did an experiment in science class.",
+          "translation": "理科の授業で実験をした。"
+        }
+      ],
+      "collocations": [
+        "do an experiment",
+        "conduct an experiment"
+      ],
+      "notes": "動詞でも「実験する」。つづりの似た experience（経験）と区別。形容詞は experimental。",
+      "tags": [
+        "ステップ2",
+        "名詞"
+      ]
+    },
+    {
+      "id": "hv-resource",
+      "type": "vocab",
+      "term": "resource",
+      "reading": "/ˈriːsɔːrs/",
+      "pos": "名詞",
+      "meanings": [
+        "資源",
+        "資料"
+      ],
+      "examples": [
+        {
+          "text": "Japan has few natural resources.",
+          "translation": "日本には天然資源が少ない。"
+        }
+      ],
+      "collocations": [
+        "natural resources",
+        "human resources"
+      ],
+      "notes": "ふつう複数形 resources で使う。human resources は「人材・人事（部）」。",
+      "tags": [
+        "ステップ2",
+        "名詞"
+      ]
+    },
+    {
+      "id": "hv-species",
+      "type": "vocab",
+      "term": "species",
+      "reading": "/ˈspiːʃiːz/",
+      "pos": "名詞",
+      "meanings": [
+        "（生物の）種"
+      ],
+      "examples": [
+        {
+          "text": "Many species are in danger of extinction.",
+          "translation": "多くの種が絶滅の危機にある。"
+        }
+      ],
+      "collocations": [
+        "endangered species"
+      ],
+      "notes": "単数と複数が同じ形（a species / two species）。endangered species は「絶滅危惧種」。",
+      "tags": [
+        "ステップ2",
+        "名詞"
+      ]
+    },
+    {
+      "id": "hv-climate",
+      "type": "vocab",
+      "term": "climate",
+      "reading": "/ˈklaɪmət/",
+      "pos": "名詞",
+      "meanings": [
+        "気候"
+      ],
+      "examples": [
+        {
+          "text": "Climate change is a global issue.",
+          "translation": "気候変動は地球規模の問題だ。"
+        }
+      ],
+      "collocations": [
+        "climate change",
+        "mild climate"
+      ],
+      "notes": "weather は「（日々の）天気」、climate は「（その地域の長期的な）気候」。",
+      "tags": [
+        "ステップ2",
+        "名詞"
+      ]
+    },
+    {
+      "id": "hv-temperature",
+      "type": "vocab",
+      "term": "temperature",
+      "reading": "/ˈtemprətʃər/",
+      "pos": "名詞",
+      "meanings": [
+        "温度",
+        "気温",
+        "体温"
+      ],
+      "examples": [
+        {
+          "text": "The temperature dropped below zero last night.",
+          "translation": "昨夜、気温が0度を下回った。"
+        }
+      ],
+      "collocations": [
+        "high temperature",
+        "take one's temperature"
+      ],
+      "notes": "気温の高い / 低いは high / low（hot / cold とはしない）。have a temperature で「熱がある」。",
+      "tags": [
+        "ステップ2",
+        "名詞"
+      ]
+    },
+    {
+      "id": "hv-relationship",
+      "type": "vocab",
+      "term": "relationship",
+      "reading": "/rɪˈleɪʃənʃɪp/",
+      "pos": "名詞",
+      "meanings": [
+        "関係"
+      ],
+      "examples": [
+        {
+          "text": "She has a good relationship with her coworkers.",
+          "translation": "彼女は同僚とよい関係を築いている。"
+        }
+      ],
+      "collocations": [
+        "relationship between A and B",
+        "close relationship"
+      ],
+      "notes": "relation は国・組織などの「関係」に多く、relationship は人と人のつながりによく使う。",
+      "tags": [
+        "ステップ2",
+        "名詞"
+      ]
+    },
+    {
+      "id": "hv-responsibility",
+      "type": "vocab",
+      "term": "responsibility",
+      "reading": "/rɪˌspɑːnsəˈbɪləti/",
+      "pos": "名詞",
+      "meanings": [
+        "責任"
+      ],
+      "examples": [
+        {
+          "text": "It's your responsibility to feed the dog.",
+          "translation": "犬にえさをやるのはあなたの責任だ。"
+        }
+      ],
+      "collocations": [
+        "take responsibility for",
+        "sense of responsibility"
+      ],
+      "notes": "形容詞は responsible（be responsible for 〜＝〜に責任がある）。",
+      "tags": [
+        "ステップ2",
+        "名詞"
+      ]
+    },
+    {
+      "id": "hv-challenge",
+      "type": "vocab",
+      "term": "challenge",
+      "reading": "/ˈtʃælɪndʒ/",
+      "pos": "名詞",
+      "meanings": [
+        "難題",
+        "やりがいのある課題"
+      ],
+      "examples": [
+        {
+          "text": "Learning a new language is a big challenge.",
+          "translation": "新しい言語を学ぶことは大きな挑戦だ。"
+        }
+      ],
+      "collocations": [
+        "face a challenge",
+        "meet the challenge"
+      ],
+      "notes": "日本語の「チャレンジする」は英語では try が自然なことが多い。動詞 challenge は「（人に）挑む・異議を唱える」。形容詞 challenging は「やりがいのある・難しい」。",
+      "tags": [
+        "ステップ2",
+        "名詞"
+      ]
+    },
+    {
+      "id": "hv-solution",
+      "type": "vocab",
+      "term": "solution",
+      "reading": "/səˈluːʃən/",
+      "pos": "名詞",
+      "meanings": [
+        "解決策",
+        "（問題の）答え"
+      ],
+      "examples": [
+        {
+          "text": "We need to find a solution to this problem.",
+          "translation": "この問題の解決策を見つける必要がある。"
+        }
+      ],
+      "collocations": [
+        "solution to",
+        "find a solution"
+      ],
+      "notes": "「〜の解決策」は solution to 〜（of ではない）。動詞は solve。化学では「溶液」の意味もある。",
+      "tags": [
+        "ステップ2",
+        "名詞"
+      ]
+    },
+    {
+      "id": "hv-decision",
+      "type": "vocab",
+      "term": "decision",
+      "reading": "/dɪˈsɪʒən/",
+      "pos": "名詞",
+      "meanings": [
+        "決定",
+        "決断"
+      ],
+      "examples": [
+        {
+          "text": "It was a difficult decision.",
+          "translation": "それは難しい決断だった。"
+        }
+      ],
+      "collocations": [
+        "make a decision",
+        "final decision"
+      ],
+      "notes": "「決断する」は make a decision。動詞は decide、形容詞は decisive（決定的な・決断力のある）。",
+      "tags": [
+        "ステップ2",
+        "名詞"
+      ]
+    },
+    {
+      "id": "hv-disaster",
+      "type": "vocab",
+      "term": "disaster",
+      "reading": "/dɪˈzæstər/",
+      "pos": "名詞",
+      "meanings": [
+        "災害",
+        "大失敗"
+      ],
+      "examples": [
+        {
+          "text": "We should prepare for natural disasters.",
+          "translation": "自然災害に備えるべきだ。"
+        }
+      ],
+      "collocations": [
+        "natural disaster",
+        "disaster area"
+      ],
+      "notes": "形容詞は disastrous（悲惨な）。くだけて「大失敗」の意味でも使う（The party was a disaster.）。",
+      "tags": [
+        "ステップ2",
+        "名詞"
+      ]
+    },
+    {
+      "id": "hv-available",
+      "type": "vocab",
+      "term": "available",
+      "reading": "/əˈveɪləbəl/",
+      "pos": "形容詞",
+      "meanings": [
+        "利用できる",
+        "手に入る",
+        "（人が）手が空いている"
+      ],
+      "examples": [
+        {
+          "text": "Are you available tomorrow afternoon?",
+          "translation": "明日の午後、時間はありますか。"
+        }
+      ],
+      "collocations": [
+        "available for",
+        "available to"
+      ],
+      "notes": "物なら「入手・利用できる」、人なら「都合がつく」。名詞は availability。",
+      "tags": [
+        "ステップ2",
+        "形容詞"
+      ]
+    },
+    {
+      "id": "hv-convenient",
+      "type": "vocab",
+      "term": "convenient",
+      "reading": "/kənˈviːniənt/",
+      "pos": "形容詞",
+      "meanings": [
+        "便利な",
+        "都合のよい"
+      ],
+      "examples": [
+        {
+          "text": "When is it convenient for you?",
+          "translation": "いつがご都合よいですか。"
+        }
+      ],
+      "collocations": [
+        "convenient for",
+        "convenience store"
+      ],
+      "notes": "人を主語にしない（Are you convenient? は誤り）。名詞は convenience（コンビニ＝convenience store）。",
+      "tags": [
+        "ステップ2",
+        "形容詞"
+      ]
+    },
+    {
+      "id": "hv-effective",
+      "type": "vocab",
+      "term": "effective",
+      "reading": "/ɪˈfektɪv/",
+      "pos": "形容詞",
+      "meanings": [
+        "効果的な",
+        "有効な"
+      ],
+      "examples": [
+        {
+          "text": "This is an effective way to remember new words.",
+          "translation": "これは新しい単語を覚える効果的な方法だ。"
+        }
+      ],
+      "collocations": [
+        "effective way",
+        "effective from 〜"
+      ],
+      "notes": "「効果が出る」ことに重点がある。efficient は「むだがなく効率的な」で意味が違う。",
+      "tags": [
+        "ステップ2",
+        "形容詞"
+      ]
+    },
+    {
+      "id": "hv-particular",
+      "type": "vocab",
+      "term": "particular",
+      "reading": "/pərˈtɪkjələr/",
+      "pos": "形容詞",
+      "meanings": [
+        "特定の",
+        "特別な",
+        "好みがうるさい"
+      ],
+      "examples": [
+        {
+          "text": "Is there any particular reason?",
+          "translation": "何か特別な理由はありますか。"
+        }
+      ],
+      "collocations": [
+        "in particular",
+        "be particular about"
+      ],
+      "notes": "in particular は「特に」。be particular about 〜 は「〜にこだわる」。副詞は particularly。",
+      "tags": [
+        "ステップ2",
+        "形容詞"
+      ]
+    },
+    {
+      "id": "hv-private",
+      "type": "vocab",
+      "term": "private",
+      "reading": "/ˈpraɪvət/",
+      "pos": "形容詞",
+      "meanings": [
+        "個人の",
+        "私的な",
+        "私立の"
+      ],
+      "examples": [
+        {
+          "text": "This is a private beach.",
+          "translation": "ここは私有の浜辺です。"
+        }
+      ],
+      "collocations": [
+        "private school",
+        "private life"
+      ],
+      "notes": "反対は public。名詞は privacy（プライバシー）。発音は「プライヴェット」。",
+      "tags": [
+        "ステップ2",
+        "形容詞"
+      ]
+    },
+    {
+      "id": "hv-physical",
+      "type": "vocab",
+      "term": "physical",
+      "reading": "/ˈfɪzɪkəl/",
+      "pos": "形容詞",
+      "meanings": [
+        "身体の",
+        "物質的な"
+      ],
+      "examples": [
+        {
+          "text": "Regular physical activity is good for you.",
+          "translation": "定期的な運動は体によい。"
+        }
+      ],
+      "collocations": [
+        "physical education",
+        "physical exercise"
+      ],
+      "notes": "反対は mental（精神の）。physical education（P.E.）は「体育」。physics は「物理学」。",
+      "tags": [
+        "ステップ2",
+        "形容詞"
+      ]
+    },
+    {
+      "id": "hv-mental",
+      "type": "vocab",
+      "term": "mental",
+      "reading": "/ˈmentəl/",
+      "pos": "形容詞",
+      "meanings": [
+        "精神の",
+        "心の"
+      ],
+      "examples": [
+        {
+          "text": "Mental health is as important as physical health.",
+          "translation": "心の健康は体の健康と同じくらい大切だ。"
+        }
+      ],
+      "collocations": [
+        "mental health",
+        "mental illness"
+      ],
+      "notes": "反対は physical。日本語の「メンタルが強い」は mentally strong などと言う。",
+      "tags": [
+        "ステップ2",
+        "形容詞"
+      ]
+    },
+    {
+      "id": "hv-aware",
+      "type": "vocab",
+      "term": "aware",
+      "reading": "/əˈwer/",
+      "pos": "形容詞",
+      "meanings": [
+        "気づいて",
+        "意識して"
+      ],
+      "examples": [
+        {
+          "text": "Are you aware of the risks?",
+          "translation": "危険性に気づいていますか。"
+        }
+      ],
+      "collocations": [
+        "be aware of",
+        "be aware that 〜"
+      ],
+      "notes": "名詞の前には置かず be aware of 〜 の形で使う。名詞は awareness（意識・認識）。",
+      "tags": [
+        "ステップ2",
+        "形容詞"
+      ]
+    },
+    {
+      "id": "hv-familiar",
+      "type": "vocab",
+      "term": "familiar",
+      "reading": "/fəˈmɪljər/",
+      "pos": "形容詞",
+      "meanings": [
+        "よく知っている",
+        "見覚えのある"
+      ],
+      "examples": [
+        {
+          "text": "This song sounds familiar.",
+          "translation": "この歌は聞き覚えがある。"
+        }
+      ],
+      "collocations": [
+        "be familiar with",
+        "be familiar to"
+      ],
+      "notes": "人が主語なら be familiar with 〜（〜をよく知っている）、物が主語なら be familiar to 人（人によく知られている）。",
+      "tags": [
+        "ステップ2",
+        "形容詞"
+      ]
+    },
+    {
+      "id": "hv-responsible",
+      "type": "vocab",
+      "term": "responsible",
+      "reading": "/rɪˈspɑːnsəbəl/",
+      "pos": "形容詞",
+      "meanings": [
+        "責任がある",
+        "責任感のある"
+      ],
+      "examples": [
+        {
+          "text": "Who is responsible for this project?",
+          "translation": "このプロジェクトの責任者は誰ですか。"
+        }
+      ],
+      "collocations": [
+        "be responsible for"
+      ],
+      "notes": "be responsible for 〜 は「〜に責任がある・〜の原因である」。名詞は responsibility。",
+      "tags": [
+        "ステップ2",
+        "形容詞"
+      ]
+    },
+    {
+      "id": "hv-gradually",
+      "type": "vocab",
+      "term": "gradually",
+      "reading": "/ˈɡrædʒuəli/",
+      "pos": "副詞",
+      "meanings": [
+        "だんだんと",
+        "徐々に"
+      ],
+      "examples": [
+        {
+          "text": "The weather gradually got warmer.",
+          "translation": "天気はだんだん暖かくなった。"
+        }
+      ],
+      "notes": "形容詞は gradual（徐々の）。反対は suddenly（突然）。",
+      "tags": [
+        "ステップ2",
+        "副詞・接続詞"
+      ]
+    },
+    {
+      "id": "hv-nearly",
+      "type": "vocab",
+      "term": "nearly",
+      "reading": "/ˈnɪrli/",
+      "pos": "副詞",
+      "meanings": [
+        "ほとんど",
+        "危うく"
+      ],
+      "examples": [
+        {
+          "text": "It's nearly ten o'clock.",
+          "translation": "もうすぐ10時だ。"
+        }
+      ],
+      "notes": "almost とほぼ同じ。I nearly missed the bus. は「もう少しでバスに乗り遅れるところだった」（実際は間に合った）。",
+      "tags": [
+        "ステップ2",
+        "副詞・接続詞"
+      ]
+    },
+    {
+      "id": "hv-therefore",
+      "type": "vocab",
+      "term": "therefore",
+      "reading": "/ˈðerfɔːr/",
+      "pos": "副詞",
+      "meanings": [
+        "それゆえ",
+        "したがって"
+      ],
+      "examples": [
+        {
+          "text": "He was sick. Therefore, he couldn't come.",
+          "translation": "彼は病気だった。それゆえ、来られなかった。"
+        }
+      ],
+      "notes": "so よりかたい書き言葉。接続詞ではないので、文と文はピリオドやセミコロンで区切る。",
+      "tags": [
+        "ステップ2",
+        "副詞・接続詞"
+      ]
+    },
+    {
+      "id": "hv-unless",
+      "type": "vocab",
+      "term": "unless",
+      "reading": "/ənˈles/",
+      "pos": "接続詞",
+      "meanings": [
+        "〜しない限り"
+      ],
+      "examples": [
+        {
+          "text": "You can't go out unless you finish your homework.",
+          "translation": "宿題を終えない限り出かけてはいけません。"
+        }
+      ],
+      "notes": "unless はほぼ if 〜 not の意味。未来のことでも unless の中は現在形にする。",
+      "tags": [
+        "ステップ2",
+        "副詞・接続詞"
+      ]
+    },
+    {
+      "id": "hv-maintain",
+      "type": "vocab",
+      "term": "maintain",
+      "reading": "/meɪnˈteɪn/",
+      "pos": "動詞",
+      "meanings": [
+        "維持する",
+        "主張する"
+      ],
+      "examples": [
+        {
+          "text": "It's important to maintain a healthy weight.",
+          "translation": "健康的な体重を維持することは大切だ。"
+        }
+      ],
+      "collocations": [
+        "maintain a balance",
+        "maintain that 〜"
+      ],
+      "notes": "keep よりかたい語。名詞は maintenance（維持・保守。日本語の「メンテナンス」）。",
+      "tags": [
+        "ステップ3",
+        "動詞"
+      ]
+    },
+    {
+      "id": "hv-attract",
+      "type": "vocab",
+      "term": "attract",
+      "reading": "/əˈtrækt/",
+      "pos": "動詞",
+      "meanings": [
+        "引きつける"
+      ],
+      "examples": [
+        {
+          "text": "The festival attracts many tourists.",
+          "translation": "その祭りは多くの観光客を引きつける。"
+        }
+      ],
+      "collocations": [
+        "attract attention",
+        "be attracted to"
+      ],
+      "notes": "名詞は attraction（魅力・呼び物）、形容詞は attractive（魅力的な）。",
+      "tags": [
+        "ステップ3",
+        "動詞"
+      ]
+    },
+    {
+      "id": "hv-establish",
+      "type": "vocab",
+      "term": "establish",
+      "reading": "/ɪˈstæblɪʃ/",
+      "pos": "動詞",
+      "meanings": [
+        "設立する",
+        "確立する"
+      ],
+      "examples": [
+        {
+          "text": "The school was established in 1950.",
+          "translation": "その学校は1950年に設立された。"
+        }
+      ],
+      "collocations": [
+        "establish a company",
+        "establish a relationship"
+      ],
+      "notes": "found（設立する）とほぼ同じ。名詞は establishment（設立・施設）。",
+      "tags": [
+        "ステップ3",
+        "動詞"
+      ]
+    },
+    {
+      "id": "hv-obtain",
+      "type": "vocab",
+      "term": "obtain",
+      "reading": "/əbˈteɪn/",
+      "pos": "動詞",
+      "meanings": [
+        "手に入れる",
+        "得る"
+      ],
+      "examples": [
+        {
+          "text": "You need to obtain permission first.",
+          "translation": "まず許可を得る必要がある。"
+        }
+      ],
+      "collocations": [
+        "obtain information",
+        "obtain permission"
+      ],
+      "notes": "get のかたい言い方で、努力や手続きを経て「入手する」感じ。",
+      "tags": [
+        "ステップ3",
+        "動詞"
+      ]
+    },
+    {
+      "id": "hv-purchase",
+      "type": "vocab",
+      "term": "purchase",
+      "reading": "/ˈpɜːrtʃəs/",
+      "pos": "動詞／名詞",
+      "meanings": [
+        "購入する",
+        "購入（品）"
+      ],
+      "examples": [
+        {
+          "text": "You can purchase tickets online.",
+          "translation": "チケットはオンラインで購入できる。"
+        }
+      ],
+      "collocations": [
+        "make a purchase",
+        "purchase price"
+      ],
+      "notes": "buy のかたい言い方で、ビジネスや掲示でよく使う。発音は「パーチェス」。",
+      "tags": [
+        "ステップ3",
+        "動詞"
+      ]
+    },
+    {
+      "id": "hv-consume",
+      "type": "vocab",
+      "term": "consume",
+      "reading": "/kənˈsuːm/",
+      "pos": "動詞",
+      "meanings": [
+        "消費する"
+      ],
+      "examples": [
+        {
+          "text": "This car consumes less fuel.",
+          "translation": "この車は燃料の消費が少ない。"
+        }
+      ],
+      "collocations": [
+        "consume energy",
+        "time-consuming"
+      ],
+      "notes": "名詞は consumption（消費）、consumer（消費者）。time-consuming は「時間のかかる」。",
+      "tags": [
+        "ステップ3",
+        "動詞"
+      ]
+    },
+    {
+      "id": "hv-respond",
+      "type": "vocab",
+      "term": "respond",
+      "reading": "/rɪˈspɑːnd/",
+      "pos": "動詞",
+      "meanings": [
+        "応答する",
+        "反応する"
+      ],
+      "examples": [
+        {
+          "text": "She didn't respond to my email.",
+          "translation": "彼女は私のメールに返事をくれなかった。"
+        }
+      ],
+      "collocations": [
+        "respond to"
+      ],
+      "notes": "respond to 〜 の形で使う。名詞は response（返事・反応）。answer よりかたい。",
+      "tags": [
+        "ステップ3",
+        "動詞"
+      ]
+    },
+    {
+      "id": "hv-attend",
+      "type": "vocab",
+      "term": "attend",
+      "reading": "/əˈtend/",
+      "pos": "動詞",
+      "meanings": [
+        "出席する",
+        "通う"
+      ],
+      "examples": [
+        {
+          "text": "Over 100 people attended the meeting.",
+          "translation": "100人以上がその会議に出席した。"
+        }
+      ],
+      "collocations": [
+        "attend a meeting",
+        "attend school"
+      ],
+      "notes": "「〜に出席する」は他動詞で attend 〜。attend to 〜 は「〜に対処する・注意を払う」で別の意味。名詞は attendance（出席）。",
+      "tags": [
+        "ステップ3",
+        "動詞"
+      ]
+    },
+    {
+      "id": "hv-complain",
+      "type": "vocab",
+      "term": "complain",
+      "reading": "/kəmˈpleɪn/",
+      "pos": "動詞",
+      "meanings": [
+        "不満を言う",
+        "苦情を言う"
+      ],
+      "examples": [
+        {
+          "text": "He always complains about the food.",
+          "translation": "彼はいつも食べ物の文句を言う。"
+        }
+      ],
+      "collocations": [
+        "complain about",
+        "complain to 人"
+      ],
+      "notes": "名詞は complaint。日本語の「クレーム」は英語では complaint（claim は「主張・請求」）。",
+      "tags": [
+        "ステップ3",
+        "動詞"
+      ]
+    },
+    {
+      "id": "hv-manage",
+      "type": "vocab",
+      "term": "manage",
+      "reading": "/ˈmænɪdʒ/",
+      "pos": "動詞",
+      "meanings": [
+        "管理する",
+        "なんとか〜する"
+      ],
+      "examples": [
+        {
+          "text": "I managed to finish the report on time.",
+          "translation": "なんとか時間どおりに報告書を仕上げた。"
+        }
+      ],
+      "collocations": [
+        "manage to do",
+        "manage a team"
+      ],
+      "notes": "manage to do は「（苦労して）なんとか〜する」。名詞は management（経営）、manager（管理者）。",
+      "tags": [
+        "ステップ3",
+        "動詞"
+      ]
+    },
+    {
+      "id": "hv-represent",
+      "type": "vocab",
+      "term": "represent",
+      "reading": "/ˌreprɪˈzent/",
+      "pos": "動詞",
+      "meanings": [
+        "代表する",
+        "表す"
+      ],
+      "examples": [
+        {
+          "text": "She represented Japan at the Olympics.",
+          "translation": "彼女はオリンピックで日本の代表を務めた。"
+        }
+      ],
+      "collocations": [
+        "represent a country"
+      ],
+      "notes": "名詞は representative（代表者）、representation（表現・代表）。",
+      "tags": [
+        "ステップ3",
+        "動詞"
+      ]
+    },
+    {
+      "id": "hv-satisfy",
+      "type": "vocab",
+      "term": "satisfy",
+      "reading": "/ˈsætɪsfaɪ/",
+      "pos": "動詞",
+      "meanings": [
+        "満足させる",
+        "満たす"
+      ],
+      "examples": [
+        {
+          "text": "The result didn't satisfy him.",
+          "translation": "その結果に彼は満足しなかった。"
+        }
+      ],
+      "collocations": [
+        "be satisfied with",
+        "satisfy needs"
+      ],
+      "notes": "「満足している」は be satisfied with 〜。名詞は satisfaction、形容詞 satisfactory は「満足のいく」。",
+      "tags": [
+        "ステップ3",
+        "動詞"
+      ]
+    },
+    {
+      "id": "hv-rely",
+      "type": "vocab",
+      "term": "rely",
+      "reading": "/rɪˈlaɪ/",
+      "pos": "動詞",
+      "meanings": [
+        "頼る",
+        "当てにする"
+      ],
+      "examples": [
+        {
+          "text": "You can rely on him.",
+          "translation": "彼は頼りになるよ。"
+        }
+      ],
+      "collocations": [
+        "rely on"
+      ],
+      "notes": "rely on 〜 で depend on 〜 とほぼ同じ。形容詞は reliable（信頼できる）。",
+      "tags": [
+        "ステップ3",
+        "動詞"
+      ]
+    },
+    {
+      "id": "hv-raise",
+      "type": "vocab",
+      "term": "raise",
+      "reading": "/reɪz/",
+      "pos": "動詞",
+      "meanings": [
+        "上げる",
+        "育てる",
+        "（お金を）集める"
+      ],
+      "examples": [
+        {
+          "text": "Raise your hand if you have a question.",
+          "translation": "質問があれば手を挙げてください。"
+        }
+      ],
+      "collocations": [
+        "raise one's hand",
+        "raise money",
+        "raise children"
+      ],
+      "notes": "raise は他動詞（〜を上げる）で規則変化（raised）。自動詞「上がる」は rise。",
+      "tags": [
+        "ステップ3",
+        "動詞"
+      ]
+    },
+    {
+      "id": "hv-rise",
+      "type": "vocab",
+      "term": "rise",
+      "reading": "/raɪz/",
+      "pos": "動詞／名詞",
+      "meanings": [
+        "上がる",
+        "昇る"
+      ],
+      "examples": [
+        {
+          "text": "The sun rises in the east.",
+          "translation": "太陽は東から昇る。"
+        }
+      ],
+      "collocations": [
+        "rise in prices",
+        "sunrise"
+      ],
+      "forms": [
+        "rose",
+        "risen"
+      ],
+      "notes": "活用は rise – rose – risen。目的語をとらない（自動詞）。目的語をとる「上げる」は raise。名詞では「上昇」。",
+      "tags": [
+        "ステップ3",
+        "動詞"
+      ]
+    },
+    {
+      "id": "hv-suppose",
+      "type": "vocab",
+      "term": "suppose",
+      "reading": "/səˈpoʊz/",
+      "pos": "動詞",
+      "meanings": [
+        "思う",
+        "推測する"
+      ],
+      "examples": [
+        {
+          "text": "I suppose you're right.",
+          "translation": "たぶんあなたの言うとおりだろう。"
+        }
+      ],
+      "collocations": [
+        "be supposed to do",
+        "Suppose 〜"
+      ],
+      "notes": "be supposed to do は「〜することになっている」。文頭の Suppose 〜 は「もし〜だとしたら」。",
+      "tags": [
+        "ステップ3",
+        "動詞"
+      ]
+    },
+    {
+      "id": "hv-determine",
+      "type": "vocab",
+      "term": "determine",
+      "reading": "/dɪˈtɜːrmɪn/",
+      "pos": "動詞",
+      "meanings": [
+        "決定する",
+        "突き止める"
+      ],
+      "examples": [
+        {
+          "text": "The cause of the accident has not been determined.",
+          "translation": "事故の原因はまだ特定されていない。"
+        }
+      ],
+      "collocations": [
+        "be determined to do"
+      ],
+      "notes": "decide よりかたく、「（調査で）突き止める」意味もある。be determined to do は「〜しようと固く決意している」。名詞は determination。",
+      "tags": [
+        "ステップ3",
+        "動詞"
+      ]
+    },
+    {
+      "id": "hv-identify",
+      "type": "vocab",
+      "term": "identify",
+      "reading": "/aɪˈdentɪfaɪ/",
+      "pos": "動詞",
+      "meanings": [
+        "特定する",
+        "身元を確認する"
+      ],
+      "examples": [
+        {
+          "text": "The police identified the man in the photo.",
+          "translation": "警察は写真の男の身元を特定した。"
+        }
+      ],
+      "collocations": [
+        "identify A as B",
+        "identify with"
+      ],
+      "notes": "名詞は identification（身分証明（書）・ID）、identity（正体・アイデンティティ）。",
+      "tags": [
+        "ステップ3",
+        "動詞"
+      ]
+    },
+    {
+      "id": "hv-observe",
+      "type": "vocab",
+      "term": "observe",
+      "reading": "/əbˈzɜːrv/",
+      "pos": "動詞",
+      "meanings": [
+        "観察する",
+        "（規則を）守る"
+      ],
+      "examples": [
+        {
+          "text": "We observed the stars through a telescope.",
+          "translation": "望遠鏡で星を観察した。"
+        }
+      ],
+      "collocations": [
+        "observe the rules"
+      ],
+      "notes": "名詞は observation（観察）。「（法・慣習を）守る」の意味の名詞は observance。",
+      "tags": [
+        "ステップ3",
+        "動詞"
+      ]
+    },
+    {
+      "id": "hv-pollution",
+      "type": "vocab",
+      "term": "pollution",
+      "reading": "/pəˈluːʃən/",
+      "pos": "名詞",
+      "meanings": [
+        "汚染",
+        "公害"
+      ],
+      "examples": [
+        {
+          "text": "Air pollution is a problem in many big cities.",
+          "translation": "大気汚染は多くの大都市で問題になっている。"
+        }
+      ],
+      "collocations": [
+        "air pollution",
+        "water pollution"
+      ],
+      "notes": "動詞は pollute（汚染する）。数えられない名詞。",
+      "tags": [
+        "ステップ3",
+        "名詞"
+      ]
+    },
+    {
+      "id": "hv-quality",
+      "type": "vocab",
+      "term": "quality",
+      "reading": "/ˈkwɑːləti/",
+      "pos": "名詞",
+      "meanings": [
+        "質",
+        "品質"
+      ],
+      "examples": [
+        {
+          "text": "This shop sells high-quality products.",
+          "translation": "この店は高品質の製品を売っている。"
+        }
+      ],
+      "collocations": [
+        "high quality",
+        "quality of life"
+      ],
+      "notes": "quantity（量）と対で覚える。quality of life（QOL）は「生活の質」。",
+      "tags": [
+        "ステップ3",
+        "名詞"
+      ]
+    },
+    {
+      "id": "hv-amount",
+      "type": "vocab",
+      "term": "amount",
+      "reading": "/əˈmaʊnt/",
+      "pos": "名詞",
+      "meanings": [
+        "量",
+        "額"
+      ],
+      "examples": [
+        {
+          "text": "A large amount of money was stolen.",
+          "translation": "多額のお金が盗まれた。"
+        }
+      ],
+      "collocations": [
+        "a large amount of",
+        "amount to"
+      ],
+      "notes": "amount of は数えられない名詞に使い、数えられる名詞には number of を使う。動詞 amount to 〜 は「合計〜に達する」。",
+      "tags": [
+        "ステップ3",
+        "名詞"
+      ]
+    },
+    {
+      "id": "hv-attitude",
+      "type": "vocab",
+      "term": "attitude",
+      "reading": "/ˈætɪtuːd/",
+      "pos": "名詞",
+      "meanings": [
+        "態度",
+        "考え方"
+      ],
+      "examples": [
+        {
+          "text": "Your attitude toward others is important.",
+          "translation": "他人に対する態度は大切だ。"
+        }
+      ],
+      "collocations": [
+        "attitude toward",
+        "positive attitude"
+      ],
+      "notes": "「〜に対する態度」は attitude toward(s) 〜。behavior が外から見える行動なのに対し、attitude は物事に対する心構え・姿勢。",
+      "tags": [
+        "ステップ3",
+        "名詞"
+      ]
+    },
+    {
+      "id": "hv-emotion",
+      "type": "vocab",
+      "term": "emotion",
+      "reading": "/ɪˈmoʊʃən/",
+      "pos": "名詞",
+      "meanings": [
+        "感情"
+      ],
+      "examples": [
+        {
+          "text": "She couldn't hide her emotions.",
+          "translation": "彼女は感情を隠しきれなかった。"
+        }
+      ],
+      "collocations": [
+        "show emotion",
+        "strong emotion"
+      ],
+      "notes": "形容詞は emotional（感情的な・感動的な）。feeling より強い感情を指すことが多い。",
+      "tags": [
+        "ステップ3",
+        "名詞"
+      ]
+    },
+    {
+      "id": "hv-custom",
+      "type": "vocab",
+      "term": "custom",
+      "reading": "/ˈkʌstəm/",
+      "pos": "名詞",
+      "meanings": [
+        "習慣",
+        "慣習"
+      ],
+      "examples": [
+        {
+          "text": "Bowing is a Japanese custom.",
+          "translation": "お辞儀は日本の習慣だ。"
+        }
+      ],
+      "collocations": [
+        "local customs",
+        "go through customs"
+      ],
+      "notes": "社会の慣習は custom、個人の癖は habit。複数形 customs は「税関」の意味にもなる。",
+      "tags": [
+        "ステップ3",
+        "名詞"
+      ]
+    },
+    {
+      "id": "hv-device",
+      "type": "vocab",
+      "term": "device",
+      "reading": "/dɪˈvaɪs/",
+      "pos": "名詞",
+      "meanings": [
+        "装置",
+        "機器"
+      ],
+      "examples": [
+        {
+          "text": "Please turn off all electronic devices.",
+          "translation": "電子機器の電源はすべて切ってください。"
+        }
+      ],
+      "collocations": [
+        "electronic device",
+        "mobile device"
+      ],
+      "notes": "発音は「ディヴァイス」。動詞 devise /dɪˈvaɪz/（考案する）と区別。",
+      "tags": [
+        "ステップ3",
+        "名詞"
+      ]
+    },
+    {
+      "id": "hv-facility",
+      "type": "vocab",
+      "term": "facility",
+      "reading": "/fəˈsɪləti/",
+      "pos": "名詞",
+      "meanings": [
+        "施設",
+        "設備"
+      ],
+      "examples": [
+        {
+          "text": "The hotel has excellent sports facilities.",
+          "translation": "そのホテルにはすばらしいスポーツ施設がある。"
+        }
+      ],
+      "collocations": [
+        "public facilities",
+        "sports facilities"
+      ],
+      "notes": "「施設」の意味ではふつう複数形 facilities。日本語の「施設」より広く「設備」も含む。",
+      "tags": [
+        "ステップ3",
+        "名詞"
+      ]
+    },
+    {
+      "id": "hv-disease",
+      "type": "vocab",
+      "term": "disease",
+      "reading": "/dɪˈziːz/",
+      "pos": "名詞",
+      "meanings": [
+        "病気"
+      ],
+      "examples": [
+        {
+          "text": "Heart disease is a leading cause of death.",
+          "translation": "心臓病は主な死因の一つだ。"
+        }
+      ],
+      "collocations": [
+        "heart disease",
+        "infectious disease"
+      ],
+      "notes": "illness は「体調が悪い状態」、disease は病名のつく「病気」を指すことが多い。発音は「ディズィーズ」。",
+      "tags": [
+        "ステップ3",
+        "名詞"
+      ]
+    },
+    {
+      "id": "hv-patient",
+      "type": "vocab",
+      "term": "patient",
+      "reading": "/ˈpeɪʃənt/",
+      "pos": "名詞／形容詞",
+      "meanings": [
+        "患者",
+        "がまん強い（形容詞）"
+      ],
+      "examples": [
+        {
+          "text": "The doctor sees about 30 patients a day.",
+          "translation": "その医師は1日に約30人の患者を診る。"
+        }
+      ],
+      "collocations": [
+        "be patient with"
+      ],
+      "notes": "形容詞では「忍耐強い」（Be patient.＝がまんしなさい）。名詞 patience は「忍耐」。反対は impatient。",
+      "tags": [
+        "ステップ3",
+        "名詞"
+      ]
+    },
+    {
+      "id": "hv-treatment",
+      "type": "vocab",
+      "term": "treatment",
+      "reading": "/ˈtriːtmənt/",
+      "pos": "名詞",
+      "meanings": [
+        "治療",
+        "扱い"
+      ],
+      "examples": [
+        {
+          "text": "He is receiving treatment for cancer.",
+          "translation": "彼はがんの治療を受けている。"
+        }
+      ],
+      "collocations": [
+        "medical treatment",
+        "special treatment"
+      ],
+      "notes": "動詞は treat（扱う・治療する・おごる）。special treatment は「特別扱い」。",
+      "tags": [
+        "ステップ3",
+        "名詞"
+      ]
+    },
+    {
+      "id": "hv-employee",
+      "type": "vocab",
+      "term": "employee",
+      "reading": "/ɪmˈplɔɪiː/",
+      "pos": "名詞",
+      "meanings": [
+        "従業員"
+      ],
+      "examples": [
+        {
+          "text": "The company has 500 employees.",
+          "translation": "その会社には500人の従業員がいる。"
+        }
+      ],
+      "collocations": [
+        "full-time employee"
+      ],
+      "notes": "employ（雇う）+ -ee（〜される人）。雇う側は employer。/ˌemplɔɪˈiː/ と後ろにアクセントを置く発音もある。",
+      "tags": [
+        "ステップ3",
+        "名詞"
+      ]
+    },
+    {
+      "id": "hv-customer",
+      "type": "vocab",
+      "term": "customer",
+      "reading": "/ˈkʌstəmər/",
+      "pos": "名詞",
+      "meanings": [
+        "（店の）客",
+        "顧客"
+      ],
+      "examples": [
+        {
+          "text": "The store was full of customers.",
+          "translation": "店は客でいっぱいだった。"
+        }
+      ],
+      "collocations": [
+        "customer service",
+        "regular customer"
+      ],
+      "notes": "店・会社の客は customer、招待客は guest、乗客は passenger、訪問客は visitor、弁護士などの依頼人は client。",
+      "tags": [
+        "ステップ3",
+        "名詞"
+      ]
+    },
+    {
+      "id": "hv-income",
+      "type": "vocab",
+      "term": "income",
+      "reading": "/ˈɪnkʌm/",
+      "pos": "名詞",
+      "meanings": [
+        "収入"
+      ],
+      "examples": [
+        {
+          "text": "Their income has increased this year.",
+          "translation": "彼らの収入は今年増えた。"
+        }
+      ],
+      "collocations": [
+        "high income",
+        "low income",
+        "income tax"
+      ],
+      "notes": "収入の多い / 少ないは high / low（または large / small）。income tax は「所得税」。",
+      "tags": [
+        "ステップ3",
+        "名詞"
+      ]
+    },
+    {
+      "id": "hv-career",
+      "type": "vocab",
+      "term": "career",
+      "reading": "/kəˈrɪr/",
+      "pos": "名詞",
+      "meanings": [
+        "職業",
+        "経歴"
+      ],
+      "examples": [
+        {
+          "text": "She wants a career in medicine.",
+          "translation": "彼女は医療の仕事に就きたいと思っている。"
+        }
+      ],
+      "collocations": [
+        "career path",
+        "career change"
+      ],
+      "notes": "アクセントは後ろ（ca-REER）で、日本語の「キャリア」と発音が違う。長く続ける職業・経歴を指す。",
+      "tags": [
+        "ステップ3",
+        "名詞"
+      ]
+    },
+    {
+      "id": "hv-risk",
+      "type": "vocab",
+      "term": "risk",
+      "reading": "/rɪsk/",
+      "pos": "名詞",
+      "meanings": [
+        "危険（性）",
+        "リスク"
+      ],
+      "examples": [
+        {
+          "text": "Smoking increases the risk of cancer.",
+          "translation": "喫煙はがんのリスクを高める。"
+        }
+      ],
+      "collocations": [
+        "take a risk",
+        "at risk",
+        "risk of"
+      ],
+      "notes": "danger は「（すでにある）危険」、risk は「（起こりうる）危険の可能性」。形容詞は risky。",
+      "tags": [
+        "ステップ3",
+        "名詞"
+      ]
+    },
+    {
+      "id": "hv-crisis",
+      "type": "vocab",
+      "term": "crisis",
+      "reading": "/ˈkraɪsɪs/",
+      "pos": "名詞",
+      "meanings": [
+        "危機"
+      ],
+      "examples": [
+        {
+          "text": "The country is facing an economic crisis.",
+          "translation": "その国は経済危機に直面している。"
+        }
+      ],
+      "collocations": [
+        "economic crisis",
+        "energy crisis"
+      ],
+      "forms": [
+        "crises"
+      ],
+      "notes": "複数形は crises /ˈkraɪsiːz/。形容詞 critical は「重大な・危機的な」。",
+      "tags": [
+        "ステップ3",
+        "名詞"
+      ]
+    },
+    {
+      "id": "hv-efficient",
+      "type": "vocab",
+      "term": "efficient",
+      "reading": "/ɪˈfɪʃənt/",
+      "pos": "形容詞",
+      "meanings": [
+        "効率的な",
+        "有能な"
+      ],
+      "examples": [
+        {
+          "text": "This is an efficient way to use energy.",
+          "translation": "これはエネルギーを効率よく使う方法だ。"
+        }
+      ],
+      "collocations": [
+        "energy-efficient",
+        "efficient use of"
+      ],
+      "notes": "effective は「効果がある」、efficient は「むだがなく効率がよい」と使い分ける。名詞は efficiency。",
+      "tags": [
+        "ステップ3",
+        "形容詞"
+      ]
+    },
+    {
+      "id": "hv-original",
+      "type": "vocab",
+      "term": "original",
+      "reading": "/əˈrɪdʒənəl/",
+      "pos": "形容詞",
+      "meanings": [
+        "最初の・元の",
+        "独創的な"
+      ],
+      "examples": [
+        {
+          "text": "This is the original version of the movie.",
+          "translation": "これはその映画のオリジナル版だ。"
+        }
+      ],
+      "collocations": [
+        "original plan",
+        "original idea"
+      ],
+      "notes": "名詞は origin（起源）、originality（独創性）。副詞 originally は「もともとは」。",
+      "tags": [
+        "ステップ3",
+        "形容詞"
+      ]
+    },
+    {
+      "id": "hv-independent",
+      "type": "vocab",
+      "term": "independent",
+      "reading": "/ˌɪndɪˈpendənt/",
+      "pos": "形容詞",
+      "meanings": [
+        "独立した",
+        "自立した"
+      ],
+      "examples": [
+        {
+          "text": "She became independent of her parents.",
+          "translation": "彼女は親から自立した。"
+        }
+      ],
+      "collocations": [
+        "be independent of",
+        "independent study"
+      ],
+      "notes": "「〜から独立した」は independent of 〜（from も使う）。名詞は independence。反対は dependent。",
+      "tags": [
+        "ステップ3",
+        "形容詞"
+      ]
+    },
+    {
+      "id": "hv-likely",
+      "type": "vocab",
+      "term": "likely",
+      "reading": "/ˈlaɪkli/",
+      "pos": "形容詞",
+      "meanings": [
+        "〜しそうな",
+        "ありそうな"
+      ],
+      "examples": [
+        {
+          "text": "It is likely to rain this afternoon.",
+          "translation": "午後は雨が降りそうだ。"
+        }
+      ],
+      "collocations": [
+        "be likely to do",
+        "It is likely that 〜"
+      ],
+      "notes": "-ly で終わるが主に形容詞。反対は unlikely。名詞は likelihood（可能性）。",
+      "tags": [
+        "ステップ3",
+        "形容詞"
+      ]
+    },
+    {
+      "id": "hv-worth",
+      "type": "vocab",
+      "term": "worth",
+      "reading": "/wɜːrθ/",
+      "pos": "形容詞",
+      "meanings": [
+        "〜の価値がある"
+      ],
+      "examples": [
+        {
+          "text": "This museum is worth visiting.",
+          "translation": "この博物館は訪れる価値がある。"
+        }
+      ],
+      "collocations": [
+        "be worth doing",
+        "worth it"
+      ],
+      "notes": "be worth doing（〜する価値がある）の形が重要。worthwhile は「やりがいのある・価値のある」。",
+      "tags": [
+        "ステップ3",
+        "形容詞"
+      ]
+    },
+    {
+      "id": "hv-rare",
+      "type": "vocab",
+      "term": "rare",
+      "reading": "/rer/",
+      "pos": "形容詞",
+      "meanings": [
+        "まれな",
+        "珍しい"
+      ],
+      "examples": [
+        {
+          "text": "It is rare for him to be late.",
+          "translation": "彼が遅刻するのは珍しい。"
+        }
+      ],
+      "collocations": [
+        "rare species",
+        "rare chance"
+      ],
+      "notes": "副詞 rarely は「めったに〜ない」と否定の意味になる。ステーキの「レア」も同じつづり。",
+      "tags": [
+        "ステップ3",
+        "形容詞"
+      ]
+    },
+    {
+      "id": "hv-global",
+      "type": "vocab",
+      "term": "global",
+      "reading": "/ˈɡloʊbəl/",
+      "pos": "形容詞",
+      "meanings": [
+        "地球規模の",
+        "世界的な"
+      ],
+      "examples": [
+        {
+          "text": "Global warming is a serious problem.",
+          "translation": "地球温暖化は深刻な問題だ。"
+        }
+      ],
+      "collocations": [
+        "global warming",
+        "global economy"
+      ],
+      "notes": "名詞は globe（地球・地球儀）、globalization（グローバル化）。",
+      "tags": [
+        "ステップ3",
+        "形容詞"
+      ]
+    },
+    {
+      "id": "hv-capable",
+      "type": "vocab",
+      "term": "capable",
+      "reading": "/ˈkeɪpəbəl/",
+      "pos": "形容詞",
+      "meanings": [
+        "能力がある",
+        "有能な"
+      ],
+      "examples": [
+        {
+          "text": "She is capable of running the company.",
+          "translation": "彼女には会社を経営する能力がある。"
+        }
+      ],
+      "collocations": [
+        "be capable of doing"
+      ],
+      "notes": "be capable of doing（to 不定詞ではなく of + 動名詞）。able は be able to do。名詞は capability。",
+      "tags": [
+        "ステップ3",
+        "形容詞"
+      ]
+    },
+    {
+      "id": "hv-obvious",
+      "type": "vocab",
+      "term": "obvious",
+      "reading": "/ˈɑːbviəs/",
+      "pos": "形容詞",
+      "meanings": [
+        "明らかな"
+      ],
+      "examples": [
+        {
+          "text": "It was obvious that he was lying.",
+          "translation": "彼がうそをついているのは明らかだった。"
+        }
+      ],
+      "collocations": [
+        "obvious reason",
+        "It is obvious that 〜"
+      ],
+      "notes": "誰が見てもすぐわかる「明白な」。clear よりも「言うまでもなく見え見えの」感じ。副詞は obviously。",
+      "tags": [
+        "ステップ3",
+        "形容詞"
+      ]
+    },
+    {
+      "id": "hv-essential",
+      "type": "vocab",
+      "term": "essential",
+      "reading": "/ɪˈsenʃəl/",
+      "pos": "形容詞",
+      "meanings": [
+        "不可欠な",
+        "本質的な"
+      ],
+      "examples": [
+        {
+          "text": "Water is essential for life.",
+          "translation": "水は生命に不可欠だ。"
+        }
+      ],
+      "collocations": [
+        "essential for",
+        "essential to"
+      ],
+      "notes": "necessary より強く「なくてはならない」。名詞は essence（本質）。",
+      "tags": [
+        "ステップ3",
+        "形容詞"
+      ]
+    },
+    {
+      "id": "hv-eventually",
+      "type": "vocab",
+      "term": "eventually",
+      "reading": "/ɪˈventʃuəli/",
+      "pos": "副詞",
+      "meanings": [
+        "最終的には",
+        "結局"
+      ],
+      "examples": [
+        {
+          "text": "After many failures, he eventually succeeded.",
+          "translation": "何度も失敗したあと、彼はついに成功した。"
+        }
+      ],
+      "notes": "長い時間や過程を経て「最後には」。形容詞は eventual（最終的な）。",
+      "tags": [
+        "ステップ3",
+        "副詞・前置詞"
+      ]
+    },
+    {
+      "id": "hv-immediately",
+      "type": "vocab",
+      "term": "immediately",
+      "reading": "/ɪˈmiːdiətli/",
+      "pos": "副詞",
+      "meanings": [
+        "すぐに",
+        "ただちに"
+      ],
+      "examples": [
+        {
+          "text": "Please call me immediately.",
+          "translation": "すぐに電話をください。"
+        }
+      ],
+      "notes": "soon（まもなく）よりも「ただちに」。形容詞は immediate（即座の）。",
+      "tags": [
+        "ステップ3",
+        "副詞・前置詞"
+      ]
+    },
+    {
+      "id": "hv-otherwise",
+      "type": "vocab",
+      "term": "otherwise",
+      "reading": "/ˈʌðərwaɪz/",
+      "pos": "副詞",
+      "meanings": [
+        "さもなければ",
+        "そのほかの点では"
+      ],
+      "examples": [
+        {
+          "text": "Hurry up. Otherwise, you'll miss the train.",
+          "translation": "急ぎなさい。さもないと電車に乗り遅れるよ。"
+        }
+      ],
+      "notes": "「さもなければ」の意味では or (else) と言い換えられる。「それ以外の点では」の意味もある。",
+      "tags": [
+        "ステップ3",
+        "副詞・前置詞"
+      ]
+    },
+    {
+      "id": "hv-despite",
+      "type": "vocab",
+      "term": "despite",
+      "reading": "/dɪˈspaɪt/",
+      "pos": "前置詞",
+      "meanings": [
+        "〜にもかかわらず"
+      ],
+      "examples": [
+        {
+          "text": "Despite the rain, the game continued.",
+          "translation": "雨にもかかわらず、試合は続けられた。"
+        }
+      ],
+      "notes": "前置詞なので後ろは名詞か動名詞（despite the rain）。in spite of 〜 と同じ意味。文を続けるなら although を使う。",
+      "tags": [
+        "ステップ3",
+        "副詞・前置詞"
+      ]
+    }
+  ]
+}

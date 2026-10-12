@@ -3,7 +3,7 @@
   "version": 1,
   "id": "it-git-linux-100",
   "title": "Git と Linux コマンド 100",
-  "description": "開発の現場で毎日使う Linux コマンドと Git の操作を、実際に打つコマンドで答えながら身につけます。ステップ 1 で Linux の基本（pwd・cd・ls・mkdir・cp・mv・rm・head・tail など）、ステップ 2 で検索（grep・find）・権限（chmod・chown と 755 などの表記）・プロセス（ps・kill・top）・ディスク（df・du）・tar・curl・ssh・パイプとリダイレクト・環境変数・sudo、ステップ 3 で Git の基本（init・clone・add・commit・log・diff・branch・switch・merge・push・pull）、ステップ 4 で stash・reset と revert の使い分け・.gitignore・コンフリクトの解消・rebase・pull request の流れを学びます。形式は一問一答 61 問（答えはコマンド。同じ意味の別の書き方も正解）・選択問題 29 問・穴埋め 7 問・作業手順の並べ替え 7 問。練習用のディレクトリやリポジトリで実際に打って確かめると定着します。データベースを扱うなら次は「SQL 入門 80」がおすすめです。",
+  "description": "開発の現場で毎日使う Linux コマンドと Git の操作を、実際に打つコマンドで答えながら身につけます。ステップ 1 で Linux の基本（pwd・cd・ls・mkdir・cp・mv・rm・head・tail など）、ステップ 2 で検索（grep・find）・権限（chmod・chown と 755 などの表記）・プロセス（ps・kill・top）・ディスク（df・du）・tar・curl・ssh・パイプとリダイレクト・環境変数・sudo、ステップ 3 で Git の基本（init・clone・add・commit・log・diff・branch・switch・merge・push・pull）、ステップ 4 で stash・reset と revert の使い分け・.gitignore・コンフリクトの解消・rebase・pull request の流れを学びます。形式は一問一答 48 問（答えはコマンド。同じ意味の別の書き方も正解）・選択問題 29 問・穴埋め 16 問・作業手順の並べ替え 7 問。練習用のディレクトリやリポジトリで実際に打って確かめると定着します。データベースを扱うなら次は「SQL 入門 80」がおすすめです。",
   "subject": "programming",
   "language": {
     "target": "ja",
@@ -105,7 +105,7 @@
         "ファイル操作"
       ],
       "text": "Linux では、名前が .（ドット）で始まるファイルは {{隠し}} ファイルとして扱われ、ls に -a を付けないと表示されない。",
-      "hint": "ひらがな・漢字",
+      "hint": "漢字 1 文字 + ひらがな 1 文字",
       "explanation": ".bashrc や .gitignore などの設定ファイルが代表例。消したり壊したりしないよう注意する。"
     },
     {
@@ -120,20 +120,14 @@
       "explanation": "make directory の略。すでに同じ名前があるとエラーになる。"
     },
     {
-      "id": "gl-q-mkdir-p",
-      "type": "qa",
+      "id": "gl-c-mkdir-p",
+      "type": "cloze",
       "tags": [
         "ステップ1",
         "ファイル操作"
       ],
-      "question": "a/b/c のように、途中のディレクトリ（a や a/b）がまだなくても、まとめて作成するコマンドは？",
-      "answer": "mkdir -p a/b/c",
-      "accepted": [
-        "mkdir --parents a/b/c"
-      ],
-      "hints": [
-        "親ディレクトリも作るオプション"
-      ],
+      "text": "mkdir {{-p}} a/b/c と実行すると、途中のディレクトリ（a や a/b）がまだなくても、まとめて作成される。",
+      "hint": "オプション（parents の頭文字）",
       "explanation": "-p（parents）を付けると途中のディレクトリも作る。すでに存在していてもエラーにならないので、スクリプトでもよく使う。"
     },
     {
@@ -211,17 +205,6 @@
       "explanation": "-r は再帰的に削除する。ゴミ箱は経由しないので、パスの打ち間違いに特に注意する。空のディレクトリだけを消すなら rmdir。"
     },
     {
-      "id": "gl-q-touch",
-      "type": "qa",
-      "tags": [
-        "ステップ1",
-        "ファイル操作"
-      ],
-      "question": "空のファイル empty.txt を作るコマンドは？（すでにあれば更新日時だけが変わる）",
-      "answer": "touch empty.txt",
-      "explanation": "touch は本来ファイルの更新日時を変えるコマンドで、ファイルがなければ空のファイルを作る。"
-    },
-    {
       "id": "gl-ch-less",
       "type": "choice",
       "tags": [
@@ -290,17 +273,6 @@
       "explanation": "-f（follow）で、追記されるたびに表示を続ける。終了は Ctrl + C。-F はログのローテーションでファイルが作り直されても追いかける。"
     },
     {
-      "id": "gl-q-man",
-      "type": "qa",
-      "tags": [
-        "ステップ1",
-        "ファイルの中身を見る"
-      ],
-      "question": "ls コマンドのマニュアル（使い方の説明）を表示するコマンドは？",
-      "answer": "man ls",
-      "explanation": "man はマニュアルを表示する。中の操作は less と同じで、q で終了。簡単な説明なら ls --help でも見られる。"
-    },
-    {
       "id": "gl-o-make-dir-flow",
       "type": "order",
       "tags": [
@@ -332,21 +304,15 @@
       "explanation": "grep パターン ファイル の順に書く。スペースや記号を含むパターンは \"...\" や '...' で囲む。"
     },
     {
-      "id": "gl-q-grep-i",
-      "type": "qa",
+      "id": "gl-c-grep-i",
+      "type": "cloze",
       "tags": [
         "ステップ2",
         "検索"
       ],
-      "question": "ファイル app.log の中から、大文字・小文字を区別せずに error を含む行を表示するコマンドは？",
-      "answer": "grep -i error app.log",
-      "accepted": [
-        "grep --ignore-case error app.log"
-      ],
-      "hints": [
-        "ignore case の i"
-      ],
-      "explanation": "-i を付けると ERROR・Error・error のどれにも一致する。"
+      "text": "grep {{-i}} error app.log と実行すると、大文字・小文字を区別せずに error を含む行（ERROR や Error も）が表示される。",
+      "hint": "オプション（ignore case）",
+      "explanation": "-i（ignore case）で大文字小文字を無視する。-v（一致しない行）・-n（行番号を付ける）・-r（再帰的に検索）とあわせて覚える。"
     },
     {
       "id": "gl-ch-grep-r",
@@ -698,14 +664,14 @@
       "explanation": "例: ps aux | grep nginx。小さなコマンドを組み合わせられるのが Linux の強み。ファイルへの保存は >、成功したときだけ次を実行するのは &&。"
     },
     {
-      "id": "gl-q-redirect",
-      "type": "qa",
+      "id": "gl-c-redirect",
+      "type": "cloze",
       "tags": [
         "ステップ2",
         "パイプとリダイレクト"
       ],
-      "question": "ls -l の結果を、ファイル list.txt に保存するコマンドは？（list.txt があれば上書きする）",
-      "answer": "ls -l > list.txt",
+      "text": "ls -l の結果をファイル list.txt に保存する（あれば上書きする）には、ls -l {{>}} list.txt と書く。",
+      "hint": "記号 1 文字",
       "explanation": "> は標準出力をファイルに書き込む（上書き）。追記したいときは >>。"
     },
     {
@@ -976,26 +942,15 @@
       "explanation": "編集 → add → commit → push が基本のサイクル。push の前に git status や git log で内容を確かめる習慣をつけると、ミスに早く気づける。"
     },
     {
-      "id": "gl-q-log-oneline",
-      "type": "qa",
+      "id": "gl-c-log-oneline",
+      "type": "cloze",
       "tags": [
         "ステップ3",
         "履歴と差分"
       ],
-      "question": "コミット履歴を 1 コミット 1 行の簡潔な形式で表示するコマンドは？",
-      "answer": "git log --oneline",
+      "text": "git log {{--oneline}} と実行すると、コミット履歴が 1 コミット 1 行の簡潔な形式で表示される。",
+      "hint": "ハイフン 2 つで始まるオプション",
       "explanation": "短いコミット ID とメッセージの 1 行目だけが表示される。--graph を加えるとブランチの分岐・合流も図で見られる。"
-    },
-    {
-      "id": "gl-q-show",
-      "type": "qa",
-      "tags": [
-        "ステップ3",
-        "履歴と差分"
-      ],
-      "question": "コミット abc1234 のメッセージと変更内容（差分）を表示するコマンドは？",
-      "answer": "git show abc1234",
-      "explanation": "git show は 1 つのコミットの詳細を表示する。コミット ID は先頭の数文字だけでも、ほかと区別できれば指定できる。"
     },
     {
       "id": "gl-q-diff",
@@ -1104,17 +1059,14 @@
       "explanation": "分岐後に main 側が進んでいなければ、ブランチの指す位置を前に進めるだけで済む（早送り）。両方にコミットがあるときは、2 つをまとめるマージコミットが作られる。"
     },
     {
-      "id": "gl-q-branch-d",
-      "type": "qa",
+      "id": "gl-c-branch-d",
+      "type": "cloze",
       "tags": [
         "ステップ3",
         "ブランチとマージ"
       ],
-      "question": "マージ済みのブランチ feature-login を削除するコマンドは？",
-      "answer": "git branch -d feature-login",
-      "accepted": [
-        "git branch --delete feature-login"
-      ],
+      "text": "マージ済みのブランチ feature-login を削除するには git branch {{-d}} feature-login を実行する。",
+      "hint": "小文字 1 文字のオプション",
       "explanation": "-d はマージされていないブランチの削除を拒否するので安全。マージしていない変更ごと捨てるときだけ -D（強制削除）を使う。"
     },
     {
@@ -1132,15 +1084,15 @@
       "explanation": "-v（verbose）で URL も表示される。fetch 用と push 用の URL が 1 行ずつ出る。"
     },
     {
-      "id": "gl-q-remote-add",
-      "type": "qa",
+      "id": "gl-c-remote-add",
+      "type": "cloze",
       "tags": [
         "ステップ3",
         "リモート"
       ],
-      "question": "リモートリポジトリ https://github.com/example/app.git を origin という名前で登録するコマンドは？",
-      "answer": "git remote add origin https://github.com/example/app.git",
-      "explanation": "git init で作ったリポジトリを GitHub などとつなぐときに使う。clone したリポジトリでは origin が最初から登録されている。"
+      "text": "git init で作ったリポジトリに、リモート https://github.com/example/app.git を origin という名前で登録するには git remote {{add}} origin https://github.com/example/app.git を実行する。",
+      "hint": "英単語 1 つ",
+      "explanation": "登録されたリモートは git remote -v で確認できる。clone したリポジトリでは origin が最初から登録されている。"
     },
     {
       "id": "gl-q-push",
@@ -1230,26 +1182,15 @@
       "explanation": "急ぎで別のブランチの作業をしなければならないときに便利。退避した変更は git stash list で確認できる。"
     },
     {
-      "id": "gl-q-stash-list",
-      "type": "qa",
+      "id": "gl-c-stash-pop",
+      "type": "cloze",
       "tags": [
         "ステップ4",
         "変更の退避"
       ],
-      "question": "git stash で退避した変更の一覧を表示するコマンドは？",
-      "answer": "git stash list",
-      "explanation": "stash@{0} が最新の退避。複数あるときは番号を指定して取り出せる。"
-    },
-    {
-      "id": "gl-q-stash-pop",
-      "type": "qa",
-      "tags": [
-        "ステップ4",
-        "変更の退避"
-      ],
-      "question": "最後に退避した変更を作業ツリーに戻し、同時に退避の一覧から削除するコマンドは？",
-      "answer": "git stash pop",
-      "explanation": "pop は「戻して削除」。戻すときにコンフリクトが起きた場合は、一覧から削除されずに残る。"
+      "text": "最後に退避した変更を作業ツリーに戻し、同時に退避の一覧から削除するには git stash {{pop}} を実行する。",
+      "hint": "英字 3 文字",
+      "explanation": "pop は「戻して削除」。戻すときにコンフリクトが起きた場合は、一覧から削除されずに残る。退避の一覧は git stash list で確認できる。"
     },
     {
       "id": "gl-ch-stash-apply",
@@ -1322,15 +1263,15 @@
       "explanation": "revert は履歴を残したまま変更を打ち消すので、共有済みのブランチでも安全。reset は履歴そのものを書き換えるため、他の人の手元の履歴と食い違ってしまう。"
     },
     {
-      "id": "gl-q-revert",
-      "type": "qa",
+      "id": "gl-c-revert",
+      "type": "cloze",
       "tags": [
         "ステップ4",
         "取り消し"
       ],
-      "question": "コミット abc1234 の変更を打ち消す新しいコミットを作るコマンドは？",
-      "answer": "git revert abc1234",
-      "explanation": "abc1234 で加えた変更の逆の変更を持つコミットが作られる。元のコミットも履歴に残る。"
+      "text": "コミット abc1234 の変更を打ち消す新しいコミットを作るには git {{revert}} abc1234 を実行する。",
+      "hint": "英単語 1 つ",
+      "explanation": "abc1234 で加えた変更の逆の変更を持つコミットが作られ、元のコミットも履歴に残る。"
     },
     {
       "id": "gl-q-reset-mixed",
@@ -1449,15 +1390,15 @@
       "explanation": ".gitignore は未追跡のファイルにだけ効く。git rm --cached config.local で追跡をやめれば（手元のファイルは残る）、以後は無視される。"
     },
     {
-      "id": "gl-q-rm-cached",
-      "type": "qa",
+      "id": "gl-c-rm-cached",
+      "type": "cloze",
       "tags": [
         "ステップ4",
         ".gitignore"
       ],
-      "question": "手元のファイルは残したまま、config.local を Git の追跡対象から外すコマンドは？",
-      "answer": "git rm --cached config.local",
-      "explanation": "--cached はリポジトリ（インデックス）からだけ削除し、作業ツリーのファイルは消さない。実行後にコミットすると追跡が外れる。"
+      "text": "手元のファイルは残したまま config.local を Git の追跡対象から外すには git rm {{--cached}} config.local を実行する。",
+      "hint": "ハイフン 2 つで始まるオプション",
+      "explanation": "--cached はインデックスからだけ削除し、作業ツリーのファイルは消さない。実行後にコミットすると追跡が外れる。"
     },
     {
       "id": "gl-ch-conflict-marker",
