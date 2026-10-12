@@ -3,7 +3,8 @@
  * 種類を増やすときは lib/packs/schema.ts・templates.ts と、ここに表示を追加する。
  */
 import { useState, type ReactNode } from 'react';
-import { BookOpenText, CheckCircle2, Lightbulb, Volume2, XCircle } from 'lucide-react';
+import { BookOpenText, CheckCircle2, Lightbulb, Maximize2, Volume2, XCircle } from 'lucide-react';
+import { BottomSheet } from '@/components/ui/BottomSheet';
 import type { ItemRecord } from '@/lib/db/types';
 import { clozeAnswers, orderChunks, shuffleChunks } from '@/lib/packs/itemText';
 import { languageName } from '@/lib/speech/lang';
@@ -524,6 +525,7 @@ export function PassageBlock({
   side: 'front' | 'back';
   lang: string;
 }) {
+  const [full, setFull] = useState(false);
   if (side === 'back') {
     if (!passage.translation) return null;
     return (
@@ -546,7 +548,37 @@ export function PassageBlock({
         <BookOpenText className="size-4 shrink-0" />
         <span className="min-w-0 flex-1 truncate">{passage.title ?? '本文'}</span>
         <SpeakButton text={passage.text} lang={lang} />
+        <button
+          type="button"
+          onClick={(e) => {
+            e.stopPropagation();
+            setFull(true);
+          }}
+          aria-label="本文を大きく表示"
+          title="本文を大きく表示"
+          className="inline-flex size-9 items-center justify-center rounded-full text-slate-500 hover:bg-slate-200/70 dark:hover:bg-slate-700"
+        >
+          <Maximize2 className="size-4" />
+        </button>
       </div>
+      <BottomSheet
+        open={full}
+        onClose={() => setFull(false)}
+        title={passage.title ?? '本文'}
+        expandable
+      >
+        <div className="space-y-3">
+          <div className="flex justify-end">
+            <SpeakButton text={passage.text} lang={lang} />
+          </div>
+          <p lang={lang} className="text-lg leading-relaxed whitespace-pre-line">
+            {passage.text}
+          </p>
+          {passage.source && (
+            <p className="text-right text-xs text-slate-400">出典: {passage.source}</p>
+          )}
+        </div>
+      </BottomSheet>
       <p
         lang={lang}
         className="max-h-56 overflow-y-auto px-3 py-2.5 leading-relaxed whitespace-pre-line sm:max-h-80"
