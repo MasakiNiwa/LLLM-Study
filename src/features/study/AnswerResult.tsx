@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { CheckCircle2, CircleDot, Loader2, Sparkles, XCircle } from 'lucide-react';
+import { CheckCircle2, CircleDot, Loader2, PencilLine, Sparkles, XCircle } from 'lucide-react';
 import { toast } from 'sonner';
 import { Button } from '@/components/ui/Button';
 import type { CardRecord } from '@/lib/db/types';
@@ -36,22 +36,26 @@ const VIEW: Record<AnswerVerdict, { label: string; icon: typeof CheckCircle2; cl
 interface AnswerResultProps {
   card: CardRecord;
   answer: string;
-  check: AnswerCheck;
+  /** プログラムの答え合わせ（正解の候補がないカードは null） */
+  check: AnswerCheck | null;
+  /** 今の判定（プログラムで言い切れないときは null。AI の判定があればそれ） */
+  verdict: AnswerVerdict | null;
   /** AI の判定で評価のおすすめが変わったとき */
   onJudged: (verdict: AnswerVerdict) => void;
 }
 
 /** 入力した答えの答え合わせの結果。プログラムの判定に、必要なら AI の判定を重ねる */
-export function AnswerResult({ card, answer, check, onJudged }: AnswerResultProps) {
+export function AnswerResult({ card, answer, check, verdict, onJudged }: AnswerResultProps) {
   const ready = useEngine((s) => s.status === 'ready');
   const busy = useAiBusy((s) => s.task !== null);
   const personaId = useSettings((s) => s.persona);
   const custom = useSettings((s) => s.customPersona);
   const [judging, setJudging] = useState(false);
   const [judge, setJudge] = useState<JudgeResult | null>(null);
-  const verdict = judge?.verdict ?? check.verdict;
-  const view = VIEW[verdict];
-  const Icon = view.icon;
+  const view = verdict ? VIEW[verdict] : null;
+  const Icon = view?.icon ?? PencilLine;
+  // 判定が「正解」以外で、まだ AI に聞いていなければ、AI に判定してもらえる
+  const canAsk = verdict !== 'correct' && !judge && !!answer.trim() && ready;
 
   const askAi = async () => {
     const json = await cardForLlm(card, { revealed: true });
@@ -60,7 +64,7 @@ export function AnswerResult({ card, answer, check, onJudged }: AnswerResultProp
     try {
       const r = await runOneshot({
         task: 'assist',
-        prompt: judgePrompt(json, answer, check.expected),
+        prompt: judgePrompt(json, answer, check?.expected ?? ''),
         maxOutputTokens: 200,
       });
       const parsed = parseJudge(r.text);
@@ -75,25 +79,33 @@ export function AnswerResult({ card, answer, check, onJudged }: AnswerResultProp
   };
 
   return (
-    <div className={cn('mt-6 space-y-2 rounded-xl px-4 py-3 text-sm', view.className)}>
+    <div
+      className={cn(
+        'mt-6 space-y-2 rounded-xl px-4 py-3 text-sm',
+        view?.className ?? 'bg-slate-100 text-slate-800 dark:bg-slate-800/60 dark:text-slate-200',
+      )}
+    >
       <div className="flex flex-wrap items-center gap-x-3 gap-y-1">
         <span className="inline-flex items-center gap-1 font-semibold">
           <Icon className="size-4" />
-          {view.label}
+          {view?.label ?? '自分で答え合わせ'}
           {judge && <span className="text-xs font-normal opacity-75">（AI の判定）</span>}
         </span>
-        <span className="min-w-0 break-words">
+        <span className="min-w-0 break-words whitespace-pre-wrap">
           あなたの答え: <strong>{answer || '（空欄）'}</strong>
         </span>
       </div>
-      {verdict !== 'correct' && !judge && <p className="opacity-90">正解: {check.expected}</p>}
+      {verdict && verdict !== 'correct' && !judge && check && (
+        <p className="opacity-90">正解: {check.expected}</p>
+      )}
+      {!verdict && !judge && <p className="opacity-90">下の正解と見比べて、評価を選んでください</p>}
       {judge && (
         <p>
           <span aria-hidden>{getPersona(personaId, custom).emoji} </span>
           {judge.comment}
         </p>
       )}
-      {check.verdict !== 'correct' && !judge && answer.trim() && ready && (
+      {canAsk && (
         <Button
           size="sm"
           variant="secondary"
@@ -101,7 +113,7 @@ export function AnswerResult({ card, answer, check, onJudged }: AnswerResultProp
           onClick={() => void askAi()}
         >
           {judging ? <Loader2 className="animate-spin" /> : <Sparkles />}
-          言い換えかも？ AI に判定してもらう
+          {verdict ? '言い換えかも？ AI に判定してもらう' : 'AI に判定してもらう'}
         </Button>
       )}
     </div>

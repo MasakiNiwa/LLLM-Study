@@ -83,6 +83,8 @@ export function BottomSheet({
     if (open && !el.open) {
       clearStyles();
       el.showModal();
+      // showModal は最初のボタン（つまみ）にフォーカスするので、入力欄があればそちらへ移す
+      el.querySelector<HTMLElement>('[data-autofocus]')?.focus();
     }
     if (!open && el.open) {
       el.close();

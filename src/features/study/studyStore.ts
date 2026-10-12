@@ -9,6 +9,8 @@ import { create } from 'zustand';
 import { db } from '@/lib/db/db';
 import type { CardRecord, GradeValue, ItemRecord } from '@/lib/db/types';
 import { requeuePosition } from '@/lib/srs/queue';
+import { checkAnswer, type AnswerCheck, type AnswerVerdict } from '@/lib/srs/answerCheck';
+import { answersInTargetLanguage, expectedAnswer } from '@/lib/packs/itemText';
 import { speechLang } from '@/lib/speech/lang';
 import { errorMessage } from '@/lib/utils/format';
 import { useAiFocus } from '@/features/ai/focusStore';
@@ -59,6 +61,19 @@ export interface LastRating {
   /** 評価した時点のセッションの状況（AI のひとこと用） */
   done: number;
   correctStreak: number;
+  /** ユーザーが書いた答え（AI のひとことで触れる） */
+  userAnswer?: { text: string; verdict: AnswerVerdict | null };
+}
+
+/** 表示中のカードにユーザーが書いた答えと、答え合わせの結果 */
+export interface WrittenAnswer {
+  /** どの表示に対する答えか（同じカードの再表示と区別する） */
+  shownAt: number;
+  text: string;
+  /** プログラムで答え合わせできたときの結果（できない種類なら null） */
+  check: AnswerCheck | null;
+  /** 判定（AI に判定してもらうと変わる） */
+  verdict: AnswerVerdict | null;
 }
 
 /** srs: 今日の学習（評価を記録してスケジュールを進める）、practice: おさらい（記録しない） */
@@ -80,15 +95,25 @@ interface StudyState {
   stats: SessionStats;
   undoStack: UndoEntry[];
   lastRating: LastRating | null;
+  /** 表示中のカードに書いた答え */
+  answer: WrittenAnswer | null;
+  /** 学習を中断した（ほかの画面から戻っても、自分で始めるまで再開しない） */
+  interrupted: boolean;
   start: () => Promise<void>;
   /** おさらいを始める（評価は記録せず、スケジュールも変えない） */
   startPractice: (kind: PracticeKind) => Promise<void>;
   reveal: () => void;
+  /** 書いた答えで答え合わせして、答えを表示する */
+  submitAnswer: (text: string) => void;
+  /** AI の判定などで、書いた答えの判定を変える */
+  setAnswerVerdict: (verdict: AnswerVerdict) => void;
   rate: (grade: GradeValue) => Promise<void>;
   undo: () => Promise<void>;
   /** 表示中の項目の出題を止めて、次のカードへ進む */
   suspendCurrent: () => Promise<void>;
   end: () => void;
+  /** 学習を中断して、学習画面を最初の状態に戻す（評価済みの記録は残る） */
+  interrupt: () => void;
 }
 
 function emptyStats(): SessionStats {
@@ -136,13 +161,14 @@ export const useStudy = create<StudyState>()((set, get) => {
           revealed: false,
           shownAt: Date.now(),
           status: 'studying',
+          answer: null,
         });
         useAiFocus.getState().setStudyCard(next.card.id, false);
         return;
       }
       rest.shift();
     }
-    set({ queue: [], current: null, revealed: false, status: 'done' });
+    set({ queue: [], current: null, revealed: false, status: 'done', answer: null });
     // 学習を終えたらアイコンの数字も更新する（アプリを閉じても古い数字が残らないように）
     void refreshAppBadge();
     useAiFocus.getState().setStudyCard(null, false);
@@ -160,10 +186,13 @@ export const useStudy = create<StudyState>()((set, get) => {
     stats: emptyStats(),
     undoStack: [],
     lastRating: null,
+    answer: null,
+    interrupted: false,
 
     async start() {
       set({
         status: 'loading',
+        interrupted: false,
         mode: 'srs',
         practiceKind: null,
         stats: emptyStats(),
@@ -186,6 +215,7 @@ export const useStudy = create<StudyState>()((set, get) => {
     async startPractice(kind) {
       set({
         status: 'loading',
+        interrupted: false,
         mode: 'practice',
         practiceKind: kind,
         stats: emptyStats(),
@@ -209,11 +239,35 @@ export const useStudy = create<StudyState>()((set, get) => {
       useAiFocus.getState().setStudyCard(get().current!.card.id, true);
     },
 
+    submitAnswer(text) {
+      const { current, revealed, shownAt } = get();
+      if (!current || revealed) return;
+      const expected = expectedAnswer(current.item.item, current.card.template);
+      const check = expected ? checkAnswer(text, expected) : null;
+      // 一問一答や意味を答えるカードは言い換えが多く、完全一致しなければ「不正解」とは言い切れない。
+      // そのときは判定を出さず、正解と見比べてもらう（AI があれば AI に判定してもらえる）
+      const free =
+        current.item.item.type === 'qa' ||
+        !answersInTargetLanguage(current.item.item, current.card.template);
+      const verdict = check && !(free && check.verdict === 'wrong') ? check.verdict : null;
+      set({ answer: { shownAt, text, check, verdict } });
+      get().reveal();
+    },
+
+    setAnswerVerdict(verdict) {
+      const { answer } = get();
+      if (answer) set({ answer: { ...answer, verdict } });
+    },
+
     rate: exclusive(async (grade: GradeValue) => {
       const { current, queue, shownAt, stats, mode } = get();
       if (!current) return;
       const now = Date.now();
       const settings = useSettings.getState();
+      const writtenAnswer = () => {
+        const a = get().answer;
+        return a && a.shownAt === shownAt ? { text: a.text, verdict: a.verdict } : undefined;
+      };
       const nextStats = (correctStreak: number): SessionStats => ({
         ...stats,
         done: stats.done + 1,
@@ -239,6 +293,7 @@ export const useStudy = create<StudyState>()((set, get) => {
             reaction: reaction(correctStreak),
             done: stats.done + 1,
             correctStreak,
+            userAnswer: writtenAnswer(),
           },
         });
         await showNext(rest);
@@ -271,6 +326,7 @@ export const useStudy = create<StudyState>()((set, get) => {
             reaction: reaction(correctStreak),
             done: stats.done + 1,
             correctStreak,
+            userAnswer: writtenAnswer(),
           },
         });
         await showNext(rest);
@@ -321,8 +377,22 @@ export const useStudy = create<StudyState>()((set, get) => {
       }
     }),
 
+    // 学習画面を離れて戻ってきても、自分で始めるまで再開しない
+    interrupt() {
+      get().end();
+      set({ interrupted: true });
+    },
+
     end() {
-      set({ status: 'idle', mode: 'srs', queue: [], current: null, revealed: false });
+      set({
+        status: 'idle',
+        mode: 'srs',
+        queue: [],
+        current: null,
+        revealed: false,
+        answer: null,
+        interrupted: false,
+      });
       useAiFocus.getState().setStudyCard(null, false);
     },
   };

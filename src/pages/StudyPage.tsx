@@ -1,16 +1,16 @@
 import { useEffect, useState } from 'react';
 import {
   CalendarDays,
+  CircleStop,
   Eye,
   EyeOff,
   House,
   Infinity as InfinityIcon,
-  Keyboard,
   Library,
   Loader2,
   Layers,
   Play,
-  RotateCcw,
+  PencilLine,
   PartyPopper,
   TriangleAlert,
   Undo2,
@@ -29,7 +29,7 @@ import {
   speakText,
   speakTiming,
 } from '@/lib/packs/itemText';
-import { checkAnswer, type AnswerCheck, type AnswerVerdict } from '@/lib/srs/answerCheck';
+import type { AnswerVerdict } from '@/lib/srs/answerCheck';
 import { speak, stopSpeaking } from '@/lib/speech/tts';
 import { formatDuration } from '@/lib/utils/format';
 import { getPersona } from '@/features/ai/personas';
@@ -40,11 +40,11 @@ import { AiAssistPanel } from '@/features/study/AiAssistPanel';
 import { LEECH_LAPSES } from '@/features/study/cardActions';
 import { AnswerInput } from '@/features/study/AnswerInput';
 import { AnswerResult } from '@/features/study/AnswerResult';
+import { AnswerSheet } from '@/features/study/AnswerSheet';
 import { PracticePicker } from '@/features/study/PracticePicker';
 import { StudyDisplayMenu } from '@/features/study/StudyDisplayMenu';
 import { CardInfoButton } from '@/features/study/CardInfoSheet';
 import { useStudyLayout } from '@/features/study/useStudyLayout';
-import { ConfirmDialog } from '@/components/ui/ConfirmDialog';
 import { RatingBar } from '@/features/study/RatingBar';
 import { ScopePicker } from '@/features/study/ScopePicker';
 import { ReactionBubble } from '@/features/study/ReactionBubble';
@@ -187,9 +187,10 @@ export default function StudyPage() {
   const stats = useStudy((s) => s.stats);
   const canUndo = useStudy((s) => s.undoStack.length > 0);
   const practice = useStudy((s) => s.mode === 'practice');
-  const [resetOpen, setResetOpen] = useState(false);
   const { compact, zoom } = useStudyLayout();
-  const { start, reveal, rate, undo, end } = useStudy.getState();
+  const { start, reveal, rate, undo, interrupt, submitAnswer, setAnswerVerdict } =
+    useStudy.getState();
+  const interrupted = useStudy((s) => s.interrupted);
   const autoSpeak = useSettings((s) => s.autoSpeak);
   const speechRate = useSettings((s) => s.speechRate);
   const speechVoice = useSettings((s) => s.speechVoice);
@@ -204,20 +205,15 @@ export default function StudyPage() {
   const ordered = order && order.showKey === showKey ? order.result : undefined;
   const chosen = choice && choice.showKey === showKey ? choice.index : undefined;
   const typeAnswer = useSettings((s) => s.typeAnswer);
-  const updateSettings = useSettings((s) => s.update);
-  // 入力した答えと答え合わせの結果（カードごと）
-  const [typed, setTyped] = useState<{
-    showKey: string;
-    answer: string;
-    check: AnswerCheck;
-    verdict: AnswerVerdict;
-  } | null>(null);
-  const typedNow = typed && typed.showKey === showKey ? typed : null;
+  // 書いた答えと答え合わせの結果（今表示しているカードのものだけ使う）
+  const written = useStudy((s) => s.answer);
+  const typedNow = written && written.shownAt === shownAt ? written : null;
+  const [answerOpen, setAnswerOpen] = useState(false);
 
-  // ページを開いたら今日のキューで始める
+  // ページを開いたら今日のキューで始める（自分で中断したときは、始めるボタンを押すまで待つ）
   useEffect(() => {
-    const st = useStudy.getState().status;
-    if (st === 'idle' || st === 'done') void useStudy.getState().start();
+    const st = useStudy.getState();
+    if ((st.status === 'idle' && !st.interrupted) || st.status === 'done') void st.start();
   }, []);
 
   // カードを表示したら（同じカードの再表示も含む）、設定に応じて読み上げる。
@@ -264,7 +260,7 @@ export default function StudyPage() {
         ? ordered.correct
           ? 3
           : 1
-        : typedNow
+        : typedNow?.verdict
           ? VERDICT_GRADE[typedNow.verdict]
           : undefined;
 
@@ -320,22 +316,6 @@ export default function StudyPage() {
               <>
                 <Button
                   size="icon"
-                  variant={typeAnswer !== 'off' ? 'secondary' : 'ghost'}
-                  onClick={() =>
-                    updateSettings({ typeAnswer: typeAnswer === 'off' ? 'recall' : 'off' })
-                  }
-                  aria-pressed={typeAnswer !== 'off'}
-                  aria-label="答えを入力して答え合わせ"
-                  title={
-                    typeAnswer !== 'off'
-                      ? '答えの入力: オン（単語・フレーズを答えるカードと穴埋め）'
-                      : '答えの入力: オフ'
-                  }
-                >
-                  <Keyboard />
-                </Button>
-                <Button
-                  size="icon"
                   variant="ghost"
                   onClick={() => void undo()}
                   disabled={!canUndo}
@@ -347,17 +327,6 @@ export default function StudyPage() {
               </>
             )}
             <StudyDisplayMenu />
-            {(status === 'studying' || status === 'done') && (
-              <Button
-                size="icon"
-                variant="ghost"
-                aria-label="学習を中断してリセット"
-                title="学習を中断してリセット"
-                onClick={() => (status === 'studying' ? setResetOpen(true) : end())}
-              >
-                <RotateCcw />
-              </Button>
-            )}
           </>
         }
       />
@@ -386,13 +355,29 @@ export default function StudyPage() {
                 compact ? 'space-y-2 py-2' : 'space-y-4 py-4 sm:py-6',
               )}
             >
-              {practice ? (
+              <div className="flex items-center gap-2">
+                {practice ? (
+                  <p className="min-w-0 flex-1 text-xs text-accent-800 dark:text-accent-200">
+                    おさらい中（評価は記録されません）
+                  </p>
+                ) : (
+                  <ScopePicker className="min-w-0 shrink" />
+                )}
+                <Button
+                  variant="ghost"
+                  size="sm"
+                  className="ml-auto shrink-0 text-slate-600 dark:text-slate-300"
+                  onClick={interrupt}
+                  title="今の学習をやめます。ここまでの評価は記録に残ります"
+                >
+                  <CircleStop />
+                  {practice ? 'おさらいをやめる' : '学習を中断'}
+                </Button>
+              </div>
+              {practice && !compact && (
                 <p className="rounded-xl bg-accent-50 px-3 py-2 text-xs text-accent-900 dark:bg-accent-900/20 dark:text-accent-200">
-                  おさらい中です。評価は記録されず、復習の予定も変わりません。思い出せなかったカードは少しあとにもう一度出ます。
+                  評価は記録されず、復習の予定も変わりません。思い出せなかったカードは少しあとにもう一度出ます。
                 </p>
-              ) : compact ? null : (
-                // 余白を詰めるときは省く（教材の切り替えは学習を始める前・終えたあとの画面でもできる）
-                <ScopePicker />
               )}
               <Card className="relative overflow-hidden">
                 <div className="flex items-center gap-2 border-b border-slate-100 px-4 py-2 text-xs text-slate-500 dark:border-slate-800">
@@ -446,24 +431,16 @@ export default function StudyPage() {
                       )}
                       lang={current.lang}
                       blanks={'blanks' in expected ? expected.blanks.length : undefined}
-                      onSubmit={(answer) => {
-                        const check = checkAnswer(answer, expected);
-                        setTyped({
-                          showKey,
-                          answer,
-                          check,
-                          verdict: check.verdict,
-                        });
-                        reveal();
-                      }}
+                      onSubmit={submitAnswer}
                     />
                   )}
                   {revealed && typedNow && (
                     <AnswerResult
                       card={current.card}
-                      answer={typedNow.answer}
+                      answer={typedNow.text}
                       check={typedNow.check}
-                      onJudged={(verdict) => setTyped({ ...typedNow, verdict })}
+                      verdict={typedNow.verdict}
+                      onJudged={setAnswerVerdict}
                     />
                   )}
                   {revealed && (
@@ -531,19 +508,51 @@ export default function StudyPage() {
                 >
                   {isChoice ? '答えを選んでください' : '語句を正しい順に並べてください'}
                 </p>
-              ) : (
+              ) : shouldType ? (
                 <Button
-                  variant={shouldType ? 'secondary' : 'primary'}
+                  variant="secondary"
                   size="lg"
                   className={cn('w-full text-base', compact ? 'h-12' : 'h-14')}
                   onClick={reveal}
                 >
                   <Eye />
-                  {shouldType ? 'わからない・答えを見る' : '答えを見る'}
+                  わからない・答えを見る
                 </Button>
+              ) : (
+                <div className="flex gap-2">
+                  {expected && (
+                    <Button
+                      variant="secondary"
+                      size="lg"
+                      className={cn('shrink-0 px-4 text-base', compact ? 'h-12' : 'h-14')}
+                      onClick={() => setAnswerOpen(true)}
+                    >
+                      <PencilLine />
+                      答えを書く
+                    </Button>
+                  )}
+                  <Button
+                    variant="primary"
+                    size="lg"
+                    className={cn('min-w-0 flex-1 text-base', compact ? 'h-12' : 'h-14')}
+                    onClick={reveal}
+                  >
+                    <Eye />
+                    答えを見る
+                  </Button>
+                </div>
               )}
             </div>
           </div>
+          <AnswerSheet
+            key={showKey}
+            open={answerOpen}
+            onClose={() => setAnswerOpen(false)}
+            item={current.item.item}
+            template={current.card.template}
+            lang={current.lang}
+            onSubmit={submitAnswer}
+          />
         </>
       )}
       {status === 'idle' && (
@@ -553,9 +562,13 @@ export default function StudyPage() {
               <Layers className="size-7" />
             </div>
             <div>
-              <h2 className="text-lg font-bold">学習を始めましょう</h2>
+              <h2 className="text-lg font-bold">
+                {interrupted ? '学習を中断しました' : '学習を始めましょう'}
+              </h2>
               <p className="mt-1 text-sm text-slate-500 dark:text-slate-400">
-                今日の分を読み直してから始めます
+                {interrupted
+                  ? 'ここまでの評価は記録に残っています。続きは「学習を始める」から（今日の分を読み直します）'
+                  : '今日の分を読み直してから始めます'}
               </p>
             </div>
             <ScopePicker />
@@ -567,17 +580,6 @@ export default function StudyPage() {
           </div>
         </div>
       )}
-      <ConfirmDialog
-        open={resetOpen}
-        title="学習を中断しますか？"
-        description="今の学習をやめて、学習画面を最初の状態に戻します。ここまでの評価は記録に残ります。"
-        confirmLabel="中断する"
-        onConfirm={() => {
-          setResetOpen(false);
-          end();
-        }}
-        onClose={() => setResetOpen(false)}
-      />
     </>
   );
 }

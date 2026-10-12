@@ -13,6 +13,7 @@ import { getPersona } from '@/features/ai/personas';
 import { cardForLlm } from '@/features/ai/studyContext';
 import { useEngine } from '@/features/engine/engineStore';
 import { useSettings } from '@/features/settings/settingsStore';
+import { useStudy } from './studyStore';
 
 const Markdown = lazy(() => import('@/features/chat/markdown/Markdown'));
 
@@ -40,7 +41,12 @@ export function AiAssistPanel({ card }: { card: CardRecord }) {
   const ready = engineStatus === 'ready';
 
   const ask = async (action: AssistAction) => {
-    const json = await cardForLlm(card, { revealed: true });
+    // 自分で答えを書いていたら、その答えも渡す（このカードの今回の表示のものだけ）
+    const { answer: written, shownAt } = useStudy.getState();
+    const json = await cardForLlm(card, {
+      revealed: true,
+      userAnswer: written && written.shownAt === shownAt ? written : null,
+    });
     if (!json) return;
     setRunning(true);
     setAnswer({ action, text: '' });
