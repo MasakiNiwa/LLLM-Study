@@ -14,7 +14,7 @@ import {
 import { errorMessage } from '@/lib/utils/format';
 import { useAiBusy } from '@/features/ai/aiBusy';
 import { draftPrompt, parseDraft, type DraftType } from '@/features/ai/draft';
-import { runOneshot } from '@/features/ai/oneshot';
+import { runOneshotParsed } from '@/features/ai/oneshot';
 import { useEngine } from '@/features/engine/engineStore';
 import { ImagePicker } from '@/features/items/ImagePicker';
 import { useLibrary } from './libraryStore';
@@ -212,12 +212,16 @@ function EditorBody({ editing, onClose }: { editing: StudyItem | null; onClose: 
   const draftWithAi = async () => {
     setDrafting(true);
     try {
-      const r = await runOneshot({
-        task: 'assist',
-        prompt: draftPrompt(form.type, form.head.trim()),
-        plain: true,
-      });
-      const draft = parseDraft(r.text, form.type);
+      const { value: draft, cancelled } = await runOneshotParsed(
+        {
+          task: 'assist',
+          prompt: draftPrompt(form.type, form.head.trim()),
+          plain: true,
+          purpose: 'structured',
+        },
+        (text) => parseDraft(text, form.type),
+      );
+      if (cancelled) return;
       if (!draft) throw new Error('AI の下書きを読み取れませんでした。もう一度試してください');
       // 入力済みの見出しは残し、空の欄だけ埋める
       const filled = fromItem(draft);

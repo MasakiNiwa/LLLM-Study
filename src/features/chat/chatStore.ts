@@ -41,6 +41,9 @@ interface ChatState {
   /** 使い方モード: 質問に関係するヘルプの抜粋を添えて、アプリの使い方に答えてもらう */
   helpMode: boolean;
   setHelpMode: (on: boolean) => void;
+  /** 送信ごとの思考モード（null: 設定に従う） */
+  thinking: boolean | null;
+  setThinking: (on: boolean) => void;
   init: () => Promise<void>;
   /**
    * 送信する。受け付けたら true（入力欄を空にしてよい）、AI が使えない・ほかの処理中なら false
@@ -146,7 +149,11 @@ export const useChat = create<ChatState>()((set, get) => {
     };
 
     try {
-      const conversation = getConversationSettings(settings, { tools });
+      // 思考モードは、入力欄の「考える」で送信ごとに切り替えられる（変えると会話を読み込み直す）
+      const conversation = {
+        ...getConversationSettings(settings, { tools }),
+        enableThinking: get().thinking ?? settings.enableThinking,
+      };
       const messageText = user.context ? `${user.context}\n\n${user.text}` : user.text;
       // 会話が長くなっても文脈長を超えないよう、古い履歴から削って渡す
       const trimmed = trimHistory(toHistory(history), {
@@ -252,9 +259,14 @@ export const useChat = create<ChatState>()((set, get) => {
     isGenerating: false,
     toolActivity: null,
     helpMode: false,
+    thinking: null,
 
     setHelpMode(on) {
       set({ helpMode: on });
+    },
+
+    setThinking(on) {
+      set({ thinking: on });
     },
 
     init() {

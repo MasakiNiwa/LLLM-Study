@@ -9,7 +9,7 @@ import type { ChatTurn } from '@/lib/llm/types';
 import { errorMessage } from '@/lib/utils/format';
 import { createId } from '@/lib/utils/id';
 import { useAiBusy } from '@/features/ai/aiBusy';
-import { isAiBusyExceptReaction, preemptReaction, runOneshot } from '@/features/ai/oneshot';
+import { isAiBusyExceptReaction, preemptReaction, runOneshotParsed } from '@/features/ai/oneshot';
 import { splitThinking } from '@/features/chat/thinking';
 import { estimateTokens, trimHistory } from '@/features/chat/historyBudget';
 import { useEngine } from '@/features/engine/engineStore';
@@ -162,27 +162,31 @@ export const usePractice = create<PracticeState>()((set, get) => {
       if (!config || utterances.length === 0) return;
       set({ feedbackLoading: true });
       try {
-        const r = await runOneshot({
-          task: 'assist',
-          prompt: feedbackPrompt(
-            config,
-            utterances.slice(-12),
-            // 理解を深める練習は、AI の質問と合わせて渡す（何に答えたかが分かるように）
-            messages
-              .filter((m) => !m.hidden && m.text)
-              .slice(-16)
-              .map((m) => ({
-                role: m.role,
-                text: (m.role === 'assistant' ? splitTranslation(m.text).line : m.text).slice(
-                  0,
-                  400,
-                ),
-              })),
-          ),
-          maxOutputTokens: 1024,
-          plain: true,
-        });
-        const fb = parseFeedback(r.text);
+        const { value: fb, cancelled } = await runOneshotParsed(
+          {
+            task: 'assist',
+            purpose: 'structured',
+            prompt: feedbackPrompt(
+              config,
+              utterances.slice(-12),
+              // 理解を深める練習は、AI の質問と合わせて渡す（何に答えたかが分かるように）
+              messages
+                .filter((m) => !m.hidden && m.text)
+                .slice(-16)
+                .map((m) => ({
+                  role: m.role,
+                  text: (m.role === 'assistant' ? splitTranslation(m.text).line : m.text).slice(
+                    0,
+                    400,
+                  ),
+                })),
+            ),
+            maxOutputTokens: 1024,
+            plain: true,
+          },
+          parseFeedback,
+        );
+        if (cancelled) return;
         if (!fb) throw new Error('AI の添削結果を読み取れませんでした。もう一度試してください');
         set({ feedback: fb });
       } catch (e) {

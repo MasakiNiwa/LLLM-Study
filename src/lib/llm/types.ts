@@ -89,6 +89,11 @@ export interface GenerateRequest {
    * oneshot: 履歴を持たない単発の生成（カードの解説など）。終わったら会話を破棄する
    */
   mode?: 'chat' | 'oneshot';
+  /**
+   * oneshot のとき、チャットの会話（KV キャッシュ）を残したまま別の会話で生成する。
+   * 作れない環境では、これまでどおりチャットの会話を捨ててから生成する
+   */
+  keepChat?: boolean;
   /** モデルに使わせるツール。実行はメインスレッド（onToolCall）で行う */
   tools?: ToolDeclaration[];
 }

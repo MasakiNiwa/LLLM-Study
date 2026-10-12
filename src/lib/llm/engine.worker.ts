@@ -53,6 +53,10 @@ let conversation: Conversation | null = null;
 let conversationTurnIds: string[] | null = null;
 let conversationSettingsKey = '';
 let cancelRequested = false;
+/** 生成中の Conversation（中断用。単発の生成では、チャットとは別の一時的なもの） */
+let active: Conversation | null = null;
+/** このモデル（バックエンド）では、チャットの会話を残したまま別の会話を作れなかった */
+let parallelUnsupported = false;
 let downloadAbort: AbortController | null = null;
 
 /** 1 回の発話でツールを呼び合う最大回数（無限ループ防止） */
@@ -187,6 +191,9 @@ const api = {
 
   async unloadModel(): Promise<void> {
     await disposeConversation();
+    active = null;
+    // 別のモデル・バックエンドでは、2 つ目の会話を作れるかもしれないので確かめ直す
+    parallelUnsupported = false;
     const e = engine;
     engine = null;
     modelInfo = null;
@@ -253,7 +260,7 @@ const api = {
 
   cancel(): void {
     cancelRequested = true;
-    conversation?.cancel();
+    (active ?? conversation)?.cancel();
   },
 
   async generate(
@@ -268,27 +275,46 @@ const api = {
     const tools = onToolCall ? req.tools : undefined;
 
     const suffix = userMessageSuffix(modelInfo?.name, req.settings.enableThinking);
-    // 履歴と設定が一致していれば既存の Conversation（KV キャッシュ）をそのまま使う
+    const config = buildConversationConfig(req.settings, req.history, suffix, tools);
     const key = settingsKey(req.settings, tools);
     const historyIds = req.history.map((t) => t.id);
-    if (
-      oneshot ||
-      !conversation ||
-      conversationSettingsKey !== key ||
-      !conversationTurnIds ||
-      !arraysEqual(conversationTurnIds, historyIds)
-    ) {
-      await disposeConversation();
-      conversation = await engine.createConversation(
-        buildConversationConfig(req.settings, req.history, suffix, tools),
-      );
-      conversationSettingsKey = key;
-      conversationTurnIds = historyIds;
-    }
 
-    const conv = conversation;
-    // 生成中・中断・エラー時は履歴の整合が取れないので、成功時にのみ確定させる
-    conversationTurnIds = null;
+    // 単発の生成で、チャットの会話（KV キャッシュ）を残す: 別の一時的な会話で生成して、終わったら消す。
+    // このモデル・バックエンドで 2 つ目の会話を作れなければ、チャットの会話を捨ててから作る（次回からもそうする）
+    let temp: Conversation | null = null;
+    if (oneshot && req.keepChat && conversation && !parallelUnsupported) {
+      try {
+        temp = await engine.createConversation(config);
+      } catch (e) {
+        console.warn('チャットの会話を残したまま、別の会話を作れませんでした', e);
+        parallelUnsupported = true;
+      }
+    }
+    if (!temp) {
+      // 履歴と設定が一致していれば既存の Conversation（KV キャッシュ）をそのまま使う
+      if (
+        oneshot ||
+        !conversation ||
+        conversationSettingsKey !== key ||
+        !conversationTurnIds ||
+        !arraysEqual(conversationTurnIds, historyIds)
+      ) {
+        await disposeConversation();
+        conversation = await engine.createConversation(config);
+        conversationSettingsKey = key;
+        conversationTurnIds = historyIds;
+      }
+      // 生成中・中断・エラー時は履歴の整合が取れないので、成功時にのみ確定させる
+      conversationTurnIds = null;
+    }
+    const conv = (temp ?? conversation)!;
+    active = conv;
+    /** 生成のあとの片付け: 一時的な会話は消す。チャットの会話は、捨てるときだけ捨てる */
+    const finish = async (disposeChat: boolean) => {
+      active = null;
+      if (temp) await temp.delete().catch(() => undefined);
+      else if (disposeChat) await disposeConversation();
+    };
     onEvent({ type: 'prefill-start' });
 
     let ttftMs: number | undefined;
@@ -337,7 +363,7 @@ const api = {
       }
     } catch (e) {
       if (!cancelRequested) {
-        await disposeConversation();
+        await finish(true);
         throw e;
       }
     }
@@ -348,8 +374,8 @@ const api = {
       backend: modelInfo?.backend,
     };
     if (cancelRequested) {
-      // 中断した会話は次回送信時に履歴から作り直す
-      await disposeConversation();
+      // 中断した会話は次回送信時に履歴から作り直す（一時的な会話なら、チャットの会話はそのまま）
+      await finish(true);
       return { status: 'cancelled', stats };
     }
 
@@ -369,9 +395,10 @@ const api = {
       // ignore
     }
     if (oneshot) {
-      // 単発の生成はチャットの文脈を汚さないよう破棄する（次のチャット送信時に履歴から作り直す）
-      await disposeConversation();
+      // 単発の生成はチャットの文脈を汚さないよう破棄する（一時的な会話でなければ、次のチャット送信時に履歴から作り直す）
+      await finish(true);
     } else {
+      active = null;
       conversationTurnIds = [...historyIds, req.message.id, req.assistantId];
     }
     return { status: 'done', stats };

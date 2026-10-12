@@ -98,4 +98,16 @@ describe('chatStore', () => {
     expect(req.message.text).toContain('タイマーの設定はどこ？');
     useChat.setState({ helpMode: false });
   });
+
+  it('入力欄の「考える」で、送信ごとに思考モードを切り替える', async () => {
+    useEngine.setState({ status: 'ready' });
+    useSettings.setState({ enableThinking: false });
+    useChat.setState({ thinking: true });
+    vi.mocked(llm.generate).mockResolvedValueOnce({ status: 'done' } as never);
+    expect(useChat.getState().send('考えて答えて')).toBe(true);
+    await vi.waitFor(() => expect(vi.mocked(llm.generate)).toHaveBeenCalled());
+    expect(vi.mocked(llm.generate).mock.calls[0][0].settings.enableThinking).toBe(true);
+    await vi.waitFor(() => expect(useChat.getState().isGenerating).toBe(false));
+    useChat.setState({ thinking: null });
+  });
 });

@@ -8,7 +8,7 @@ import { cn } from '@/lib/utils/cn';
 import { errorMessage } from '@/lib/utils/format';
 import { useAiBusy } from '@/features/ai/aiBusy';
 import { judgePrompt, parseJudge, type JudgeResult } from '@/features/ai/judge';
-import { runOneshot } from '@/features/ai/oneshot';
+import { runOneshotParsed } from '@/features/ai/oneshot';
 import { getPersona } from '@/features/ai/personas';
 import { cardForLlm } from '@/features/ai/studyContext';
 import { useEngine } from '@/features/engine/engineStore';
@@ -62,14 +62,18 @@ export function AnswerResult({ card, answer, check, verdict, onJudged }: AnswerR
     if (!json) return;
     setJudging(true);
     try {
-      const r = await runOneshot({
-        task: 'assist',
-        prompt: judgePrompt(json, answer, check?.expected ?? ''),
-        maxOutputTokens: 200,
-      });
+      const { value: parsed, cancelled } = await runOneshotParsed(
+        {
+          task: 'assist',
+          prompt: judgePrompt(json, answer, check?.expected ?? ''),
+          maxOutputTokens: 200,
+          // 同じ答えには同じ判定を返してほしいので、温度を低くする
+          purpose: 'judge',
+        },
+        parseJudge,
+      );
       // 止めた（カードが変わったなど）ときは、途中までの出力を判定に使わない
-      if (r.cancelled) return;
-      const parsed = parseJudge(r.text);
+      if (cancelled) return;
       if (!parsed) throw new Error('AI の判定を読み取れませんでした');
       setJudge(parsed);
       onJudged(parsed.verdict);
