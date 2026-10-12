@@ -1,0 +1,1939 @@
+{
+  "format": "lllm-study-pack",
+  "version": 1,
+  "id": "en-business-phrases-100",
+  "title": "ビジネス英語フレーズ 100（メール・会議・プレゼン）",
+  "description": "仕事で英語を使う人のための定番フレーズ 100 個（すべてフレーズ形式）。各フレーズに意味・使う場面・例文と訳・丁寧さの違いや言い換えのメモを付けています。場面は 4 つ: メールの書き出し・依頼・確認・お詫び・結び（35）、会議の進行・意見・賛否・確認（30）、プレゼン（15）、電話・オンライン会議・雑談（20）。並び順は学ぶ順です。ステップ1（33）は Could you please ~? / Please let me know ~ / Let's get started. など、まず覚えたい基本形。ステップ2（37）は I was wondering if you could ~ のような一段丁寧な依頼、やんわり反対する言い方、グラフ説明、電話の取り次ぎなど実務で差がつく表現。ステップ3（30）は I would be grateful if ~ / Should you have any questions ~ のような改まった書き言葉や、議論を深める・会議を締める上級表現です。タグ（メール・会議・プレゼン・電話・オンライン会議・雑談）で場面ごとに復習することもできます。前に「日常会話フレーズ 40」や「英語の基本動詞 40」で基礎を固めておくと理解しやすく、次は「よく使う句動詞 30」で follow up / look into のような表現を広げるのがおすすめです。",
+  "subject": "english",
+  "language": {
+    "target": "en",
+    "explanation": "ja"
+  },
+  "level": "社会人（CEFR B1〜B2）",
+  "tags": [
+    "英会話",
+    "フレーズ",
+    "ビジネス英語",
+    "メール",
+    "会議",
+    "プレゼン"
+  ],
+  "author": "LLLM-Study",
+  "license": "MIT",
+  "source": "LLLM-Study オリジナル（AI を利用して作成）",
+  "revision": 1,
+  "items": [
+    {
+      "id": "bp-hope-this-email-finds-you-well",
+      "type": "phrase",
+      "phrase": "I hope this email finds you well.",
+      "meaning": "お元気でお過ごしのことと存じます。",
+      "situation": "メールの書き出し（あいさつ）",
+      "examples": [
+        {
+          "text": "Dear Ms. Clark,\nI hope this email finds you well. I'm writing about our meeting next week.",
+          "translation": "クラーク様\nお元気でお過ごしのことと存じます。来週の打ち合わせの件でご連絡いたしました。"
+        }
+      ],
+      "notes": "社外や久しぶりの相手への定番の書き出し。毎日やり取りする同僚には I hope you're doing well. や Hi Tom, だけで十分。使いすぎると決まり文句っぽく見えるので、関係が近くなったら省いてよい。",
+      "tags": [
+        "ステップ1",
+        "メール",
+        "書き出し"
+      ]
+    },
+    {
+      "id": "bp-thank-you-for-your-email",
+      "type": "phrase",
+      "phrase": "Thank you for your email.",
+      "meaning": "メールをありがとうございます。",
+      "situation": "返信の書き出し",
+      "examples": [
+        {
+          "text": "Thank you for your email. Please see my answers below.",
+          "translation": "メールをありがとうございます。以下にお答えします。"
+        }
+      ],
+      "notes": "返信の書き出しで最もよく使う。返事を待っていた相手には Thank you for getting back to me.（ご返信ありがとうございます）、早い返信には Thank you for your quick reply. と言い換えられる。",
+      "tags": [
+        "ステップ1",
+        "メール",
+        "書き出し"
+      ]
+    },
+    {
+      "id": "bp-im-writing-to",
+      "type": "phrase",
+      "phrase": "I'm writing to ~.",
+      "meaning": "〜の件でご連絡しています。",
+      "situation": "メールの用件を最初に伝えるとき",
+      "examples": [
+        {
+          "text": "I'm writing to confirm the details of our order.",
+          "translation": "注文の詳細を確認したくご連絡しています。"
+        }
+      ],
+      "notes": "あいさつの次に用件を一文で言う定番。to の後は動詞の原形（ask / confirm / follow up など）。about を使う I'm writing about the invoice. も可。よりかしこまると I am writing to inquire about ~（〜についてお問い合わせします）。",
+      "tags": [
+        "ステップ1",
+        "メール",
+        "書き出し"
+      ]
+    },
+    {
+      "id": "bp-could-you-please",
+      "type": "phrase",
+      "phrase": "Could you please ~?",
+      "meaning": "〜していただけますか。",
+      "situation": "相手に何かを依頼するとき",
+      "examples": [
+        {
+          "text": "Could you please send me the latest version of the report?",
+          "translation": "報告書の最新版を送っていただけますか。"
+        }
+      ],
+      "notes": "ビジネスで最も使いやすい丁寧な依頼。Can you ~? は同僚向けのくだけた言い方。命令形の Please send me ~. は日本語の「送ってください」より強く響くことがあるので、社外には Could you please ~? が無難。",
+      "tags": [
+        "ステップ1",
+        "メール",
+        "依頼"
+      ]
+    },
+    {
+      "id": "bp-please-find-attached",
+      "type": "phrase",
+      "phrase": "Please find attached ~.",
+      "meaning": "〜を添付いたします。",
+      "situation": "ファイルを添付したとき",
+      "examples": [
+        {
+          "text": "Please find attached the agenda for Friday's meeting.",
+          "translation": "金曜日の会議の議題を添付いたします。"
+        }
+      ],
+      "notes": "かしこまった定番表現。最近は I've attached ~. / I'm attaching ~. のほうが自然で、社内ではこちらが主流。Attached is ~.（〜を添付します）も同じ意味。",
+      "tags": [
+        "ステップ1",
+        "メール",
+        "依頼"
+      ]
+    },
+    {
+      "id": "bp-could-you-confirm",
+      "type": "phrase",
+      "phrase": "Could you confirm ~?",
+      "meaning": "〜をご確認いただけますか。",
+      "situation": "日時・内容・受け取りなどを確かめてもらうとき",
+      "examples": [
+        {
+          "text": "Could you confirm that you received the documents?",
+          "translation": "書類を受け取られたかご確認いただけますか。"
+        },
+        {
+          "text": "Could you confirm the delivery date?",
+          "translation": "納期をご確認いただけますか。"
+        }
+      ],
+      "notes": "confirm は「正しいと確認する・確定させる」。単に「目を通して」は Could you check ~? / Could you take a look at ~? を使う。自分が確認するときは Let me confirm ~. / I'd like to confirm ~.",
+      "tags": [
+        "ステップ1",
+        "メール",
+        "確認"
+      ]
+    },
+    {
+      "id": "bp-just-a-quick-reminder",
+      "type": "phrase",
+      "phrase": "Just a quick reminder that ~.",
+      "meaning": "念のためお知らせですが、〜です。",
+      "situation": "締め切りや予定を思い出してもらうとき",
+      "examples": [
+        {
+          "text": "Just a quick reminder that the deadline for the survey is this Friday.",
+          "translation": "念のためですが、アンケートの締め切りは今週金曜日です。"
+        }
+      ],
+      "notes": "Just a quick ~ を付けると、催促がやわらかくなる。社外には This is a friendly reminder that ~. もよく使う。何度目かの催促なら I'm following up on ~. に切り替える。",
+      "tags": [
+        "ステップ1",
+        "メール",
+        "確認"
+      ]
+    },
+    {
+      "id": "bp-sorry-for-the-late-reply",
+      "type": "phrase",
+      "phrase": "Sorry for the late reply.",
+      "meaning": "お返事が遅くなりすみません。",
+      "situation": "返信が遅れたときの書き出し",
+      "examples": [
+        {
+          "text": "Sorry for the late reply. I was out of the office last week.",
+          "translation": "お返事が遅くなりすみません。先週は不在にしておりました。"
+        }
+      ],
+      "notes": "社内や親しい相手向け。社外には I apologize for the delay in getting back to you.（ご返信が遅くなり申し訳ございません）がより丁寧。数日程度なら Thank you for your patience. で始めるのも感じがよい。",
+      "tags": [
+        "ステップ1",
+        "メール",
+        "お詫び"
+      ]
+    },
+    {
+      "id": "bp-thank-you-for-your-patience",
+      "type": "phrase",
+      "phrase": "Thank you for your patience.",
+      "meaning": "お待ちいただきありがとうございます。",
+      "situation": "相手を待たせたとき（謝罪の代わりに感謝で伝える）",
+      "examples": [
+        {
+          "text": "Thank you for your patience. Here is the updated schedule.",
+          "translation": "お待たせいたしました。更新したスケジュールをお送りします。"
+        }
+      ],
+      "notes": "Sorry for making you wait. より前向きで、英語のビジネスメールでは好まれる。直訳の「忍耐をありがとう」ではなく「お待たせしました」に近い。お詫びと組み合わせて使うこともある。",
+      "tags": [
+        "ステップ1",
+        "メール",
+        "お詫び"
+      ]
+    },
+    {
+      "id": "bp-please-let-me-know-if-you-have-any-questions",
+      "type": "phrase",
+      "phrase": "Please let me know if you have any questions.",
+      "meaning": "ご不明な点があればお知らせください。",
+      "situation": "メールの結び",
+      "examples": [
+        {
+          "text": "I've attached the contract. Please let me know if you have any questions.",
+          "translation": "契約書を添付しました。ご不明な点があればお知らせください。"
+        }
+      ],
+      "notes": "結びの定番中の定番。Feel free to ~ を使うと柔らかく、Please feel free to contact me if you have any questions. はさらに丁寧。社内では Let me know if you have any questions. で十分。",
+      "tags": [
+        "ステップ1",
+        "メール",
+        "結び"
+      ]
+    },
+    {
+      "id": "bp-i-look-forward-to-hearing-from-you",
+      "type": "phrase",
+      "phrase": "I look forward to hearing from you.",
+      "meaning": "ご連絡をお待ちしております。",
+      "situation": "返事がほしいメールの結び",
+      "examples": [
+        {
+          "text": "I look forward to hearing from you.",
+          "translation": "ご連絡をお待ちしております。"
+        },
+        {
+          "text": "I look forward to working with you.",
+          "translation": "ご一緒できることを楽しみにしております。"
+        }
+      ],
+      "notes": "look forward to の to は前置詞なので、後ろは ~ing（hearing / working / seeing）。I look forward to hear ~ は誤り。I'm looking forward to ~ はややくだけた響き。",
+      "tags": [
+        "ステップ1",
+        "メール",
+        "結び"
+      ]
+    },
+    {
+      "id": "bp-best-regards",
+      "type": "phrase",
+      "phrase": "Best regards,",
+      "meaning": "よろしくお願いいたします。（メールの結びのあいさつ）",
+      "situation": "署名の直前に書く結びの言葉",
+      "examples": [
+        {
+          "text": "Best regards,\nKenji Sato",
+          "translation": "よろしくお願いいたします。\n佐藤健二"
+        }
+      ],
+      "notes": "最も無難な結び。Kind regards, はやや丁寧、Regards, は短くそっけない印象もある、Best, / Thanks, は社内・親しい相手向け。Sincerely, は手紙や応募書類などかしこまった場面で使う。",
+      "tags": [
+        "ステップ1",
+        "メール",
+        "結び"
+      ]
+    },
+    {
+      "id": "bp-lets-get-started",
+      "type": "phrase",
+      "phrase": "Let's get started.",
+      "meaning": "では始めましょう。",
+      "situation": "会議の開始",
+      "examples": [
+        {
+          "text": "It's ten o'clock, so let's get started.",
+          "translation": "10時になりましたので、始めましょう。"
+        }
+      ],
+      "notes": "司会が最初に言う定番。Shall we get started? / Why don't we get started? と疑問形にすると柔らかい。少し待つなら Let's give it a couple more minutes.（あと数分待ちましょう）。",
+      "tags": [
+        "ステップ1",
+        "会議",
+        "進行"
+      ]
+    },
+    {
+      "id": "bp-the-purpose-of-todays-meeting",
+      "type": "phrase",
+      "phrase": "The purpose of today's meeting is to ~.",
+      "meaning": "本日の会議の目的は〜することです。",
+      "situation": "会議の冒頭で目的を示すとき",
+      "examples": [
+        {
+          "text": "The purpose of today's meeting is to decide the launch date.",
+          "translation": "本日の会議の目的は、発売日を決めることです。"
+        }
+      ],
+      "notes": "最初に目的を言うと議論がぶれにくい。言い換えは We're here today to ~. / Today we need to ~.（今日は〜する必要があります）。",
+      "tags": [
+        "ステップ1",
+        "会議",
+        "進行"
+      ]
+    },
+    {
+      "id": "bp-could-you-give-us-an-update",
+      "type": "phrase",
+      "phrase": "Could you give us an update on ~?",
+      "meaning": "〜の進み具合を教えていただけますか。",
+      "situation": "会議で担当者に進捗報告を求めるとき",
+      "examples": [
+        {
+          "text": "Ken, could you give us an update on the website project?",
+          "translation": "ケンさん、ウェブサイトのプロジェクトの進み具合を教えていただけますか。"
+        }
+      ],
+      "notes": "update は名詞で「最新情報・進捗報告」。答える側は Sure. We're on schedule.（予定どおりです）/ We're a little behind schedule.（少し遅れています）。自分から報告するなら Here's a quick update on ~.",
+      "tags": [
+        "ステップ1",
+        "会議",
+        "進行"
+      ]
+    },
+    {
+      "id": "bp-what-are-your-thoughts",
+      "type": "phrase",
+      "phrase": "What are your thoughts on ~?",
+      "meaning": "〜についてどう思いますか。",
+      "situation": "相手の意見を聞くとき",
+      "examples": [
+        {
+          "text": "What are your thoughts on the new design?",
+          "translation": "新しいデザインについてどう思いますか。"
+        }
+      ],
+      "notes": "What do you think about ~? より少し丁寧で、会議でよく使う。特定の人に振るなら名前を添えて Yuki, what are your thoughts? / Any thoughts, Yuki?",
+      "tags": [
+        "ステップ1",
+        "会議",
+        "意見"
+      ]
+    },
+    {
+      "id": "bp-in-my-opinion",
+      "type": "phrase",
+      "phrase": "In my opinion, ~.",
+      "meaning": "私の意見では、〜。",
+      "situation": "自分の意見を述べるとき",
+      "examples": [
+        {
+          "text": "In my opinion, we should focus on the domestic market first.",
+          "translation": "私の意見では、まず国内市場に集中すべきです。"
+        }
+      ],
+      "notes": "I think ~ より改まった響きで、「これは個人の意見です」とはっきりさせる。会話では I think ~ / I feel ~ のほうが自然。In my opinion, I think ~ は重複なので避ける。",
+      "tags": [
+        "ステップ1",
+        "会議",
+        "意見"
+      ]
+    },
+    {
+      "id": "bp-i-agree-with-you",
+      "type": "phrase",
+      "phrase": "I agree with you.",
+      "meaning": "あなたに賛成です。",
+      "situation": "賛成を伝えるとき",
+      "examples": [
+        {
+          "text": "I agree with you. The deadline is too tight.",
+          "translation": "賛成です。締め切りが厳しすぎます。"
+        }
+      ],
+      "notes": "人には agree with、提案・計画には agree to（I agree to the plan.＝計画に同意する）。I'm agree は誤り（agree は動詞なので be は不要）。部分的なら I agree with you on that point.",
+      "tags": [
+        "ステップ1",
+        "会議",
+        "賛否"
+      ]
+    },
+    {
+      "id": "bp-could-you-say-that-again",
+      "type": "phrase",
+      "phrase": "Sorry, could you say that again?",
+      "meaning": "すみません、もう一度言っていただけますか。",
+      "situation": "聞き取れなかったとき",
+      "examples": [
+        {
+          "text": "Sorry, could you say that again? I didn't catch the last part.",
+          "translation": "すみません、もう一度言っていただけますか。最後の部分が聞き取れませんでした。"
+        }
+      ],
+      "notes": "Could you repeat that? も同じ。Pardon? は丁寧だが単独だとやや古風。What? は失礼に聞こえるので避ける。I didn't catch ~（〜が聞き取れなかった）を添えると親切。",
+      "tags": [
+        "ステップ1",
+        "会議",
+        "確認"
+      ]
+    },
+    {
+      "id": "bp-does-that-make-sense",
+      "type": "phrase",
+      "phrase": "Does that make sense?",
+      "meaning": "ここまでよろしいですか（わかりますか）。",
+      "situation": "説明の後、伝わったか確かめるとき",
+      "examples": [
+        {
+          "text": "We'll start testing next week and release in May. Does that make sense?",
+          "translation": "来週テストを始めて5月にリリースします。ここまでよろしいですか。"
+        }
+      ],
+      "notes": "make sense は「筋が通る・理解できる」。答えは Yes, that makes sense.（よくわかります）。Do you understand? は相手の理解力を問うように響くので避けたい。",
+      "tags": [
+        "ステップ1",
+        "会議",
+        "確認"
+      ]
+    },
+    {
+      "id": "bp-lets-move-on-to-the-next-item",
+      "type": "phrase",
+      "phrase": "Let's move on to the next item.",
+      "meaning": "次の議題に移りましょう。",
+      "situation": "議題を切り替えるとき",
+      "examples": [
+        {
+          "text": "OK, let's move on to the next item: the budget.",
+          "translation": "では、次の議題、予算に移りましょう。"
+        }
+      ],
+      "notes": "item は議題（agenda item）のこと。言い換えは Next on the agenda is ~. / Let's move on to ~.",
+      "tags": [
+        "ステップ1",
+        "会議",
+        "進行"
+      ]
+    },
+    {
+      "id": "bp-lets-wrap-up",
+      "type": "phrase",
+      "phrase": "Let's wrap up.",
+      "meaning": "そろそろまとめましょう。",
+      "situation": "会議を締めくくるとき",
+      "examples": [
+        {
+          "text": "We're almost out of time, so let's wrap up.",
+          "translation": "時間が迫っているので、まとめに入りましょう。"
+        }
+      ],
+      "notes": "wrap up は「（包むように）締めくくる」。Let's call it a day. は「今日はここまでにしよう」とその日の仕事を終えるときに使う。",
+      "tags": [
+        "ステップ1",
+        "会議",
+        "進行"
+      ]
+    },
+    {
+      "id": "bp-today-im-going-to-talk-about",
+      "type": "phrase",
+      "phrase": "Today, I'm going to talk about ~.",
+      "meaning": "本日は〜についてお話しします。",
+      "situation": "プレゼンの冒頭でテーマを示す",
+      "examples": [
+        {
+          "text": "Today, I'm going to talk about our marketing plan for next year.",
+          "translation": "本日は来年度のマーケティング計画についてお話しします。"
+        }
+      ],
+      "notes": "最初にテーマを一文で言うのが英語プレゼンの基本。少し改まると I'd like to talk about ~. / The topic of my presentation today is ~.",
+      "tags": [
+        "ステップ1",
+        "プレゼン",
+        "導入"
+      ]
+    },
+    {
+      "id": "bp-let-me-start-by",
+      "type": "phrase",
+      "phrase": "Let me start by ~ing.",
+      "meaning": "まず〜するところから始めます。",
+      "situation": "最初の話題に入るとき",
+      "examples": [
+        {
+          "text": "Let me start by giving you some background.",
+          "translation": "まず背景からご説明します。"
+        }
+      ],
+      "notes": "by の後ろは ~ing。First, I'd like to ~. も同じ働き。自己紹介から始めるなら Let me start by introducing myself.",
+      "tags": [
+        "ステップ1",
+        "プレゼン",
+        "導入"
+      ]
+    },
+    {
+      "id": "bp-please-take-a-look-at-this-slide",
+      "type": "phrase",
+      "phrase": "Please take a look at this slide.",
+      "meaning": "こちらのスライドをご覧ください。",
+      "situation": "スライドや資料に注目してもらうとき",
+      "examples": [
+        {
+          "text": "Please take a look at this slide. It shows our sales by region.",
+          "translation": "こちらのスライドをご覧ください。地域別の売上を示しています。"
+        }
+      ],
+      "notes": "take a look at で「ちょっと見る」。If you look at this chart, ~（このグラフを見ると〜）も便利。オンラインでは Can everyone see my screen? と一言確かめるとよい。",
+      "tags": [
+        "ステップ1",
+        "プレゼン",
+        "本論"
+      ]
+    },
+    {
+      "id": "bp-are-there-any-questions",
+      "type": "phrase",
+      "phrase": "Are there any questions?",
+      "meaning": "ご質問はありますか。",
+      "situation": "質疑応答に入るとき",
+      "examples": [
+        {
+          "text": "That's all from me. Are there any questions?",
+          "translation": "私からは以上です。ご質問はありますか。"
+        }
+      ],
+      "notes": "Any questions? は短くくだけた言い方。より丁寧には I'd be happy to answer any questions.（ご質問があれば喜んでお答えします）。That's all from me. / That's it for me. は「私からは以上です」。",
+      "tags": [
+        "ステップ1",
+        "プレゼン",
+        "質疑応答"
+      ]
+    },
+    {
+      "id": "bp-thank-you-for-your-attention",
+      "type": "phrase",
+      "phrase": "Thank you for your attention.",
+      "meaning": "ご清聴ありがとうございました。",
+      "situation": "プレゼンの最後",
+      "examples": [
+        {
+          "text": "That brings me to the end of my presentation. Thank you for your attention.",
+          "translation": "以上で発表を終わります。ご清聴ありがとうございました。"
+        }
+      ],
+      "notes": "Thank you for listening. はややくだけた言い方。That brings me to the end of ~（これで〜は終わりです）と組み合わせると締まる。",
+      "tags": [
+        "ステップ1",
+        "プレゼン",
+        "結び"
+      ]
+    },
+    {
+      "id": "bp-this-is-from",
+      "type": "phrase",
+      "phrase": "This is ~ from ….",
+      "meaning": "…の〜です。（電話で名乗る）",
+      "situation": "電話をかけて名乗るとき",
+      "examples": [
+        {
+          "text": "Hello, this is Kenji Sato from ABC Trading.",
+          "translation": "もしもし、ABC 商事の佐藤健二です。"
+        }
+      ],
+      "notes": "電話では I am ~ ではなく This is ~ を使うのが基本。所属は from で示す。受けるときは Thank you for calling ABC Trading. This is Sato speaking.",
+      "tags": [
+        "ステップ1",
+        "電話・オンライン会議・雑談",
+        "電話"
+      ]
+    },
+    {
+      "id": "bp-may-i-speak-to",
+      "type": "phrase",
+      "phrase": "May I speak to ~?",
+      "meaning": "〜さんをお願いできますか。",
+      "situation": "電話で取り次ぎを頼むとき",
+      "examples": [
+        {
+          "text": "May I speak to Ms. Brown, please?",
+          "translation": "ブラウンさんをお願いできますか。"
+        }
+      ],
+      "notes": "May I ~? は Can I ~? より丁寧。Could I speak to ~? も同程度に丁寧。本人が出たら Speaking.（私です）と答える。",
+      "tags": [
+        "ステップ1",
+        "電話・オンライン会議・雑談",
+        "電話"
+      ]
+    },
+    {
+      "id": "bp-can-you-hear-me",
+      "type": "phrase",
+      "phrase": "Can you hear me?",
+      "meaning": "聞こえていますか。",
+      "situation": "オンライン会議の開始時や音声が不安なとき",
+      "examples": [
+        {
+          "text": "Hi everyone. Can you hear me OK?",
+          "translation": "皆さん、こんにちは。音声は聞こえていますか。"
+        }
+      ],
+      "notes": "答えは Yes, loud and clear.（はっきり聞こえます）。映像なら Can you see me? / Can you see my screen? 自分側が聞こえないときは I can't hear you.",
+      "tags": [
+        "ステップ1",
+        "電話・オンライン会議・雑談",
+        "オンライン会議"
+      ]
+    },
+    {
+      "id": "bp-youre-on-mute",
+      "type": "phrase",
+      "phrase": "You're on mute.",
+      "meaning": "ミュートになっていますよ。",
+      "situation": "相手のマイクがオフのまま話しているとき",
+      "examples": [
+        {
+          "text": "Sorry, Tom, I think you're on mute.",
+          "translation": "トムさん、ミュートになっているようです。"
+        }
+      ],
+      "notes": "I think ~ を付けると柔らかい。自分のミュートを外し忘れたときは Sorry, I was on mute.（すみません、ミュートでした）。",
+      "tags": [
+        "ステップ1",
+        "電話・オンライン会議・雑談",
+        "オンライン会議"
+      ]
+    },
+    {
+      "id": "bp-how-was-your-weekend",
+      "type": "phrase",
+      "phrase": "How was your weekend?",
+      "meaning": "週末はどうでしたか。",
+      "situation": "月曜日の会議前などの雑談",
+      "examples": [
+        {
+          "text": "Good morning! How was your weekend?",
+          "translation": "おはようございます。週末はどうでしたか。"
+        }
+      ],
+      "notes": "会議前の軽い雑談（small talk）の定番。答えは It was great, thanks. I went hiking. のように一言添えて、And you? / How about you? と返すと会話が続く。",
+      "tags": [
+        "ステップ1",
+        "電話・オンライン会議・雑談",
+        "雑談"
+      ]
+    },
+    {
+      "id": "bp-nice-to-finally-meet-you",
+      "type": "phrase",
+      "phrase": "It's nice to finally meet you in person.",
+      "meaning": "ようやく直接お会いできてうれしいです。",
+      "situation": "メールやオンラインでやり取りしていた相手に初めて対面で会うとき",
+      "examples": [
+        {
+          "text": "Ms. Lee, it's nice to finally meet you in person.",
+          "translation": "リーさん、ようやく直接お会いできてうれしいです。"
+        }
+      ],
+      "notes": "初対面の基本は Nice to meet you. 改まると It's a pleasure to meet you. in person は「（オンラインではなく）直接・対面で」。別れ際は Nice meeting you.",
+      "tags": [
+        "ステップ1",
+        "電話・オンライン会議・雑談",
+        "雑談"
+      ]
+    },
+    {
+      "id": "bp-i-was-wondering-if-you-could",
+      "type": "phrase",
+      "phrase": "I was wondering if you could ~.",
+      "meaning": "〜していただけないかと思いまして。",
+      "situation": "Could you ~? より控えめに依頼するとき",
+      "examples": [
+        {
+          "text": "I was wondering if you could send us a quote by next week.",
+          "translation": "来週までに見積もりをお送りいただけないかと思いまして。"
+        }
+      ],
+      "notes": "過去進行形にすることで遠回しになり、ていねいさが増す。上司・社外・負担の大きいお願いに向く。丁寧さの目安: Can you ~? < Could you ~? < I was wondering if you could ~.",
+      "tags": [
+        "ステップ2",
+        "メール",
+        "依頼"
+      ]
+    },
+    {
+      "id": "bp-would-it-be-possible-to",
+      "type": "phrase",
+      "phrase": "Would it be possible to ~?",
+      "meaning": "〜することは可能でしょうか。",
+      "situation": "日程変更や特別な対応をお願いするとき",
+      "examples": [
+        {
+          "text": "Would it be possible to move the meeting to Thursday?",
+          "translation": "打ち合わせを木曜日に変更することは可能でしょうか。"
+        }
+      ],
+      "notes": "相手に「できるかどうか」を聞く形なので、断りやすく押しつけがましくない。Is it possible to ~? はやや直接的。",
+      "tags": [
+        "ステップ2",
+        "メール",
+        "依頼"
+      ]
+    },
+    {
+      "id": "bp-id-appreciate-it-if-you-could",
+      "type": "phrase",
+      "phrase": "I'd appreciate it if you could ~.",
+      "meaning": "〜していただけるとありがたいです。",
+      "situation": "丁寧に依頼するとき",
+      "examples": [
+        {
+          "text": "I'd appreciate it if you could reply by Wednesday.",
+          "translation": "水曜日までにご返信いただけるとありがたいです。"
+        }
+      ],
+      "notes": "appreciate の後の it を落とす I'd appreciate if ~ はよくある間違い。さらに改まると I would be grateful if you could ~.",
+      "tags": [
+        "ステップ2",
+        "メール",
+        "依頼"
+      ]
+    },
+    {
+      "id": "bp-as-discussed",
+      "type": "phrase",
+      "phrase": "As discussed, ~.",
+      "meaning": "お話ししたとおり、〜。",
+      "situation": "打ち合わせや電話の内容を受けてメールを書くとき",
+      "examples": [
+        {
+          "text": "As discussed, I've attached the revised price list.",
+          "translation": "お話ししたとおり、改訂した価格表を添付します。"
+        }
+      ],
+      "notes": "As we discussed (on the phone / in the meeting), ~ とも言う。As per our conversation, ~ はかしこまった言い方。「言った・言わない」を防ぐ確認メールでよく使う。",
+      "tags": [
+        "ステップ2",
+        "メール",
+        "確認"
+      ]
+    },
+    {
+      "id": "bp-just-to-clarify",
+      "type": "phrase",
+      "phrase": "Just to clarify, ~.",
+      "meaning": "念のため確認ですが、〜。",
+      "situation": "誤解がないように内容を確かめるとき",
+      "examples": [
+        {
+          "text": "Just to clarify, the meeting is at 3 p.m. Tokyo time, right?",
+          "translation": "念のため確認ですが、打ち合わせは東京時間の午後3時ですよね。"
+        }
+      ],
+      "notes": "clarify は「はっきりさせる」。会議でもメールでも使える。相手に説明を求めるなら Could you clarify what you mean by ~?",
+      "tags": [
+        "ステップ2",
+        "メール",
+        "確認"
+      ]
+    },
+    {
+      "id": "bp-im-following-up-on",
+      "type": "phrase",
+      "phrase": "I'm following up on ~.",
+      "meaning": "〜の件で、その後いかがでしょうか。",
+      "situation": "返事がない件を催促・確認するとき",
+      "examples": [
+        {
+          "text": "I'm following up on my email from last Monday about the invoice.",
+          "translation": "先週月曜日にお送りした請求書の件で、その後いかがでしょうか。"
+        }
+      ],
+      "notes": "follow up は「（前の件を）追って確認する」。I just wanted to follow up on ~. とするとさらに柔らかい。Why haven't you replied? のような直接的な催促は避ける。",
+      "tags": [
+        "ステップ2",
+        "メール",
+        "確認"
+      ]
+    },
+    {
+      "id": "bp-please-see-below",
+      "type": "phrase",
+      "phrase": "Please see below.",
+      "meaning": "以下をご覧ください。",
+      "situation": "メール本文の下に情報や回答を書くとき",
+      "examples": [
+        {
+          "text": "Thank you for your questions. Please see my answers below.",
+          "translation": "ご質問ありがとうございます。以下にお答えします。"
+        }
+      ],
+      "notes": "相手のメール本文に回答を書き込むときは Please see my comments below in red.（赤字でコメントしています）などと書く。転送時は Please see the email below. と添える。",
+      "tags": [
+        "ステップ2",
+        "メール",
+        "書き出し"
+      ]
+    },
+    {
+      "id": "bp-ive-ccd",
+      "type": "phrase",
+      "phrase": "I've cc'd ~ on this email.",
+      "meaning": "〜さんを CC に入れています。",
+      "situation": "関係者をメールに加えたとき",
+      "examples": [
+        {
+          "text": "I've cc'd my manager, Ms. Tanaka, on this email.",
+          "translation": "上司の田中を CC に入れております。"
+        }
+      ],
+      "notes": "cc は carbon copy の略で、動詞としても使う（cc'd = 過去分詞）。I'm copying ~ on this email. とも言う。誰を加えたか一言書くのが英語メールのマナー。",
+      "tags": [
+        "ステップ2",
+        "メール",
+        "書き出し"
+      ]
+    },
+    {
+      "id": "bp-could-you-get-back-to-me-by",
+      "type": "phrase",
+      "phrase": "Could you get back to me by ~?",
+      "meaning": "〜までにお返事いただけますか。",
+      "situation": "返事の期限を伝えるとき",
+      "examples": [
+        {
+          "text": "Could you get back to me by Friday, May 10?",
+          "translation": "5月10日（金）までにお返事いただけますか。"
+        }
+      ],
+      "notes": "get back to ~ は「〜に（後で）連絡する・返事する」。期限は by（〜までに）。until は「〜までずっと」なので、締め切りには使わない。",
+      "tags": [
+        "ステップ2",
+        "メール",
+        "依頼"
+      ]
+    },
+    {
+      "id": "bp-please-accept-our-apologies",
+      "type": "phrase",
+      "phrase": "Please accept our apologies for any inconvenience.",
+      "meaning": "ご不便をおかけしましたことをお詫び申し上げます。",
+      "situation": "顧客・取引先への正式なお詫び",
+      "examples": [
+        {
+          "text": "The delivery was delayed due to a system error. Please accept our apologies for any inconvenience.",
+          "translation": "システムエラーにより配送が遅れました。ご不便をおかけしましたことをお詫び申し上げます。"
+        }
+      ],
+      "notes": "会社として謝る改まった表現。We apologize for any inconvenience this may have caused. も定番。個人の軽いミスには I'm sorry about that. / My apologies. で十分。",
+      "tags": [
+        "ステップ2",
+        "メール",
+        "お詫び"
+      ]
+    },
+    {
+      "id": "bp-thank-you-for-bringing-this-to-our-attention",
+      "type": "phrase",
+      "phrase": "Thank you for bringing this to our attention.",
+      "meaning": "ご指摘いただきありがとうございます。",
+      "situation": "苦情や間違いの報告を受けたとき",
+      "examples": [
+        {
+          "text": "Thank you for bringing this to our attention. We will correct the invoice right away.",
+          "translation": "ご指摘いただきありがとうございます。すぐに請求書を訂正いたします。"
+        }
+      ],
+      "notes": "bring ~ to one's attention は「〜に気づかせる」。苦情にもまず感謝で応じると角が立たない。社内なら Thanks for pointing that out.",
+      "tags": [
+        "ステップ2",
+        "メール",
+        "お詫び"
+      ]
+    },
+    {
+      "id": "bp-let-me-look-into-it",
+      "type": "phrase",
+      "phrase": "Let me look into it and get back to you.",
+      "meaning": "確認して折り返しご連絡します。",
+      "situation": "その場で答えられない問い合わせを受けたとき",
+      "examples": [
+        {
+          "text": "I'm not sure why the payment failed. Let me look into it and get back to you.",
+          "translation": "支払いがなぜ失敗したのかわかりかねますので、確認して折り返しご連絡します。"
+        }
+      ],
+      "notes": "look into は「調べる」。いつまでに返事するかを添えると信頼される（I'll get back to you by tomorrow.）。メールでも会議でも使える。",
+      "tags": [
+        "ステップ2",
+        "メール",
+        "確認"
+      ]
+    },
+    {
+      "id": "bp-unfortunately-we-are-unable-to",
+      "type": "phrase",
+      "phrase": "Unfortunately, we are unable to ~.",
+      "meaning": "あいにく〜いたしかねます。",
+      "situation": "依頼を断るとき",
+      "examples": [
+        {
+          "text": "Unfortunately, we are unable to offer a discount on this item.",
+          "translation": "あいにく、この商品は値引きいたしかねます。"
+        }
+      ],
+      "notes": "Unfortunately で始めると「残念ながら」の気持ちが伝わる。can't より unable to のほうが改まった響き。代案を添えると印象がよい（However, we can offer free shipping.）。",
+      "tags": [
+        "ステップ2",
+        "メール",
+        "お詫び"
+      ]
+    },
+    {
+      "id": "bp-im-afraid",
+      "type": "phrase",
+      "phrase": "I'm afraid ~.",
+      "meaning": "申し訳ないのですが〜／あいにく〜。",
+      "situation": "相手にとって好ましくないことを伝えるとき",
+      "examples": [
+        {
+          "text": "I'm afraid I can't make it to the meeting tomorrow.",
+          "translation": "申し訳ないのですが、明日の会議には出られません。"
+        }
+      ],
+      "notes": "I'm afraid は「怖い」ではなく、悪い知らせをやわらげるクッション言葉。メールでも口頭でも使える。I'm afraid not.（残念ながら違います／できません）と短く答えることもできる。",
+      "tags": [
+        "ステップ2",
+        "メール",
+        "お詫び"
+      ]
+    },
+    {
+      "id": "bp-lets-go-around-the-table",
+      "type": "phrase",
+      "phrase": "Let's go around the table.",
+      "meaning": "順番に一人ずつ話しましょう。",
+      "situation": "全員に順に発言してもらうとき",
+      "examples": [
+        {
+          "text": "Let's go around the table and share one update each.",
+          "translation": "順番に一人ずつ、近況を一つずつ共有しましょう。"
+        }
+      ],
+      "notes": "オンラインでも使う。誰から始めるか指名すると進めやすい（Let's start with Ken.）。",
+      "tags": [
+        "ステップ2",
+        "会議",
+        "進行"
+      ]
+    },
+    {
+      "id": "bp-could-i-add-something",
+      "type": "phrase",
+      "phrase": "Could I add something here?",
+      "meaning": "ここで少し補足してもよろしいですか。",
+      "situation": "議論に加わって発言したいとき",
+      "examples": [
+        {
+          "text": "Could I add something here? We also need to consider shipping costs.",
+          "translation": "少し補足してもよろしいですか。送料も考慮する必要があります。"
+        }
+      ],
+      "notes": "発言のきっかけをつかむ表現。I'd like to add that ~.（〜を付け加えたいと思います）、Can I jump in?（ちょっといいですか）はくだけた言い方。",
+      "tags": [
+        "ステップ2",
+        "会議",
+        "意見"
+      ]
+    },
+    {
+      "id": "bp-i-see-your-point-but",
+      "type": "phrase",
+      "phrase": "I see your point, but ~.",
+      "meaning": "おっしゃることはわかりますが、〜。",
+      "situation": "相手の意見を認めつつ反対するとき",
+      "examples": [
+        {
+          "text": "I see your point, but I think it's too risky.",
+          "translation": "おっしゃることはわかりますが、リスクが大きすぎると思います。"
+        }
+      ],
+      "notes": "いきなり I disagree. と言うより角が立たない。That's true, but ~. / I understand, but ~. も同じ働き。",
+      "tags": [
+        "ステップ2",
+        "会議",
+        "賛否"
+      ]
+    },
+    {
+      "id": "bp-im-not-sure-i-agree",
+      "type": "phrase",
+      "phrase": "I'm not sure I agree.",
+      "meaning": "賛成しかねます。",
+      "situation": "やんわり反対するとき",
+      "examples": [
+        {
+          "text": "I'm not sure I agree. Our customers might not like the change.",
+          "translation": "賛成しかねます。お客様がその変更を気に入らないかもしれません。"
+        }
+      ],
+      "notes": "I disagree. より控えめ。理由を続けるのがポイント。反対の強さの目安: I'm not sure I agree. < I don't think so. < I disagree. < I totally disagree.",
+      "tags": [
+        "ステップ2",
+        "会議",
+        "賛否"
+      ]
+    },
+    {
+      "id": "bp-thats-a-good-point",
+      "type": "phrase",
+      "phrase": "That's a good point.",
+      "meaning": "それはいい指摘ですね。",
+      "situation": "相手の意見を評価するとき",
+      "examples": [
+        {
+          "text": "That's a good point. I hadn't thought about that.",
+          "translation": "いい指摘ですね。それは考えていませんでした。"
+        }
+      ],
+      "notes": "同意の前置きにも、反論の前のクッションにも使える（That's a good point, but ~）。強めるなら That's a really good point. / Good point.（短くくだけた形）。",
+      "tags": [
+        "ステップ2",
+        "会議",
+        "賛否"
+      ]
+    },
+    {
+      "id": "bp-what-do-you-mean-by",
+      "type": "phrase",
+      "phrase": "What do you mean by ~?",
+      "meaning": "〜とはどういう意味ですか。",
+      "situation": "相手の発言の意味を確かめるとき",
+      "examples": [
+        {
+          "text": "What do you mean by \"flexible pricing\"?",
+          "translation": "「柔軟な価格設定」とはどういう意味ですか。"
+        }
+      ],
+      "notes": "語句を具体的に挙げて聞くと失礼にならない。言い方によっては問い詰めるように聞こえるので、Sorry, what do you mean by ~? / Could you explain what you mean by ~? と柔らげるとよい。",
+      "tags": [
+        "ステップ2",
+        "会議",
+        "確認"
+      ]
+    },
+    {
+      "id": "bp-so-what-youre-saying-is",
+      "type": "phrase",
+      "phrase": "So what you're saying is ~?",
+      "meaning": "つまり〜ということですね。",
+      "situation": "相手の発言を言い換えて確認するとき",
+      "examples": [
+        {
+          "text": "So what you're saying is we need more time for testing?",
+          "translation": "つまり、テストにもっと時間が必要だということですね。"
+        }
+      ],
+      "notes": "自分の理解が正しいか確かめる表現。If I understand correctly, ~.（正しく理解していれば〜）も同じ働きで、より丁寧。",
+      "tags": [
+        "ステップ2",
+        "会議",
+        "確認"
+      ]
+    },
+    {
+      "id": "bp-lets-get-back-on-track",
+      "type": "phrase",
+      "phrase": "Let's get back on track.",
+      "meaning": "本題に戻りましょう。",
+      "situation": "話が脱線したとき",
+      "examples": [
+        {
+          "text": "That's interesting, but let's get back on track. We only have ten minutes left.",
+          "translation": "興味深い話ですが、本題に戻りましょう。残り10分しかありません。"
+        }
+      ],
+      "notes": "on track は「予定どおり・本筋に」。Let's stick to the agenda.（議題どおりに進めましょう）も同じ場面で使う。",
+      "tags": [
+        "ステップ2",
+        "会議",
+        "進行"
+      ]
+    },
+    {
+      "id": "bp-can-we-take-this-offline",
+      "type": "phrase",
+      "phrase": "Can we take this offline?",
+      "meaning": "この件は会議の後で別途話しませんか。",
+      "situation": "一部の人にしか関係ない話題や長くなりそうな話題を会議から外すとき",
+      "examples": [
+        {
+          "text": "This seems to need more discussion. Can we take this offline?",
+          "translation": "もう少し議論が必要そうですね。会議の後で別途話しませんか。"
+        }
+      ],
+      "notes": "offline は「インターネットから切断」ではなく「この会議の場の外で」という意味。Let's discuss this separately. とも言える。",
+      "tags": [
+        "ステップ2",
+        "会議",
+        "進行"
+      ]
+    },
+    {
+      "id": "bp-lets-table-this",
+      "type": "phrase",
+      "phrase": "Let's table this for now.",
+      "meaning": "この件はいったん保留にしましょう。",
+      "situation": "結論が出ない議題を後回しにするとき（主にアメリカ英語）",
+      "examples": [
+        {
+          "text": "We don't have enough data yet. Let's table this for now.",
+          "translation": "まだデータが足りません。この件はいったん保留にしましょう。"
+        }
+      ],
+      "notes": "注意: アメリカ英語の table は「保留にする」、イギリス英語では「議題として提出する」と逆の意味になる。誤解を避けたいなら Let's put this on hold. / Let's come back to this later. が安全。",
+      "tags": [
+        "ステップ2",
+        "会議",
+        "進行"
+      ]
+    },
+    {
+      "id": "bp-ive-divided-my-presentation",
+      "type": "phrase",
+      "phrase": "I've divided my presentation into three parts.",
+      "meaning": "発表は3つのパートに分けてお話しします。",
+      "situation": "プレゼンの構成を最初に示すとき",
+      "examples": [
+        {
+          "text": "I've divided my presentation into three parts: the market, our product, and the budget.",
+          "translation": "発表は市場、製品、予算の3つのパートに分けてお話しします。"
+        }
+      ],
+      "notes": "最初に全体像を示すと聞き手が迷わない。First, ~. Then, ~. Finally, ~. と続ける。言い換えは My presentation is in three parts.",
+      "tags": [
+        "ステップ2",
+        "プレゼン",
+        "導入"
+      ]
+    },
+    {
+      "id": "bp-moving-on-to",
+      "type": "phrase",
+      "phrase": "Moving on to ~.",
+      "meaning": "続いて〜に移ります。",
+      "situation": "次の話題に移るとき",
+      "examples": [
+        {
+          "text": "Moving on to the next point, let's look at our costs.",
+          "translation": "続いて次のポイント、コストを見てみましょう。"
+        }
+      ],
+      "notes": "話題の切り替えを言葉で示す（サインポスト）のが英語プレゼンのコツ。This brings me to ~.（ここで〜に話を移します）、Let's now turn to ~. も同じ働き。",
+      "tags": [
+        "ステップ2",
+        "プレゼン",
+        "本論"
+      ]
+    },
+    {
+      "id": "bp-as-you-can-see",
+      "type": "phrase",
+      "phrase": "As you can see from this graph, ~.",
+      "meaning": "このグラフからわかるように、〜。",
+      "situation": "図表を説明するとき",
+      "examples": [
+        {
+          "text": "As you can see from this graph, sales have been rising since April.",
+          "translation": "このグラフからわかるように、4月から売上が伸びています。"
+        }
+      ],
+      "notes": "from の後に graph / chart / table（表）/ slide を入れる。This chart shows ~.（このグラフは〜を示しています）と組み合わせるとよい。",
+      "tags": [
+        "ステップ2",
+        "プレゼン",
+        "本論"
+      ]
+    },
+    {
+      "id": "bp-rose-by",
+      "type": "phrase",
+      "phrase": "~ rose by 15%.",
+      "meaning": "〜が15％増加しました。",
+      "situation": "数値の変化を説明するとき",
+      "examples": [
+        {
+          "text": "Sales rose by 15% compared to last year.",
+          "translation": "売上は前年比で15％増加しました。"
+        },
+        {
+          "text": "Costs fell from $2 million to $1.5 million.",
+          "translation": "コストは200万ドルから150万ドルに減少しました。"
+        }
+      ],
+      "notes": "by は「差（〜だけ）」、to は「到達点（〜まで）」。増加: rise / increase / go up、減少: fall / decrease / drop / go down、横ばい: remain flat / level off。sharply（急に）・slightly（わずかに）を添えると変化の大きさが伝わる。",
+      "tags": [
+        "ステップ2",
+        "プレゼン",
+        "本論"
+      ]
+    },
+    {
+      "id": "bp-ill-take-questions-at-the-end",
+      "type": "phrase",
+      "phrase": "I'll be happy to take questions at the end.",
+      "meaning": "ご質問は最後にお受けします。",
+      "situation": "質問のタイミングを最初に伝えるとき",
+      "examples": [
+        {
+          "text": "I'll be happy to take questions at the end of my presentation.",
+          "translation": "ご質問は発表の最後にお受けします。"
+        }
+      ],
+      "notes": "途中の質問を歓迎するなら Feel free to interrupt me if you have any questions.（ご質問があれば途中でもどうぞ）。最初に一言決めておくと進行が楽になる。",
+      "tags": [
+        "ステップ2",
+        "プレゼン",
+        "導入"
+      ]
+    },
+    {
+      "id": "bp-could-you-hold-please",
+      "type": "phrase",
+      "phrase": "Could you hold, please?",
+      "meaning": "少々お待ちいただけますか。",
+      "situation": "電話で相手を待たせるとき",
+      "examples": [
+        {
+          "text": "Could you hold, please? I'll check if he's available.",
+          "translation": "少々お待ちいただけますか。彼が対応できるか確認します。"
+        }
+      ],
+      "notes": "hold は「（電話を切らずに）待つ」。One moment, please. / Just a moment, please. も同じ。戻ったら Thank you for holding.（お待たせしました）。",
+      "tags": [
+        "ステップ2",
+        "電話・オンライン会議・雑談",
+        "電話"
+      ]
+    },
+    {
+      "id": "bp-can-i-take-a-message",
+      "type": "phrase",
+      "phrase": "Can I take a message?",
+      "meaning": "ご伝言を承りましょうか。",
+      "situation": "電話の相手が不在のとき",
+      "examples": [
+        {
+          "text": "I'm afraid Mr. Brown is in a meeting right now. Can I take a message?",
+          "translation": "あいにくブラウンは会議中です。ご伝言を承りましょうか。"
+        }
+      ],
+      "notes": "より丁寧には Would you like to leave a message? 不在の伝え方: He's out of the office today.（本日外出しています）/ She's on another line.（ほかの電話に出ています）。",
+      "tags": [
+        "ステップ2",
+        "電話・オンライン会議・雑談",
+        "電話"
+      ]
+    },
+    {
+      "id": "bp-could-you-ask-her-to-call-me-back",
+      "type": "phrase",
+      "phrase": "Could you ask her to call me back?",
+      "meaning": "折り返しお電話いただけるようお伝えいただけますか。",
+      "situation": "伝言を頼むとき",
+      "examples": [
+        {
+          "text": "Could you ask her to call me back when she's free? My number is 090-1234-5678.",
+          "translation": "お手すきのときに折り返しお電話いただけるようお伝えいただけますか。番号は 090-1234-5678 です。"
+        }
+      ],
+      "notes": "call ~ back は「〜に折り返し電話する」。自分からかけ直すなら I'll call back later.（後でかけ直します）。",
+      "tags": [
+        "ステップ2",
+        "電話・オンライン会議・雑談",
+        "電話"
+      ]
+    },
+    {
+      "id": "bp-let-me-share-my-screen",
+      "type": "phrase",
+      "phrase": "Let me share my screen.",
+      "meaning": "画面を共有します。",
+      "situation": "オンライン会議で資料を見せるとき",
+      "examples": [
+        {
+          "text": "Let me share my screen. Can everyone see it?",
+          "translation": "画面を共有します。皆さん見えていますか。"
+        }
+      ],
+      "notes": "続けて Can you see my screen? と確認するのが定番。止めるときは I'll stop sharing now.",
+      "tags": [
+        "ステップ2",
+        "電話・オンライン会議・雑談",
+        "オンライン会議"
+      ]
+    },
+    {
+      "id": "bp-youre-breaking-up",
+      "type": "phrase",
+      "phrase": "You're breaking up.",
+      "meaning": "音声が途切れています。",
+      "situation": "オンライン会議や電話で相手の声が途切れるとき",
+      "examples": [
+        {
+          "text": "Sorry, you're breaking up. Could you say that again?",
+          "translation": "すみません、音声が途切れています。もう一度言っていただけますか。"
+        }
+      ],
+      "notes": "break up は「（音声が）途切れる」。I think we have a bad connection.（接続が悪いようです）とも言う。完全に切れたら I think we got disconnected.",
+      "tags": [
+        "ステップ2",
+        "電話・オンライン会議・雑談",
+        "オンライン会議"
+      ]
+    },
+    {
+      "id": "bp-i-think-we-got-disconnected",
+      "type": "phrase",
+      "phrase": "I think we got disconnected.",
+      "meaning": "接続が切れてしまったようです。",
+      "situation": "通話・オンライン会議が途中で切れたとき",
+      "examples": [
+        {
+          "text": "Sorry about that. I think we got disconnected. Where were we?",
+          "translation": "失礼しました。接続が切れてしまったようです。どこまで話しましたっけ。"
+        }
+      ],
+      "notes": "Where were we? は「どこまで話していたっけ」で、話を再開するときに便利。電話なら We got cut off. も同じ意味。",
+      "tags": [
+        "ステップ2",
+        "電話・オンライン会議・雑談",
+        "オンライン会議"
+      ]
+    },
+    {
+      "id": "bp-thanks-for-taking-the-time",
+      "type": "phrase",
+      "phrase": "Thank you for taking the time to meet with us today.",
+      "meaning": "本日はお時間をいただきありがとうございます。",
+      "situation": "打ち合わせの最初や最後に",
+      "examples": [
+        {
+          "text": "Thank you for taking the time to meet with us today. We know you're very busy.",
+          "translation": "本日はお時間をいただきありがとうございます。お忙しいところ恐縮です。"
+        }
+      ],
+      "notes": "take the time to ~ は「わざわざ時間を割いて〜する」。最初にも最後にも使える。くだけると Thanks for your time.",
+      "tags": [
+        "ステップ2",
+        "電話・オンライン会議・雑談",
+        "雑談"
+      ]
+    },
+    {
+      "id": "bp-how-are-things",
+      "type": "phrase",
+      "phrase": "How are things on your end?",
+      "meaning": "そちらはいかがですか。",
+      "situation": "オンライン会議の始まりなどの雑談",
+      "examples": [
+        {
+          "text": "We've had a busy month here. How are things on your end?",
+          "translation": "こちらは忙しい1か月でした。そちらはいかがですか。"
+        }
+      ],
+      "notes": "on your end は「そちら側では」。離れた拠点との会議で自然に使える。How's everything going? / How's business? も雑談の切り出しになる。",
+      "tags": [
+        "ステップ2",
+        "電話・オンライン会議・雑談",
+        "雑談"
+      ]
+    },
+    {
+      "id": "bp-i-would-be-grateful-if-you-could",
+      "type": "phrase",
+      "phrase": "I would be grateful if you could ~.",
+      "meaning": "〜していただけますと幸いです。",
+      "situation": "改まった依頼（社外・目上の人・初めての相手）",
+      "examples": [
+        {
+          "text": "I would be grateful if you could send me a copy of the contract.",
+          "translation": "契約書の写しをお送りいただけますと幸いです。"
+        }
+      ],
+      "notes": "I'd appreciate it if you could ~ と同程度かそれ以上に丁寧。日本語の「〜いただけますと幸いです」に近い。社内の軽い依頼に使うと大げさに聞こえる。",
+      "tags": [
+        "ステップ3",
+        "メール",
+        "依頼"
+      ]
+    },
+    {
+      "id": "bp-at-your-earliest-convenience",
+      "type": "phrase",
+      "phrase": "at your earliest convenience",
+      "meaning": "ご都合がつき次第（なるべく早く）",
+      "situation": "期限を明示せず早めの対応を丁寧に頼むとき",
+      "examples": [
+        {
+          "text": "Please reply at your earliest convenience.",
+          "translation": "ご都合がつき次第ご返信ください。"
+        }
+      ],
+      "notes": "丁寧だが実際は「なるべく早く」という意味で使われる。ASAP（as soon as possible）は社内のくだけた略語で、社外には失礼に響くことがある。確実に期限があるなら by ~ で日付を示すほうが誤解がない。",
+      "tags": [
+        "ステップ3",
+        "メール",
+        "依頼"
+      ]
+    },
+    {
+      "id": "bp-should-you-have-any-questions",
+      "type": "phrase",
+      "phrase": "Should you have any questions, please do not hesitate to contact me.",
+      "meaning": "ご不明な点がございましたら、ご遠慮なくお問い合わせください。",
+      "situation": "改まったメールの結び",
+      "examples": [
+        {
+          "text": "Should you have any questions, please do not hesitate to contact me.",
+          "translation": "ご不明な点がございましたら、ご遠慮なくお問い合わせください。"
+        }
+      ],
+      "notes": "Should you have ~ は If you have ~ を倒置した改まった形。社内や親しい相手には Let me know if you have any questions. のほうが自然。",
+      "tags": [
+        "ステップ3",
+        "メール",
+        "結び"
+      ]
+    },
+    {
+      "id": "bp-thank-you-in-advance",
+      "type": "phrase",
+      "phrase": "Thank you in advance for your cooperation.",
+      "meaning": "ご協力のほど、よろしくお願いいたします。",
+      "situation": "依頼メールの結び",
+      "examples": [
+        {
+          "text": "Please submit your timesheet by Friday. Thank you in advance for your cooperation.",
+          "translation": "金曜日までに勤務表を提出してください。ご協力のほど、よろしくお願いいたします。"
+        }
+      ],
+      "notes": "「よろしくお願いします」に近く便利だが、「やってくれて当然」と押しつけがましく感じる人もいる。気になるときは I appreciate your help. / Thank you for your help with this. が無難。",
+      "tags": [
+        "ステップ3",
+        "メール",
+        "結び"
+      ]
+    },
+    {
+      "id": "bp-we-regret-to-inform-you",
+      "type": "phrase",
+      "phrase": "We regret to inform you that ~.",
+      "meaning": "誠に残念ながら〜をお知らせいたします。",
+      "situation": "不採用・中止など悪い知らせを正式に伝えるとき",
+      "examples": [
+        {
+          "text": "We regret to inform you that the event has been cancelled.",
+          "translation": "誠に残念ながら、イベントは中止となりましたことをお知らせいたします。"
+        }
+      ],
+      "notes": "非常に改まった表現で、通知文・書面向き。個人間のメールなら Unfortunately, ~. / I'm sorry to tell you that ~. のほうが自然。",
+      "tags": [
+        "ステップ3",
+        "メール",
+        "お詫び"
+      ]
+    },
+    {
+      "id": "bp-looping-in",
+      "type": "phrase",
+      "phrase": "Looping in ~.",
+      "meaning": "〜さんをこのやり取りに加えます。",
+      "situation": "メールのやり取りに新しく関係者を加えるとき",
+      "examples": [
+        {
+          "text": "Looping in Sarah from our legal team, who can answer your question.",
+          "translation": "ご質問にお答えできる法務チームのサラを加えます。"
+        }
+      ],
+      "notes": "I'm looping in ~ / Let me loop in ~ の省略形で、社内・カジュアル寄り。改まった場面では I've copied ~ on this email. / I'm adding ~ to this thread.",
+      "tags": [
+        "ステップ3",
+        "メール",
+        "書き出し"
+      ]
+    },
+    {
+      "id": "bp-please-disregard-my-previous-email",
+      "type": "phrase",
+      "phrase": "Please disregard my previous email.",
+      "meaning": "先ほどのメールは破棄してください。",
+      "situation": "誤ったメールを送ってしまったとき",
+      "examples": [
+        {
+          "text": "Please disregard my previous email. I sent the wrong file. The correct one is attached.",
+          "translation": "先ほどのメールは破棄してください。誤ったファイルを送ってしまいました。正しいものを添付します。"
+        }
+      ],
+      "notes": "disregard は「無視する・考慮しない」。ignore より改まった言い方。何が違ったのかと正しい情報を必ず添える。",
+      "tags": [
+        "ステップ3",
+        "メール",
+        "お詫び"
+      ]
+    },
+    {
+      "id": "bp-further-to",
+      "type": "phrase",
+      "phrase": "Further to my email of May 10, ~.",
+      "meaning": "5月10日にお送りしたメールに関連して、〜。",
+      "situation": "以前のメールの続きとして連絡するとき（主にイギリス英語の改まった表現）",
+      "examples": [
+        {
+          "text": "Further to my email of May 10, I would like to confirm the delivery date.",
+          "translation": "5月10日にお送りしたメールに関連して、納期を確認させてください。"
+        }
+      ],
+      "notes": "改まった書き言葉。アメリカ英語やふつうのメールでは Following up on my email from May 10, ~. / Regarding my email on May 10, ~. のほうが自然。",
+      "tags": [
+        "ステップ3",
+        "メール",
+        "確認"
+      ]
+    },
+    {
+      "id": "bp-please-advise",
+      "type": "phrase",
+      "phrase": "Please advise.",
+      "meaning": "ご指示ください。／ご意見をお聞かせください。",
+      "situation": "判断・指示を相手に仰ぐとき",
+      "examples": [
+        {
+          "text": "The supplier can deliver either on Monday or Wednesday. Which date would you prefer? Please advise.",
+          "translation": "仕入れ先は月曜か水曜に納品できます。どちらがよろしいでしょうか。ご指示ください。"
+        }
+      ],
+      "notes": "短くて便利だが、単独だとそっけなく、相手によっては命令的に感じる。Could you let me know how you'd like to proceed?（どう進めたいかお知らせいただけますか）のほうが柔らかい。",
+      "tags": [
+        "ステップ3",
+        "メール",
+        "依頼"
+      ]
+    },
+    {
+      "id": "bp-sorry-to-interrupt",
+      "type": "phrase",
+      "phrase": "Sorry to interrupt, but ~.",
+      "meaning": "お話し中すみませんが、〜。",
+      "situation": "相手の話をさえぎって発言するとき",
+      "examples": [
+        {
+          "text": "Sorry to interrupt, but I think we're running out of time.",
+          "translation": "お話し中すみませんが、時間がなくなってきているようです。"
+        }
+      ],
+      "notes": "割り込むときは必ず一言わびる。逆に割り込まれたら Could I just finish my point?（最後まで言わせてもらえますか）と丁寧に返せる。",
+      "tags": [
+        "ステップ3",
+        "会議",
+        "意見"
+      ]
+    },
+    {
+      "id": "bp-to-play-devils-advocate",
+      "type": "phrase",
+      "phrase": "Just to play devil's advocate, ~.",
+      "meaning": "あえて反対の立場から言うと、〜。",
+      "situation": "議論を深めるためにあえて反論するとき",
+      "examples": [
+        {
+          "text": "Just to play devil's advocate, what if our competitors lower their prices too?",
+          "translation": "あえて反対の立場から言うと、競合も値下げしたらどうなりますか。"
+        }
+      ],
+      "notes": "devil's advocate は「あえて反対意見を述べる人」。自分の本心ではないと示せるので、角を立てずに問題点を指摘できる。",
+      "tags": [
+        "ステップ3",
+        "会議",
+        "意見"
+      ]
+    },
+    {
+      "id": "bp-id-like-to-build-on",
+      "type": "phrase",
+      "phrase": "I'd like to build on what ~ said.",
+      "meaning": "〜さんのお話に付け加えたいと思います。",
+      "situation": "前の発言を発展させて意見を言うとき",
+      "examples": [
+        {
+          "text": "I'd like to build on what Maria said about customer feedback.",
+          "translation": "顧客の声についてマリアさんが話したことに付け加えたいと思います。"
+        }
+      ],
+      "notes": "build on は「〜を土台にして積み上げる」。相手の意見を立てながら発言できる。Following on from what ~ said, ~. も同じ働き。",
+      "tags": [
+        "ステップ3",
+        "会議",
+        "意見"
+      ]
+    },
+    {
+      "id": "bp-i-see-where-youre-coming-from",
+      "type": "phrase",
+      "phrase": "I see where you're coming from, but ~.",
+      "meaning": "そうお考えになる理由はわかりますが、〜。",
+      "situation": "相手の立場に理解を示しつつ反対するとき",
+      "examples": [
+        {
+          "text": "I see where you're coming from, but I think we need to cut costs first.",
+          "translation": "そうお考えになる理由はわかりますが、まずコストを削減する必要があると思います。"
+        }
+      ],
+      "notes": "where you're coming from は「（その意見の）背景・立場」。I see your point, but ~. より共感の度合いが強く、反対意見をやわらげる効果が高い。",
+      "tags": [
+        "ステップ3",
+        "会議",
+        "賛否"
+      ]
+    },
+    {
+      "id": "bp-i-couldnt-agree-more",
+      "type": "phrase",
+      "phrase": "I couldn't agree more.",
+      "meaning": "まったく同感です。",
+      "situation": "強く賛成するとき",
+      "examples": [
+        {
+          "text": "I couldn't agree more. Customer service is our top priority.",
+          "translation": "まったく同感です。顧客サービスが最優先です。"
+        }
+      ],
+      "notes": "「これ以上賛成できないほど賛成」＝強い同意。否定形なのに反対ではない点に注意。Absolutely. / Exactly. も強い同意を表す。",
+      "tags": [
+        "ステップ3",
+        "会議",
+        "賛否"
+      ]
+    },
+    {
+      "id": "bp-are-we-all-on-the-same-page",
+      "type": "phrase",
+      "phrase": "Are we all on the same page?",
+      "meaning": "皆さん、認識はそろっていますか。",
+      "situation": "全員の理解が一致しているか確かめるとき",
+      "examples": [
+        {
+          "text": "So we'll launch in June, not May. Are we all on the same page?",
+          "translation": "では、発売は5月ではなく6月です。皆さん、認識はそろっていますか。"
+        }
+      ],
+      "notes": "on the same page は「同じ認識を共有している」。Is everyone OK with that?（皆さんそれでよろしいですか）と組み合わせて合意を取る。",
+      "tags": [
+        "ステップ3",
+        "会議",
+        "確認"
+      ]
+    },
+    {
+      "id": "bp-let-me-get-back-to-you-on-that",
+      "type": "phrase",
+      "phrase": "Let me get back to you on that.",
+      "meaning": "その件は確認して後ほどお答えします。",
+      "situation": "会議中にその場で答えられないとき",
+      "examples": [
+        {
+          "text": "I don't have the exact numbers with me. Let me get back to you on that.",
+          "translation": "正確な数字が手元にないので、その件は確認して後ほどお答えします。"
+        }
+      ],
+      "notes": "その場であいまいに答えるより信頼される。期限を添えるとさらによい（I'll get back to you by the end of the day.）。",
+      "tags": [
+        "ステップ3",
+        "会議",
+        "確認"
+      ]
+    },
+    {
+      "id": "bp-to-sum-up",
+      "type": "phrase",
+      "phrase": "To sum up, ~.",
+      "meaning": "まとめると、〜。",
+      "situation": "議論の要点をまとめるとき",
+      "examples": [
+        {
+          "text": "To sum up, we've agreed to increase the budget and hire two more people.",
+          "translation": "まとめると、予算を増やし、さらに2名を採用することで合意しました。"
+        }
+      ],
+      "notes": "To summarize, ~. / In short, ~. も同じ。会議の最後に決定事項を口に出してまとめると、認識のずれを防げる。",
+      "tags": [
+        "ステップ3",
+        "会議",
+        "進行"
+      ]
+    },
+    {
+      "id": "bp-lets-go-over-the-action-items",
+      "type": "phrase",
+      "phrase": "Let's go over the action items.",
+      "meaning": "やるべきことを確認しましょう。",
+      "situation": "会議の最後に担当と期限を確認するとき",
+      "examples": [
+        {
+          "text": "Before we finish, let's go over the action items. Ken, you'll update the schedule by Friday, right?",
+          "translation": "終わる前に、やるべきことを確認しましょう。ケンさんは金曜日までにスケジュールを更新してくれるんですよね。"
+        }
+      ],
+      "notes": "action items は会議で決まった「各自の宿題」。go over は「見直す・ひととおり確認する」。Who's going to take care of this?（これは誰が担当しますか）で担当を決める。",
+      "tags": [
+        "ステップ3",
+        "会議",
+        "進行"
+      ]
+    },
+    {
+      "id": "bp-ill-send-out-the-minutes",
+      "type": "phrase",
+      "phrase": "I'll send out the minutes later today.",
+      "meaning": "議事録は本日中に送ります。",
+      "situation": "会議の最後に記録の共有を伝えるとき",
+      "examples": [
+        {
+          "text": "Thank you, everyone. I'll send out the minutes later today.",
+          "translation": "皆さん、ありがとうございました。議事録は本日中にお送りします。"
+        }
+      ],
+      "notes": "minutes（複数形）で「議事録」。meeting notes も同じ意味でよりくだけた言い方。send out は「（複数の人に）送る」。",
+      "tags": [
+        "ステップ3",
+        "会議",
+        "進行"
+      ]
+    },
+    {
+      "id": "bp-let-me-give-you-an-example",
+      "type": "phrase",
+      "phrase": "Let me give you an example.",
+      "meaning": "例を挙げましょう。",
+      "situation": "抽象的な説明を具体化するとき",
+      "examples": [
+        {
+          "text": "This approach saves time. Let me give you an example.",
+          "translation": "この方法は時間の節約になります。例を挙げましょう。"
+        }
+      ],
+      "notes": "For example, ~. だけでなく、一呼吸おいてこの表現を入れると聞き手の注意を引ける。To put it another way, ~.（別の言い方をすると）も説明を補う表現。",
+      "tags": [
+        "ステップ3",
+        "プレゼン",
+        "本論"
+      ]
+    },
+    {
+      "id": "bp-the-key-takeaway-is",
+      "type": "phrase",
+      "phrase": "The key takeaway is ~.",
+      "meaning": "いちばんお伝えしたいことは〜です。",
+      "situation": "最も重要なメッセージを強調するとき",
+      "examples": [
+        {
+          "text": "The key takeaway is that small changes can make a big difference.",
+          "translation": "いちばんお伝えしたいのは、小さな変化が大きな違いを生むということです。"
+        }
+      ],
+      "notes": "takeaway は「持ち帰ってほしい要点」。複数あるなら There are three key takeaways. The most important point is ~. も同じ働き。",
+      "tags": [
+        "ステップ3",
+        "プレゼン",
+        "結び"
+      ]
+    },
+    {
+      "id": "bp-thats-a-great-question",
+      "type": "phrase",
+      "phrase": "That's a great question.",
+      "meaning": "よいご質問ですね。",
+      "situation": "質疑応答で質問を受けたとき",
+      "examples": [
+        {
+          "text": "That's a great question. Let me explain how we calculated the cost.",
+          "translation": "よいご質問ですね。コストをどう計算したかご説明します。"
+        }
+      ],
+      "notes": "答えを考える時間を稼ぐ効果もある。毎回言うと形だけに聞こえるので、Thank you for the question. と使い分けるとよい。",
+      "tags": [
+        "ステップ3",
+        "プレゼン",
+        "質疑応答"
+      ]
+    },
+    {
+      "id": "bp-i-dont-have-that-information",
+      "type": "phrase",
+      "phrase": "I'm afraid I don't have that information right now, but I'll find out and get back to you.",
+      "meaning": "あいにく今その情報は手元にありませんが、調べて後ほどご連絡します。",
+      "situation": "質疑応答でその場で答えられないとき",
+      "examples": [
+        {
+          "text": "I'm afraid I don't have that information right now, but I'll find out and get back to you.",
+          "translation": "あいにく今その情報は手元にありませんが、調べて後ほどご連絡します。"
+        }
+      ],
+      "notes": "推測で答えずに、後で回答すると約束するのがプロの対応。連絡先を聞いておくと確実（Could I have your email address?）。",
+      "tags": [
+        "ステップ3",
+        "プレゼン",
+        "質疑応答"
+      ]
+    },
+    {
+      "id": "bp-to-wrap-up",
+      "type": "phrase",
+      "phrase": "To wrap up, ~.",
+      "meaning": "最後にまとめますと、〜。",
+      "situation": "プレゼンの締めくくりで要点を振り返るとき",
+      "examples": [
+        {
+          "text": "To wrap up, let me go over the three main points again.",
+          "translation": "最後に、3つの要点をもう一度振り返ります。"
+        }
+      ],
+      "notes": "In conclusion, ~. はより改まった響きで書き言葉寄り。To sum up, ~. / Let me summarize. も同じ場面で使える。",
+      "tags": [
+        "ステップ3",
+        "プレゼン",
+        "結び"
+      ]
+    },
+    {
+      "id": "bp-ill-put-you-through",
+      "type": "phrase",
+      "phrase": "I'll put you through.",
+      "meaning": "おつなぎします。",
+      "situation": "電話を担当者に取り次ぐとき",
+      "examples": [
+        {
+          "text": "Thank you. I'll put you through to the sales department.",
+          "translation": "ありがとうございます。営業部におつなぎします。"
+        }
+      ],
+      "notes": "put ~ through to … は「〜を…に（電話で）つなぐ」。つなぐ前に One moment, please. と言うのが自然。",
+      "tags": [
+        "ステップ3",
+        "電話・オンライン会議・雑談",
+        "電話"
+      ]
+    },
+    {
+      "id": "bp-could-you-spell-that",
+      "type": "phrase",
+      "phrase": "Could you spell that for me, please?",
+      "meaning": "つづりを教えていただけますか。",
+      "situation": "電話で名前やメールアドレスを聞き取るとき",
+      "examples": [
+        {
+          "text": "Could you spell your last name for me, please?",
+          "translation": "名字のつづりを教えていただけますか。"
+        }
+      ],
+      "notes": "聞き間違えやすい文字は B as in Boston のように単語で確かめる。速すぎるときは Could you speak a little more slowly, please?（もう少しゆっくり話していただけますか）。",
+      "tags": [
+        "ステップ3",
+        "電話・オンライン会議・雑談",
+        "電話"
+      ]
+    },
+    {
+      "id": "bp-i-have-to-jump-on-another-call",
+      "type": "phrase",
+      "phrase": "I'm sorry, but I have to jump on another call.",
+      "meaning": "すみませんが、次の会議に移らなければなりません。",
+      "situation": "オンライン会議を途中で抜けるとき",
+      "examples": [
+        {
+          "text": "I'm sorry, but I have to jump on another call. I'll catch up with the notes later.",
+          "translation": "すみませんが、次の会議に移らなければなりません。後でメモを確認します。"
+        }
+      ],
+      "notes": "jump on a call は「（オンラインの）通話・会議に入る」の口語。改まると I'm afraid I have to leave for another meeting.",
+      "tags": [
+        "ステップ3",
+        "電話・オンライン会議・雑談",
+        "オンライン会議"
+      ]
+    },
+    {
+      "id": "bp-ill-let-you-go",
+      "type": "phrase",
+      "phrase": "I'll let you go.",
+      "meaning": "では、このへんで失礼します。",
+      "situation": "電話や雑談を感じよく終えるとき",
+      "examples": [
+        {
+          "text": "Well, I know you're busy, so I'll let you go. Talk to you soon.",
+          "translation": "お忙しいでしょうから、このへんで失礼しますね。またお話ししましょう。"
+        }
+      ],
+      "notes": "「あなたを（解放して）行かせてあげる」の意味で、相手を気づかって会話を終える表現。I have to go. よりも感じがよい。",
+      "tags": [
+        "ステップ3",
+        "電話・オンライン会議・雑談",
+        "電話"
+      ]
+    },
+    {
+      "id": "bp-lets-keep-in-touch",
+      "type": "phrase",
+      "phrase": "Let's keep in touch.",
+      "meaning": "これからも連絡を取り合いましょう。",
+      "situation": "展示会や出張で知り合った人と別れるとき",
+      "examples": [
+        {
+          "text": "It was great talking to you. Let's keep in touch.",
+          "translation": "お話しできてよかったです。これからも連絡を取り合いましょう。"
+        }
+      ],
+      "notes": "keep in touch は「連絡を保つ」。I'll be in touch.（また連絡します）は自分から連絡する意思を示す。名刺を渡しながら Here's my card. と添えるとよい。",
+      "tags": [
+        "ステップ3",
+        "電話・オンライン会議・雑談",
+        "雑談"
+      ]
+    },
+    {
+      "id": "bp-did-you-have-trouble-finding",
+      "type": "phrase",
+      "phrase": "Did you have any trouble finding our office?",
+      "meaning": "弊社の場所はすぐおわかりになりましたか。",
+      "situation": "来客を迎えたときの雑談",
+      "examples": [
+        {
+          "text": "Welcome! Did you have any trouble finding our office?",
+          "translation": "ようこそ。弊社の場所はすぐおわかりになりましたか。"
+        }
+      ],
+      "notes": "来客への定番の気づかい。答えは No, it was easy to find.（すぐわかりました）など。have trouble ~ing で「〜するのに苦労する」。",
+      "tags": [
+        "ステップ3",
+        "電話・オンライン会議・雑談",
+        "雑談"
+      ]
+    }
+  ]
+}

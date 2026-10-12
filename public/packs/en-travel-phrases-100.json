@@ -1,0 +1,1845 @@
+{
+  "format": "lllm-study-pack",
+  "version": 1,
+  "id": "en-travel-phrases-100",
+  "title": "旅行と海外生活の英語 100",
+  "description": "海外旅行や留学・赴任で「そのまま使える」英語フレーズ 100 個（すべてフレーズ形式）。各フレーズに意味・使う場面・例文と訳、返答の例や言い換え・アメリカ英語とイギリス英語の違いなどのメモを付けています。旅の流れに沿って 3 ステップで学べます。ステップ1（39）: 空港・機内・入国審査（15）、ホテル（12）、交通（12）。出発から宿に着いて移動するまでの基本。ステップ2（36）: レストラン（14）、買い物（12）、道案内（10）。注文・試着・支払い・道を聞くなど、旅先で毎日使う表現。ステップ3（25）: トラブル・病院・緊急（13）、海外生活（銀行・携帯・住まい、12）。盗難や病気のときの伝え方と、長期滞在の手続きの表現。タグで場面ごとに復習できるので、出発前に必要な場面だけ見直すのにも使えます。前に「日常会話フレーズ 40」でごく基本のあいさつやあいづちを押さえておくとスムーズです。次は「英語の基本動詞 40」「よく使う句動詞 30」で、check in / drop off のような表現の土台になる語を広げるのがおすすめです。",
+  "subject": "english",
+  "language": {
+    "target": "en",
+    "explanation": "ja"
+  },
+  "level": "初級〜中級（CEFR A2〜B1）",
+  "tags": [
+    "英会話",
+    "フレーズ",
+    "旅行英語",
+    "海外生活"
+  ],
+  "author": "LLLM-Study",
+  "license": "MIT",
+  "source": "LLLM-Study オリジナル（AI を利用して作成）",
+  "revision": 1,
+  "items": [
+    {
+      "id": "tp-id-like-to-check-this-bag",
+      "type": "phrase",
+      "phrase": "I'd like to check this bag.",
+      "meaning": "この荷物を預けたいです。",
+      "situation": "空港のチェックインカウンターで",
+      "examples": [
+        {
+          "text": "Hi. I'd like to check this bag, please.",
+          "translation": "こんにちは。この荷物を預けたいです。"
+        }
+      ],
+      "notes": "check は「（荷物を）預ける」。預ける荷物は checked baggage、機内に持ち込む荷物は carry-on (bag)。返答の例: Please put it on the scale.（はかりに載せてください）",
+      "tags": [
+        "ステップ1",
+        "空港・機内・入国審査"
+      ]
+    },
+    {
+      "id": "tp-could-i-have-a-window-seat",
+      "type": "phrase",
+      "phrase": "Could I have a window seat, please?",
+      "meaning": "窓側の席にしてもらえますか。",
+      "situation": "チェックイン時に座席の希望を伝えるとき",
+      "examples": [
+        {
+          "text": "Could I have a window seat, please?",
+          "translation": "窓側の席にしてもらえますか。"
+        },
+        {
+          "text": "A: Window or aisle? B: Aisle, please.",
+          "translation": "A: 窓側と通路側どちらにしますか。B: 通路側でお願いします。"
+        }
+      ],
+      "notes": "通路側は aisle seat（aisle の s は発音しない: /aɪl/）。2人で並びたいときは Could we sit together?（隣同士にできますか）。",
+      "tags": [
+        "ステップ1",
+        "空港・機内・入国審査"
+      ]
+    },
+    {
+      "id": "tp-can-i-bring-this-on-board",
+      "type": "phrase",
+      "phrase": "Can I bring this on board?",
+      "meaning": "これは機内に持ち込めますか。",
+      "situation": "手荷物を持ち込めるか確かめるとき",
+      "examples": [
+        {
+          "text": "Can I bring this on board? It's a laptop.",
+          "translation": "これは機内に持ち込めますか。ノートパソコンです。"
+        }
+      ],
+      "notes": "on board は「機内に・乗って」。返答の例: Yes, that's fine.（大丈夫です）/ No, you'll have to check it.（預けてください）。液体の持ち込み制限は国や空港で異なるので事前に確認を。",
+      "tags": [
+        "ステップ1",
+        "空港・機内・入国審査"
+      ]
+    },
+    {
+      "id": "tp-is-the-flight-on-time",
+      "type": "phrase",
+      "phrase": "Is the flight on time?",
+      "meaning": "飛行機は定刻どおりですか。",
+      "situation": "出発の遅れを確かめるとき",
+      "examples": [
+        {
+          "text": "Excuse me, is the flight to Sydney on time?",
+          "translation": "すみません、シドニー行きの便は定刻どおりですか。"
+        }
+      ],
+      "notes": "on time は「時間どおりに」。返答の例: It's delayed by about an hour.（約1時間遅れています）/ It's been cancelled.（欠航になりました）。boarding（搭乗）が始まると Now boarding と表示される。",
+      "tags": [
+        "ステップ1",
+        "空港・機内・入国審査"
+      ]
+    },
+    {
+      "id": "tp-how-do-i-get-to-gate",
+      "type": "phrase",
+      "phrase": "How do I get to Gate 23?",
+      "meaning": "23番ゲートへはどう行けばいいですか。",
+      "situation": "空港で搭乗口を探すとき",
+      "examples": [
+        {
+          "text": "Excuse me, how do I get to Gate 23?",
+          "translation": "すみません、23番ゲートへはどう行けばいいですか。"
+        }
+      ],
+      "notes": "How do I get to ~? は道を聞く万能表現。返答の例: Go through security and turn right.（保安検査を通って右へ）。搭乗時刻は boarding time。",
+      "tags": [
+        "ステップ1",
+        "空港・機内・入国審査"
+      ]
+    },
+    {
+      "id": "tp-i-think-youre-in-my-seat",
+      "type": "phrase",
+      "phrase": "Excuse me, I think you're in my seat.",
+      "meaning": "すみません、そこは私の席だと思うのですが。",
+      "situation": "自分の席に別の人が座っているとき",
+      "examples": [
+        {
+          "text": "Excuse me, I think you're in my seat. I'm 24A.",
+          "translation": "すみません、そこは私の席だと思います。私は 24A です。"
+        }
+      ],
+      "notes": "I think ~ を付けると相手を責めずに伝えられる。チケットを見せながら言うとスムーズ。返答の例: Oh, sorry! / Let me check.（確認します）",
+      "tags": [
+        "ステップ1",
+        "空港・機内・入国審査"
+      ]
+    },
+    {
+      "id": "tp-ill-have-the-chicken",
+      "type": "phrase",
+      "phrase": "I'll have the chicken, please.",
+      "meaning": "チキンをお願いします。",
+      "situation": "機内食や飲み物を選ぶとき",
+      "examples": [
+        {
+          "text": "A: Chicken or beef? B: I'll have the chicken, please.",
+          "translation": "A: チキンとビーフどちらにしますか。B: チキンをお願いします。"
+        }
+      ],
+      "notes": "I'll have ~ は注文の基本形。単に Chicken, please. でもよい。飲み物は Could I have some water, please? / Coffee, please. 不要なら No, thank you.",
+      "tags": [
+        "ステップ1",
+        "空港・機内・入国審査"
+      ]
+    },
+    {
+      "id": "tp-do-you-mind-if-i-recline",
+      "type": "phrase",
+      "phrase": "Do you mind if I recline my seat?",
+      "meaning": "座席を倒してもいいですか。",
+      "situation": "機内で後ろの人に声をかけるとき",
+      "examples": [
+        {
+          "text": "Excuse me, do you mind if I recline my seat a little?",
+          "translation": "すみません、少し座席を倒してもいいですか。"
+        }
+      ],
+      "notes": "Do you mind if ~? は「〜したら嫌ですか」と聞く形なので、OK のときは Not at all. / No, go ahead.（どうぞ）と否定で答える。Yes と答えると「嫌です」の意味になるので注意。",
+      "tags": [
+        "ステップ1",
+        "空港・機内・入国審査"
+      ]
+    },
+    {
+      "id": "tp-im-here-for-sightseeing",
+      "type": "phrase",
+      "phrase": "I'm here for sightseeing.",
+      "meaning": "観光で来ました。",
+      "situation": "入国審査で訪問の目的を聞かれたとき",
+      "examples": [
+        {
+          "text": "A: What's the purpose of your visit? B: I'm here for sightseeing.",
+          "translation": "A: 訪問の目的は何ですか。B: 観光です。"
+        }
+      ],
+      "notes": "短く Sightseeing. だけでもよい。仕事なら I'm here on business.、留学なら I'm here to study.、友人訪問なら I'm visiting a friend.",
+      "tags": [
+        "ステップ1",
+        "空港・機内・入国審査"
+      ]
+    },
+    {
+      "id": "tp-im-staying-for-a-week",
+      "type": "phrase",
+      "phrase": "I'm staying for a week.",
+      "meaning": "1週間滞在します。",
+      "situation": "入国審査で滞在期間を聞かれたとき",
+      "examples": [
+        {
+          "text": "A: How long are you staying? B: I'm staying for a week.",
+          "translation": "A: 滞在期間はどのくらいですか。B: 1週間です。"
+        }
+      ],
+      "notes": "For a week. / Five days. のように短く答えてもよい。期間は for で表す。帰りの航空券を見せるよう言われることもある（Do you have a return ticket?）。",
+      "tags": [
+        "ステップ1",
+        "空港・機内・入国審査"
+      ]
+    },
+    {
+      "id": "tp-im-staying-at",
+      "type": "phrase",
+      "phrase": "I'm staying at the Central Hotel.",
+      "meaning": "セントラルホテルに泊まります。",
+      "situation": "入国審査で滞在先を聞かれたとき",
+      "examples": [
+        {
+          "text": "A: Where are you staying? B: I'm staying at the Central Hotel in Boston.",
+          "translation": "A: どこに滞在しますか。B: ボストンのセントラルホテルです。"
+        }
+      ],
+      "notes": "ホテル名は at、都市名は in。知人宅なら I'm staying with a friend.（友人の家に泊まります）。予約確認書を手元に出しておくと安心。",
+      "tags": [
+        "ステップ1",
+        "空港・機内・入国審査"
+      ]
+    },
+    {
+      "id": "tp-i-have-nothing-to-declare",
+      "type": "phrase",
+      "phrase": "I have nothing to declare.",
+      "meaning": "申告するものはありません。",
+      "situation": "税関で申告の有無を聞かれたとき",
+      "examples": [
+        {
+          "text": "A: Do you have anything to declare? B: No, I have nothing to declare.",
+          "translation": "A: 申告するものはありますか。B: いいえ、ありません。"
+        }
+      ],
+      "notes": "declare は「（税関で）申告する」。申告が必要なものは素直に Yes, I have ~. と答える。食品の持ち込みは国によって厳しく制限されているので注意。",
+      "tags": [
+        "ステップ1",
+        "空港・機内・入国審査"
+      ]
+    },
+    {
+      "id": "tp-my-suitcase-didnt-come-out",
+      "type": "phrase",
+      "phrase": "My suitcase didn't come out.",
+      "meaning": "スーツケースが出てきませんでした。",
+      "situation": "手荷物受取所で荷物が見つからないとき",
+      "examples": [
+        {
+          "text": "Excuse me, my suitcase didn't come out. Where can I report it?",
+          "translation": "すみません、スーツケースが出てきませんでした。どこに届け出ればいいですか。"
+        }
+      ],
+      "notes": "手荷物受取所は baggage claim。荷物を預けたときにもらう控え（baggage claim tag）を見せる。返答の例: Please fill out this form.（この用紙に記入してください）",
+      "tags": [
+        "ステップ1",
+        "空港・機内・入国審査"
+      ]
+    },
+    {
+      "id": "tp-i-missed-my-connecting-flight",
+      "type": "phrase",
+      "phrase": "I missed my connecting flight.",
+      "meaning": "乗り継ぎ便に乗り遅れました。",
+      "situation": "乗り継ぎ（トランジット）に間に合わなかったとき",
+      "examples": [
+        {
+          "text": "My first flight was late, and I missed my connecting flight. What should I do?",
+          "translation": "最初の便が遅れて、乗り継ぎ便に乗り遅れました。どうすればいいですか。"
+        }
+      ],
+      "notes": "connecting flight は「乗り継ぎ便」、乗り継ぎは connection / transfer。航空会社のカウンターで Can you book me on the next flight?（次の便に予約してもらえますか）と頼む。",
+      "tags": [
+        "ステップ1",
+        "空港・機内・入国審査"
+      ]
+    },
+    {
+      "id": "tp-where-can-i-exchange-money",
+      "type": "phrase",
+      "phrase": "Where can I exchange money?",
+      "meaning": "どこで両替できますか。",
+      "situation": "空港や街で両替所を探すとき",
+      "examples": [
+        {
+          "text": "Excuse me, where can I exchange money?",
+          "translation": "すみません、どこで両替できますか。"
+        }
+      ],
+      "notes": "両替所は currency exchange。I'd like to exchange 30,000 yen into dollars.（3万円をドルに両替したい）と言える。What's the exchange rate?（レートはいくらですか）も便利。",
+      "tags": [
+        "ステップ1",
+        "空港・機内・入国審査"
+      ]
+    },
+    {
+      "id": "tp-i-have-a-reservation-under",
+      "type": "phrase",
+      "phrase": "I have a reservation under the name Sato.",
+      "meaning": "佐藤の名前で予約しています。",
+      "situation": "ホテルのチェックイン",
+      "examples": [
+        {
+          "text": "Hi, I'd like to check in. I have a reservation under the name Sato.",
+          "translation": "こんにちは、チェックインをお願いします。佐藤の名前で予約しています。"
+        }
+      ],
+      "notes": "under the name ~ で「〜の名前で」。レストランの予約でも使える。返答の例: Can I see your passport, please?（パスポートを見せていただけますか）",
+      "tags": [
+        "ステップ1",
+        "ホテル"
+      ]
+    },
+    {
+      "id": "tp-is-breakfast-included",
+      "type": "phrase",
+      "phrase": "Is breakfast included?",
+      "meaning": "朝食は付いていますか。",
+      "situation": "宿泊料金に含まれるものを確かめるとき",
+      "examples": [
+        {
+          "text": "Is breakfast included in the price?",
+          "translation": "朝食は料金に含まれていますか。"
+        }
+      ],
+      "notes": "included は「含まれている」。返答の例: Yes, it's served from 7 to 10.（7時から10時までです）。時間だけ聞くなら What time is breakfast?",
+      "tags": [
+        "ステップ1",
+        "ホテル"
+      ]
+    },
+    {
+      "id": "tp-whats-the-wifi-password",
+      "type": "phrase",
+      "phrase": "What's the Wi-Fi password?",
+      "meaning": "Wi-Fi のパスワードは何ですか。",
+      "situation": "ホテルやカフェでインターネットを使うとき",
+      "examples": [
+        {
+          "text": "Excuse me, what's the Wi-Fi password?",
+          "translation": "すみません、Wi-Fi のパスワードは何ですか。"
+        }
+      ],
+      "notes": "Wi-Fi は英語では /ˈwaɪfaɪ/（ワイファイ）。Is there free Wi-Fi?（無料の Wi-Fi はありますか）も便利。",
+      "tags": [
+        "ステップ1",
+        "ホテル"
+      ]
+    },
+    {
+      "id": "tp-could-you-keep-my-luggage",
+      "type": "phrase",
+      "phrase": "Could you keep my luggage until three?",
+      "meaning": "3時まで荷物を預かってもらえますか。",
+      "situation": "チェックイン前・チェックアウト後に荷物を預けるとき",
+      "examples": [
+        {
+          "text": "I'm checking out now. Could you keep my luggage until three?",
+          "translation": "今チェックアウトします。3時まで荷物を預かってもらえますか。"
+        }
+      ],
+      "notes": "luggage は数えられない名詞なので a luggage / luggages とは言わない（a piece of luggage）。Can I leave my bags here? も同じ意味。",
+      "tags": [
+        "ステップ1",
+        "ホテル"
+      ]
+    },
+    {
+      "id": "tp-the-air-conditioning-isnt-working",
+      "type": "phrase",
+      "phrase": "The air conditioning isn't working.",
+      "meaning": "エアコンが動きません。",
+      "situation": "部屋の設備が故障しているとき",
+      "examples": [
+        {
+          "text": "Hello, this is Room 512. The air conditioning isn't working.",
+          "translation": "もしもし、512号室です。エアコンが動きません。"
+        }
+      ],
+      "notes": "~ isn't working / ~ doesn't work で「〜が壊れている・動かない」。The shower / The TV / The light など何にでも使える。フロントに電話するときは最初に部屋番号を言う。",
+      "tags": [
+        "ステップ1",
+        "ホテル"
+      ]
+    },
+    {
+      "id": "tp-could-i-have-an-extra-towel",
+      "type": "phrase",
+      "phrase": "Could I have an extra towel?",
+      "meaning": "タオルをもう1枚いただけますか。",
+      "situation": "備品を追加で頼むとき",
+      "examples": [
+        {
+          "text": "Could I have an extra towel and another pillow?",
+          "translation": "タオルをもう1枚と、枕をもう1つもらえますか。"
+        }
+      ],
+      "notes": "extra は「追加の」。「もう1つ」は another ~ でも言える。歯ブラシ（toothbrush）など、ホテルによっては置いていないものもあるので頼んでみる価値がある。",
+      "tags": [
+        "ステップ1",
+        "ホテル"
+      ]
+    },
+    {
+      "id": "tp-i-locked-myself-out",
+      "type": "phrase",
+      "phrase": "I locked myself out of my room.",
+      "meaning": "鍵を部屋に置いたまま締め出されてしまいました。",
+      "situation": "オートロックで部屋に入れなくなったとき",
+      "examples": [
+        {
+          "text": "Sorry, I locked myself out of my room. It's Room 805.",
+          "translation": "すみません、部屋に鍵を置いたまま出てしまいました。805号室です。"
+        }
+      ],
+      "notes": "「自分を外に閉め出した」という言い方。カードキーが使えないときは My key card doesn't work.（カードキーが反応しません）。",
+      "tags": [
+        "ステップ1",
+        "ホテル"
+      ]
+    },
+    {
+      "id": "tp-could-i-get-a-wake-up-call",
+      "type": "phrase",
+      "phrase": "Could I get a wake-up call at six?",
+      "meaning": "6時にモーニングコールをお願いできますか。",
+      "situation": "フロントに起こしてもらうよう頼むとき",
+      "examples": [
+        {
+          "text": "Could I get a wake-up call at six tomorrow morning?",
+          "translation": "明朝6時にモーニングコールをお願いできますか。"
+        }
+      ],
+      "notes": "「モーニングコール」は和製英語で、英語では wake-up call。最近は電話機で自分で設定するホテルも多い。",
+      "tags": [
+        "ステップ1",
+        "ホテル"
+      ]
+    },
+    {
+      "id": "tp-is-late-check-out-possible",
+      "type": "phrase",
+      "phrase": "Is late check-out possible?",
+      "meaning": "チェックアウトを遅くすることはできますか。",
+      "situation": "チェックアウト時刻を延ばしたいとき",
+      "examples": [
+        {
+          "text": "Is late check-out possible? My flight is in the evening.",
+          "translation": "チェックアウトを遅くすることはできますか。飛行機が夕方なんです。"
+        }
+      ],
+      "notes": "返答の例: Yes, until 1 p.m. at no extra charge.（午後1時まで追加料金なしで可能です）/ There's an extra charge of $30.（30ドルの追加料金がかかります）。",
+      "tags": [
+        "ステップ1",
+        "ホテル"
+      ]
+    },
+    {
+      "id": "tp-could-you-call-a-taxi-for-me",
+      "type": "phrase",
+      "phrase": "Could you call a taxi for me?",
+      "meaning": "タクシーを呼んでいただけますか。",
+      "situation": "ホテルのフロントでタクシーを頼むとき",
+      "examples": [
+        {
+          "text": "Could you call a taxi for me? I need to be at the airport by ten.",
+          "translation": "タクシーを呼んでいただけますか。10時までに空港に着かなければならないんです。"
+        }
+      ],
+      "notes": "call a taxi は「タクシーを呼ぶ」。Call me a taxi. は冗談で「私をタクシーと呼んで」とも取れるため、for me を付けると明確。配車アプリが一般的な国も多い。",
+      "tags": [
+        "ステップ1",
+        "ホテル"
+      ]
+    },
+    {
+      "id": "tp-id-like-to-check-out",
+      "type": "phrase",
+      "phrase": "I'd like to check out, please.",
+      "meaning": "チェックアウトをお願いします。",
+      "situation": "ホテルを出るとき",
+      "examples": [
+        {
+          "text": "I'd like to check out, please. Here's my key.",
+          "translation": "チェックアウトをお願いします。鍵をお返しします。"
+        }
+      ],
+      "notes": "返答の例: Did you use anything from the minibar?（ミニバーのご利用はありましたか）。明細を見たいときは Could I have a receipt?（領収書をもらえますか）。",
+      "tags": [
+        "ステップ1",
+        "ホテル"
+      ]
+    },
+    {
+      "id": "tp-i-dont-recognize-this-charge",
+      "type": "phrase",
+      "phrase": "I don't recognize this charge.",
+      "meaning": "この請求に心当たりがありません。",
+      "situation": "精算の明細に覚えのない料金があるとき",
+      "examples": [
+        {
+          "text": "Excuse me, I don't recognize this charge. I didn't use the minibar.",
+          "translation": "すみません、この請求に心当たりがありません。ミニバーは使っていません。"
+        }
+      ],
+      "notes": "charge は「料金・請求」。What's this charge for?（これは何の料金ですか）と聞くのも穏やか。感情的にならず、具体的に伝えるのがコツ。",
+      "tags": [
+        "ステップ1",
+        "ホテル"
+      ]
+    },
+    {
+      "id": "tp-where-can-i-buy-a-ticket",
+      "type": "phrase",
+      "phrase": "Where can I buy a ticket?",
+      "meaning": "切符はどこで買えますか。",
+      "situation": "駅やバス停で切符の買い方がわからないとき",
+      "examples": [
+        {
+          "text": "Excuse me, where can I buy a ticket for the subway?",
+          "translation": "すみません、地下鉄の切符はどこで買えますか。"
+        }
+      ],
+      "notes": "返答の例: From the machine over there.（あそこの券売機で）/ You can pay with a contactless card.（タッチ決済のカードで乗れます）。券売機は ticket machine、窓口は ticket office。",
+      "tags": [
+        "ステップ1",
+        "交通"
+      ]
+    },
+    {
+      "id": "tp-a-one-way-ticket-to",
+      "type": "phrase",
+      "phrase": "A one-way ticket to Oxford, please.",
+      "meaning": "オックスフォードまで片道1枚お願いします。",
+      "situation": "駅の窓口で切符を買うとき",
+      "examples": [
+        {
+          "text": "A one-way ticket to Oxford, please.",
+          "translation": "オックスフォードまで片道1枚お願いします。"
+        },
+        {
+          "text": "Two round-trip tickets to Boston, please.",
+          "translation": "ボストンまで往復2枚お願いします。"
+        }
+      ],
+      "notes": "片道は one-way（英: single）、往復は round-trip（英: return）。イギリスで return ticket と言えば往復切符。",
+      "tags": [
+        "ステップ1",
+        "交通"
+      ]
+    },
+    {
+      "id": "tp-does-this-bus-go-to",
+      "type": "phrase",
+      "phrase": "Does this bus go to the museum?",
+      "meaning": "このバスは博物館に行きますか。",
+      "situation": "乗る前に行き先を確かめるとき",
+      "examples": [
+        {
+          "text": "Excuse me, does this bus go to the museum?",
+          "translation": "すみません、このバスは博物館に行きますか。"
+        }
+      ],
+      "notes": "Does this train / bus stop at ~?（〜に止まりますか）も便利。返答の例: No, you need the number 5.（いいえ、5番のバスです）",
+      "tags": [
+        "ステップ1",
+        "交通"
+      ]
+    },
+    {
+      "id": "tp-which-platform",
+      "type": "phrase",
+      "phrase": "Which platform does the train to Leeds leave from?",
+      "meaning": "リーズ行きの電車は何番線から出ますか。",
+      "situation": "駅で乗り場を探すとき",
+      "examples": [
+        {
+          "text": "Which platform does the train to Leeds leave from?",
+          "translation": "リーズ行きの電車は何番線から出ますか。"
+        }
+      ],
+      "notes": "platform は「（駅の）ホーム・〜番線」。アメリカでは track も使う（Track 5）。返答の例: Platform 4.（4番線です）",
+      "tags": [
+        "ステップ1",
+        "交通"
+      ]
+    },
+    {
+      "id": "tp-where-should-i-change-trains",
+      "type": "phrase",
+      "phrase": "Where should I change trains?",
+      "meaning": "どこで乗り換えればいいですか。",
+      "situation": "乗り換えを確かめるとき",
+      "examples": [
+        {
+          "text": "I'm going to Central Park. Where should I change trains?",
+          "translation": "セントラルパークに行きたいのですが、どこで乗り換えればいいですか。"
+        }
+      ],
+      "notes": "change trains（乗り換える）は trains と複数形にする。transfer も同じ意味。返答の例: Change at Union Station.（ユニオン駅で乗り換えてください）",
+      "tags": [
+        "ステップ1",
+        "交通"
+      ]
+    },
+    {
+      "id": "tp-could-you-tell-me-when-we-get-to",
+      "type": "phrase",
+      "phrase": "Could you tell me when we get to Market Street?",
+      "meaning": "マーケット通りに着いたら教えてもらえますか。",
+      "situation": "降りる場所がわからないとき、運転手や隣の人に頼む",
+      "examples": [
+        {
+          "text": "Could you tell me when we get to Market Street?",
+          "translation": "マーケット通りに着いたら教えてもらえますか。"
+        }
+      ],
+      "notes": "when の後は未来のことでも現在形（when we get to ~）。get to は「〜に着く」。How many stops is it to ~?（〜まで何駅／いくつ目の停留所ですか）も便利。",
+      "tags": [
+        "ステップ1",
+        "交通"
+      ]
+    },
+    {
+      "id": "tp-is-this-seat-taken",
+      "type": "phrase",
+      "phrase": "Is this seat taken?",
+      "meaning": "この席は空いていますか。",
+      "situation": "電車・バス・カフェで空席に座りたいとき",
+      "examples": [
+        {
+          "text": "Excuse me, is this seat taken?",
+          "translation": "すみません、この席は空いていますか。"
+        }
+      ],
+      "notes": "直訳は「この席は取られていますか」なので、空いていれば No, go ahead.（いいえ、どうぞ）と答えが No になる点に注意。Is anyone sitting here? も同じ意味。",
+      "tags": [
+        "ステップ1",
+        "交通"
+      ]
+    },
+    {
+      "id": "tp-how-often-does-the-bus-run",
+      "type": "phrase",
+      "phrase": "How often does the bus run?",
+      "meaning": "バスは何分おきに来ますか。",
+      "situation": "運行間隔を知りたいとき",
+      "examples": [
+        {
+          "text": "How often does the bus to the airport run?",
+          "translation": "空港行きのバスは何分おきに来ますか。"
+        }
+      ],
+      "notes": "run は「（交通機関が）運行する」。返答の例: Every 15 minutes.（15分おきです）。最終便は What time is the last bus?",
+      "tags": [
+        "ステップ1",
+        "交通"
+      ]
+    },
+    {
+      "id": "tp-to-this-address-please",
+      "type": "phrase",
+      "phrase": "To this address, please.",
+      "meaning": "この住所までお願いします。",
+      "situation": "タクシーで行き先を伝えるとき",
+      "examples": [
+        {
+          "text": "To this address, please.",
+          "translation": "この住所までお願いします。"
+        },
+        {
+          "text": "Could you take me to the Grand Hotel, please?",
+          "translation": "グランドホテルまでお願いできますか。"
+        }
+      ],
+      "notes": "スマートフォンの地図や住所のメモを見せながら言うと確実。発音しにくい地名も間違いがない。",
+      "tags": [
+        "ステップ1",
+        "交通"
+      ]
+    },
+    {
+      "id": "tp-how-much-is-it-to-the-airport",
+      "type": "phrase",
+      "phrase": "About how much is it to the airport?",
+      "meaning": "空港までだいたいいくらですか。",
+      "situation": "タクシーに乗る前に料金の目安を聞くとき",
+      "examples": [
+        {
+          "text": "About how much is it to the airport?",
+          "translation": "空港までだいたいいくらですか。"
+        }
+      ],
+      "notes": "about を付けると「おおよそ」。How long does it take?（どのくらい時間がかかりますか）とあわせて聞くと安心。メーターを使ってほしいときは Could you use the meter, please?",
+      "tags": [
+        "ステップ1",
+        "交通"
+      ]
+    },
+    {
+      "id": "tp-you-can-drop-me-off-here",
+      "type": "phrase",
+      "phrase": "You can drop me off here.",
+      "meaning": "ここで降ろしてください。",
+      "situation": "タクシーで降りたい場所を伝えるとき",
+      "examples": [
+        {
+          "text": "You can drop me off here, thanks.",
+          "translation": "ここで降ろしてください、ありがとう。"
+        }
+      ],
+      "notes": "drop ~ off は「（車から）〜を降ろす」。Could you stop here, please? / Here is fine.（ここで大丈夫です）も同じ場面で使える。",
+      "tags": [
+        "ステップ1",
+        "交通"
+      ]
+    },
+    {
+      "id": "tp-keep-the-change",
+      "type": "phrase",
+      "phrase": "Keep the change.",
+      "meaning": "おつりはとっておいてください。",
+      "situation": "タクシーなどでチップ代わりにおつりを渡すとき",
+      "examples": [
+        {
+          "text": "Here's twenty dollars. Keep the change.",
+          "translation": "20ドルです。おつりはとっておいてください。"
+        }
+      ],
+      "notes": "change は「おつり・小銭」。チップの習慣がある国で使う。おつりが必要なら Could I have the change, please?、領収書は Could I get a receipt?",
+      "tags": [
+        "ステップ1",
+        "交通"
+      ]
+    },
+    {
+      "id": "tp-a-table-for-two",
+      "type": "phrase",
+      "phrase": "A table for two, please.",
+      "meaning": "2人です。（席をお願いします）",
+      "situation": "予約なしでレストランに入るとき",
+      "examples": [
+        {
+          "text": "A: How many? B: A table for two, please.",
+          "translation": "A: 何名様ですか。B: 2人です。"
+        }
+      ],
+      "notes": "人数だけ Two, please. でも通じる。返答の例: Do you have a reservation?（ご予約はありますか）/ It's about a 20-minute wait.（20分ほどお待ちいただきます）",
+      "tags": [
+        "ステップ2",
+        "レストラン"
+      ]
+    },
+    {
+      "id": "tp-i-have-a-reservation-at-seven",
+      "type": "phrase",
+      "phrase": "I have a reservation at seven.",
+      "meaning": "7時に予約しています。",
+      "situation": "予約したレストランに着いたとき",
+      "examples": [
+        {
+          "text": "Hi, I have a reservation at seven under Tanaka.",
+          "translation": "こんにちは、田中の名前で7時に予約しています。"
+        }
+      ],
+      "notes": "予約を取るときは I'd like to make a reservation for four people at seven tonight.（今夜7時に4名で予約したい）。イギリスでは booking も使う。",
+      "tags": [
+        "ステップ2",
+        "レストラン"
+      ]
+    },
+    {
+      "id": "tp-could-i-see-the-menu",
+      "type": "phrase",
+      "phrase": "Could I see the menu, please?",
+      "meaning": "メニューを見せてもらえますか。",
+      "situation": "メニューを頼むとき",
+      "examples": [
+        {
+          "text": "Could I see the menu, please? Do you have one in Japanese?",
+          "translation": "メニューを見せてもらえますか。日本語のものはありますか。"
+        }
+      ],
+      "notes": "Can I have a menu? も可。飲み物のメニューは drink menu、ワインリストは wine list。",
+      "tags": [
+        "ステップ2",
+        "レストラン"
+      ]
+    },
+    {
+      "id": "tp-what-do-you-recommend",
+      "type": "phrase",
+      "phrase": "What do you recommend?",
+      "meaning": "おすすめは何ですか。",
+      "situation": "料理選びに迷ったとき",
+      "examples": [
+        {
+          "text": "It all looks good. What do you recommend?",
+          "translation": "どれもおいしそうですね。おすすめは何ですか。"
+        }
+      ],
+      "notes": "What's popular here?（ここでは何が人気ですか）も便利。返答の例: The fish is very popular.（魚料理がとても人気です）",
+      "tags": [
+        "ステップ2",
+        "レストラン"
+      ]
+    },
+    {
+      "id": "tp-ill-have-the-steak",
+      "type": "phrase",
+      "phrase": "I'll have the steak, please.",
+      "meaning": "ステーキをお願いします。",
+      "situation": "料理を注文するとき",
+      "examples": [
+        {
+          "text": "I'll have the steak and a green salad, please.",
+          "translation": "ステーキとグリーンサラダをお願いします。"
+        },
+        {
+          "text": "I'll have the same.",
+          "translation": "私も同じものを。"
+        }
+      ],
+      "notes": "I'll have ~ が注文の基本。メニューを指さして I'll have this one, please. でもよい。I want ~ は子どもっぽく、ややぶっきらぼうに響く。",
+      "tags": [
+        "ステップ2",
+        "レストラン"
+      ]
+    },
+    {
+      "id": "tp-medium-rare-please",
+      "type": "phrase",
+      "phrase": "Medium rare, please.",
+      "meaning": "ミディアムレアでお願いします。",
+      "situation": "ステーキの焼き加減を聞かれたとき",
+      "examples": [
+        {
+          "text": "A: How would you like your steak? B: Medium rare, please.",
+          "translation": "A: ステーキの焼き加減はどうしますか。B: ミディアムレアでお願いします。"
+        }
+      ],
+      "notes": "焼き加減は rare → medium rare → medium → medium well → well-done の順に火が通る。卵の調理法を聞かれることもある（How would you like your eggs? → Scrambled, please.）。",
+      "tags": [
+        "ステップ2",
+        "レストラン"
+      ]
+    },
+    {
+      "id": "tp-im-allergic-to",
+      "type": "phrase",
+      "phrase": "I'm allergic to nuts.",
+      "meaning": "ナッツのアレルギーがあります。",
+      "situation": "注文時に食物アレルギーを伝えるとき",
+      "examples": [
+        {
+          "text": "I'm allergic to nuts. Does this dish contain any?",
+          "translation": "ナッツのアレルギーがあります。この料理には入っていますか。"
+        }
+      ],
+      "notes": "allergic は /əˈlɜːrdʒɪk/（アラージック）と発音し、名詞は allergy /ˈælərdʒi/。重いアレルギーなら It's serious.（重症です）と強調する。菜食なら I'm vegetarian.",
+      "tags": [
+        "ステップ2",
+        "レストラン"
+      ]
+    },
+    {
+      "id": "tp-could-i-have-it-without",
+      "type": "phrase",
+      "phrase": "Could I have it without onions?",
+      "meaning": "玉ねぎ抜きにしてもらえますか。",
+      "situation": "苦手な食材を抜いてもらうとき",
+      "examples": [
+        {
+          "text": "Could I have the burger without onions?",
+          "translation": "ハンバーガーを玉ねぎ抜きにしてもらえますか。"
+        }
+      ],
+      "notes": "without ~ で「〜抜きで」。ソースを別にしてほしいときは Could I have the dressing on the side?（ドレッシングは別添えで）。",
+      "tags": [
+        "ステップ2",
+        "レストラン"
+      ]
+    },
+    {
+      "id": "tp-to-go-please",
+      "type": "phrase",
+      "phrase": "To go, please.",
+      "meaning": "持ち帰りでお願いします。",
+      "situation": "ファストフード店やカフェで聞かれたとき",
+      "examples": [
+        {
+          "text": "A: For here or to go? B: To go, please.",
+          "translation": "A: こちらでお召し上がりですか、お持ち帰りですか。B: 持ち帰りでお願いします。"
+        }
+      ],
+      "notes": "アメリカ英語の言い方。イギリスでは Eat in or take away? → Take away, please. 店内で食べるなら For here, please.",
+      "tags": [
+        "ステップ2",
+        "レストラン"
+      ]
+    },
+    {
+      "id": "tp-could-we-get-the-check",
+      "type": "phrase",
+      "phrase": "Could we get the check, please?",
+      "meaning": "お会計をお願いします。",
+      "situation": "食事が終わって会計を頼むとき",
+      "examples": [
+        {
+          "text": "Excuse me, could we get the check, please?",
+          "translation": "すみません、お会計をお願いします。"
+        }
+      ],
+      "notes": "アメリカ英語は check、イギリス英語は bill。多くの国のレストランではレジに行かず、席で会計するのが一般的。",
+      "tags": [
+        "ステップ2",
+        "レストラン"
+      ]
+    },
+    {
+      "id": "tp-can-we-pay-separately",
+      "type": "phrase",
+      "phrase": "Can we pay separately?",
+      "meaning": "別々に支払えますか。",
+      "situation": "グループで会計を分けたいとき",
+      "examples": [
+        {
+          "text": "Can we pay separately? I had the pasta.",
+          "translation": "別々に払えますか。私はパスタを頼みました。"
+        }
+      ],
+      "notes": "Could we have separate checks?（伝票を別々にできますか）も同じ。割り勘は split the bill。Let's split it.（割り勘にしよう）",
+      "tags": [
+        "ステップ2",
+        "レストラン"
+      ]
+    },
+    {
+      "id": "tp-is-the-tip-included",
+      "type": "phrase",
+      "phrase": "Is the tip included?",
+      "meaning": "チップは含まれていますか。",
+      "situation": "会計時にサービス料・チップを確かめるとき",
+      "examples": [
+        {
+          "text": "Is the tip included in the bill?",
+          "translation": "チップはお会計に含まれていますか。"
+        }
+      ],
+      "notes": "service charge（サービス料）がすでに加算されている店もあるので、明細を確認する。アメリカのレストランでは料金の 15〜20％程度のチップが一般的とされる（2026 年時点の目安。国や店によって異なる）。",
+      "tags": [
+        "ステップ2",
+        "レストラン"
+      ]
+    },
+    {
+      "id": "tp-this-isnt-what-i-ordered",
+      "type": "phrase",
+      "phrase": "This isn't what I ordered.",
+      "meaning": "これは注文したものと違います。",
+      "situation": "違う料理が来たとき",
+      "examples": [
+        {
+          "text": "Excuse me, this isn't what I ordered. I ordered the chicken salad.",
+          "translation": "すみません、これは注文したものと違います。チキンサラダを頼みました。"
+        }
+      ],
+      "notes": "Excuse me で始め、何を頼んだかを具体的に言うと穏やかに伝わる。I think there's a mistake with my order. も同じ場面で使える。",
+      "tags": [
+        "ステップ2",
+        "レストラン"
+      ]
+    },
+    {
+      "id": "tp-could-i-get-a-box",
+      "type": "phrase",
+      "phrase": "Could I get a box for this?",
+      "meaning": "これを持ち帰る容器をもらえますか。",
+      "situation": "食べ残した料理を持ち帰りたいとき",
+      "examples": [
+        {
+          "text": "I can't finish this. Could I get a box for this?",
+          "translation": "食べきれないので、持ち帰り用の容器をもらえますか。"
+        }
+      ],
+      "notes": "量の多いアメリカなどでは食べ残しの持ち帰りはふつうのこと。Could I get a to-go box? / Could you wrap this up? も同じ意味。",
+      "tags": [
+        "ステップ2",
+        "レストラン"
+      ]
+    },
+    {
+      "id": "tp-im-just-looking",
+      "type": "phrase",
+      "phrase": "I'm just looking, thanks.",
+      "meaning": "見ているだけです。",
+      "situation": "店員に声をかけられたが、まだ買うものが決まっていないとき",
+      "examples": [
+        {
+          "text": "A: Can I help you? B: I'm just looking, thanks.",
+          "translation": "A: 何かお探しですか。B: 見ているだけです、ありがとう。"
+        }
+      ],
+      "notes": "thanks を付けると感じがよい。後で手伝ってほしいときは I'll let you know if I need help.（必要なら声をかけます）。",
+      "tags": [
+        "ステップ2",
+        "買い物"
+      ]
+    },
+    {
+      "id": "tp-how-much-is-this",
+      "type": "phrase",
+      "phrase": "How much is this?",
+      "meaning": "これはいくらですか。",
+      "situation": "値段を聞くとき",
+      "examples": [
+        {
+          "text": "Excuse me, how much is this bag?",
+          "translation": "すみません、このかばんはいくらですか。"
+        }
+      ],
+      "notes": "複数のものなら How much are these? 返答の例: It's 45 dollars.（45ドルです）。値札（price tag）がないときに使う。",
+      "tags": [
+        "ステップ2",
+        "買い物"
+      ]
+    },
+    {
+      "id": "tp-can-i-try-this-on",
+      "type": "phrase",
+      "phrase": "Can I try this on?",
+      "meaning": "これを試着してもいいですか。",
+      "situation": "服や靴を試したいとき",
+      "examples": [
+        {
+          "text": "Can I try this on? Where's the fitting room?",
+          "translation": "これを試着してもいいですか。試着室はどこですか。"
+        }
+      ],
+      "notes": "try ~ on で「〜を試着する」。代名詞は try it on の語順になる（try on it は誤り）。試着室は fitting room（米: dressing room）。",
+      "tags": [
+        "ステップ2",
+        "買い物"
+      ]
+    },
+    {
+      "id": "tp-do-you-have-this-in-a-smaller-size",
+      "type": "phrase",
+      "phrase": "Do you have this in a smaller size?",
+      "meaning": "これの小さいサイズはありますか。",
+      "situation": "サイズが合わないとき",
+      "examples": [
+        {
+          "text": "This is too big. Do you have this in a smaller size?",
+          "translation": "これは大きすぎます。小さいサイズはありますか。"
+        }
+      ],
+      "notes": "大きいサイズは a larger size / a bigger size、具体的なサイズは in a medium / in size 8。サイズ表記は国によって違うので試着が安心。",
+      "tags": [
+        "ステップ2",
+        "買い物"
+      ]
+    },
+    {
+      "id": "tp-do-you-have-this-in-another-color",
+      "type": "phrase",
+      "phrase": "Do you have this in another color?",
+      "meaning": "これの色違いはありますか。",
+      "situation": "ほかの色がほしいとき",
+      "examples": [
+        {
+          "text": "Do you have this in another color? Maybe in blue?",
+          "translation": "これの色違いはありますか。青とか。"
+        }
+      ],
+      "notes": "色を指定するなら Do you have this in black? イギリス英語のつづりは colour。",
+      "tags": [
+        "ステップ2",
+        "買い物"
+      ]
+    },
+    {
+      "id": "tp-do-you-have-anything-cheaper",
+      "type": "phrase",
+      "phrase": "Do you have anything cheaper?",
+      "meaning": "もっと安いものはありますか。",
+      "situation": "予算に合わないとき",
+      "examples": [
+        {
+          "text": "That's a little over my budget. Do you have anything cheaper?",
+          "translation": "少し予算オーバーです。もっと安いものはありますか。"
+        }
+      ],
+      "notes": "over my budget は「予算オーバー」。less expensive を使うと少し上品（Do you have anything less expensive?）。",
+      "tags": [
+        "ステップ2",
+        "買い物"
+      ]
+    },
+    {
+      "id": "tp-ill-take-it",
+      "type": "phrase",
+      "phrase": "I'll take it.",
+      "meaning": "これにします（買います）。",
+      "situation": "買うものを決めたとき",
+      "examples": [
+        {
+          "text": "This fits perfectly. I'll take it.",
+          "translation": "ぴったりです。これにします。"
+        }
+      ],
+      "notes": "複数なら I'll take them. / I'll take two. 迷っているときは I'll think about it.（少し考えます）と言えば店を出やすい。",
+      "tags": [
+        "ステップ2",
+        "買い物"
+      ]
+    },
+    {
+      "id": "tp-can-i-pay-by-card",
+      "type": "phrase",
+      "phrase": "Can I pay by card?",
+      "meaning": "カードで払えますか。",
+      "situation": "支払い方法を確かめるとき",
+      "examples": [
+        {
+          "text": "Can I pay by card? I don't have enough cash.",
+          "translation": "カードで払えますか。現金が足りないんです。"
+        }
+      ],
+      "notes": "by card / in cash（現金で）の前置詞に注意。返答の例: Sure. Tap or insert your card.（タッチかカードを差し込んでください）。暗証番号を求められたら Enter your PIN.",
+      "tags": [
+        "ステップ2",
+        "買い物"
+      ]
+    },
+    {
+      "id": "tp-i-dont-need-a-bag",
+      "type": "phrase",
+      "phrase": "I don't need a bag, thanks.",
+      "meaning": "袋はいりません。",
+      "situation": "レジで袋が必要か聞かれたとき",
+      "examples": [
+        {
+          "text": "A: Do you need a bag? B: No, I don't need a bag, thanks.",
+          "translation": "A: 袋はご入用ですか。B: いいえ、袋はいりません。"
+        }
+      ],
+      "notes": "No, I'm fine, thanks. も同じ意味。袋が有料の国・地域も多い。ほしいときは Could I have a bag, please?",
+      "tags": [
+        "ステップ2",
+        "買い物"
+      ]
+    },
+    {
+      "id": "tp-could-you-gift-wrap-it",
+      "type": "phrase",
+      "phrase": "Could you gift-wrap it?",
+      "meaning": "プレゼント用に包んでもらえますか。",
+      "situation": "贈り物を買うとき",
+      "examples": [
+        {
+          "text": "It's a present for my sister. Could you gift-wrap it?",
+          "translation": "姉へのプレゼントなんです。ギフト用に包んでもらえますか。"
+        }
+      ],
+      "notes": "gift-wrap は「贈答用に包む」。無料とは限らないので Is there a charge for gift-wrapping?（包装は有料ですか）と確認するとよい。",
+      "tags": [
+        "ステップ2",
+        "買い物"
+      ]
+    },
+    {
+      "id": "tp-could-you-give-me-a-discount",
+      "type": "phrase",
+      "phrase": "Could you give me a discount?",
+      "meaning": "少し安くしてもらえますか。",
+      "situation": "市場など値段交渉ができる店で",
+      "examples": [
+        {
+          "text": "I'll take three. Could you give me a discount?",
+          "translation": "3つ買うので、少し安くしてもらえますか。"
+        }
+      ],
+      "notes": "値切るのが一般的な市場と、定価販売で値引きしない店がある。くだけた言い方は Can you do it for 20?（20で売ってくれない？）。",
+      "tags": [
+        "ステップ2",
+        "買い物"
+      ]
+    },
+    {
+      "id": "tp-id-like-to-return-this",
+      "type": "phrase",
+      "phrase": "I'd like to return this.",
+      "meaning": "これを返品したいのですが。",
+      "situation": "買ったものを返品・交換したいとき",
+      "examples": [
+        {
+          "text": "I'd like to return this. It's the wrong size. Here's the receipt.",
+          "translation": "これを返品したいのですが。サイズが違いました。レシートはこちらです。"
+        }
+      ],
+      "notes": "交換なら Can I exchange this for a different size?、返金なら Can I get a refund? レシートがないと返品できないことが多い。",
+      "tags": [
+        "ステップ2",
+        "買い物"
+      ]
+    },
+    {
+      "id": "tp-where-is-the-nearest-station",
+      "type": "phrase",
+      "phrase": "Excuse me, where is the nearest station?",
+      "meaning": "すみません、いちばん近い駅はどこですか。",
+      "situation": "道で人に場所を聞くとき",
+      "examples": [
+        {
+          "text": "Excuse me, where is the nearest subway station?",
+          "translation": "すみません、いちばん近い地下鉄の駅はどこですか。"
+        }
+      ],
+      "notes": "最初に Excuse me と声をかけるのがマナー。Is there a convenience store near here?（この近くにコンビニはありますか）と「あるかどうか」を聞く形も便利。",
+      "tags": [
+        "ステップ2",
+        "道案内"
+      ]
+    },
+    {
+      "id": "tp-could-you-tell-me-the-way-to",
+      "type": "phrase",
+      "phrase": "Could you tell me the way to the museum?",
+      "meaning": "博物館への行き方を教えていただけますか。",
+      "situation": "道を丁寧に尋ねるとき",
+      "examples": [
+        {
+          "text": "Excuse me, could you tell me the way to the City Museum?",
+          "translation": "すみません、市立博物館への行き方を教えていただけますか。"
+        }
+      ],
+      "notes": "How do I get to ~? より丁寧。the way to ~ で「〜への道」。teach は使わない（Could you teach me the way? は不自然）。",
+      "tags": [
+        "ステップ2",
+        "道案内"
+      ]
+    },
+    {
+      "id": "tp-is-it-within-walking-distance",
+      "type": "phrase",
+      "phrase": "Is it within walking distance?",
+      "meaning": "歩いて行ける距離ですか。",
+      "situation": "目的地までの距離感を知りたいとき",
+      "examples": [
+        {
+          "text": "Is the castle within walking distance from here?",
+          "translation": "城はここから歩いて行ける距離ですか。"
+        }
+      ],
+      "notes": "返答の例: Yes, it's about a ten-minute walk.（歩いて10分くらいです）/ No, you should take a bus.（バスに乗ったほうがいいです）",
+      "tags": [
+        "ステップ2",
+        "道案内"
+      ]
+    },
+    {
+      "id": "tp-how-long-does-it-take-to-get-there",
+      "type": "phrase",
+      "phrase": "How long does it take to get there?",
+      "meaning": "そこまでどのくらいかかりますか。",
+      "situation": "所要時間を聞くとき",
+      "examples": [
+        {
+          "text": "How long does it take to get there on foot?",
+          "translation": "そこまで歩いてどのくらいかかりますか。"
+        }
+      ],
+      "notes": "on foot（徒歩で）/ by bus（バスで）/ by taxi（タクシーで）を付けて手段を指定できる。get there は「そこに着く」で、there の前に to は付けない。",
+      "tags": [
+        "ステップ2",
+        "道案内"
+      ]
+    },
+    {
+      "id": "tp-could-you-show-me-on-the-map",
+      "type": "phrase",
+      "phrase": "Could you show me on the map?",
+      "meaning": "地図で教えてもらえますか。",
+      "situation": "口頭の説明だけではわかりにくいとき",
+      "examples": [
+        {
+          "text": "Sorry, I'm not sure where that is. Could you show me on the map?",
+          "translation": "すみません、場所がよくわかりません。地図で教えてもらえますか。"
+        }
+      ],
+      "notes": "スマートフォンの地図を見せながら Where are we now?（今どこにいますか）と聞くのも有効。",
+      "tags": [
+        "ステップ2",
+        "道案内"
+      ]
+    },
+    {
+      "id": "tp-i-think-im-lost",
+      "type": "phrase",
+      "phrase": "I think I'm lost.",
+      "meaning": "道に迷ったみたいです。",
+      "situation": "道がわからなくなったとき",
+      "examples": [
+        {
+          "text": "Excuse me, I think I'm lost. I'm looking for the City Museum.",
+          "translation": "すみません、道に迷ったみたいです。市立博物館を探しています。"
+        }
+      ],
+      "notes": "lost は「道に迷った」。I'm looking for ~（〜を探しています）を続けると相手が助けやすい。",
+      "tags": [
+        "ステップ2",
+        "道案内"
+      ]
+    },
+    {
+      "id": "tp-go-straight-and-turn-left",
+      "type": "phrase",
+      "phrase": "Go straight and turn left at the second corner.",
+      "meaning": "まっすぐ行って、2つ目の角を左に曲がってください。",
+      "situation": "道案内を聞き取るとき（言われる側）",
+      "examples": [
+        {
+          "text": "Go straight and turn left at the second corner. You'll see it on your right.",
+          "translation": "まっすぐ行って2つ目の角を左に曲がってください。右側に見えます。"
+        }
+      ],
+      "notes": "turn left / right at ~（〜で左／右に曲がる）、at the traffic lights（信号で）、go past ~（〜を通り過ぎる）が道案内の基本語。聞き取れなければ Could you say that again more slowly?",
+      "tags": [
+        "ステップ2",
+        "道案内"
+      ]
+    },
+    {
+      "id": "tp-its-on-your-right",
+      "type": "phrase",
+      "phrase": "It's on your right.",
+      "meaning": "右手にあります。",
+      "situation": "目的地の位置を伝える・聞き取るとき",
+      "examples": [
+        {
+          "text": "Walk two blocks, and the bank is on your right.",
+          "translation": "2ブロック歩くと、銀行は右手にあります。"
+        }
+      ],
+      "notes": "on your left は「左手に」。on the corner（角に）、at the end of the street（通りの突き当たりに）もよく使う。",
+      "tags": [
+        "ステップ2",
+        "道案内"
+      ]
+    },
+    {
+      "id": "tp-its-across-from",
+      "type": "phrase",
+      "phrase": "It's across from the bank.",
+      "meaning": "銀行の向かいにあります。",
+      "situation": "建物の位置関係を説明する・聞き取るとき",
+      "examples": [
+        {
+          "text": "The post office is across from the bank, next to the café.",
+          "translation": "郵便局は銀行の向かい、カフェの隣にあります。"
+        }
+      ],
+      "notes": "across from（向かいに。英: opposite）、next to（隣に）、between A and B（AとBの間に）、behind（後ろに）をセットで覚える。",
+      "tags": [
+        "ステップ2",
+        "道案内"
+      ]
+    },
+    {
+      "id": "tp-sorry-im-not-from-around-here",
+      "type": "phrase",
+      "phrase": "Sorry, I'm not from around here.",
+      "meaning": "すみません、このあたりの者ではないんです。",
+      "situation": "旅行中に逆に道を聞かれて答えられないとき",
+      "examples": [
+        {
+          "text": "A: Excuse me, where's Oak Street? B: Sorry, I'm not from around here.",
+          "translation": "A: すみません、オーク通りはどこですか。B: すみません、このあたりの者ではないんです。"
+        }
+      ],
+      "notes": "I'm a tourist myself.（私も観光客なんです）も同じ場面で使える。わかる範囲で I think it's that way.（あっちだと思います）と添えると親切。",
+      "tags": [
+        "ステップ2",
+        "道案内"
+      ]
+    },
+    {
+      "id": "tp-call-an-ambulance",
+      "type": "phrase",
+      "phrase": "Call an ambulance!",
+      "meaning": "救急車を呼んで！",
+      "situation": "急病人やけが人がいる緊急時",
+      "examples": [
+        {
+          "text": "Someone fainted! Call an ambulance!",
+          "translation": "人が倒れました！救急車を呼んでください！"
+        },
+        {
+          "text": "Please call the police!",
+          "translation": "警察を呼んでください！"
+        }
+      ],
+      "notes": "緊急番号は国によって違う（アメリカ・カナダは 911、イギリスは 999、EU 諸国の多くは 112 など）。渡航前に確認しておく。ambulance は /ˈæmbjələns/。",
+      "tags": [
+        "ステップ3",
+        "トラブル・病院・緊急"
+      ]
+    },
+    {
+      "id": "tp-i-lost-my-passport",
+      "type": "phrase",
+      "phrase": "I lost my passport.",
+      "meaning": "パスポートをなくしました。",
+      "situation": "パスポートを紛失したとき",
+      "examples": [
+        {
+          "text": "I lost my passport. I think I left it in a taxi.",
+          "translation": "パスポートをなくしました。タクシーに置き忘れたと思います。"
+        }
+      ],
+      "notes": "まず警察で紛失の届出をして証明書（police report）をもらい、日本大使館・総領事館で再発行や帰国のための渡航書を申請する。I can't find my ~（〜が見つからない）も使える。",
+      "tags": [
+        "ステップ3",
+        "トラブル・病院・緊急"
+      ]
+    },
+    {
+      "id": "tp-my-wallet-was-stolen",
+      "type": "phrase",
+      "phrase": "My wallet was stolen.",
+      "meaning": "財布を盗まれました。",
+      "situation": "盗難にあったとき",
+      "examples": [
+        {
+          "text": "My wallet was stolen on the train. I'd like to report it.",
+          "translation": "電車で財布を盗まれました。届け出たいのですが。"
+        }
+      ],
+      "notes": "物が主語なら was stolen（盗まれた）。人が主語なら I was robbed.（強盗にあった）。Someone stole my wallet. も同じ意味。",
+      "tags": [
+        "ステップ3",
+        "トラブル・病院・緊急"
+      ]
+    },
+    {
+      "id": "tp-where-is-the-police-station",
+      "type": "phrase",
+      "phrase": "Where is the nearest police station?",
+      "meaning": "いちばん近い警察署はどこですか。",
+      "situation": "盗難・紛失の届け出をしたいとき",
+      "examples": [
+        {
+          "text": "Where is the nearest police station? I need a police report for my insurance.",
+          "translation": "いちばん近い警察署はどこですか。保険のために盗難証明が必要なんです。"
+        }
+      ],
+      "notes": "保険の請求には警察の証明書（police report）が必要になることが多い。届け出るときは I'd like to report a theft.（盗難を届け出たい）。",
+      "tags": [
+        "ステップ3",
+        "トラブル・病院・緊急"
+      ]
+    },
+    {
+      "id": "tp-i-need-to-see-a-doctor",
+      "type": "phrase",
+      "phrase": "I need to see a doctor.",
+      "meaning": "医者に診てもらいたいです。",
+      "situation": "体調が悪く病院に行きたいとき",
+      "examples": [
+        {
+          "text": "I'm not feeling well. I need to see a doctor.",
+          "translation": "体調がよくありません。医者に診てもらいたいです。"
+        }
+      ],
+      "notes": "see a doctor で「医者に診てもらう」。ホテルなら Could you recommend a clinic nearby?（近くのクリニックを教えてください）と聞ける。",
+      "tags": [
+        "ステップ3",
+        "トラブル・病院・緊急"
+      ]
+    },
+    {
+      "id": "tp-i-have-a-fever",
+      "type": "phrase",
+      "phrase": "I have a fever.",
+      "meaning": "熱があります。",
+      "situation": "症状を伝えるとき",
+      "examples": [
+        {
+          "text": "I have a fever and a sore throat.",
+          "translation": "熱があって、のどが痛いです。"
+        }
+      ],
+      "notes": "I have a ~ で症状を言える: a headache（頭痛）、a stomachache（腹痛）、a cough（せき）、a cold（風邪）。アメリカでは体温を華氏（°F）で言うことが多い。",
+      "tags": [
+        "ステップ3",
+        "トラブル・病院・緊急"
+      ]
+    },
+    {
+      "id": "tp-it-hurts-here",
+      "type": "phrase",
+      "phrase": "It hurts here.",
+      "meaning": "ここが痛いです。",
+      "situation": "痛む場所を指して伝えるとき",
+      "examples": [
+        {
+          "text": "A: Where does it hurt? B: It hurts here, on my right side.",
+          "translation": "A: どこが痛みますか。B: ここ、右側が痛いです。"
+        }
+      ],
+      "notes": "痛む場所を指さしながら言えば単語がわからなくても伝わる。My ankle hurts.（足首が痛い）と体の部位を主語にもできる。痛みの程度は a sharp pain（鋭い痛み）/ a dull pain（鈍い痛み）。",
+      "tags": [
+        "ステップ3",
+        "トラブル・病院・緊急"
+      ]
+    },
+    {
+      "id": "tp-i-feel-sick",
+      "type": "phrase",
+      "phrase": "I feel sick.",
+      "meaning": "気分が悪いです（吐き気がします）。",
+      "situation": "体調不良を伝えるとき",
+      "examples": [
+        {
+          "text": "I feel sick. I think it was something I ate.",
+          "translation": "気分が悪いです。何か食べたものにあたったようです。"
+        }
+      ],
+      "notes": "feel sick は特に「吐き気がする」の意味でよく使う（イギリス英語では特に）。全身の不調は I don't feel well.、めまいは I feel dizzy.",
+      "tags": [
+        "ステップ3",
+        "トラブル・病院・緊急"
+      ]
+    },
+    {
+      "id": "tp-is-there-a-pharmacy-near-here",
+      "type": "phrase",
+      "phrase": "Is there a pharmacy near here?",
+      "meaning": "この近くに薬局はありますか。",
+      "situation": "薬を買いたいとき",
+      "examples": [
+        {
+          "text": "Is there a pharmacy near here? I need something for a headache.",
+          "translation": "この近くに薬局はありますか。頭痛の薬がほしいんです。"
+        }
+      ],
+      "notes": "薬局は pharmacy（米: drugstore、英: chemist's）。something for ~ で「〜に効く薬」と言える。",
+      "tags": [
+        "ステップ3",
+        "トラブル・病院・緊急"
+      ]
+    },
+    {
+      "id": "tp-do-i-need-a-prescription",
+      "type": "phrase",
+      "phrase": "Do I need a prescription for this?",
+      "meaning": "これは処方箋が必要ですか。",
+      "situation": "薬局で薬を買うとき",
+      "examples": [
+        {
+          "text": "Do I need a prescription for this medicine?",
+          "translation": "この薬は処方箋が必要ですか。"
+        }
+      ],
+      "notes": "prescription は「処方箋」。処方箋なしで買える薬は over-the-counter medicine。How often should I take it?（どのくらいの頻度で飲みますか）も確認したい。",
+      "tags": [
+        "ステップ3",
+        "トラブル・病院・緊急"
+      ]
+    },
+    {
+      "id": "tp-i-have-travel-insurance",
+      "type": "phrase",
+      "phrase": "I have travel insurance.",
+      "meaning": "海外旅行保険に入っています。",
+      "situation": "病院の受付で支払いについて話すとき",
+      "examples": [
+        {
+          "text": "I have travel insurance. Here's my insurance card.",
+          "translation": "海外旅行保険に入っています。こちらが保険証です。"
+        }
+      ],
+      "notes": "国によっては医療費が非常に高額になるため、保険の加入は重要。保険会社に出す書類が必要なら Could you fill out this form for my insurance?（保険用にこの書類を書いていただけますか）。",
+      "tags": [
+        "ステップ3",
+        "トラブル・病院・緊急"
+      ]
+    },
+    {
+      "id": "tp-is-there-anyone-who-speaks-japanese",
+      "type": "phrase",
+      "phrase": "Is there anyone who speaks Japanese?",
+      "meaning": "日本語を話せる人はいますか。",
+      "situation": "大事な話を正確に伝えたいとき",
+      "examples": [
+        {
+          "text": "I don't understand. Is there anyone who speaks Japanese?",
+          "translation": "よくわかりません。日本語を話せる人はいますか。"
+        }
+      ],
+      "notes": "病院や警察では、わからないまま話を進めない。Could you speak more slowly? / Could you write it down?（書いてもらえますか）も役立つ。",
+      "tags": [
+        "ステップ3",
+        "トラブル・病院・緊急"
+      ]
+    },
+    {
+      "id": "tp-where-is-the-japanese-embassy",
+      "type": "phrase",
+      "phrase": "Where is the Japanese embassy?",
+      "meaning": "日本大使館はどこですか。",
+      "situation": "パスポートの紛失など大使館の手続きが必要なとき",
+      "examples": [
+        {
+          "text": "I lost my passport. Where is the Japanese embassy?",
+          "translation": "パスポートをなくしました。日本大使館はどこですか。"
+        }
+      ],
+      "notes": "embassy は「大使館」、consulate は「領事館」（Consulate-General ＝総領事館）。首都以外の都市では総領事館が窓口になることも多い。",
+      "tags": [
+        "ステップ3",
+        "トラブル・病院・緊急"
+      ]
+    },
+    {
+      "id": "tp-id-like-to-open-a-bank-account",
+      "type": "phrase",
+      "phrase": "I'd like to open a bank account.",
+      "meaning": "銀行口座を開きたいです。",
+      "situation": "留学・赴任先の銀行で",
+      "examples": [
+        {
+          "text": "Hi, I'd like to open a bank account. I just moved here.",
+          "translation": "こんにちは、銀行口座を開きたいです。こちらに引っ越してきたばかりなんです。"
+        }
+      ],
+      "notes": "返答の例: Do you have an appointment?（予約はありますか）。口座の種類は checking account（米: 普通・決済用。英: current account）と savings account（貯蓄口座）。",
+      "tags": [
+        "ステップ3",
+        "海外生活"
+      ]
+    },
+    {
+      "id": "tp-what-documents-do-i-need",
+      "type": "phrase",
+      "phrase": "What documents do I need?",
+      "meaning": "どんな書類が必要ですか。",
+      "situation": "手続きに必要な書類を確かめるとき",
+      "examples": [
+        {
+          "text": "What documents do I need to open an account?",
+          "translation": "口座を開くにはどんな書類が必要ですか。"
+        }
+      ],
+      "notes": "返答の例: Your passport and proof of address.（パスポートと住所を証明する書類です）。proof of address は公共料金の請求書や賃貸契約書など。",
+      "tags": [
+        "ステップ3",
+        "海外生活"
+      ]
+    },
+    {
+      "id": "tp-id-like-to-transfer-money",
+      "type": "phrase",
+      "phrase": "I'd like to transfer money to this account.",
+      "meaning": "この口座に送金したいです。",
+      "situation": "銀行で振り込み・送金をするとき",
+      "examples": [
+        {
+          "text": "I'd like to transfer 500 dollars to this account.",
+          "translation": "この口座に500ドル送金したいです。"
+        }
+      ],
+      "notes": "transfer は「送金する・振り込む」。海外送金は international transfer。手数料は Is there a fee?（手数料はかかりますか）で確認する。",
+      "tags": [
+        "ステップ3",
+        "海外生活"
+      ]
+    },
+    {
+      "id": "tp-id-like-to-get-a-sim-card",
+      "type": "phrase",
+      "phrase": "I'd like to get a prepaid SIM card.",
+      "meaning": "プリペイドの SIM カードがほしいです。",
+      "situation": "携帯電話ショップや空港で",
+      "examples": [
+        {
+          "text": "I'd like to get a prepaid SIM card for two weeks.",
+          "translation": "2週間使えるプリペイドの SIM カードがほしいです。"
+        }
+      ],
+      "notes": "契約プランは plan、プリペイドは prepaid、月額契約は monthly plan / contract。最近は eSIM も一般的（Does this phone support eSIM?）。",
+      "tags": [
+        "ステップ3",
+        "海外生活"
+      ]
+    },
+    {
+      "id": "tp-does-this-plan-include-unlimited-data",
+      "type": "phrase",
+      "phrase": "Does this plan include unlimited data?",
+      "meaning": "このプランはデータ無制限ですか。",
+      "situation": "携帯電話の料金プランを比べるとき",
+      "examples": [
+        {
+          "text": "Does this plan include unlimited data?",
+          "translation": "このプランはデータ通信が無制限ですか。"
+        }
+      ],
+      "notes": "data は「データ通信量」。How much data do I get?（データ量はどのくらいですか）、Can I make international calls?（国際電話はかけられますか）もあわせて確認したい。",
+      "tags": [
+        "ステップ3",
+        "海外生活"
+      ]
+    },
+    {
+      "id": "tp-im-looking-for-a-one-bedroom-apartment",
+      "type": "phrase",
+      "phrase": "I'm looking for a one-bedroom apartment.",
+      "meaning": "1ベッドルームのアパートを探しています。",
+      "situation": "不動産屋で部屋探しをするとき",
+      "examples": [
+        {
+          "text": "I'm looking for a one-bedroom apartment near the university.",
+          "translation": "大学の近くで1ベッドルームのアパートを探しています。"
+        }
+      ],
+      "notes": "one-bedroom は寝室1つ＋リビングの間取り。アメリカでは apartment、イギリスでは flat。予算は My budget is about ~ a month.（予算は月〜くらいです）。",
+      "tags": [
+        "ステップ3",
+        "海外生活"
+      ]
+    },
+    {
+      "id": "tp-are-utilities-included-in-the-rent",
+      "type": "phrase",
+      "phrase": "Are utilities included in the rent?",
+      "meaning": "家賃に光熱費は含まれていますか。",
+      "situation": "賃貸物件の条件を確かめるとき",
+      "examples": [
+        {
+          "text": "Are utilities included in the rent, or do I pay them separately?",
+          "translation": "家賃に光熱費は含まれていますか、それとも別に払いますか。"
+        }
+      ],
+      "notes": "utilities は電気・ガス・水道などの公共料金。rent は「家賃」。インターネット代が含まれるかも別に聞いておくとよい。",
+      "tags": [
+        "ステップ3",
+        "海外生活"
+      ]
+    },
+    {
+      "id": "tp-how-much-is-the-deposit",
+      "type": "phrase",
+      "phrase": "How much is the deposit?",
+      "meaning": "保証金はいくらですか。",
+      "situation": "賃貸契約の初期費用を確かめるとき",
+      "examples": [
+        {
+          "text": "How much is the deposit, and when do I get it back?",
+          "translation": "保証金はいくらで、いつ返ってきますか。"
+        }
+      ],
+      "notes": "deposit は「敷金・保証金」で、退去時に部屋の状態に応じて返金されるのが一般的。契約書は lease（英: tenancy agreement）。",
+      "tags": [
+        "ステップ3",
+        "海外生活"
+      ]
+    },
+    {
+      "id": "tp-when-can-i-move-in",
+      "type": "phrase",
+      "phrase": "When can I move in?",
+      "meaning": "いつから入居できますか。",
+      "situation": "入居日を確かめるとき",
+      "examples": [
+        {
+          "text": "I like this place. When can I move in?",
+          "translation": "ここが気に入りました。いつから入居できますか。"
+        }
+      ],
+      "notes": "move in は「入居する」、move out は「退去する」。返答の例: It's available from the first of next month.（来月1日から入居可能です）",
+      "tags": [
+        "ステップ3",
+        "海外生活"
+      ]
+    },
+    {
+      "id": "tp-the-faucet-is-leaking",
+      "type": "phrase",
+      "phrase": "The faucet is leaking.",
+      "meaning": "蛇口から水が漏れています。",
+      "situation": "家の設備の故障を大家や管理会社に伝えるとき",
+      "examples": [
+        {
+          "text": "Hi, this is Ken in Apartment 3B. The kitchen faucet is leaking.",
+          "translation": "3B号室のケンです。台所の蛇口から水が漏れています。"
+        }
+      ],
+      "notes": "faucet はアメリカ英語で、イギリス英語では tap。leak は「漏れる」。Could you send someone to fix it?（修理の人を送ってもらえますか）と続ける。",
+      "tags": [
+        "ステップ3",
+        "海外生活"
+      ]
+    },
+    {
+      "id": "tp-i-just-moved-in-next-door",
+      "type": "phrase",
+      "phrase": "Hi, I just moved in next door.",
+      "meaning": "隣に引っ越してきた者です。",
+      "situation": "近所の人にあいさつするとき",
+      "examples": [
+        {
+          "text": "Hi, I just moved in next door. I'm Yuki.",
+          "translation": "こんにちは、隣に引っ越してきたユキです。"
+        }
+      ],
+      "notes": "返答の例: Welcome to the neighborhood!（ようこそ）。困ったときに聞ける関係を作っておくと心強い。neighborhood はイギリス英語では neighbourhood。",
+      "tags": [
+        "ステップ3",
+        "海外生活"
+      ]
+    },
+    {
+      "id": "tp-id-like-to-make-an-appointment",
+      "type": "phrase",
+      "phrase": "I'd like to make an appointment.",
+      "meaning": "予約を取りたいのですが。",
+      "situation": "病院・美容院・役所・銀行などで予約するとき",
+      "examples": [
+        {
+          "text": "I'd like to make an appointment with Dr. Lee. Is Thursday afternoon available?",
+          "translation": "リー先生の予約を取りたいのですが。木曜の午後は空いていますか。"
+        }
+      ],
+      "notes": "人に会う・サービスを受ける予約は appointment、ホテル・レストラン・座席の予約は reservation と使い分ける。変更は I need to reschedule my appointment.",
+      "tags": [
+        "ステップ3",
+        "海外生活"
+      ]
+    }
+  ]
+}

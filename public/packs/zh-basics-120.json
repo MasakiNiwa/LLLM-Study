@@ -1,0 +1,2395 @@
+{
+  "format": "lllm-study-pack",
+  "version": 1,
+  "id": "zh-basics-120",
+  "title": "中国語入門 120（あいさつ・基本単語・基本文型）",
+  "description": "中国語（普通話・簡体字）をゼロから始める人のための入門教材です。すべての語句にピンイン（声調記号つき）を付け、HSK 1〜2 級レベルの語彙を中心に収録しています。ステップ1 は「あいさつ・数字・代名詞・自己紹介」、ステップ2 は「基本単語（人・時・動詞・形容詞・身近な名詞）と基本文型（是・吗・不・的・很・在・两）」、ステップ3 は「買い物と数字・時刻の言い方、量詞（个・本・张）と 了・没、日本語と意味が違う漢字語（手纸・汽车・走・丈夫など）」の順に、会話で使える形で身につけられます。形式の内訳: フレーズ 40・単語 65・穴埋め 9・選択問題 6。声調変化（不・一 の変調、第3声の連続）も解説で確認できます。次は HSK 2〜3 級レベルの語彙や、補語・比較文など一歩進んだ文型の教材に進むのがおすすめです。",
+  "subject": "chinese",
+  "language": {
+    "target": "zh-CN",
+    "explanation": "ja"
+  },
+  "level": "入門（HSK 1〜2 級）",
+  "tags": [
+    "中国語",
+    "HSK",
+    "入門",
+    "ピンイン",
+    "あいさつ",
+    "基本文型"
+  ],
+  "author": "LLLM-Study",
+  "license": "MIT",
+  "source": "LLLM-Study オリジナル（AI を利用して作成）",
+  "revision": 1,
+  "items": [
+    {
+      "id": "zh-p-ni-hao",
+      "type": "phrase",
+      "tags": [
+        "ステップ1",
+        "あいさつ"
+      ],
+      "phrase": "你好！",
+      "meaning": "こんにちは",
+      "situation": "時間を問わない基本のあいさつ",
+      "examples": [
+        {
+          "text": "老师，你好！",
+          "translation": "先生、こんにちは！"
+        }
+      ],
+      "notes": "ピンイン: nǐ hǎo。第3声が2つ続くと前の字は第2声に変わり「ní hǎo」と発音する（表記は nǐ hǎo のまま）。朝・昼・夜いつでも使える。"
+    },
+    {
+      "id": "zh-p-nin-hao",
+      "type": "phrase",
+      "tags": [
+        "ステップ1",
+        "あいさつ"
+      ],
+      "phrase": "您好！",
+      "meaning": "こんにちは（丁寧）",
+      "situation": "目上の人・お客さま・初対面の人へのあいさつ",
+      "examples": [
+        {
+          "text": "王经理，您好！",
+          "translation": "王部長、こんにちは。"
+        }
+      ],
+      "notes": "ピンイン: nín hǎo。您 は 你 の敬称。電話の第一声やお店の接客でもよく使う。複数の相手には 大家好（dàjiā hǎo, 皆さんこんにちは）。"
+    },
+    {
+      "id": "zh-p-zaoshang-hao",
+      "type": "phrase",
+      "tags": [
+        "ステップ1",
+        "あいさつ"
+      ],
+      "phrase": "早上好！",
+      "meaning": "おはようございます",
+      "situation": "朝のあいさつ",
+      "examples": [
+        {
+          "text": "早上好！今天很冷。",
+          "translation": "おはよう！今日は寒いね。"
+        }
+      ],
+      "notes": "ピンイン: zǎoshang hǎo。親しい間柄では 早！（zǎo）だけでもよい。夜は 晚上好（wǎnshang hǎo）、寝る前は 晚安（wǎn'ān, おやすみ）。"
+    },
+    {
+      "id": "zh-p-xiexie",
+      "type": "phrase",
+      "tags": [
+        "ステップ1",
+        "あいさつ"
+      ],
+      "phrase": "谢谢。",
+      "meaning": "ありがとう",
+      "situation": "お礼を言うとき",
+      "examples": [
+        {
+          "text": "A: 给你。B: 谢谢！",
+          "translation": "A: どうぞ。B: ありがとう！"
+        }
+      ],
+      "notes": "ピンイン: xièxie。2 文字目は軽声で軽く短く。強めるときは 谢谢你（xièxie nǐ）・非常感谢（fēicháng gǎnxiè, 本当にありがとうございます）。"
+    },
+    {
+      "id": "zh-p-bu-keqi",
+      "type": "phrase",
+      "tags": [
+        "ステップ1",
+        "あいさつ"
+      ],
+      "phrase": "不客气。",
+      "meaning": "どういたしまして",
+      "situation": "お礼を言われたときの返事",
+      "examples": [
+        {
+          "text": "A: 谢谢！B: 不客气。",
+          "translation": "A: ありがとう！B: どういたしまして。"
+        }
+      ],
+      "notes": "ピンイン: bú kèqi。不 は第4声の前では第2声 bú に変わる。言い換えは 不用谢（búyòng xiè）・没事儿（méi shìr, 口語）。"
+    },
+    {
+      "id": "zh-p-duibuqi",
+      "type": "phrase",
+      "tags": [
+        "ステップ1",
+        "あいさつ"
+      ],
+      "phrase": "对不起。",
+      "meaning": "ごめんなさい／すみません",
+      "situation": "はっきり謝るとき",
+      "examples": [
+        {
+          "text": "对不起，我来晚了。",
+          "translation": "すみません、遅れました。"
+        }
+      ],
+      "notes": "ピンイン: duìbuqǐ。自分に非があるときの謝罪。人に声をかける「すみません」には 请问 や 不好意思 を使う。"
+    },
+    {
+      "id": "zh-p-mei-guanxi",
+      "type": "phrase",
+      "tags": [
+        "ステップ1",
+        "あいさつ"
+      ],
+      "phrase": "没关系。",
+      "meaning": "大丈夫です／気にしないで",
+      "situation": "謝られたときの返事",
+      "examples": [
+        {
+          "text": "A: 对不起！B: 没关系。",
+          "translation": "A: ごめんなさい！B: 大丈夫ですよ。"
+        }
+      ],
+      "notes": "ピンイン: méi guānxi。直訳は「関係ない」だが冷たい意味ではなく「気にしないで」。对不起 とセットで覚える。"
+    },
+    {
+      "id": "zh-p-bu-haoyisi",
+      "type": "phrase",
+      "tags": [
+        "ステップ1",
+        "あいさつ"
+      ],
+      "phrase": "不好意思。",
+      "meaning": "すみません（軽いおわび・恐縮）",
+      "situation": "軽く謝るとき・頼みごとの前置き",
+      "examples": [
+        {
+          "text": "不好意思，让你久等了。",
+          "translation": "すみません、お待たせしました。"
+        }
+      ],
+      "notes": "ピンイン: bù hǎoyìsi。对不起 より軽く、日本語の「すみません」に近い。人を呼び止める・席を通してもらうときにも使える。"
+    },
+    {
+      "id": "zh-p-zaijian",
+      "type": "phrase",
+      "tags": [
+        "ステップ1",
+        "あいさつ"
+      ],
+      "phrase": "再见！",
+      "meaning": "さようなら",
+      "situation": "別れるとき",
+      "examples": [
+        {
+          "text": "明天见！再见！",
+          "translation": "また明日！さようなら！"
+        }
+      ],
+      "notes": "ピンイン: zàijiàn。再（再び）+ 见（会う）で「また会いましょう」。くだけた場面では 拜拜（báibái／bàibài, バイバイ）もよく使う。"
+    },
+    {
+      "id": "zh-p-mingtian-jian",
+      "type": "phrase",
+      "tags": [
+        "ステップ1",
+        "あいさつ"
+      ],
+      "phrase": "明天见！",
+      "meaning": "また明日",
+      "situation": "翌日また会う相手との別れ際",
+      "examples": [
+        {
+          "text": "A: 我先走了。B: 好，明天见！",
+          "translation": "A: お先に失礼します。B: うん、また明日！"
+        }
+      ],
+      "notes": "ピンイン: míngtiān jiàn。「時を表す語 + 见」で「〜にまた会いましょう」。下周见（xià zhōu jiàn, また来週）・一会儿见（yíhuìr jiàn, また後で）。"
+    },
+    {
+      "id": "zh-p-haojiu-bu-jian",
+      "type": "phrase",
+      "tags": [
+        "ステップ1",
+        "あいさつ"
+      ],
+      "phrase": "好久不见！",
+      "meaning": "お久しぶりです",
+      "situation": "しばらく会っていなかった人に",
+      "examples": [
+        {
+          "text": "好久不见！你最近怎么样？",
+          "translation": "久しぶり！最近どう？"
+        }
+      ],
+      "notes": "ピンイン: hǎojiǔ bú jiàn。好久 は「長い間」。不 は第4声の 见 の前なので bú と読む。"
+    },
+    {
+      "id": "zh-p-zuijin-zenmeyang",
+      "type": "phrase",
+      "tags": [
+        "ステップ1",
+        "あいさつ"
+      ],
+      "phrase": "最近怎么样？",
+      "meaning": "最近どう？",
+      "situation": "知り合いに近況を聞くとき",
+      "examples": [
+        {
+          "text": "A: 最近怎么样？B: 还不错。",
+          "translation": "A: 最近どう？B: まあまあいいよ。"
+        }
+      ],
+      "notes": "ピンイン: zuìjìn zěnmeyàng。返事は 很好（hěn hǎo, 元気）・还不错（hái búcuò, 悪くない）・很忙（hěn máng, 忙しい）など。你好吗？ は教科書的で、実際の会話ではこちらが自然。"
+    },
+    {
+      "id": "zh-p-qingwen",
+      "type": "phrase",
+      "tags": [
+        "ステップ1",
+        "あいさつ"
+      ],
+      "phrase": "请问……",
+      "meaning": "お尋ねしますが／すみません",
+      "situation": "知らない人に質問するときの前置き",
+      "examples": [
+        {
+          "text": "请问，地铁站在哪儿？",
+          "translation": "すみません、地下鉄の駅はどこですか。"
+        }
+      ],
+      "notes": "ピンイン: qǐngwèn。请（どうぞ）+ 问（尋ねる）。質問の前に付けると丁寧になる。"
+    },
+    {
+      "id": "zh-p-xinku-le",
+      "type": "phrase",
+      "tags": [
+        "ステップ1",
+        "あいさつ"
+      ],
+      "phrase": "辛苦了！",
+      "meaning": "お疲れさまでした",
+      "situation": "仕事や長旅を終えた人をねぎらうとき",
+      "examples": [
+        {
+          "text": "今天的工作结束了，大家辛苦了！",
+          "translation": "今日の仕事は終わりです。皆さんお疲れさまでした！"
+        }
+      ],
+      "notes": "ピンイン: xīnkǔ le。相手の苦労をねぎらう言葉で、日本語の「お疲れさま」のようにあいさつ代わりに多用はしない。返事は 不辛苦（bù xīnkǔ）など。"
+    },
+    {
+      "id": "zh-v-yi",
+      "type": "vocab",
+      "tags": [
+        "ステップ1",
+        "数字"
+      ],
+      "term": "一",
+      "reading": "yī",
+      "pos": "数詞",
+      "meanings": [
+        "1",
+        "ひとつの〜"
+      ],
+      "examples": [
+        {
+          "text": "一年有十二个月。",
+          "translation": "1 年は 12 か月ある。"
+        }
+      ],
+      "notes": "単独・数を数えるとき・序数では yī。第4声の前では yí（一个 yí ge）、第1・2・3声の前では yì（一天 yì tiān）に変わる。"
+    },
+    {
+      "id": "zh-v-er",
+      "type": "vocab",
+      "tags": [
+        "ステップ1",
+        "数字"
+      ],
+      "term": "二",
+      "reading": "èr",
+      "pos": "数詞",
+      "meanings": [
+        "2（数としての 2）"
+      ],
+      "examples": [
+        {
+          "text": "一、二、三、四、五。",
+          "translation": "1、2、3、4、5。"
+        }
+      ],
+      "notes": "数を数える・十二・第二・二月 など「数字」として読むときは 二。物の数「2 つの〜」には 两 を使う。"
+    },
+    {
+      "id": "zh-v-liang",
+      "type": "vocab",
+      "tags": [
+        "ステップ1",
+        "数字"
+      ],
+      "term": "两",
+      "reading": "liǎng",
+      "pos": "数詞",
+      "meanings": [
+        "2つ（の〜）",
+        "ふたつ"
+      ],
+      "examples": [
+        {
+          "text": "我有两个哥哥。",
+          "translation": "私には兄が 2 人いる。"
+        }
+      ],
+      "notes": "量詞の前の「2」は 两（两本书・两杯茶）。時刻の「2 時」も 两点。ただし 12・22 のように 2 けた以上の末尾は 二（十二个）。"
+    },
+    {
+      "id": "zh-v-shi",
+      "type": "vocab",
+      "tags": [
+        "ステップ1",
+        "数字"
+      ],
+      "term": "十",
+      "reading": "shí",
+      "pos": "数詞",
+      "meanings": [
+        "10"
+      ],
+      "examples": [
+        {
+          "text": "十一、十二、二十。",
+          "translation": "11、12、20。"
+        }
+      ],
+      "notes": "11〜99 は日本語と同じく組み合わせる（十一 = 11、二十 = 20、九十九 = 99）。四（sì）と十（shí）は発音を混同しやすいので注意。"
+    },
+    {
+      "id": "zh-v-bai",
+      "type": "vocab",
+      "tags": [
+        "ステップ1",
+        "数字"
+      ],
+      "term": "百",
+      "reading": "bǎi",
+      "pos": "数詞",
+      "meanings": [
+        "100"
+      ],
+      "examples": [
+        {
+          "text": "这本书一百块。",
+          "translation": "この本は 100 元だ。"
+        }
+      ],
+      "notes": "100 は「一百」と 一 を必ず付ける（日本語の「百」とは違う）。101 は 一百零一（yìbǎi líng yī）と途中の 0 を 零 で読む。"
+    },
+    {
+      "id": "zh-v-wo",
+      "type": "vocab",
+      "tags": [
+        "ステップ1",
+        "代名詞・疑問詞"
+      ],
+      "term": "我",
+      "reading": "wǒ",
+      "pos": "代名詞",
+      "meanings": [
+        "私",
+        "ぼく"
+      ],
+      "examples": [
+        {
+          "text": "我是学生。",
+          "translation": "私は学生です。"
+        }
+      ],
+      "notes": "男女・年齢を問わない「私」。複数は 我们（wǒmen）。"
+    },
+    {
+      "id": "zh-v-ni",
+      "type": "vocab",
+      "tags": [
+        "ステップ1",
+        "代名詞・疑問詞"
+      ],
+      "term": "你",
+      "reading": "nǐ",
+      "pos": "代名詞",
+      "meanings": [
+        "あなた",
+        "君"
+      ],
+      "examples": [
+        {
+          "text": "你是老师吗？",
+          "translation": "あなたは先生ですか。"
+        }
+      ],
+      "notes": "敬意を込めるときは 您（nín）。複数は 你们（nǐmen, あなたたち）。"
+    },
+    {
+      "id": "zh-v-ta",
+      "type": "vocab",
+      "tags": [
+        "ステップ1",
+        "代名詞・疑問詞"
+      ],
+      "term": "他",
+      "reading": "tā",
+      "pos": "代名詞",
+      "meanings": [
+        "彼"
+      ],
+      "examples": [
+        {
+          "text": "他是我朋友。",
+          "translation": "彼は私の友だちです。"
+        }
+      ],
+      "notes": "「彼女」は 她、物や動物は 它。3 つとも発音は同じ tā で、字だけが違う。"
+    },
+    {
+      "id": "zh-v-women",
+      "type": "vocab",
+      "tags": [
+        "ステップ1",
+        "代名詞・疑問詞"
+      ],
+      "term": "我们",
+      "reading": "wǒmen",
+      "pos": "代名詞",
+      "meanings": [
+        "私たち"
+      ],
+      "examples": [
+        {
+          "text": "我们一起去吧。",
+          "translation": "一緒に行きましょう。"
+        }
+      ],
+      "notes": "们（men, 軽声）は人を表す語に付いて複数を表す。聞き手を含む「私たち」には 咱们（zánmen）も使う。"
+    },
+    {
+      "id": "zh-v-zhe",
+      "type": "vocab",
+      "tags": [
+        "ステップ1",
+        "代名詞・疑問詞"
+      ],
+      "term": "这",
+      "reading": "zhè",
+      "pos": "代名詞",
+      "meanings": [
+        "これ",
+        "この"
+      ],
+      "examples": [
+        {
+          "text": "这是什么？",
+          "translation": "これは何ですか。"
+        }
+      ],
+      "notes": "量詞の前では「この」の意味（这个 zhège, 这本书）。口語では zhèi とも発音する。"
+    },
+    {
+      "id": "zh-v-na4",
+      "type": "vocab",
+      "tags": [
+        "ステップ1",
+        "代名詞・疑問詞"
+      ],
+      "term": "那",
+      "reading": "nà",
+      "pos": "代名詞",
+      "meanings": [
+        "あれ・それ",
+        "あの・その"
+      ],
+      "examples": [
+        {
+          "text": "那是我的书。",
+          "translation": "あれは私の本です。"
+        }
+      ],
+      "notes": "中国語は「これ（近い）／あれ・それ（遠い）」の 2 区分。疑問の 哪（nǎ, どれ）とは字も声調も違う。"
+    },
+    {
+      "id": "zh-v-na3",
+      "type": "vocab",
+      "tags": [
+        "ステップ1",
+        "代名詞・疑問詞"
+      ],
+      "term": "哪",
+      "reading": "nǎ",
+      "pos": "疑問詞",
+      "meanings": [
+        "どれ",
+        "どの"
+      ],
+      "examples": [
+        {
+          "text": "你是哪国人？",
+          "translation": "あなたはどこの国の人ですか。"
+        }
+      ],
+      "notes": "哪个（nǎge, どれ）・哪儿（nǎr, どこ）の形でよく使う。那（nà）は第4声、哪（nǎ）は第3声と区別する。"
+    },
+    {
+      "id": "zh-v-shenme",
+      "type": "vocab",
+      "tags": [
+        "ステップ1",
+        "代名詞・疑問詞"
+      ],
+      "term": "什么",
+      "reading": "shénme",
+      "pos": "疑問詞",
+      "meanings": [
+        "何",
+        "何の〜"
+      ],
+      "examples": [
+        {
+          "text": "你叫什么名字？",
+          "translation": "お名前は何ですか。"
+        }
+      ],
+      "notes": "答えにしたい部分にそのまま置き換えるだけで疑問文になる（这是书 → 这是什么？）。文末に 吗 は付けない。"
+    },
+    {
+      "id": "zh-v-shei",
+      "type": "vocab",
+      "tags": [
+        "ステップ1",
+        "代名詞・疑問詞"
+      ],
+      "term": "谁",
+      "reading": "shéi",
+      "pos": "疑問詞",
+      "meanings": [
+        "だれ"
+      ],
+      "examples": [
+        {
+          "text": "他是谁？",
+          "translation": "彼はだれですか。"
+        }
+      ],
+      "notes": "shuí と読む人もいる（どちらも正しい）。疑問詞を使う疑問文なので 吗 は付けない。"
+    },
+    {
+      "id": "zh-v-ji",
+      "type": "vocab",
+      "tags": [
+        "ステップ1",
+        "代名詞・疑問詞"
+      ],
+      "term": "几",
+      "reading": "jǐ",
+      "pos": "疑問詞",
+      "meanings": [
+        "いくつ（10 くらいまでの数を予想して）",
+        "何〜"
+      ],
+      "examples": [
+        {
+          "text": "你有几个孩子？",
+          "translation": "お子さんは何人いますか。"
+        }
+      ],
+      "notes": "答えが小さい数だと予想されるときや、日付・時刻・曜日に使う（几点・几月几号・星期几）。後ろに量詞が必要。"
+    },
+    {
+      "id": "zh-v-duoshao",
+      "type": "vocab",
+      "tags": [
+        "ステップ1",
+        "代名詞・疑問詞"
+      ],
+      "term": "多少",
+      "reading": "duōshao",
+      "pos": "疑問詞",
+      "meanings": [
+        "いくつ・どれくらい",
+        "いくら"
+      ],
+      "examples": [
+        {
+          "text": "这个多少钱？",
+          "translation": "これはいくらですか。"
+        }
+      ],
+      "notes": "大きな数を予想するとき・値段・電話番号に使う。量詞は省略できる（多少人）。几 との使い分けがポイント。"
+    },
+    {
+      "id": "zh-p-jiao-shenme-mingzi",
+      "type": "phrase",
+      "tags": [
+        "ステップ1",
+        "自己紹介"
+      ],
+      "phrase": "你叫什么名字？",
+      "meaning": "お名前は何ですか",
+      "situation": "相手のフルネームや名前を聞くとき",
+      "examples": [
+        {
+          "text": "A: 你叫什么名字？B: 我叫李明。",
+          "translation": "A: お名前は？B: 李明といいます。"
+        }
+      ],
+      "notes": "ピンイン: nǐ jiào shénme míngzi。叫 は「〜という名前だ」。目上の人には次の 您贵姓？ のように名字を尋ねるほうが丁寧。"
+    },
+    {
+      "id": "zh-p-wo-jiao",
+      "type": "phrase",
+      "tags": [
+        "ステップ1",
+        "自己紹介"
+      ],
+      "phrase": "我叫山田花子。",
+      "meaning": "私は山田花子といいます",
+      "situation": "自己紹介でフルネームを名乗るとき",
+      "examples": [
+        {
+          "text": "你好，我叫山田花子。",
+          "translation": "こんにちは、山田花子と申します。"
+        }
+      ],
+      "notes": "ピンイン: wǒ jiào Shāntián Huāzǐ。我叫 + フルネーム。日本人の名前は漢字を中国語読みする（山田 Shāntián）。名字だけなら 我姓山田。"
+    },
+    {
+      "id": "zh-p-nin-gui-xing",
+      "type": "phrase",
+      "tags": [
+        "ステップ1",
+        "自己紹介"
+      ],
+      "phrase": "您贵姓？",
+      "meaning": "（ご）名字は何とおっしゃいますか",
+      "situation": "目上の人・初対面の相手に丁寧に名字を聞くとき",
+      "examples": [
+        {
+          "text": "A: 您贵姓？B: 我姓王。",
+          "translation": "A: お名前は（名字は）？B: 王と申します。"
+        }
+      ],
+      "notes": "ピンイン: nín guì xìng。贵 は相手を高める言葉。答えるときは 我姓〜 で、自分に 贵 は付けない（×我贵姓王）。"
+    },
+    {
+      "id": "zh-p-shi-ribenren",
+      "type": "phrase",
+      "tags": [
+        "ステップ1",
+        "自己紹介"
+      ],
+      "phrase": "我是日本人。",
+      "meaning": "私は日本人です",
+      "situation": "国籍を言うとき",
+      "examples": [
+        {
+          "text": "我是日本人，我从东京来。",
+          "translation": "私は日本人で、東京から来ました。"
+        }
+      ],
+      "notes": "ピンイン: wǒ shì Rìběnrén。「A 是 B」で「A は B です」。国名 + 人 で「〜人」（中国人 Zhōngguórén, 美国人 Měiguórén）。"
+    },
+    {
+      "id": "zh-p-na-guo-ren",
+      "type": "phrase",
+      "tags": [
+        "ステップ1",
+        "自己紹介"
+      ],
+      "phrase": "你是哪国人？",
+      "meaning": "どこの国の方ですか",
+      "situation": "国籍を尋ねるとき",
+      "examples": [
+        {
+          "text": "A: 你是哪国人？B: 我是日本人。",
+          "translation": "A: どこの国の人ですか。B: 日本人です。"
+        }
+      ],
+      "notes": "ピンイン: nǐ shì nǎ guó rén。哪 + 国 + 人 で「どの国の人」。疑問詞の文なので 吗 は付けない。"
+    },
+    {
+      "id": "zh-p-renshi-ni-hen-gaoxing",
+      "type": "phrase",
+      "tags": [
+        "ステップ1",
+        "自己紹介"
+      ],
+      "phrase": "认识你很高兴。",
+      "meaning": "お会いできてうれしいです",
+      "situation": "初対面のあいさつ",
+      "examples": [
+        {
+          "text": "我叫田中。认识你很高兴。",
+          "translation": "田中です。お会いできてうれしいです。"
+        }
+      ],
+      "notes": "ピンイン: rènshi nǐ hěn gāoxìng。认识 は「知り合う」。語順を入れ替えた 很高兴认识你 もよく使う。"
+    },
+    {
+      "id": "zh-p-qing-duo-guanzhao",
+      "type": "phrase",
+      "tags": [
+        "ステップ1",
+        "自己紹介"
+      ],
+      "phrase": "请多关照。",
+      "meaning": "どうぞよろしくお願いします",
+      "situation": "自己紹介の締めくくり",
+      "examples": [
+        {
+          "text": "我是新来的，请多关照。",
+          "translation": "新しく来た者です。どうぞよろしくお願いします。"
+        }
+      ],
+      "notes": "ピンイン: qǐng duō guānzhào。日本語の「よろしく」ほど頻繁には使わず、新しい職場・取引先などあらたまった場面向き。"
+    },
+    {
+      "id": "zh-p-ershiwu-sui",
+      "type": "phrase",
+      "tags": [
+        "ステップ1",
+        "自己紹介"
+      ],
+      "phrase": "我今年二十五岁。",
+      "meaning": "私は今年 25 歳です",
+      "situation": "年齢を言うとき",
+      "examples": [
+        {
+          "text": "A: 你今年多大？B: 我今年二十五岁。",
+          "translation": "A: 今年何歳？B: 今年 25 歳です。"
+        }
+      ],
+      "notes": "ピンイン: wǒ jīnnián èrshíwǔ suì。年齢を言う文では 是 を省略するのがふつう。聞き方は相手によって変わる（子ども: 几岁？ 同年代: 多大？ 年配の人: 多大年纪？）。"
+    },
+    {
+      "id": "zh-p-hui-shuo-yidianr",
+      "type": "phrase",
+      "tags": [
+        "ステップ1",
+        "自己紹介"
+      ],
+      "phrase": "我会说一点儿汉语。",
+      "meaning": "中国語が少し話せます",
+      "situation": "自分の語学力を伝えるとき",
+      "examples": [
+        {
+          "text": "A: 你会说汉语吗？B: 我会说一点儿。",
+          "translation": "A: 中国語を話せますか。B: 少し話せます。"
+        }
+      ],
+      "notes": "ピンイン: wǒ huì shuō yìdiǎnr Hànyǔ。会 は学んで身につけた「できる」。一点儿 は「少し」。中国語は 汉语（Hànyǔ）または 中文（Zhōngwén）。"
+    },
+    {
+      "id": "zh-p-ting-bu-dong",
+      "type": "phrase",
+      "tags": [
+        "ステップ1",
+        "自己紹介"
+      ],
+      "phrase": "我听不懂。",
+      "meaning": "（聞いて）わかりません",
+      "situation": "相手の言葉が聞き取れない・理解できないとき",
+      "examples": [
+        {
+          "text": "对不起，我听不懂。",
+          "translation": "すみません、聞いてもわかりません。"
+        }
+      ],
+      "notes": "ピンイン: wǒ tīng bu dǒng。听（聞く）+ 不懂（わからない）。わかったときは 听懂了（tīngdǒng le）。読んでわからないときは 看不懂。"
+    },
+    {
+      "id": "zh-p-zai-shuo-yi-bian",
+      "type": "phrase",
+      "tags": [
+        "ステップ1",
+        "自己紹介"
+      ],
+      "phrase": "请再说一遍。",
+      "meaning": "もう一度言ってください",
+      "situation": "聞き取れなかったとき",
+      "examples": [
+        {
+          "text": "不好意思，请再说一遍。",
+          "translation": "すみません、もう一度言ってください。"
+        }
+      ],
+      "notes": "ピンイン: qǐng zài shuō yí biàn。一遍 は「（始めから終わりまで）1 回」。遍 は第4声なので 一 は yí と読む。"
+    },
+    {
+      "id": "zh-p-shuo-man-yidianr",
+      "type": "phrase",
+      "tags": [
+        "ステップ1",
+        "自己紹介"
+      ],
+      "phrase": "请说慢一点儿。",
+      "meaning": "もう少しゆっくり話してください",
+      "situation": "相手の話が速いとき",
+      "examples": [
+        {
+          "text": "你说得太快了，请说慢一点儿。",
+          "translation": "話すのが速すぎます。もう少しゆっくり話してください。"
+        }
+      ],
+      "notes": "ピンイン: qǐng shuō màn yìdiǎnr。形容詞 + 一点儿 で「もう少し〜」。慢（ゆっくり）の反対は 快（kuài, 速い）。"
+    },
+    {
+      "id": "zh-v-ren",
+      "type": "vocab",
+      "tags": [
+        "ステップ2",
+        "基本単語"
+      ],
+      "term": "人",
+      "reading": "rén",
+      "pos": "名詞",
+      "meanings": [
+        "人"
+      ],
+      "examples": [
+        {
+          "text": "你们家有几口人？",
+          "translation": "ご家族は何人ですか。"
+        }
+      ],
+      "notes": "国名 + 人 で「〜人」。家族の人数には量詞 口（kǒu）を使う。"
+    },
+    {
+      "id": "zh-v-pengyou",
+      "type": "vocab",
+      "tags": [
+        "ステップ2",
+        "基本単語"
+      ],
+      "term": "朋友",
+      "reading": "péngyou",
+      "pos": "名詞",
+      "meanings": [
+        "友だち"
+      ],
+      "examples": [
+        {
+          "text": "他是我的好朋友。",
+          "translation": "彼は私の親友です。"
+        }
+      ],
+      "collocations": [
+        "好朋友",
+        "男朋友",
+        "女朋友"
+      ],
+      "notes": "男朋友（ボーイフレンド・彼氏）・女朋友（ガールフレンド・彼女）は恋人の意味になる。"
+    },
+    {
+      "id": "zh-v-laoshi",
+      "type": "vocab",
+      "tags": [
+        "ステップ2",
+        "基本単語"
+      ],
+      "term": "老师",
+      "reading": "lǎoshī",
+      "pos": "名詞",
+      "meanings": [
+        "先生",
+        "教師"
+      ],
+      "examples": [
+        {
+          "text": "王老师是我们的汉语老师。",
+          "translation": "王先生は私たちの中国語の先生です。"
+        }
+      ],
+      "notes": "学校の先生に呼びかけるときは「名字 + 老师」。日本語の「先生」のように医者・議員には使わない（医者は 医生 yīshēng）。"
+    },
+    {
+      "id": "zh-v-xuesheng",
+      "type": "vocab",
+      "tags": [
+        "ステップ2",
+        "基本単語"
+      ],
+      "term": "学生",
+      "reading": "xuésheng",
+      "pos": "名詞",
+      "meanings": [
+        "学生",
+        "生徒・児童"
+      ],
+      "examples": [
+        {
+          "text": "我是大学生。",
+          "translation": "私は大学生です。"
+        }
+      ],
+      "notes": "小学生・中学生・高校生・大学生すべてに使える。留学生は 留学生（liúxuéshēng）。"
+    },
+    {
+      "id": "zh-v-baba",
+      "type": "vocab",
+      "tags": [
+        "ステップ2",
+        "基本単語"
+      ],
+      "term": "爸爸",
+      "reading": "bàba",
+      "pos": "名詞",
+      "meanings": [
+        "お父さん",
+        "父"
+      ],
+      "examples": [
+        {
+          "text": "我爸爸在银行工作。",
+          "translation": "父は銀行で働いています。"
+        }
+      ],
+      "notes": "2 文字目は軽声。「私の父」は 我的爸爸 より 我爸爸 と 的 を省くのがふつう（家族・親しい関係）。"
+    },
+    {
+      "id": "zh-v-mama",
+      "type": "vocab",
+      "tags": [
+        "ステップ2",
+        "基本単語"
+      ],
+      "term": "妈妈",
+      "reading": "māma",
+      "pos": "名詞",
+      "meanings": [
+        "お母さん",
+        "母"
+      ],
+      "examples": [
+        {
+          "text": "妈妈做的菜很好吃。",
+          "translation": "母の作る料理はとてもおいしい。"
+        }
+      ],
+      "notes": "妈（mā）は第1声、马（mǎ, 馬）は第3声、骂（mà, ののしる）は第4声。声調の大切さを示す有名な例。"
+    },
+    {
+      "id": "zh-v-zhongguo",
+      "type": "vocab",
+      "tags": [
+        "ステップ2",
+        "基本単語"
+      ],
+      "term": "中国",
+      "reading": "Zhōngguó",
+      "pos": "名詞（固有名詞）",
+      "meanings": [
+        "中国"
+      ],
+      "examples": [
+        {
+          "text": "我想去中国旅行。",
+          "translation": "中国へ旅行に行きたい。"
+        }
+      ],
+      "notes": "中国人（Zhōngguórén）・中国菜（Zhōngguócài, 中国料理）。"
+    },
+    {
+      "id": "zh-v-riben",
+      "type": "vocab",
+      "tags": [
+        "ステップ2",
+        "基本単語"
+      ],
+      "term": "日本",
+      "reading": "Rìběn",
+      "pos": "名詞（固有名詞）",
+      "meanings": [
+        "日本"
+      ],
+      "examples": [
+        {
+          "text": "日本的夏天很热。",
+          "translation": "日本の夏は暑い。"
+        }
+      ],
+      "notes": "日 の rì は舌をそり上げる音。日本人（Rìběnrén）・日语（Rìyǔ, 日本語）。"
+    },
+    {
+      "id": "zh-v-hanyu",
+      "type": "vocab",
+      "tags": [
+        "ステップ2",
+        "基本単語"
+      ],
+      "term": "汉语",
+      "reading": "Hànyǔ",
+      "pos": "名詞",
+      "meanings": [
+        "中国語"
+      ],
+      "examples": [
+        {
+          "text": "我在学习汉语。",
+          "translation": "私は中国語を勉強しています。"
+        }
+      ],
+      "notes": "日常会話では 中文（Zhōngwén）もよく使う。学習者向けの普通話（標準語）は 普通话（pǔtōnghuà）。"
+    },
+    {
+      "id": "zh-v-jintian",
+      "type": "vocab",
+      "tags": [
+        "ステップ2",
+        "基本単語"
+      ],
+      "term": "今天",
+      "reading": "jīntiān",
+      "pos": "名詞",
+      "meanings": [
+        "今日"
+      ],
+      "examples": [
+        {
+          "text": "今天星期一。",
+          "translation": "今日は月曜日です。"
+        }
+      ],
+      "notes": "時を表す語は主語の前か後ろに置く（今天我很忙／我今天很忙）。動詞の後ろには置かない。"
+    },
+    {
+      "id": "zh-v-mingtian",
+      "type": "vocab",
+      "tags": [
+        "ステップ2",
+        "基本単語"
+      ],
+      "term": "明天",
+      "reading": "míngtiān",
+      "pos": "名詞",
+      "meanings": [
+        "明日"
+      ],
+      "examples": [
+        {
+          "text": "我明天去北京。",
+          "translation": "私は明日北京へ行きます。"
+        }
+      ],
+      "notes": "昨天（zuótiān, 昨日）・今天（今日）・明天（明日）を 天 でまとめて覚える。"
+    },
+    {
+      "id": "zh-v-zuotian",
+      "type": "vocab",
+      "tags": [
+        "ステップ2",
+        "基本単語"
+      ],
+      "term": "昨天",
+      "reading": "zuótiān",
+      "pos": "名詞",
+      "meanings": [
+        "昨日"
+      ],
+      "examples": [
+        {
+          "text": "昨天很热。",
+          "translation": "昨日は暑かった。"
+        }
+      ],
+      "notes": "前天（qiántiān, おととい）・昨天・今天・明天・后天（hòutiān, あさって）と並べて覚える。"
+    },
+    {
+      "id": "zh-v-xianzai",
+      "type": "vocab",
+      "tags": [
+        "ステップ2",
+        "基本単語"
+      ],
+      "term": "现在",
+      "reading": "xiànzài",
+      "pos": "名詞",
+      "meanings": [
+        "今",
+        "現在"
+      ],
+      "examples": [
+        {
+          "text": "现在几点？",
+          "translation": "今何時ですか。"
+        }
+      ],
+      "notes": "日本語の「現在」より口語的で、「今」の意味でふつうに使う。"
+    },
+    {
+      "id": "zh-v-shi4",
+      "type": "vocab",
+      "tags": [
+        "ステップ2",
+        "基本単語"
+      ],
+      "term": "是",
+      "reading": "shì",
+      "pos": "動詞",
+      "meanings": [
+        "〜である",
+        "〜です"
+      ],
+      "examples": [
+        {
+          "text": "他是我哥哥。",
+          "translation": "彼は私の兄です。"
+        }
+      ],
+      "notes": "「A 是 B」で A = B を表す。否定は 不是（bú shì）。形容詞が述語になる文（〜は忙しい・〜は大きい）にはふつう使わない。"
+    },
+    {
+      "id": "zh-v-you",
+      "type": "vocab",
+      "tags": [
+        "ステップ2",
+        "基本単語"
+      ],
+      "term": "有",
+      "reading": "yǒu",
+      "pos": "動詞",
+      "meanings": [
+        "持っている",
+        "（〜に…が）ある・いる"
+      ],
+      "examples": [
+        {
+          "text": "我有一个妹妹。",
+          "translation": "私には妹が 1 人いる。"
+        }
+      ],
+      "notes": "否定は必ず 没有（méiyǒu）で、×不有 とは言わない。「場所 + 有 + もの」で「〜に…がある」。"
+    },
+    {
+      "id": "zh-v-zai",
+      "type": "vocab",
+      "tags": [
+        "ステップ2",
+        "基本単語"
+      ],
+      "term": "在",
+      "reading": "zài",
+      "pos": "動詞・前置詞",
+      "meanings": [
+        "（〜に）いる・ある",
+        "〜で（場所）"
+      ],
+      "examples": [
+        {
+          "text": "我在家。",
+          "translation": "私は家にいます。"
+        },
+        {
+          "text": "我在银行工作。",
+          "translation": "私は銀行で働いています。"
+        }
+      ],
+      "notes": "「人・もの + 在 + 場所」で所在を表す。「在 + 場所 + 動詞」で「〜で…する」。"
+    },
+    {
+      "id": "zh-v-qu",
+      "type": "vocab",
+      "tags": [
+        "ステップ2",
+        "基本単語"
+      ],
+      "term": "去",
+      "reading": "qù",
+      "pos": "動詞",
+      "meanings": [
+        "行く"
+      ],
+      "examples": [
+        {
+          "text": "你去哪儿？",
+          "translation": "どこへ行くの？"
+        }
+      ],
+      "notes": "日本語の「去る」とは逆で「（そこへ）行く」。「去 + 場所」で目的地を直接続ける（去北京）。"
+    },
+    {
+      "id": "zh-v-chi",
+      "type": "vocab",
+      "tags": [
+        "ステップ2",
+        "基本単語"
+      ],
+      "term": "吃",
+      "reading": "chī",
+      "pos": "動詞",
+      "meanings": [
+        "食べる"
+      ],
+      "examples": [
+        {
+          "text": "我们去吃饭吧。",
+          "translation": "ご飯を食べに行こう。"
+        }
+      ],
+      "collocations": [
+        "吃饭",
+        "吃药"
+      ],
+      "notes": "吃饭 は「ご飯を食べる・食事をする」。薬を飲むのも 吃药（chī yào）と 吃 を使う。"
+    },
+    {
+      "id": "zh-v-he",
+      "type": "vocab",
+      "tags": [
+        "ステップ2",
+        "基本単語"
+      ],
+      "term": "喝",
+      "reading": "hē",
+      "pos": "動詞",
+      "meanings": [
+        "飲む"
+      ],
+      "examples": [
+        {
+          "text": "你喝茶还是喝咖啡？",
+          "translation": "お茶にしますか、コーヒーにしますか。"
+        }
+      ],
+      "collocations": [
+        "喝水",
+        "喝茶",
+        "喝酒"
+      ],
+      "notes": "液体を飲むのは 喝。薬は 吃药 と 吃 を使う。口へんの字で「口でする動作」と覚える。"
+    },
+    {
+      "id": "zh-v-kan",
+      "type": "vocab",
+      "tags": [
+        "ステップ2",
+        "基本単語"
+      ],
+      "term": "看",
+      "reading": "kàn",
+      "pos": "動詞",
+      "meanings": [
+        "見る",
+        "読む"
+      ],
+      "examples": [
+        {
+          "text": "我喜欢看电影。",
+          "translation": "私は映画を見るのが好きです。"
+        }
+      ],
+      "collocations": [
+        "看书",
+        "看电影"
+      ],
+      "notes": "本や新聞を「読む」のも 看（看书・看报）。看病 は「診察する・受診する」。"
+    },
+    {
+      "id": "zh-v-ting",
+      "type": "vocab",
+      "tags": [
+        "ステップ2",
+        "基本単語"
+      ],
+      "term": "听",
+      "reading": "tīng",
+      "pos": "動詞",
+      "meanings": [
+        "聞く"
+      ],
+      "examples": [
+        {
+          "text": "我每天听音乐。",
+          "translation": "私は毎日音楽を聞きます。"
+        }
+      ],
+      "collocations": [
+        "听音乐",
+        "听懂"
+      ],
+      "notes": "听懂（tīngdǒng）で「聞いてわかる」、听见（tīngjiàn）で「聞こえる」。"
+    },
+    {
+      "id": "zh-v-shuo",
+      "type": "vocab",
+      "tags": [
+        "ステップ2",
+        "基本単語"
+      ],
+      "term": "说",
+      "reading": "shuō",
+      "pos": "動詞",
+      "meanings": [
+        "話す",
+        "言う"
+      ],
+      "examples": [
+        {
+          "text": "请说汉语。",
+          "translation": "中国語で話してください。"
+        }
+      ],
+      "collocations": [
+        "说话",
+        "说汉语"
+      ],
+      "notes": "说汉语 は「中国語を話す」。日本語の「説」の簡体字。"
+    },
+    {
+      "id": "zh-v-mai",
+      "type": "vocab",
+      "tags": [
+        "ステップ2",
+        "基本単語"
+      ],
+      "term": "买",
+      "reading": "mǎi",
+      "pos": "動詞",
+      "meanings": [
+        "買う"
+      ],
+      "examples": [
+        {
+          "text": "我想买一本书。",
+          "translation": "本を 1 冊買いたい。"
+        }
+      ],
+      "notes": "卖（mài, 売る）と字も音もよく似ている。买 は第3声、卖 は第4声で、字は 卖 に「十」が付く。"
+    },
+    {
+      "id": "zh-v-xihuan",
+      "type": "vocab",
+      "tags": [
+        "ステップ2",
+        "基本単語"
+      ],
+      "term": "喜欢",
+      "reading": "xǐhuan",
+      "pos": "動詞",
+      "meanings": [
+        "好きだ",
+        "〜するのが好きだ"
+      ],
+      "examples": [
+        {
+          "text": "我喜欢中国菜。",
+          "translation": "私は中国料理が好きです。"
+        }
+      ],
+      "notes": "動詞として目的語を直接とる（喜欢 + 名詞／動詞句）。程度を強めるときは 很喜欢・非常喜欢。"
+    },
+    {
+      "id": "zh-v-xiang",
+      "type": "vocab",
+      "tags": [
+        "ステップ2",
+        "基本単語"
+      ],
+      "term": "想",
+      "reading": "xiǎng",
+      "pos": "助動詞・動詞",
+      "meanings": [
+        "〜したい",
+        "思う・考える",
+        "恋しく思う"
+      ],
+      "examples": [
+        {
+          "text": "我想去中国。",
+          "translation": "中国へ行きたい。"
+        }
+      ],
+      "notes": "「想 + 動詞」で「〜したい」。我想你 は「あなたが恋しい」。"
+    },
+    {
+      "id": "zh-v-hao",
+      "type": "vocab",
+      "tags": [
+        "ステップ2",
+        "基本単語"
+      ],
+      "term": "好",
+      "reading": "hǎo",
+      "pos": "形容詞",
+      "meanings": [
+        "よい",
+        "元気だ"
+      ],
+      "examples": [
+        {
+          "text": "这个很好。",
+          "translation": "これはとてもよい。"
+        }
+      ],
+      "collocations": [
+        "好吃",
+        "好看"
+      ],
+      "notes": "好吃（おいしい）・好看（きれい）・好喝（〔飲み物が〕おいしい）のように動詞と組み合わせて「〜しやすい・〜して気持ちいい」を表す。"
+    },
+    {
+      "id": "zh-v-da",
+      "type": "vocab",
+      "tags": [
+        "ステップ2",
+        "基本単語"
+      ],
+      "term": "大",
+      "reading": "dà",
+      "pos": "形容詞",
+      "meanings": [
+        "大きい",
+        "（年齢が）上だ"
+      ],
+      "examples": [
+        {
+          "text": "这件衣服太大了。",
+          "translation": "この服は大きすぎる。"
+        }
+      ],
+      "notes": "年齢を聞く 你多大？（何歳？）の 大 は年齢の意味。反対は 小（xiǎo）。"
+    },
+    {
+      "id": "zh-v-gui",
+      "type": "vocab",
+      "tags": [
+        "ステップ2",
+        "基本単語"
+      ],
+      "term": "贵",
+      "reading": "guì",
+      "pos": "形容詞",
+      "meanings": [
+        "（値段が）高い",
+        "貴い"
+      ],
+      "examples": [
+        {
+          "text": "北京的房子很贵。",
+          "translation": "北京の家はとても高い。"
+        }
+      ],
+      "notes": "値段が「高い」は 贵。背や山が「高い」は 高（gāo）と使い分ける。"
+    },
+    {
+      "id": "zh-v-pianyi",
+      "type": "vocab",
+      "tags": [
+        "ステップ2",
+        "基本単語"
+      ],
+      "term": "便宜",
+      "reading": "piányi",
+      "pos": "形容詞",
+      "meanings": [
+        "（値段が）安い"
+      ],
+      "examples": [
+        {
+          "text": "这个比那个便宜。",
+          "translation": "これはあれより安い。"
+        }
+      ],
+      "notes": "日本語の「便宜（べんぎ）」とは意味も読みも違う。便 はここでは pián と読む（方便 fāngbiàn では biàn）。"
+    },
+    {
+      "id": "zh-v-shui",
+      "type": "vocab",
+      "tags": [
+        "ステップ2",
+        "基本単語"
+      ],
+      "term": "水",
+      "reading": "shuǐ",
+      "pos": "名詞",
+      "meanings": [
+        "水"
+      ],
+      "examples": [
+        {
+          "text": "请给我一杯水。",
+          "translation": "水を 1 杯ください。"
+        }
+      ],
+      "notes": "喝水 で「水を飲む」。中国では冷たい水より白湯（热水 rèshuǐ）を飲む習慣が根強い。冷たい水は 冰水（bīngshuǐ）。"
+    },
+    {
+      "id": "zh-v-cha",
+      "type": "vocab",
+      "tags": [
+        "ステップ2",
+        "基本単語"
+      ],
+      "term": "茶",
+      "reading": "chá",
+      "pos": "名詞",
+      "meanings": [
+        "お茶"
+      ],
+      "examples": [
+        {
+          "text": "中国人喜欢喝绿茶。",
+          "translation": "中国人は緑茶を飲むのが好きだ。"
+        }
+      ],
+      "notes": "绿茶（lǜchá, 緑茶）・红茶（hóngchá, 紅茶）・乌龙茶（wūlóngchá, ウーロン茶）。"
+    },
+    {
+      "id": "zh-v-qian",
+      "type": "vocab",
+      "tags": [
+        "ステップ2",
+        "基本単語"
+      ],
+      "term": "钱",
+      "reading": "qián",
+      "pos": "名詞",
+      "meanings": [
+        "お金"
+      ],
+      "examples": [
+        {
+          "text": "我没有钱了。",
+          "translation": "お金がなくなった。"
+        }
+      ],
+      "notes": "値段を聞く 多少钱？ でおなじみ。日本の「銭」の簡体字。"
+    },
+    {
+      "id": "zh-v-shu",
+      "type": "vocab",
+      "tags": [
+        "ステップ2",
+        "基本単語"
+      ],
+      "term": "书",
+      "reading": "shū",
+      "pos": "名詞",
+      "meanings": [
+        "本"
+      ],
+      "examples": [
+        {
+          "text": "这本书很有意思。",
+          "translation": "この本はとても面白い。"
+        }
+      ],
+      "notes": "量詞は 本（běn）。日本語の「書」の簡体字で、书店（shūdiàn）は本屋。"
+    },
+    {
+      "id": "zh-v-jia",
+      "type": "vocab",
+      "tags": [
+        "ステップ2",
+        "基本単語"
+      ],
+      "term": "家",
+      "reading": "jiā",
+      "pos": "名詞",
+      "meanings": [
+        "家",
+        "家庭"
+      ],
+      "examples": [
+        {
+          "text": "我家在东京。",
+          "translation": "私の家は東京にあります。"
+        }
+      ],
+      "notes": "「家に帰る」は 回家（huí jiā）。「〜家（専門家）」の意味でも使う（作家 zuòjiā）。"
+    },
+    {
+      "id": "zh-g-shi",
+      "type": "cloze",
+      "tags": [
+        "ステップ2",
+        "基本文型"
+      ],
+      "text": "我{{是}}日本人。",
+      "translation": "私は日本人です。",
+      "hint": "漢字 1 文字",
+      "explanation": "「A 是 B」で「A は B です」。是 は英語の be 動詞に近いが、形容詞の文（私は忙しい）には使わない。"
+    },
+    {
+      "id": "zh-g-ma",
+      "type": "cloze",
+      "tags": [
+        "ステップ2",
+        "基本文型"
+      ],
+      "text": "你是中国人{{吗}}？",
+      "translation": "あなたは中国人ですか。",
+      "hint": "漢字 1 文字（文末）",
+      "explanation": "平叙文の文末に 吗（ma）を付けると「はい・いいえ」で答える疑問文になる。什么・谁 などの疑問詞がある文には付けない。"
+    },
+    {
+      "id": "zh-g-bu-shi",
+      "type": "cloze",
+      "tags": [
+        "ステップ2",
+        "基本文型"
+      ],
+      "text": "我{{不}}是老师。",
+      "translation": "私は先生ではありません。",
+      "hint": "漢字 1 文字",
+      "explanation": "是 の否定は 不是。不 は第4声の 是 の前なので bú と発音する。"
+    },
+    {
+      "id": "zh-g-de",
+      "type": "cloze",
+      "tags": [
+        "ステップ2",
+        "基本文型"
+      ],
+      "text": "这是我{{的}}书。",
+      "translation": "これは私の本です。",
+      "hint": "漢字 1 文字",
+      "explanation": "「名詞・代名詞 + 的 + 名詞」で「〜の…」。ただし家族や所属（我妈妈・我们学校）では 的 を省くことが多い。"
+    },
+    {
+      "id": "zh-g-hen",
+      "type": "choice",
+      "tags": [
+        "ステップ2",
+        "基本文型"
+      ],
+      "question": "「私は忙しい」を正しく表した中国語はどれ？",
+      "choices": [
+        "我是忙。",
+        "我很忙。",
+        "我忙是。",
+        "我的忙。"
+      ],
+      "answer": 1,
+      "explanation": "形容詞はそのまま述語になれるので 是 は不要。ただし形容詞を単独で言い切ると比較の響きが出るため、ふつうは 很 を添える（このとき 很 は「とても」の意味が弱い）。我的忙 は「私の忙しさ」のようで文にならない。"
+    },
+    {
+      "id": "zh-g-zai",
+      "type": "cloze",
+      "tags": [
+        "ステップ2",
+        "基本文型"
+      ],
+      "text": "我妈妈{{在}}家。",
+      "translation": "母は家にいます。",
+      "hint": "漢字 1 文字",
+      "explanation": "「人・もの + 在 + 場所」で「〜にいる・ある」。不定のものが「ある」ことを言うときは「場所 + 有 + もの」（家里有人 = 家に人がいる）。"
+    },
+    {
+      "id": "zh-g-zai-word-order",
+      "type": "choice",
+      "tags": [
+        "ステップ2",
+        "基本文型"
+      ],
+      "question": "「私は北京で中国語を勉強しています」を正しく表した中国語はどれ？",
+      "choices": [
+        "我在北京学习汉语。",
+        "我学习汉语在北京。",
+        "我在北京汉语学习。",
+        "我北京在学习汉语。"
+      ],
+      "answer": 0,
+      "explanation": "語順は「主語 + 在 + 場所 + 動詞 + 目的語」。場所の 在〜 は動詞の前に置き、英語のように文末には置かない。目的語は動詞の後ろ（学习汉语）なので 汉语学习 は誤り。"
+    },
+    {
+      "id": "zh-g-liang",
+      "type": "choice",
+      "tags": [
+        "ステップ2",
+        "基本文型"
+      ],
+      "question": "「2 人」を正しく表した中国語はどれ？",
+      "choices": [
+        "二个人",
+        "两人个",
+        "二人个",
+        "两个人"
+      ],
+      "answer": 3,
+      "explanation": "数量「2 つの〜」は 两 + 量詞 + 名詞。二 は数を数えるときや十二・第二などに使う。量詞 个 は数と名詞の間に置く。"
+    },
+    {
+      "id": "zh-p-duoshao-qian",
+      "type": "phrase",
+      "tags": [
+        "ステップ3",
+        "買い物"
+      ],
+      "phrase": "这个多少钱？",
+      "meaning": "これはいくらですか",
+      "situation": "値段を聞くとき",
+      "examples": [
+        {
+          "text": "A: 这个多少钱？B: 二十块。",
+          "translation": "A: これはいくら？B: 20 元です。"
+        }
+      ],
+      "notes": "ピンイン: zhège duōshao qián。这个 は口語で zhèige とも発音する。値段の答えは「数 + 块（元）」。"
+    },
+    {
+      "id": "zh-p-wo-yao-zhege",
+      "type": "phrase",
+      "tags": [
+        "ステップ3",
+        "買い物"
+      ],
+      "phrase": "我要这个。",
+      "meaning": "これをください",
+      "situation": "買う物・注文する物を指さして",
+      "examples": [
+        {
+          "text": "我要这个，还要那个。",
+          "translation": "これと、それもください。"
+        }
+      ],
+      "notes": "ピンイン: wǒ yào zhège。要 は「欲しい・必要だ」。いらないときは 不要（bú yào）。注文では 来一个（lái yí ge, 1 つください）もよく使う。"
+    },
+    {
+      "id": "zh-p-tai-gui-le",
+      "type": "phrase",
+      "tags": [
+        "ステップ3",
+        "買い物"
+      ],
+      "phrase": "太贵了！",
+      "meaning": "高すぎます！",
+      "situation": "値段が高いと感じたとき・値切る前に",
+      "examples": [
+        {
+          "text": "一百块？太贵了！",
+          "translation": "100 元？高すぎるよ！"
+        }
+      ],
+      "notes": "ピンイン: tài guì le。「太 + 形容詞 + 了」で「〜すぎる」。太好了（tài hǎo le）は「よかった！すばらしい！」。"
+    },
+    {
+      "id": "zh-p-pianyi-yidianr-ba",
+      "type": "phrase",
+      "tags": [
+        "ステップ3",
+        "買い物"
+      ],
+      "phrase": "便宜一点儿吧。",
+      "meaning": "少し安くしてください",
+      "situation": "市場などで値段を交渉するとき",
+      "examples": [
+        {
+          "text": "太贵了，便宜一点儿吧。",
+          "translation": "高いよ、少し安くして。"
+        }
+      ],
+      "notes": "ピンイン: piányi yìdiǎnr ba。吧 は「〜しようよ・〜してよ」と提案・お願いをやわらげる。デパートなど定価の店では値切らないのがふつう。"
+    },
+    {
+      "id": "zh-p-zhishi-kankan",
+      "type": "phrase",
+      "tags": [
+        "ステップ3",
+        "買い物"
+      ],
+      "phrase": "我只是看看。",
+      "meaning": "見ているだけです",
+      "situation": "店員に声をかけられたとき",
+      "examples": [
+        {
+          "text": "A: 你要买什么？B: 我只是看看，谢谢。",
+          "translation": "A: 何をお探しですか。B: 見ているだけです、ありがとう。"
+        }
+      ],
+      "notes": "ピンイン: wǒ zhǐshì kànkan。動詞を重ねる（看看）と「ちょっと〜する」という軽い感じになる。2 つ目は軽声。"
+    },
+    {
+      "id": "zh-p-da-yidianr-de",
+      "type": "phrase",
+      "tags": [
+        "ステップ3",
+        "買い物"
+      ],
+      "phrase": "有大一点儿的吗？",
+      "meaning": "もう少し大きいのはありますか",
+      "situation": "服や靴のサイズを替えたいとき",
+      "examples": [
+        {
+          "text": "这件有点儿小，有大一点儿的吗？",
+          "translation": "これは少し小さいです。もう少し大きいのはありますか。"
+        }
+      ],
+      "notes": "ピンイン: yǒu dà yìdiǎnr de ma。「形容詞 + 一点儿 + 的」で「もう少し〜なもの」。小一点儿的（もう少し小さいの）・便宜一点儿的（もう少し安いの）。"
+    },
+    {
+      "id": "zh-p-yigong-duoshao",
+      "type": "phrase",
+      "tags": [
+        "ステップ3",
+        "買い物"
+      ],
+      "phrase": "一共多少钱？",
+      "meaning": "全部でいくらですか",
+      "situation": "会計で合計金額を聞くとき",
+      "examples": [
+        {
+          "text": "这三个一共多少钱？",
+          "translation": "この 3 つで全部でいくらですか。"
+        }
+      ],
+      "notes": "ピンイン: yígòng duōshao qián。一共 は「合計で」。共 は第4声なので 一 は yí。"
+    },
+    {
+      "id": "zh-p-keyi-shuaka",
+      "type": "phrase",
+      "tags": [
+        "ステップ3",
+        "買い物"
+      ],
+      "phrase": "可以刷卡吗？",
+      "meaning": "カードで払えますか",
+      "situation": "支払い方法を確かめるとき",
+      "examples": [
+        {
+          "text": "A: 可以刷卡吗？B: 可以。",
+          "translation": "A: カードは使えますか。B: 使えます。"
+        }
+      ],
+      "notes": "ピンイン: kěyǐ shuā kǎ ma。可以 は「〜してよい・〜できる（許可・条件）」。刷卡 は「カードを通す」。現金は 现金（xiànjīn）。"
+    },
+    {
+      "id": "zh-p-xishoujian-zai-nar",
+      "type": "phrase",
+      "tags": [
+        "ステップ3",
+        "買い物"
+      ],
+      "phrase": "洗手间在哪儿？",
+      "meaning": "お手洗いはどこですか",
+      "situation": "トイレの場所を聞くとき",
+      "examples": [
+        {
+          "text": "请问，洗手间在哪儿？",
+          "translation": "すみません、お手洗いはどこですか。"
+        }
+      ],
+      "notes": "ピンイン: xǐshǒujiān zài nǎr。哪儿 は北方の口語で、南方では 哪里（nǎli）が多い。トイレは 厕所（cèsuǒ）とも言うが、洗手间 のほうが上品。"
+    },
+    {
+      "id": "zh-p-ji-dian",
+      "type": "phrase",
+      "tags": [
+        "ステップ3",
+        "数字・時間"
+      ],
+      "phrase": "现在几点？",
+      "meaning": "今何時ですか",
+      "situation": "時刻を尋ねるとき",
+      "examples": [
+        {
+          "text": "A: 现在几点？B: 三点十分。",
+          "translation": "A: 今何時？B: 3 時 10 分です。"
+        }
+      ],
+      "notes": "ピンイン: xiànzài jǐ diǎn。時刻は「数 + 点 + 数 + 分」。答えは 现在三点（今 3 時）のように 是 なしで言う。"
+    },
+    {
+      "id": "zh-p-liang-dian-ban",
+      "type": "phrase",
+      "tags": [
+        "ステップ3",
+        "数字・時間"
+      ],
+      "phrase": "两点半",
+      "meaning": "2 時半",
+      "situation": "時刻を言うとき",
+      "examples": [
+        {
+          "text": "我们两点半见吧。",
+          "translation": "2 時半に会いましょう。"
+        }
+      ],
+      "notes": "ピンイン: liǎng diǎn bàn。「2 時」は ×二点 ではなく 两点。半 は「30 分」。15 分は 一刻（yí kè）とも言う。"
+    },
+    {
+      "id": "zh-p-ji-yue-ji-hao",
+      "type": "phrase",
+      "tags": [
+        "ステップ3",
+        "数字・時間"
+      ],
+      "phrase": "今天几月几号？",
+      "meaning": "今日は何月何日ですか",
+      "situation": "日付を尋ねるとき",
+      "examples": [
+        {
+          "text": "A: 今天几月几号？B: 十月一号。",
+          "translation": "A: 今日は何月何日？B: 10 月 1 日です。"
+        }
+      ],
+      "notes": "ピンイン: jīntiān jǐ yuè jǐ hào。話し言葉では日付に 号（hào）、書き言葉では 日（rì）を使う。月の名前は数 + 月（一月〜十二月）。"
+    },
+    {
+      "id": "zh-p-xingqi-ji",
+      "type": "phrase",
+      "tags": [
+        "ステップ3",
+        "数字・時間"
+      ],
+      "phrase": "今天星期几？",
+      "meaning": "今日は何曜日ですか",
+      "situation": "曜日を尋ねるとき",
+      "examples": [
+        {
+          "text": "A: 今天星期几？B: 星期三。",
+          "translation": "A: 今日は何曜日？B: 水曜日です。"
+        }
+      ],
+      "notes": "ピンイン: jīntiān xīngqī jǐ。月曜〜土曜は 星期 + 一〜六（星期一 = 月曜）。日曜だけは 星期天（xīngqītiān）または 星期日。"
+    },
+    {
+      "id": "zh-p-dianhua-haoma",
+      "type": "phrase",
+      "tags": [
+        "ステップ3",
+        "数字・時間"
+      ],
+      "phrase": "你的电话号码是多少？",
+      "meaning": "あなたの電話番号は何番ですか",
+      "situation": "連絡先を聞くとき",
+      "examples": [
+        {
+          "text": "A: 你的电话号码是多少？B: 一三九……",
+          "translation": "A: 電話番号は？B: 139……"
+        }
+      ],
+      "notes": "ピンイン: nǐ de diànhuà hàomǎ shì duōshao。番号は 1 けたずつ読み、1 は 7（qī）と聞き間違えないよう yāo と読むことが多い。電話番号・部屋番号には 多少 を使う。"
+    },
+    {
+      "id": "zh-g-ben",
+      "type": "cloze",
+      "tags": [
+        "ステップ3",
+        "量詞・了・没"
+      ],
+      "text": "我有三{{本}}书。",
+      "translation": "私は本を 3 冊持っています。",
+      "hint": "量詞・漢字 1 文字",
+      "explanation": "中国語では「数 + 量詞 + 名詞」の形をとる。本・雑誌など綴じたものは 本（běn）。"
+    },
+    {
+      "id": "zh-g-zhang",
+      "type": "cloze",
+      "tags": [
+        "ステップ3",
+        "量詞・了・没"
+      ],
+      "text": "我要两{{张}}票。",
+      "translation": "チケットを 2 枚ください。",
+      "hint": "量詞・漢字 1 文字",
+      "explanation": "紙・切符・机・ベッドなど平らな面をもつものは 张（zhāng）。日本語の「〜枚」より範囲が広い（一张桌子 = 机 1 つ）。"
+    },
+    {
+      "id": "zh-g-ge",
+      "type": "choice",
+      "tags": [
+        "ステップ3",
+        "量詞・了・没"
+      ],
+      "question": "「学生が 3 人」の空欄に入る量詞はどれ？　三＿＿学生",
+      "choices": [
+        "本",
+        "张",
+        "个",
+        "杯"
+      ],
+      "answer": 2,
+      "explanation": "个（ge）は人や多くのものに使える最も一般的な量詞。本 は本・雑誌、张 は紙や切符など平らなもの、杯 はコップに入った飲み物に使う。"
+    },
+    {
+      "id": "zh-g-le",
+      "type": "cloze",
+      "tags": [
+        "ステップ3",
+        "量詞・了・没"
+      ],
+      "text": "我买{{了}}一本书。",
+      "translation": "私は本を 1 冊買いました。",
+      "hint": "漢字 1 文字（動作の完了）",
+      "explanation": "動詞の直後の 了（le）は動作の完了を表す。過去の時制そのものではなく「〜し終えた」というしるし。"
+    },
+    {
+      "id": "zh-g-mei",
+      "type": "cloze",
+      "tags": [
+        "ステップ3",
+        "量詞・了・没"
+      ],
+      "text": "我昨天{{没}}去学校。",
+      "translation": "私は昨日学校へ行きませんでした。",
+      "hint": "漢字 1 文字",
+      "explanation": "「〜しなかった・まだ〜していない」は 没（没有）+ 動詞。このとき 了 は付けない（×没去了）。"
+    },
+    {
+      "id": "zh-g-bu-vs-mei",
+      "type": "choice",
+      "tags": [
+        "ステップ3",
+        "量詞・了・没"
+      ],
+      "question": "「私は明日は行きません」を正しく表した中国語はどれ？",
+      "choices": [
+        "我明天没去。",
+        "我不明天去。",
+        "我明天没有去。",
+        "我明天不去。"
+      ],
+      "answer": 3,
+      "explanation": "これからのこと・意志の否定は 不。没（没有）は「〜しなかった・まだ〜していない」という実現していないことの否定なので、明天 とは合わない。否定の 不 は動詞の直前に置く。"
+    },
+    {
+      "id": "zh-g-le-question",
+      "type": "choice",
+      "tags": [
+        "ステップ3",
+        "量詞・了・没"
+      ],
+      "question": "「もうご飯を食べましたか」を正しく表した中国語はどれ？",
+      "choices": [
+        "你吃饭吗了？",
+        "你吃饭了吗？",
+        "你了吃饭吗？",
+        "你没吃饭了吗？"
+      ],
+      "answer": 1,
+      "explanation": "完了の 了 のあとに疑問の 吗 を付ける。吗 は必ず文末。没 と 了 は同時に使わない。你吃饭了吗？ は昼どきのあいさつ代わりにも使われる。"
+    },
+    {
+      "id": "zh-v-shouzhi",
+      "type": "vocab",
+      "tags": [
+        "ステップ3",
+        "日本語との違い"
+      ],
+      "term": "手纸",
+      "reading": "shǒuzhǐ",
+      "pos": "名詞",
+      "meanings": [
+        "トイレットペーパー",
+        "ちり紙"
+      ],
+      "examples": [
+        {
+          "text": "厕所里没有手纸了。",
+          "translation": "トイレにトイレットペーパーがもうない。"
+        }
+      ],
+      "notes": "日本語の「手紙」ではない。「手紙」は 信（xìn）、「手紙を書く」は 写信（xiě xìn）。"
+    },
+    {
+      "id": "zh-v-qiche",
+      "type": "vocab",
+      "tags": [
+        "ステップ3",
+        "日本語との違い"
+      ],
+      "term": "汽车",
+      "reading": "qìchē",
+      "pos": "名詞",
+      "meanings": [
+        "自動車"
+      ],
+      "examples": [
+        {
+          "text": "我想买一辆汽车。",
+          "translation": "自動車を 1 台買いたい。"
+        }
+      ],
+      "notes": "日本語の「汽車」ではなく自動車のこと。列車・汽車は 火车（huǒchē）、駅は 火车站。"
+    },
+    {
+      "id": "zh-v-zou",
+      "type": "vocab",
+      "tags": [
+        "ステップ3",
+        "日本語との違い"
+      ],
+      "term": "走",
+      "reading": "zǒu",
+      "pos": "動詞",
+      "meanings": [
+        "歩く",
+        "出かける・その場を離れる"
+      ],
+      "examples": [
+        {
+          "text": "我们走吧。",
+          "translation": "行こう（出発しよう）。"
+        },
+        {
+          "text": "我每天走路去学校。",
+          "translation": "私は毎日歩いて学校へ行く。"
+        }
+      ],
+      "notes": "日本語の「走る」ではない。「走る」は 跑（pǎo）。我先走了 は「お先に失礼します」。"
+    },
+    {
+      "id": "zh-v-dongxi",
+      "type": "vocab",
+      "tags": [
+        "ステップ3",
+        "日本語との違い"
+      ],
+      "term": "东西",
+      "reading": "dōngxi",
+      "pos": "名詞",
+      "meanings": [
+        "もの",
+        "品物"
+      ],
+      "examples": [
+        {
+          "text": "我去超市买东西。",
+          "translation": "スーパーへ買い物に行く。"
+        }
+      ],
+      "notes": "西 を軽声で読むと「もの」。dōngxī と両方第1声で読むと「東と西」の意味になる。买东西 で「買い物をする」。"
+    },
+    {
+      "id": "zh-v-gongzuo",
+      "type": "vocab",
+      "tags": [
+        "ステップ3",
+        "日本語との違い"
+      ],
+      "term": "工作",
+      "reading": "gōngzuò",
+      "pos": "名詞・動詞",
+      "meanings": [
+        "仕事",
+        "働く"
+      ],
+      "examples": [
+        {
+          "text": "你在哪儿工作？",
+          "translation": "どこで働いていますか。"
+        }
+      ],
+      "notes": "日本語の「工作（図工・裏工作）」ではなく、ふつうの「仕事・働く」。"
+    },
+    {
+      "id": "zh-v-airen",
+      "type": "vocab",
+      "tags": [
+        "ステップ3",
+        "日本語との違い"
+      ],
+      "term": "爱人",
+      "reading": "àiren",
+      "pos": "名詞",
+      "meanings": [
+        "配偶者（夫または妻）"
+      ],
+      "examples": [
+        {
+          "text": "这是我爱人。",
+          "translation": "こちらは私の妻（夫）です。"
+        }
+      ],
+      "notes": "日本語の「愛人」ではなく、中国大陸で夫・妻を指す言い方。日本語の「愛人」に近いのは 情人（qíngrén）。若い世代では 老公・老婆 なども使う。"
+    },
+    {
+      "id": "zh-v-zhangfu",
+      "type": "vocab",
+      "tags": [
+        "ステップ3",
+        "日本語との違い"
+      ],
+      "term": "丈夫",
+      "reading": "zhàngfu",
+      "pos": "名詞",
+      "meanings": [
+        "夫"
+      ],
+      "examples": [
+        {
+          "text": "她丈夫是医生。",
+          "translation": "彼女の夫は医者です。"
+        }
+      ],
+      "notes": "日本語の「丈夫（じょうぶ）」ではない。「丈夫な」は 结实（jiēshi）。妻 は 妻子（qīzi）。"
+    },
+    {
+      "id": "zh-v-xinwen",
+      "type": "vocab",
+      "tags": [
+        "ステップ3",
+        "日本語との違い"
+      ],
+      "term": "新闻",
+      "reading": "xīnwén",
+      "pos": "名詞",
+      "meanings": [
+        "ニュース"
+      ],
+      "examples": [
+        {
+          "text": "我每天看新闻。",
+          "translation": "私は毎日ニュースを見る。"
+        }
+      ],
+      "notes": "日本語の「新聞」ではない。新聞は 报纸（bàozhǐ）、新聞を読むは 看报（kàn bào）。"
+    },
+    {
+      "id": "zh-v-dajia",
+      "type": "vocab",
+      "tags": [
+        "ステップ3",
+        "日本語との違い"
+      ],
+      "term": "大家",
+      "reading": "dàjiā",
+      "pos": "代名詞",
+      "meanings": [
+        "みんな",
+        "皆さん"
+      ],
+      "examples": [
+        {
+          "text": "大家好！",
+          "translation": "皆さん、こんにちは！"
+        }
+      ],
+      "notes": "日本語の「大家（おおや）」ではない。大家好 は大勢の前でのあいさつの定番。"
+    },
+    {
+      "id": "zh-v-xiansheng",
+      "type": "vocab",
+      "tags": [
+        "ステップ3",
+        "日本語との違い"
+      ],
+      "term": "先生",
+      "reading": "xiānsheng",
+      "pos": "名詞",
+      "meanings": [
+        "〜さん（男性への敬称）",
+        "夫"
+      ],
+      "examples": [
+        {
+          "text": "李先生，您好！",
+          "translation": "李さん、こんにちは！"
+        }
+      ],
+      "notes": "教師ではなく男性への敬称（Mr.）。教師は 老师。我先生 は「私の夫」。"
+    },
+    {
+      "id": "zh-v-chuang",
+      "type": "vocab",
+      "tags": [
+        "ステップ3",
+        "日本語との違い"
+      ],
+      "term": "床",
+      "reading": "chuáng",
+      "pos": "名詞",
+      "meanings": [
+        "ベッド"
+      ],
+      "examples": [
+        {
+          "text": "我的房间里有一张床。",
+          "translation": "私の部屋にはベッドが 1 つある。"
+        }
+      ],
+      "notes": "日本語の「床（ゆか）」ではない。床は 地板（dìbǎn）。起床（qǐchuáng）は「起きる」。量詞は 张。"
+    },
+    {
+      "id": "zh-v-tang",
+      "type": "vocab",
+      "tags": [
+        "ステップ3",
+        "日本語との違い"
+      ],
+      "term": "汤",
+      "reading": "tāng",
+      "pos": "名詞",
+      "meanings": [
+        "スープ"
+      ],
+      "examples": [
+        {
+          "text": "我想喝鸡蛋汤。",
+          "translation": "卵スープが飲みたい。"
+        }
+      ],
+      "notes": "日本語の「湯（お湯）」ではない。お湯は 热水（rèshuǐ）・开水（kāishuǐ）。スープも 喝 で「飲む」。"
+    },
+    {
+      "id": "zh-v-mianqiang",
+      "type": "vocab",
+      "tags": [
+        "ステップ3",
+        "日本語との違い"
+      ],
+      "term": "勉强",
+      "reading": "miǎnqiǎng",
+      "pos": "形容詞・動詞",
+      "meanings": [
+        "無理に・しぶしぶ",
+        "無理強いする"
+      ],
+      "examples": [
+        {
+          "text": "你不想去就别勉强了。",
+          "translation": "行きたくないなら無理しないで。"
+        }
+      ],
+      "notes": "日本語の「勉強」ではない。勉強する は 学习（xuéxí）。"
+    },
+    {
+      "id": "zh-v-laopo",
+      "type": "vocab",
+      "tags": [
+        "ステップ3",
+        "日本語との違い"
+      ],
+      "term": "老婆",
+      "reading": "lǎopo",
+      "pos": "名詞",
+      "meanings": [
+        "妻（口語・親しみをこめて）"
+      ],
+      "examples": [
+        {
+          "text": "我老婆做菜很好吃。",
+          "translation": "うちの妻の料理はおいしい。"
+        }
+      ],
+      "notes": "「老婆（ろうば）」ではなく、くだけた言い方の「妻・嫁さん」。夫は 老公（lǎogōng）。あらたまった場面では 妻子・爱人 を使う。"
+    },
+    {
+      "id": "zh-v-fandian",
+      "type": "vocab",
+      "tags": [
+        "ステップ3",
+        "日本語との違い"
+      ],
+      "term": "饭店",
+      "reading": "fàndiàn",
+      "pos": "名詞",
+      "meanings": [
+        "ホテル",
+        "レストラン"
+      ],
+      "examples": [
+        {
+          "text": "我们住在北京饭店。",
+          "translation": "私たちは北京飯店（ホテル）に泊まっています。"
+        }
+      ],
+      "notes": "日本語の「飯店」は中華料理店のイメージだが、中国語では大きなホテルの名前にもよく使う。小さな食堂は 饭馆（fànguǎn）。"
+    }
+  ]
+}
