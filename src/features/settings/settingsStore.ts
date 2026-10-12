@@ -24,16 +24,10 @@ export const STUDY_FONT_SCALES: Record<StudyFontScale, { label: string; zoom: nu
   lg: { label: '大', zoom: 1.15 },
   xl: { label: '特大', zoom: 1.3 },
 };
-/** テストモード: 1 問の制限時間（秒。0 はなし） */
-export const CARD_TIME_LIMITS = [0, 10, 20, 30, 60] as const;
-/** 時間を決めて学習: 学習全体の制限時間（分。0 はなし） */
-export const SESSION_TIME_LIMITS = [0, 5, 10, 15, 30] as const;
-export function cardLimitLabel(sec: number): string {
-  return sec > 0 ? `${sec} 秒` : 'なし';
-}
-export function sessionLimitLabel(min: number): string {
-  return min > 0 ? `${min} 分` : 'なし';
-}
+/** テストモード: 1 問の制限時間（秒）の上限 */
+export const CARD_LIMIT_MAX = 3600;
+/** 学習全体の制限時間（分）の上限 */
+export const SESSION_LIMIT_MAX = 600;
 /** 学習画面の余白を詰める（auto: 画面の高さが低いときだけ） */
 export type StudyCompact = 'auto' | 'on' | 'off';
 export const STUDY_COMPACT_LABELS: Record<StudyCompact, string> = {

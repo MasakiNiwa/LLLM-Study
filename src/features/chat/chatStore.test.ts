@@ -81,4 +81,21 @@ describe('chatStore', () => {
     expect(useChat.getState().send('do not lose this draft')).toBe(false);
     expect(useChat.getState().messages).toEqual([]);
   });
+
+  it('使い方モードでは、質問に関係するヘルプの抜粋を添えて送る', async () => {
+    useEngine.setState({ status: 'ready' });
+    useChat.setState({ helpMode: true });
+    vi.mocked(llm.generate).mockImplementationOnce(async (_req, onEvent) => {
+      onEvent({ type: 'delta', text: '右上のタイマーから設定できます' } as never);
+      return { status: 'done' } as never;
+    });
+    expect(useChat.getState().send('タイマーの設定はどこ？')).toBe(true);
+    await vi.waitFor(() => expect(vi.mocked(llm.generate)).toHaveBeenCalled());
+    await vi.waitFor(() => expect(useChat.getState().isGenerating).toBe(false));
+    const req = vi.mocked(llm.generate).mock.calls[0][0];
+    expect(req.message.text).toContain('<app_help>');
+    expect(req.message.text).toContain('時間を測る');
+    expect(req.message.text).toContain('タイマーの設定はどこ？');
+    useChat.setState({ helpMode: false });
+  });
 });

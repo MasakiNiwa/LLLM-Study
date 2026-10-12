@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { Eraser, MessagesSquare, Sparkles } from 'lucide-react';
+import { Eraser, LifeBuoy, Sparkles, X } from 'lucide-react';
 import { Link } from 'wouter';
 import { PageHeader } from '@/app/PageHeader';
 import { Button } from '@/components/ui/Button';
@@ -23,6 +23,15 @@ const SUGGESTIONS = [
   '「serendipity」をカードにして',
 ];
 
+/** 使い方モードの質問の例 */
+const HELP_SUGGESTIONS = [
+  'このアプリで何ができる？',
+  'タイマーの設定はどこ？',
+  '教材を追加するには？',
+  'バックアップの取り方は？',
+  'AI モデルを入れるには？',
+];
+
 const CARD_SUGGESTIONS = [
   'このカードを詳しく解説して',
   '似た表現との違いは？',
@@ -35,6 +44,7 @@ function EmptyState({ onPick }: { onPick: (text: string) => void }) {
   const ready = useEngine((s) => s.status === 'ready');
   const engineStatus = useEngine((s) => s.status);
   const attached = useAiFocus((s) => s.attachedCardId);
+  const helpMode = useChat((s) => s.helpMode);
   const persona = getPersona(personaId, custom);
   return (
     <div className="min-h-0 flex-1 overflow-y-auto">
@@ -48,7 +58,7 @@ function EmptyState({ onPick }: { onPick: (text: string) => void }) {
         </div>
         {ready ? (
           <div className="flex flex-wrap justify-center gap-2">
-            {(attached ? CARD_SUGGESTIONS : SUGGESTIONS).map((s) => (
+            {(helpMode ? HELP_SUGGESTIONS : attached ? CARD_SUGGESTIONS : SUGGESTIONS).map((s) => (
               <button
                 key={s}
                 type="button"
@@ -89,6 +99,8 @@ export default function ChatPage() {
   const ready = useChat((s) => s.ready);
   const hasMessages = useChat((s) => s.messages.length > 0);
   const clear = useChat((s) => s.clear);
+  const helpMode = useChat((s) => s.helpMode);
+  const setHelpMode = useChat((s) => s.setHelpMode);
   const personaId = useSettings((s) => s.persona);
   const custom = useSettings((s) => s.customPersona);
   const [confirming, setConfirming] = useState(false);
@@ -103,17 +115,18 @@ export default function ChatPage() {
         hideTitleOnMobile
         actions={
           <>
-            <Link href="/practice">
-              <Button
-                variant="ghost"
-                size="sm"
-                aria-label="会話練習"
-                title="会話練習（ロールプレイ）"
-              >
-                <MessagesSquare />
-                <span className="hidden sm:inline">会話練習</span>
-              </Button>
-            </Link>
+            <Button
+              variant={helpMode ? 'secondary' : 'ghost'}
+              size="sm"
+              onClick={() => setHelpMode(!helpMode)}
+              aria-pressed={helpMode}
+              aria-label="アプリの使い方を聞く"
+              title="アプリの使い方を聞く（ヘルプをもとに答えます）"
+            >
+              <LifeBuoy />
+              <span className="sm:hidden">使い方</span>
+              <span className="hidden sm:inline">使い方を聞く</span>
+            </Button>
             <Button
               variant="ghost"
               size="sm"
@@ -123,7 +136,7 @@ export default function ChatPage() {
               title="会話をクリア"
             >
               <Eraser />
-              クリア
+              <span className="hidden sm:inline">クリア</span>
             </Button>
           </>
         }
@@ -136,6 +149,24 @@ export default function ChatPage() {
         <EmptyState onPick={(text) => setDraft((d) => ({ text, n: d.n + 1 }))} />
       )}
       <div className="shrink-0 space-y-1 pt-1">
+        {helpMode && (
+          <div className="mx-auto flex w-full max-w-3xl items-center gap-2 px-3 sm:px-4">
+            <div className="flex min-w-0 flex-1 items-center gap-2 rounded-xl bg-sky-50 px-3 py-2 text-xs text-sky-900 dark:bg-sky-950/40 dark:text-sky-200">
+              <LifeBuoy className="size-4 shrink-0" />
+              <span className="min-w-0 flex-1">
+                使い方モード: アプリのヘルプから関係する部分を選んで、AI が答えます
+              </span>
+              <button
+                type="button"
+                onClick={() => setHelpMode(false)}
+                aria-label="使い方モードをやめる"
+                className="rounded-md p-0.5 hover:bg-sky-100 dark:hover:bg-sky-900/40"
+              >
+                <X className="size-4" />
+              </button>
+            </div>
+          </div>
+        )}
         <AttachedCard />
         <Composer key={draft.n} initialText={draft.text} />
       </div>

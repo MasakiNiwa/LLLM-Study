@@ -14,6 +14,7 @@ import type { ChatTurn, GenerationStats } from '@/lib/llm/types';
 import { errorMessage } from '@/lib/utils/format';
 import { createId } from '@/lib/utils/id';
 import { useAiBusy } from '@/features/ai/aiBusy';
+import { helpContext } from '@/features/help/helpTopics';
 import { isAiBusyExceptReaction, preemptReaction } from '@/features/ai/oneshot';
 import { estimateTokens, trimHistory } from './historyBudget';
 import { useAiFocus } from '@/features/ai/focusStore';
@@ -37,6 +38,9 @@ interface ChatState {
   isGenerating: boolean;
   /** 実行中のツールの表示名 */
   toolActivity: string | null;
+  /** 使い方モード: 質問に関係するヘルプの抜粋を添えて、アプリの使い方に答えてもらう */
+  helpMode: boolean;
+  setHelpMode: (on: boolean) => void;
   init: () => Promise<void>;
   /**
    * 送信する。受け付けたら true（入力欄を空にしてよい）、AI が使えない・ほかの処理中なら false
@@ -247,6 +251,11 @@ export const useChat = create<ChatState>()((set, get) => {
     messages: [],
     isGenerating: false,
     toolActivity: null,
+    helpMode: false,
+
+    setHelpMode(on) {
+      set({ helpMode: on });
+    },
 
     init() {
       initPromise ??= (async () => {
@@ -270,7 +279,8 @@ export const useChat = create<ChatState>()((set, get) => {
           id: createId(),
           role: 'user',
           text: trimmed,
-          context: await contextFor(history),
+          // 使い方モードでは、アプリの状態の代わりに、質問に関係するヘルプの抜粋を添える
+          context: get().helpMode ? helpContext(trimmed) : await contextFor(history),
           createdAt: Date.now(),
           status: 'done',
         };

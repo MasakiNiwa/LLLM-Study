@@ -15,9 +15,20 @@ import { addDays } from '@/lib/srs/day';
 import { retrievability } from '@/lib/srs/scheduler';
 import { getTodayOverview } from '@/features/study/repository';
 import type { Settings } from '@/features/settings/settingsStore';
+import { searchHelp } from '@/features/help/helpTopics';
 import { cardForLlm } from './studyContext';
 
 export const TOOL_DECLARATIONS: ToolDeclaration[] = [
+  {
+    name: 'search_help',
+    description:
+      'アプリ LLLM Study の使い方（画面の場所・設定・機能の使い方）をヘルプから調べる。ユーザーがアプリの操作や機能について質問したときに使う',
+    parameters: {
+      type: 'object',
+      properties: { query: { type: 'string', description: '調べたいこと（例: タイマーの設定）' } },
+      required: ['query'],
+    },
+  },
   {
     name: 'get_study_status',
     description:
@@ -284,6 +295,13 @@ export async function executeTool(
         note: 'カードを画面に表示しました。ユーザーが「追加」を押すとマイカードに保存されます。保存されたとは言わないでください',
       };
     }
+    case 'search_help': {
+      const query = typeof call.arguments.query === 'string' ? call.arguments.query : '';
+      const topics = searchHelp(query);
+      return topics.length > 0
+        ? { topics: topics.map((t) => ({ title: t.title, body: t.body })) }
+        : { topics: [], note: 'ヘルプに見当たりませんでした。推測で答えず、そう伝えてください' };
+    }
     case 'get_study_status':
       return getStudyStatus(settings);
     case 'search_items':
@@ -298,6 +316,7 @@ export async function executeTool(
 }
 
 export const TOOL_LABELS: Record<string, string> = {
+  search_help: 'ヘルプを確認',
   get_study_status: '学習状況を確認',
   search_items: '教材を検索',
   get_weak_items: '苦手な項目を確認',

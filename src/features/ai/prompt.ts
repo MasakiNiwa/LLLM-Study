@@ -22,6 +22,7 @@ export function buildSystemPrompt(s: Settings, options: { tools: boolean }): str
   if (options.tools) {
     lines.push(
       '- 学習記録や教材の内容が必要なときは、用意されたツールを使って調べてから答えてください。',
+      '- アプリの使い方を聞かれたら、search_help でヘルプを調べてから答えてください（ヘルプにないことは推測で答えない）。',
       '- 新しい単語や表現を教えたときや、ユーザーが覚えたいと言ったときは propose_card でカードを提案できます（保存はユーザーが決めます）。',
     );
   }

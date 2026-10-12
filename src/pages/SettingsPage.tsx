@@ -46,11 +46,7 @@ import {
   TYPE_ANSWER_LABELS,
 } from '@/features/settings/labels';
 import {
-  CARD_TIME_LIMITS,
-  SESSION_TIME_LIMITS,
-  cardLimitLabel,
   sanitizeSettings,
-  sessionLimitLabel,
   STUDY_COMPACT_LABELS,
   STUDY_FONT_SCALES,
   useSettings,
@@ -63,6 +59,7 @@ import {
   type TypeAnswerMode,
 } from '@/features/settings/settingsStore';
 import { useStudy } from '@/features/study/studyStore';
+import { TimerOptions } from '@/features/study/StudyTimerMenu';
 import { ModelStatusChip } from '@/features/engine/ModelStatusChip';
 import { Link } from 'wouter';
 import { backupNow } from '@/features/home/backup';
@@ -339,56 +336,13 @@ export default function SettingsPage() {
         <Section
           title="時間を測る"
           icon={<Timer />}
-          description="問題ごと・学習全体の時間の表示と、制限時間（テストモード）。学習画面の「Aa」からも変えられます"
+          description="問題ごと・学習全体の時間の表示と、制限時間（テストモード）。学習画面の右上のタイマーのボタンからも変えられます"
           collapsible
           storageKey="settings"
         >
-          <Field label="問題ごとの時間を表示" htmlFor="card-timer" hint="答えを見るまでの時間">
-            <Switch
-              id="card-timer"
-              checked={s.showCardTimer}
-              onChange={(v) => update({ showCardTimer: v })}
-            />
-          </Field>
-          <Field label="学習全体の時間を表示" htmlFor="session-timer" hint="学習を始めてからの時間">
-            <Switch
-              id="session-timer"
-              checked={s.showSessionTimer}
-              onChange={(v) => update({ showSessionTimer: v })}
-            />
-          </Field>
-          <Field
-            label="1 問の制限時間（テストモード）"
-            htmlFor="card-limit"
-            hint="残り時間を数え、時間切れになったら答えを表示します（評価は「もう一度」をおすすめ）"
-            stacked
-          >
-            <Select
-              id="card-limit"
-              value={String(s.cardTimeLimit)}
-              onChange={(v) => update({ cardTimeLimit: Number(v) })}
-              options={CARD_TIME_LIMITS.map((n) => ({
-                value: String(n),
-                label: cardLimitLabel(n),
-              }))}
-            />
-          </Field>
-          <Field
-            label="学習全体の制限時間"
-            htmlFor="session-limit"
-            hint="残り時間を数え、時間になったら評価中のカードで終えます"
-            stacked
-          >
-            <Select
-              id="session-limit"
-              value={String(s.sessionTimeLimit)}
-              onChange={(v) => update({ sessionTimeLimit: Number(v) })}
-              options={SESSION_TIME_LIMITS.map((n) => ({
-                value: String(n),
-                label: sessionLimitLabel(n),
-              }))}
-            />
-          </Field>
+          <div className="px-4 py-3.5 sm:px-5">
+            <TimerOptions />
+          </div>
         </Section>
 
         <Section
