@@ -43,6 +43,7 @@ import { AnswerResult } from '@/features/study/AnswerResult';
 import { AnswerSheet } from '@/features/study/AnswerSheet';
 import { PracticePicker } from '@/features/study/PracticePicker';
 import { StudyDisplayMenu } from '@/features/study/StudyDisplayMenu';
+import { StudyTimerMenu } from '@/features/study/StudyTimerMenu';
 import { CardInfoButton } from '@/features/study/CardInfoSheet';
 import { useStudyLayout } from '@/features/study/useStudyLayout';
 import { RatingBar } from '@/features/study/RatingBar';
@@ -358,6 +359,7 @@ export default function StudyPage() {
                 </Button>
               </>
             )}
+            <StudyTimerMenu />
             <StudyDisplayMenu />
           </>
         }

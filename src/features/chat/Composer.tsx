@@ -19,6 +19,7 @@ export function Composer({ initialText = '' }: { initialText?: string }) {
   const stop = useChat((s) => s.stop);
   const ready = useEngine((s) => s.status === 'ready');
   const enterToSend = useSettings((s) => s.enterToSend);
+  const helpMode = useChat((s) => s.helpMode);
   // ほかの AI の処理（例文クイズ・会話練習など）の最中は送れない（ひとことは譲ってもらえる）
   const otherBusy = useAiBusy((s) => s.task !== null && s.task !== 'reaction' && s.task !== 'chat');
 
@@ -64,7 +65,9 @@ export function Composer({ initialText = '' }: { initialText?: string }) {
               ? 'まず AI モデルを読み込んでください'
               : otherBusy
                 ? 'AI がほかの処理中です（終わったら送れます）'
-                : 'AI に話しかける…'
+                : helpMode
+                  ? 'アプリの使い方を質問する…'
+                  : 'AI に話しかける…'
           }
           enterKeyHint={enterToSend ? 'send' : 'enter'}
           aria-label="メッセージ"
