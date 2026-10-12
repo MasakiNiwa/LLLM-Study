@@ -3,6 +3,7 @@ import { beforeEach, describe, expect, it } from 'vitest';
 import { db } from '@/lib/db/db';
 import { expectedAnswer } from '@/lib/packs/itemText';
 import { installPack } from '@/lib/packs/install';
+import { useSettings } from '@/features/settings/settingsStore';
 import { useStudy } from './studyStore';
 
 beforeEach(async () => {
@@ -77,5 +78,23 @@ describe('studyStore', () => {
     expect(useStudy.getState()).toMatchObject({ status: 'idle', interrupted: true, current: null });
     await useStudy.getState().start();
     expect(useStudy.getState()).toMatchObject({ status: 'studying', interrupted: false });
+  });
+
+  it('学習全体の制限時間を過ぎたら、評価したカードで終える', async () => {
+    useSettings.getState().update({ sessionTimeLimit: 5 });
+    try {
+      await useStudy.getState().start();
+      useStudy.getState().reveal();
+      expect(useStudy.getState().revealedAt).not.toBeNull();
+      // 6 分前に始めたことにする
+      useStudy.setState((s) => ({ stats: { ...s.stats, startedAt: Date.now() - 6 * 60_000 } }));
+      await useStudy.getState().rate(3);
+      expect(useStudy.getState()).toMatchObject({ status: 'done', timeUp: true });
+      expect(await db.reviews.count()).toBe(1);
+      await useStudy.getState().start();
+      expect(useStudy.getState().timeUp).toBe(false);
+    } finally {
+      useSettings.getState().update({ sessionTimeLimit: 0 });
+    }
   });
 });

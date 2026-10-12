@@ -18,7 +18,7 @@
   "author": "LLLM-Study",
   "license": "MIT",
   "source": "LLLM-Study オリジナル（高頻度の基本語を中心に選定）",
-  "revision": 1,
+  "revision": 2,
   "items": [
     {
       "id": "v-take",
@@ -40,6 +40,10 @@
           "text": "Take an umbrella with you.",
           "translation": "傘を持って行きなさい。"
         }
+      ],
+      "forms": [
+        "took",
+        "taken"
       ],
       "collocations": [
         "take a break",
@@ -69,6 +73,9 @@
           "translation": "その映画で泣いてしまった。"
         }
       ],
+      "forms": [
+        "made"
+      ],
       "collocations": [
         "make a mistake",
         "make a decision",
@@ -97,6 +104,10 @@
           "translation": "暗くなってきた。"
         }
       ],
+      "forms": [
+        "got",
+        "gotten"
+      ],
       "collocations": [
         "get up",
         "get home",
@@ -123,6 +134,10 @@
           "text": "Let me give it a try.",
           "translation": "やってみるね。"
         }
+      ],
+      "forms": [
+        "gave",
+        "given"
       ],
       "collocations": [
         "give up",
@@ -152,6 +167,11 @@
           "translation": "牛乳が腐った。"
         }
       ],
+      "forms": [
+        "went",
+        "gone",
+        "goes"
+      ],
       "collocations": [
         "go out",
         "go on",
@@ -179,6 +199,9 @@
           "text": "My dream came true.",
           "translation": "夢がかなった。"
         }
+      ],
+      "forms": [
+        "came"
       ],
       "collocations": [
         "come back",
@@ -208,6 +231,10 @@
           "translation": "髪を切ってもらった。"
         }
       ],
+      "forms": [
+        "has",
+        "had"
+      ],
       "collocations": [
         "have lunch",
         "have a good time",
@@ -235,6 +262,9 @@
           "text": "She kept talking for an hour.",
           "translation": "彼女は1時間話し続けた。"
         }
+      ],
+      "forms": [
+        "kept"
       ],
       "collocations": [
         "keep in touch",
@@ -264,6 +294,9 @@
           "translation": "別の言い方をさせて。"
         }
       ],
+      "forms": [
+        "put"
+      ],
       "collocations": [
         "put on",
         "put off",
@@ -290,6 +323,9 @@
           "text": "Spring brings warm weather.",
           "translation": "春は暖かい天気をもたらす。"
         }
+      ],
+      "forms": [
+        "brought"
       ],
       "collocations": [
         "bring back",
@@ -319,6 +355,9 @@
           "translation": "そのアプリはどのスマホでも動く。"
         }
       ],
+      "forms": [
+        "ran"
+      ],
       "collocations": [
         "run out of",
         "run into",
@@ -346,6 +385,9 @@
           "text": "Let's set a date for the party.",
           "translation": "パーティーの日を決めよう。"
         }
+      ],
+      "forms": [
+        "set"
       ],
       "collocations": [
         "set up",
@@ -429,6 +471,10 @@
           "translation": "また明日。"
         }
       ],
+      "forms": [
+        "saw",
+        "seen"
+      ],
       "collocations": [
         "see a doctor",
         "I see",
@@ -456,6 +502,9 @@
           "translation": "その本はおもしろいと思った。"
         }
       ],
+      "forms": [
+        "found"
+      ],
       "collocations": [
         "find out",
         "find a way"
@@ -480,6 +529,9 @@
           "text": "Let me think about it.",
           "translation": "ちょっと考えさせて。"
         }
+      ],
+      "forms": [
+        "thought"
       ],
       "collocations": [
         "think about",
@@ -507,6 +559,10 @@
           "text": "You never know.",
           "translation": "先のことは分からないよ。"
         }
+      ],
+      "forms": [
+        "knew",
+        "known"
       ],
       "collocations": [
         "you know",
@@ -536,6 +592,9 @@
           "translation": "遠慮なく聞いてね。"
         }
       ],
+      "forms": [
+        "felt"
+      ],
       "collocations": [
         "feel like",
         "feel free to"
@@ -562,6 +621,9 @@
           "text": "Leave the door open.",
           "translation": "ドアを開けたままにしておいて。"
         }
+      ],
+      "forms": [
+        "left"
       ],
       "collocations": [
         "leave for",
@@ -591,6 +653,9 @@
           "translation": "会議は月曜日に開かれる。"
         }
       ],
+      "forms": [
+        "held"
+      ],
       "collocations": [
         "hold on",
         "hold a meeting",
@@ -618,6 +683,10 @@
           "text": "Let's break for lunch.",
           "translation": "昼食休憩にしよう。"
         }
+      ],
+      "forms": [
+        "broke",
+        "broken"
       ],
       "collocations": [
         "break down",
@@ -699,6 +768,9 @@
           "translation": "行こう！"
         }
       ],
+      "forms": [
+        "let"
+      ],
       "collocations": [
         "let me know",
         "let go",
@@ -726,6 +798,10 @@
           "translation": "データははっきりした傾向を示している。"
         }
       ],
+      "forms": [
+        "showed",
+        "shown"
+      ],
       "collocations": [
         "show up",
         "show around",
@@ -752,6 +828,9 @@
           "text": "I can't tell the difference.",
           "translation": "違いが分からない。"
         }
+      ],
+      "forms": [
+        "told"
       ],
       "collocations": [
         "tell a lie",
@@ -860,6 +939,9 @@
           "translation": "新しい仕事についたって聞いたよ。"
         }
       ],
+      "forms": [
+        "heard"
+      ],
       "collocations": [
         "hear from",
         "hear about"
@@ -885,6 +967,9 @@
           "text": "We need to meet the deadline.",
           "translation": "締め切りに間に合わせないといけない。"
         }
+      ],
+      "forms": [
+        "met"
       ],
       "collocations": [
         "meet up",
@@ -913,6 +998,9 @@
           "translation": "努力は報われる。"
         }
       ],
+      "forms": [
+        "paid"
+      ],
       "collocations": [
         "pay for",
         "pay attention to",
@@ -938,6 +1026,9 @@
           "text": "Please send my regards to your family.",
           "translation": "ご家族によろしくお伝えください。"
         }
+      ],
+      "forms": [
+        "sent"
       ],
       "collocations": [
         "send back",
@@ -965,6 +1056,9 @@
           "translation": "いくら使ったの？"
         }
       ],
+      "forms": [
+        "spent"
+      ],
       "collocations": [
         "spend time",
         "spend money on"
@@ -990,6 +1084,9 @@
           "text": "Please stand in line.",
           "translation": "列に並んでください。"
         }
+      ],
+      "forms": [
+        "stood"
       ],
       "collocations": [
         "stand up",
@@ -1018,6 +1115,9 @@
           "translation": "彼女は1等賞を取った。"
         }
       ],
+      "forms": [
+        "won"
+      ],
       "collocations": [
         "win a prize",
         "win over"
@@ -1044,6 +1144,9 @@
           "text": "I want to lose weight.",
           "translation": "体重を減らしたい。"
         }
+      ],
+      "forms": [
+        "lost"
       ],
       "collocations": [
         "lose weight",
@@ -1073,6 +1176,9 @@
           "translation": "風邪をひいた。"
         }
       ],
+      "forms": [
+        "caught"
+      ],
       "collocations": [
         "catch up with",
         "catch a cold",
@@ -1098,6 +1204,10 @@
           "text": "I chose the red one.",
           "translation": "赤いのを選んだ。"
         }
+      ],
+      "forms": [
+        "chose",
+        "chosen"
       ],
       "collocations": [
         "choose between",

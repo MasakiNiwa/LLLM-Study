@@ -47,7 +47,7 @@ export const AI_TOOL_ITEMS: NavItem[] = [
     to: '/practice',
     label: '会話練習',
     icon: MessagesSquare,
-    description: '場面を決めて AI とロールプレイ。終わったら添削',
+    description: '語学・ビジネス・口頭試問などを AI とロールプレイ。終わったらふりかえり',
   },
 ];
 

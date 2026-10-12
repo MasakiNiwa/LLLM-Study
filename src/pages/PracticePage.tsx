@@ -24,14 +24,21 @@ import { useEngine } from '@/features/engine/engineStore';
 import { SpeakButton } from '@/features/items/ItemCard';
 import { useLibrary } from '@/features/library/libraryStore';
 import { usePractice, type PracticeMessage } from '@/features/practice/practiceStore';
+import { pickPackMaterial } from '@/features/practice/material';
 import {
+  FEEDBACK_LABELS,
+  GENERAL_LANGUAGES,
   LEVEL_LABELS,
+  LEVEL_TITLES,
   PRACTICE_LANGUAGES,
   SCENARIOS,
   splitTranslation,
+  TRACKS,
   type PracticeLevel,
+  type PracticeTrack,
   type Scenario,
 } from '@/features/practice/scenarios';
+import { STORAGE_PREFIX } from '@/lib/constants';
 import { pickQuizItems } from '@/features/quiz/quizSelect';
 import { targetOf } from '@/features/quiz/quizGen';
 
@@ -66,26 +73,67 @@ function AiBubble({ message, lang }: { message: PracticeMessage; lang: string })
   );
 }
 
+const TRACK_KEY = `${STORAGE_PREFIX}:practice-track`;
+
+function loadTrack(): PracticeTrack {
+  try {
+    const v = localStorage.getItem(TRACK_KEY);
+    if (v && v in TRACKS) return v as PracticeTrack;
+  } catch {
+    // 保存できない環境では毎回「語学の会話」から
+  }
+  return 'language';
+}
+
 function Setup() {
   const packs = useLibrary((s) => s.packs);
   const start = usePractice((s) => s.start);
   const defaultLang = packs.map((p) => p.language?.target).find((l) => l && l !== 'ja') ?? 'en';
-  const [lang, setLang] = useState<string>(defaultLang);
+  const [track, setTrackState] = useState<PracticeTrack>(loadTrack);
+  const [langByTrack, setLangByTrack] = useState<Record<PracticeTrack, string>>({
+    language: defaultLang,
+    business: 'ja',
+    study: 'ja',
+  });
+  const lang = langByTrack[track];
   const [level, setLevel] = useState<PracticeLevel>('easy');
   const [useVocab, setUseVocab] = useState(true);
   const [custom, setCustom] = useState('');
+  const [topic, setTopic] = useState('');
+  const [packId, setPackId] = useState('');
   const [starting, setStarting] = useState(false);
+
+  const setTrack = (t: PracticeTrack) => {
+    setTrackState(t);
+    try {
+      localStorage.setItem(TRACK_KEY, t);
+    } catch {
+      // 覚えられなくても動く
+    }
+  };
+  // 理解を深める練習の話題: 入力したもの、なければ選んだ教材の名前
+  const studyPack = packs.find((p) => p.id === packId);
+  const studyTopic = topic.trim() || studyPack?.title || '';
 
   const begin = async (scenario: Scenario) => {
     setStarting(true);
     try {
-      const vocab = useVocab
-        ? (await pickQuizItems(20))
-            .filter((p) => (p.lang ?? 'en').startsWith(lang))
-            .slice(0, 5)
-            .map((p) => targetOf(p.item))
-        : [];
-      await start({ scenario, lang, level, vocab });
+      const vocab =
+        track === 'language' && useVocab
+          ? (await pickQuizItems(20))
+              .filter((p) => (p.lang ?? 'en').startsWith(lang))
+              .slice(0, 5)
+              .map((p) => targetOf(p.item))
+          : [];
+      const material = track === 'study' && packId ? await pickPackMaterial(packId, 8) : undefined;
+      await start({
+        scenario,
+        lang,
+        level,
+        vocab,
+        topic: track === 'study' ? studyTopic : undefined,
+        material,
+      });
     } catch (e) {
       toast.error('会話を始められませんでした', { description: errorMessage(e) });
     } finally {
@@ -93,23 +141,40 @@ function Setup() {
     }
   };
 
+  const languages = track === 'language' ? PRACTICE_LANGUAGES : GENERAL_LANGUAGES;
+  const needsTopic = track === 'study' && !studyTopic;
   return (
     <div className="space-y-4">
+      <div className="grid grid-cols-3 gap-2" role="group" aria-label="練習の種類">
+        {(Object.keys(TRACKS) as PracticeTrack[]).map((t) => (
+          <button
+            key={t}
+            type="button"
+            aria-pressed={track === t}
+            onClick={() => setTrack(t)}
+            className={cn(
+              'flex flex-col items-center gap-0.5 rounded-2xl border px-2 py-2.5 text-sm transition-colors',
+              track === t
+                ? 'border-accent-500 bg-accent-50 font-semibold text-accent-800 dark:bg-accent-900/30 dark:text-accent-200'
+                : 'border-slate-200 bg-white hover:bg-slate-50 dark:border-slate-800 dark:bg-slate-900 dark:hover:bg-slate-800',
+            )}
+          >
+            <span className="text-xl" aria-hidden>
+              {TRACKS[t].emoji}
+            </span>
+            {TRACKS[t].label}
+          </button>
+        ))}
+      </div>
       <Card className="space-y-4 p-4 sm:p-5">
-        <div>
-          <h2 className="font-semibold">場面を選んで会話する</h2>
-          <p className="mt-1 text-sm text-slate-600 dark:text-slate-400">
-            AI
-            が役を演じて話しかけてきます。間違えても大丈夫。終わったら「添削」で直してもらい、覚えたい表現はマイカードに追加できます。
-          </p>
-        </div>
+        <p className="text-sm text-slate-600 dark:text-slate-400">{TRACKS[track].description}</p>
         <div className="grid grid-cols-2 gap-3">
           <label className="space-y-1">
             <span className="text-sm font-medium">言語</span>
             <Select
               value={lang}
-              onChange={setLang}
-              options={PRACTICE_LANGUAGES.map((l) => ({ value: l, label: languageName(l) }))}
+              onChange={(v) => setLangByTrack((m) => ({ ...m, [track]: v }))}
+              options={languages.map((l) => ({ value: l, label: languageName(l) }))}
             />
           </label>
           <label className="space-y-1">
@@ -119,27 +184,57 @@ function Setup() {
               onChange={(v) => setLevel(v as PracticeLevel)}
               options={(Object.keys(LEVEL_LABELS) as PracticeLevel[]).map((l) => ({
                 value: l,
-                label: LEVEL_LABELS[l],
+                label: LEVEL_TITLES[track][l],
               }))}
             />
           </label>
         </div>
-        <div className="flex items-center justify-between gap-4">
-          <div>
-            <div className="text-sm font-medium">学習中の語句を会話に取り入れる</div>
-            <p className="text-xs text-slate-500">
-              思い出しにくくなっている単語・フレーズを AI に使ってもらいます
-            </p>
+        {track === 'language' && (
+          <div className="flex items-center justify-between gap-4">
+            <div>
+              <div className="text-sm font-medium">学習中の語句を会話に取り入れる</div>
+              <p className="text-xs text-slate-500">
+                思い出しにくくなっている単語・フレーズを AI に使ってもらいます
+              </p>
+            </div>
+            <Switch checked={useVocab} onChange={setUseVocab} label="学習中の語句を取り入れる" />
           </div>
-          <Switch checked={useVocab} onChange={setUseVocab} label="学習中の語句を取り入れる" />
-        </div>
+        )}
+        {track === 'study' && (
+          <div className="space-y-3">
+            <label className="block space-y-1">
+              <span className="text-sm font-medium">教材から話題を選ぶ</span>
+              <Select
+                value={packId}
+                onChange={setPackId}
+                aria-label="話題にする教材"
+                options={[
+                  { value: '', label: '選ばない（話題を入力する）' },
+                  ...packs.map((p) => ({ value: p.id, label: p.title })),
+                ]}
+              />
+              <span className="block text-xs text-slate-500">
+                思い出しにくくなっている項目を、アプリが選んで AI に渡します
+              </span>
+            </label>
+            <label className="block space-y-1">
+              <span className="text-sm font-medium">話題</span>
+              <input
+                value={topic}
+                onChange={(e) => setTopic(e.target.value)}
+                placeholder={studyPack ? studyPack.title : '例: 光合成のしくみ、減価償却、鎌倉幕府'}
+                className="h-10 w-full rounded-xl border border-slate-300 bg-white px-3 text-sm dark:border-slate-700 dark:bg-slate-950"
+              />
+            </label>
+          </div>
+        )}
       </Card>
       <div className="grid gap-2 sm:grid-cols-2">
-        {SCENARIOS.map((s) => (
+        {SCENARIOS.filter((s) => s.track === track).map((s) => (
           <button
             key={s.id}
             type="button"
-            disabled={starting}
+            disabled={starting || needsTopic}
             onClick={() => void begin(s)}
             className="flex items-center gap-3 rounded-2xl border border-slate-200 bg-white p-4 text-left hover:border-accent-400 hover:bg-accent-50/50 disabled:opacity-60 dark:border-slate-800 dark:bg-slate-900 dark:hover:bg-accent-900/20"
           >
@@ -155,33 +250,45 @@ function Setup() {
           </button>
         ))}
       </div>
-      <Card className="space-y-2 p-4">
-        <div className="text-sm font-medium">自由に場面を決める</div>
-        <div className="flex gap-2">
-          <input
-            value={custom}
-            onChange={(e) => setCustom(e.target.value)}
-            placeholder="例: 空港で乗り継ぎ便について聞く"
-            className="h-10 min-w-0 flex-1 rounded-xl border border-slate-300 bg-white px-3 text-sm dark:border-slate-700 dark:bg-slate-950"
-          />
-          <Button
-            variant="primary"
-            disabled={!custom.trim() || starting}
-            onClick={() =>
-              void begin({
-                id: 'custom',
-                title: custom.trim(),
-                emoji: '💬',
-                situation: custom.trim(),
-                aiRole: 'その場面にふさわしい相手',
-                userRole: '学習者',
-              })
-            }
-          >
-            始める
-          </Button>
-        </div>
-      </Card>
+      {needsTopic && (
+        <p className="text-center text-xs text-slate-500">
+          教材を選ぶか、話題を入力すると始められます
+        </p>
+      )}
+      {track !== 'study' && (
+        <Card className="space-y-2 p-4">
+          <div className="text-sm font-medium">自由に場面を決める</div>
+          <div className="flex gap-2">
+            <input
+              value={custom}
+              onChange={(e) => setCustom(e.target.value)}
+              placeholder={
+                track === 'business'
+                  ? '例: 新しい企画を社内の会議で説明する'
+                  : '例: 空港で乗り継ぎ便について聞く'
+              }
+              className="h-10 min-w-0 flex-1 rounded-xl border border-slate-300 bg-white px-3 text-sm dark:border-slate-700 dark:bg-slate-950"
+            />
+            <Button
+              variant="primary"
+              disabled={!custom.trim() || starting}
+              onClick={() =>
+                void begin({
+                  id: 'custom',
+                  track,
+                  title: custom.trim(),
+                  emoji: '💬',
+                  situation: custom.trim(),
+                  aiRole: 'その場面にふさわしい相手',
+                  userRole: track === 'business' ? 'ビジネスパーソン' : '学習者',
+                })
+              }
+            >
+              始める
+            </Button>
+          </div>
+        </Card>
+      )}
       {starting && (
         <p className="flex items-center justify-center gap-2 text-sm text-slate-500">
           <Loader2 className="size-4 animate-spin" />
@@ -194,17 +301,31 @@ function Setup() {
 
 function FeedbackDialog({ open, onClose }: { open: boolean; onClose: () => void }) {
   const feedback = usePractice((s) => s.feedback);
+  const track = usePractice((s) => s.config?.scenario.track ?? 'language');
   const [added, setAdded] = useState<Set<number>>(new Set());
   const add = async (i: number) => {
     const c = feedback?.corrections[i];
     if (!c) return;
     try {
-      await addUserItem({
-        type: 'phrase',
-        phrase: c.corrected,
-        meaning: c.meaning || c.note || '（会話練習で直した表現）',
-        notes: [`元の文: ${c.original}`, c.note].filter(Boolean).join('\n'),
-      });
+      // 語学は直した表現をフレーズに、ほかは「元の言い方 → よりよい言い方・正しい説明」の一問一答にする
+      await addUserItem(
+        track === 'language'
+          ? {
+              type: 'phrase',
+              phrase: c.corrected,
+              meaning: c.meaning || c.note || '（会話練習で直した表現）',
+              notes: [`元の文: ${c.original}`, c.note].filter(Boolean).join('\n'),
+            }
+          : {
+              type: 'qa',
+              question:
+                track === 'business'
+                  ? `「${c.original}」をよりよい言い方にすると？`
+                  : `「${c.original}」の誤りを直すと？`,
+              answer: c.corrected,
+              explanation: [c.meaning, c.note].filter(Boolean).join('\n') || undefined,
+            },
+      );
       setAdded((s) => new Set(s).add(i));
       void useLibrary.getState().refresh();
       toast.success('マイカードに追加しました');
@@ -213,7 +334,7 @@ function FeedbackDialog({ open, onClose }: { open: boolean; onClose: () => void 
     }
   };
   return (
-    <Dialog open={open} title="添削" onClose={onClose}>
+    <Dialog open={open} title={FEEDBACK_LABELS[track].title} onClose={onClose}>
       {feedback && (
         <div className="space-y-3">
           {feedback.good && (
@@ -270,7 +391,9 @@ function Conversation() {
         <div className="mx-auto w-full max-w-2xl space-y-4 px-3 py-4 sm:px-4">
           <div className="flex items-center justify-center gap-2 text-xs text-slate-500">
             <span aria-hidden>{config.scenario.emoji}</span>
-            {config.scenario.title} · {languageName(config.lang)} · {LEVEL_LABELS[config.level]}
+            {config.topic ? `${config.topic} · ` : ''}
+            {config.scenario.title} · {languageName(config.lang)} ·{' '}
+            {LEVEL_TITLES[config.scenario.track][config.level]}
           </div>
           {config.vocab.length > 0 && (
             <p className="text-center text-xs text-slate-400">
@@ -307,7 +430,7 @@ function Conversation() {
             }}
           >
             {feedbackLoading ? <Loader2 className="animate-spin" /> : <ClipboardCheck />}
-            添削してもらう
+            {FEEDBACK_LABELS[config.scenario.track].action}
           </Button>
         </div>
         <form

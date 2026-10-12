@@ -7,6 +7,12 @@ describe('normalizeAnswer', () => {
     expect(normalizeAnswer('I’m in.')).toBe("i'm in");
     expect(normalizeAnswer('ＴＡＫＥ')).toBe('take');
   });
+
+  it('日本語の前後の空白は区別しない（英語の語の間の空白は残す）', () => {
+    expect(normalizeAnswer('5 冊まで 2 週間')).toBe(normalizeAnswer('5冊まで2週間'));
+    expect(normalizeAnswer('報告、連絡、相談')).toBe('報告連絡相談');
+    expect(normalizeAnswer('look forward to')).toBe('look forward to');
+  });
 });
 
 describe('checkAnswer', () => {

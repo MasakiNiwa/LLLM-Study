@@ -6,7 +6,9 @@ import { Button } from '@/components/ui/Button';
 import type { CardRecord } from '@/lib/db/types';
 import { errorMessage } from '@/lib/utils/format';
 import { useAiBusy } from '@/features/ai/aiBusy';
-import { ASSIST_ACTIONS, assistPrompt, type AssistAction } from '@/features/ai/assist';
+import { assistActions, assistPrompt, type AssistAction } from '@/features/ai/assist';
+import { isLanguagePack } from '@/lib/packs/subjects';
+import { useLibrary } from '@/features/library/libraryStore';
 import { useAiFocus } from '@/features/ai/focusStore';
 import { cancelAi, runOneshot } from '@/features/ai/oneshot';
 import { getPersona } from '@/features/ai/personas';
@@ -38,6 +40,9 @@ export function AiAssistPanel({ card }: { card: CardRecord }) {
   }, [card.id]);
 
   const persona = getPersona(personaId, custom);
+  // 語学以外の教材（簿記・歴史など）では、例文の代わりに具体例を出すなど指示を変える
+  const pack = useLibrary((s) => s.packs.find((p) => p.id === card.packId));
+  const domain = pack && !isLanguagePack(pack) ? 'general' : 'language';
   const ready = engineStatus === 'ready';
 
   const ask = async (action: AssistAction) => {
@@ -54,7 +59,7 @@ export function AiAssistPanel({ card }: { card: CardRecord }) {
     try {
       const r = await runOneshot({
         task: 'assist',
-        prompt: assistPrompt(action, json),
+        prompt: assistPrompt(action, json, domain),
         onText: (text) => cardIdRef.current === id && setAnswer({ action, text }),
       });
       if (cardIdRef.current === id)
@@ -92,7 +97,7 @@ export function AiAssistPanel({ card }: { card: CardRecord }) {
   return (
     <div className="space-y-3">
       <div className="flex flex-wrap gap-2">
-        {ASSIST_ACTIONS.map((a) => (
+        {assistActions(domain).map((a) => (
           <Button
             key={a.id}
             size="sm"

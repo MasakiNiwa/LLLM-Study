@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react';
+import { useCallback, useEffect, useState } from 'react';
 import {
   CalendarDays,
   CircleStop,
@@ -31,7 +31,7 @@ import {
 } from '@/lib/packs/itemText';
 import type { AnswerVerdict } from '@/lib/srs/answerCheck';
 import { speak, stopSpeaking } from '@/lib/speech/tts';
-import { formatDuration } from '@/lib/utils/format';
+import { formatClock } from '@/lib/utils/format';
 import { getPersona } from '@/features/ai/personas';
 import { CardFace, type OrderResult } from '@/features/items/ItemCard';
 import { useEngine } from '@/features/engine/engineStore';
@@ -48,6 +48,7 @@ import { useStudyLayout } from '@/features/study/useStudyLayout';
 import { RatingBar } from '@/features/study/RatingBar';
 import { ScopePicker } from '@/features/study/ScopePicker';
 import { ReactionBubble } from '@/features/study/ReactionBubble';
+import { StudyTimers } from '@/features/study/StudyTimers';
 import { useStudy } from '@/features/study/studyStore';
 
 const VERDICT_GRADE: Record<AnswerVerdict, GradeValue> = { correct: 3, close: 2, wrong: 1 };
@@ -76,6 +77,7 @@ function SessionSummary() {
   const aiReady = useEngine((s) => s.status === 'ready');
   const unlimited = useSettings((s) => s.noDailyLimit);
   const practice = useStudy((s) => s.mode === 'practice');
+  const timeUp = useStudy((s) => s.timeUp);
   const [endedAt] = useState(() => Date.now());
   const [message] = useState(() => {
     const list = stats.done > 0 ? persona.finish : persona.allDone;
@@ -89,13 +91,15 @@ function SessionSummary() {
       </div>
       <div>
         <h2 className="text-xl font-bold">
-          {practice
-            ? stats.done > 0
-              ? 'おさらいが終わりました'
-              : 'おさらいするカードがありません'
-            : stats.done > 0
-              ? '今日の学習が終わりました'
-              : '今は学習するカードがありません'}
+          {timeUp
+            ? '⏰ 時間になりました'
+            : practice
+              ? stats.done > 0
+                ? 'おさらいが終わりました'
+                : 'おさらいするカードがありません'
+              : stats.done > 0
+                ? '今日の学習が終わりました'
+                : '今は学習するカードがありません'}
         </h2>
         <p className="mt-2 text-slate-600 dark:text-slate-400">
           <span className="mr-1" aria-hidden>
@@ -118,11 +122,17 @@ function SessionSummary() {
           </div>
           <div>
             <div className="text-2xl font-bold tabular-nums">
-              {formatDuration(endedAt - stats.startedAt).replace(' 秒', '秒')}
+              {formatClock(endedAt - stats.startedAt)}
             </div>
             <div className="text-xs text-slate-500">時間</div>
           </div>
         </Card>
+      )}
+      {timeUp && !practice && (
+        <Button variant="primary" size="sm" onClick={() => void useStudy.getState().start()}>
+          <Play />
+          続きを学習する（時間を測り直す）
+        </Button>
       )}
       {practice ? (
         <Button variant="secondary" size="sm" onClick={() => void useStudy.getState().start()}>
@@ -209,6 +219,16 @@ export default function StudyPage() {
   const written = useStudy((s) => s.answer);
   const typedNow = written && written.shownAt === shownAt ? written : null;
   const [answerOpen, setAnswerOpen] = useState(false);
+  // テストモードで時間切れになったカード
+  const [timedOut, setTimedOut] = useState<string | null>(null);
+  const timedOutNow = timedOut === showKey;
+  const onCardTimeUp = useCallback(() => {
+    const st = useStudy.getState();
+    if (!st.current || st.revealed) return;
+    setTimedOut(`${st.current.card.id}:${st.shownAt}`);
+    setAnswerOpen(false);
+    st.reveal();
+  }, []);
 
   // ページを開いたら今日のキューで始める（自分で中断したときは、始めるボタンを押すまで待つ）
   useEffect(() => {
@@ -262,7 +282,9 @@ export default function StudyPage() {
           : 1
         : typedNow?.verdict
           ? VERDICT_GRADE[typedNow.verdict]
-          : undefined;
+          : timedOutNow
+            ? 1
+            : undefined;
 
   // キーボード操作: Space / Enter で答えを見る、1〜4 で評価、Ctrl+Z で取り消し
   useEffect(() => {
@@ -304,9 +326,12 @@ export default function StudyPage() {
         hideHelp
         meta={
           status === 'studying' && (
-            <span className="font-mono text-sm whitespace-nowrap text-slate-500 tabular-nums">
-              {practice && <span className="mr-1 font-sans sm:hidden">おさらい</span>}
-              残り {queueLength}
+            <span className="flex min-w-0 items-center gap-2">
+              <span className="font-mono text-sm whitespace-nowrap text-slate-500 tabular-nums">
+                {practice && <span className="mr-1 font-sans sm:hidden">おさらい</span>}
+                残り {queueLength}
+              </span>
+              <StudyTimers onCardTimeUp={onCardTimeUp} />
             </span>
           )
         }
@@ -388,6 +413,11 @@ export default function StudyPage() {
                   )}
                   {current.card.reps > 0 && <span>復習 {current.card.reps} 回</span>}
                   {current.card.lapses > 0 && <span>忘れた回数 {current.card.lapses}</span>}
+                  {timedOutNow && (
+                    <span className="rounded-md bg-rose-100 px-1.5 py-0.5 font-medium text-rose-800 dark:bg-rose-900/40 dark:text-rose-200">
+                      時間切れ
+                    </span>
+                  )}
                   <span className="ml-auto" />
                   <CardInfoButton card={current.card} item={current.item} revealed={revealed} />
                   <button

@@ -18,7 +18,7 @@
   "author": "LLLM-Study",
   "license": "MIT",
   "source": "LLLM-Study オリジナル",
-  "revision": 1,
+  "revision": 2,
   "passages": [
     {
       "id": "r-library",
@@ -86,7 +86,12 @@
       "passage": "r-library",
       "question": "本は何冊まで、どのくらいの期間借りられますか。",
       "answer": "5 冊まで 2 週間",
-      "explanation": "\"You can borrow up to five books for two weeks.\" up to 〜 は「〜まで（上限）」。"
+      "explanation": "\"You can borrow up to five books for two weeks.\" up to 〜 は「〜まで（上限）」。",
+      "accepted": [
+        "5冊を2週間",
+        "2週間で5冊まで",
+        "五冊まで二週間"
+      ]
     },
     {
       "id": "lib-4",
@@ -130,7 +135,13 @@
       "passage": "r-email",
       "question": "質問があるとき、トムはどのように連絡してほしいと言っていますか。",
       "answer": "電話ではなくメールで",
-      "explanation": "\"please send me an email instead of calling\" instead of 〜 は「〜の代わりに」。"
+      "explanation": "\"please send me an email instead of calling\" instead of 〜 は「〜の代わりに」。",
+      "accepted": [
+        "メールで",
+        "メール",
+        "Eメールで",
+        "電話ではなくメール"
+      ]
     },
     {
       "id": "mail-4",
@@ -160,7 +171,15 @@
       "passage": "r-sleep",
       "question": "ほとんどの大人に必要な睡眠時間は、毎晩どのくらいですか。",
       "answer": "7〜9 時間",
-      "explanation": "\"Most adults need seven to nine hours of sleep each night.\""
+      "explanation": "\"Most adults need seven to nine hours of sleep each night.\"",
+      "accepted": [
+        "7~9時間",
+        "7-9時間",
+        "7から9時間",
+        "7時間から9時間",
+        "7〜9時間",
+        "7～9時間"
+      ]
     },
     {
       "id": "sleep-3",
@@ -204,7 +223,11 @@
       "passage": "r-dialogue",
       "question": "ミカたちはどこで待つことにしましたか。",
       "answer": "バー",
-      "explanation": "\"Can we wait at the bar?\" に店員が \"Of course.\" と答えています。"
+      "explanation": "\"Can we wait at the bar?\" に店員が \"Of course.\" と答えています。",
+      "accepted": [
+        "バーで",
+        "バーカウンター"
+      ]
     },
     {
       "id": "rest-3",
@@ -262,7 +285,13 @@
       "passage": "r-bike",
       "question": "シェアサイクルが環境にやさしいと言える理由は何ですか。",
       "answer": "自転車は排気ガスを出さないから",
-      "explanation": "\"bikes do not produce any gas\" とあります。"
+      "explanation": "\"bikes do not produce any gas\" とあります。",
+      "accepted": [
+        "排気ガスを出さないから",
+        "排気ガスを出さない",
+        "排気ガスが出ないから",
+        "排気ガスを出さないため"
+      ]
     },
     {
       "id": "bike-4",

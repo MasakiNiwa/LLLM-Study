@@ -13,7 +13,7 @@
         "動詞",
         "基礎"
       ],
-      "revision": 1,
+      "revision": 2,
       "itemCount": 40,
       "itemTypes": [
         "vocab"
@@ -68,7 +68,7 @@
         "英単語",
         "句動詞"
       ],
-      "revision": 1,
+      "revision": 2,
       "itemCount": 30,
       "itemTypes": [
         "vocab"
@@ -86,13 +86,138 @@
         "長文読解",
         "リーディング"
       ],
-      "revision": 1,
+      "revision": 2,
       "itemCount": 20,
       "itemTypes": [
         "choice",
         "qa",
         "cloze",
         "order"
+      ]
+    },
+    {
+      "file": "business-manners.json",
+      "id": "business-manners",
+      "title": "ビジネスマナーと敬語 30",
+      "description": "尊敬語・謙譲語の使い分け、二重敬語やバイト敬語、電話応対、ビジネスメール、名刺交換、席次、報連相、会議の基本を、選択問題 10 問・一問一答 8 問・穴埋め 6 問・並べ替え 6 問で確認します。マナーは会社や地域によって異なることがあるため、一般的とされる基本を扱います。",
+      "subject": "business",
+      "level": "社会人基礎",
+      "tags": [
+        "ビジネス",
+        "敬語",
+        "マナー"
+      ],
+      "revision": 1,
+      "itemCount": 30,
+      "itemTypes": [
+        "choice",
+        "qa",
+        "cloze",
+        "order"
+      ]
+    },
+    {
+      "file": "it-basics.json",
+      "id": "it-basics",
+      "title": "IT の基礎用語 40",
+      "description": "コンピュータ・ネットワーク・情報セキュリティの基本用語 22 語と、2 進数・ビットとバイト・単位・セキュリティ対策を、選択問題 12 問・一問一答 4 問・穴埋め 2 問で確認します。",
+      "subject": "it",
+      "level": "IT パスポート入門相当",
+      "tags": [
+        "IT",
+        "用語",
+        "情報"
+      ],
+      "revision": 1,
+      "itemCount": 40,
+      "itemTypes": [
+        "vocab",
+        "choice",
+        "cloze",
+        "qa"
+      ]
+    },
+    {
+      "file": "ja-history-timeline.json",
+      "id": "ja-history-timeline",
+      "title": "日本史の流れ 40",
+      "description": "縄文時代から昭和の戦後までの日本史の重要なできごとを、年代とあわせて確認します。一問一答 14 問・選択問題 10 問・穴埋め 8 問・年代の並べ替え 8 問。",
+      "subject": "history",
+      "level": "中学〜高校基礎",
+      "tags": [
+        "日本史",
+        "年代",
+        "並べ替え"
+      ],
+      "revision": 1,
+      "itemCount": 40,
+      "itemTypes": [
+        "qa",
+        "choice",
+        "cloze",
+        "order"
+      ]
+    },
+    {
+      "file": "world-geography.json",
+      "id": "world-geography",
+      "title": "世界の地理 40",
+      "description": "世界の首都、大きな川・山・砂漠・海洋、ケッペンの気候区分、経度と時差、プレートと地形の基本を確認します。一問一答 18 問・選択問題 12 問・穴埋め 6 問・並べ替え 4 問。",
+      "subject": "geography",
+      "level": "中学〜高校基礎",
+      "tags": [
+        "地理",
+        "世界",
+        "首都"
+      ],
+      "revision": 1,
+      "itemCount": 40,
+      "itemTypes": [
+        "qa",
+        "choice",
+        "cloze",
+        "order"
+      ]
+    },
+    {
+      "file": "science-chemistry-basics.json",
+      "id": "science-chemistry-basics",
+      "title": "化学の基礎 40（元素・物質・反応）",
+      "description": "元素記号 16 語と、原子・イオン・化学反応式・中和・状態変化・物質量（mol）の基本を、選択問題 10 問・穴埋め 8 問・一問一答 6 問で確認します。化学式は H2O のように数字をふつうの文字で書きます。",
+      "subject": "science",
+      "level": "中学〜高校基礎",
+      "tags": [
+        "理科",
+        "化学",
+        "元素記号"
+      ],
+      "revision": 1,
+      "itemCount": 40,
+      "itemTypes": [
+        "vocab",
+        "choice",
+        "cloze",
+        "qa"
+      ]
+    },
+    {
+      "file": "math-middle-school.json",
+      "id": "math-middle-school",
+      "title": "中学数学の公式と考え方 30",
+      "description": "図形の面積・体積、三平方の定理、角度、一次関数、比例・反比例、方程式、因数分解、確率、平方根の公式と考え方を、一問一答 10 問・選択問題 12 問・穴埋め 8 問で確認します。累乗は ^（例: r^2）、根号は √、円周率は π で書きます。",
+      "subject": "math",
+      "level": "中学",
+      "tags": [
+        "数学",
+        "公式",
+        "中学"
+      ],
+      "revision": 1,
+      "itemCount": 30,
+      "itemTypes": [
+        "qa",
+        "choice",
+        "cloze"
       ]
     },
     {
@@ -111,7 +236,7 @@
         "連結会計",
         "工業簿記"
       ],
-      "revision": 1,
+      "revision": 2,
       "itemCount": 100,
       "itemTypes": [
         "qa",
