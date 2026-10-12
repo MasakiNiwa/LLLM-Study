@@ -1108,7 +1108,7 @@
         "mode=\"utf-8\""
       ],
       "answer": 0,
-      "explanation": "encoding を省略すると OS の既定の文字コード（Windows では cp932 になることがある）が使われ、文字化けや UnicodeDecodeError の原因になる。encoding=\"utf-8\" を明示する。"
+      "explanation": "encoding を省略すると、Python のバージョンや環境によっては OS の既定の文字コード（日本語版 Windows では cp932 など）が使われ、文字化けや UnicodeDecodeError の原因になる。encoding=\"utf-8\" を明示する。"
     },
     {
       "id": "py-od-file-read",
