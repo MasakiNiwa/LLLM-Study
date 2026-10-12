@@ -1,7 +1,7 @@
 {
   "name": "lllm-study",
   "private": true,
-  "version": "1.4.0",
+  "version": "1.5.0",
   "description": "LLLM Study — 自分のペースで使えるローカルLLMタイプの学習アプリ",
   "license": "MIT",
   "type": "module",
@@ -20,6 +20,7 @@
     "licenses:check": "node scripts/generate-licenses.mjs --check",
     "packs": "node scripts/build-packs.ts",
     "packs:check": "node scripts/build-packs.ts --check",
+    "packs:lint": "node scripts/check-pack.ts",
     "format": "prettier --write .",
     "format:check": "prettier --check ."
   },

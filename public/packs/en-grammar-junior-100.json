@@ -1,0 +1,1523 @@
+{
+  "format": "lllm-study-pack",
+  "version": 1,
+  "id": "en-grammar-junior-100",
+  "title": "中学英文法の総復習 100",
+  "description": "中学 3 年間で学ぶ英文法を、教科書で習う順に 100 問で総復習します。ステップ1（be 動詞・一般動詞・疑問文と否定文・代名詞・複数形・現在進行形）→ ステップ2（過去形・未来・助動詞・不定詞・動名詞）→ ステップ3（比較・受け身・現在完了）→ ステップ4（関係代名詞・間接疑問・分詞の後置修飾・仮定法過去）と、少しずつ積み上がる構成です。形式は穴埋め 40 問（和訳つき）・選択問題 40 問・並べ替え 20 問。すべての問題に「なぜそうなるか」とよくある間違いの解説を付けています。おすすめの進め方: まず「英文法チェック 30」（en-grammar-check）で弱点をつかみ → この教材で中学範囲を固め → 次は「高校英文法 100（文の組み立てを深める）」（en-grammar-high-100）へ。実践として「TOEIC 文法・語彙問題 100（Part 5 形式）」（en-toeic-part5-100）に挑戦するのもおすすめです。",
+  "subject": "english",
+  "language": {
+    "target": "en",
+    "explanation": "ja"
+  },
+  "level": "中学〜高校入門",
+  "tags": [
+    "英文法",
+    "中学英語",
+    "学び直し",
+    "穴埋め",
+    "選択問題",
+    "並べ替え"
+  ],
+  "author": "LLLM-Study",
+  "license": "MIT",
+  "source": "LLLM-Study オリジナル（AI を利用して作成）",
+  "revision": 1,
+  "items": [
+    {
+      "id": "j-be-am",
+      "type": "cloze",
+      "text": "I {{am}} a junior high school student.",
+      "translation": "私は中学生です。",
+      "explanation": "主語が I のときの be 動詞は am。I am / you are / he・she・it is の組み合わせをセットで覚える。",
+      "tags": [
+        "ステップ1",
+        "be動詞"
+      ]
+    },
+    {
+      "id": "j-be-plural-subject",
+      "type": "choice",
+      "question": "My brother and I ____ on the same soccer team.",
+      "choices": [
+        "are",
+        "am",
+        "is",
+        "be"
+      ],
+      "answer": 0,
+      "explanation": "主語の My brother and I は 2 人（＝we）なので are。直前の I につられて am にしないこと。is は 1 人・1 つのとき、be は原形なのでこの位置には入らない。訳: 兄と私は同じサッカーチームにいる。",
+      "tags": [
+        "ステップ1",
+        "be動詞"
+      ]
+    },
+    {
+      "id": "j-be-not",
+      "type": "cloze",
+      "text": "Ken {{is}} not at home now.",
+      "translation": "健は今、家にいない。",
+      "explanation": "be 動詞には「〜です」のほかに「（〜に）いる・ある」の意味もある。否定文は be 動詞の後ろに not を置く（is not = isn't）。",
+      "tags": [
+        "ステップ1",
+        "be動詞"
+      ]
+    },
+    {
+      "id": "j-be-question",
+      "type": "choice",
+      "question": "____ your parents teachers?",
+      "choices": [
+        "Is",
+        "Are",
+        "Do",
+        "Does"
+      ],
+      "answer": 1,
+      "explanation": "be 動詞の疑問文は be 動詞を主語の前に出す。主語 your parents は複数なので Are。Do / Does は一般動詞（play, like など）の疑問文で使う。訳: あなたの両親は先生ですか。",
+      "tags": [
+        "ステップ1",
+        "be動詞"
+      ]
+    },
+    {
+      "id": "j-be-these",
+      "type": "order",
+      "prompt": "これらの本はとても古い。",
+      "answer": "These books are very old.",
+      "chunks": [
+        "These",
+        "books",
+        "are",
+        "very",
+        "old."
+      ],
+      "explanation": "these は this の複数形で、後ろの名詞も複数（books）、be 動詞も are にそろえる。very は形容詞 old の前に置く。",
+      "tags": [
+        "ステップ1",
+        "be動詞"
+      ]
+    },
+    {
+      "id": "j-v-plays",
+      "type": "cloze",
+      "text": "My sister {{plays}} the piano every day.",
+      "translation": "姉は毎日ピアノを弾く。",
+      "hint": "play を適切な形に",
+      "explanation": "主語が三人称単数（I・you 以外の 1 人・1 つ）で現在の文なら、動詞に -s を付ける。楽器を「弾く」ときは the piano のように the を付ける。",
+      "tags": [
+        "ステップ1",
+        "一般動詞（三単現）"
+      ]
+    },
+    {
+      "id": "j-v-likes",
+      "type": "order",
+      "prompt": "トムは数学がとても好きだ。",
+      "answer": "Tom likes math very much.",
+      "chunks": [
+        "Tom",
+        "likes",
+        "math",
+        "very much."
+      ],
+      "explanation": "主語が三人称単数なので likes。「とても」の very much は目的語（math）の後ろ、文の最後に置く。",
+      "tags": [
+        "ステップ1",
+        "一般動詞（三単現）"
+      ]
+    },
+    {
+      "id": "j-v-has",
+      "type": "cloze",
+      "text": "He {{has}} two dogs.",
+      "translation": "彼は犬を 2 匹飼っている。",
+      "hint": "have を適切な形に",
+      "explanation": "have の三単現は has（haves にはならない）。不規則なので特に注意。",
+      "tags": [
+        "ステップ1",
+        "一般動詞（三単現）"
+      ]
+    },
+    {
+      "id": "j-v-watches",
+      "type": "choice",
+      "question": "She ____ TV after dinner.",
+      "choices": [
+        "watchs",
+        "watch",
+        "watches",
+        "is watch"
+      ],
+      "answer": 2,
+      "explanation": "-ch・-sh・-s・-x・-o で終わる動詞は -es を付ける（watches, washes, goes）。watchs というつづりはない。訳: 彼女は夕食後にテレビを見る。",
+      "tags": [
+        "ステップ1",
+        "一般動詞（三単現）"
+      ]
+    },
+    {
+      "id": "j-v-studies",
+      "type": "cloze",
+      "text": "My father {{studies}} English on Sundays.",
+      "translation": "父は日曜日に英語を勉強する。",
+      "hint": "study を適切な形に",
+      "explanation": "〈子音字＋y〉で終わる動詞は y を i に変えて -es（study → studies）。play のように〈母音字＋y〉ならそのまま -s（plays）。",
+      "tags": [
+        "ステップ1",
+        "一般動詞（三単現）"
+      ]
+    },
+    {
+      "id": "j-qn-do",
+      "type": "cloze",
+      "text": "{{Do}} you like music?",
+      "translation": "あなたは音楽が好きですか。",
+      "explanation": "一般動詞の疑問文は Do を文頭に置き、動詞は原形のまま。答えるときも do を使う（Yes, I do. / No, I don't.）。",
+      "tags": [
+        "ステップ1",
+        "疑問文・否定文"
+      ]
+    },
+    {
+      "id": "j-qn-does",
+      "type": "choice",
+      "question": "____ your brother play baseball?",
+      "choices": [
+        "Do",
+        "Is",
+        "Are",
+        "Does"
+      ],
+      "answer": 3,
+      "explanation": "主語が三人称単数（your brother）の一般動詞の疑問文は Does ＋主語＋原形。Is / Are は be 動詞なので play と一緒に使えない。訳: あなたのお兄さんは野球をしますか。",
+      "tags": [
+        "ステップ1",
+        "疑問文・否定文"
+      ]
+    },
+    {
+      "id": "j-qn-doesnt-base",
+      "type": "choice",
+      "question": "She doesn't ____ coffee.",
+      "choices": [
+        "drinks",
+        "drinking",
+        "drink",
+        "drank"
+      ],
+      "answer": 2,
+      "explanation": "does / doesn't の後ろの動詞は必ず原形。三単現の -s は does がすでに引き受けているので drinks にはしない。訳: 彼女はコーヒーを飲まない。",
+      "tags": [
+        "ステップ1",
+        "疑問文・否定文"
+      ]
+    },
+    {
+      "id": "j-qn-do-not",
+      "type": "cloze",
+      "text": "I {{do}} {{not}} have a bike.",
+      "translation": "私は自転車を持っていない。",
+      "explanation": "一般動詞の否定文は do not（don't）＋原形。主語が三人称単数なら does not（doesn't）を使う。",
+      "tags": [
+        "ステップ1",
+        "疑問文・否定文"
+      ]
+    },
+    {
+      "id": "j-qn-what-do",
+      "type": "choice",
+      "question": "What ____ you have in your bag? — I have a notebook and a pen.",
+      "choices": [
+        "are",
+        "does",
+        "is",
+        "do"
+      ],
+      "answer": 3,
+      "explanation": "疑問詞の後ろは疑問文の語順。have は一般動詞で、主語は you なので do。are / is は be 動詞、does は三人称単数の主語のとき。訳: かばんに何が入っていますか。— ノートとペンです。",
+      "tags": [
+        "ステップ1",
+        "疑問文・否定文"
+      ]
+    },
+    {
+      "id": "j-qn-where-live",
+      "type": "order",
+      "prompt": "あなたはどこに住んでいますか。",
+      "answer": "Where do you live?",
+      "chunks": [
+        "Where",
+        "do",
+        "you",
+        "live?"
+      ],
+      "explanation": "疑問詞 Where を文頭に置き、そのあとは一般動詞の疑問文の語順（do ＋主語＋原形）を続ける。",
+      "tags": [
+        "ステップ1",
+        "疑問文・否定文"
+      ]
+    },
+    {
+      "id": "j-qn-who",
+      "type": "choice",
+      "question": "____ is that girl? — She is my cousin.",
+      "choices": [
+        "What",
+        "Who",
+        "Whose",
+        "Which"
+      ],
+      "answer": 1,
+      "explanation": "「あの女の子は誰？」と人をたずねるので Who。Whose は「誰の」、Which は「どちら」。What is she? は職業などをたずねる言い方。訳: あの女の子は誰ですか。— 私のいとこです。",
+      "tags": [
+        "ステップ1",
+        "疑問文・否定文"
+      ]
+    },
+    {
+      "id": "j-pr-her-obj",
+      "type": "choice",
+      "question": "This is my friend, Yuki. I like ____ very much.",
+      "choices": [
+        "her",
+        "she",
+        "hers",
+        "his"
+      ],
+      "answer": 0,
+      "explanation": "動詞 like の目的語なので目的格の her。she は主格、hers は「彼女のもの」。Yuki は女の子なので his は合わない。訳: こちらは友だちのユキです。私は彼女が大好きです。",
+      "tags": [
+        "ステップ1",
+        "代名詞"
+      ]
+    },
+    {
+      "id": "j-pr-his-poss",
+      "type": "cloze",
+      "text": "That bag is not mine. It is {{his}}.",
+      "translation": "あのかばんは私のものではない。彼のものだ。",
+      "hint": "「彼のもの」",
+      "explanation": "「〜のもの」は mine・yours・his・hers・ours・theirs。his は所有格（his bag）と「彼のもの」が同じ形。",
+      "tags": [
+        "ステップ1",
+        "代名詞"
+      ]
+    },
+    {
+      "id": "j-pr-your",
+      "type": "choice",
+      "question": "Is this ____ umbrella? — No, it isn't. Mine is blue.",
+      "choices": [
+        "you",
+        "your",
+        "yours",
+        "yourself"
+      ],
+      "answer": 1,
+      "explanation": "名詞 umbrella の前なので所有格の your。yours は「あなたのもの」で、後ろに名詞を置かず単独で使う（Is this umbrella yours?）。訳: これはあなたの傘ですか。— いいえ。私のは青です。",
+      "tags": [
+        "ステップ1",
+        "代名詞"
+      ]
+    },
+    {
+      "id": "j-pr-her-help",
+      "type": "cloze",
+      "text": "We often visit our grandmother and help {{her}}.",
+      "translation": "私たちはよく祖母を訪ねて、彼女の手伝いをする。",
+      "hint": "grandmother を指す代名詞",
+      "explanation": "help の目的語なので目的格の her。I-my-me-mine のように「主格・所有格・目的格・所有代名詞」を 1 セットで覚える。",
+      "tags": [
+        "ステップ1",
+        "代名詞"
+      ]
+    },
+    {
+      "id": "j-pr-whose",
+      "type": "order",
+      "prompt": "これは誰のノートですか。",
+      "answer": "Whose notebook is this?",
+      "chunks": [
+        "Whose",
+        "notebook",
+        "is",
+        "this?"
+      ],
+      "explanation": "Whose ＋名詞で「誰の〜」。〈Whose notebook〉をひとかたまりで文頭に置き、そのあとは be 動詞の疑問文の語順。",
+      "tags": [
+        "ステップ1",
+        "代名詞"
+      ]
+    },
+    {
+      "id": "j-pl-boxes",
+      "type": "cloze",
+      "text": "I have three {{boxes}}.",
+      "translation": "私は箱を 3 つ持っている。",
+      "hint": "box を適切な形に",
+      "explanation": "-s・-x・-ch・-sh で終わる名詞は -es を付けて複数形にする（boxes, buses, dishes）。three があるので複数形が必要。",
+      "tags": [
+        "ステップ1",
+        "名詞の複数形"
+      ]
+    },
+    {
+      "id": "j-pl-children",
+      "type": "cloze",
+      "text": "There are many {{children}} in the park.",
+      "translation": "公園にたくさんの子どもがいる。",
+      "hint": "child の複数形",
+      "explanation": "child の複数形は children（不規則）。ほかに man → men、woman → women、foot → feet、tooth → teeth も頻出。",
+      "tags": [
+        "ステップ1",
+        "名詞の複数形"
+      ]
+    },
+    {
+      "id": "j-pl-how-many",
+      "type": "choice",
+      "question": "How many ____ do you have? — I have two.",
+      "choices": [
+        "brothers",
+        "brother",
+        "water",
+        "money"
+      ],
+      "answer": 0,
+      "explanation": "How many の後ろは数えられる名詞の複数形。water・money は数えられない名詞なので、量をたずねるときは How much を使う。訳: 兄弟は何人いますか。— 2 人です。",
+      "tags": [
+        "ステップ1",
+        "名詞の複数形"
+      ]
+    },
+    {
+      "id": "j-pl-there-are",
+      "type": "cloze",
+      "text": "There {{are}} two cats under the table.",
+      "translation": "テーブルの下に猫が 2 匹いる。",
+      "explanation": "There is / are の文は、後ろの名詞（two cats）に合わせて be 動詞を選ぶ。複数なので are。",
+      "tags": [
+        "ステップ1",
+        "名詞の複数形"
+      ]
+    },
+    {
+      "id": "j-prog-swimming",
+      "type": "cloze",
+      "text": "Look! The boys are {{swimming}} in the river.",
+      "translation": "見て！男の子たちが川で泳いでいる。",
+      "hint": "swim を使って",
+      "explanation": "現在進行形は be 動詞＋-ing で「今〜している」。swim のように〈短い母音＋子音字〉で終わる語は子音字を重ねる（running, sitting も同じ）。",
+      "tags": [
+        "ステップ1",
+        "現在進行形"
+      ]
+    },
+    {
+      "id": "j-prog-is-cooking",
+      "type": "order",
+      "prompt": "母は今、夕食を作っている。",
+      "answer": "My mother is cooking dinner now.",
+      "chunks": [
+        "My mother",
+        "is",
+        "cooking",
+        "dinner",
+        "now."
+      ],
+      "explanation": "現在進行形は〈be 動詞＋-ing〉。now は文の最後に置くことが多い。is cook や cooking だけにしないこと。",
+      "tags": [
+        "ステップ1",
+        "現在進行形"
+      ]
+    },
+    {
+      "id": "j-prog-stative",
+      "type": "choice",
+      "question": "I ____ the answer.",
+      "choices": [
+        "am knowing",
+        "knowing",
+        "am know",
+        "know"
+      ],
+      "answer": 3,
+      "explanation": "know・like・want・have（持っている）など状態を表す動詞はふつう進行形にしない。「知っている」でも am knowing とはしない。訳: 私はその答えを知っている。",
+      "tags": [
+        "ステップ1",
+        "現在進行形"
+      ]
+    },
+    {
+      "id": "j-prog-what-doing",
+      "type": "order",
+      "prompt": "あなたは何をしているのですか。",
+      "answer": "What are you doing?",
+      "chunks": [
+        "What",
+        "are",
+        "you",
+        "doing?"
+      ],
+      "explanation": "What ＋現在進行形の疑問文（are ＋主語＋-ing）。答えるときも I'm reading a book. のように進行形で答える。",
+      "tags": [
+        "ステップ1",
+        "現在進行形"
+      ]
+    },
+    {
+      "id": "j-past-visited",
+      "type": "cloze",
+      "text": "I {{visited}} Kyoto last summer.",
+      "translation": "私は去年の夏、京都を訪れた。",
+      "hint": "visit を使って",
+      "explanation": "last summer（去年の夏）は過去を表すので、規則動詞に -ed を付けて過去形にする。主語が何であっても形は同じ。",
+      "tags": [
+        "ステップ2",
+        "過去形"
+      ]
+    },
+    {
+      "id": "j-past-went",
+      "type": "cloze",
+      "text": "We {{went}} to the zoo yesterday.",
+      "translation": "私たちは昨日、動物園に行った。",
+      "hint": "go を使って",
+      "explanation": "yesterday があるので過去形。go の過去形は不規則に変化して went（goed は誤り）。不規則動詞は原形・過去形・過去分詞（go – went – gone）をセットで覚える。",
+      "tags": [
+        "ステップ2",
+        "過去形"
+      ]
+    },
+    {
+      "id": "j-past-did",
+      "type": "cloze",
+      "text": "{{Did}} you see the movie last night?",
+      "translation": "昨夜その映画を見ましたか。",
+      "explanation": "一般動詞の過去の疑問文は Did ＋主語＋原形。主語が何でも Did を使い、動詞は saw ではなく see に戻す。",
+      "tags": [
+        "ステップ2",
+        "過去形"
+      ]
+    },
+    {
+      "id": "j-past-didnt-base",
+      "type": "choice",
+      "question": "He didn't ____ breakfast this morning.",
+      "choices": [
+        "ate",
+        "eats",
+        "eat",
+        "eating"
+      ],
+      "answer": 2,
+      "explanation": "didn't の後ろは原形。過去の意味は did が表しているので ate にはしない。訳: 彼は今朝、朝食を食べなかった。",
+      "tags": [
+        "ステップ2",
+        "過去形"
+      ]
+    },
+    {
+      "id": "j-past-was",
+      "type": "choice",
+      "question": "I ____ very tired last night.",
+      "choices": [
+        "were",
+        "am",
+        "did",
+        "was"
+      ],
+      "answer": 3,
+      "explanation": "tired は形容詞なので be 動詞が必要。過去で主語が I なので was（you と複数の主語は were）。did は一般動詞の文で使う。訳: 私は昨夜とても疲れていた。",
+      "tags": [
+        "ステップ2",
+        "過去形"
+      ]
+    },
+    {
+      "id": "j-past-prog",
+      "type": "cloze",
+      "text": "They {{were}} playing tennis at three yesterday.",
+      "translation": "彼らは昨日の 3 時にテニスをしていた。",
+      "explanation": "過去進行形は was / were ＋-ing で「（その時）〜していた」。主語 They は複数なので were。",
+      "tags": [
+        "ステップ2",
+        "過去形"
+      ]
+    },
+    {
+      "id": "j-past-when-buy",
+      "type": "order",
+      "prompt": "あなたはいつその本を買いましたか。",
+      "answer": "When did you buy the book?",
+      "chunks": [
+        "When",
+        "did",
+        "you",
+        "buy",
+        "the book?"
+      ],
+      "explanation": "When ＋過去の疑問文（did ＋主語＋原形）。buy の過去形は bought だが、did を使う疑問文では原形 buy に戻す。",
+      "tags": [
+        "ステップ2",
+        "過去形"
+      ]
+    },
+    {
+      "id": "j-fut-will",
+      "type": "cloze",
+      "text": "It {{will}} be sunny tomorrow.",
+      "translation": "明日は晴れるだろう。",
+      "hint": "未来を表す助動詞",
+      "explanation": "will ＋原形で「〜だろう（予想）」「〜します（その場の意志）」。will の後ろは be 動詞でも原形 be になる。",
+      "tags": [
+        "ステップ2",
+        "未来の表現"
+      ]
+    },
+    {
+      "id": "j-fut-going-to",
+      "type": "choice",
+      "question": "I'm going to ____ my uncle next week.",
+      "choices": [
+        "visiting",
+        "visits",
+        "visit",
+        "visited"
+      ],
+      "answer": 2,
+      "explanation": "be going to の後ろは動詞の原形。to の後ろなので -s や -ing は付けない。訳: 私は来週おじを訪ねる予定だ。",
+      "tags": [
+        "ステップ2",
+        "未来の表現"
+      ]
+    },
+    {
+      "id": "j-fut-will-q",
+      "type": "choice",
+      "question": "____ you be free tomorrow?",
+      "choices": [
+        "Will",
+        "Are",
+        "Do",
+        "Did"
+      ],
+      "answer": 0,
+      "explanation": "後ろに原形の be があるので、助動詞 Will の疑問文〈Will ＋主語＋原形〉。Are や Do の後ろに be は置けず、Did では tomorrow と合わない。答えるときは Yes, I will. / No, I won't.。訳: 明日はひまですか。",
+      "tags": [
+        "ステップ2",
+        "未来の表現"
+      ]
+    },
+    {
+      "id": "j-fut-going-to-buy",
+      "type": "order",
+      "prompt": "私は今週末に新しい靴を買うつもりです。",
+      "answer": "I'm going to buy new shoes this weekend.",
+      "chunks": [
+        "I'm",
+        "going",
+        "to",
+        "buy",
+        "new shoes",
+        "this weekend."
+      ],
+      "explanation": "be going to ＋原形で「〜するつもりだ（前から決めている予定）」。時を表す語句（this weekend）はふつう文の最後に置く。",
+      "tags": [
+        "ステップ2",
+        "未来の表現"
+      ]
+    },
+    {
+      "id": "j-fut-will-not",
+      "type": "cloze",
+      "text": "I will {{not}} be late again.",
+      "translation": "もう二度と遅刻しません。",
+      "explanation": "will の否定は will not（短縮形 won't）。not は will の直後に置き、動詞は原形のまま。",
+      "tags": [
+        "ステップ2",
+        "未来の表現"
+      ]
+    },
+    {
+      "id": "j-aux-can",
+      "type": "cloze",
+      "text": "My grandfather {{can}} speak three languages.",
+      "translation": "祖父は 3 か国語を話せる。",
+      "hint": "「〜できる」",
+      "explanation": "can ＋原形で「〜できる」。助動詞の後ろの動詞は、主語が三人称単数でも原形（can speaks は誤り）。",
+      "tags": [
+        "ステップ2",
+        "助動詞"
+      ]
+    },
+    {
+      "id": "j-aux-must-not",
+      "type": "choice",
+      "question": "You ____ run in the hallway.（廊下を走ってはいけません）",
+      "choices": [
+        "don't have to",
+        "must not",
+        "must",
+        "have to"
+      ],
+      "answer": 1,
+      "explanation": "must not は「〜してはいけない（禁止）」。don't have to は「〜しなくてよい（不要）」で意味がまったく違う。must / have to は「〜しなければならない」。",
+      "tags": [
+        "ステップ2",
+        "助動詞"
+      ]
+    },
+    {
+      "id": "j-aux-dont-have-to",
+      "type": "choice",
+      "question": "You ____ come tomorrow. It's a holiday.（明日は来なくていいよ。休日だから。）",
+      "choices": [
+        "must not",
+        "don't have to",
+        "must",
+        "can't"
+      ],
+      "answer": 1,
+      "explanation": "「〜しなくてよい」は don't have to。must not（〜してはいけない）と取り違えやすいので要注意。can't は「〜できない」。",
+      "tags": [
+        "ステップ2",
+        "助動詞"
+      ]
+    },
+    {
+      "id": "j-aux-may-i",
+      "type": "choice",
+      "question": "____ I use your pen? — Sure. Here you are.",
+      "choices": [
+        "Must",
+        "Will",
+        "Have",
+        "May"
+      ],
+      "answer": 3,
+      "explanation": "May I 〜? で「〜してもいいですか（許可を求める）」。Can I 〜? よりていねい。Will I 〜? や Must I 〜? では許可を求める意味にならない。訳: ペンを使ってもいいですか。— どうぞ。",
+      "tags": [
+        "ステップ2",
+        "助動詞"
+      ]
+    },
+    {
+      "id": "j-aux-shall-we",
+      "type": "cloze",
+      "text": "{{Shall}} we go to the library after school?",
+      "translation": "放課後、図書館に行きませんか。",
+      "hint": "「〜しませんか」と誘う",
+      "explanation": "Shall we 〜? で「（一緒に）〜しませんか」と誘う表現。Let's 〜. とほぼ同じ意味。Shall I 〜? なら「（私が）〜しましょうか」。",
+      "tags": [
+        "ステップ2",
+        "助動詞"
+      ]
+    },
+    {
+      "id": "j-aux-should",
+      "type": "cloze",
+      "text": "You {{should}} see a doctor.",
+      "translation": "医者に診てもらったほうがいいよ。",
+      "hint": "「〜したほうがいい」",
+      "explanation": "should ＋原形で「〜したほうがいい・〜すべきだ」。相手に助言するときの基本の助動詞。",
+      "tags": [
+        "ステップ2",
+        "助動詞"
+      ]
+    },
+    {
+      "id": "j-aux-could-you",
+      "type": "order",
+      "prompt": "窓を開けていただけませんか。",
+      "answer": "Could you open the window?",
+      "chunks": [
+        "Could",
+        "you",
+        "open",
+        "the window?"
+      ],
+      "explanation": "Could you 〜? はていねいな依頼。Will you 〜? / Can you 〜? よりていねいで、目上の人にも使える。",
+      "tags": [
+        "ステップ2",
+        "助動詞"
+      ]
+    },
+    {
+      "id": "j-inf-want-to",
+      "type": "cloze",
+      "text": "I want {{to}} be a doctor in the future.",
+      "translation": "私は将来、医者になりたい。",
+      "explanation": "want to ＋原形で「〜したい」（名詞的用法：〜すること）。want be とは言わない。",
+      "tags": [
+        "ステップ2",
+        "不定詞"
+      ]
+    },
+    {
+      "id": "j-inf-purpose",
+      "type": "choice",
+      "question": "I went to the park ____ tennis.",
+      "choices": [
+        "to play",
+        "play",
+        "playing",
+        "played"
+      ],
+      "answer": 0,
+      "explanation": "「テニスをするために」と目的を表すのは to 不定詞（副詞的用法）。went の後ろに動詞をそのまま続けることはできない。訳: 私はテニスをしに公園へ行った。",
+      "tags": [
+        "ステップ2",
+        "不定詞"
+      ]
+    },
+    {
+      "id": "j-inf-adj",
+      "type": "choice",
+      "question": "I have a lot of homework ____.",
+      "choices": [
+        "doing",
+        "do",
+        "to do",
+        "done"
+      ],
+      "answer": 2,
+      "explanation": "to 不定詞が前の名詞を後ろから説明する形容詞的用法（するべき宿題）。訳: 私にはやるべき宿題がたくさんある。",
+      "tags": [
+        "ステップ2",
+        "不定詞"
+      ]
+    },
+    {
+      "id": "j-inf-emotion",
+      "type": "cloze",
+      "text": "I was happy {{to}} hear the news.",
+      "translation": "その知らせを聞いてうれしかった。",
+      "explanation": "感情を表す形容詞（happy, sad, surprised）＋to 不定詞で、感情の原因「〜して」を表す。",
+      "tags": [
+        "ステップ2",
+        "不定詞"
+      ]
+    },
+    {
+      "id": "j-inf-anything-cold",
+      "type": "order",
+      "prompt": "何か冷たい飲み物はありますか。",
+      "answer": "Do you have anything cold to drink?",
+      "chunks": [
+        "Do you have",
+        "anything",
+        "cold",
+        "to drink?"
+      ],
+      "explanation": "-thing の語を形容詞と to 不定詞で説明するときは〈anything ＋形容詞＋to 不定詞〉の順。cold anything とはしない。",
+      "tags": [
+        "ステップ2",
+        "不定詞"
+      ]
+    },
+    {
+      "id": "j-inf-how-to",
+      "type": "cloze",
+      "text": "Do you know how {{to}} use this machine?",
+      "translation": "この機械の使い方を知っていますか。",
+      "explanation": "〈how to ＋原形〉で「〜のしかた」。what to do（何をすべきか）、where to go（どこへ行くべきか）も同じ形。",
+      "tags": [
+        "ステップ2",
+        "不定詞"
+      ]
+    },
+    {
+      "id": "j-inf-it-for-to",
+      "type": "choice",
+      "question": "It is important ____ breakfast every day.",
+      "choices": [
+        "us to eat",
+        "for us eating",
+        "for us to eat",
+        "to us eat"
+      ],
+      "answer": 2,
+      "explanation": "〈It is ＋形容詞＋for 人＋to 不定詞〉で「（人が）〜することは…だ」。意味上の主語は for で表し、後ろは to ＋原形。訳: 毎日朝食をとることは私たちにとって大切だ。",
+      "tags": [
+        "ステップ2",
+        "不定詞"
+      ]
+    },
+    {
+      "id": "j-inf-tell-to",
+      "type": "order",
+      "prompt": "母は私に部屋を掃除するように言った。",
+      "answer": "My mother told me to clean my room.",
+      "chunks": [
+        "My mother",
+        "told",
+        "me",
+        "to clean",
+        "my room."
+      ],
+      "explanation": "〈tell 人 to 〜〉で「人に〜するように言う」。ask 人 to 〜（頼む）、want 人 to 〜（〜してほしい）も同じ形。",
+      "tags": [
+        "ステップ2",
+        "不定詞"
+      ]
+    },
+    {
+      "id": "j-ger-enjoy",
+      "type": "cloze",
+      "text": "I enjoyed {{talking}} with you.",
+      "translation": "あなたと話せて楽しかった。",
+      "hint": "talk を使って",
+      "explanation": "enjoy の目的語は動名詞（-ing）だけで、to 不定詞は使えない。finish・stop・give up も同じ。",
+      "tags": [
+        "ステップ2",
+        "動名詞"
+      ]
+    },
+    {
+      "id": "j-ger-hobby",
+      "type": "choice",
+      "question": "My hobby is ____ pictures.",
+      "choices": [
+        "taking",
+        "take",
+        "took",
+        "takes"
+      ],
+      "answer": 0,
+      "explanation": "is の後ろで「写真を撮ること」という名詞の働きをするのは動名詞 taking（to take も可）。take / took / takes は be 動詞の後ろに置けない。訳: 私の趣味は写真を撮ることです。",
+      "tags": [
+        "ステップ2",
+        "動名詞"
+      ]
+    },
+    {
+      "id": "j-ger-prep",
+      "type": "cloze",
+      "text": "Thank you for {{helping}} me.",
+      "translation": "手伝ってくれてありがとう。",
+      "hint": "help を使って",
+      "explanation": "前置詞（for）の後ろに動詞を置くときは動名詞（-ing）にする。前置詞の後ろに to 不定詞や原形は置けない。",
+      "tags": [
+        "ステップ2",
+        "動名詞"
+      ]
+    },
+    {
+      "id": "j-ger-hope-to",
+      "type": "choice",
+      "question": "I hope ____ you again soon.",
+      "choices": [
+        "seeing",
+        "see",
+        "saw",
+        "to see"
+      ],
+      "answer": 3,
+      "explanation": "hope の目的語は to 不定詞（hope seeing は不可）。want・decide・plan も to 不定詞をとる。enjoy・finish は動名詞をとるので区別して覚える。訳: また近いうちに会えるといいな。",
+      "tags": [
+        "ステップ2",
+        "動名詞"
+      ]
+    },
+    {
+      "id": "j-ger-subject",
+      "type": "order",
+      "prompt": "英語を話すことは楽しい。",
+      "answer": "Speaking English is fun.",
+      "chunks": [
+        "Speaking",
+        "English",
+        "is",
+        "fun."
+      ],
+      "explanation": "動名詞（Speaking English）は文の主語にもなれる。動名詞の主語は単数扱いなので be 動詞は is。",
+      "tags": [
+        "ステップ2",
+        "動名詞"
+      ]
+    },
+    {
+      "id": "j-cmp-heavier",
+      "type": "cloze",
+      "text": "This box is {{heavier}} than that one.",
+      "translation": "この箱はあの箱より重い。",
+      "hint": "heavy を使って",
+      "explanation": "比較級は -er ＋than。〈子音字＋y〉で終わる語は y を i に変えて -er（heavy → heavier, easy → easier）。",
+      "tags": [
+        "ステップ3",
+        "比較"
+      ]
+    },
+    {
+      "id": "j-cmp-highest",
+      "type": "choice",
+      "question": "Mt. Fuji is the ____ mountain in Japan.",
+      "choices": [
+        "higher",
+        "highest",
+        "high",
+        "most high"
+      ],
+      "answer": 1,
+      "explanation": "the と in Japan（範囲）があるので最上級の highest。短い語は most を使わず -est を付ける。訳: 富士山は日本でいちばん高い山だ。",
+      "tags": [
+        "ステップ3",
+        "比較"
+      ]
+    },
+    {
+      "id": "j-cmp-more",
+      "type": "choice",
+      "question": "This question is ____ difficult than that one.",
+      "choices": [
+        "most",
+        "very",
+        "much",
+        "more"
+      ],
+      "answer": 3,
+      "explanation": "difficult のような長い語の比較級は more ＋原級。than があるので最上級の most は使えない。much は比較級を強める語なので much more difficult なら正しい。訳: この問題はあの問題より難しい。",
+      "tags": [
+        "ステップ3",
+        "比較"
+      ]
+    },
+    {
+      "id": "j-cmp-as-fast",
+      "type": "cloze",
+      "text": "I can run as {{fast}} as my brother.",
+      "translation": "私は兄と同じくらい速く走れる。",
+      "hint": "「速く」を表す 4 文字の語",
+      "explanation": "〈as ＋原級＋as〉で「〜と同じくらい…」。as と as の間は -er などを付けない元の形。",
+      "tags": [
+        "ステップ3",
+        "比較"
+      ]
+    },
+    {
+      "id": "j-cmp-like-better",
+      "type": "choice",
+      "question": "Which do you like ____, dogs or cats?",
+      "choices": [
+        "best",
+        "better",
+        "more good",
+        "well"
+      ],
+      "answer": 1,
+      "explanation": "2 つのうち「どちらがより好きか」は like 〜 better。3 つ以上なら like 〜 the best。good / well の比較級は better（more good は誤り）。訳: 犬と猫、どちらが好きですか。",
+      "tags": [
+        "ステップ3",
+        "比較"
+      ]
+    },
+    {
+      "id": "j-cmp-not-as",
+      "type": "order",
+      "prompt": "この本はあの本ほどおもしろくない。",
+      "answer": "This book is not as interesting as that one.",
+      "chunks": [
+        "This book",
+        "is not",
+        "as",
+        "interesting",
+        "as",
+        "that one."
+      ],
+      "explanation": "〈not as ＋原級＋as〉で「〜ほど…ではない」。that one の one は前に出た book のくり返しを避ける語。",
+      "tags": [
+        "ステップ3",
+        "比較"
+      ]
+    },
+    {
+      "id": "j-cmp-best-ever",
+      "type": "cloze",
+      "text": "This is the {{best}} movie I have ever seen.",
+      "translation": "これは私が今まで見た中でいちばんよい映画だ。",
+      "hint": "good を使って",
+      "explanation": "good（よい）の比較級は better、最上級は best（不規則変化）。〈最上級＋名詞＋I have ever 過去分詞〉で「今まで〜した中でいちばん…」。",
+      "tags": [
+        "ステップ3",
+        "比較"
+      ]
+    },
+    {
+      "id": "j-cmp-of-in",
+      "type": "choice",
+      "question": "Ken is the tallest ____ the five boys.",
+      "choices": [
+        "in",
+        "than",
+        "of",
+        "at"
+      ],
+      "answer": 2,
+      "explanation": "最上級の範囲は、複数のもの・数（the five boys, all）なら of、場所や集団（in my class, in Japan）なら in。than は比較級で使う。訳: ケンは 5 人の少年の中でいちばん背が高い。",
+      "tags": [
+        "ステップ3",
+        "比較"
+      ]
+    },
+    {
+      "id": "j-pass-cleaned",
+      "type": "cloze",
+      "text": "This room is {{cleaned}} every day.",
+      "translation": "この部屋は毎日掃除される。",
+      "hint": "clean を使って",
+      "explanation": "受け身は〈be 動詞＋過去分詞〉で「〜される」。規則動詞の過去分詞は過去形と同じ -ed の形。",
+      "tags": [
+        "ステップ3",
+        "受け身"
+      ]
+    },
+    {
+      "id": "j-pass-spoken",
+      "type": "choice",
+      "question": "English ____ in many countries.",
+      "choices": [
+        "is spoken",
+        "speaks",
+        "is speaking",
+        "spoke"
+      ],
+      "answer": 0,
+      "explanation": "英語は「話される」側なので受け身の is spoken。speak の過去分詞は spoken（不規則）。訳: 英語は多くの国で話されている。",
+      "tags": [
+        "ステップ3",
+        "受け身"
+      ]
+    },
+    {
+      "id": "j-pass-built",
+      "type": "cloze",
+      "text": "This temple was {{built}} about 500 years ago.",
+      "translation": "この寺は約 500 年前に建てられた。",
+      "hint": "build を使って",
+      "explanation": "was ＋過去分詞で過去の受け身「〜された」。build は build – built – built と不規則に変化する。",
+      "tags": [
+        "ステップ3",
+        "受け身"
+      ]
+    },
+    {
+      "id": "j-pass-by",
+      "type": "cloze",
+      "text": "This song is loved {{by}} many young people.",
+      "translation": "この歌は多くの若者に愛されている。",
+      "explanation": "受け身で「誰によって」を表すときは by ＋人。目的格を使う（by them, by her）。",
+      "tags": [
+        "ステップ3",
+        "受け身"
+      ]
+    },
+    {
+      "id": "j-pass-taken-by",
+      "type": "order",
+      "prompt": "この写真は私の父によって撮られた。",
+      "answer": "This picture was taken by my father.",
+      "chunks": [
+        "This picture",
+        "was",
+        "taken",
+        "by",
+        "my father."
+      ],
+      "explanation": "過去の受け身は was / were ＋過去分詞。take の過去分詞は taken。by ＋人で「〜によって」。",
+      "tags": [
+        "ステップ3",
+        "受け身"
+      ]
+    },
+    {
+      "id": "j-pass-covered-with",
+      "type": "choice",
+      "question": "The top of the mountain is covered ____ snow.",
+      "choices": [
+        "with",
+        "by",
+        "of",
+        "in"
+      ],
+      "answer": 0,
+      "explanation": "be covered with 〜 で「〜でおおわれている」。受け身でも by 以外の前置詞を使う決まった表現（be known to, be made of など）がある。訳: その山の頂上は雪でおおわれている。",
+      "tags": [
+        "ステップ3",
+        "受け身"
+      ]
+    },
+    {
+      "id": "j-perf-lived",
+      "type": "cloze",
+      "text": "I have {{lived}} in this town for ten years.",
+      "translation": "私はこの町に 10 年間住んでいる。",
+      "hint": "live を使って",
+      "explanation": "〈have ＋過去分詞〉＋for 〜 で「〜の間ずっと…している」（継続）。過去から今までつながっている様子を表す。",
+      "tags": [
+        "ステップ3",
+        "現在完了"
+      ]
+    },
+    {
+      "id": "j-perf-since",
+      "type": "choice",
+      "question": "She has been sick ____ last Monday.",
+      "choices": [
+        "for",
+        "from",
+        "since",
+        "during"
+      ],
+      "answer": 2,
+      "explanation": "last Monday は「起点」なので since。for は for three days のように期間の長さに使う。from は現在完了の継続にはふつう使わない。訳: 彼女はこの前の月曜日から体調をくずしている。",
+      "tags": [
+        "ステップ3",
+        "現在完了"
+      ]
+    },
+    {
+      "id": "j-perf-ever",
+      "type": "choice",
+      "question": "____ you ever been to Hokkaido?",
+      "choices": [
+        "Did",
+        "Have",
+        "Do",
+        "Are"
+      ],
+      "answer": 1,
+      "explanation": "後ろに been（過去分詞）と ever があるので現在完了の疑問文〈Have ＋主語＋過去分詞〉。have been to 〜 で「〜に行ったことがある」。訳: 北海道に行ったことはありますか。",
+      "tags": [
+        "ステップ3",
+        "現在完了"
+      ]
+    },
+    {
+      "id": "j-perf-already",
+      "type": "cloze",
+      "text": "I have {{already}} finished my homework.",
+      "translation": "私はもう宿題を終えた。",
+      "hint": "「もう・すでに」",
+      "explanation": "肯定文で「もう・すでに」は already（完了）。have と過去分詞の間に置く。疑問文・否定文では yet を使う。",
+      "tags": [
+        "ステップ3",
+        "現在完了"
+      ]
+    },
+    {
+      "id": "j-perf-yet",
+      "type": "choice",
+      "question": "Have you eaten lunch ____? — No, not yet.",
+      "choices": [
+        "already",
+        "ever",
+        "just",
+        "yet"
+      ],
+      "answer": 3,
+      "explanation": "疑問文で「もう〜しましたか」は文末の yet。already は主に肯定文、ever は「今までに」、just は「ちょうど」で、文末には置かない。訳: もう昼食を食べましたか。— いいえ、まだです。",
+      "tags": [
+        "ステップ3",
+        "現在完了"
+      ]
+    },
+    {
+      "id": "j-perf-how-long",
+      "type": "order",
+      "prompt": "あなたはどのくらい日本にいるのですか。",
+      "answer": "How long have you been in Japan?",
+      "chunks": [
+        "How long",
+        "have",
+        "you",
+        "been",
+        "in Japan?"
+      ],
+      "explanation": "How long ＋現在完了の疑問文で「どのくらいの間〜しているか」（継続の期間）をたずねる。答えは for 〜 / since 〜 で。",
+      "tags": [
+        "ステップ3",
+        "現在完了"
+      ]
+    },
+    {
+      "id": "j-perf-never",
+      "type": "cloze",
+      "text": "I have {{never}} seen a koala.",
+      "translation": "私は一度もコアラを見たことがない。",
+      "explanation": "have never ＋過去分詞で「一度も〜したことがない」（経験の否定）。never 自体に not の意味があるので not は付けない。",
+      "tags": [
+        "ステップ3",
+        "現在完了"
+      ]
+    },
+    {
+      "id": "j-perf-yesterday",
+      "type": "choice",
+      "question": "I ____ my homework yesterday.",
+      "choices": [
+        "finished",
+        "have finished",
+        "have finish",
+        "finishing"
+      ],
+      "answer": 0,
+      "explanation": "yesterday のように過去の一時点をはっきり表す語は、現在完了と一緒に使えない。過去形の finished を選ぶ。訳: 私は昨日宿題を終えた。",
+      "tags": [
+        "ステップ3",
+        "現在完了"
+      ]
+    },
+    {
+      "id": "j-perf-prog-since",
+      "type": "cloze",
+      "text": "It has been raining {{since}} this morning.",
+      "translation": "今朝からずっと雨が降っている。",
+      "explanation": "〈have been ＋-ing〉は現在完了進行形で、動作が今まで続いていることを表す。this morning は起点なので since。",
+      "tags": [
+        "ステップ3",
+        "現在完了"
+      ]
+    },
+    {
+      "id": "j-rel-who",
+      "type": "choice",
+      "question": "I have a friend ____ lives in Canada.",
+      "choices": [
+        "which",
+        "who",
+        "whose",
+        "what"
+      ],
+      "answer": 1,
+      "explanation": "先行詞が人（a friend）で、後ろに主語が欠けている（lives）ので主格の who。which は人以外、whose は「〜の」、what は先行詞を含むので名詞の後ろには来ない。訳: 私にはカナダに住んでいる友だちがいる。",
+      "tags": [
+        "ステップ4",
+        "関係代名詞"
+      ]
+    },
+    {
+      "id": "j-rel-which-obj",
+      "type": "choice",
+      "question": "This is the bag ____ I bought yesterday.",
+      "choices": [
+        "who",
+        "whose",
+        "which",
+        "what"
+      ],
+      "answer": 2,
+      "explanation": "先行詞が物（the bag）で、bought の目的語が欠けているので目的格の which（that も可、省略も可）。who は人のとき。訳: これは私が昨日買ったかばんです。",
+      "tags": [
+        "ステップ4",
+        "関係代名詞"
+      ]
+    },
+    {
+      "id": "j-rel-whose",
+      "type": "cloze",
+      "text": "I know a girl {{whose}} father is a pilot.",
+      "translation": "私は父親がパイロットをしている女の子を知っている。",
+      "explanation": "〈名詞＋whose ＋名詞〉で「その〜が…である」。whose の後ろには必ず名詞（father）が続く。",
+      "tags": [
+        "ステップ4",
+        "関係代名詞"
+      ]
+    },
+    {
+      "id": "j-rel-omit",
+      "type": "order",
+      "prompt": "これは私の兄が作ったケーキです。",
+      "answer": "This is the cake my brother made.",
+      "chunks": [
+        "This is",
+        "the cake",
+        "my brother",
+        "made."
+      ],
+      "explanation": "目的格の関係代名詞（which / that）は省略できる。〈名詞＋主語＋動詞〉の形で後ろから名詞を説明する。",
+      "tags": [
+        "ステップ4",
+        "関係代名詞"
+      ]
+    },
+    {
+      "id": "j-rel-that-animal",
+      "type": "choice",
+      "question": "The dog ____ is running over there is Taro's.",
+      "choices": [
+        "where",
+        "what",
+        "whose",
+        "that"
+      ],
+      "answer": 3,
+      "explanation": "先行詞が動物（The dog）で、後ろに主語が欠けているので主格の that（which も可）。where は場所を表す関係副詞、whose は後ろに名詞が必要。訳: 向こうで走っている犬は太郎の犬だ。",
+      "tags": [
+        "ステップ4",
+        "関係代名詞"
+      ]
+    },
+    {
+      "id": "j-rel-who-can",
+      "type": "order",
+      "prompt": "私にはフランス語を話せる友だちがいる。",
+      "answer": "I have a friend who can speak French.",
+      "chunks": [
+        "I have",
+        "a friend",
+        "who",
+        "can speak",
+        "French."
+      ],
+      "explanation": "〈名詞＋who ＋動詞〉で「〜する（人）」。who 以下が a friend を後ろから説明している。",
+      "tags": [
+        "ステップ4",
+        "関係代名詞"
+      ]
+    },
+    {
+      "id": "j-iq-where",
+      "type": "choice",
+      "question": "Do you know where ____?",
+      "choices": [
+        "does he live",
+        "he does live",
+        "he lives",
+        "lives he"
+      ],
+      "answer": 2,
+      "explanation": "疑問詞の疑問文が文の一部になる（間接疑問）と、語順は〈疑問詞＋主語＋動詞〉の普通の順になり、do / does は使わない。訳: 彼がどこに住んでいるか知っていますか。",
+      "tags": [
+        "ステップ4",
+        "間接疑問"
+      ]
+    },
+    {
+      "id": "j-iq-what-wants",
+      "type": "order",
+      "prompt": "私は彼が何を欲しがっているのか分からない。",
+      "answer": "I don't know what he wants.",
+      "chunks": [
+        "I don't know",
+        "what",
+        "he",
+        "wants."
+      ],
+      "explanation": "間接疑問は〈疑問詞＋主語＋動詞〉。What does he want? を文の中に入れると what he wants になる（三単現の -s が復活する点に注意）。",
+      "tags": [
+        "ステップ4",
+        "間接疑問"
+      ]
+    },
+    {
+      "id": "j-iq-why",
+      "type": "order",
+      "prompt": "彼女はなぜ休んだのだろう。",
+      "answer": "I wonder why she was absent.",
+      "chunks": [
+        "I wonder",
+        "why",
+        "she",
+        "was",
+        "absent."
+      ],
+      "explanation": "wonder の後ろの間接疑問は〈疑問詞＋主語＋動詞〉の普通の語順（why was she とはしない）。absent は形容詞なので be 動詞 was が必要。",
+      "tags": [
+        "ステップ4",
+        "間接疑問"
+      ]
+    },
+    {
+      "id": "j-part-sitting",
+      "type": "choice",
+      "question": "Look at the boy ____ on the bench.",
+      "choices": [
+        "sat",
+        "sits",
+        "is sitting",
+        "sitting"
+      ],
+      "answer": 3,
+      "explanation": "「ベンチに座っている少年」は現在分詞（-ing）が後ろから名詞を説明する形。is sitting にすると文の中に動詞が 2 つになってしまう。訳: ベンチに座っている少年を見て。",
+      "tags": [
+        "ステップ4",
+        "分詞の後置修飾"
+      ]
+    },
+    {
+      "id": "j-part-made",
+      "type": "cloze",
+      "text": "This is a car {{made}} in Germany.",
+      "translation": "これはドイツで作られた車です。",
+      "hint": "make を使って",
+      "explanation": "「〜された」と受け身の意味で名詞を説明するときは過去分詞。made in Germany が a car を後ろから説明している。",
+      "tags": [
+        "ステップ4",
+        "分詞の後置修飾"
+      ]
+    },
+    {
+      "id": "j-part-written",
+      "type": "order",
+      "prompt": "私は英語で書かれた手紙を受け取った。",
+      "answer": "I received a letter written in English.",
+      "chunks": [
+        "I received",
+        "a letter",
+        "written",
+        "in English."
+      ],
+      "explanation": "過去分詞 written（書かれた）が in English と組になって a letter を後ろから説明する。",
+      "tags": [
+        "ステップ4",
+        "分詞の後置修飾"
+      ]
+    },
+    {
+      "id": "j-subj-were",
+      "type": "cloze",
+      "text": "If I {{were}} a bird, I could fly to you.",
+      "translation": "もし私が鳥なら、あなたのところへ飛んでいけるのに。",
+      "explanation": "現実とちがう想像は仮定法過去〈If ＋主語＋過去形, 主語＋would / could ＋原形〉。be 動詞は主語が I でも were を使うのが基本。",
+      "tags": [
+        "ステップ4",
+        "仮定法過去"
+      ]
+    },
+    {
+      "id": "j-subj-wish",
+      "type": "choice",
+      "question": "I wish I ____ a car.",
+      "choices": [
+        "have",
+        "had",
+        "will have",
+        "having"
+      ],
+      "answer": 1,
+      "explanation": "〈I wish ＋主語＋過去形〉で「〜ならいいのに（実際はちがう）」。今のことでも過去形を使うのが仮定法のポイント。訳: 車を持っていたらいいのに。",
+      "tags": [
+        "ステップ4",
+        "仮定法過去"
+      ]
+    },
+    {
+      "id": "j-subj-would",
+      "type": "choice",
+      "question": "If I had more time, I ____ travel around the world.",
+      "choices": [
+        "would",
+        "will",
+        "am",
+        "can"
+      ],
+      "answer": 0,
+      "explanation": "If 節が過去形（had）の仮定法過去なので、主節は〈would ＋原形〉。will や can にすると現実に起こりうる条件の文になり、形が合わない。訳: もっと時間があれば世界中を旅行するのに。",
+      "tags": [
+        "ステップ4",
+        "仮定法過去"
+      ]
+    }
+  ]
+}

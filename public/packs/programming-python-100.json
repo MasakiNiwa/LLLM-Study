@@ -1,0 +1,1420 @@
+{
+  "format": "lllm-study-pack",
+  "version": 1,
+  "id": "programming-python-100",
+  "title": "Python 入門 100（基本文法から関数・クラスまで）",
+  "description": "Python 3.12 以降を対象に、print・変数・型から、数値演算（//・%・**）、文字列（スライス・f 文字列・メソッド）、リスト・タプル・辞書・集合、if / for / while と range、内包表記、関数（引数・デフォルト引数・戻り値・*args）、スコープ、例外処理、ファイル操作（with）、モジュールと import、クラス・継承までを、ステップ 1〜4 の順に学びます。最後はミュータブルなデフォルト引数・is と ==・浅いコピーなど、初心者がつまずきやすい落とし穴で仕上げます。多くの問題は短いコードを読んで「出力は？」を答える形式で、すべてのコードは実際に実行して出力を確かめています。形式の内訳: 一問一答 40 問・選択問題 35 問・穴埋め 17 問・並べ替え 8 問。複数行の出力は行の順に空白で区切って答えます。前に「IT の基礎用語 40」で用語を確認しておくと安心です。次は「JavaScript 入門 100（基本文法から非同期処理まで）」へ進みましょう。",
+  "subject": "programming",
+  "language": {
+    "target": "ja",
+    "explanation": "ja"
+  },
+  "level": "プログラミング初級",
+  "tags": [
+    "プログラミング",
+    "Python",
+    "入門"
+  ],
+  "author": "LLLM-Study",
+  "license": "MIT",
+  "source": "LLLM-Study オリジナル（AI を利用して作成）",
+  "revision": 1,
+  "items": [
+    {
+      "id": "py-q-print-sep",
+      "type": "qa",
+      "tags": [
+        "ステップ1",
+        "print と変数"
+      ],
+      "question": "次のコードを実行したときの出力は？\n\nprint(\"A\", \"B\", \"C\", sep=\"-\")",
+      "answer": "A-B-C",
+      "hints": [
+        "sep は separator（区切り）の略"
+      ],
+      "explanation": "print() は複数の値を受け取ると既定では空白で区切って出力する。sep= で区切り文字を変えられる（sep=\"\" なら区切りなし）。"
+    },
+    {
+      "id": "py-ch-print-end",
+      "type": "choice",
+      "tags": [
+        "ステップ1",
+        "print と変数"
+      ],
+      "question": "次のコードを実行したときの出力は？\n\nprint(\"Hello\", end=\"!\")\nprint(\"World\")",
+      "choices": [
+        "HelloWorld!",
+        "Hello! World",
+        "Hello!World",
+        "Hello World!"
+      ],
+      "answer": 2,
+      "explanation": "print() は最後に改行（end=\"\\n\"）を出力する。end=\"!\" にすると改行の代わりに ! を出すので、次の print の出力が同じ行に続く。"
+    },
+    {
+      "id": "py-q-swap",
+      "type": "qa",
+      "tags": [
+        "ステップ1",
+        "print と変数"
+      ],
+      "question": "次のコードを実行したときの出力は？\n\na, b = 1, 2\na, b = b, a\nprint(a, b)",
+      "answer": "2 1",
+      "hints": [
+        "右辺が先に評価される"
+      ],
+      "explanation": "右辺のタプル (b, a) が先に作られてから、左辺の a, b に順に代入される。一時変数を使わずに値を入れ替える Python の定番の書き方。"
+    },
+    {
+      "id": "py-ch-var-name",
+      "type": "choice",
+      "tags": [
+        "ステップ1",
+        "print と変数"
+      ],
+      "question": "Python の変数名として使えないものは？",
+      "choices": [
+        "値",
+        "userName",
+        "2nd_value",
+        "_count"
+      ],
+      "answer": 2,
+      "explanation": "変数名（識別子）は数字で始められない。_ で始まる名前・大文字を含む名前・日本語などの Unicode 文字も使えるが、慣習では英小文字と _ のスネークケース（user_name）が推奨される。"
+    },
+    {
+      "id": "py-ch-type-float",
+      "type": "choice",
+      "tags": [
+        "ステップ1",
+        "型"
+      ],
+      "question": "次のコードを実行したときの出力は？\n\nprint(type(3.0))",
+      "choices": [
+        "<class 'float'>",
+        "<class 'int'>",
+        "<class 'decimal'>",
+        "<class 'double'>"
+      ],
+      "answer": 0,
+      "explanation": "小数点を含む数値リテラルは float（浮動小数点数）。3.0 は値としては 3 と等しいが型は float。Python に double 型はなく、decimal は標準ライブラリのモジュール。"
+    },
+    {
+      "id": "py-q-input-type",
+      "type": "qa",
+      "tags": [
+        "ステップ1",
+        "型"
+      ],
+      "question": "input() で読み込んだ値の型は？（型名を英語で）",
+      "answer": "str",
+      "accepted": [
+        "string",
+        "文字列"
+      ],
+      "hints": [
+        "数字を入力しても数値にはならない"
+      ],
+      "explanation": "input() は入力された内容を常に文字列（str）として返す。数値として計算したいときは int() や float() で変換する。"
+    },
+    {
+      "id": "py-cz-int-conv",
+      "type": "cloze",
+      "tags": [
+        "ステップ1",
+        "型"
+      ],
+      "text": "age = {{int}}(input(\"年齢: \"))  # 入力を整数に変換する",
+      "hint": "整数の型名",
+      "explanation": "入力は文字列なので、int() で整数に変換してから計算に使う。int(\"3.5\") のように小数の文字列は変換できず ValueError になる。"
+    },
+    {
+      "id": "py-err-str-plus-int",
+      "type": "qa",
+      "tags": [
+        "ステップ1",
+        "型"
+      ],
+      "question": "次のコードを実行すると発生する例外（エラー）の名前は？\n\nprint(\"年齢: \" + 20)",
+      "answer": "TypeError",
+      "hints": [
+        "型（type）が合わないときのエラー"
+      ],
+      "explanation": "str と int は + で連結できない。str(20) で文字列にするか、f\"年齢: {age}\" のように f 文字列を使う。"
+    },
+    {
+      "id": "py-q-floordiv",
+      "type": "qa",
+      "tags": [
+        "ステップ1",
+        "数値演算"
+      ],
+      "question": "次のコードを実行したときの出力は？\n\nprint(7 // 2)",
+      "answer": "3",
+      "hints": [
+        "// は「割って切り捨て」"
+      ],
+      "explanation": "// は切り捨て除算（商の整数部分）。/ は常に float を返すので 7 / 2 は 3.5 になる。"
+    },
+    {
+      "id": "py-ch-mod",
+      "type": "choice",
+      "tags": [
+        "ステップ1",
+        "数値演算"
+      ],
+      "question": "次のコードを実行したときの出力は？\n\nprint(17 % 5)",
+      "choices": [
+        "2",
+        "5",
+        "3.4",
+        "3"
+      ],
+      "answer": 0,
+      "explanation": "% は割り算の余り。17 = 5 × 3 + 2。偶数の判定（n % 2 == 0）や「〜ごとに」の処理でよく使う。"
+    },
+    {
+      "id": "py-cz-pow",
+      "type": "cloze",
+      "tags": [
+        "ステップ1",
+        "数値演算"
+      ],
+      "text": "print(2 {{**}} 10)  # 2 の 10 乗の 1024 を表示",
+      "hint": "記号 2 文字",
+      "explanation": "** はべき乗。^ は Python ではビット演算の XOR なので、2 ^ 10 は 8 になってしまう。pow(2, 10) と書いてもよい。"
+    },
+    {
+      "id": "py-ch-truediv",
+      "type": "choice",
+      "tags": [
+        "ステップ1",
+        "数値演算"
+      ],
+      "question": "次のコードを実行したときの出力は？\n\nprint(6 / 3)",
+      "choices": [
+        "2.00",
+        "2",
+        "6/3",
+        "2.0"
+      ],
+      "answer": 3,
+      "explanation": "/ は割り切れても常に float を返すので 2.0 と表示される。整数の商が欲しいときは // を使う（6 // 3 は 2）。"
+    },
+    {
+      "id": "py-ch-neg-floordiv",
+      "type": "choice",
+      "tags": [
+        "ステップ1",
+        "数値演算"
+      ],
+      "question": "次のコードを実行したときの出力は？\n\nprint(-7 // 2)",
+      "choices": [
+        "-4",
+        "3",
+        "-3.5",
+        "-3"
+      ],
+      "answer": 0,
+      "explanation": "// は「より小さい方の整数」へ切り捨てる（床関数）。-3.5 を切り捨てると -4。0 の方向へ切り捨てる言語（C など）とは結果が違うので注意。"
+    },
+    {
+      "id": "py-ch-str-index",
+      "type": "choice",
+      "tags": [
+        "ステップ1",
+        "文字列"
+      ],
+      "question": "次のコードを実行したときの出力は？\n\ns = \"Python\"\nprint(s[0], s[-1])",
+      "choices": [
+        "P o",
+        "y n",
+        "y o",
+        "P n"
+      ],
+      "answer": 3,
+      "explanation": "インデックスは 0 から数えるので s[0] は先頭の P。負のインデックスは後ろから数え、-1 が最後の文字 n。1 から数えると y、-1 を「最後の 1 つ前」と考えると o になってしまう。"
+    },
+    {
+      "id": "py-ch-slice",
+      "type": "choice",
+      "tags": [
+        "ステップ1",
+        "文字列"
+      ],
+      "question": "次のコードを実行したときの出力は？\n\ns = \"Python\"\nprint(s[1:4])",
+      "choices": [
+        "ytho",
+        "Pyth",
+        "Pyt",
+        "yth"
+      ],
+      "answer": 3,
+      "explanation": "スライス s[start:stop] は start 番目から stop 番目の「手前」まで。s[1:4] はインデックス 1, 2, 3 の 3 文字。終わりの位置を含めると ytho になってしまう。"
+    },
+    {
+      "id": "py-q-slice-reverse",
+      "type": "qa",
+      "tags": [
+        "ステップ1",
+        "文字列"
+      ],
+      "question": "次のコードを実行したときの出力は？\n\nprint(\"Python\"[::-1])",
+      "answer": "nohtyP",
+      "explanation": "スライスの 3 つ目は step（刻み幅）。-1 にすると後ろから 1 文字ずつ取り出すので、文字列が逆順になる。"
+    },
+    {
+      "id": "py-ch-slice-step",
+      "type": "choice",
+      "tags": [
+        "ステップ1",
+        "文字列"
+      ],
+      "question": "次のコードを実行したときの出力は？\n\nprint(\"abcdefg\"[::2])",
+      "choices": [
+        "abcd",
+        "aceg",
+        "bdf",
+        "ab"
+      ],
+      "answer": 1,
+      "explanation": "[::2] は先頭から 2 文字おき（インデックス 0, 2, 4, 6）。bdf はインデックス 1 から始めた [1::2] の結果。"
+    },
+    {
+      "id": "py-cz-fstring",
+      "type": "cloze",
+      "tags": [
+        "ステップ1",
+        "文字列"
+      ],
+      "text": "name = \"Ken\"\nprint({{f}}\"Hello, {name}!\")  # Hello, Ken! と表示",
+      "hint": "英小文字 1 文字",
+      "explanation": "文字列の前に f を付けた f 文字列では、{ } の中に変数や式を書くと値が埋め込まれる。f を付け忘れると {name} がそのまま表示される。"
+    },
+    {
+      "id": "py-q-fstring-format",
+      "type": "qa",
+      "tags": [
+        "ステップ1",
+        "文字列"
+      ],
+      "question": "次のコードを実行したときの出力は？\n\npi = 3.14159\nprint(f\"{pi:.2f}\")",
+      "answer": "3.14",
+      "hints": [
+        ".2f の 2 は桁数"
+      ],
+      "explanation": "{値:.2f} は「小数点以下 2 桁の固定小数点」で表示する書式指定。3 桁目以降は丸められる（3.14159 → 3.14）。"
+    },
+    {
+      "id": "py-q-fstring-debug",
+      "type": "qa",
+      "tags": [
+        "ステップ1",
+        "文字列"
+      ],
+      "question": "次のコードを実行したときの出力は？\n\nx = 10\nprint(f\"{x=}\")",
+      "answer": "x=10",
+      "explanation": "f 文字列で {x=} と書くと「式=値」の形で表示される（Python 3.8 以降）。デバッグで変数の中身を確かめるときに便利。"
+    },
+    {
+      "id": "py-q-strip-upper",
+      "type": "qa",
+      "tags": [
+        "ステップ1",
+        "文字列"
+      ],
+      "question": "次のコードを実行したときの出力は？\n\nprint(\"  hi  \".strip().upper())",
+      "answer": "HI",
+      "explanation": "strip() は前後の空白を取り除き、upper() は大文字にする。文字列のメソッドは元の文字列を変えず、新しい文字列を返すのでつなげて書ける。"
+    },
+    {
+      "id": "py-ch-split",
+      "type": "choice",
+      "tags": [
+        "ステップ1",
+        "文字列"
+      ],
+      "question": "次のコードを実行したときの出力は？\n\nprint(\"a,b,c\".split(\",\"))",
+      "choices": [
+        "['a,b,c']",
+        "['a', 'b', 'c']",
+        "['a', ',', 'b', ',', 'c']",
+        "('a', 'b', 'c')"
+      ],
+      "answer": 1,
+      "explanation": "split(区切り文字) は文字列を区切り文字で分割してリストを返す。区切り文字そのものは結果に含まれない。引数を省略すると空白（連続した空白もまとめて）で分割する。"
+    },
+    {
+      "id": "py-cz-join",
+      "type": "cloze",
+      "tags": [
+        "ステップ1",
+        "文字列"
+      ],
+      "text": "print(\"-\".{{join}}([\"2026\", \"10\", \"12\"]))  # 2026-10-12 と表示",
+      "hint": "「つなぐ」という意味の英語",
+      "explanation": "\"区切り\".join(リスト) はリストの文字列を区切り文字でつなぐ。split の逆の操作。要素が数値だとエラーになるので、先に str に変換する。"
+    },
+    {
+      "id": "py-ch-str-immutable",
+      "type": "choice",
+      "tags": [
+        "ステップ1",
+        "文字列"
+      ],
+      "question": "次のコードを実行するとどうなる？\n\ns = \"cat\"\ns[0] = \"b\"\nprint(s)",
+      "choices": [
+        "cat と表示される",
+        "bat と表示される",
+        "TypeError が発生する",
+        "IndexError が発生する"
+      ],
+      "answer": 2,
+      "explanation": "文字列はイミュータブル（変更不可）なので、要素への代入はできず TypeError になる。変えたいときは s = \"b\" + s[1:] のように新しい文字列を作る。"
+    },
+    {
+      "id": "py-q-list-append",
+      "type": "qa",
+      "tags": [
+        "ステップ2",
+        "リスト"
+      ],
+      "question": "次のコードを実行したときの出力は？\n\nnums = [1, 2]\nnums.append(3)\nprint(nums)",
+      "answer": "[1, 2, 3]",
+      "explanation": "append() はリストの末尾に要素を 1 つ追加する。リストはミュータブル（変更可能）なので、元のリストそのものが変わる。"
+    },
+    {
+      "id": "py-ch-append-list",
+      "type": "choice",
+      "tags": [
+        "ステップ2",
+        "リスト"
+      ],
+      "question": "次のコードを実行したときの出力は？\n\na = [1, 2]\na.append([3, 4])\nprint(len(a))",
+      "choices": [
+        "3",
+        "5",
+        "4",
+        "2"
+      ],
+      "answer": 0,
+      "explanation": "append() は引数を「1 つの要素」として追加するので、a は [1, 2, [3, 4]] になり長さは 3。要素をばらして追加したいときは extend([3, 4]) か a += [3, 4] を使う。"
+    },
+    {
+      "id": "py-ch-sort-none",
+      "type": "choice",
+      "tags": [
+        "ステップ2",
+        "リスト"
+      ],
+      "question": "次のコードを実行したときの出力は？\n\na = [3, 1, 2]\nb = a.sort()\nprint(b)",
+      "choices": [
+        "[1, 2, 3]",
+        "[3, 2, 1]",
+        "None",
+        "[3, 1, 2]"
+      ],
+      "answer": 2,
+      "explanation": "list.sort() はリストそのものを並べ替え（破壊的）、戻り値は None。並べ替えた新しいリストが欲しいときは sorted(a) を使う。"
+    },
+    {
+      "id": "py-ch-tuple-single",
+      "type": "choice",
+      "tags": [
+        "ステップ2",
+        "タプル"
+      ],
+      "question": "要素が 1 つのタプルを作る正しい書き方は？",
+      "choices": [
+        "(1,)",
+        "[1]",
+        "(1)",
+        "{1}"
+      ],
+      "answer": 0,
+      "explanation": "タプルを作るのは丸かっこではなくカンマ。(1) はただの整数 1 になる。[1] はリスト、{1} は集合。"
+    },
+    {
+      "id": "py-q-star-unpack",
+      "type": "qa",
+      "tags": [
+        "ステップ2",
+        "タプル"
+      ],
+      "question": "次のコードを実行したときの出力は？\n\nfirst, *rest = [1, 2, 3, 4]\nprint(rest)",
+      "answer": "[2, 3, 4]",
+      "hints": [
+        "* は「残り全部」"
+      ],
+      "explanation": "アンパック（分割代入）で * を付けた変数には、残りの要素がリストとしてまとめて入る。"
+    },
+    {
+      "id": "py-q-dict-update",
+      "type": "qa",
+      "tags": [
+        "ステップ2",
+        "辞書"
+      ],
+      "question": "次のコードを実行したときの出力は？\n\nd = {\"a\": 1}\nd[\"a\"] = 5\nd[\"b\"] = 2\nprint(d)",
+      "answer": "{'a': 5, 'b': 2}",
+      "accepted": [
+        "{\"a\": 5, \"b\": 2}"
+      ],
+      "explanation": "既にあるキーに代入すると値が上書きされ、ないキーに代入すると新しく追加される。辞書は追加した順序を保つ（Python 3.7 以降）。"
+    },
+    {
+      "id": "py-err-keyerror",
+      "type": "qa",
+      "tags": [
+        "ステップ2",
+        "辞書"
+      ],
+      "question": "次のコードを実行すると発生する例外（エラー）の名前は？\n\nd = {\"a\": 1}\nprint(d[\"b\"])",
+      "answer": "KeyError",
+      "explanation": "存在しないキーを [] で参照すると KeyError。ないかもしれないキーは d.get(\"b\") や \"b\" in d で確かめる。"
+    },
+    {
+      "id": "py-q-dict-get",
+      "type": "qa",
+      "tags": [
+        "ステップ2",
+        "辞書"
+      ],
+      "question": "次のコードを実行したときの出力は？\n\nd = {\"a\": 1}\nprint(d.get(\"b\", 0))",
+      "answer": "0",
+      "explanation": "get(キー, 既定値) はキーがないとき既定値を返す（省略時は None）。KeyError を避けて安全に参照できる。"
+    },
+    {
+      "id": "py-ch-dict-in",
+      "type": "choice",
+      "tags": [
+        "ステップ2",
+        "辞書"
+      ],
+      "question": "次のコードを実行したときの出力は？\n\nd = {\"a\": 1, \"b\": 2}\nprint(\"a\" in d, 1 in d)",
+      "choices": [
+        "False False",
+        "True False",
+        "False True",
+        "True True"
+      ],
+      "answer": 1,
+      "explanation": "辞書に対する in は「キー」があるかを調べる。値を調べたいときは 1 in d.values() と書く。"
+    },
+    {
+      "id": "py-cz-dict-items",
+      "type": "cloze",
+      "tags": [
+        "ステップ2",
+        "辞書"
+      ],
+      "text": "scores = {\"国語\": 80, \"数学\": 95}\nfor subject, score in scores.{{items}}():\n    print(subject, score)",
+      "hint": "キーと値の組を返すメソッド",
+      "explanation": "items() は (キー, 値) の組を順に返すので、for でキーと値を同時に受け取れる。キーだけなら keys()（または辞書そのもの）、値だけなら values()。"
+    },
+    {
+      "id": "py-q-set-dedupe",
+      "type": "qa",
+      "tags": [
+        "ステップ2",
+        "集合"
+      ],
+      "question": "次のコードを実行したときの出力は？\n\nprint(len(set([1, 2, 2, 3, 3, 3])))",
+      "answer": "3",
+      "explanation": "set（集合）は重複を持たないので、リストを set にすると重複が取り除かれる。要素の順序は保証されない点に注意。"
+    },
+    {
+      "id": "py-ch-set-and",
+      "type": "choice",
+      "tags": [
+        "ステップ2",
+        "集合"
+      ],
+      "question": "次のコードを実行したときの出力は？\n\na = {1, 2, 3}\nb = {2, 3, 4}\nprint(a & b)",
+      "choices": [
+        "{1, 4}",
+        "{1}",
+        "{1, 2, 3, 4}",
+        "{2, 3}"
+      ],
+      "answer": 3,
+      "explanation": "& は積集合（両方にある要素）。| は和集合 {1, 2, 3, 4}、- は差集合（a - b は {1}）、^ は対称差 {1, 4}。"
+    },
+    {
+      "id": "py-ch-empty-set",
+      "type": "choice",
+      "tags": [
+        "ステップ2",
+        "集合"
+      ],
+      "question": "空の集合（set）を作る正しい書き方は？",
+      "choices": [
+        "()",
+        "[]",
+        "{}",
+        "set()"
+      ],
+      "answer": 3,
+      "explanation": "{} は空の「辞書」になる。空の集合は set() で作る。[] は空のリスト、() は空のタプル。"
+    },
+    {
+      "id": "py-q-if-elif",
+      "type": "qa",
+      "tags": [
+        "ステップ2",
+        "条件分岐"
+      ],
+      "question": "次のコードを実行したときの出力は？\n\nscore = 75\nif score >= 80:\n    print(\"A\")\nelif score >= 60:\n    print(\"B\")\nelse:\n    print(\"C\")",
+      "answer": "B",
+      "hints": [
+        "elif は else if の略"
+      ],
+      "explanation": "if / elif / else は上から順に条件を調べ、最初に True になったブロックだけを実行する。75 は 80 未満なので elif の B。"
+    },
+    {
+      "id": "py-ch-falsy",
+      "type": "choice",
+      "tags": [
+        "ステップ2",
+        "条件分岐"
+      ],
+      "question": "if の条件として偽（False と同じ扱い）になる値は？",
+      "choices": [
+        "-1",
+        "\"0\"",
+        "[]",
+        "[0]"
+      ],
+      "answer": 2,
+      "explanation": "空のリスト・空文字列 \"\"・0・None は偽になる。\"0\" は中身のある文字列、[0] は要素が 1 つあるリスト、-1 は 0 以外の数なので、どれも真。"
+    },
+    {
+      "id": "py-ch-or-default",
+      "type": "choice",
+      "tags": [
+        "ステップ2",
+        "条件分岐"
+      ],
+      "question": "次のコードを実行したときの出力は？\n\nprint(0 or \"default\")",
+      "choices": [
+        "True",
+        "default",
+        "0",
+        "False"
+      ],
+      "answer": 1,
+      "explanation": "or は左側が真ならその値を、偽なら右側の値をそのまま返す（True / False に変換しない）。0 は偽なので \"default\" が返る。未入力のときの既定値を決める書き方として使われる。"
+    },
+    {
+      "id": "py-q-range-step",
+      "type": "qa",
+      "tags": [
+        "ステップ2",
+        "ループと range"
+      ],
+      "question": "次のコードを実行したときの出力は？\n\nprint(list(range(2, 10, 3)))",
+      "answer": "[2, 5, 8]",
+      "explanation": "range(start, stop, step) は start から step ずつ増やし、stop の手前で止まる。2, 5, 8 の次の 11 は 10 以上なので含まない。"
+    },
+    {
+      "id": "py-ch-range-sum",
+      "type": "choice",
+      "tags": [
+        "ステップ2",
+        "ループと range"
+      ],
+      "question": "次のコードを実行したときの出力は？\n\ntotal = 0\nfor i in range(5):\n    total += i\nprint(total)",
+      "choices": [
+        "4",
+        "5",
+        "15",
+        "10"
+      ],
+      "answer": 3,
+      "explanation": "range(5) は 0, 1, 2, 3, 4 の 5 つ（5 は含まない）。合計は 0+1+2+3+4 = 10。1〜5 の合計 15 と間違えやすい。"
+    },
+    {
+      "id": "py-cz-enumerate",
+      "type": "cloze",
+      "tags": [
+        "ステップ2",
+        "ループと range"
+      ],
+      "text": "names = [\"Aki\", \"Ben\"]\nfor i, name in {{enumerate}}(names, start=1):\n    print(i, name)  # 1 Aki / 2 Ben",
+      "hint": "番号を付ける組み込み関数",
+      "explanation": "enumerate() は (番号, 要素) の組を返す。start= で番号の開始値を変えられる（既定は 0）。range(len(...)) で回すより読みやすい。"
+    },
+    {
+      "id": "py-q-while",
+      "type": "qa",
+      "tags": [
+        "ステップ2",
+        "ループと range"
+      ],
+      "question": "次のコードを実行したときの出力は？\n\nn = 1\nwhile n < 100:\n    n *= 3\nprint(n)",
+      "answer": "243",
+      "hints": [
+        "81 の次で止まる"
+      ],
+      "explanation": "n は 1 → 3 → 9 → 27 → 81 → 243 と増え、243 で n < 100 が偽になってループを抜ける。条件は「ループの先頭」で毎回調べられる。"
+    },
+    {
+      "id": "py-q-break",
+      "type": "qa",
+      "tags": [
+        "ステップ2",
+        "ループと range"
+      ],
+      "question": "次のコードを実行したときの出力は？\n\nfor i in range(10):\n    if i == 3:\n        break\n    print(i)\n\n（複数行の出力は、行の順に空白で区切って答える）",
+      "answer": "0 1 2",
+      "explanation": "break はループ全体をすぐに終了する。i が 3 になった時点で print の前に抜けるので、3 は表示されない。"
+    },
+    {
+      "id": "py-ch-continue",
+      "type": "choice",
+      "tags": [
+        "ステップ2",
+        "ループと range"
+      ],
+      "question": "次のコードを実行したときの出力は？\n\nfor i in range(5):\n    if i % 2 == 0:\n        continue\n    print(i)\n\n（複数行の出力は、行の順に空白で区切って示す）",
+      "choices": [
+        "0 1",
+        "1 3",
+        "0 2 4",
+        "1 3 5"
+      ],
+      "answer": 1,
+      "explanation": "continue はその回の残りの処理を飛ばして次の繰り返しへ進む。偶数のときは print を飛ばすので、奇数の 1 と 3 だけが表示される。"
+    },
+    {
+      "id": "py-q-zip",
+      "type": "qa",
+      "tags": [
+        "ステップ2",
+        "ループと range"
+      ],
+      "question": "次のコードを実行したときの出力は？\n\nfor a, b in zip([1, 2, 3], [\"x\", \"y\"]):\n    print(a, b)\n\n（複数行の出力は、行の順に空白で区切って答える）",
+      "answer": "1 x 2 y",
+      "explanation": "zip() は複数の並びから要素を 1 つずつ組にして返す。長さが違うときは短い方に合わせて止まる（3 は使われない）。"
+    },
+    {
+      "id": "py-od-loop-sum",
+      "type": "order",
+      "tags": [
+        "ステップ2",
+        "ループと range"
+      ],
+      "prompt": "リスト [1, 2, 3] の合計 6 を最後に 1 回だけ表示するプログラムになるよう、行を正しい順に並べよ（インデントは省略）。",
+      "answer": "total = 0 for x in [1, 2, 3]: total += x print(total)",
+      "chunks": [
+        "total = 0",
+        "for x in [1, 2, 3]:",
+        "total += x",
+        "print(total)"
+      ],
+      "explanation": "合計用の変数はループの前に 0 で初期化し、ループの中で足し込み、ループの外（後）で表示する。print をループの中に入れると途中経過が毎回表示される。"
+    },
+    {
+      "id": "py-od-if-elif",
+      "type": "order",
+      "tags": [
+        "ステップ2",
+        "ループと range"
+      ],
+      "prompt": "数値 x が正なら「正」、負なら「負」、0 なら「ゼロ」と表示する if 文になるよう、行を正しい順に並べよ（インデントは省略）。",
+      "answer": "if x > 0: print(\"正\") elif x < 0: print(\"負\") else: print(\"ゼロ\")",
+      "chunks": [
+        "if x > 0:",
+        "print(\"正\")",
+        "elif x < 0:",
+        "print(\"負\")",
+        "else:",
+        "print(\"ゼロ\")"
+      ],
+      "explanation": "if → elif → else の順に書き、各条件の直後にそのときの処理を書く。else は最後に 1 つだけ置ける。"
+    },
+    {
+      "id": "py-q-listcomp",
+      "type": "qa",
+      "tags": [
+        "ステップ3",
+        "内包表記"
+      ],
+      "question": "次のコードを実行したときの出力は？\n\nprint([x * 2 for x in range(4)])",
+      "answer": "[0, 2, 4, 6]",
+      "explanation": "リスト内包表記 [式 for 変数 in 並び] は、各要素に式を当てはめた新しいリストを作る。for ループで append するより短く書ける。"
+    },
+    {
+      "id": "py-q-listcomp-if",
+      "type": "qa",
+      "tags": [
+        "ステップ3",
+        "内包表記"
+      ],
+      "question": "次のコードを実行したときの出力は？\n\nprint([x for x in range(10) if x % 3 == 0])",
+      "answer": "[0, 3, 6, 9]",
+      "explanation": "内包表記の後ろに if を付けると、条件を満たす要素だけが残る（フィルタ）。0 も 3 で割り切れるので含まれる。"
+    },
+    {
+      "id": "py-cz-listcomp-if",
+      "type": "cloze",
+      "tags": [
+        "ステップ3",
+        "内包表記"
+      ],
+      "text": "nums = [1, 2, 3, 4]\nevens = [n for n in nums {{if}} n % 2 == 0]  # [2, 4]",
+      "explanation": "内包表記で絞り込むときは、for の後ろに if 条件を書く。値を変換する x if 条件 else y（条件式）は for の前に書く点と区別する。"
+    },
+    {
+      "id": "py-ch-genexp-sum",
+      "type": "choice",
+      "tags": [
+        "ステップ3",
+        "内包表記"
+      ],
+      "question": "次のコードを実行したときの出力は？\n\nprint(sum(x * x for x in range(4)))",
+      "choices": [
+        "30",
+        "16",
+        "14",
+        "6"
+      ],
+      "answer": 2,
+      "explanation": "range(4) は 0〜3 なので 0 + 1 + 4 + 9 = 14。関数の引数にするときは [ ] を省いたジェネレーター式で書ける（リストを作らずに済む）。30 は 1〜4 の 2 乗の和。"
+    },
+    {
+      "id": "py-od-listcomp",
+      "type": "order",
+      "tags": [
+        "ステップ3",
+        "内包表記"
+      ],
+      "prompt": "リスト nums の正の要素だけを 2 倍したリストを作る内包表記になるよう、部品を正しい順に並べよ。",
+      "answer": "[ x * 2 for x in nums if x > 0 ]",
+      "chunks": [
+        "[",
+        "x * 2",
+        "for x in nums",
+        "if x > 0",
+        "]"
+      ],
+      "explanation": "内包表記は [式 for 変数 in 並び if 条件] の順。「何を作るか（式）」を先頭に書くのがポイント。"
+    },
+    {
+      "id": "py-cz-def",
+      "type": "cloze",
+      "tags": [
+        "ステップ3",
+        "関数"
+      ],
+      "text": "{{def}} greet(name):\n    return \"Hi, \" + name",
+      "hint": "define の略",
+      "explanation": "関数は def 関数名(引数): で定義し、本体はインデントして書く。return で呼び出し元に値を返す。"
+    },
+    {
+      "id": "py-ch-no-return",
+      "type": "choice",
+      "tags": [
+        "ステップ3",
+        "関数"
+      ],
+      "question": "次のコードを実行したときの出力は？\n\ndef f():\n    x = 1\n\nprint(f())",
+      "choices": [
+        "None",
+        "NameError が発生する",
+        "1",
+        "0"
+      ],
+      "answer": 0,
+      "explanation": "return のない関数（または値のない return）は None を返す。関数の中で計算しただけでは値は返らない。"
+    },
+    {
+      "id": "py-q-default-arg",
+      "type": "qa",
+      "tags": [
+        "ステップ3",
+        "関数"
+      ],
+      "question": "次のコードを実行したときの出力は？\n\ndef power(x, n=2):\n    return x ** n\n\nprint(power(3), power(2, 3))",
+      "answer": "9 8",
+      "explanation": "n=2 はデフォルト引数。省略すると 2 が使われるので power(3) = 3 ** 2 = 9、power(2, 3) = 2 ** 3 = 8。デフォルト引数は通常の引数より後ろに書く。"
+    },
+    {
+      "id": "py-q-keyword-arg",
+      "type": "qa",
+      "tags": [
+        "ステップ3",
+        "関数"
+      ],
+      "question": "次のコードを実行したときの出力は？\n\ndef show(a, b):\n    print(a, b)\n\nshow(b=1, a=2)",
+      "answer": "2 1",
+      "explanation": "キーワード引数（名前=値）で渡すと、並び順ではなく名前で対応づけられる。引数が多い関数を読みやすく呼び出せる。"
+    },
+    {
+      "id": "py-q-args-sum",
+      "type": "qa",
+      "tags": [
+        "ステップ3",
+        "関数"
+      ],
+      "question": "次のコードを実行したときの出力は？\n\ndef total(*args):\n    return sum(args)\n\nprint(total(1, 2, 3))",
+      "answer": "6",
+      "explanation": "*args は任意の個数の位置引数を受け取る。名前は慣習で args だが、* が付いていれば何でもよい。"
+    },
+    {
+      "id": "py-ch-args-type",
+      "type": "choice",
+      "tags": [
+        "ステップ3",
+        "関数"
+      ],
+      "question": "次のコードを実行したときの出力は？\n\ndef f(*args):\n    print(type(args))\n\nf(1, 2)",
+      "choices": [
+        "<class 'dict'>",
+        "<class 'list'>",
+        "<class 'int'>",
+        "<class 'tuple'>"
+      ],
+      "answer": 3,
+      "explanation": "*args に集められた引数はタプルになる。**kwargs（キーワード引数をまとめる）は辞書になる。"
+    },
+    {
+      "id": "py-q-multi-return",
+      "type": "qa",
+      "tags": [
+        "ステップ3",
+        "関数"
+      ],
+      "question": "次のコードを実行したときの出力は？\n\ndef min_max(nums):\n    return min(nums), max(nums)\n\nlo, hi = min_max([4, 1, 7])\nprint(lo, hi)",
+      "answer": "1 7",
+      "explanation": "return a, b はタプル (a, b) を返す。受け取る側でアンパックすれば、複数の値を返す関数のように使える。"
+    },
+    {
+      "id": "py-q-lambda",
+      "type": "qa",
+      "tags": [
+        "ステップ3",
+        "関数"
+      ],
+      "question": "次のコードを実行したときの出力は？\n\npairs = [(1, \"b\"), (2, \"a\")]\nprint(sorted(pairs, key=lambda p: p[1]))",
+      "answer": "[(2, 'a'), (1, 'b')]",
+      "accepted": [
+        "[(2, \"a\"), (1, \"b\")]"
+      ],
+      "explanation": "lambda 引数: 式 は名前のない小さな関数。ここでは各タプルの 2 番目（p[1]）を基準に並べるので \"a\" の組が先になる。"
+    },
+    {
+      "id": "py-od-def-call",
+      "type": "order",
+      "tags": [
+        "ステップ3",
+        "関数"
+      ],
+      "prompt": "長方形の面積 12 を表示するプログラムになるよう、行を正しい順に並べよ（インデントは省略）。",
+      "answer": "def area(w, h): return w * h result = area(3, 4) print(result)",
+      "chunks": [
+        "def area(w, h):",
+        "return w * h",
+        "result = area(3, 4)",
+        "print(result)"
+      ],
+      "explanation": "関数は呼び出すより前に定義しておく必要がある。def の直後に本体（return）を書き、そのあとで呼び出して結果を使う。"
+    },
+    {
+      "id": "py-ch-scope-local",
+      "type": "choice",
+      "tags": [
+        "ステップ3",
+        "スコープ"
+      ],
+      "question": "次のコードを実行したときの出力は？\n\nx = 10\n\ndef f():\n    x = 20\n\nf()\nprint(x)",
+      "choices": [
+        "NameError が発生する",
+        "20",
+        "10",
+        "None"
+      ],
+      "answer": 2,
+      "explanation": "関数の中で代入した変数は、その関数のローカル変数になる。外側の x とは別物なので、グローバルの x は 10 のまま。"
+    },
+    {
+      "id": "py-err-unbound",
+      "type": "qa",
+      "tags": [
+        "ステップ3",
+        "スコープ"
+      ],
+      "question": "次のコードを実行すると発生する例外（エラー）の名前は？\n\ncount = 0\n\ndef inc():\n    count += 1\n\ninc()",
+      "answer": "UnboundLocalError",
+      "hints": [
+        "Unbound（まだ結び付いていない）Local"
+      ],
+      "explanation": "関数内で count に代入しているので count はローカル変数とみなされ、値が入る前に count + 1 を読もうとしてエラーになる。グローバル変数を書き換えるなら global count を宣言する（引数と戻り値でやりとりする方がよい）。"
+    },
+    {
+      "id": "py-cz-global",
+      "type": "cloze",
+      "tags": [
+        "ステップ3",
+        "スコープ"
+      ],
+      "text": "count = 0\n\ndef inc():\n    {{global}} count\n    count += 1",
+      "explanation": "global 宣言をすると、関数内の代入がグローバル変数に対して行われる。入れ子の関数から外側の関数の変数を書き換えるときは nonlocal を使う。"
+    },
+    {
+      "id": "py-od-legb",
+      "type": "order",
+      "tags": [
+        "ステップ3",
+        "スコープ"
+      ],
+      "prompt": "関数の中で名前（変数名）を参照したとき、Python が探す順に並べよ。",
+      "answer": "ローカル エンクロージング グローバル ビルトイン",
+      "chunks": [
+        "ローカル",
+        "エンクロージング",
+        "グローバル",
+        "ビルトイン"
+      ],
+      "explanation": "頭文字を取って LEGB ルールという。自分の関数 → 外側の関数 → モジュール全体 → 組み込み（print や len）の順に探し、最初に見つかったものを使う。"
+    },
+    {
+      "id": "py-err-index",
+      "type": "qa",
+      "tags": [
+        "ステップ3",
+        "例外処理"
+      ],
+      "question": "次のコードを実行すると発生する例外（エラー）の名前は？\n\nnums = [1, 2, 3]\nprint(nums[3])",
+      "answer": "IndexError",
+      "explanation": "長さ 3 のリストの有効なインデックスは 0〜2（または -3〜-1）。範囲外を参照すると IndexError。"
+    },
+    {
+      "id": "py-err-value",
+      "type": "qa",
+      "tags": [
+        "ステップ3",
+        "例外処理"
+      ],
+      "question": "次のコードを実行すると発生する例外（エラー）の名前は？\n\nprint(int(\"3.5\"))",
+      "answer": "ValueError",
+      "explanation": "int() は \"3.5\" のような小数の文字列を変換できず ValueError（型は合っているが値が不適切）。int(float(\"3.5\")) なら 3 になる。"
+    },
+    {
+      "id": "py-q-try-else-finally",
+      "type": "qa",
+      "tags": [
+        "ステップ3",
+        "例外処理"
+      ],
+      "question": "次のコードを実行したときの出力は？\n\ntry:\n    x = int(\"abc\")\nexcept ValueError:\n    print(\"A\")\nelse:\n    print(\"B\")\nfinally:\n    print(\"C\")\n\n（複数行の出力は、行の順に空白で区切って答える）",
+      "answer": "A C",
+      "explanation": "\"abc\" は整数に変換できないので except が実行される。else は例外が起きなかったときだけ、finally は例外の有無にかかわらず必ず実行される。"
+    },
+    {
+      "id": "py-ch-try-else",
+      "type": "choice",
+      "tags": [
+        "ステップ3",
+        "例外処理"
+      ],
+      "question": "try 文の else 節が実行されるのはどんなとき？",
+      "choices": [
+        "例外の有無にかかわらず必ず",
+        "try 節で例外が発生しなかったとき",
+        "try 節で例外が発生したとき",
+        "except 節の中で例外が発生したとき"
+      ],
+      "answer": 1,
+      "explanation": "else は「try が無事に終わったとき」だけ実行される。例外が起きたときは except、必ず実行したい後始末は finally に書く。"
+    },
+    {
+      "id": "py-od-try-clauses",
+      "type": "order",
+      "tags": [
+        "ステップ3",
+        "例外処理"
+      ],
+      "prompt": "try 文の節を、書く順に並べよ。",
+      "answer": "try: except ValueError: else: finally:",
+      "chunks": [
+        "try:",
+        "except ValueError:",
+        "else:",
+        "finally:"
+      ],
+      "explanation": "try → except（複数可）→ else → finally の順。else と finally は省略できるが、書くならこの順番で、except より後ろに置く。"
+    },
+    {
+      "id": "py-cz-raise",
+      "type": "cloze",
+      "tags": [
+        "ステップ3",
+        "例外処理"
+      ],
+      "text": "def set_age(age):\n    if age < 0:\n        {{raise}} ValueError(\"age must be >= 0\")",
+      "explanation": "raise で例外を自分で発生させる。関数に不正な値が渡されたことを呼び出し元に知らせる定番の方法。"
+    },
+    {
+      "id": "py-cz-with-open",
+      "type": "cloze",
+      "tags": [
+        "ステップ3",
+        "ファイル操作"
+      ],
+      "text": "{{with}} open(\"memo.txt\", encoding=\"utf-8\") as f:\n    text = f.read()",
+      "explanation": "with 文で開いたファイルは、ブロックを抜けるときに（例外が起きても）自動で閉じられる。close() の呼び忘れを防げる。"
+    },
+    {
+      "id": "py-ch-open-mode-a",
+      "type": "choice",
+      "tags": [
+        "ステップ3",
+        "ファイル操作"
+      ],
+      "question": "既存のファイルの末尾に書き足すとき、open() の 2 つ目の引数（モード）に指定するのは？",
+      "choices": [
+        "\"a\"",
+        "\"x\"",
+        "\"r\"",
+        "\"w\""
+      ],
+      "answer": 0,
+      "explanation": "\"a\"（append）は末尾に追記。\"w\" は中身を消して上書き、\"r\" は読み込み（既定）、\"x\" はファイルが存在しないときだけ新規作成する。"
+    },
+    {
+      "id": "py-q-file-lines",
+      "type": "qa",
+      "tags": [
+        "ステップ3",
+        "ファイル操作"
+      ],
+      "question": "次のコードを実行したときの出力は？\n\nwith open(\"t.txt\", \"w\", encoding=\"utf-8\") as f:\n    f.write(\"one\\ntwo\\n\")\n\nwith open(\"t.txt\", encoding=\"utf-8\") as f:\n    lines = f.readlines()\n\nprint(len(lines))",
+      "answer": "2",
+      "explanation": "readlines() は 1 行ずつ（改行文字付きの）文字列のリストを返す。\"one\\n\" と \"two\\n\" の 2 行。大きなファイルは for line in f: で 1 行ずつ読むとメモリを節約できる。"
+    },
+    {
+      "id": "py-ch-encoding",
+      "type": "choice",
+      "tags": [
+        "ステップ3",
+        "ファイル操作"
+      ],
+      "question": "日本語を含むテキストファイルを開くとき、OS による違いを避けるために open() に指定するとよい引数は？",
+      "choices": [
+        "encoding=\"utf-8\"",
+        "newline=\"utf-8\"",
+        "errors=\"utf-8\"",
+        "mode=\"utf-8\""
+      ],
+      "answer": 0,
+      "explanation": "encoding を省略すると、Python のバージョンや環境によっては OS の既定の文字コード（日本語版 Windows では cp932 など）が使われ、文字化けや UnicodeDecodeError の原因になる。encoding=\"utf-8\" を明示する。"
+    },
+    {
+      "id": "py-od-file-read",
+      "type": "order",
+      "tags": [
+        "ステップ3",
+        "ファイル操作"
+      ],
+      "prompt": "memo.txt の中身を読み込んで文字数を表示するプログラムになるよう、行を正しい順に並べよ（インデントは省略）。",
+      "answer": "with open(\"memo.txt\", encoding=\"utf-8\") as f: text = f.read() print(len(text))",
+      "chunks": [
+        "with open(\"memo.txt\", encoding=\"utf-8\") as f:",
+        "text = f.read()",
+        "print(len(text))"
+      ],
+      "explanation": "ファイルを開く → ブロックの中で読む → 結果を使う、の順。read() はファイル全体を 1 つの文字列として返す。"
+    },
+    {
+      "id": "py-q-import-math",
+      "type": "qa",
+      "tags": [
+        "ステップ3",
+        "モジュール"
+      ],
+      "question": "次のコードを実行したときの出力は？\n\nimport math\nprint(math.sqrt(16))",
+      "answer": "4.0",
+      "explanation": "import math で標準ライブラリの math モジュールを読み込み、math.sqrt のように「モジュール名.名前」で使う。sqrt は float を返すので 4.0。"
+    },
+    {
+      "id": "py-cz-from-import",
+      "type": "cloze",
+      "tags": [
+        "ステップ3",
+        "モジュール"
+      ],
+      "text": "{{from}} math import pi\nprint(pi)  # 3.141592653589793",
+      "explanation": "from モジュール import 名前 と書くと、math.pi ではなく pi だけで使える。import math as m のように as で別名も付けられる。"
+    },
+    {
+      "id": "py-ch-name-main",
+      "type": "choice",
+      "tags": [
+        "ステップ3",
+        "モジュール"
+      ],
+      "question": "if __name__ == \"__main__\": の中の処理が実行されるのはどんなとき？",
+      "choices": [
+        "ファイルの中で関数が定義されたとき",
+        "直接実行したときも import されたときも",
+        "そのファイルを直接実行したとき",
+        "ほかのファイルから import されたとき"
+      ],
+      "answer": 2,
+      "explanation": "直接実行されたファイルでは __name__ が \"__main__\" になり、import されたときはモジュール名になる。テストコードや起動処理を import 時に動かさないために使う。"
+    },
+    {
+      "id": "py-cz-init",
+      "type": "cloze",
+      "tags": [
+        "ステップ4",
+        "クラス"
+      ],
+      "text": "class User:\n    def {{__init__}}(self, name):\n        self.name = name",
+      "hint": "アンダースコア 2 つで囲まれた名前",
+      "explanation": "__init__ はインスタンスを作るときに自動で呼ばれる初期化メソッド。前後にアンダースコアが 2 つずつ付く。"
+    },
+    {
+      "id": "py-q-class-method",
+      "type": "qa",
+      "tags": [
+        "ステップ4",
+        "クラス"
+      ],
+      "question": "次のコードを実行したときの出力は？\n\nclass Dog:\n    def __init__(self, name):\n        self.name = name\n\n    def bark(self):\n        return self.name + \"!\"\n\nd = Dog(\"Pochi\")\nprint(d.bark())",
+      "answer": "Pochi!",
+      "explanation": "Dog(\"Pochi\") でインスタンスが作られ、__init__ で self.name に \"Pochi\" が入る。メソッドの中では self.name のように self を通して属性を使う。"
+    },
+    {
+      "id": "py-ch-self",
+      "type": "choice",
+      "tags": [
+        "ステップ4",
+        "クラス"
+      ],
+      "question": "メソッドの第 1 引数 self が指すものは？",
+      "choices": [
+        "クラスそのもの",
+        "メソッドを呼び出したインスタンス自身",
+        "最後に作られたインスタンス",
+        "親クラス"
+      ],
+      "answer": 1,
+      "explanation": "d.bark() は Dog.bark(d) と同じ意味で、self には d が入る。クラスそのものを受け取るのは @classmethod の cls。"
+    },
+    {
+      "id": "py-q-class-var",
+      "type": "qa",
+      "tags": [
+        "ステップ4",
+        "クラス"
+      ],
+      "question": "次のコードを実行したときの出力は？\n\nclass Counter:\n    count = 0\n\n    def __init__(self):\n        Counter.count += 1\n\nCounter()\nCounter()\nprint(Counter.count)",
+      "answer": "2",
+      "explanation": "クラスの直下に書いた変数はクラス変数で、すべてのインスタンスで共有される。インスタンスを 2 つ作ったので 2。self.x に入れるインスタンス変数とは別物。"
+    },
+    {
+      "id": "py-ch-str-dunder",
+      "type": "choice",
+      "tags": [
+        "ステップ4",
+        "クラス"
+      ],
+      "question": "次のコードを実行したときの出力は？\n\nclass Point:\n    def __init__(self, x, y):\n        self.x = x\n        self.y = y\n\n    def __str__(self):\n        return f\"({self.x}, {self.y})\"\n\nprint(Point(1, 2))",
+      "choices": [
+        "{\"x\": 1, \"y\": 2}",
+        "(1, 2)",
+        "Point(1, 2)",
+        "<__main__.Point object>"
+      ],
+      "answer": 1,
+      "explanation": "print() や str() はオブジェクトの __str__ メソッドの戻り値を表示する。__str__ を定義しないと <__main__.Point object at 0x...> のような表示になる。"
+    },
+    {
+      "id": "py-od-class",
+      "type": "order",
+      "tags": [
+        "ステップ4",
+        "クラス"
+      ],
+      "prompt": "x 座標を持つ Point クラスを定義し、Point(5) の x を表示するプログラムになるよう、行を正しい順に並べよ（インデントは省略）。",
+      "answer": "class Point: def __init__(self, x): self.x = x p = Point(5) print(p.x)",
+      "chunks": [
+        "class Point:",
+        "def __init__(self, x):",
+        "self.x = x",
+        "p = Point(5)",
+        "print(p.x)"
+      ],
+      "explanation": "class 文の中に __init__ を定義し、その中で self.x に代入する。インスタンスを作るのはクラスを定義したあと。"
+    },
+    {
+      "id": "py-q-override",
+      "type": "qa",
+      "tags": [
+        "ステップ4",
+        "継承"
+      ],
+      "question": "次のコードを実行したときの出力は？\n\nclass Animal:\n    def speak(self):\n        return \"...\"\n\nclass Cat(Animal):\n    def speak(self):\n        return \"ニャー\"\n\nprint(Cat().speak())",
+      "answer": "ニャー",
+      "explanation": "class Cat(Animal) で Animal を継承する。子クラスで同じ名前のメソッドを定義すると親のメソッドを上書き（オーバーライド）する。"
+    },
+    {
+      "id": "py-cz-super",
+      "type": "cloze",
+      "tags": [
+        "ステップ4",
+        "継承"
+      ],
+      "text": "class Student(Person):\n    def __init__(self, name, school):\n        {{super}}().__init__(name)\n        self.school = school",
+      "explanation": "super() で親クラスのメソッドを呼び出せる。子クラスで __init__ を定義したときは、親の初期化を super().__init__(...) で呼ぶのを忘れない。"
+    },
+    {
+      "id": "py-cz-isinstance",
+      "type": "cloze",
+      "tags": [
+        "ステップ4",
+        "継承"
+      ],
+      "text": "class A:\n    pass\n\nclass B(A):\n    pass\n\nprint({{isinstance}}(B(), A))  # True",
+      "hint": "「〜のインスタンスか」を調べる組み込み関数",
+      "explanation": "isinstance(obj, クラス) は、obj がそのクラスか「その子クラス」のインスタンスなら True。B は A を継承しているので True。type(B()) == A は False になる点が違う。"
+    },
+    {
+      "id": "py-ch-mutable-default",
+      "type": "choice",
+      "tags": [
+        "ステップ4",
+        "よくある落とし穴"
+      ],
+      "question": "次のコードを実行したときの出力は？\n\ndef add(x, items=[]):\n    items.append(x)\n    return items\n\nadd(1)\nprint(add(2))",
+      "choices": [
+        "[1]",
+        "[1, 2]",
+        "[2]",
+        "[2, 1]"
+      ],
+      "answer": 1,
+      "explanation": "デフォルト引数の値は関数を定義したときに 1 回だけ作られ、呼び出しのたびに同じリストが使い回される。そのため 1 回目に追加した 1 が残っていて、直感に反して [2] にはならない。"
+    },
+    {
+      "id": "py-cz-none-default",
+      "type": "cloze",
+      "tags": [
+        "ステップ4",
+        "よくある落とし穴"
+      ],
+      "text": "def add(x, items=None):\n    if items is {{None}}:\n        items = []\n    items.append(x)\n    return items",
+      "explanation": "ミュータブルなデフォルト引数の対策は、既定値を None にして関数の中で新しいリストを作ること。呼び出しのたびに別のリストになる。"
+    },
+    {
+      "id": "py-q-is-vs-eq",
+      "type": "qa",
+      "tags": [
+        "ステップ4",
+        "よくある落とし穴"
+      ],
+      "question": "次のコードを実行したときの出力は？\n\na = [1, 2]\nb = [1, 2]\nprint(a == b, a is b)",
+      "answer": "True False",
+      "explanation": "== は値が等しいか、is は同じオブジェクト（同一の実体）かを調べる。中身が同じでも別々に作ったリストは別のオブジェクト。"
+    },
+    {
+      "id": "py-ch-is-none",
+      "type": "choice",
+      "tags": [
+        "ステップ4",
+        "よくある落とし穴"
+      ],
+      "question": "変数 x が None かどうかを調べる書き方として、PEP 8 で推奨されているのは？",
+      "choices": [
+        "x.is_none()",
+        "x = None",
+        "x == None",
+        "x is None"
+      ],
+      "answer": 3,
+      "explanation": "None は 1 つしか存在しないので is で比べるのが推奨。== None も多くの場合動くが、__eq__ を独自に定義したクラスで誤動作しうる。x = None は代入。"
+    },
+    {
+      "id": "py-ch-alias",
+      "type": "choice",
+      "tags": [
+        "ステップ4",
+        "よくある落とし穴"
+      ],
+      "question": "次のコードを実行したときの出力は？\n\na = [1, 2]\nb = a\nb.append(3)\nprint(a)",
+      "choices": [
+        "[1, 2, 3]",
+        "[1, 2, [3]]",
+        "[3]",
+        "[1, 2]"
+      ],
+      "answer": 0,
+      "explanation": "b = a はリストをコピーせず、同じリストに別の名前を付けるだけ。b を通した変更は a からも見える。コピーするなら a.copy() や a[:]。"
+    },
+    {
+      "id": "py-ch-shallow-copy",
+      "type": "choice",
+      "tags": [
+        "ステップ4",
+        "よくある落とし穴"
+      ],
+      "question": "次のコードを実行したときの出力は？\n\na = [[1], [2]]\nb = a.copy()\nb[0].append(9)\nprint(a)",
+      "choices": [
+        "[[1], [2], 9]",
+        "[[1], [2]]",
+        "[[1, 9], [2]]",
+        "[[1, 9], [2, 9]]"
+      ],
+      "answer": 2,
+      "explanation": "copy() は浅いコピーで、外側のリストだけを新しく作り、中の要素（内側のリスト）は a と共有したまま。そのため b[0] への変更が a にも表れる。入れ子まで複製するには copy.deepcopy() を使う。"
+    },
+    {
+      "id": "py-cz-deepcopy",
+      "type": "cloze",
+      "tags": [
+        "ステップ4",
+        "よくある落とし穴"
+      ],
+      "text": "import copy\n\nb = copy.{{deepcopy}}(a)  # 入れ子のリストまで丸ごと複製する",
+      "explanation": "copy.deepcopy() は中の要素まで再帰的に複製するので、b を変更しても a に影響しない。copy.copy() は浅いコピー。"
+    },
+    {
+      "id": "py-q-list-mul",
+      "type": "qa",
+      "tags": [
+        "ステップ4",
+        "よくある落とし穴"
+      ],
+      "question": "次のコードを実行したときの出力は？\n\ngrid = [[0] * 2] * 2\ngrid[0][0] = 1\nprint(grid)",
+      "answer": "[[1, 0], [1, 0]]",
+      "explanation": "[[0] * 2] * 2 は同じ内側リストへの参照を 2 つ並べたものなので、1 か所を変えると両方の行が変わる。2 次元リストは [[0] * 2 for _ in range(2)] のように内包表記で作る。"
+    },
+    {
+      "id": "py-q-float-eq",
+      "type": "qa",
+      "tags": [
+        "ステップ4",
+        "よくある落とし穴"
+      ],
+      "question": "次のコードを実行したときの出力は？\n\nprint(0.1 + 0.2 == 0.3)",
+      "answer": "False",
+      "explanation": "浮動小数点数は 2 進数で近似して表すため、0.1 + 0.2 は 0.30000000000000004 になる。比較には math.isclose() を使う。"
+    },
+    {
+      "id": "py-q-round-half-even",
+      "type": "qa",
+      "tags": [
+        "ステップ4",
+        "よくある落とし穴"
+      ],
+      "question": "次のコードを実行したときの出力は？\n\nprint(round(2.5), round(3.5))",
+      "answer": "2 4",
+      "hints": [
+        "四捨五入ではない"
+      ],
+      "explanation": "round() はちょうど中間の値を「偶数の側」に丸める（銀行丸め）。2.5 → 2、3.5 → 4。いわゆる四捨五入をしたいときは decimal モジュールなどを使う。"
+    }
+  ]
+}

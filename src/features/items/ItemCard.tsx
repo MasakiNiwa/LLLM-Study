@@ -128,9 +128,32 @@ function Headword({ text, sub, lang }: { text: string; sub?: ReactNode; lang: st
   );
 }
 
-function Prompt({ children }: { children: ReactNode }) {
+/** コード・表など、改行や字下げをそのまま見せる部分 */
+const CODE_BLOCK =
+  'overflow-x-auto rounded-xl bg-slate-100 px-3 py-2.5 text-left font-mono text-sm leading-relaxed whitespace-pre text-slate-800 dark:bg-slate-800 dark:text-slate-200';
+
+/**
+ * 問題文。1 行なら中央に大きく。改行を含む（条件の箇条書き・コードつきの問題など）なら左寄せにし、
+ * 空行のあとの部分はコードとして等幅・字下げを保って表示する。
+ */
+function Prompt({ children }: { children: string }) {
+  if (!children.includes('\n')) {
+    return (
+      <div className="text-center text-xl leading-relaxed font-semibold sm:text-2xl">
+        {children}
+      </div>
+    );
+  }
+  const [lead, ...blocks] = children.split(/\n[ \t]*\n/);
   return (
-    <div className="text-center text-xl leading-relaxed font-semibold sm:text-2xl">{children}</div>
+    <div className="space-y-3">
+      <p className="text-lg leading-relaxed font-semibold whitespace-pre-line sm:text-xl">{lead}</p>
+      {blocks.map((b, i) => (
+        <pre key={i} className={CODE_BLOCK}>
+          <code>{b}</code>
+        </pre>
+      ))}
+    </div>
   );
 }
 
@@ -252,8 +275,10 @@ function QaFace({ item, side }: FaceProps<QaItem>) {
 
 function ClozeText({ text, reveal }: { text: string; reveal: boolean }) {
   const parts = text.split(/(\{\{[^{}]+\}\})/g);
+  // 改行を含む穴埋め（コードなど）は、字下げを保って等幅で表示する
+  const code = text.includes('\n');
   return (
-    <p className="text-center text-xl leading-loose font-medium sm:text-2xl">
+    <p className={code ? CODE_BLOCK : 'text-center text-xl leading-loose font-medium sm:text-2xl'}>
       {parts.map((p, i) => {
         const m = /^\{\{([^{}]+)\}\}$/.exec(p);
         if (!m) return <span key={i}>{p}</span>;
@@ -267,7 +292,10 @@ function ClozeText({ text, reveal }: { text: string; reveal: boolean }) {
         ) : (
           <span
             key={i}
-            className="mx-0.5 inline-block min-w-16 border-b-2 border-accent-500 text-transparent select-none"
+            className={cn(
+              'inline-block border-b-2 border-accent-500 text-transparent select-none',
+              code ? 'min-w-8' : 'mx-0.5 min-w-16',
+            )}
           >
             {m[1].replace(/./g, '_')}
           </span>
@@ -293,10 +321,15 @@ function ClozeFace({ item, side, lang }: FaceProps<ClozeItem>) {
   }
   return (
     <div className="space-y-4">
-      <div className="flex items-center justify-center gap-1">
+      {item.text.includes('\n') ? (
+        // コードなどは読み上げない（幅も広く使う）
         <ClozeText text={item.text} reveal />
-        <SpeakButton text={item.text.replace(/\{\{([^{}]+)\}\}/g, '$1')} lang={lang} />
-      </div>
+      ) : (
+        <div className="flex items-center justify-center gap-1">
+          <ClozeText text={item.text} reveal />
+          <SpeakButton text={item.text.replace(/\{\{([^{}]+)\}\}/g, '$1')} lang={lang} />
+        </div>
+      )}
       <p className="text-center text-sm text-slate-500">
         答え: {clozeAnswers(item.text).join(' / ')}
       </p>

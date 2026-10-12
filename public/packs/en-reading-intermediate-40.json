@@ -1,0 +1,792 @@
+{
+  "format": "lllm-study-pack",
+  "version": 1,
+  "id": "en-reading-intermediate-40",
+  "title": "英語の長文読解 中級 40",
+  "description": "150〜280 語程度のオリジナル英文 8 本と、その内容を問う問題 40 問。易しい文章から順に、お知らせ・商品レビュー（ステップ1）→ ビジネスメール・会話文（ステップ2）→ 物語・ニュース記事（ステップ3）→ 説明文・意見文（ステップ4）と進みます。本文は問題の上に表示され、答えを見ると全文の訳を確認できます。各文章 5 問で、内容一致の選択問題 26 問・短く答える一問一答 7 問・要約文の穴埋め 6 問・並べ替え 1 問。解説では根拠になる本文の一文を引用しているので、「どこを読めば答えがわかるか」を確かめながら進められます。前の段階は「英語の長文読解 入門 20」（A2〜B1 の短い文章）。本文に出てくる meet a deadline・make a reservation などの言い回しは「自然な英語のコロケーション 100」、語いの土台は「英語の基本動詞 40」「よく使う句動詞 30」、会話の慣用表現は「よく使う英語のイディオム 80」で確認できます。",
+  "subject": "english",
+  "language": {
+    "target": "en",
+    "explanation": "ja"
+  },
+  "level": "高校〜大学（CEFR B1〜B2）",
+  "tags": [
+    "英語",
+    "長文読解",
+    "リーディング",
+    "中級"
+  ],
+  "author": "LLLM-Study",
+  "license": "MIT",
+  "source": "LLLM-Study オリジナル（AI を利用して作成）",
+  "revision": 1,
+  "passages": [
+    {
+      "id": "r-pool-notice",
+      "title": "Notice: Pool Closure and New Hours",
+      "text": "NOTICE TO ALL MEMBERS\n\nThe indoor pool at Riverside Sports Center will be closed from Monday, June 3 to Sunday, June 16 for repairs to the heating system. During this period, members can use the pool at our Eastside branch free of charge. Please show your membership card at the front desk there. A free shuttle bus will run between the two centers every 30 minutes from 7 a.m. to 7 p.m.\n\nWhen the pool reopens on June 17, our opening hours will change. On weekdays, the center will open one hour earlier, at 6 a.m., and close at 10 p.m. as before. Weekend hours will stay the same: 8 a.m. to 8 p.m.\n\nWe will also start a new beginner swimming class for adults on Tuesday and Thursday evenings. Each class lasts 50 minutes and is limited to eight people. You can sign up online or at the front desk from June 1. The fee is $40 for eight lessons.\n\nWe apologize for any inconvenience and thank you for your understanding. If you have any questions, please ask a member of staff at the front desk.",
+      "translation": "会員の皆さまへのお知らせ\n\nリバーサイド・スポーツセンターの屋内プールは、暖房（加温）設備の修理のため、6 月 3 日（月）から 6 月 16 日（日）まで閉鎖します。この期間中、会員の皆さまはイーストサイド支店のプールを無料でご利用いただけます。あちらの受付で会員証をご提示ください。両センターの間には、午前 7 時から午後 7 時まで 30 分ごとに無料のシャトルバスを運行します。\n\n6 月 17 日にプールが再開すると、営業時間が変わります。平日は 1 時間早い午前 6 時に開館し、閉館はこれまでどおり午後 10 時です。週末の営業時間は変わらず、午前 8 時から午後 8 時です。\n\nまた、火曜日と木曜日の夜に、大人向けの初心者水泳教室を新たに始めます。各回 50 分で、定員は 8 名です。6 月 1 日から、オンラインまたは受付でお申し込みいただけます。料金は 8 回で 40 ドルです。\n\nご不便をおかけして申し訳ありません。ご理解のほどよろしくお願いいたします。ご質問は受付のスタッフまでお尋ねください。"
+    },
+    {
+      "id": "r-earbuds-review",
+      "title": "Review: Kestrel Mini Wireless Earbuds",
+      "text": "I bought the Kestrel Mini wireless earbuds three weeks ago, mainly for listening to podcasts on my way to work. Overall, I'm happy with them, but they are not perfect.\n\nFirst, the good points. The sound quality is clear, especially for voices, and the earbuds are very light, so they don't hurt my ears even after two hours. The battery is also impressive. The company says it lasts eight hours, and in my experience that's about right. The charging case gives you three more full charges, so I only need to charge the case once a week.\n\nNow the bad points. The noise cancelling is weak. On a busy train, I still hear a lot of background noise, so I have to turn the volume up. Also, the touch controls are too sensitive. Sometimes when I adjust the earbuds in my ears, the music stops by accident.\n\nAt $59, they cost about half the price of the big brands, so I think they are good value for money. If you mainly listen to podcasts or audiobooks, I recommend them. However, if you want to block out noise on planes or trains, you should spend more on a different model.\n\nRating: 4 out of 5",
+      "translation": "3 週間前、主に通勤中にポッドキャストを聞くために、Kestrel Mini のワイヤレスイヤホンを買いました。全体としては満足していますが、完璧ではありません。\n\nまず良い点です。音質はクリアで、特に人の声が聞き取りやすく、イヤホンがとても軽いので 2 時間つけていても耳が痛くなりません。バッテリーもすばらしいです。メーカーは 8 時間もつと言っていて、私の経験でもほぼそのとおりです。充電ケースでさらに 3 回フル充電できるので、ケースの充電は週に 1 回で済みます。\n\n次に悪い点です。ノイズキャンセリングが弱いです。混んだ電車では周りの雑音がかなり聞こえるので、音量を上げなければなりません。また、タッチ操作が敏感すぎます。耳の中でイヤホンの位置を直すと、うっかり音楽が止まってしまうことがあります。\n\n59 ドルで大手ブランドの約半額なので、値段の割にお得だと思います。主にポッドキャストやオーディオブックを聞くなら、おすすめです。ただし、飛行機や電車で雑音をしっかり遮りたいなら、もっとお金を出して別のモデルを買うべきです。\n\n評価：5 点中 4 点"
+    },
+    {
+      "id": "r-order-email",
+      "title": "Email: Delay in Your Order",
+      "text": "Subject: Delay in your order #4821\n\nDear Ms. Carter,\n\nThank you for your order of 200 printed notebooks, which we received on May 10. I am writing to let you know that there will be a short delay in delivery.\n\nUnfortunately, one of our printing machines broke down last week, and the replacement part will not arrive until May 20. As a result, we will not be able to deliver your order by May 24 as originally planned. We now expect to ship the notebooks on May 28, and they should reach your office within two business days.\n\nWe understand that you need the notebooks for your company's training event on June 3. If this new schedule causes a problem, we can offer two options. First, we can deliver 100 notebooks by May 24 using another printing company, and send the rest later. Second, you can cancel the order and receive a full refund.\n\nTo apologize for the inconvenience, we will give you a 10% discount on this order. Could you let me know which option you would prefer by May 16?\n\nWe are very sorry for any trouble this may cause.\n\nBest regards,\nDaniel Brooks\nCustomer Service Manager, Brightline Printing",
+      "translation": "件名：ご注文 #4821 の遅延について\n\nカーター様\n\n5 月 10 日に承りました名入れノート 200 冊のご注文、ありがとうございます。お届けが少し遅れることをお知らせするため、ご連絡いたしました。\n\nあいにく、先週弊社の印刷機の 1 台が故障し、交換部品が 5 月 20 日まで届きません。そのため、当初の予定どおり 5 月 24 日までにお届けすることができなくなりました。現在のところ、ノートは 5 月 28 日に発送する見込みで、2 営業日以内に御社に届く予定です。\n\nノートは 6 月 3 日の御社の研修で必要とうかがっております。この新しい日程で問題がある場合は、2 つの選択肢をご用意できます。1 つ目は、別の印刷会社を使って 5 月 24 日までに 100 冊をお届けし、残りを後からお送りする方法です。2 つ目は、ご注文をキャンセルして全額返金を受ける方法です。\n\nご不便のおわびとして、今回のご注文を 10% 割引いたします。どちらの選択肢をご希望か、5 月 16 日までにお知らせいただけますか。\n\nご迷惑をおかけし、大変申し訳ございません。\n\nよろしくお願いいたします。\nダニエル・ブルックス\nブライトライン印刷 カスタマーサービス部長"
+    },
+    {
+      "id": "r-farewell-dialogue",
+      "title": "Dialogue: Planning a Farewell",
+      "text": "Mia: Hey, Ken. Have you heard that Sarah is leaving the company at the end of the month?\nKen: Yes, she told me yesterday. She's moving to Canada, right?\nMia: That's right. Her husband got a job in Vancouver. I was thinking we should do something for her before she goes.\nKen: Good idea. How about a farewell dinner? There's a nice Italian place near the station.\nMia: I thought about that, but a lot of people on our team have small children, so evenings are difficult. What about lunch instead?\nKen: That makes sense. Her last day is Friday the 28th, but she's taking that day off to pack, isn't she?\nMia: Yes, so her last day in the office is actually Thursday. Let's have lunch on Wednesday, just in case she's busy on Thursday.\nKen: Sounds good. Should we get her a present, too?\nMia: Definitely. I'll collect ten dollars from everyone. With twelve people, that's enough for something nice.\nKen: She loves cooking. Maybe a good Japanese kitchen knife?\nMia: Hmm, a knife might be difficult to take on a long flight. Let's get her a cookbook of Japanese recipes and a card from everyone.\nKen: Perfect. I'll book a table for lunch, and you can take care of the present.",
+      "translation": "ミア：ねえ、ケン。サラが月末で会社を辞めるって聞いた？\nケン：うん、昨日本人から聞いたよ。カナダに引っ越すんだよね？\nミア：そう。ご主人がバンクーバーで仕事が決まったの。行ってしまう前に、何かしてあげたいなと思って。\nケン：いいね。送別の夕食会はどう？駅の近くにいいイタリア料理店があるよ。\nミア：それも考えたんだけど、チームには小さい子どもがいる人が多いから、夜は難しいのよ。代わりにランチはどう？\nケン：なるほど。最終日は 28 日の金曜日だけど、その日は荷造りのために休みをとるんだよね？\nミア：そう。だから実際に出社する最後の日は木曜日。木曜日は忙しいかもしれないから、念のため水曜日にランチにしよう。\nケン：いいね。プレゼントも用意する？\nミア：もちろん。みんなから 10 ドルずつ集めるわ。12 人いるから、何かいいものが買えるわね。\nケン：彼女は料理が大好きだよね。いい和包丁はどうかな？\nミア：うーん、包丁は長い空の旅に持って行くのが大変かもしれない。和食のレシピ本と、みんなからのカードにしましょう。\nケン：完璧だ。僕がランチの席を予約するから、プレゼントは君に任せるよ。"
+    },
+    {
+      "id": "r-umbrella-story",
+      "title": "The Green Umbrella",
+      "text": "Every morning at 7:40, Hana took the same bus to her office. One rainy Monday, an old man sitting next to her got off at the hospital stop and left his umbrella behind. It was a beautiful dark green umbrella with a wooden handle, and the name \"T. Mori\" was written inside in small letters.\n\nHana tried to call after him, but the doors had already closed. She decided to keep the umbrella safe and look for him the next day. On Tuesday, however, the old man was not on the bus. He was not there on Wednesday or Thursday, either. Hana began to worry that he was ill.\n\nOn Friday, she got off at the hospital stop and asked at the front desk. The nurse smiled. \"Mr. Mori? He visits his wife here every morning. She's been in the hospital for a month. He usually takes the bus, but this week his son has been driving him.\"\n\nHana left the umbrella with the nurse, together with a short note. A week later, when she got on the bus, the old man was there again. He waved at her and held up the green umbrella. \"My wife gave me this umbrella forty years ago,\" he said. \"Thank you for bringing it back.\" From then on, they talked every morning until his stop.",
+      "translation": "毎朝 7 時 40 分、ハナは同じバスに乗って会社へ通っていた。ある雨の月曜日、隣に座っていた老人が病院前のバス停で降り、傘を置き忘れていった。木の持ち手がついた美しい深緑色の傘で、内側には小さな字で「T. Mori」と名前が書かれていた。\n\nハナは後ろから呼び止めようとしたが、ドアはもう閉まっていた。彼女は傘を大切に預かっておき、翌日その人を探すことにした。ところが火曜日、老人はバスに乗っていなかった。水曜日にも木曜日にもいなかった。ハナは、あの人は病気なのではないかと心配になり始めた。\n\n金曜日、彼女は病院前のバス停で降り、受付でたずねた。看護師はほほえんだ。「森さんですか？毎朝ここに奥さんのお見舞いに来られるんですよ。奥さんは 1 か月前から入院していらして。ふだんはバスで来られるんですが、今週は息子さんが車で送ってきているんです。」\n\nハナは短いメモを添えて、傘を看護師に預けた。1 週間後、バスに乗ると、あの老人がまたそこにいた。彼はハナに手を振り、緑の傘を掲げてみせた。「この傘は 40 年前に妻がくれたものなんです」と彼は言った。「届けてくれてありがとう。」それからというもの、二人は毎朝、彼の降りるバス停まで話をするようになった。"
+    },
+    {
+      "id": "r-library-news",
+      "title": "News: A Library That Lends Tools",
+      "text": "GREENFIELD — The public library in the small town of Greenfield has started lending something unusual: tools. Since April, residents with a library card have been able to borrow items such as drills, ladders, sewing machines and even camping tents, just as they would borrow a book.\n\nThe idea came from a survey the library carried out last year. Many residents said they had bought expensive tools that they used only once or twice. \"People told us their garages were full of things they hardly ever use,\" said head librarian Ruth Alvarez. \"We thought, why not share them?\"\n\nThe \"Library of Things\" started with 150 items, most of which were donated by local people and businesses. Items can be borrowed for up to one week, and there is no charge. However, borrowers must watch a short safety video before taking power tools home.\n\nThe service has been more popular than expected. In the first three months, items were borrowed more than 1,200 times, and the most popular item was a carpet cleaner. The library now plans to add 50 more items, including kitchen equipment, by the end of the year.\n\nNot everyone is pleased. The owner of a local hardware store said that the program might reduce his sales. Alvarez, however, believes that the program can help the store as well. \"People who try a tool here may decide to buy their own,\" she said.",
+      "translation": "グリーンフィールド発 ― 小さな町グリーンフィールドの公共図書館が、一風変わったものの貸し出しを始めた。道具だ。4 月から、図書館カードを持つ住民は、本を借りるのと同じように、ドリル、はしご、ミシン、さらにはキャンプ用テントといった物を借りられるようになった。\n\nこのアイデアは、図書館が昨年行ったアンケートから生まれた。多くの住民が、1、2 回しか使わない高価な道具を買ってしまったと答えたのだ。「ガレージがほとんど使わない物でいっぱいだという声が多く寄せられました」と図書館長のルース・アルバレスさんは話す。「それなら共有すればいいのでは、と考えたんです。」\n\nこの「モノの図書館」は 150 点の品物で始まり、その大半は地元の人々や企業から寄付されたものだ。品物は最長 1 週間借りることができ、料金はかからない。ただし、電動工具を持ち帰る前には、短い安全講習の動画を見なければならない。\n\nこのサービスは予想以上の人気となっている。最初の 3 か月で品物は延べ 1,200 回以上貸し出され、最も人気だったのはカーペットクリーナーだった。図書館は年末までに、台所用品を含む 50 点の品物を追加する予定だ。\n\n誰もが喜んでいるわけではない。地元の金物店の店主は、この取り組みによって自分の店の売り上げが減るかもしれないと話した。しかしアルバレスさんは、この取り組みは店の助けにもなりうると考えている。「ここで道具を試した人が、自分用に買おうと決めるかもしれませんから」と彼女は語った。"
+    },
+    {
+      "id": "r-memory-science",
+      "title": "Why We Forget — and How to Remember Better",
+      "text": "In the 1880s, the German psychologist Hermann Ebbinghaus carried out a series of experiments on his own memory. He learned lists of nonsense syllables, such as \"WID\" and \"ZOF,\" and then tested himself after different periods of time. He used meaningless syllables so that his previous knowledge would not affect the results.\n\nHis findings are often shown as a \"forgetting curve.\" The curve shows that we forget new information very quickly at first: a large part is lost within the first day. After that, the speed of forgetting slows down, and what remains is kept for a longer time.\n\nEbbinghaus also noticed something encouraging. Each time he relearned a list, he forgot it more slowly than before. Later researchers studied this further and described the \"spacing effect\": studying the same material several times with gaps between sessions leads to better long-term memory than studying it all in one long session. In other words, an hour of study spread over four days is usually more effective than an hour of cramming the night before a test.\n\nAnother useful finding is the \"testing effect.\" When learners try to recall information from memory — for example, by answering questions without looking at their notes — they remember it better than when they simply read the material again. Recalling takes more effort, but this effort is exactly what makes memories stronger.\n\nTogether, these findings suggest a simple strategy: review often, leave time between reviews, and test yourself instead of just rereading.",
+      "translation": "1880 年代、ドイツの心理学者ヘルマン・エビングハウスは、自分自身の記憶を対象に一連の実験を行った。彼は「WID」や「ZOF」のような無意味な音節のリストを覚え、さまざまな時間がたってから自分をテストした。無意味な音節を使ったのは、もともと持っている知識が結果に影響しないようにするためだった。\n\n彼の発見は「忘却曲線」として示されることが多い。この曲線は、私たちが新しい情報を最初はとても速く忘れることを示している。大部分は最初の 1 日のうちに失われるのだ。その後は忘れる速さがゆるやかになり、残ったものはより長く保たれる。\n\nエビングハウスは、希望の持てることにも気づいた。リストを覚え直すたびに、前よりもゆっくり忘れるようになったのだ。後の研究者たちはこれをさらに研究し、「分散効果」を明らかにした。同じ内容を、間隔をあけて何回かに分けて学ぶほうが、一度の長い時間でまとめて学ぶよりも、長期的な記憶にとってよい結果になるというものだ。言いかえれば、4 日間に分けた 1 時間の勉強は、テスト前夜の 1 時間の詰め込み勉強よりも、たいていは効果が高い。\n\nもう一つの役に立つ発見が「テスト効果」だ。学習者が記憶から情報を思い出そうとすると ― たとえばノートを見ずに問題に答えるなど ― 単に教材を読み直したときよりもよく覚えている。思い出すにはより多くの努力が必要だが、まさにその努力こそが記憶を強くするのである。\n\nこれらの発見を合わせると、簡単な作戦が見えてくる。こまめに復習し、復習と復習の間には時間をあけ、読み直すだけでなく自分をテストすることだ。"
+    },
+    {
+      "id": "r-phones-opinion",
+      "title": "Should Schools Ban Smartphones?",
+      "text": "In recent years, several countries have introduced rules that limit the use of smartphones in schools. Supporters say phones distract students and harm their concentration. Critics say phones are useful tools for learning and for staying safe. In my view, the best solution lies between these two positions: schools should ban phones during lessons, but they should not ban them completely.\n\nThere is little doubt that phones can be distracting. A single notification can break a student's concentration, and it may take several minutes to fully return to a task. When phones are on desks, students are tempted to check them even when they are not ringing. Collecting phones at the start of each lesson would remove this temptation and help students focus.\n\nHowever, a total ban goes too far. Many parents want to be able to contact their children before and after school, especially when plans change suddenly. In addition, phones can be valuable learning tools. Students can use them to look up words, record experiments, or take photos of notes on the board. Teachers should be able to allow phones when they have a clear purpose for them in a lesson.\n\nSome people argue that students should simply learn self-control. This is a fair point, but self-control is a skill that develops slowly, and young people should not be expected to fight alone against apps that are designed to capture their attention.\n\nFor these reasons, I believe a balanced rule is best: phones away during lessons unless the teacher says otherwise, and free use during breaks and after school. Such a rule protects concentration without ignoring the real benefits of technology.",
+      "translation": "近年、学校でのスマートフォンの使用を制限する規則を導入した国がいくつかある。賛成派は、スマホは生徒の気を散らし、集中力を損なうと言う。反対派は、スマホは学習や安全のための便利な道具だと言う。私の考えでは、最善の解決策はこの 2 つの立場の間にある。学校は授業中のスマホを禁止すべきだが、全面的に禁止すべきではない。\n\nスマホが気を散らすものになりうることは、ほとんど疑いがない。たった 1 つの通知で生徒の集中は途切れ、課題に完全に戻るまでには数分かかることもある。スマホが机の上にあると、生徒は鳴っていなくても確認したくなってしまう。各授業の始めにスマホを回収すれば、この誘惑をなくし、生徒が集中する助けになるだろう。\n\nしかし、全面禁止は行き過ぎだ。多くの保護者は、特に予定が急に変わったときなど、登校前や放課後に子どもと連絡をとれるようにしておきたいと考えている。さらに、スマホは価値ある学習道具にもなりうる。生徒は単語を調べたり、実験を記録したり、黒板の板書を撮影したりできる。教師は、授業でスマホを使う明確な目的があるときには、使用を許可できるようにすべきだ。\n\n生徒はただ自制心を身につければよい、と主張する人もいる。それはもっともな意見だが、自制心はゆっくりと育つ能力であり、注意を引きつけるように作られたアプリに、若者が一人で立ち向かうことを期待すべきではない。\n\n以上の理由から、私はバランスのとれた規則が最善だと考える。授業中は教師が別の指示をしない限りスマホをしまい、休み時間と放課後は自由に使えるようにする。そのような規則なら、テクノロジーの本当の利点を無視することなく、集中力を守ることができる。"
+    }
+  ],
+  "items": [
+    {
+      "id": "pool-1",
+      "type": "choice",
+      "tags": [
+        "ステップ1",
+        "お知らせ"
+      ],
+      "passage": "r-pool-notice",
+      "question": "プールが閉鎖される理由は何ですか。",
+      "choices": [
+        "新しい水泳教室の準備をするため",
+        "利用する会員が少ないため",
+        "暖房（加温）設備を修理するため",
+        "シャトルバスの運行を始めるため"
+      ],
+      "answer": 2,
+      "explanation": "\"will be closed ... for repairs to the heating system\" とあります。for 〜 が理由を表しています。水泳教室やシャトルバスは閉鎖の理由ではありません。"
+    },
+    {
+      "id": "pool-2",
+      "type": "choice",
+      "tags": [
+        "ステップ1",
+        "お知らせ"
+      ],
+      "passage": "r-pool-notice",
+      "question": "閉鎖期間中、会員ができることとして正しいものは？",
+      "choices": [
+        "会員証を見せればイーストサイド支店のプールを無料で使える",
+        "受付で手続きをすれば会費の払い戻しを受けられる",
+        "シャトルバスを 1 回 2 ドルで利用できる",
+        "閉鎖期間中だけ営業時間が 1 時間延びる"
+      ],
+      "answer": 0,
+      "explanation": "\"members can use the pool at our Eastside branch free of charge. Please show your membership card\" とあります。free of charge は「無料で」。シャトルバスも free（無料）です。"
+    },
+    {
+      "id": "pool-3",
+      "type": "qa",
+      "tags": [
+        "ステップ1",
+        "お知らせ"
+      ],
+      "passage": "r-pool-notice",
+      "question": "プールの再開後、平日は午前何時に開館しますか（数字で）。",
+      "answer": "6",
+      "accepted": [
+        "6時",
+        "午前6時",
+        "6 a.m.",
+        "6am",
+        "六時"
+      ],
+      "hints": [
+        "one hour earlier に注目"
+      ],
+      "explanation": "\"the center will open one hour earlier, at 6 a.m.\" とあります。one hour earlier から、以前は 7 時開館だったこともわかります。"
+    },
+    {
+      "id": "pool-4",
+      "type": "choice",
+      "tags": [
+        "ステップ1",
+        "お知らせ"
+      ],
+      "passage": "r-pool-notice",
+      "question": "新しい初心者水泳教室について正しいものは？",
+      "choices": [
+        "週末の朝に開かれる",
+        "1 回 50 分で、定員は 8 名である",
+        "6 月 17 日から申し込みが始まる",
+        "料金は 1 回 40 ドルである"
+      ],
+      "answer": 1,
+      "explanation": "\"Each class lasts 50 minutes and is limited to eight people.\" とあります。教室は火・木の夜、申し込みは 6 月 1 日から、40 ドルは 8 回分の料金です。"
+    },
+    {
+      "id": "pool-5",
+      "type": "cloze",
+      "tags": [
+        "ステップ1",
+        "お知らせ",
+        "要約"
+      ],
+      "passage": "r-pool-notice",
+      "text": "While the pool is closed, members can take a free {{shuttle}} bus to the Eastside branch.",
+      "translation": "プールの閉鎖中、会員は無料のシャトルバスでイーストサイド支店へ行ける。",
+      "hint": "本文中の 1 語",
+      "explanation": "\"A free shuttle bus will run between the two centers\" とあります。shuttle bus は 2 地点を往復するバス。"
+    },
+    {
+      "id": "buds-1",
+      "type": "choice",
+      "tags": [
+        "ステップ1",
+        "商品レビュー"
+      ],
+      "passage": "r-earbuds-review",
+      "question": "筆者がこのイヤホンを買った主な目的は？",
+      "choices": [
+        "飛行機の中で雑音を遮るため",
+        "運動中に音楽を聞くため",
+        "オンライン会議で話すため",
+        "通勤中にポッドキャストを聞くため"
+      ],
+      "answer": 3,
+      "explanation": "冒頭に \"mainly for listening to podcasts on my way to work\" とあります。on my way to work は「通勤途中に」。飛行機での利用はむしろ向かないと書かれています。"
+    },
+    {
+      "id": "buds-2",
+      "type": "choice",
+      "tags": [
+        "ステップ1",
+        "商品レビュー"
+      ],
+      "passage": "r-earbuds-review",
+      "question": "筆者が不満に思っている点は？",
+      "choices": [
+        "長時間つけると耳が痛くなる",
+        "タッチ操作が敏感すぎる",
+        "バッテリーが説明より早く切れる",
+        "人の声が聞き取りにくい"
+      ],
+      "answer": 1,
+      "explanation": "\"the touch controls are too sensitive\" とあります。ほかの 3 つは本文と逆で、軽くて耳が痛くならない・電池はほぼ説明どおり・声がクリアと書かれています。"
+    },
+    {
+      "id": "buds-3",
+      "type": "qa",
+      "tags": [
+        "ステップ1",
+        "商品レビュー"
+      ],
+      "passage": "r-earbuds-review",
+      "question": "充電ケースを使うと、イヤホンを合計で最大何時間使えますか（数字で）。",
+      "answer": "32",
+      "accepted": [
+        "32時間",
+        "三十二時間"
+      ],
+      "hints": [
+        "1 回の充電で何時間もつかを確認",
+        "three more full charges の more に注目"
+      ],
+      "explanation": "1 回の充電で 8 時間、ケースで \"three more full charges\"（さらに 3 回分）なので 8 + 8 × 3 = 32 時間です。more を見落として 24 としないよう注意。"
+    },
+    {
+      "id": "buds-4",
+      "type": "choice",
+      "tags": [
+        "ステップ1",
+        "商品レビュー"
+      ],
+      "passage": "r-earbuds-review",
+      "question": "筆者はこのイヤホンをどんな人にすすめていますか。",
+      "choices": [
+        "主にポッドキャストやオーディオブックを聞く人",
+        "飛行機や電車でよく移動する人",
+        "値段より音質を最優先する人",
+        "大手ブランドの製品が好きな人"
+      ],
+      "answer": 0,
+      "explanation": "\"If you mainly listen to podcasts or audiobooks, I recommend them.\" とあります。雑音を遮りたい人には別のモデルをすすめています。"
+    },
+    {
+      "id": "buds-5",
+      "type": "cloze",
+      "tags": [
+        "ステップ1",
+        "商品レビュー",
+        "要約"
+      ],
+      "passage": "r-earbuds-review",
+      "text": "The writer thinks the earbuds are good {{value}} for money, but their noise cancelling is weak.",
+      "translation": "筆者は、このイヤホンは値段の割にお得だが、ノイズキャンセリングは弱いと考えている。",
+      "hint": "本文中の 1 語",
+      "explanation": "good value for money は「値段の割に価値がある・お得」という決まった言い方。本文最終段落の \"good value for money\" から。"
+    },
+    {
+      "id": "mail-1",
+      "type": "choice",
+      "tags": [
+        "ステップ2",
+        "ビジネスメール"
+      ],
+      "passage": "r-order-email",
+      "question": "このメールの主な目的は？",
+      "choices": [
+        "新しい商品を紹介する",
+        "研修の日程の変更を依頼する",
+        "注文品の配送が遅れることを知らせる",
+        "注文の数を確認する"
+      ],
+      "answer": 2,
+      "explanation": "第 1 段落の \"I am writing to let you know that there will be a short delay in delivery.\" が目的です。I am writing to 〜 はメールの目的を述べる定番表現。"
+    },
+    {
+      "id": "mail-2",
+      "type": "choice",
+      "tags": [
+        "ステップ2",
+        "ビジネスメール"
+      ],
+      "passage": "r-order-email",
+      "question": "配送が遅れる原因は何ですか。",
+      "choices": [
+        "注文の数が予定より多かったから",
+        "別の印刷会社に仕事を任せたから",
+        "研修の日程が変わったから",
+        "印刷機が故障し、交換部品の到着を待っているから"
+      ],
+      "answer": 3,
+      "explanation": "\"one of our printing machines broke down last week, and the replacement part will not arrive until May 20\" とあります。break down は「（機械が）故障する」。"
+    },
+    {
+      "id": "mail-3",
+      "type": "choice",
+      "tags": [
+        "ステップ2",
+        "ビジネスメール"
+      ],
+      "passage": "r-order-email",
+      "question": "日程に問題がある場合に提案されている選択肢として正しいものは？",
+      "choices": [
+        "配送料を無料にする",
+        "5 月 24 日までに一部を届け、残りを後で送る",
+        "別の種類のノートに変更する",
+        "研修の日まで料金の支払いを待つ"
+      ],
+      "answer": 1,
+      "explanation": "1 つ目の選択肢は \"deliver 100 notebooks by May 24 ... and send the rest later\"、2 つ目はキャンセルして全額返金です。10% 割引は選択肢ではなく、おわびとして全員に適用されます。"
+    },
+    {
+      "id": "mail-4",
+      "type": "qa",
+      "tags": [
+        "ステップ2",
+        "ビジネスメール"
+      ],
+      "passage": "r-order-email",
+      "question": "カーターさんは何月何日までに返事をするよう求められていますか。",
+      "answer": "5月16日",
+      "accepted": [
+        "May 16",
+        "5/16",
+        "五月十六日",
+        "5月16"
+      ],
+      "hints": [
+        "by 〜 は期限を表す"
+      ],
+      "explanation": "最後の依頼文 \"Could you let me know which option you would prefer by May 16?\" とあります。by は「〜までに（期限）」。5 月 24 日・28 日はノートの配送に関する日付です。"
+    },
+    {
+      "id": "mail-5",
+      "type": "order",
+      "tags": [
+        "ステップ2",
+        "ビジネスメール",
+        "並べ替え"
+      ],
+      "passage": "r-order-email",
+      "prompt": "（本文の表現）どちらの選択肢がよいか教えていただけますか。",
+      "answer": "Could you let me know which option you would prefer?",
+      "explanation": "Could you let me know 〜? は「〜を教えていただけますか」のていねいな依頼。文の中の疑問（間接疑問）は which option you would prefer のように「疑問詞＋主語＋動詞」の語順になる。"
+    },
+    {
+      "id": "dlg-1",
+      "type": "choice",
+      "tags": [
+        "ステップ2",
+        "会話文"
+      ],
+      "passage": "r-farewell-dialogue",
+      "question": "サラがカナダに引っ越す理由は？",
+      "choices": [
+        "夫がバンクーバーで仕事を得たから",
+        "カナダの大学に入学するから",
+        "会社のカナダ支店に転勤するから",
+        "家族の世話をするため"
+      ],
+      "answer": 0,
+      "explanation": "ミアの \"Her husband got a job in Vancouver.\" から。サラ本人の転勤や進学の話は出てきません。"
+    },
+    {
+      "id": "dlg-2",
+      "type": "choice",
+      "tags": [
+        "ステップ2",
+        "会話文"
+      ],
+      "passage": "r-farewell-dialogue",
+      "question": "ミアが夕食会ではなくランチを提案した理由は？",
+      "choices": [
+        "イタリア料理店が予約できなかったから",
+        "サラが夜は荷造りで忙しいから",
+        "小さい子どもがいる同僚が多く、夜は都合が悪いから",
+        "ランチのほうが安いから"
+      ],
+      "answer": 2,
+      "explanation": "\"a lot of people on our team have small children, so evenings are difficult\" とあります。so の前が理由です。"
+    },
+    {
+      "id": "dlg-3",
+      "type": "qa",
+      "tags": [
+        "ステップ2",
+        "会話文"
+      ],
+      "passage": "r-farewell-dialogue",
+      "question": "送別のランチは何曜日に開く予定ですか。",
+      "answer": "水曜日",
+      "accepted": [
+        "水曜",
+        "Wednesday",
+        "すいようび"
+      ],
+      "hints": [
+        "just in case（念のため）の文に注目"
+      ],
+      "explanation": "ミアの \"Let's have lunch on Wednesday, just in case she's busy on Thursday.\" から。just in case は「念のため」。最後の出社日の木曜日と混同しないこと。"
+    },
+    {
+      "id": "dlg-4",
+      "type": "choice",
+      "tags": [
+        "ステップ2",
+        "会話文"
+      ],
+      "passage": "r-farewell-dialogue",
+      "question": "プレゼントについて、二人が最終的に決めたことは？",
+      "choices": [
+        "和包丁を贈る",
+        "一人 12 ドルずつ集める",
+        "ケンがプレゼントを選ぶ",
+        "和食のレシピ本とみんなからのカードを贈る"
+      ],
+      "answer": 3,
+      "explanation": "ミアの \"Let's get her a cookbook of Japanese recipes and a card from everyone.\" にケンが Perfect. と同意しています。包丁はケンの案で、却下されました。集めるのは 10 ドルずつ（12 人分）で、プレゼントはミアの担当です。"
+    },
+    {
+      "id": "dlg-5",
+      "type": "cloze",
+      "tags": [
+        "ステップ2",
+        "会話文",
+        "要約"
+      ],
+      "passage": "r-farewell-dialogue",
+      "text": "Sarah's last day in the office is {{Thursday}} because she is taking Friday off to pack.",
+      "translation": "サラは金曜日に荷造りのため休みをとるので、出社する最後の日は木曜日だ。",
+      "hint": "曜日を英語で",
+      "explanation": "\"her last day in the office is actually Thursday\" とあります。正式な最終日（28 日の金曜日）と、実際に出社する最終日を区別しましょう。"
+    },
+    {
+      "id": "umb-1",
+      "type": "choice",
+      "tags": [
+        "ステップ3",
+        "物語"
+      ],
+      "passage": "r-umbrella-story",
+      "question": "月曜日、ハナがバスの中で見つけたものは？",
+      "choices": [
+        "老人が落としたメモ",
+        "隣の老人が置き忘れた傘",
+        "病院の診察券",
+        "看護師の名札"
+      ],
+      "answer": 1,
+      "explanation": "\"got off at the hospital stop and left his umbrella behind\" とあります。leave 〜 behind は「〜を置き忘れる」。"
+    },
+    {
+      "id": "umb-2",
+      "type": "choice",
+      "tags": [
+        "ステップ3",
+        "物語"
+      ],
+      "passage": "r-umbrella-story",
+      "question": "火曜日から木曜日まで、老人がバスに乗っていなかった理由は？",
+      "choices": [
+        "老人自身が病気で入院していたから",
+        "雨が降っていなかったから",
+        "別の時間のバスに乗っていたから",
+        "息子が車で病院まで送っていたから"
+      ],
+      "answer": 3,
+      "explanation": "看護師の \"He usually takes the bus, but this week his son has been driving him.\" から。ハナは病気を心配しましたが、実際は違いました。"
+    },
+    {
+      "id": "umb-3",
+      "type": "qa",
+      "tags": [
+        "ステップ3",
+        "物語"
+      ],
+      "passage": "r-umbrella-story",
+      "question": "森さんの妻は、どのくらいの期間入院していましたか。",
+      "answer": "1か月",
+      "accepted": [
+        "1ヶ月",
+        "1カ月",
+        "一か月",
+        "一ヶ月",
+        "ひと月",
+        "1か月間",
+        "a month",
+        "one month"
+      ],
+      "hints": [
+        "看護師の言葉に注目"
+      ],
+      "explanation": "看護師の \"She's been in the hospital for a month.\" から。現在完了（has been）＋ for で「（今まで）〜の間ずっと」。"
+    },
+    {
+      "id": "umb-4",
+      "type": "choice",
+      "tags": [
+        "ステップ3",
+        "物語"
+      ],
+      "passage": "r-umbrella-story",
+      "question": "森さんにとって、その傘が大切だった理由は？",
+      "choices": [
+        "40 年前に妻からもらったものだったから",
+        "病院でもらった記念品だったから",
+        "息子が初めての給料で買ってくれたから",
+        "名前入りの高価な傘だったから"
+      ],
+      "answer": 0,
+      "explanation": "最後の段落の \"My wife gave me this umbrella forty years ago\" から。名前が書いてあったことは本文にありますが、大切な理由としては述べられていません。"
+    },
+    {
+      "id": "umb-5",
+      "type": "cloze",
+      "tags": [
+        "ステップ3",
+        "物語",
+        "要約"
+      ],
+      "passage": "r-umbrella-story",
+      "text": "Hana returned the umbrella by leaving it with a {{nurse}} at the hospital.",
+      "translation": "ハナは病院の看護師に預けることで、傘を返した。",
+      "hint": "本文中の 1 語",
+      "explanation": "\"Hana left the umbrella with the nurse\" とあります。leave 〜 with 人 は「〜を人に預ける」。"
+    },
+    {
+      "id": "news-1",
+      "type": "choice",
+      "tags": [
+        "ステップ3",
+        "ニュース記事"
+      ],
+      "passage": "r-library-news",
+      "question": "この記事は主に何について書かれていますか。",
+      "choices": [
+        "町の図書館が道具などの貸し出しを始めたこと",
+        "図書館の新しい建物が完成したこと",
+        "金物店が図書館に道具を寄付したこと",
+        "住民がガレージの片づけを始めたこと"
+      ],
+      "answer": 0,
+      "explanation": "第 1 段落の \"has started lending something unusual: tools\" が記事の中心です。寄付したのは主に地元の人々や企業で、金物店はむしろ懸念を示しています。"
+    },
+    {
+      "id": "news-2",
+      "type": "choice",
+      "tags": [
+        "ステップ3",
+        "ニュース記事"
+      ],
+      "passage": "r-library-news",
+      "question": "このサービスのきっかけとなったものは？",
+      "choices": [
+        "地元の金物店からの提案",
+        "図書館の本の貸出数が減ったこと",
+        "めったに使わない高価な道具を持っているという住民の声",
+        "キャンプ用品の値上がり"
+      ],
+      "answer": 2,
+      "explanation": "\"The idea came from a survey ... Many residents said they had bought expensive tools that they used only once or twice.\" とあります。come from 〜 は「〜から生まれる」。"
+    },
+    {
+      "id": "news-3",
+      "type": "qa",
+      "tags": [
+        "ステップ3",
+        "ニュース記事"
+      ],
+      "passage": "r-library-news",
+      "question": "最初の 3 か月で、最も人気があった品物は何ですか。",
+      "answer": "カーペットクリーナー",
+      "accepted": [
+        "carpet cleaner",
+        "カーペット掃除機",
+        "じゅうたん掃除機",
+        "カーペットクリーナ"
+      ],
+      "hints": [
+        "the most popular item の文を探す"
+      ],
+      "explanation": "\"the most popular item was a carpet cleaner\" とあります。the most popular は「最も人気のある」。"
+    },
+    {
+      "id": "news-4",
+      "type": "choice",
+      "tags": [
+        "ステップ3",
+        "ニュース記事"
+      ],
+      "passage": "r-library-news",
+      "question": "品物を借りるときの決まりとして正しいものは？",
+      "choices": [
+        "1 週間につき少額の料金がかかる",
+        "最長 2 週間まで借りられる",
+        "図書館カードがなくても借りられる",
+        "電動工具を持ち帰る前に、安全についての動画を見なければならない"
+      ],
+      "answer": 3,
+      "explanation": "\"borrowers must watch a short safety video before taking power tools home\" とあります。料金は無料（there is no charge）、期間は最長 1 週間（up to one week）、借りられるのは図書館カードを持つ住民です。"
+    },
+    {
+      "id": "news-5",
+      "type": "cloze",
+      "tags": [
+        "ステップ3",
+        "ニュース記事",
+        "要約"
+      ],
+      "passage": "r-library-news",
+      "text": "A local store owner worries that the program might reduce his {{sales}}.",
+      "translation": "地元の店主は、この取り組みが自分の売り上げを減らすかもしれないと心配している。",
+      "hint": "本文中の 1 語",
+      "explanation": "最終段落の \"the program might reduce his sales\" から。この懸念に対し、館長は「試した人が買うかもしれない」と反論しています。"
+    },
+    {
+      "id": "mem-1",
+      "type": "choice",
+      "tags": [
+        "ステップ4",
+        "説明文"
+      ],
+      "passage": "r-memory-science",
+      "question": "エビングハウスが無意味な音節を使った理由は？",
+      "choices": [
+        "短くて覚えやすかったから",
+        "もともと持っている知識が結果に影響しないようにするため",
+        "ドイツ語の単語を覚えるのが目的だったから",
+        "ほかの人の記憶と比べるため"
+      ],
+      "answer": 1,
+      "explanation": "\"He used meaningless syllables so that his previous knowledge would not affect the results.\" とあります。so that 〜 は「〜するように（目的）」。実験の対象は自分自身の記憶でした。"
+    },
+    {
+      "id": "mem-2",
+      "type": "choice",
+      "tags": [
+        "ステップ4",
+        "説明文"
+      ],
+      "passage": "r-memory-science",
+      "question": "「忘却曲線」が示していることとして正しいものは？",
+      "choices": [
+        "時間がたつほど忘れる速さが増していく",
+        "最初の 1 日はほとんど忘れない",
+        "学んだ直後に急速に忘れ、その後は忘れる速さがゆるやかになる",
+        "一度覚えたことは 1 週間たつとすべて忘れる"
+      ],
+      "answer": 2,
+      "explanation": "\"we forget new information very quickly at first\" と \"After that, the speed of forgetting slows down\" から。at first（最初は）と After that（その後）の対比に注目。"
+    },
+    {
+      "id": "mem-3",
+      "type": "choice",
+      "tags": [
+        "ステップ4",
+        "説明文"
+      ],
+      "passage": "r-memory-science",
+      "question": "「分散効果（spacing effect）」の説明として正しいものは？",
+      "choices": [
+        "一度に長時間学ぶほうが、長く記憶に残る",
+        "テストの前夜に復習するのが最も効果的である",
+        "同じ内容は 1 回だけ学べば十分である",
+        "間隔をあけて何回かに分けて学ぶほうが、長く記憶に残る"
+      ],
+      "answer": 3,
+      "explanation": "コロンの後の \"studying the same material several times with gaps between sessions leads to better long-term memory\" が定義です。cramming（詰め込み）より分散学習のほうが効果的と書かれています。"
+    },
+    {
+      "id": "mem-4",
+      "type": "choice",
+      "tags": [
+        "ステップ4",
+        "説明文"
+      ],
+      "passage": "r-memory-science",
+      "question": "次のうち「テスト効果」を利用した勉強法はどれですか。",
+      "choices": [
+        "ノートを閉じて、覚えた内容を問題に答える形で思い出す",
+        "教科書を何度も声に出して読み直す",
+        "大事な部分に蛍光ペンで線を引く",
+        "ノートをきれいに書き写す"
+      ],
+      "answer": 0,
+      "explanation": "テスト効果は \"try to recall information from memory — for example, by answering questions without looking at their notes\" です。読み直す・線を引く・書き写すは「思い出す」練習になりません。"
+    },
+    {
+      "id": "mem-5",
+      "type": "qa",
+      "tags": [
+        "ステップ4",
+        "説明文"
+      ],
+      "passage": "r-memory-science",
+      "question": "忘却曲線によると、新しく学んだ情報の大部分は、学んでからどのくらいの間に失われますか。",
+      "answer": "1日",
+      "accepted": [
+        "最初の1日",
+        "1日以内",
+        "一日",
+        "最初の一日",
+        "the first day",
+        "1日のうち"
+      ],
+      "hints": [
+        "within の後ろに注目"
+      ],
+      "explanation": "\"a large part is lost within the first day\" とあります。within 〜 は「〜以内に」。だからこそ、学んだ翌日の復習が効果的です。"
+    },
+    {
+      "id": "op-1",
+      "type": "choice",
+      "tags": [
+        "ステップ4",
+        "意見文"
+      ],
+      "passage": "r-phones-opinion",
+      "question": "筆者の主張として最も適切なものは？",
+      "choices": [
+        "学校でのスマホの使用は全面的に禁止すべきだ",
+        "スマホの使い方はすべて生徒の自制心に任せるべきだ",
+        "授業中のスマホは禁止すべきだが、全面的な禁止には反対である",
+        "スマホは学習に役立つので、授業中も自由に使わせるべきだ"
+      ],
+      "answer": 2,
+      "explanation": "第 1 段落の \"schools should ban phones during lessons, but they should not ban them completely\" が主張で、最終段落でも \"a balanced rule is best\" とくり返しています。意見文では第 1 段落と最終段落に主張が来ることが多い。"
+    },
+    {
+      "id": "op-2",
+      "type": "choice",
+      "tags": [
+        "ステップ4",
+        "意見文"
+      ],
+      "passage": "r-phones-opinion",
+      "question": "筆者が全面禁止に反対する理由として本文で挙げているものは？",
+      "choices": [
+        "保護者が登下校の前後に子どもと連絡をとりたいと考えているから",
+        "スマホがあると集中力が高まるから",
+        "多くの国がすでに禁止をやめたから",
+        "スマホを回収する作業が教師の負担になるから"
+      ],
+      "answer": 0,
+      "explanation": "第 3 段落の \"Many parents want to be able to contact their children before and after school\" から。ほかに学習道具としての価値も挙げていますが、選択肢のほかの内容は本文にありません。"
+    },
+    {
+      "id": "op-3",
+      "type": "choice",
+      "tags": [
+        "ステップ4",
+        "意見文"
+      ],
+      "passage": "r-phones-opinion",
+      "question": "第 2 段落の this temptation（この誘惑）が指す内容は？",
+      "choices": [
+        "授業中に友だちと話したくなること",
+        "スマホが鳴っていなくても確認したくなること",
+        "新しいスマホを買いたくなること",
+        "授業を早く終わらせたくなること"
+      ],
+      "answer": 1,
+      "explanation": "直前の文 \"students are tempted to check them even when they are not ringing\" を受けています。this / these などの指示語は、たいてい直前の内容を指します。"
+    },
+    {
+      "id": "op-4",
+      "type": "choice",
+      "tags": [
+        "ステップ4",
+        "意見文"
+      ],
+      "passage": "r-phones-opinion",
+      "question": "「生徒は自制心を身につければよい」という意見に対する筆者の考えは？",
+      "choices": [
+        "まったく根拠のない意見なので、考える必要はない",
+        "完全に正しいので、規則は必要ない",
+        "自制心は大人になっても身につかない",
+        "一理あるが、自制心はゆっくり育つものなので、若者だけに頼るのは無理がある"
+      ],
+      "answer": 3,
+      "explanation": "\"This is a fair point, but self-control is a skill that develops slowly\" とあります。a fair point（もっともな意見）といったん認めてから but で反論する「譲歩→反論」の形です。"
+    },
+    {
+      "id": "op-5",
+      "type": "cloze",
+      "tags": [
+        "ステップ4",
+        "意見文",
+        "要約"
+      ],
+      "passage": "r-phones-opinion",
+      "text": "The writer suggests that phones should be put away during lessons unless the {{teacher}} says otherwise.",
+      "translation": "筆者は、教師が別の指示をしない限り、授業中はスマホをしまっておくべきだと提案している。",
+      "hint": "本文中の 1 語",
+      "explanation": "最終段落の \"phones away during lessons unless the teacher says otherwise\" から。unless 〜 は「〜しない限り」、otherwise は「別のように」。"
+    }
+  ]
+}

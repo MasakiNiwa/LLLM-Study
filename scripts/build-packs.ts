@@ -65,22 +65,76 @@ for (const file of readdirSync(packsDir)
   });
 }
 
-// 一覧の並び（おすすめ順）: 分野ごとにまとめる。ここにない分野は後ろへ、同じ分野の中はファイル名の順
-const SUBJECT_ORDER = [
-  'english',
-  'business',
-  'it',
-  'history',
-  'geography',
-  'science',
-  'math',
-  'bookkeeping',
+// 一覧の並び（おすすめ順）: 分野のまとまりごとに、学ぶ順（易しい → 難しい）に並べる。
+// ここにない教材は、同じ分野の最後（分野も知らなければ一覧の最後）に、ファイル名の順で入る
+const RECOMMENDED_ORDER = [
+  // 英語: 単語 → 文法 → 表現 → 読解 → 実践
+  'en-core-verbs',
+  'en-vocab-junior-150',
+  'en-daily-phrases',
+  'en-grammar-check',
+  'en-grammar-junior-100',
+  'en-phrasal-verbs',
+  'en-vocab-high-150',
+  'en-grammar-high-100',
+  'en-collocations-100',
+  'en-reading-basic',
+  'en-travel-phrases-100',
+  'en-idioms-80',
+  'en-vocab-advanced-150',
+  'en-reading-intermediate-40',
+  'en-business-phrases-100',
+  'en-toeic-part5-100',
+  // 外国語・国語
+  'zh-basics-120',
+  'ko-basics-120',
+  'es-basics-100',
+  'ja-kanji-reading-120',
+  'ja-idioms-proverbs-120',
+  // 数学・理科
+  'math-elementary-review-80',
+  'math-middle-school',
+  'math-high-1a-100',
+  'math-statistics-80',
+  'math-spi-80',
+  'science-chemistry-basics',
+  'science-physics-basics-80',
+  'science-biology-basics-80',
+  'science-earth-80',
+  // 社会
+  'ja-history-timeline',
+  'world-history-100',
+  'world-geography',
+  'ja-geography-100',
+  'civics-politics-economy-100',
+  'law-everyday-80',
+  // IT・プログラミング
+  'it-basics',
+  'it-passport-120',
+  'it-ai-data-literacy-80',
+  'it-fe-basics-120',
+  'programming-python-100',
+  'programming-javascript-100',
+  'programming-sql-80',
+  'it-git-linux-100',
+  // ビジネス・お金
+  'business-manners',
+  'business-logical-thinking-60',
+  'money-basics-100',
+  'business-marketing-80',
+  'ja-bookkeeping-accounts-001',
+  'business-financial-statements-80',
 ];
-const rank = (subject?: string) => {
-  const i = SUBJECT_ORDER.indexOf(subject?.toLowerCase() ?? '');
-  return i < 0 ? SUBJECT_ORDER.length : i;
+const rank = (e: SampleIndexEntry) => {
+  const i = RECOMMENDED_ORDER.indexOf(e.id);
+  if (i >= 0) return i;
+  // 同じ分野の教材のうち、おすすめ順で最後のものの後ろ
+  const last = RECOMMENDED_ORDER.findLastIndex(
+    (id) => entries.find((x) => x.id === id)?.subject === e.subject,
+  );
+  return last >= 0 ? last + 0.5 : RECOMMENDED_ORDER.length;
 };
-entries.sort((a, b) => rank(a.subject) - rank(b.subject) || a.file.localeCompare(b.file));
+entries.sort((a, b) => rank(a) - rank(b) || a.file.localeCompare(b.file));
 
 if (errors.length > 0) {
   console.error(errors.join('\n'));

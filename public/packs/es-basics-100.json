@@ -1,0 +1,2075 @@
+{
+  "format": "lllm-study-pack",
+  "version": 1,
+  "id": "es-basics-100",
+  "title": "スペイン語入門 100（あいさつ・基本単語・基本文法）",
+  "description": "スペイン語をゼロから始める人のための入門教材 100 項目。3 つのステップで「話す・覚える・組み立てる」を順に学べます。ステップ1（フレーズ 30）: ¡Hola! / Mucho gusto. / Me llamo ~. / ¿Cuánto cuesta? など、あいさつ・自己紹介・お礼やお願いの基本表現。カタカナの読みと、文法の小さな気づき（ser と estar、¿ ¡ の使い方など）をメモに付けています。ステップ2（単語 50）: 家族・人、数字 1〜10、食べ物・飲み物、場所・もの、時、形容詞、基本動詞。名詞は el / la を付けた形で見出しにして性がわかるようにし、カタカナ読み・例文・覚え方のメモを付けました。ステップ3（文法 20: 選択問題 13・穴埋め 7）: 名詞の性と冠詞・形容詞の一致、ser と estar の使い分け、-ar / -er / -ir 動詞の現在形、tener、gustar を問題で確認します。カタカナの読みは目安で、地域によって発音が異なる音（ll・c・z など）はメモで補足しています。入門の次は、過去形や再帰動詞、旅行の場面のフレーズへ進むのがおすすめです。",
+  "subject": "spanish",
+  "language": {
+    "target": "es",
+    "explanation": "ja"
+  },
+  "level": "入門（CEFR A1）",
+  "tags": [
+    "スペイン語",
+    "入門",
+    "あいさつ",
+    "基本単語",
+    "基本文法"
+  ],
+  "author": "LLLM-Study",
+  "license": "MIT",
+  "source": "LLLM-Study オリジナル（AI を利用して作成）",
+  "revision": 1,
+  "items": [
+    {
+      "id": "es-p-hola",
+      "type": "phrase",
+      "phrase": "¡Hola!",
+      "meaning": "やあ／こんにちは",
+      "situation": "時間を問わない気軽なあいさつ",
+      "examples": [
+        {
+          "text": "¡Hola, Ana! ¿Qué tal?",
+          "translation": "やあ、アナ！元気？"
+        }
+      ],
+      "notes": "読み: オラ。h は発音しない（「ホラ」ではない）。スペイン語では感嘆文の最初に逆さの ¡ を付ける。",
+      "tags": [
+        "ステップ1",
+        "あいさつ・自己紹介",
+        "あいさつ"
+      ]
+    },
+    {
+      "id": "es-p-buenos-dias",
+      "type": "phrase",
+      "phrase": "Buenos días.",
+      "meaning": "おはようございます／こんにちは（午前中）",
+      "situation": "朝から昼食ごろまでのあいさつ",
+      "examples": [
+        {
+          "text": "Buenos días, señora García.",
+          "translation": "おはようございます、ガルシアさん。"
+        }
+      ],
+      "notes": "読み: ブエノス ディアス。昼食（スペインでは 14 時ごろ）までは Buenos días を使うことが多い。día（日）は複数形 días になっている点に注意。",
+      "tags": [
+        "ステップ1",
+        "あいさつ・自己紹介",
+        "あいさつ"
+      ]
+    },
+    {
+      "id": "es-p-buenas-tardes",
+      "type": "phrase",
+      "phrase": "Buenas tardes.",
+      "meaning": "こんにちは（午後）",
+      "situation": "昼食後から日が暮れるまでのあいさつ",
+      "examples": [
+        {
+          "text": "Buenas tardes. ¿Cómo está usted?",
+          "translation": "こんにちは。お元気ですか。"
+        }
+      ],
+      "notes": "読み: ブエナス タルデス。tarde（午後）は女性名詞なので buenas と女性形になる。",
+      "tags": [
+        "ステップ1",
+        "あいさつ・自己紹介",
+        "あいさつ"
+      ]
+    },
+    {
+      "id": "es-p-buenas-noches",
+      "type": "phrase",
+      "phrase": "Buenas noches.",
+      "meaning": "こんばんは／おやすみなさい",
+      "situation": "夜のあいさつ・寝る前のあいさつ",
+      "examples": [
+        {
+          "text": "Buenas noches, mamá. Hasta mañana.",
+          "translation": "おやすみ、お母さん。また明日。"
+        }
+      ],
+      "notes": "読み: ブエナス ノチェス。会ったときの「こんばんは」にも、別れ際・寝る前の「おやすみなさい」にも使える。noche（夜）は女性名詞。",
+      "tags": [
+        "ステップ1",
+        "あいさつ・自己紹介",
+        "あいさつ"
+      ]
+    },
+    {
+      "id": "es-p-que-tal",
+      "type": "phrase",
+      "phrase": "¿Qué tal?",
+      "meaning": "元気？／調子はどう？",
+      "situation": "友だちや知り合いへの気軽なあいさつ",
+      "examples": [
+        {
+          "text": "¡Hola, Pedro! ¿Qué tal?",
+          "translation": "やあ、ペドロ！元気？"
+        }
+      ],
+      "notes": "読み: ケ タル。親しい相手向けのくだけた言い方。疑問文は最初に逆さの ¿、最後に ? を付ける。返事は Bien, gracias. など。",
+      "tags": [
+        "ステップ1",
+        "あいさつ・自己紹介",
+        "あいさつ"
+      ]
+    },
+    {
+      "id": "es-p-como-estas",
+      "type": "phrase",
+      "phrase": "¿Cómo estás?",
+      "meaning": "元気？（友だち・家族に）",
+      "situation": "親しい相手（tú で話す相手）の様子を聞くとき",
+      "examples": [
+        {
+          "text": "Hola, Lucía. ¿Cómo estás?",
+          "translation": "やあ、ルシア。元気？"
+        }
+      ],
+      "notes": "読み: コモ エスタス。estás は estar（一時的な状態を表す「〜である」）の tú の形。体調や気分など変わる状態なので ser ではなく estar を使う。",
+      "tags": [
+        "ステップ1",
+        "あいさつ・自己紹介",
+        "あいさつ"
+      ]
+    },
+    {
+      "id": "es-p-como-esta-usted",
+      "type": "phrase",
+      "phrase": "¿Cómo está usted?",
+      "meaning": "お元気ですか。（丁寧）",
+      "situation": "目上の人・初対面の人・店員などに",
+      "examples": [
+        {
+          "text": "Buenos días, señor López. ¿Cómo está usted?",
+          "translation": "おはようございます、ロペスさん。お元気ですか。"
+        }
+      ],
+      "notes": "読み: コモ エスタ ウステ。usted（あなた）は丁寧な二人称で、動詞は 3 人称単数形（está）を使う。親しい相手には tú を使い ¿Cómo estás? と言う。",
+      "tags": [
+        "ステップ1",
+        "あいさつ・自己紹介",
+        "あいさつ"
+      ]
+    },
+    {
+      "id": "es-p-muy-bien-gracias",
+      "type": "phrase",
+      "phrase": "Muy bien, gracias. ¿Y tú?",
+      "meaning": "とても元気です、ありがとう。あなたは？",
+      "situation": "¿Cómo estás? への返事",
+      "examples": [
+        {
+          "text": "A: ¿Cómo estás? B: Muy bien, gracias. ¿Y tú?",
+          "translation": "A: 元気？ B: とても元気、ありがとう。君は？"
+        }
+      ],
+      "notes": "読み: ムイ ビエン グラシアス。イ トゥ。丁寧に聞かれたら ¿Y usted? と返す。tú（君）にはアクセント記号が付き、tu（君の）とは別の語。",
+      "tags": [
+        "ステップ1",
+        "あいさつ・自己紹介",
+        "あいさつ"
+      ]
+    },
+    {
+      "id": "es-p-mas-o-menos",
+      "type": "phrase",
+      "phrase": "Más o menos.",
+      "meaning": "まあまあです。",
+      "situation": "調子を聞かれて「普通」と答えるとき",
+      "examples": [
+        {
+          "text": "A: ¿Qué tal el trabajo? B: Más o menos.",
+          "translation": "A: 仕事はどう？ B: まあまあだね。"
+        }
+      ],
+      "notes": "読み: マス オ メノス。直訳は「多かれ少なかれ」。ほかに Bien.（元気）/ Regular.（まあまあ）/ No muy bien.（あまりよくない）。",
+      "tags": [
+        "ステップ1",
+        "あいさつ・自己紹介",
+        "あいさつ"
+      ]
+    },
+    {
+      "id": "es-p-mucho-gusto",
+      "type": "phrase",
+      "phrase": "Mucho gusto.",
+      "meaning": "はじめまして。",
+      "situation": "初対面のあいさつ",
+      "examples": [
+        {
+          "text": "A: Me llamo Carlos. B: Mucho gusto, Carlos.",
+          "translation": "A: カルロスです。B: はじめまして、カルロス。"
+        }
+      ],
+      "notes": "読み: ムチョ グスト。話し手の性別に関係なく使える。返事は Igualmente.（こちらこそ）。",
+      "tags": [
+        "ステップ1",
+        "あいさつ・自己紹介",
+        "自己紹介"
+      ]
+    },
+    {
+      "id": "es-p-encantado",
+      "type": "phrase",
+      "phrase": "Encantado. / Encantada.",
+      "meaning": "はじめまして。（お会いできてうれしいです）",
+      "situation": "初対面のあいさつ（話し手の性別で形が変わる）",
+      "examples": [
+        {
+          "text": "Soy Yuki. Encantada.",
+          "translation": "ユキです。はじめまして。（女性が言う場合）"
+        }
+      ],
+      "notes": "読み: エンカンタド／エンカンタダ。男性が言うときは Encantado、女性が言うときは Encantada。形容詞が話し手の性に一致する、スペイン語らしい表現。",
+      "tags": [
+        "ステップ1",
+        "あいさつ・自己紹介",
+        "自己紹介"
+      ]
+    },
+    {
+      "id": "es-p-como-te-llamas",
+      "type": "phrase",
+      "phrase": "¿Cómo te llamas?",
+      "meaning": "名前は何ていうの？",
+      "situation": "親しい相手や子ども・同年代に名前を聞くとき",
+      "examples": [
+        {
+          "text": "Hola. ¿Cómo te llamas?",
+          "translation": "こんにちは。お名前は？"
+        }
+      ],
+      "notes": "読み: コモ テ ヤマス。直訳は「君は自分をどう呼ぶの？」。丁寧には ¿Cómo se llama usted?。ll は「ヤ」行（地域によって「ジャ」「シャ」）の音。",
+      "tags": [
+        "ステップ1",
+        "あいさつ・自己紹介",
+        "自己紹介"
+      ]
+    },
+    {
+      "id": "es-p-me-llamo",
+      "type": "phrase",
+      "phrase": "Me llamo Yuki.",
+      "meaning": "私の名前はユキです。",
+      "situation": "名前を名乗るとき",
+      "examples": [
+        {
+          "text": "Me llamo Kenji Tanaka. Soy de Osaka.",
+          "translation": "田中健二です。大阪出身です。"
+        }
+      ],
+      "notes": "読み: メ ヤモ ユキ。Soy Yuki.（ユキです）とも言える。Mi nombre es Yuki. はやや改まった言い方。",
+      "tags": [
+        "ステップ1",
+        "あいさつ・自己紹介",
+        "自己紹介"
+      ]
+    },
+    {
+      "id": "es-p-de-donde-eres",
+      "type": "phrase",
+      "phrase": "¿De dónde eres?",
+      "meaning": "どこの出身？",
+      "situation": "出身地・国籍を聞くとき",
+      "examples": [
+        {
+          "text": "¿De dónde eres? ¿De México?",
+          "translation": "出身はどこ？メキシコ？"
+        }
+      ],
+      "notes": "読み: デ ドンデ エレス。eres は ser の tú の形。出身は変わらない性質なので ser を使う。丁寧には ¿De dónde es usted?",
+      "tags": [
+        "ステップ1",
+        "あいさつ・自己紹介",
+        "自己紹介"
+      ]
+    },
+    {
+      "id": "es-p-soy-de-japon",
+      "type": "phrase",
+      "phrase": "Soy de Japón.",
+      "meaning": "日本出身です。",
+      "situation": "出身を答えるとき",
+      "examples": [
+        {
+          "text": "Soy de Japón, de Tokio.",
+          "translation": "日本の東京出身です。"
+        },
+        {
+          "text": "Soy japonés. / Soy japonesa.",
+          "translation": "日本人です。（男性／女性）"
+        }
+      ],
+      "notes": "読み: ソイ デ ハポン。j は喉の奥から出す強い「ハ」の音。国籍で言うときは男性 japonés、女性 japonesa（女性形はアクセント記号が消える）。",
+      "tags": [
+        "ステップ1",
+        "あいさつ・自己紹介",
+        "自己紹介"
+      ]
+    },
+    {
+      "id": "es-p-soy-estudiante",
+      "type": "phrase",
+      "phrase": "Soy estudiante.",
+      "meaning": "私は学生です。",
+      "situation": "職業・身分を言うとき",
+      "examples": [
+        {
+          "text": "Soy estudiante de la universidad.",
+          "translation": "大学生です。"
+        }
+      ],
+      "notes": "読み: ソイ エストゥディアンテ。職業は ser で表し、ふつう冠詞を付けない（Soy un estudiante. とは言わない）。estudiante は男女同形。",
+      "tags": [
+        "ステップ1",
+        "あいさつ・自己紹介",
+        "自己紹介"
+      ]
+    },
+    {
+      "id": "es-p-tengo-veinte-anos",
+      "type": "phrase",
+      "phrase": "Tengo veinte años.",
+      "meaning": "20 歳です。",
+      "situation": "年齢を言うとき",
+      "examples": [
+        {
+          "text": "A: ¿Cuántos años tienes? B: Tengo veinte años.",
+          "translation": "A: 何歳？ B: 20 歳だよ。"
+        }
+      ],
+      "notes": "読み: テンゴ ベインテ アニョス。年齢は「〜年を持っている」と tener で表す（ser は使わない）。años の ñ を n にすると別の語になってしまうので注意。",
+      "tags": [
+        "ステップ1",
+        "あいさつ・自己紹介",
+        "自己紹介"
+      ]
+    },
+    {
+      "id": "es-p-hablo-un-poco-de-espanol",
+      "type": "phrase",
+      "phrase": "Hablo un poco de español.",
+      "meaning": "スペイン語を少し話せます。",
+      "situation": "自分の語学力を伝えるとき",
+      "examples": [
+        {
+          "text": "Hablo un poco de español, pero no mucho.",
+          "translation": "スペイン語は少し話せますが、たくさんではありません。"
+        }
+      ],
+      "notes": "読み: アブロ ウン ポコ デ エスパニョル。un poco de ~ で「少しの〜」。言語名は小文字で書く（español, japonés, inglés）。",
+      "tags": [
+        "ステップ1",
+        "あいさつ・自己紹介",
+        "自己紹介"
+      ]
+    },
+    {
+      "id": "es-p-hablas-ingles",
+      "type": "phrase",
+      "phrase": "¿Hablas inglés?",
+      "meaning": "英語を話せる？",
+      "situation": "相手が話せる言語を聞くとき",
+      "examples": [
+        {
+          "text": "Perdón, ¿hablas inglés?",
+          "translation": "すみません、英語話せる？"
+        }
+      ],
+      "notes": "読み: アブラス イングレス。丁寧には ¿Habla usted inglés?。スペイン語は主語を省略することが多く、動詞の形で主語がわかる。",
+      "tags": [
+        "ステップ1",
+        "あいさつ・自己紹介",
+        "自己紹介"
+      ]
+    },
+    {
+      "id": "es-p-gracias",
+      "type": "phrase",
+      "phrase": "Gracias. / Muchas gracias.",
+      "meaning": "ありがとう。／どうもありがとうございます。",
+      "situation": "お礼を言うとき",
+      "examples": [
+        {
+          "text": "Muchas gracias por tu ayuda.",
+          "translation": "手伝ってくれて本当にありがとう。"
+        }
+      ],
+      "notes": "読み: グラシアス／ムチャス グラシアス。gracias は女性名詞の複数形なので muchas と女性複数形になる（muchos は誤り）。",
+      "tags": [
+        "ステップ1",
+        "あいさつ・自己紹介",
+        "基本表現"
+      ]
+    },
+    {
+      "id": "es-p-de-nada",
+      "type": "phrase",
+      "phrase": "De nada.",
+      "meaning": "どういたしまして。",
+      "situation": "お礼への返事",
+      "examples": [
+        {
+          "text": "A: Gracias. B: De nada.",
+          "translation": "A: ありがとう。B: どういたしまして。"
+        }
+      ],
+      "notes": "読み: デ ナダ。直訳は「何でもないことです」。より丁寧には No hay de qué.（とんでもないです）。",
+      "tags": [
+        "ステップ1",
+        "あいさつ・自己紹介",
+        "基本表現"
+      ]
+    },
+    {
+      "id": "es-p-por-favor",
+      "type": "phrase",
+      "phrase": "Por favor.",
+      "meaning": "お願いします。",
+      "situation": "頼みごと・注文のとき",
+      "examples": [
+        {
+          "text": "Un café, por favor.",
+          "translation": "コーヒーを 1 つお願いします。"
+        }
+      ],
+      "notes": "読み: ポル ファボル。文の最後に付けるのが一般的。b と v はどちらも「バ行」に近い同じ音で発音される。",
+      "tags": [
+        "ステップ1",
+        "あいさつ・自己紹介",
+        "基本表現"
+      ]
+    },
+    {
+      "id": "es-p-perdon",
+      "type": "phrase",
+      "phrase": "Perdón.",
+      "meaning": "すみません／失礼。",
+      "situation": "軽く謝るとき・人に話しかけるとき",
+      "examples": [
+        {
+          "text": "Perdón, ¿dónde está el baño?",
+          "translation": "すみません、トイレはどこですか。"
+        }
+      ],
+      "notes": "読み: ペルドン。ぶつかったときの軽いお詫びや、呼びかけに使う。丁寧な呼びかけは Disculpe.（すみません／ちょっとよろしいですか）。",
+      "tags": [
+        "ステップ1",
+        "あいさつ・自己紹介",
+        "基本表現"
+      ]
+    },
+    {
+      "id": "es-p-lo-siento",
+      "type": "phrase",
+      "phrase": "Lo siento.",
+      "meaning": "ごめんなさい。",
+      "situation": "きちんと謝るとき",
+      "examples": [
+        {
+          "text": "Lo siento, llego tarde.",
+          "translation": "ごめんなさい、遅れました。"
+        }
+      ],
+      "notes": "読み: ロ シエント。直訳は「それを残念に感じる」。Perdón より気持ちのこもった謝罪で、お悔やみの「残念です」にも使う。強めるなら Lo siento mucho.",
+      "tags": [
+        "ステップ1",
+        "あいさつ・自己紹介",
+        "基本表現"
+      ]
+    },
+    {
+      "id": "es-p-no-entiendo",
+      "type": "phrase",
+      "phrase": "No entiendo.",
+      "meaning": "わかりません。",
+      "situation": "相手の言葉が理解できないとき",
+      "examples": [
+        {
+          "text": "Perdón, no entiendo. ¿Puede hablar más despacio?",
+          "translation": "すみません、わかりません。もっとゆっくり話していただけますか。"
+        }
+      ],
+      "notes": "読み: ノ エンティエンド。否定文は動詞の前に no を置くだけ。entiendo は entender（理解する）の yo の形で、語幹の e が ie に変わる。",
+      "tags": [
+        "ステップ1",
+        "あいさつ・自己紹介",
+        "基本表現"
+      ]
+    },
+    {
+      "id": "es-p-puede-repetir",
+      "type": "phrase",
+      "phrase": "¿Puede repetir, por favor?",
+      "meaning": "もう一度言っていただけますか。",
+      "situation": "聞き取れなかったとき",
+      "examples": [
+        {
+          "text": "Perdón, ¿puede repetir, por favor?",
+          "translation": "すみません、もう一度言っていただけますか。"
+        }
+      ],
+      "notes": "読み: プエデ レペティル ポル ファボル。puede は poder（〜できる）の usted の形。親しい相手には ¿Puedes repetir?",
+      "tags": [
+        "ステップ1",
+        "あいさつ・自己紹介",
+        "基本表現"
+      ]
+    },
+    {
+      "id": "es-p-como-se-dice",
+      "type": "phrase",
+      "phrase": "¿Cómo se dice … en español?",
+      "meaning": "…はスペイン語で何と言いますか。",
+      "situation": "知らない単語を聞くとき",
+      "examples": [
+        {
+          "text": "¿Cómo se dice \"thank you\" en español?",
+          "translation": "thank you はスペイン語で何と言いますか。"
+        }
+      ],
+      "notes": "読み: コモ セ ディセ … エン エスパニョル。逆に意味を聞くなら ¿Qué significa …?（…はどういう意味ですか）。",
+      "tags": [
+        "ステップ1",
+        "あいさつ・自己紹介",
+        "基本表現"
+      ]
+    },
+    {
+      "id": "es-p-cuanto-cuesta",
+      "type": "phrase",
+      "phrase": "¿Cuánto cuesta?",
+      "meaning": "いくらですか。",
+      "situation": "値段を聞くとき",
+      "examples": [
+        {
+          "text": "¿Cuánto cuesta este libro?",
+          "translation": "この本はいくらですか。"
+        }
+      ],
+      "notes": "読み: クアント クエスタ。複数のものなら ¿Cuánto cuestan?。会計の合計を聞くときは ¿Cuánto es?（いくらになりますか）。",
+      "tags": [
+        "ステップ1",
+        "あいさつ・自己紹介",
+        "基本表現"
+      ]
+    },
+    {
+      "id": "es-p-hasta-luego",
+      "type": "phrase",
+      "phrase": "Hasta luego.",
+      "meaning": "またね／ではまた。",
+      "situation": "別れのあいさつ",
+      "examples": [
+        {
+          "text": "Bueno, me voy. ¡Hasta luego!",
+          "translation": "じゃあ、行くね。またね！"
+        }
+      ],
+      "notes": "読み: アスタ ルエゴ。直訳は「後ほどまで」だが、次にいつ会うか決まっていなくても広く使う。明日会うなら Hasta mañana.、近いうちなら Hasta pronto.",
+      "tags": [
+        "ステップ1",
+        "あいさつ・自己紹介",
+        "あいさつ"
+      ]
+    },
+    {
+      "id": "es-p-adios",
+      "type": "phrase",
+      "phrase": "Adiós.",
+      "meaning": "さようなら。",
+      "situation": "別れのあいさつ",
+      "examples": [
+        {
+          "text": "Adiós, y gracias por todo.",
+          "translation": "さようなら、いろいろありがとう。"
+        }
+      ],
+      "notes": "読み: アディオス。日常では Hasta luego. のほうがよく使われ、Adiós はしばらく会わないときの響きがある。最後の o にアクセント記号を忘れずに。",
+      "tags": [
+        "ステップ1",
+        "あいさつ・自己紹介",
+        "あいさつ"
+      ]
+    },
+    {
+      "id": "es-v-padre",
+      "type": "vocab",
+      "term": "el padre",
+      "reading": "パドレ",
+      "pos": "名詞（男性）",
+      "meanings": [
+        "父"
+      ],
+      "examples": [
+        {
+          "text": "Mi padre es profesor.",
+          "translation": "私の父は教師です。"
+        }
+      ],
+      "notes": "複数形 los padres は「両親」の意味にもなる。親しみを込めると papá（パパ）。",
+      "tags": [
+        "ステップ2",
+        "基本単語",
+        "家族・人"
+      ]
+    },
+    {
+      "id": "es-v-madre",
+      "type": "vocab",
+      "term": "la madre",
+      "reading": "マドレ",
+      "pos": "名詞（女性）",
+      "meanings": [
+        "母"
+      ],
+      "examples": [
+        {
+          "text": "Mi madre vive en Kioto.",
+          "translation": "母は京都に住んでいます。"
+        }
+      ],
+      "notes": "親しみを込めると mamá（ママ）。-e で終わる名詞は性が決まっていないので、冠詞と一緒に覚える。",
+      "tags": [
+        "ステップ2",
+        "基本単語",
+        "家族・人"
+      ]
+    },
+    {
+      "id": "es-v-hermano",
+      "type": "vocab",
+      "term": "el hermano",
+      "reading": "エルマノ",
+      "pos": "名詞（男性）",
+      "meanings": [
+        "兄・弟"
+      ],
+      "examples": [
+        {
+          "text": "Tengo un hermano mayor.",
+          "translation": "私には兄が 1 人います。"
+        }
+      ],
+      "notes": "h は発音しない。女性形は la hermana（姉・妹）。複数の los hermanos は「兄弟姉妹」の意味にもなる。年上は mayor、年下は menor を付ける。",
+      "tags": [
+        "ステップ2",
+        "基本単語",
+        "家族・人"
+      ]
+    },
+    {
+      "id": "es-v-hermana",
+      "type": "vocab",
+      "term": "la hermana",
+      "reading": "エルマナ",
+      "pos": "名詞（女性）",
+      "meanings": [
+        "姉・妹"
+      ],
+      "examples": [
+        {
+          "text": "Mi hermana menor tiene diez años.",
+          "translation": "私の妹は 10 歳です。"
+        }
+      ],
+      "notes": "男性形 el hermano の -o を -a に変えた形。-o/-a で男女を区別する名詞は多い（amigo/amiga, hijo/hija）。",
+      "tags": [
+        "ステップ2",
+        "基本単語",
+        "家族・人"
+      ]
+    },
+    {
+      "id": "es-v-hijo",
+      "type": "vocab",
+      "term": "el hijo",
+      "reading": "イホ",
+      "pos": "名詞（男性）",
+      "meanings": [
+        "息子"
+      ],
+      "examples": [
+        {
+          "text": "Tienen dos hijos.",
+          "translation": "彼らには子どもが 2 人います。"
+        }
+      ],
+      "notes": "女性形は la hija（娘）。複数形 los hijos は息子・娘を含めた「子どもたち」の意味にもなる。h は発音せず、j は強い「ハ行」。",
+      "tags": [
+        "ステップ2",
+        "基本単語",
+        "家族・人"
+      ]
+    },
+    {
+      "id": "es-v-amigo",
+      "type": "vocab",
+      "term": "el amigo",
+      "reading": "アミゴ",
+      "pos": "名詞（男性）",
+      "meanings": [
+        "（男性の）友だち"
+      ],
+      "examples": [
+        {
+          "text": "Juan es mi mejor amigo.",
+          "translation": "フアンは私の親友です。"
+        }
+      ],
+      "notes": "女性の友だちは la amiga。男女混合のグループは男性複数形 los amigos で表す。",
+      "tags": [
+        "ステップ2",
+        "基本単語",
+        "家族・人"
+      ]
+    },
+    {
+      "id": "es-v-hombre",
+      "type": "vocab",
+      "term": "el hombre",
+      "reading": "オンブレ",
+      "pos": "名詞（男性）",
+      "meanings": [
+        "男性・男の人",
+        "人間"
+      ],
+      "examples": [
+        {
+          "text": "Ese hombre es mi profesor.",
+          "translation": "あの男性は私の先生です。"
+        }
+      ],
+      "notes": "h は発音しない。反対は la mujer（女性）。",
+      "tags": [
+        "ステップ2",
+        "基本単語",
+        "家族・人"
+      ]
+    },
+    {
+      "id": "es-v-mujer",
+      "type": "vocab",
+      "term": "la mujer",
+      "reading": "ムヘール",
+      "pos": "名詞（女性）",
+      "meanings": [
+        "女性・女の人",
+        "妻"
+      ],
+      "examples": [
+        {
+          "text": "La mujer de la foto es mi abuela.",
+          "translation": "写真の女性は私の祖母です。"
+        }
+      ],
+      "notes": "j は強い「ハ」の音。複数形は las mujeres（子音で終わる語は -es を付ける）。mi mujer は「私の妻」の意味でも使う。",
+      "tags": [
+        "ステップ2",
+        "基本単語",
+        "家族・人"
+      ]
+    },
+    {
+      "id": "es-v-uno",
+      "type": "vocab",
+      "term": "uno",
+      "reading": "ウノ",
+      "pos": "数詞",
+      "meanings": [
+        "1"
+      ],
+      "examples": [
+        {
+          "text": "Tengo un hermano y una hermana.",
+          "translation": "兄弟が 1 人と姉妹が 1 人います。"
+        }
+      ],
+      "notes": "男性名詞の前では un（un libro）、女性名詞の前では una（una casa）になる。数えるときは uno。",
+      "tags": [
+        "ステップ2",
+        "基本単語",
+        "数字"
+      ]
+    },
+    {
+      "id": "es-v-dos",
+      "type": "vocab",
+      "term": "dos",
+      "reading": "ドス",
+      "pos": "数詞",
+      "meanings": [
+        "2"
+      ],
+      "examples": [
+        {
+          "text": "Dos cafés, por favor.",
+          "translation": "コーヒーを 2 つお願いします。"
+        }
+      ],
+      "notes": "2 以上は名詞を複数形にする（dos cafés）。男女で形は変わらない。",
+      "tags": [
+        "ステップ2",
+        "基本単語",
+        "数字"
+      ]
+    },
+    {
+      "id": "es-v-tres",
+      "type": "vocab",
+      "term": "tres",
+      "reading": "トレス",
+      "pos": "数詞",
+      "meanings": [
+        "3"
+      ],
+      "examples": [
+        {
+          "text": "Son las tres.",
+          "translation": "3 時です。"
+        }
+      ],
+      "notes": "r は舌先を 1 回はじく音（日本語のラ行に近い）。時刻は「las ＋数字」で言う（1 時だけ Es la una.）。",
+      "tags": [
+        "ステップ2",
+        "基本単語",
+        "数字"
+      ]
+    },
+    {
+      "id": "es-v-cuatro",
+      "type": "vocab",
+      "term": "cuatro",
+      "reading": "クアトロ",
+      "pos": "数詞",
+      "meanings": [
+        "4"
+      ],
+      "examples": [
+        {
+          "text": "Somos cuatro.",
+          "translation": "私たちは 4 人です。"
+        }
+      ],
+      "notes": "レストランなどで人数を言うときは Somos ＋数字（私たちは〜人です）。",
+      "tags": [
+        "ステップ2",
+        "基本単語",
+        "数字"
+      ]
+    },
+    {
+      "id": "es-v-cinco",
+      "type": "vocab",
+      "term": "cinco",
+      "reading": "シンコ",
+      "pos": "数詞",
+      "meanings": [
+        "5"
+      ],
+      "examples": [
+        {
+          "text": "La clase empieza a las cinco.",
+          "translation": "授業は 5 時に始まります。"
+        }
+      ],
+      "notes": "ci の c は中南米では「シ」、スペインの多くの地域では英語の th（θ）に近い音になる。",
+      "tags": [
+        "ステップ2",
+        "基本単語",
+        "数字"
+      ]
+    },
+    {
+      "id": "es-v-seis",
+      "type": "vocab",
+      "term": "seis",
+      "reading": "セイス",
+      "pos": "数詞",
+      "meanings": [
+        "6"
+      ],
+      "examples": [
+        {
+          "text": "Tengo seis años.",
+          "translation": "6 歳です。"
+        }
+      ],
+      "notes": "ei は「エイ」と 2 つの母音をはっきり発音する（「セース」にならない）。",
+      "tags": [
+        "ステップ2",
+        "基本単語",
+        "数字"
+      ]
+    },
+    {
+      "id": "es-v-siete",
+      "type": "vocab",
+      "term": "siete",
+      "reading": "シエテ",
+      "pos": "数詞",
+      "meanings": [
+        "7"
+      ],
+      "examples": [
+        {
+          "text": "La semana tiene siete días.",
+          "translation": "1 週間は 7 日です。"
+        }
+      ],
+      "notes": "ie は「イエ」。día は -a で終わるが男性名詞で、複数形は días。",
+      "tags": [
+        "ステップ2",
+        "基本単語",
+        "数字"
+      ]
+    },
+    {
+      "id": "es-v-ocho",
+      "type": "vocab",
+      "term": "ocho",
+      "reading": "オチョ",
+      "pos": "数詞",
+      "meanings": [
+        "8"
+      ],
+      "examples": [
+        {
+          "text": "El tren sale a las ocho.",
+          "translation": "電車は 8 時に出発します。"
+        }
+      ],
+      "notes": "ch は「チャ行」の音。",
+      "tags": [
+        "ステップ2",
+        "基本単語",
+        "数字"
+      ]
+    },
+    {
+      "id": "es-v-nueve",
+      "type": "vocab",
+      "term": "nueve",
+      "reading": "ヌエベ",
+      "pos": "数詞",
+      "meanings": [
+        "9"
+      ],
+      "examples": [
+        {
+          "text": "Mi hermano tiene nueve años.",
+          "translation": "弟は 9 歳です。"
+        }
+      ],
+      "notes": "v は b と同じ「バ行」に近い音で発音する。",
+      "tags": [
+        "ステップ2",
+        "基本単語",
+        "数字"
+      ]
+    },
+    {
+      "id": "es-v-diez",
+      "type": "vocab",
+      "term": "diez",
+      "reading": "ディエス",
+      "pos": "数詞",
+      "meanings": [
+        "10"
+      ],
+      "examples": [
+        {
+          "text": "Son diez euros.",
+          "translation": "10 ユーロです。"
+        }
+      ],
+      "notes": "z は中南米では「ス」、スペインの多くの地域では英語の th（θ）に近い音。11 以降は once, doce, trece … と続く。",
+      "tags": [
+        "ステップ2",
+        "基本単語",
+        "数字"
+      ]
+    },
+    {
+      "id": "es-v-agua",
+      "type": "vocab",
+      "term": "el agua",
+      "reading": "アグア",
+      "pos": "名詞（女性）",
+      "meanings": [
+        "水"
+      ],
+      "examples": [
+        {
+          "text": "Un agua sin gas, por favor.",
+          "translation": "炭酸なしの水を 1 つお願いします。"
+        },
+        {
+          "text": "El agua está fría.",
+          "translation": "水は冷たい。"
+        }
+      ],
+      "notes": "女性名詞だが、アクセントのある a で始まるので単数の冠詞は el を使う（複数は las aguas）。形容詞は女性形（fría）になる点に注意。",
+      "tags": [
+        "ステップ2",
+        "基本単語",
+        "食べ物・飲み物"
+      ]
+    },
+    {
+      "id": "es-v-cafe",
+      "type": "vocab",
+      "term": "el café",
+      "reading": "カフェ",
+      "pos": "名詞（男性）",
+      "meanings": [
+        "コーヒー",
+        "カフェ（喫茶店）"
+      ],
+      "examples": [
+        {
+          "text": "Un café con leche, por favor.",
+          "translation": "カフェオレを 1 つお願いします。"
+        }
+      ],
+      "notes": "最後の é にアクセント記号を付ける。café con leche は「ミルク入りコーヒー」。",
+      "tags": [
+        "ステップ2",
+        "基本単語",
+        "食べ物・飲み物"
+      ]
+    },
+    {
+      "id": "es-v-pan",
+      "type": "vocab",
+      "term": "el pan",
+      "reading": "パン",
+      "pos": "名詞（男性）",
+      "meanings": [
+        "パン"
+      ],
+      "examples": [
+        {
+          "text": "Compro pan todas las mañanas.",
+          "translation": "毎朝パンを買います。"
+        }
+      ],
+      "notes": "日本語の「パン」はポルトガル語由来で、スペイン語でも同じく pan。",
+      "tags": [
+        "ステップ2",
+        "基本単語",
+        "食べ物・飲み物"
+      ]
+    },
+    {
+      "id": "es-v-leche",
+      "type": "vocab",
+      "term": "la leche",
+      "reading": "レチェ",
+      "pos": "名詞（女性）",
+      "meanings": [
+        "牛乳・ミルク"
+      ],
+      "examples": [
+        {
+          "text": "¿Tomas el café con leche?",
+          "translation": "コーヒーにミルクを入れる？"
+        }
+      ],
+      "notes": "-e で終わる名詞で女性。冠詞ごと la leche と覚える。",
+      "tags": [
+        "ステップ2",
+        "基本単語",
+        "食べ物・飲み物"
+      ]
+    },
+    {
+      "id": "es-v-carne",
+      "type": "vocab",
+      "term": "la carne",
+      "reading": "カルネ",
+      "pos": "名詞（女性）",
+      "meanings": [
+        "肉"
+      ],
+      "examples": [
+        {
+          "text": "No como carne.",
+          "translation": "私は肉を食べません。"
+        }
+      ],
+      "notes": "牛肉は carne de res（中南米）／ternera（スペイン）など地域で言い方が異なる。",
+      "tags": [
+        "ステップ2",
+        "基本単語",
+        "食べ物・飲み物"
+      ]
+    },
+    {
+      "id": "es-v-pescado",
+      "type": "vocab",
+      "term": "el pescado",
+      "reading": "ペスカド",
+      "pos": "名詞（男性）",
+      "meanings": [
+        "魚（食べ物としての）"
+      ],
+      "examples": [
+        {
+          "text": "Hoy comemos pescado.",
+          "translation": "今日は魚を食べます。"
+        }
+      ],
+      "notes": "生きている魚は el pez（複数 los peces）。食材としての魚は pescado と使い分ける。",
+      "tags": [
+        "ステップ2",
+        "基本単語",
+        "食べ物・飲み物"
+      ]
+    },
+    {
+      "id": "es-v-manzana",
+      "type": "vocab",
+      "term": "la manzana",
+      "reading": "マンサナ",
+      "pos": "名詞（女性）",
+      "meanings": [
+        "りんご"
+      ],
+      "examples": [
+        {
+          "text": "Quiero una manzana.",
+          "translation": "りんごが 1 つほしい。"
+        }
+      ],
+      "notes": "-a で終わる典型的な女性名詞。スペインでは「（街の）区画・ブロック」の意味でも使う。",
+      "tags": [
+        "ステップ2",
+        "基本単語",
+        "食べ物・飲み物"
+      ]
+    },
+    {
+      "id": "es-v-casa",
+      "type": "vocab",
+      "term": "la casa",
+      "reading": "カサ",
+      "pos": "名詞（女性）",
+      "meanings": [
+        "家"
+      ],
+      "examples": [
+        {
+          "text": "Mi casa es pequeña.",
+          "translation": "私の家は小さい。"
+        },
+        {
+          "text": "Estoy en casa.",
+          "translation": "私は家にいます。"
+        }
+      ],
+      "notes": "「家に（いる）」は冠詞なしで en casa。形容詞は名詞の後ろに置き、性・数を一致させる（casa pequeña）。",
+      "tags": [
+        "ステップ2",
+        "基本単語",
+        "場所・もの"
+      ]
+    },
+    {
+      "id": "es-v-ciudad",
+      "type": "vocab",
+      "term": "la ciudad",
+      "reading": "シウダッ",
+      "pos": "名詞（女性）",
+      "meanings": [
+        "都市・町"
+      ],
+      "examples": [
+        {
+          "text": "Madrid es una ciudad grande.",
+          "translation": "マドリードは大きな都市です。"
+        }
+      ],
+      "notes": "-dad で終わる名詞は女性（la universidad, la verdad）。語末の d はごく弱く、ほとんど聞こえないこともある。複数形は las ciudades。",
+      "tags": [
+        "ステップ2",
+        "基本単語",
+        "場所・もの"
+      ]
+    },
+    {
+      "id": "es-v-calle",
+      "type": "vocab",
+      "term": "la calle",
+      "reading": "カジェ",
+      "pos": "名詞（女性）",
+      "meanings": [
+        "通り・道"
+      ],
+      "examples": [
+        {
+          "text": "Vivo en la calle Mayor.",
+          "translation": "私はマヨール通りに住んでいます。"
+        }
+      ],
+      "notes": "ll は地域によって「ジェ」「イェ」「シェ」などに聞こえる。住所では通りの名前の前に calle を付ける。",
+      "tags": [
+        "ステップ2",
+        "基本単語",
+        "場所・もの"
+      ]
+    },
+    {
+      "id": "es-v-escuela",
+      "type": "vocab",
+      "term": "la escuela",
+      "reading": "エスクエラ",
+      "pos": "名詞（女性）",
+      "meanings": [
+        "学校"
+      ],
+      "examples": [
+        {
+          "text": "Los niños van a la escuela.",
+          "translation": "子どもたちは学校に行きます。"
+        }
+      ],
+      "notes": "大学は la universidad。「学校へ行く」は ir a la escuela。",
+      "tags": [
+        "ステップ2",
+        "基本単語",
+        "場所・もの"
+      ]
+    },
+    {
+      "id": "es-v-estacion",
+      "type": "vocab",
+      "term": "la estación",
+      "reading": "エスタシオン",
+      "pos": "名詞（女性）",
+      "meanings": [
+        "駅",
+        "季節"
+      ],
+      "examples": [
+        {
+          "text": "¿Dónde está la estación?",
+          "translation": "駅はどこですか。"
+        }
+      ],
+      "notes": "-ción で終わる名詞は女性（la canción, la información）。複数形 las estaciones ではアクセント記号が消える。",
+      "tags": [
+        "ステップ2",
+        "基本単語",
+        "場所・もの"
+      ]
+    },
+    {
+      "id": "es-v-bano",
+      "type": "vocab",
+      "term": "el baño",
+      "reading": "バニョ",
+      "pos": "名詞（男性）",
+      "meanings": [
+        "トイレ",
+        "浴室"
+      ],
+      "examples": [
+        {
+          "text": "Perdón, ¿dónde está el baño?",
+          "translation": "すみません、トイレはどこですか。"
+        }
+      ],
+      "notes": "ñ は「ニャ行」の音。公共の場のトイレは los servicios / los aseos（スペイン）と言うこともある。",
+      "tags": [
+        "ステップ2",
+        "基本単語",
+        "場所・もの"
+      ]
+    },
+    {
+      "id": "es-v-libro",
+      "type": "vocab",
+      "term": "el libro",
+      "reading": "リブロ",
+      "pos": "名詞（男性）",
+      "meanings": [
+        "本"
+      ],
+      "examples": [
+        {
+          "text": "Este libro es interesante.",
+          "translation": "この本はおもしろい。"
+        }
+      ],
+      "notes": "-o で終わる典型的な男性名詞。複数形は los libros。図書館は la biblioteca（librería は「本屋」）。",
+      "tags": [
+        "ステップ2",
+        "基本単語",
+        "場所・もの"
+      ]
+    },
+    {
+      "id": "es-v-coche",
+      "type": "vocab",
+      "term": "el coche",
+      "reading": "コチェ",
+      "pos": "名詞（男性）",
+      "meanings": [
+        "車・自動車"
+      ],
+      "examples": [
+        {
+          "text": "Voy al trabajo en coche.",
+          "translation": "車で仕事に行きます。"
+        }
+      ],
+      "notes": "スペインでは coche、中南米の多くの国では carro や auto が一般的。「〜で（乗り物）」は en coche / en tren。",
+      "tags": [
+        "ステップ2",
+        "基本単語",
+        "場所・もの"
+      ]
+    },
+    {
+      "id": "es-v-dinero",
+      "type": "vocab",
+      "term": "el dinero",
+      "reading": "ディネロ",
+      "pos": "名詞（男性）",
+      "meanings": [
+        "お金"
+      ],
+      "examples": [
+        {
+          "text": "No tengo mucho dinero.",
+          "translation": "あまりお金を持っていません。"
+        }
+      ],
+      "notes": "数えられない名詞なのでふつう単数で使う。現金は el efectivo（en efectivo＝現金で）。",
+      "tags": [
+        "ステップ2",
+        "基本単語",
+        "場所・もの"
+      ]
+    },
+    {
+      "id": "es-v-trabajo",
+      "type": "vocab",
+      "term": "el trabajo",
+      "reading": "トラバホ",
+      "pos": "名詞（男性）",
+      "meanings": [
+        "仕事",
+        "職場"
+      ],
+      "examples": [
+        {
+          "text": "Mi trabajo empieza a las nueve.",
+          "translation": "私の仕事は 9 時に始まります。"
+        }
+      ],
+      "notes": "動詞は trabajar（働く）。Trabajo en un banco.（銀行で働いています）の trabajo は動詞の yo の形。",
+      "tags": [
+        "ステップ2",
+        "基本単語",
+        "場所・もの"
+      ]
+    },
+    {
+      "id": "es-v-dia",
+      "type": "vocab",
+      "term": "el día",
+      "reading": "ディア",
+      "pos": "名詞（男性）",
+      "meanings": [
+        "日",
+        "昼間"
+      ],
+      "examples": [
+        {
+          "text": "Hoy es un buen día.",
+          "translation": "今日はいい日です。"
+        }
+      ],
+      "notes": "-a で終わるが男性名詞（例外の代表）。¡Buenos días! の días はこの語の複数形。",
+      "tags": [
+        "ステップ2",
+        "基本単語",
+        "時"
+      ]
+    },
+    {
+      "id": "es-v-noche",
+      "type": "vocab",
+      "term": "la noche",
+      "reading": "ノチェ",
+      "pos": "名詞（女性）",
+      "meanings": [
+        "夜"
+      ],
+      "examples": [
+        {
+          "text": "Estudio por la noche.",
+          "translation": "私は夜に勉強します。"
+        }
+      ],
+      "notes": "por la noche で「夜に」（午前は por la mañana、午後は por la tarde）。¡Buenas noches! の noches はこの語の複数形。",
+      "tags": [
+        "ステップ2",
+        "基本単語",
+        "時"
+      ]
+    },
+    {
+      "id": "es-v-semana",
+      "type": "vocab",
+      "term": "la semana",
+      "reading": "セマナ",
+      "pos": "名詞（女性）",
+      "meanings": [
+        "週"
+      ],
+      "examples": [
+        {
+          "text": "Trabajo cinco días a la semana.",
+          "translation": "週に 5 日働きます。"
+        }
+      ],
+      "notes": "a la semana で「週に（〜回）」。来週は la semana que viene / la próxima semana。",
+      "tags": [
+        "ステップ2",
+        "基本単語",
+        "時"
+      ]
+    },
+    {
+      "id": "es-v-ano",
+      "type": "vocab",
+      "term": "el año",
+      "reading": "アニョ",
+      "pos": "名詞（男性）",
+      "meanings": [
+        "年",
+        "（年齢の）〜歳"
+      ],
+      "examples": [
+        {
+          "text": "Tengo treinta años.",
+          "translation": "私は 30 歳です。"
+        }
+      ],
+      "notes": "年齢は tener ＋数字＋ años。ñ を n にすると別の（意味のよくない）語になるので、必ず ñ で書く。",
+      "tags": [
+        "ステップ2",
+        "基本単語",
+        "時"
+      ]
+    },
+    {
+      "id": "es-v-hoy",
+      "type": "vocab",
+      "term": "hoy",
+      "reading": "オイ",
+      "pos": "副詞",
+      "meanings": [
+        "今日"
+      ],
+      "examples": [
+        {
+          "text": "Hoy hace calor.",
+          "translation": "今日は暑い。"
+        }
+      ],
+      "notes": "h は発音しない。昨日は ayer、明日は mañana（mañana には「朝」の意味もある）。",
+      "tags": [
+        "ステップ2",
+        "基本単語",
+        "時"
+      ]
+    },
+    {
+      "id": "es-v-grande",
+      "type": "vocab",
+      "term": "grande",
+      "reading": "グランデ",
+      "pos": "形容詞",
+      "meanings": [
+        "大きい",
+        "偉大な（名詞の前で）"
+      ],
+      "examples": [
+        {
+          "text": "Es una casa grande.",
+          "translation": "大きな家です。"
+        }
+      ],
+      "notes": "-e で終わる形容詞は男女同形。単数名詞の前では gran になり「偉大な」の意味になる（un gran hombre＝偉大な人）。",
+      "tags": [
+        "ステップ2",
+        "基本単語",
+        "形容詞"
+      ]
+    },
+    {
+      "id": "es-v-pequeno",
+      "type": "vocab",
+      "term": "pequeño",
+      "reading": "ペケニョ",
+      "pos": "形容詞",
+      "meanings": [
+        "小さい"
+      ],
+      "examples": [
+        {
+          "text": "Tengo un perro pequeño.",
+          "translation": "小さな犬を飼っています。"
+        }
+      ],
+      "notes": "女性形は pequeña。形容詞はふつう名詞の後ろに置き、性・数を一致させる（casas pequeñas）。",
+      "tags": [
+        "ステップ2",
+        "基本単語",
+        "形容詞"
+      ]
+    },
+    {
+      "id": "es-v-bueno",
+      "type": "vocab",
+      "term": "bueno",
+      "reading": "ブエノ",
+      "pos": "形容詞",
+      "meanings": [
+        "よい",
+        "おいしい（estar とともに）"
+      ],
+      "examples": [
+        {
+          "text": "Es un buen libro.",
+          "translation": "いい本です。"
+        },
+        {
+          "text": "La sopa está muy buena.",
+          "translation": "スープがとてもおいしい。"
+        }
+      ],
+      "notes": "男性単数名詞の前では buen になる（buen día）。女性形は buena。会話では Bueno, …（ええと、さて）のつなぎ言葉にもなる。",
+      "tags": [
+        "ステップ2",
+        "基本単語",
+        "形容詞"
+      ]
+    },
+    {
+      "id": "es-v-malo",
+      "type": "vocab",
+      "term": "malo",
+      "reading": "マロ",
+      "pos": "形容詞",
+      "meanings": [
+        "悪い"
+      ],
+      "examples": [
+        {
+          "text": "Hace mal tiempo.",
+          "translation": "天気が悪い。"
+        }
+      ],
+      "notes": "男性単数名詞の前では mal になる（mal tiempo）。女性形は mala。bueno → buen と同じパターン。",
+      "tags": [
+        "ステップ2",
+        "基本単語",
+        "形容詞"
+      ]
+    },
+    {
+      "id": "es-v-hablar",
+      "type": "vocab",
+      "term": "hablar",
+      "reading": "アブラール",
+      "pos": "動詞（-ar 規則動詞）",
+      "meanings": [
+        "話す"
+      ],
+      "examples": [
+        {
+          "text": "Hablo japonés y un poco de español.",
+          "translation": "日本語と少しスペイン語を話します。"
+        }
+      ],
+      "notes": "現在形: hablo, hablas, habla, hablamos, habláis, hablan。-ar 動詞の活用の手本になる語。h は発音しない。",
+      "tags": [
+        "ステップ2",
+        "基本単語",
+        "動詞"
+      ]
+    },
+    {
+      "id": "es-v-comer",
+      "type": "vocab",
+      "term": "comer",
+      "reading": "コメール",
+      "pos": "動詞（-er 規則動詞）",
+      "meanings": [
+        "食べる",
+        "昼食をとる"
+      ],
+      "examples": [
+        {
+          "text": "¿Qué comes normalmente?",
+          "translation": "ふだん何を食べる？"
+        }
+      ],
+      "notes": "現在形: como, comes, come, comemos, coméis, comen。スペインでは comer だけで「昼食をとる」の意味になることが多い。",
+      "tags": [
+        "ステップ2",
+        "基本単語",
+        "動詞"
+      ]
+    },
+    {
+      "id": "es-v-beber",
+      "type": "vocab",
+      "term": "beber",
+      "reading": "ベベール",
+      "pos": "動詞（-er 規則動詞）",
+      "meanings": [
+        "飲む"
+      ],
+      "examples": [
+        {
+          "text": "Bebo agua todos los días.",
+          "translation": "毎日水を飲みます。"
+        }
+      ],
+      "notes": "現在形: bebo, bebes, bebe, bebemos, bebéis, beben。中南米では「飲む」に tomar もよく使う。",
+      "tags": [
+        "ステップ2",
+        "基本単語",
+        "動詞"
+      ]
+    },
+    {
+      "id": "es-v-vivir",
+      "type": "vocab",
+      "term": "vivir",
+      "reading": "ビビール",
+      "pos": "動詞（-ir 規則動詞）",
+      "meanings": [
+        "住む",
+        "生きる"
+      ],
+      "examples": [
+        {
+          "text": "Vivo en Tokio.",
+          "translation": "東京に住んでいます。"
+        }
+      ],
+      "notes": "現在形: vivo, vives, vive, vivimos, vivís, viven。-er 動詞と違うのは nosotros（vivimos）と vosotros（vivís）の形だけ。",
+      "tags": [
+        "ステップ2",
+        "基本単語",
+        "動詞"
+      ]
+    },
+    {
+      "id": "es-v-ir",
+      "type": "vocab",
+      "term": "ir",
+      "reading": "イール",
+      "pos": "動詞（不規則）",
+      "meanings": [
+        "行く"
+      ],
+      "examples": [
+        {
+          "text": "Voy a la playa.",
+          "translation": "ビーチに行きます。"
+        },
+        {
+          "text": "Vamos a comer.",
+          "translation": "食べに行こう／食べましょう。"
+        }
+      ],
+      "forms": [
+        "voy",
+        "vas",
+        "va",
+        "vamos",
+        "vais",
+        "van"
+      ],
+      "notes": "a ＋ el は al に縮まる（Voy al parque.）。ir a ＋動詞の原形で「〜するつもりだ」（近い未来）を表す。",
+      "tags": [
+        "ステップ2",
+        "基本単語",
+        "動詞"
+      ]
+    },
+    {
+      "id": "es-v-querer",
+      "type": "vocab",
+      "term": "querer",
+      "reading": "ケレール",
+      "pos": "動詞（不規則・語幹母音変化）",
+      "meanings": [
+        "ほしい",
+        "〜したい（＋動詞の原形）",
+        "愛する"
+      ],
+      "examples": [
+        {
+          "text": "Quiero un café.",
+          "translation": "コーヒーがほしいです。"
+        },
+        {
+          "text": "Quiero ir a México.",
+          "translation": "メキシコに行きたい。"
+        }
+      ],
+      "forms": [
+        "quiero",
+        "quieres",
+        "quiere",
+        "queremos",
+        "queréis",
+        "quieren"
+      ],
+      "notes": "語幹の e が ie に変わる（nosotros・vosotros は変わらない）。人に対して Te quiero. は「好きだよ・愛してる」の意味。",
+      "tags": [
+        "ステップ2",
+        "基本単語",
+        "動詞"
+      ]
+    },
+    {
+      "id": "es-g-gender-feminine",
+      "type": "choice",
+      "question": "次のうち、女性名詞はどれ？",
+      "choices": [
+        "el día",
+        "el problema",
+        "la casa",
+        "el libro"
+      ],
+      "answer": 2,
+      "explanation": "casa は -a で終わる典型的な女性名詞。día と problema は -a で終わるが男性名詞の例外、libro は -o で終わる男性名詞。名詞は必ず冠詞ごと覚えるのがコツ。",
+      "tags": [
+        "ステップ3",
+        "基本文法",
+        "名詞の性・冠詞"
+      ]
+    },
+    {
+      "id": "es-g-article-agua",
+      "type": "choice",
+      "question": "「冷たい水」を正しく表しているのはどれ？",
+      "choices": [
+        "el agua fría",
+        "la agua fría",
+        "el agua frío",
+        "la agua frío"
+      ],
+      "answer": 0,
+      "explanation": "agua は女性名詞だが、アクセントのある a で始まるため単数では冠詞を el にする（発音しやすさのため）。名詞自体は女性のままなので、形容詞は女性形 fría。複数は las aguas frías。",
+      "tags": [
+        "ステップ3",
+        "基本文法",
+        "名詞の性・冠詞"
+      ]
+    },
+    {
+      "id": "es-g-article-los",
+      "type": "cloze",
+      "text": "{{Los}} libros están en la mesa.",
+      "translation": "（その）本は机の上にあります。",
+      "hint": "定冠詞",
+      "explanation": "libros は男性名詞 libro の複数形なので、定冠詞は los。定冠詞は el（男・単）／la（女・単）／los（男・複）／las（女・複）の 4 つ。",
+      "tags": [
+        "ステップ3",
+        "基本文法",
+        "名詞の性・冠詞"
+      ]
+    },
+    {
+      "id": "es-g-plural-ciudad",
+      "type": "choice",
+      "question": "la ciudad（都市）の複数形として正しいのはどれ？",
+      "choices": [
+        "las ciudads",
+        "los ciudades",
+        "la ciudades",
+        "las ciudades"
+      ],
+      "answer": 3,
+      "explanation": "子音で終わる名詞は -es を付けて複数形にする（ciudad → ciudades）。冠詞も女性複数の las にする。los は男性複数、la は単数なので合わない。",
+      "tags": [
+        "ステップ3",
+        "基本文法",
+        "名詞の性・冠詞"
+      ]
+    },
+    {
+      "id": "es-g-adjective-agreement",
+      "type": "cloze",
+      "text": "La casa es {{blanca}}.",
+      "translation": "その家は白い。",
+      "hint": "blanco（白い）を正しい形にする",
+      "explanation": "形容詞は修飾する名詞の性・数に一致する。casa は女性単数なので blanco → blanca。男性名詞なら El coche es blanco.",
+      "tags": [
+        "ステップ3",
+        "基本文法",
+        "名詞の性・冠詞"
+      ]
+    },
+    {
+      "id": "es-g-ser-nationality",
+      "type": "choice",
+      "question": "「私は日本人です」: Yo ___ japonés.",
+      "choices": [
+        "estoy",
+        "soy",
+        "es",
+        "está"
+      ],
+      "answer": 1,
+      "explanation": "国籍・職業・性格など変わらない性質は ser で表し、yo の形は soy。estoy は estar（一時的な状態・場所）の形。es / está は 3 人称単数なので主語 yo に合わない。",
+      "tags": [
+        "ステップ3",
+        "基本文法",
+        "ser と estar"
+      ]
+    },
+    {
+      "id": "es-g-estar-state",
+      "type": "choice",
+      "question": "「私は疲れています」: Yo ___ cansado.",
+      "choices": [
+        "soy",
+        "es",
+        "estoy",
+        "son"
+      ],
+      "answer": 2,
+      "explanation": "疲れている・元気だ・怒っているなど一時的な状態は estar で表す。yo の形は estoy。Soy cansado. は誤り。女性が言うなら Estoy cansada.",
+      "tags": [
+        "ステップ3",
+        "基本文法",
+        "ser と estar"
+      ]
+    },
+    {
+      "id": "es-g-estar-location",
+      "type": "choice",
+      "question": "「マドリードはスペインにあります」: Madrid ___ en España.",
+      "choices": [
+        "es",
+        "son",
+        "están",
+        "está"
+      ],
+      "answer": 3,
+      "explanation": "（人や物・場所の）所在地は estar で表す。主語 Madrid は 3 人称単数なので está。es は性質を表す ser の形、son / están は複数形。",
+      "tags": [
+        "ステップ3",
+        "基本文法",
+        "ser と estar"
+      ]
+    },
+    {
+      "id": "es-g-ser-profession",
+      "type": "cloze",
+      "text": "Mi padre {{es}} médico.",
+      "translation": "私の父は医者です。",
+      "hint": "ser か estar を正しい形にする",
+      "explanation": "職業は ser で表す。主語 mi padre は 3 人称単数なので es。職業の前には冠詞を付けない（es un médico とはふつう言わない）。",
+      "tags": [
+        "ステップ3",
+        "基本文法",
+        "ser と estar"
+      ]
+    },
+    {
+      "id": "es-g-hablar-yo",
+      "type": "cloze",
+      "text": "Yo {{hablo}} japonés.",
+      "translation": "私は日本語を話します。",
+      "hint": "hablar を正しい形にする",
+      "explanation": "-ar 動詞の yo の形は語尾 -ar を -o に変える（hablar → hablo）。主語の yo は省略して Hablo japonés. と言うことも多い。",
+      "tags": [
+        "ステップ3",
+        "基本文法",
+        "動詞の現在形"
+      ]
+    },
+    {
+      "id": "es-g-hablar-el",
+      "type": "choice",
+      "question": "hablar の él / ella / usted の形はどれ？",
+      "choices": [
+        "hablo",
+        "hablas",
+        "habla",
+        "hablan"
+      ],
+      "answer": 2,
+      "explanation": "-ar 動詞の 3 人称単数は -a（habla）。hablo は yo、hablas は tú、hablan は ellos / ustedes の形。usted（あなた）は意味は 2 人称でも 3 人称の形を使う点に注意。",
+      "tags": [
+        "ステップ3",
+        "基本文法",
+        "動詞の現在形"
+      ]
+    },
+    {
+      "id": "es-g-beber-tu",
+      "type": "choice",
+      "question": "「君はコーヒーを飲む？」: ¿Tú ___ café?",
+      "choices": [
+        "bebe",
+        "bebes",
+        "bebo",
+        "beben"
+      ],
+      "answer": 1,
+      "explanation": "-er 動詞の tú の形は -es（beber → bebes）。bebe は él / usted、bebo は yo、beben は ellos の形。tú の形は -ar 動詞なら -as、-er・-ir 動詞なら -es と覚える。",
+      "tags": [
+        "ステップ3",
+        "基本文法",
+        "動詞の現在形"
+      ]
+    },
+    {
+      "id": "es-g-comer-ellos",
+      "type": "cloze",
+      "text": "Ellos {{comen}} pan por la mañana.",
+      "translation": "彼らは朝パンを食べます。",
+      "hint": "comer を正しい形にする",
+      "explanation": "-er 動詞の ellos / ellas / ustedes の形は -en（comer → comen）。-ar 動詞なら -an（hablan）になる。",
+      "tags": [
+        "ステップ3",
+        "基本文法",
+        "動詞の現在形"
+      ]
+    },
+    {
+      "id": "es-g-vivir-nosotros",
+      "type": "choice",
+      "question": "「私たちは東京に住んでいます」: Nosotros ___ en Tokio.",
+      "choices": [
+        "vivimos",
+        "vivemos",
+        "viven",
+        "vivís"
+      ],
+      "answer": 0,
+      "explanation": "-ir 動詞の nosotros の形は -imos（vivir → vivimos）。vivemos は -er 動詞の語尾を付けた誤り、viven は ellos、vivís は vosotros の形。",
+      "tags": [
+        "ステップ3",
+        "基本文法",
+        "動詞の現在形"
+      ]
+    },
+    {
+      "id": "es-g-tener-yo",
+      "type": "cloze",
+      "text": "Yo {{tengo}} dos hermanos.",
+      "translation": "私には兄弟が 2 人います。",
+      "hint": "tener を正しい形にする",
+      "explanation": "tener（持っている）は不規則動詞で、yo の形は tengo。活用は tengo, tienes, tiene, tenemos, tenéis, tienen（tú・él・ellos では e が ie に変わる）。",
+      "tags": [
+        "ステップ3",
+        "基本文法",
+        "tener"
+      ]
+    },
+    {
+      "id": "es-g-tener-tu-age",
+      "type": "choice",
+      "question": "「君は何歳？」: ¿Cuántos años ___ tú?",
+      "choices": [
+        "tengo",
+        "tiene",
+        "tenemos",
+        "tienes"
+      ],
+      "answer": 3,
+      "explanation": "年齢は tener で表し、tú の形は tienes。tengo は yo、tiene は él / usted、tenemos は nosotros の形。",
+      "tags": [
+        "ステップ3",
+        "基本文法",
+        "tener"
+      ]
+    },
+    {
+      "id": "es-g-tener-hambre",
+      "type": "choice",
+      "question": "「お腹がすいています」を正しく表しているのはどれ？",
+      "choices": [
+        "Estoy hambre.",
+        "Tengo hambre.",
+        "Soy hambre.",
+        "Hay hambre."
+      ],
+      "answer": 1,
+      "explanation": "空腹は「空腹を持っている」と tener ＋名詞 hambre で表す。同じ形に Tengo sed.（のどが渇いた）、Tengo frío.（寒い）、Tengo sueño.（眠い）がある。hambre は名詞なので estar や ser とは結び付かない。",
+      "tags": [
+        "ステップ3",
+        "基本文法",
+        "tener"
+      ]
+    },
+    {
+      "id": "es-g-gustar-singular",
+      "type": "choice",
+      "question": "「私はコーヒーが好きです」: Me ___ el café.",
+      "choices": [
+        "gusta",
+        "gusto",
+        "gustan",
+        "gustas"
+      ],
+      "answer": 0,
+      "explanation": "gustar は「〜が（人に）気に入る」という意味で、好きな物（el café）が主語になる。主語が単数なので gusta。me は「私に」。gusto は「私は気に入る」の形になってしまう。",
+      "tags": [
+        "ステップ3",
+        "基本文法",
+        "gustar"
+      ]
+    },
+    {
+      "id": "es-g-gustar-plural",
+      "type": "cloze",
+      "text": "Me {{gustan}} los gatos.",
+      "translation": "私は猫が好きです。",
+      "hint": "gustar を正しい形にする",
+      "explanation": "好きな物 los gatos が複数なので gustan になる。好きな物が単数・動詞の原形なら gusta（Me gusta bailar.＝踊るのが好き）。",
+      "tags": [
+        "ステップ3",
+        "基本文法",
+        "gustar"
+      ]
+    },
+    {
+      "id": "es-g-gustar-te",
+      "type": "choice",
+      "question": "「君は音楽が好き？」: ¿___ gusta la música?（「君」は tú）",
+      "choices": [
+        "Me",
+        "Le",
+        "Te",
+        "Nos"
+      ],
+      "answer": 2,
+      "explanation": "「君に」は te なので ¿Te gusta la música?。me は「私に」、le は「彼・彼女・あなた（usted）に」、nos は「私たちに」。答えは Sí, me gusta.（はい、好き）。",
+      "tags": [
+        "ステップ3",
+        "基本文法",
+        "gustar"
+      ]
+    }
+  ]
+}

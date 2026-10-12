@@ -1,0 +1,1792 @@
+{
+  "format": "lllm-study-pack",
+  "version": 1,
+  "id": "en-collocations-100",
+  "title": "自然な英語のコロケーション 100",
+  "description": "英語らしい「ことばの組み合わせ」（コロケーション）100 個を、4 つのステップで身につけます。ステップ1 は make / do / take / have ＋名詞（make a mistake・do research など）、ステップ2 は形容詞＋名詞（heavy rain・strong coffee など）、ステップ3 は動詞＋名詞（meet a deadline・raise a question など）、ステップ4 は副詞＋形容詞（highly likely など）。各ステップで、まずフレーズを意味・使う場面・例文で覚え、次に穴埋めで書けるか確かめ、最後に「どちらが自然？」の選択問題で日本人がしがちな誤り（×do a mistake・×strong rain など）を見分けます。内訳はフレーズ 60・穴埋め 25（訳つき）・選択問題 15。前に「英語の基本動詞 40」で make / take などの基本動詞のイメージをつかんでおくと理解しやすくなります。次は「よく使う英語のイディオム 80」や「よく使う句動詞 30」で表現の幅を広げ、「英語の長文読解 中級 40」で実際の文章の中のコロケーションに出会ってみましょう。",
+  "subject": "english",
+  "language": {
+    "target": "en",
+    "explanation": "ja"
+  },
+  "level": "中級（CEFR B1〜B2）",
+  "tags": [
+    "英語",
+    "コロケーション",
+    "語法",
+    "中級"
+  ],
+  "author": "LLLM-Study",
+  "license": "MIT",
+  "source": "LLLM-Study オリジナル（AI を利用して作成）",
+  "revision": 1,
+  "items": [
+    {
+      "id": "col-make-a-mistake",
+      "type": "phrase",
+      "tags": [
+        "ステップ1",
+        "make・do・take・have",
+        "フレーズ"
+      ],
+      "phrase": "make a mistake",
+      "meaning": "間違える・ミスをする",
+      "situation": "失敗やミスを認めるとき・相手をなぐさめるとき",
+      "examples": [
+        {
+          "text": "I made a mistake in the email address.",
+          "translation": "メールアドレスを間違えてしまった。"
+        },
+        {
+          "text": "Everyone makes mistakes when they learn a language.",
+          "translation": "言語を学ぶときは誰でも間違えるものだ。"
+        }
+      ],
+      "notes": "×do a mistake は日本人に多い誤り。make は「何かを作り出す」動詞で、ミスも「作り出してしまうもの」と考える。大きなミスは make a big mistake / a serious mistake。"
+    },
+    {
+      "id": "col-make-a-decision",
+      "type": "phrase",
+      "tags": [
+        "ステップ1",
+        "make・do・take・have",
+        "フレーズ"
+      ],
+      "phrase": "make a decision",
+      "meaning": "決断する・決定を下す",
+      "situation": "仕事や生活で何かを決めるとき",
+      "examples": [
+        {
+          "text": "We need to make a decision by Friday.",
+          "translation": "金曜日までに決断しなければならない。"
+        },
+        {
+          "text": "It was a hard decision to make.",
+          "translation": "それは難しい決断だった。"
+        }
+      ],
+      "notes": "×do a decision とは言わない。イギリス英語では take a decision も使われるが、まずは make a decision を覚えれば十分。動詞 decide で言い換えられる。"
+    },
+    {
+      "id": "col-make-an-effort",
+      "type": "phrase",
+      "tags": [
+        "ステップ1",
+        "make・do・take・have",
+        "フレーズ"
+      ],
+      "phrase": "make an effort",
+      "meaning": "努力する",
+      "situation": "がんばる・歩み寄る姿勢を示すとき",
+      "examples": [
+        {
+          "text": "She made an effort to speak only English in class.",
+          "translation": "彼女は授業中、英語だけで話すよう努力した。"
+        },
+        {
+          "text": "Thanks for making the effort to come.",
+          "translation": "わざわざ来てくれてありがとう。"
+        }
+      ],
+      "notes": "×do an effort は誤り。「たいへん努力する」は make a great effort / make every effort。to 不定詞を続けて「〜しようと努力する」。"
+    },
+    {
+      "id": "col-make-progress",
+      "type": "phrase",
+      "tags": [
+        "ステップ1",
+        "make・do・take・have",
+        "フレーズ"
+      ],
+      "phrase": "make progress",
+      "meaning": "進歩する・はかどる",
+      "situation": "勉強や仕事の進み具合を話すとき",
+      "examples": [
+        {
+          "text": "You've made a lot of progress with your English.",
+          "translation": "英語がずいぶん上達しましたね。"
+        },
+        {
+          "text": "We're making good progress on the project.",
+          "translation": "プロジェクトは順調に進んでいる。"
+        }
+      ],
+      "notes": "progress は数えられない名詞なので ×make a progress / ×progresses は誤り。「大きく進歩する」は make great progress。"
+    },
+    {
+      "id": "col-make-a-reservation",
+      "type": "phrase",
+      "tags": [
+        "ステップ1",
+        "make・do・take・have",
+        "フレーズ"
+      ],
+      "phrase": "make a reservation",
+      "meaning": "予約する",
+      "situation": "レストラン・ホテルなどを予約するとき",
+      "examples": [
+        {
+          "text": "I'd like to make a reservation for two at seven.",
+          "translation": "7 時に 2 名で予約をお願いしたいのですが。"
+        }
+      ],
+      "notes": "×do a reservation は誤り。book a table / book a room とも言う。病院や美容院の「予約」は appointment を使い make an appointment。"
+    },
+    {
+      "id": "col-make-money",
+      "type": "phrase",
+      "tags": [
+        "ステップ1",
+        "make・do・take・have",
+        "フレーズ"
+      ],
+      "phrase": "make money",
+      "meaning": "お金を稼ぐ・もうける",
+      "situation": "収入や商売のもうけについて話すとき",
+      "examples": [
+        {
+          "text": "He makes money by selling old books online.",
+          "translation": "彼は古本をネットで売ってお金を稼いでいる。"
+        }
+      ],
+      "notes": "money は数えられない名詞なので ×make a money は誤り。earn money も同じ意味だが、make money のほうが口語的。「大金をもうける」は make a lot of money。"
+    },
+    {
+      "id": "col-do-homework",
+      "type": "phrase",
+      "tags": [
+        "ステップ1",
+        "make・do・take・have",
+        "フレーズ"
+      ],
+      "phrase": "do one's homework",
+      "meaning": "宿題をする",
+      "situation": "学校の課題について話すとき",
+      "examples": [
+        {
+          "text": "I always do my homework before dinner.",
+          "translation": "私はいつも夕食前に宿題をする。"
+        }
+      ],
+      "notes": "×make homework は誤り。do は「作業・仕事をこなす」ときに使う。homework は数えられない名詞なので ×homeworks も誤り。比喩で「下調べをする」の意味にもなる。"
+    },
+    {
+      "id": "col-do-the-dishes",
+      "type": "phrase",
+      "tags": [
+        "ステップ1",
+        "make・do・take・have",
+        "フレーズ"
+      ],
+      "phrase": "do the dishes",
+      "meaning": "皿洗いをする",
+      "situation": "家事の分担を話すとき",
+      "examples": [
+        {
+          "text": "I'll do the dishes if you cook.",
+          "translation": "あなたが料理するなら、私が皿洗いをするよ。"
+        }
+      ],
+      "notes": "家事には do を使うことが多い（do the laundry「洗濯をする」、do the shopping「買い物をする」）。wash the dishes とも言う。"
+    },
+    {
+      "id": "col-do-business",
+      "type": "phrase",
+      "tags": [
+        "ステップ1",
+        "make・do・take・have",
+        "フレーズ"
+      ],
+      "phrase": "do business (with 〜)",
+      "meaning": "（〜と）取引する・商売をする",
+      "situation": "会社どうしの取引や商売について話すとき",
+      "examples": [
+        {
+          "text": "We've been doing business with them for ten years.",
+          "translation": "彼らとは 10 年間取引をしている。"
+        }
+      ],
+      "notes": "×make business は誤り。business は「商売」の意味では数えられない名詞で、冠詞を付けない。It's a pleasure doing business with you.（お取引できて光栄です）は決まり文句。"
+    },
+    {
+      "id": "col-do-a-favor",
+      "type": "phrase",
+      "tags": [
+        "ステップ1",
+        "make・do・take・have",
+        "フレーズ"
+      ],
+      "phrase": "do 〜 a favor",
+      "meaning": "〜の頼みを聞く・〜に親切にする",
+      "situation": "人にお願いごとをするとき",
+      "examples": [
+        {
+          "text": "Could you do me a favor?",
+          "translation": "ちょっとお願いがあるんだけど。"
+        },
+        {
+          "text": "He did me a big favor.",
+          "translation": "彼は大きな手助けをしてくれた。"
+        }
+      ],
+      "notes": "×make me a favor は誤り。Could you do me a favor? は頼みごとの前置きの定番で、ていねいに言うなら Could I ask you a favor? も使える。イギリス英語のつづりは favour。"
+    },
+    {
+      "id": "col-do-research",
+      "type": "phrase",
+      "tags": [
+        "ステップ1",
+        "make・do・take・have",
+        "フレーズ"
+      ],
+      "phrase": "do research (on 〜)",
+      "meaning": "（〜について）研究する・調査する",
+      "situation": "調べもの・研究について話すとき",
+      "examples": [
+        {
+          "text": "She is doing research on climate change.",
+          "translation": "彼女は気候変動の研究をしている。"
+        }
+      ],
+      "notes": "research は数えられない名詞なので ×do a research / ×researches は避ける。「少し調べる」は do some research。conduct research はかたい言い方。"
+    },
+    {
+      "id": "col-take-a-break",
+      "type": "phrase",
+      "tags": [
+        "ステップ1",
+        "make・do・take・have",
+        "フレーズ"
+      ],
+      "phrase": "take a break",
+      "meaning": "休憩する",
+      "situation": "仕事や勉強の途中でひと休みするとき",
+      "examples": [
+        {
+          "text": "Let's take a ten-minute break.",
+          "translation": "10 分休憩しましょう。"
+        },
+        {
+          "text": "You look tired. Why don't you take a break?",
+          "translation": "疲れているようだね。ひと休みしたら？"
+        }
+      ],
+      "notes": "イギリス英語では have a break も使う。×do a break は誤り。「数字-minute」はハイフンでつなぎ、minute を単数にする点にも注意。"
+    },
+    {
+      "id": "col-take-a-look",
+      "type": "phrase",
+      "tags": [
+        "ステップ1",
+        "make・do・take・have",
+        "フレーズ"
+      ],
+      "phrase": "take a look (at 〜)",
+      "meaning": "（〜を）ちょっと見る",
+      "situation": "資料などを確認してもらう・確認するとき",
+      "examples": [
+        {
+          "text": "Could you take a look at this report?",
+          "translation": "この報告書にちょっと目を通してもらえますか。"
+        }
+      ],
+      "notes": "look at より「ちょっと見る・目を通す」感じが出る。イギリス英語では have a look も同じ意味。×see a look は誤り。"
+    },
+    {
+      "id": "col-take-notes",
+      "type": "phrase",
+      "tags": [
+        "ステップ1",
+        "make・do・take・have",
+        "フレーズ"
+      ],
+      "phrase": "take notes",
+      "meaning": "メモをとる・ノートをとる",
+      "situation": "授業・会議で書きとめるとき",
+      "examples": [
+        {
+          "text": "Please take notes during the meeting.",
+          "translation": "会議中はメモをとってください。"
+        }
+      ],
+      "notes": "日本語の「メモ」につられて ×write a memo としがちだが、memo は「社内連絡文書」の意味。「メモをとる」は take notes（複数形が普通）。"
+    },
+    {
+      "id": "col-take-medicine",
+      "type": "phrase",
+      "tags": [
+        "ステップ1",
+        "make・do・take・have",
+        "フレーズ"
+      ],
+      "phrase": "take medicine",
+      "meaning": "薬を飲む",
+      "situation": "薬の飲み方・服用について話すとき",
+      "examples": [
+        {
+          "text": "Take this medicine three times a day after meals.",
+          "translation": "この薬を 1 日 3 回、食後に飲んでください。"
+        }
+      ],
+      "notes": "×drink medicine は誤り。液体の薬でも錠剤でも take を使う。take a pill / take vitamins も同じ。"
+    },
+    {
+      "id": "col-take-a-shower",
+      "type": "phrase",
+      "tags": [
+        "ステップ1",
+        "make・do・take・have",
+        "フレーズ"
+      ],
+      "phrase": "take a shower",
+      "meaning": "シャワーを浴びる",
+      "situation": "日常の習慣を話すとき",
+      "examples": [
+        {
+          "text": "I usually take a shower in the morning.",
+          "translation": "ふだんは朝シャワーを浴びる。"
+        }
+      ],
+      "notes": "イギリス英語では have a shower もよく使う。×bathe a shower は誤り。お風呂なら take a bath（英 have a bath）。"
+    },
+    {
+      "id": "col-have-a-good-time",
+      "type": "phrase",
+      "tags": [
+        "ステップ1",
+        "make・do・take・have",
+        "フレーズ"
+      ],
+      "phrase": "have a good time",
+      "meaning": "楽しく過ごす",
+      "situation": "楽しかった経験を伝える・相手を送り出すとき",
+      "examples": [
+        {
+          "text": "We had a great time at the party.",
+          "translation": "パーティーはとても楽しかった。"
+        },
+        {
+          "text": "Have a good time in Hawaii!",
+          "translation": "ハワイ楽しんできてね！"
+        }
+      ],
+      "notes": "enjoy を使うなら目的語が必要で、×I enjoyed. ではなく I enjoyed myself. / I enjoyed the party. と言う。good の代わりに great / wonderful もよく使う。"
+    },
+    {
+      "id": "col-have-a-meeting",
+      "type": "phrase",
+      "tags": [
+        "ステップ1",
+        "make・do・take・have",
+        "フレーズ"
+      ],
+      "phrase": "have a meeting",
+      "meaning": "会議をする・会議がある",
+      "situation": "予定やスケジュールを伝えるとき",
+      "examples": [
+        {
+          "text": "I have a meeting with a client at three.",
+          "translation": "3 時に顧客との打ち合わせがある。"
+        }
+      ],
+      "notes": "日本語の「ミーティングする」につられて ×meeting（動詞）や ×do a meeting としない。正式に「開催する」は hold a meeting。"
+    },
+    {
+      "id": "col-c-make-mistakes",
+      "type": "cloze",
+      "tags": [
+        "ステップ1",
+        "make・do・take・have",
+        "穴埋め"
+      ],
+      "text": "Everyone {{makes}} mistakes. Don't worry about it.",
+      "translation": "誰だって間違えるものだよ。気にしないで。",
+      "hint": "make / do / take / have のどれかを、文に合う形で",
+      "explanation": "make a mistake で「間違える」。主語 Everyone は 3 人称単数なので makes。×does mistakes は典型的な誤り。"
+    },
+    {
+      "id": "col-c-do-favor",
+      "type": "cloze",
+      "tags": [
+        "ステップ1",
+        "make・do・take・have",
+        "穴埋め"
+      ],
+      "text": "Could you {{do}} me a favor? I need help moving this desk.",
+      "translation": "ちょっとお願いできる？この机を動かすのを手伝ってほしいんだ。",
+      "hint": "make / do / take / have のどれかを、文に合う形で",
+      "explanation": "do 〜 a favor で「〜の頼みを聞く」。make は使わない。"
+    },
+    {
+      "id": "col-c-take-medicine",
+      "type": "cloze",
+      "tags": [
+        "ステップ1",
+        "make・do・take・have",
+        "穴埋め"
+      ],
+      "text": "Don't forget to {{take}} your medicine after breakfast.",
+      "translation": "朝食後に薬を飲むのを忘れないでね。",
+      "hint": "make / do / take / have のどれかを、文に合う形で",
+      "explanation": "「薬を飲む」は take medicine。drink は使わない。"
+    },
+    {
+      "id": "col-c-did-homework",
+      "type": "cloze",
+      "tags": [
+        "ステップ1",
+        "make・do・take・have",
+        "穴埋め"
+      ],
+      "text": "I {{did}} my homework last night, but I left it at home.",
+      "translation": "昨夜宿題をやったのに、家に置いてきてしまった。",
+      "hint": "make / do / take / have のどれかを、文に合う形で",
+      "explanation": "宿題は do one's homework。last night があるので過去形 did。"
+    },
+    {
+      "id": "col-c-made-progress",
+      "type": "cloze",
+      "tags": [
+        "ステップ1",
+        "make・do・take・have",
+        "穴埋め"
+      ],
+      "text": "You've {{made}} great progress since April.",
+      "translation": "4 月からずいぶん進歩しましたね。",
+      "hint": "make / do / take / have のどれかを、文に合う形で",
+      "explanation": "make progress で「進歩する」。You've（現在完了）なので過去分詞 made。progress に a を付けない点も確認。"
+    },
+    {
+      "id": "col-c-had-time",
+      "type": "cloze",
+      "tags": [
+        "ステップ1",
+        "make・do・take・have",
+        "穴埋め"
+      ],
+      "text": "We {{had}} a wonderful time at the beach yesterday.",
+      "translation": "昨日は海辺でとても楽しく過ごした。",
+      "hint": "make / do / take / have のどれかを、文に合う形で",
+      "explanation": "have a good / wonderful time で「楽しく過ごす」。yesterday があるので過去形 had。"
+    },
+    {
+      "id": "col-c-did-research",
+      "type": "cloze",
+      "tags": [
+        "ステップ1",
+        "make・do・take・have",
+        "穴埋め"
+      ],
+      "text": "Before writing the report, I {{did}} some research on our competitors.",
+      "translation": "報告書を書く前に、競合他社について少し調べた。",
+      "hint": "make / do / take / have のどれかを、文に合う形で",
+      "explanation": "do research で「調査する」。research は数えられないので some research（×a research）。"
+    },
+    {
+      "id": "col-q-mistake",
+      "type": "choice",
+      "tags": [
+        "ステップ1",
+        "make・do・take・have",
+        "使い分け"
+      ],
+      "question": "「報告書でミスをしてしまった」として自然な英文は？",
+      "choices": [
+        "I did a mistake in the report.",
+        "I made a mistake in the report.",
+        "I took a mistake in the report.",
+        "I had a mistake in the report."
+      ],
+      "answer": 1,
+      "explanation": "ミスは make a mistake。do a mistake は日本人に多い誤りで、take・have も「ミスをする」の意味では使わない。"
+    },
+    {
+      "id": "col-q-medicine",
+      "type": "choice",
+      "tags": [
+        "ステップ1",
+        "make・do・take・have",
+        "使い分け"
+      ],
+      "question": "「朝食後に薬を飲む」として自然な英文は？",
+      "choices": [
+        "I drink my medicine after breakfast.",
+        "I eat my medicine after breakfast.",
+        "I do my medicine after breakfast.",
+        "I take my medicine after breakfast."
+      ],
+      "answer": 3,
+      "explanation": "薬は液体でも錠剤でも take。日本語の「飲む」につられて drink としないこと。eat・do も使わない。"
+    },
+    {
+      "id": "col-q-homework",
+      "type": "choice",
+      "tags": [
+        "ステップ1",
+        "make・do・take・have",
+        "使い分け"
+      ],
+      "question": "「夕食前に宿題をする」として自然な英文は？",
+      "choices": [
+        "I do my homework before dinner.",
+        "I make my homework before dinner.",
+        "I take my homework before dinner.",
+        "I have my homework before dinner."
+      ],
+      "answer": 0,
+      "explanation": "作業・課題をこなすのは do。make は「作り出す」、take は「取る」で、宿題には合わない。have my homework は「宿題を持っている・ある」の意味になり「する」にはならない。"
+    },
+    {
+      "id": "col-q-progress",
+      "type": "choice",
+      "tags": [
+        "ステップ1",
+        "make・do・take・have",
+        "使い分け"
+      ],
+      "question": "「ずいぶん進歩したね」として自然な英文は？",
+      "choices": [
+        "You've done a lot of progresses.",
+        "You've made a lot of progresses.",
+        "You've made a lot of progress.",
+        "You've taken a lot of progress."
+      ],
+      "answer": 2,
+      "explanation": "progress は数えられない名詞なので複数形にしない。動詞は make を使い make progress とする。"
+    },
+    {
+      "id": "col-q-favor",
+      "type": "choice",
+      "tags": [
+        "ステップ1",
+        "make・do・take・have",
+        "使い分け"
+      ],
+      "question": "「ちょっとお願いがあるんだけど」として自然な英文は？",
+      "choices": [
+        "Could you do me a favor?",
+        "Could you make me a favor?",
+        "Could you take me a favor?",
+        "Could you have me a favor?"
+      ],
+      "answer": 0,
+      "explanation": "頼みを聞くのは do 〜 a favor。ほかの動詞は使わない。ていねいにするなら Could I ask you a favor? も可。"
+    },
+    {
+      "id": "col-heavy-rain",
+      "type": "phrase",
+      "tags": [
+        "ステップ2",
+        "形容詞＋名詞",
+        "フレーズ"
+      ],
+      "phrase": "heavy rain",
+      "meaning": "大雨・激しい雨",
+      "situation": "天気について話すとき・天気予報",
+      "examples": [
+        {
+          "text": "Heavy rain is expected tonight.",
+          "translation": "今夜は大雨が予想されています。"
+        }
+      ],
+      "notes": "×strong rain は不自然。雨・雪の量が多いときは heavy（heavy snow「大雪」）。逆の「小雨」は light rain。"
+    },
+    {
+      "id": "col-strong-coffee",
+      "type": "phrase",
+      "tags": [
+        "ステップ2",
+        "形容詞＋名詞",
+        "フレーズ"
+      ],
+      "phrase": "strong coffee",
+      "meaning": "濃いコーヒー",
+      "situation": "飲み物の好みを伝えるとき",
+      "examples": [
+        {
+          "text": "I need a cup of strong coffee.",
+          "translation": "濃いコーヒーが 1 杯ほしい。"
+        }
+      ],
+      "notes": "×thick coffee / ×dark coffee は「濃い」の意味では使わない（dark roast は「深煎り」）。お茶も strong tea。「薄い」は weak coffee。"
+    },
+    {
+      "id": "col-heavy-traffic",
+      "type": "phrase",
+      "tags": [
+        "ステップ2",
+        "形容詞＋名詞",
+        "フレーズ"
+      ],
+      "phrase": "heavy traffic",
+      "meaning": "交通渋滞・多い交通量",
+      "situation": "遅刻の理由・道路の混み具合を話すとき",
+      "examples": [
+        {
+          "text": "Sorry I'm late. There was heavy traffic on the highway.",
+          "translation": "遅れてすみません。高速道路が渋滞していました。"
+        }
+      ],
+      "notes": "traffic は数えられない名詞なので ×many traffic は誤り。The traffic is heavy. とも言う。「交通量が少ない」は light traffic。traffic jam は「渋滞」そのもの。"
+    },
+    {
+      "id": "col-strong-wind",
+      "type": "phrase",
+      "tags": [
+        "ステップ2",
+        "形容詞＋名詞",
+        "フレーズ"
+      ],
+      "phrase": "strong wind",
+      "meaning": "強い風",
+      "situation": "天気について話すとき",
+      "examples": [
+        {
+          "text": "The strong wind knocked down several trees.",
+          "translation": "強風で何本も木が倒れた。"
+        }
+      ],
+      "notes": "雨は heavy だが、風は strong（天気予報では high winds も使う）。「弱い風・そよ風」は light wind / a gentle breeze。"
+    },
+    {
+      "id": "col-high-price",
+      "type": "phrase",
+      "tags": [
+        "ステップ2",
+        "形容詞＋名詞",
+        "フレーズ"
+      ],
+      "phrase": "a high price",
+      "meaning": "高い値段",
+      "situation": "値段・物価について話すとき",
+      "examples": [
+        {
+          "text": "The price of this watch is too high for me.",
+          "translation": "この時計の値段は私には高すぎる。"
+        }
+      ],
+      "notes": "expensive は「品物」が高いときに使う（This watch is expensive.）。price には high / low を使い、×expensive price は避ける。物価高は high prices。"
+    },
+    {
+      "id": "col-heavy-smoker",
+      "type": "phrase",
+      "tags": [
+        "ステップ2",
+        "形容詞＋名詞",
+        "フレーズ"
+      ],
+      "phrase": "a heavy smoker",
+      "meaning": "ヘビースモーカー・たばこをたくさん吸う人",
+      "situation": "健康や習慣について話すとき",
+      "examples": [
+        {
+          "text": "My father used to be a heavy smoker.",
+          "translation": "父は以前ヘビースモーカーだった。"
+        }
+      ],
+      "notes": "量が多いことを heavy で表す（a heavy drinker「大酒飲み」）。日本語でもそのまま使うので覚えやすい。"
+    },
+    {
+      "id": "col-close-friend",
+      "type": "phrase",
+      "tags": [
+        "ステップ2",
+        "形容詞＋名詞",
+        "フレーズ"
+      ],
+      "phrase": "a close friend",
+      "meaning": "親しい友人・親友",
+      "situation": "人間関係について話すとき",
+      "examples": [
+        {
+          "text": "She's one of my close friends from college.",
+          "translation": "彼女は大学時代からの親しい友人の一人です。"
+        }
+      ],
+      "notes": "×near friend は誤り。close は「（心理的に）近い」。最上級の one of my closest friends もよく使う。best friend は「一番の親友」。"
+    },
+    {
+      "id": "col-high-fever",
+      "type": "phrase",
+      "tags": [
+        "ステップ2",
+        "形容詞＋名詞",
+        "フレーズ"
+      ],
+      "phrase": "a high fever",
+      "meaning": "高熱",
+      "situation": "体調・病気について話すとき",
+      "examples": [
+        {
+          "text": "He has a high fever, so he's staying home today.",
+          "translation": "彼は高熱があるので、今日は家にいる。"
+        }
+      ],
+      "notes": "熱は high で表し、×big fever / ×hot fever は不自然。「熱がある」は have a fever（イギリス英語では have a temperature も）。"
+    },
+    {
+      "id": "col-serious-problem",
+      "type": "phrase",
+      "tags": [
+        "ステップ2",
+        "形容詞＋名詞",
+        "フレーズ"
+      ],
+      "phrase": "a serious problem",
+      "meaning": "深刻な問題",
+      "situation": "問題の大きさを伝えるとき",
+      "examples": [
+        {
+          "text": "Air pollution is a serious problem in many cities.",
+          "translation": "大気汚染は多くの都市で深刻な問題だ。"
+        }
+      ],
+      "notes": "×heavy problem は不自然。深刻さは serious で表す（a serious illness「重い病気」、a serious mistake「重大な誤り」）。big problem はくだけた言い方。"
+    },
+    {
+      "id": "col-bad-cold",
+      "type": "phrase",
+      "tags": [
+        "ステップ2",
+        "形容詞＋名詞",
+        "フレーズ"
+      ],
+      "phrase": "a bad cold",
+      "meaning": "ひどい風邪",
+      "situation": "体調・欠席の理由を伝えるとき",
+      "examples": [
+        {
+          "text": "I've got a bad cold, so I can't come to work today.",
+          "translation": "ひどい風邪をひいたので、今日は出社できません。"
+        }
+      ],
+      "notes": "×strong cold は誤り。病気の程度は bad で表す（a bad headache「ひどい頭痛」）。イギリス英語では a heavy cold とも言う。"
+    },
+    {
+      "id": "col-tough-decision",
+      "type": "phrase",
+      "tags": [
+        "ステップ2",
+        "形容詞＋名詞",
+        "フレーズ"
+      ],
+      "phrase": "a tough decision",
+      "meaning": "難しい決断・苦しい決断",
+      "situation": "迷う・悩む状況を話すとき",
+      "examples": [
+        {
+          "text": "Closing the store was a tough decision.",
+          "translation": "店を閉めるのは苦しい決断だった。"
+        }
+      ],
+      "notes": "tough は「骨の折れる・つらい」。a difficult decision / a hard decision もほぼ同じ意味。動詞は make を使い make a tough decision。"
+    },
+    {
+      "id": "col-wide-range",
+      "type": "phrase",
+      "tags": [
+        "ステップ2",
+        "形容詞＋名詞",
+        "フレーズ"
+      ],
+      "phrase": "a wide range (of 〜)",
+      "meaning": "幅広い（〜）・さまざまな（〜）",
+      "situation": "品ぞろえや種類の多さを伝えるとき",
+      "examples": [
+        {
+          "text": "The store sells a wide range of products.",
+          "translation": "その店は幅広い商品を販売している。"
+        }
+      ],
+      "notes": "range（範囲）には wide / broad が合い、×big range はあまり使わない。ビジネス文書で頻出。a wide variety of 〜 も同じ意味。"
+    },
+    {
+      "id": "col-sharp-increase",
+      "type": "phrase",
+      "tags": [
+        "ステップ2",
+        "形容詞＋名詞",
+        "フレーズ"
+      ],
+      "phrase": "a sharp increase",
+      "meaning": "急増・急な上昇",
+      "situation": "数値の変化を説明するとき（グラフ・報告）",
+      "examples": [
+        {
+          "text": "There was a sharp increase in sales last month.",
+          "translation": "先月は売上が急増した。"
+        }
+      ],
+      "notes": "sharp は「急な・鋭い」。逆は a sharp decrease / a sharp drop（急減）。ゆるやかな変化は a gradual increase。グラフの説明で必須。"
+    },
+    {
+      "id": "col-large-amount",
+      "type": "phrase",
+      "tags": [
+        "ステップ2",
+        "形容詞＋名詞",
+        "フレーズ"
+      ],
+      "phrase": "a large amount of 〜",
+      "meaning": "大量の〜（数えられない名詞）",
+      "situation": "量の多さを伝えるとき",
+      "examples": [
+        {
+          "text": "The project needs a large amount of money.",
+          "translation": "そのプロジェクトには多額の資金が必要だ。"
+        }
+      ],
+      "notes": "amount には large / small を使い、×many amount は誤り。後ろは数えられない名詞（money, time, water など）。数えられる名詞なら a large number of 〜。"
+    },
+    {
+      "id": "col-c-heavy-rain",
+      "type": "cloze",
+      "tags": [
+        "ステップ2",
+        "形容詞＋名詞",
+        "穴埋め"
+      ],
+      "text": "There was {{heavy}} rain last night, so the river rose.",
+      "translation": "昨夜は大雨だったので、川の水位が上がった。",
+      "hint": "h で始まる形容詞（5 文字）",
+      "explanation": "雨の量が多いときは heavy。strong rain とは言わない。"
+    },
+    {
+      "id": "col-c-strong-coffee",
+      "type": "cloze",
+      "tags": [
+        "ステップ2",
+        "形容詞＋名詞",
+        "穴埋め"
+      ],
+      "text": "I need a cup of {{strong}} coffee to wake up.",
+      "translation": "目を覚ますのに濃いコーヒーが 1 杯ほしい。",
+      "hint": "s で始まる形容詞（6 文字）",
+      "explanation": "コーヒーやお茶が「濃い」は strong、「薄い」は weak。"
+    },
+    {
+      "id": "col-c-traffic",
+      "type": "cloze",
+      "tags": [
+        "ステップ2",
+        "形容詞＋名詞",
+        "穴埋め"
+      ],
+      "text": "The {{traffic}} was heavy, so I was twenty minutes late.",
+      "translation": "道が混んでいたので、20 分遅刻した。",
+      "hint": "「交通」を表す名詞",
+      "explanation": "「交通量が多い」は The traffic is heavy.。traffic は数えられない名詞。"
+    },
+    {
+      "id": "col-c-close-friend",
+      "type": "cloze",
+      "tags": [
+        "ステップ2",
+        "形容詞＋名詞",
+        "穴埋め"
+      ],
+      "text": "Ken and I have been {{close}} friends since elementary school.",
+      "translation": "ケンと私は小学校のころから親しい友人だ。",
+      "hint": "c で始まる形容詞（5 文字）",
+      "explanation": "「親しい友人」は close friends。near は使わない。"
+    },
+    {
+      "id": "col-c-high-fever",
+      "type": "cloze",
+      "tags": [
+        "ステップ2",
+        "形容詞＋名詞",
+        "穴埋め"
+      ],
+      "text": "She has a {{high}} fever and a sore throat.",
+      "translation": "彼女は高熱があり、のどが痛い。",
+      "hint": "h で始まる形容詞",
+      "explanation": "熱の高さは high で表す。big や hot は使わない。"
+    },
+    {
+      "id": "col-c-sharp-increase",
+      "type": "cloze",
+      "tags": [
+        "ステップ2",
+        "形容詞＋名詞",
+        "穴埋め"
+      ],
+      "text": "The graph shows a {{sharp}} increase in online sales.",
+      "translation": "グラフはネット販売の急増を示している。",
+      "hint": "s で始まる形容詞（5 文字）",
+      "explanation": "「急な増加」は a sharp increase。ゆるやかなら gradual。"
+    },
+    {
+      "id": "col-q-price",
+      "type": "choice",
+      "tags": [
+        "ステップ2",
+        "形容詞＋名詞",
+        "使い分け"
+      ],
+      "question": "「この時計の値段は高い」として自然な英文は？",
+      "choices": [
+        "The price of this watch is expensive.",
+        "The price of this watch is tall.",
+        "The price of this watch is high.",
+        "The price of this watch is big."
+      ],
+      "answer": 2,
+      "explanation": "price（値段）には high / low を使う。expensive は品物について This watch is expensive. と言う。tall は背の高さ、big は大きさで、値段には使わない。"
+    },
+    {
+      "id": "col-q-cold",
+      "type": "choice",
+      "tags": [
+        "ステップ2",
+        "形容詞＋名詞",
+        "使い分け"
+      ],
+      "question": "「ひどい風邪をひいている」として自然な英文は？",
+      "choices": [
+        "I have a strong cold.",
+        "I have a bad cold.",
+        "I have a hard cold.",
+        "I have a deep cold."
+      ],
+      "answer": 1,
+      "explanation": "病気の程度は bad で表す。strong・hard・deep は cold と組み合わせない。"
+    },
+    {
+      "id": "col-q-friend",
+      "type": "choice",
+      "tags": [
+        "ステップ2",
+        "形容詞＋名詞",
+        "使い分け"
+      ],
+      "question": "「彼は私の親しい友人です」として自然な英文は？",
+      "choices": [
+        "He is a near friend of mine.",
+        "He is a short friend of mine.",
+        "He is a nearby friend of mine.",
+        "He is a close friend of mine."
+      ],
+      "answer": 3,
+      "explanation": "心理的な近さは close。near・nearby は物理的な距離に使い、「親しい友人」の意味にはならない。short は「背が低い」。"
+    },
+    {
+      "id": "col-q-traffic",
+      "type": "choice",
+      "tags": [
+        "ステップ2",
+        "形容詞＋名詞",
+        "使い分け"
+      ],
+      "question": "「今朝は交通量が多かった」として自然な英文は？",
+      "choices": [
+        "The traffic was heavy this morning.",
+        "The traffic was many this morning.",
+        "The traffic was strong this morning.",
+        "The traffic was crowded this morning."
+      ],
+      "answer": 0,
+      "explanation": "traffic には heavy / light を使う。many は数えられる名詞の数、strong は力の強さ。crowded は The roads were crowded. のように場所について使う。"
+    },
+    {
+      "id": "col-raise-a-question",
+      "type": "phrase",
+      "tags": [
+        "ステップ3",
+        "動詞＋名詞",
+        "フレーズ"
+      ],
+      "phrase": "raise a question",
+      "meaning": "疑問を投げかける・問題を提起する",
+      "situation": "会議や議論で問題点を示すとき",
+      "examples": [
+        {
+          "text": "She raised an important question at the meeting.",
+          "translation": "彼女は会議で重要な問題を提起した。"
+        }
+      ],
+      "notes": "raise は「〜を上げる」（他動詞）。自動詞 rise（上がる）と混同して ×rise a question としない。raise a concern（懸念を示す）も頻出。"
+    },
+    {
+      "id": "col-meet-a-deadline",
+      "type": "phrase",
+      "tags": [
+        "ステップ3",
+        "動詞＋名詞",
+        "フレーズ"
+      ],
+      "phrase": "meet a deadline",
+      "meaning": "締め切りに間に合わせる・期限を守る",
+      "situation": "仕事の納期・課題の提出期限について話すとき",
+      "examples": [
+        {
+          "text": "We worked overtime to meet the deadline.",
+          "translation": "締め切りに間に合わせるために残業した。"
+        }
+      ],
+      "notes": "meet は「（条件・要求を）満たす」。逆の「締め切りに遅れる」は miss a deadline。×keep a deadline / ×follow a deadline は不自然。"
+    },
+    {
+      "id": "col-catch-a-cold",
+      "type": "phrase",
+      "tags": [
+        "ステップ3",
+        "動詞＋名詞",
+        "フレーズ"
+      ],
+      "phrase": "catch a cold",
+      "meaning": "風邪をひく",
+      "situation": "体調について話すとき",
+      "examples": [
+        {
+          "text": "Wear a coat, or you'll catch a cold.",
+          "translation": "コートを着ないと風邪をひくよ。"
+        }
+      ],
+      "notes": "「ひく」につられて ×pull a cold / ×take a cold としない。「ひいている」状態は have a cold。"
+    },
+    {
+      "id": "col-pay-attention",
+      "type": "phrase",
+      "tags": [
+        "ステップ3",
+        "動詞＋名詞",
+        "フレーズ"
+      ],
+      "phrase": "pay attention (to 〜)",
+      "meaning": "（〜に）注意を払う・よく聞く",
+      "situation": "注意をうながすとき",
+      "examples": [
+        {
+          "text": "Please pay attention to the safety instructions.",
+          "translation": "安全上の指示によく注意してください。"
+        }
+      ],
+      "notes": "attention には pay を使う（注意を「払う」と日本語と同じ発想）。give attention to も使われるが、「注意を払う」は pay attention to が圧倒的に一般的。attention は数えられない名詞。"
+    },
+    {
+      "id": "col-keep-a-promise",
+      "type": "phrase",
+      "tags": [
+        "ステップ3",
+        "動詞＋名詞",
+        "フレーズ"
+      ],
+      "phrase": "keep a promise",
+      "meaning": "約束を守る",
+      "situation": "信頼や約束について話すとき",
+      "examples": [
+        {
+          "text": "He always keeps his promises.",
+          "translation": "彼はいつも約束を守る。"
+        }
+      ],
+      "notes": "「守る」につられて ×protect a promise としない。「約束を破る」は break a promise。「約束する」は make a promise。"
+    },
+    {
+      "id": "col-tell-a-lie",
+      "type": "phrase",
+      "tags": [
+        "ステップ3",
+        "動詞＋名詞",
+        "フレーズ"
+      ],
+      "phrase": "tell a lie",
+      "meaning": "うそをつく",
+      "situation": "正直さについて話すとき",
+      "examples": [
+        {
+          "text": "I've never told a lie to my parents.",
+          "translation": "両親にうそをついたことは一度もない。"
+        }
+      ],
+      "notes": "×say a lie は誤り。動詞の lie（うそをつく）を使って He lied to me. とも言える。"
+    },
+    {
+      "id": "col-tell-the-truth",
+      "type": "phrase",
+      "tags": [
+        "ステップ3",
+        "動詞＋名詞",
+        "フレーズ"
+      ],
+      "phrase": "tell the truth",
+      "meaning": "本当のことを言う",
+      "situation": "正直に話すよう求める・打ち明けるとき",
+      "examples": [
+        {
+          "text": "Please tell me the truth.",
+          "translation": "本当のことを話して。"
+        },
+        {
+          "text": "To tell the truth, I don't like coffee.",
+          "translation": "実を言うと、コーヒーは好きじゃないんだ。"
+        }
+      ],
+      "notes": "lie と同じく tell を使う。To tell the truth（実を言うと）は文頭の決まり文句。the を付けるのが普通。"
+    },
+    {
+      "id": "col-give-a-presentation",
+      "type": "phrase",
+      "tags": [
+        "ステップ3",
+        "動詞＋名詞",
+        "フレーズ"
+      ],
+      "phrase": "give a presentation",
+      "meaning": "発表をする・プレゼンをする",
+      "situation": "会議・授業での発表について話すとき",
+      "examples": [
+        {
+          "text": "I have to give a presentation in English tomorrow.",
+          "translation": "明日、英語でプレゼンをしなければならない。"
+        }
+      ],
+      "notes": "make a presentation も同じ意味。presentation は名詞なので「プレゼンする」を ×presentation（動詞）としない。動詞なら present。"
+    },
+    {
+      "id": "col-solve-a-problem",
+      "type": "phrase",
+      "tags": [
+        "ステップ3",
+        "動詞＋名詞",
+        "フレーズ"
+      ],
+      "phrase": "solve a problem",
+      "meaning": "問題を解決する・問題を解く",
+      "situation": "トラブル対応や数学の問題について話すとき",
+      "examples": [
+        {
+          "text": "We need to work together to solve this problem.",
+          "translation": "この問題を解決するには協力する必要がある。"
+        }
+      ],
+      "notes": "solve は「解く・解決する」。×answer a problem は不自然（質問なら answer a question）。deal with a problem は「問題に対処する」。"
+    },
+    {
+      "id": "col-save-time",
+      "type": "phrase",
+      "tags": [
+        "ステップ3",
+        "動詞＋名詞",
+        "フレーズ"
+      ],
+      "phrase": "save time",
+      "meaning": "時間を節約する",
+      "situation": "効率や便利さを話すとき",
+      "examples": [
+        {
+          "text": "Online shopping saves a lot of time.",
+          "translation": "ネットショッピングはかなりの時間の節約になる。"
+        }
+      ],
+      "notes": "save は「節約する・ためる」（save money「お金をためる・節約する」）。save energy（省エネする）も頻出。"
+    },
+    {
+      "id": "col-waste-time",
+      "type": "phrase",
+      "tags": [
+        "ステップ3",
+        "動詞＋名詞",
+        "フレーズ"
+      ],
+      "phrase": "waste time",
+      "meaning": "時間を無駄にする",
+      "situation": "時間の使い方について話すとき",
+      "examples": [
+        {
+          "text": "Don't waste time worrying about small things.",
+          "translation": "小さなことを気にして時間を無駄にしないで。"
+        }
+      ],
+      "notes": "waste time (in) -ing で「〜して時間を無駄にする」。It's a waste of time.（時間の無駄だ）もよく使う。save time の反対。"
+    },
+    {
+      "id": "col-run-a-business",
+      "type": "phrase",
+      "tags": [
+        "ステップ3",
+        "動詞＋名詞",
+        "フレーズ"
+      ],
+      "phrase": "run a business",
+      "meaning": "事業を経営する・会社を経営する",
+      "situation": "仕事や経営について話すとき",
+      "examples": [
+        {
+          "text": "My aunt runs a small business in Osaka.",
+          "translation": "おばは大阪で小さな商売をしている。"
+        }
+      ],
+      "notes": "run には「経営する・運営する」の意味がある（run a hotel / run a restaurant）。manage も可だが、「自分で経営する」には run が一般的。"
+    },
+    {
+      "id": "col-reach-an-agreement",
+      "type": "phrase",
+      "tags": [
+        "ステップ3",
+        "動詞＋名詞",
+        "フレーズ"
+      ],
+      "phrase": "reach an agreement",
+      "meaning": "合意に達する",
+      "situation": "交渉・話し合いの結果を伝えるとき",
+      "examples": [
+        {
+          "text": "The two companies finally reached an agreement.",
+          "translation": "両社はついに合意に達した。"
+        }
+      ],
+      "notes": "reach は他動詞なので ×reach to an agreement とせず、前置詞なしで使う。come to an agreement も同じ意味。reach a conclusion（結論に達する）も同じ形。"
+    },
+    {
+      "id": "col-set-a-goal",
+      "type": "phrase",
+      "tags": [
+        "ステップ3",
+        "動詞＋名詞",
+        "フレーズ"
+      ],
+      "phrase": "set a goal",
+      "meaning": "目標を立てる・設定する",
+      "situation": "計画や目標について話すとき",
+      "examples": [
+        {
+          "text": "Set a clear goal before you start studying.",
+          "translation": "勉強を始める前に、はっきりした目標を立てよう。"
+        }
+      ],
+      "notes": "「目標を立てる」は set。「目標を達成する」は achieve / reach a goal。×make a goal は不自然。"
+    },
+    {
+      "id": "col-gain-weight",
+      "type": "phrase",
+      "tags": [
+        "ステップ3",
+        "動詞＋名詞",
+        "フレーズ"
+      ],
+      "phrase": "gain weight",
+      "meaning": "体重が増える・太る",
+      "situation": "体型・健康について話すとき",
+      "examples": [
+        {
+          "text": "I gained weight during the holidays.",
+          "translation": "休みの間に体重が増えた。"
+        }
+      ],
+      "notes": "put on weight も同じ意味（イギリス英語で多い）。「やせる」は lose weight。get fat は直接的で失礼に響くことがあるので、gain weight のほうが無難。"
+    },
+    {
+      "id": "col-commit-a-crime",
+      "type": "phrase",
+      "tags": [
+        "ステップ3",
+        "動詞＋名詞",
+        "フレーズ"
+      ],
+      "phrase": "commit a crime",
+      "meaning": "罪を犯す",
+      "situation": "ニュース・事件について話すとき",
+      "examples": [
+        {
+          "text": "He was accused of committing a serious crime.",
+          "translation": "彼は重大な罪を犯したとして告発された。"
+        }
+      ],
+      "notes": "犯罪や過ちを「犯す」は commit（commit suicide「自殺する」、commit an error「誤りを犯す」）。do a crime はくだけた言い方で、正式な文や報道では commit を使う。"
+    },
+    {
+      "id": "col-draw-a-conclusion",
+      "type": "phrase",
+      "tags": [
+        "ステップ3",
+        "動詞＋名詞",
+        "フレーズ"
+      ],
+      "phrase": "draw a conclusion",
+      "meaning": "結論を出す・結論を引き出す",
+      "situation": "データや議論から判断するとき",
+      "examples": [
+        {
+          "text": "It's too early to draw a conclusion from this data.",
+          "translation": "このデータから結論を出すのはまだ早い。"
+        }
+      ],
+      "notes": "draw は「引き出す」。reach a conclusion（結論に達する）もある。「早まった結論を出す」は jump to conclusions。"
+    },
+    {
+      "id": "col-follow-advice",
+      "type": "phrase",
+      "tags": [
+        "ステップ3",
+        "動詞＋名詞",
+        "フレーズ"
+      ],
+      "phrase": "follow one's advice",
+      "meaning": "〜の助言に従う",
+      "situation": "アドバイスを受けて行動したとき",
+      "examples": [
+        {
+          "text": "I followed my doctor's advice and started walking every day.",
+          "translation": "医者の助言に従って、毎日歩き始めた。"
+        }
+      ],
+      "notes": "take one's advice も同じ意味。advice は数えられない名詞なので ×an advice / ×advices は誤り。1 つなら a piece of advice。"
+    },
+    {
+      "id": "col-c-meet-deadline",
+      "type": "cloze",
+      "tags": [
+        "ステップ3",
+        "動詞＋名詞",
+        "穴埋め"
+      ],
+      "text": "If we work late tonight, we can {{meet}} the deadline.",
+      "translation": "今夜遅くまで働けば、締め切りに間に合う。",
+      "hint": "m で始まる動詞（4 文字）",
+      "explanation": "「締め切りに間に合わせる」は meet a deadline。逆は miss a deadline。"
+    },
+    {
+      "id": "col-c-pay-attention",
+      "type": "cloze",
+      "tags": [
+        "ステップ3",
+        "動詞＋名詞",
+        "穴埋め"
+      ],
+      "text": "Please {{pay}} attention to the safety instructions.",
+      "translation": "安全上の指示によく注意してください。",
+      "hint": "p で始まる動詞",
+      "explanation": "注意を「払う」は pay attention。日本語と同じ発想で覚えやすい。"
+    },
+    {
+      "id": "col-c-keep-promise",
+      "type": "cloze",
+      "tags": [
+        "ステップ3",
+        "動詞＋名詞",
+        "穴埋め"
+      ],
+      "text": "If you make a promise, you should {{keep}} it.",
+      "translation": "約束をしたら、守るべきだ。",
+      "hint": "k で始まる動詞",
+      "explanation": "約束を「守る」は keep、「破る」は break、「する」は make。"
+    },
+    {
+      "id": "col-c-told-lie",
+      "type": "cloze",
+      "tags": [
+        "ステップ3",
+        "動詞＋名詞",
+        "穴埋め"
+      ],
+      "text": "He {{told}} a lie about his age.",
+      "translation": "彼は年齢についてうそをついた。",
+      "hint": "t で始まる動詞の過去形",
+      "explanation": "「うそをつく」は tell a lie。過去形 told。×said a lie とは言わない。"
+    },
+    {
+      "id": "col-c-solve-problem",
+      "type": "cloze",
+      "tags": [
+        "ステップ3",
+        "動詞＋名詞",
+        "穴埋め"
+      ],
+      "text": "Can you help me {{solve}} this problem?",
+      "translation": "この問題を解決するのを手伝ってくれる？",
+      "hint": "s で始まる動詞（5 文字）",
+      "explanation": "「問題を解決する・解く」は solve a problem。help me に続くので原形。"
+    },
+    {
+      "id": "col-c-save-time",
+      "type": "cloze",
+      "tags": [
+        "ステップ3",
+        "動詞＋名詞",
+        "穴埋め"
+      ],
+      "text": "Taking the express train {{saves}} about thirty minutes.",
+      "translation": "急行に乗ると約 30 分節約できる。",
+      "hint": "s で始まる動詞",
+      "explanation": "「時間を節約する」は save time。主語は動名詞句（単数扱い）なので saves。"
+    },
+    {
+      "id": "col-c-reached-agreement",
+      "type": "cloze",
+      "tags": [
+        "ステップ3",
+        "動詞＋名詞",
+        "穴埋め"
+      ],
+      "text": "After long talks, the two sides {{reached}} an agreement.",
+      "translation": "長い話し合いの末、双方は合意に達した。",
+      "hint": "r で始まる動詞の過去形",
+      "explanation": "reach an agreement で「合意に達する」。reach の後ろに to は不要。"
+    },
+    {
+      "id": "col-c-draw-conclusion",
+      "type": "cloze",
+      "tags": [
+        "ステップ3",
+        "動詞＋名詞",
+        "穴埋め"
+      ],
+      "text": "Don't {{draw}} a conclusion until you have all the facts.",
+      "translation": "事実がすべてそろうまで結論を出してはいけない。",
+      "hint": "d で始まる動詞",
+      "explanation": "draw a conclusion で「結論を出す」。draw は「引き出す」。"
+    },
+    {
+      "id": "col-q-raise",
+      "type": "choice",
+      "tags": [
+        "ステップ3",
+        "動詞＋名詞",
+        "使い分け"
+      ],
+      "question": "「彼女は会議で重要な問題を提起した」として自然な英文は？",
+      "choices": [
+        "She rose an important question at the meeting.",
+        "She lifted an important question at the meeting.",
+        "She grew an important question at the meeting.",
+        "She raised an important question at the meeting."
+      ],
+      "answer": 3,
+      "explanation": "「問題を提起する」は raise a question。rose は自動詞 rise（上がる）の過去形で目的語をとれない。lift・grow は question と組み合わせない。"
+    },
+    {
+      "id": "col-q-catch-cold",
+      "type": "choice",
+      "tags": [
+        "ステップ3",
+        "動詞＋名詞",
+        "使い分け"
+      ],
+      "question": "「先週、風邪をひいた」として自然な英文は？",
+      "choices": [
+        "I took a cold last week.",
+        "I caught a cold last week.",
+        "I pulled a cold last week.",
+        "I drew a cold last week."
+      ],
+      "answer": 1,
+      "explanation": "「風邪をひく」は catch a cold。日本語の「ひく」につられて pull や draw としない。take も使わない。"
+    },
+    {
+      "id": "col-q-tell-lie",
+      "type": "choice",
+      "tags": [
+        "ステップ3",
+        "動詞＋名詞",
+        "使い分け"
+      ],
+      "question": "「彼はうそをついた」として自然な英文は？",
+      "choices": [
+        "He said a lie.",
+        "He spoke a lie.",
+        "He told a lie.",
+        "He talked a lie."
+      ],
+      "answer": 2,
+      "explanation": "lie（うそ）・truth（本当のこと）・story（話）には tell を使う。say・speak・talk は lie を目的語にしない。"
+    },
+    {
+      "id": "col-q-deadline",
+      "type": "choice",
+      "tags": [
+        "ステップ3",
+        "動詞＋名詞",
+        "使い分け"
+      ],
+      "question": "「締め切りに間に合わなかった」として自然な英文は？",
+      "choices": [
+        "We missed the deadline.",
+        "We lost the deadline.",
+        "We failed the deadline.",
+        "We dropped the deadline."
+      ],
+      "answer": 0,
+      "explanation": "締め切りに「間に合う」は meet、「間に合わない」は miss。lose・fail・drop は deadline と組み合わせない（fail to meet the deadline なら可）。"
+    },
+    {
+      "id": "col-highly-likely",
+      "type": "phrase",
+      "tags": [
+        "ステップ4",
+        "副詞＋形容詞",
+        "フレーズ"
+      ],
+      "phrase": "highly likely",
+      "meaning": "非常に可能性が高い",
+      "situation": "見通し・予測を述べるとき（報告・ニュース）",
+      "examples": [
+        {
+          "text": "It's highly likely that prices will rise next year.",
+          "translation": "来年は物価が上がる可能性が非常に高い。"
+        }
+      ],
+      "notes": "highly は「高く・非常に」で、likely / unlikely / successful / recommended などと組む。very likely でも通じるが、highly likely のほうが引きしまった表現。×high likely は誤り。"
+    },
+    {
+      "id": "col-deeply-moved",
+      "type": "phrase",
+      "tags": [
+        "ステップ4",
+        "副詞＋形容詞",
+        "フレーズ"
+      ],
+      "phrase": "deeply moved",
+      "meaning": "深く感動した",
+      "situation": "映画・話などに心を動かされたとき",
+      "examples": [
+        {
+          "text": "I was deeply moved by her speech.",
+          "translation": "彼女のスピーチに深く感動した。"
+        }
+      ],
+      "notes": "感情の深さは deeply（deeply grateful「心から感謝して」、deeply disappointed「ひどく失望して」）。moved は「感動した」。"
+    },
+    {
+      "id": "col-fully-aware",
+      "type": "phrase",
+      "tags": [
+        "ステップ4",
+        "副詞＋形容詞",
+        "フレーズ"
+      ],
+      "phrase": "fully aware (of 〜)",
+      "meaning": "（〜を）十分承知している",
+      "situation": "リスクや状況をわかっていると伝えるとき",
+      "examples": [
+        {
+          "text": "I'm fully aware of the risks.",
+          "translation": "そのリスクは十分承知しています。"
+        }
+      ],
+      "notes": "fully は「完全に・十分に」。well aware も同じ意味。ビジネスでも使えるややかたい表現。"
+    },
+    {
+      "id": "col-completely-different",
+      "type": "phrase",
+      "tags": [
+        "ステップ4",
+        "副詞＋形容詞",
+        "フレーズ"
+      ],
+      "phrase": "completely different",
+      "meaning": "まったく違う",
+      "situation": "違いを強調するとき",
+      "examples": [
+        {
+          "text": "The book and the movie are completely different.",
+          "translation": "その本と映画はまったく違う。"
+        }
+      ],
+      "notes": "completely / totally / entirely が different とよく組む。very different も自然だが、「まったく」と強調するなら completely。×highly different は不自然。"
+    },
+    {
+      "id": "col-bitterly-cold",
+      "type": "phrase",
+      "tags": [
+        "ステップ4",
+        "副詞＋形容詞",
+        "フレーズ"
+      ],
+      "phrase": "bitterly cold",
+      "meaning": "身を切るように寒い・ひどく寒い",
+      "situation": "厳しい寒さを伝えるとき",
+      "examples": [
+        {
+          "text": "It was bitterly cold in Sapporo this morning.",
+          "translation": "今朝の札幌は身を切るような寒さだった。"
+        }
+      ],
+      "notes": "bitterly は「激しく・ひどく」。cold・disappointed と組むことが多い。ただの very cold より寒さの厳しさが伝わる。"
+    },
+    {
+      "id": "col-seriously-injured",
+      "type": "phrase",
+      "tags": [
+        "ステップ4",
+        "副詞＋形容詞",
+        "フレーズ"
+      ],
+      "phrase": "seriously injured",
+      "meaning": "重傷を負った",
+      "situation": "事故のニュースなど",
+      "examples": [
+        {
+          "text": "Two people were seriously injured in the accident.",
+          "translation": "その事故で 2 人が重傷を負った。"
+        }
+      ],
+      "notes": "けがの重さは seriously / badly / severely で表す。軽いけがは slightly injured。×heavily injured は不自然。"
+    },
+    {
+      "id": "col-widely-used",
+      "type": "phrase",
+      "tags": [
+        "ステップ4",
+        "副詞＋形容詞",
+        "フレーズ"
+      ],
+      "phrase": "widely used",
+      "meaning": "広く使われている",
+      "situation": "普及の度合いを説明するとき",
+      "examples": [
+        {
+          "text": "English is widely used in international business.",
+          "translation": "英語は国際ビジネスで広く使われている。"
+        }
+      ],
+      "notes": "widely は「広く」（widely known「広く知られた」、widely available「広く手に入る」）。説明文やニュースで頻出。"
+    },
+    {
+      "id": "col-perfectly-normal",
+      "type": "phrase",
+      "tags": [
+        "ステップ4",
+        "副詞＋形容詞",
+        "フレーズ"
+      ],
+      "phrase": "perfectly normal",
+      "meaning": "まったく普通の・ごく当たり前の",
+      "situation": "相手を安心させるとき",
+      "examples": [
+        {
+          "text": "It's perfectly normal to feel nervous before an interview.",
+          "translation": "面接の前に緊張するのはごく当たり前のことだ。"
+        }
+      ],
+      "notes": "perfectly は「完璧に」だけでなく「まったく」の強調にも使う（perfectly clear「まったく明らかな」、perfectly fine「まったく問題ない」）。"
+    },
+    {
+      "id": "col-absolutely-delicious",
+      "type": "phrase",
+      "tags": [
+        "ステップ4",
+        "副詞＋形容詞",
+        "フレーズ"
+      ],
+      "phrase": "absolutely delicious",
+      "meaning": "すごくおいしい",
+      "situation": "料理をほめるとき",
+      "examples": [
+        {
+          "text": "This soup is absolutely delicious!",
+          "translation": "このスープ、本当においしい！"
+        }
+      ],
+      "notes": "delicious・amazing・terrible のような「もともと意味の強い」形容詞の強調には absolutely がよく合う。very delicious も使われるが、absolutely のほうが気持ちが伝わる。"
+    },
+    {
+      "id": "col-closely-related",
+      "type": "phrase",
+      "tags": [
+        "ステップ4",
+        "副詞＋形容詞",
+        "フレーズ"
+      ],
+      "phrase": "closely related",
+      "meaning": "密接に関係している",
+      "situation": "物事の関係を説明するとき",
+      "examples": [
+        {
+          "text": "Sleep and memory are closely related.",
+          "translation": "睡眠と記憶は密接に関係している。"
+        }
+      ],
+      "notes": "closely は「密接に・綿密に」（closely connected「密接につながった」）。×nearly related は誤り（nearly は「ほとんど」）。"
+    },
+    {
+      "id": "col-c-highly-likely",
+      "type": "cloze",
+      "tags": [
+        "ステップ4",
+        "副詞＋形容詞",
+        "穴埋め"
+      ],
+      "text": "It's {{highly}} likely that the meeting will be postponed.",
+      "translation": "会議が延期される可能性が非常に高い。",
+      "hint": "h で始まる副詞",
+      "explanation": "likely を強めるのは highly。high likely とは言わない。"
+    },
+    {
+      "id": "col-c-widely-used",
+      "type": "cloze",
+      "tags": [
+        "ステップ4",
+        "副詞＋形容詞",
+        "穴埋め"
+      ],
+      "text": "This app is {{widely}} used by students around the world.",
+      "translation": "このアプリは世界中の学生に広く使われている。",
+      "hint": "w で始まる副詞",
+      "explanation": "「広く使われている」は widely used。"
+    },
+    {
+      "id": "col-c-seriously-injured",
+      "type": "cloze",
+      "tags": [
+        "ステップ4",
+        "副詞＋形容詞",
+        "穴埋め"
+      ],
+      "text": "Fortunately, no one was {{seriously}} injured.",
+      "translation": "幸い、重傷者はいなかった。",
+      "hint": "s で始まる副詞（9 文字）",
+      "explanation": "けがの重さは seriously で表す。軽傷なら slightly injured。"
+    },
+    {
+      "id": "col-c-fully-aware",
+      "type": "cloze",
+      "tags": [
+        "ステップ4",
+        "副詞＋形容詞",
+        "穴埋め"
+      ],
+      "text": "We are {{fully}} aware of the problem and are working on it.",
+      "translation": "私たちはその問題を十分承知しており、対応中です。",
+      "hint": "f で始まる副詞（5 文字）",
+      "explanation": "「十分承知している」は fully aware。お知らせやおわびの文書でよく使う。"
+    },
+    {
+      "id": "col-q-different",
+      "type": "choice",
+      "tags": [
+        "ステップ4",
+        "副詞＋形容詞",
+        "使い分け"
+      ],
+      "question": "「私の意見は彼のとまったく違う」として自然な英文は？",
+      "choices": [
+        "My opinion is highly different from his.",
+        "My opinion is heavily different from his.",
+        "My opinion is strongly different from his.",
+        "My opinion is completely different from his."
+      ],
+      "answer": 3,
+      "explanation": "different を強めるのは completely / totally / entirely。highly・heavily・strongly は different と組み合わせない。"
+    },
+    {
+      "id": "col-q-bitterly",
+      "type": "choice",
+      "tags": [
+        "ステップ4",
+        "副詞＋形容詞",
+        "使い分け"
+      ],
+      "question": "「今日は身を切るように寒い」として自然な英文は？",
+      "choices": [
+        "It's heavily cold today.",
+        "It's bitterly cold today.",
+        "It's deeply cold today.",
+        "It's highly cold today."
+      ],
+      "answer": 1,
+      "explanation": "厳しい寒さは bitterly cold。heavily は量（雨・交通など）、deeply は感情、highly は可能性や評価に使い、cold とは組まない。"
+    }
+  ]
+}

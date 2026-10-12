@@ -1,0 +1,1551 @@
+{
+  "format": "lllm-study-pack",
+  "version": 1,
+  "id": "en-idioms-80",
+  "title": "よく使う英語のイディオム 80",
+  "description": "英語の会話やビジネスでよく使うイディオム（慣用句）70 個と、意味を確かめる選択問題 10 問の計 80 項目です。よく使うものから順に、ステップ1「日常会話の定番」（a piece of cake・break the ice・call it a day など）、ステップ2「仕事で使う」（touch base・keep me posted・a ballpark figure など）、ステップ3「気持ち・状況を表す」（the last straw・get cold feet・bite the bullet など）と進み、ステップ4 で意味を確認します。各イディオムには意味・使う場面・訳つきの例文と、くだけた表現か・職場で使えるかなどの使い分けのメモがあります。前に「自然な英語のコロケーション 100」や「よく使う句動詞 30」で語と語の組み合わせに慣れておくと理解しやすくなります。次は「英語の長文読解 中級 40」で、会話文やメールの中でイディオムやコロケーションがどう使われるかを確かめましょう。長文がまだ不安なら「英語の長文読解 入門 20」から始めるのがおすすめです。",
+  "subject": "english",
+  "language": {
+    "target": "en",
+    "explanation": "ja"
+  },
+  "level": "中級〜上級（CEFR B1〜B2）",
+  "tags": [
+    "英語",
+    "イディオム",
+    "英会話",
+    "ビジネス英語"
+  ],
+  "author": "LLLM-Study",
+  "license": "MIT",
+  "source": "LLLM-Study オリジナル（AI を利用して作成）",
+  "revision": 1,
+  "items": [
+    {
+      "id": "id-piece-of-cake",
+      "type": "phrase",
+      "tags": [
+        "ステップ1",
+        "日常会話の定番",
+        "イディオム"
+      ],
+      "phrase": "a piece of cake",
+      "meaning": "とても簡単なこと・朝飯前",
+      "situation": "試験や作業が簡単だったと言うとき",
+      "examples": [
+        {
+          "text": "The test was a piece of cake.",
+          "translation": "テストは楽勝だった。"
+        },
+        {
+          "text": "A: Can you fix it? B: Sure, it's a piece of cake.",
+          "translation": "A: 直せる？ B: もちろん、簡単だよ。"
+        }
+      ],
+      "notes": "くだけた会話向き。ビジネス文書では very easy / straightforward を使う。似た表現に It's a breeze. がある。"
+    },
+    {
+      "id": "id-break-the-ice",
+      "type": "phrase",
+      "tags": [
+        "ステップ1",
+        "日常会話の定番",
+        "イディオム"
+      ],
+      "phrase": "break the ice",
+      "meaning": "（初対面などの）緊張をほぐす・場をなごませる",
+      "situation": "初対面の人と話し始めるとき・会議の冒頭",
+      "examples": [
+        {
+          "text": "He told a funny story to break the ice.",
+          "translation": "彼は場をなごませるために面白い話をした。"
+        }
+      ],
+      "notes": "会話でもビジネスでも使える。場をなごませるための軽いゲームや話題を icebreaker と呼ぶ。"
+    },
+    {
+      "id": "id-call-it-a-day",
+      "type": "phrase",
+      "tags": [
+        "ステップ1",
+        "日常会話の定番",
+        "イディオム"
+      ],
+      "phrase": "call it a day",
+      "meaning": "（その日の仕事などを）終わりにする",
+      "situation": "作業を切り上げるとき",
+      "examples": [
+        {
+          "text": "It's already eight. Let's call it a day.",
+          "translation": "もう 8 時だ。今日はここまでにしよう。"
+        }
+      ],
+      "notes": "職場の会話でよく使い、上司・同僚どちらにも使える。夜なら call it a night とも言う。"
+    },
+    {
+      "id": "id-under-the-weather",
+      "type": "phrase",
+      "tags": [
+        "ステップ1",
+        "日常会話の定番",
+        "イディオム"
+      ],
+      "phrase": "under the weather",
+      "meaning": "体調がすぐれない・なんとなく具合が悪い",
+      "situation": "軽い不調を伝えるとき",
+      "examples": [
+        {
+          "text": "I'm feeling a bit under the weather today.",
+          "translation": "今日はちょっと体調がすぐれません。"
+        }
+      ],
+      "notes": "重い病気ではなく「軽い不調」に使う。やわらかい言い方なので、職場で休みや早退を伝えるときにも使える。"
+    },
+    {
+      "id": "id-on-the-same-page",
+      "type": "phrase",
+      "tags": [
+        "ステップ1",
+        "日常会話の定番",
+        "イディオム"
+      ],
+      "phrase": "on the same page",
+      "meaning": "認識が一致している・共通理解がある",
+      "situation": "話し合いの前後で認識を確かめるとき",
+      "examples": [
+        {
+          "text": "Let's make sure we're all on the same page before the meeting.",
+          "translation": "会議の前に、全員の認識がそろっているか確認しよう。"
+        }
+      ],
+      "notes": "ビジネスで非常によく使う。Are we on the same page?（認識は合っていますか）は確認の定番。"
+    },
+    {
+      "id": "id-hit-the-nail",
+      "type": "phrase",
+      "tags": [
+        "ステップ1",
+        "日常会話の定番",
+        "イディオム"
+      ],
+      "phrase": "hit the nail on the head",
+      "meaning": "まさにその通りだ・核心を突く",
+      "situation": "相手の発言が的確だとほめるとき",
+      "examples": [
+        {
+          "text": "You hit the nail on the head. That's exactly the problem.",
+          "translation": "まさにその通り。それこそが問題なんだ。"
+        }
+      ],
+      "notes": "釘の頭を正確に打つイメージ。会議でも使える。Exactly. / That's spot on. も近い意味。"
+    },
+    {
+      "id": "id-take-it-easy",
+      "type": "phrase",
+      "tags": [
+        "ステップ1",
+        "日常会話の定番",
+        "イディオム"
+      ],
+      "phrase": "take it easy",
+      "meaning": "気楽にやる・無理しない／（別れぎわに）じゃあね",
+      "situation": "相手を気づかうとき・くだけた別れのあいさつ",
+      "examples": [
+        {
+          "text": "Take it easy. You don't have to finish it today.",
+          "translation": "無理しないで。今日中に終わらせなくていいよ。"
+        },
+        {
+          "text": "See you later. Take it easy!",
+          "translation": "じゃあまたね！"
+        }
+      ],
+      "notes": "親しい相手向けのくだけた表現。怒っている人に言うと「落ち着いて」の意味にもなるが、かえって相手をいらだたせることもある。"
+    },
+    {
+      "id": "id-no-big-deal",
+      "type": "phrase",
+      "tags": [
+        "ステップ1",
+        "日常会話の定番",
+        "イディオム"
+      ],
+      "phrase": "no big deal",
+      "meaning": "たいしたことではない",
+      "situation": "お礼や謝罪に軽く応じるとき・問題を小さく見せるとき",
+      "examples": [
+        {
+          "text": "A: Sorry, I broke your pen. B: No big deal.",
+          "translation": "A: ごめん、ペン壊しちゃった。B: 気にしないで。"
+        }
+      ],
+      "notes": "くだけた表現。It's not a big deal. とも言う。目上の人には Not at all. / No problem. のほうが無難。"
+    },
+    {
+      "id": "id-out-of-the-blue",
+      "type": "phrase",
+      "tags": [
+        "ステップ1",
+        "日常会話の定番",
+        "イディオム"
+      ],
+      "phrase": "out of the blue",
+      "meaning": "突然・予期せず",
+      "situation": "思いがけない出来事を話すとき",
+      "examples": [
+        {
+          "text": "My old friend called me out of the blue.",
+          "translation": "昔の友人が突然電話してきた。"
+        }
+      ],
+      "notes": "青空（the blue）から突然何かが現れるイメージ。会話でもビジネスでも使える。suddenly / unexpectedly で言い換え可。"
+    },
+    {
+      "id": "id-once-in-a-blue-moon",
+      "type": "phrase",
+      "tags": [
+        "ステップ1",
+        "日常会話の定番",
+        "イディオム"
+      ],
+      "phrase": "once in a blue moon",
+      "meaning": "ごくまれに",
+      "situation": "めったにしないことを話すとき",
+      "examples": [
+        {
+          "text": "I only eat fast food once in a blue moon.",
+          "translation": "ファストフードはめったに食べない。"
+        }
+      ],
+      "notes": "blue moon は「めったにないこと」のたとえ。くだけた会話向き。rarely / very seldom で言い換えられる。"
+    },
+    {
+      "id": "id-arm-and-a-leg",
+      "type": "phrase",
+      "tags": [
+        "ステップ1",
+        "日常会話の定番",
+        "イディオム"
+      ],
+      "phrase": "cost an arm and a leg",
+      "meaning": "（値段が）とても高い",
+      "situation": "高額な買い物について話すとき",
+      "examples": [
+        {
+          "text": "That new phone cost me an arm and a leg.",
+          "translation": "あの新しいスマホはすごく高かった。"
+        }
+      ],
+      "notes": "くだけた会話向き。「腕と脚を差し出すほど高い」と大げさに言う表現。正式な場では very expensive。"
+    },
+    {
+      "id": "id-get-the-hang",
+      "type": "phrase",
+      "tags": [
+        "ステップ1",
+        "日常会話の定番",
+        "イディオム"
+      ],
+      "phrase": "get the hang of 〜",
+      "meaning": "〜のコツをつかむ・〜に慣れる",
+      "situation": "新しいことに慣れてきたとき",
+      "examples": [
+        {
+          "text": "Don't worry. You'll get the hang of it soon.",
+          "translation": "心配しないで。すぐにコツがつかめるよ。"
+        }
+      ],
+      "notes": "会話でよく使う。of の後ろは名詞か it（get the hang of driving）。新人や学習者を励ますときの定番。"
+    },
+    {
+      "id": "id-keep-an-eye-on",
+      "type": "phrase",
+      "tags": [
+        "ステップ1",
+        "日常会話の定番",
+        "イディオム"
+      ],
+      "phrase": "keep an eye on 〜",
+      "meaning": "〜から目を離さない・〜を見張る",
+      "situation": "荷物・子ども・状況などを見ていてほしいとき",
+      "examples": [
+        {
+          "text": "Could you keep an eye on my bag for a minute?",
+          "translation": "少しの間、かばんを見ていてもらえますか。"
+        },
+        {
+          "text": "We need to keep an eye on costs.",
+          "translation": "コストに注意を払い続ける必要がある。"
+        }
+      ],
+      "notes": "日常でも仕事でも使える。比喩的に「（状況・数値を）注視する」の意味でも使う。"
+    },
+    {
+      "id": "id-hang-in-there",
+      "type": "phrase",
+      "tags": [
+        "ステップ1",
+        "日常会話の定番",
+        "イディオム"
+      ],
+      "phrase": "hang in there",
+      "meaning": "がんばれ・あきらめないで",
+      "situation": "つらい状況の人を励ますとき",
+      "examples": [
+        {
+          "text": "I know it's hard, but hang in there.",
+          "translation": "大変なのはわかるけど、がんばって。"
+        }
+      ],
+      "notes": "親しい相手へのくだけた励まし。すでに十分がんばっている人に「くじけないで」と寄りそう感じ。"
+    },
+    {
+      "id": "id-better-late",
+      "type": "phrase",
+      "tags": [
+        "ステップ1",
+        "日常会話の定番",
+        "イディオム"
+      ],
+      "phrase": "Better late than never.",
+      "meaning": "遅れてもやらないよりはまし",
+      "situation": "遅れて何かをした人に・自分が遅れたときに",
+      "examples": [
+        {
+          "text": "I finally started learning the piano at 40. Better late than never!",
+          "translation": "40 歳でついにピアノを習い始めた。遅くてもやらないよりはましだよね！"
+        }
+      ],
+      "notes": "ことわざ。気軽な会話で使う。遅刻した本人が言うと開き直りに聞こえることもあるので注意。"
+    },
+    {
+      "id": "id-time-flies",
+      "type": "phrase",
+      "tags": [
+        "ステップ1",
+        "日常会話の定番",
+        "イディオム"
+      ],
+      "phrase": "Time flies.",
+      "meaning": "時がたつのは早い",
+      "situation": "久しぶりに会ったとき・時間の早さに驚いたとき",
+      "examples": [
+        {
+          "text": "It's already December? Time flies!",
+          "translation": "もう 12 月？時がたつのは早いね！"
+        }
+      ],
+      "notes": "Time flies when you're having fun.（楽しいと時間はあっという間）の形でもよく使う。どんな相手にも使える。"
+    },
+    {
+      "id": "id-speak-of-the-devil",
+      "type": "phrase",
+      "tags": [
+        "ステップ1",
+        "日常会話の定番",
+        "イディオム"
+      ],
+      "phrase": "Speak of the devil.",
+      "meaning": "うわさをすれば（本人が来た）",
+      "situation": "話題にしていた人が現れたとき",
+      "examples": [
+        {
+          "text": "Speak of the devil! We were just talking about you.",
+          "translation": "うわさをすれば！ちょうど君の話をしていたんだ。"
+        }
+      ],
+      "notes": "くだけた会話向き。devil（悪魔）と言っても悪口ではなく、冗談めかした言い方。本人の前で言っても普通は失礼にならない。"
+    },
+    {
+      "id": "id-sleep-on-it",
+      "type": "phrase",
+      "tags": [
+        "ステップ1",
+        "日常会話の定番",
+        "イディオム"
+      ],
+      "phrase": "sleep on it",
+      "meaning": "一晩じっくり考える",
+      "situation": "その場で決めずに時間をもらいたいとき",
+      "examples": [
+        {
+          "text": "It's a big decision. Let me sleep on it.",
+          "translation": "大きな決断なので、一晩考えさせて。"
+        }
+      ],
+      "notes": "ビジネスでも使えるやわらかい保留の表現。Let me think about it. より「すぐには決めない」感じがはっきりする。"
+    },
+    {
+      "id": "id-in-the-same-boat",
+      "type": "phrase",
+      "tags": [
+        "ステップ1",
+        "日常会話の定番",
+        "イディオム"
+      ],
+      "phrase": "in the same boat",
+      "meaning": "同じ（困った）境遇にいる",
+      "situation": "相手と同じ苦労をしていると共感するとき",
+      "examples": [
+        {
+          "text": "Don't worry. We're all in the same boat.",
+          "translation": "心配しないで。みんな同じ状況だよ。"
+        }
+      ],
+      "notes": "多くは困難な状況について使う。会話でもビジネスでも使える。"
+    },
+    {
+      "id": "id-give-it-a-shot",
+      "type": "phrase",
+      "tags": [
+        "ステップ1",
+        "日常会話の定番",
+        "イディオム"
+      ],
+      "phrase": "give it a shot",
+      "meaning": "試しにやってみる",
+      "situation": "挑戦をすすめる・自分がやってみると言うとき",
+      "examples": [
+        {
+          "text": "I've never surfed before, but I'll give it a shot.",
+          "translation": "サーフィンはしたことがないけど、やってみるよ。"
+        }
+      ],
+      "notes": "くだけた表現。give it a try とほぼ同じ。shot は「試み」の意味。"
+    },
+    {
+      "id": "id-break-a-leg",
+      "type": "phrase",
+      "tags": [
+        "ステップ1",
+        "日常会話の定番",
+        "イディオム"
+      ],
+      "phrase": "Break a leg!",
+      "meaning": "（本番前に）がんばってね・成功を祈ってる",
+      "situation": "発表・舞台・試合などの直前に",
+      "examples": [
+        {
+          "text": "Your first concert is tonight? Break a leg!",
+          "translation": "今夜が初めてのコンサート？がんばってね！"
+        }
+      ],
+      "notes": "演劇界で「直接 Good luck と言うと縁起が悪い」とされたことから広まったと言われる。文字通り「脚を折れ」ではない。親しい相手に使う。"
+    },
+    {
+      "id": "id-rain-check",
+      "type": "phrase",
+      "tags": [
+        "ステップ1",
+        "日常会話の定番",
+        "イディオム"
+      ],
+      "phrase": "take a rain check",
+      "meaning": "（誘いを）また今度にする",
+      "situation": "誘いを断りつつ、次の機会を約束するとき",
+      "examples": [
+        {
+          "text": "I'm busy tonight. Can I take a rain check?",
+          "translation": "今夜は忙しいんだ。また今度でもいい？"
+        }
+      ],
+      "notes": "もとは雨で中止になった野球の試合の振替券（rain check）。ていねいに誘いを断れる便利な表現で、同僚にも使える。"
+    },
+    {
+      "id": "id-pull-someones-leg",
+      "type": "phrase",
+      "tags": [
+        "ステップ1",
+        "日常会話の定番",
+        "イディオム"
+      ],
+      "phrase": "pull someone's leg",
+      "meaning": "（人を）からかう・冗談を言う",
+      "situation": "相手の話が冗談かどうか確かめるとき",
+      "examples": [
+        {
+          "text": "Are you pulling my leg?",
+          "translation": "からかってるんでしょ？"
+        },
+        {
+          "text": "Don't worry, I'm just pulling your leg.",
+          "translation": "心配しないで、ただの冗談だよ。"
+        }
+      ],
+      "notes": "悪意のない軽いからかいに使う。くだけた会話向き。You're kidding. とほぼ同じ場面で使える。"
+    },
+    {
+      "id": "id-see-eye-to-eye",
+      "type": "phrase",
+      "tags": [
+        "ステップ1",
+        "日常会話の定番",
+        "イディオム"
+      ],
+      "phrase": "see eye to eye (with 〜)",
+      "meaning": "（〜と）意見が一致する",
+      "situation": "意見が合う・合わないを話すとき",
+      "examples": [
+        {
+          "text": "My boss and I don't always see eye to eye.",
+          "translation": "上司と私はいつも意見が合うわけではない。"
+        }
+      ],
+      "notes": "否定文で使うことが多い。ビジネスでも使える。agree で言い換えられる。"
+    },
+    {
+      "id": "id-touch-base",
+      "type": "phrase",
+      "tags": [
+        "ステップ2",
+        "仕事で使う",
+        "イディオム"
+      ],
+      "phrase": "touch base (with 〜)",
+      "meaning": "（〜と）連絡をとる・軽く打ち合わせる",
+      "situation": "短く連絡・確認をしたいとき",
+      "examples": [
+        {
+          "text": "Let's touch base next week to see how things are going.",
+          "translation": "来週、進み具合を確認するために一度連絡をとりましょう。"
+        }
+      ],
+      "notes": "ビジネス会話で頻出。野球の「塁に触れる」から。長い会議ではなく、短い確認の連絡に使う。"
+    },
+    {
+      "id": "id-keep-me-posted",
+      "type": "phrase",
+      "tags": [
+        "ステップ2",
+        "仕事で使う",
+        "イディオム"
+      ],
+      "phrase": "Keep me posted.",
+      "meaning": "（進展があったら）随時知らせてね",
+      "situation": "報告や続報を頼むとき",
+      "examples": [
+        {
+          "text": "Keep me posted on the negotiations.",
+          "translation": "交渉の進展を随時知らせてください。"
+        }
+      ],
+      "notes": "ビジネスで非常によく使う。少していねいにするなら Please keep me updated.。on の後ろに話題を続ける。"
+    },
+    {
+      "id": "id-ball-in-your-court",
+      "type": "phrase",
+      "tags": [
+        "ステップ2",
+        "仕事で使う",
+        "イディオム"
+      ],
+      "phrase": "The ball is in your court.",
+      "meaning": "次はあなたが決める（動く）番だ",
+      "situation": "相手の判断や返事を待つ状況で",
+      "examples": [
+        {
+          "text": "We've sent our offer. Now the ball is in their court.",
+          "translation": "こちらの提案は送った。今度は向こうが決める番だ。"
+        }
+      ],
+      "notes": "テニスで「ボールが相手のコートにある」イメージ。ビジネスの交渉でも使えるが、言い方によっては突き放した感じになる。"
+    },
+    {
+      "id": "id-get-the-ball-rolling",
+      "type": "phrase",
+      "tags": [
+        "ステップ2",
+        "仕事で使う",
+        "イディオム"
+      ],
+      "phrase": "get the ball rolling",
+      "meaning": "（物事を）始める・口火を切る",
+      "situation": "プロジェクトや話し合いを始めるとき",
+      "examples": [
+        {
+          "text": "Let's get the ball rolling with a quick introduction.",
+          "translation": "簡単な自己紹介から始めましょう。"
+        }
+      ],
+      "notes": "会議の冒頭でよく使う。start the ball rolling とも言う。start / begin より「動き出させる」感じ。"
+    },
+    {
+      "id": "id-up-in-the-air",
+      "type": "phrase",
+      "tags": [
+        "ステップ2",
+        "仕事で使う",
+        "イディオム"
+      ],
+      "phrase": "up in the air",
+      "meaning": "まだ決まっていない・未定の",
+      "situation": "計画や日程が確定していないとき",
+      "examples": [
+        {
+          "text": "Our travel plans are still up in the air.",
+          "translation": "旅行の計画はまだ決まっていない。"
+        }
+      ],
+      "notes": "会話でもビジネスでも使える。undecided / uncertain で言い換えられる。"
+    },
+    {
+      "id": "id-hands-are-tied",
+      "type": "phrase",
+      "tags": [
+        "ステップ2",
+        "仕事で使う",
+        "イディオム"
+      ],
+      "phrase": "My hands are tied.",
+      "meaning": "（規則などで）自分にはどうすることもできない",
+      "situation": "助けたいが立場上できないと伝えるとき",
+      "examples": [
+        {
+          "text": "I'd like to help, but my hands are tied. It's company policy.",
+          "translation": "力になりたいのですが、どうにもできないんです。会社の方針なので。"
+        }
+      ],
+      "notes": "ビジネスでよく使う、ていねいに断る表現。自分の意思ではなく、規則や上の判断のせいで動けないことを伝える。"
+    },
+    {
+      "id": "id-ballpark-figure",
+      "type": "phrase",
+      "tags": [
+        "ステップ2",
+        "仕事で使う",
+        "イディオム"
+      ],
+      "phrase": "a ballpark figure",
+      "meaning": "おおよその数字・概算",
+      "situation": "見積もりの目安をたずねるとき",
+      "examples": [
+        {
+          "text": "Can you give me a ballpark figure for the cost?",
+          "translation": "費用のおおよその金額を教えてもらえますか。"
+        }
+      ],
+      "notes": "ビジネスで頻出。ballpark は「野球場」→「だいたいの範囲」。a rough estimate と同じ意味。"
+    },
+    {
+      "id": "id-cut-to-the-chase",
+      "type": "phrase",
+      "tags": [
+        "ステップ2",
+        "仕事で使う",
+        "イディオム"
+      ],
+      "phrase": "cut to the chase",
+      "meaning": "本題に入る・要点を言う",
+      "situation": "前置きを省いて本題に入るとき",
+      "examples": [
+        {
+          "text": "I'll cut to the chase: we need to reduce costs by 10%.",
+          "translation": "単刀直入に言います。コストを 10% 削減する必要があります。"
+        }
+      ],
+      "notes": "自分について使うと「単刀直入に言うと」。相手に Cut to the chase. と命令すると失礼に響くので注意。get to the point も同じ意味。"
+    },
+    {
+      "id": "id-in-a-nutshell",
+      "type": "phrase",
+      "tags": [
+        "ステップ2",
+        "仕事で使う",
+        "イディオム"
+      ],
+      "phrase": "in a nutshell",
+      "meaning": "要するに・簡単に言うと",
+      "situation": "話をまとめるとき",
+      "examples": [
+        {
+          "text": "In a nutshell, the project was a success.",
+          "translation": "要するに、プロジェクトは成功だった。"
+        }
+      ],
+      "notes": "クルミの殻に収まるほど短く、というイメージ。会話でもプレゼンでも使える。in short / to sum up も同じ意味。"
+    },
+    {
+      "id": "id-bottom-line",
+      "type": "phrase",
+      "tags": [
+        "ステップ2",
+        "仕事で使う",
+        "イディオム"
+      ],
+      "phrase": "the bottom line",
+      "meaning": "最も重要な点・結論",
+      "situation": "議論の要点や結論を示すとき",
+      "examples": [
+        {
+          "text": "The bottom line is that we need more staff.",
+          "translation": "要するに、もっと人手が必要だということだ。"
+        }
+      ],
+      "notes": "会計で「最終行（純利益）」の意味から。ビジネス会話で頻出。The bottom line is (that) 〜 の形で使う。"
+    },
+    {
+      "id": "id-back-to-square-one",
+      "type": "phrase",
+      "tags": [
+        "ステップ2",
+        "仕事で使う",
+        "イディオム"
+      ],
+      "phrase": "back to square one",
+      "meaning": "振り出しに戻って",
+      "situation": "計画が失敗してやり直すとき",
+      "examples": [
+        {
+          "text": "The client rejected our design, so we're back to square one.",
+          "translation": "顧客にデザインを却下されたので、振り出しに戻った。"
+        }
+      ],
+      "notes": "すごろくなどの最初のマスに戻るイメージ。会話でもビジネスでも使える。start over / start from scratch も近い意味。"
+    },
+    {
+      "id": "id-go-the-extra-mile",
+      "type": "phrase",
+      "tags": [
+        "ステップ2",
+        "仕事で使う",
+        "イディオム"
+      ],
+      "phrase": "go the extra mile",
+      "meaning": "期待以上の努力をする・ひと手間かける",
+      "situation": "人の努力や心づかいをほめるとき",
+      "examples": [
+        {
+          "text": "She always goes the extra mile for her customers.",
+          "translation": "彼女はいつもお客様のために期待以上の努力をする。"
+        }
+      ],
+      "notes": "ビジネスでほめ言葉としてよく使う。「余分に 1 マイル歩く」から。"
+    },
+    {
+      "id": "id-think-outside-the-box",
+      "type": "phrase",
+      "tags": [
+        "ステップ2",
+        "仕事で使う",
+        "イディオム"
+      ],
+      "phrase": "think outside the box",
+      "meaning": "既成の枠にとらわれずに考える",
+      "situation": "新しい発想を求めるとき",
+      "examples": [
+        {
+          "text": "We need to think outside the box to solve this.",
+          "translation": "これを解決するには、発想を変える必要がある。"
+        }
+      ],
+      "notes": "ビジネスでよく使う。使われすぎて決まり文句と感じる人もいるので、多用は避ける。"
+    },
+    {
+      "id": "id-learn-the-ropes",
+      "type": "phrase",
+      "tags": [
+        "ステップ2",
+        "仕事で使う",
+        "イディオム"
+      ],
+      "phrase": "learn the ropes",
+      "meaning": "（仕事などの）やり方・コツを覚える",
+      "situation": "新人・新しい仕事について話すとき",
+      "examples": [
+        {
+          "text": "It took me a few months to learn the ropes.",
+          "translation": "仕事のやり方を覚えるのに数か月かかった。"
+        }
+      ],
+      "notes": "帆船で綱の扱いを覚えることから。教える側は show someone the ropes（やり方を教える）。職場で気軽に使える。"
+    },
+    {
+      "id": "id-on-the-ball",
+      "type": "phrase",
+      "tags": [
+        "ステップ2",
+        "仕事で使う",
+        "イディオム"
+      ],
+      "phrase": "on the ball",
+      "meaning": "抜け目のない・機敏な・よくわかっている",
+      "situation": "人の仕事ぶりの的確さ・素早さをほめるとき",
+      "examples": [
+        {
+          "text": "Our new assistant is really on the ball.",
+          "translation": "新しいアシスタントは本当に仕事ができる。"
+        }
+      ],
+      "notes": "くだけたほめ言葉で、職場の会話で使える。ボールから目を離さないイメージ。"
+    },
+    {
+      "id": "id-cut-corners",
+      "type": "phrase",
+      "tags": [
+        "ステップ2",
+        "仕事で使う",
+        "イディオム"
+      ],
+      "phrase": "cut corners",
+      "meaning": "（時間・お金を節約するために）手を抜く",
+      "situation": "品質を落とす手抜きを戒めるとき",
+      "examples": [
+        {
+          "text": "Don't cut corners on safety.",
+          "translation": "安全面で手を抜いてはいけない。"
+        }
+      ],
+      "notes": "悪い意味で使う。角を曲がらずに近道するイメージ。会話でもビジネスでも使える。"
+    },
+    {
+      "id": "id-win-win",
+      "type": "phrase",
+      "tags": [
+        "ステップ2",
+        "仕事で使う",
+        "イディオム"
+      ],
+      "phrase": "a win-win situation",
+      "meaning": "双方に得のある状況",
+      "situation": "交渉や提案のメリットを示すとき",
+      "examples": [
+        {
+          "text": "If we share the costs, it's a win-win situation.",
+          "translation": "費用を分担すれば、双方にとって得になる。"
+        }
+      ],
+      "notes": "ビジネスで頻出。日本語の「ウィンウィン」と同じ。形容詞的に a win-win deal とも言う。"
+    },
+    {
+      "id": "id-no-brainer",
+      "type": "phrase",
+      "tags": [
+        "ステップ2",
+        "仕事で使う",
+        "イディオム"
+      ],
+      "phrase": "a no-brainer",
+      "meaning": "考えるまでもないこと・簡単に決められること",
+      "situation": "選択肢が明らかによいとき",
+      "examples": [
+        {
+          "text": "It's free and it saves time. It's a no-brainer.",
+          "translation": "無料で時間も節約できる。迷うまでもないよ。"
+        }
+      ],
+      "notes": "くだけた表現。社内の会話では使えるが、正式な文書では避ける。"
+    },
+    {
+      "id": "id-rule-of-thumb",
+      "type": "phrase",
+      "tags": [
+        "ステップ2",
+        "仕事で使う",
+        "イディオム"
+      ],
+      "phrase": "a rule of thumb",
+      "meaning": "経験から来る目安・大まかな原則",
+      "situation": "実用的な目安を示すとき",
+      "examples": [
+        {
+          "text": "As a rule of thumb, a meeting shouldn't last more than an hour.",
+          "translation": "目安として、会議は 1 時間を超えないようにすべきだ。"
+        }
+      ],
+      "notes": "as a rule of thumb（目安として）の形でよく使う。厳密な規則ではなく経験的な目安。ビジネスでも使える。"
+    },
+    {
+      "id": "id-play-it-by-ear",
+      "type": "phrase",
+      "tags": [
+        "ステップ2",
+        "仕事で使う",
+        "イディオム"
+      ],
+      "phrase": "play it by ear",
+      "meaning": "その場の状況に合わせて決める",
+      "situation": "予定をきっちり決めないとき",
+      "examples": [
+        {
+          "text": "I don't know how long the meeting will take, so let's play it by ear.",
+          "translation": "会議がどのくらいかかるかわからないので、状況を見て決めよう。"
+        }
+      ],
+      "notes": "楽譜なしで耳で聞いて演奏することから。くだけた会話向きだが、職場でも使える。"
+    },
+    {
+      "id": "id-tip-of-the-iceberg",
+      "type": "phrase",
+      "tags": [
+        "ステップ2",
+        "仕事で使う",
+        "イディオム"
+      ],
+      "phrase": "the tip of the iceberg",
+      "meaning": "氷山の一角",
+      "situation": "見えている問題がごく一部だと言うとき",
+      "examples": [
+        {
+          "text": "These complaints are just the tip of the iceberg.",
+          "translation": "これらの苦情は氷山の一角にすぎない。"
+        }
+      ],
+      "notes": "日本語の「氷山の一角」と同じ発想で覚えやすい。ニュースやビジネスで使う。"
+    },
+    {
+      "id": "id-bend-over-backwards",
+      "type": "phrase",
+      "tags": [
+        "ステップ2",
+        "仕事で使う",
+        "イディオム"
+      ],
+      "phrase": "bend over backwards",
+      "meaning": "（人のために）精いっぱい努力する",
+      "situation": "相手のために骨を折ることを伝えるとき",
+      "examples": [
+        {
+          "text": "The hotel staff bent over backwards to help us.",
+          "translation": "ホテルのスタッフは私たちのために精いっぱい尽くしてくれた。"
+        }
+      ],
+      "notes": "主に「人を助ける・喜ばせる」ための努力に使う。会話でもビジネスでも使える。"
+    },
+    {
+      "id": "id-miss-the-boat",
+      "type": "phrase",
+      "tags": [
+        "ステップ2",
+        "仕事で使う",
+        "イディオム"
+      ],
+      "phrase": "miss the boat",
+      "meaning": "好機を逃す",
+      "situation": "チャンスに乗り遅れたとき",
+      "examples": [
+        {
+          "text": "If you don't apply now, you'll miss the boat.",
+          "translation": "今申し込まないと、チャンスを逃すよ。"
+        }
+      ],
+      "notes": "船に乗り遅れるイメージ。くだけた会話でもビジネスでも使える。miss the chance で言い換えられる。"
+    },
+    {
+      "id": "id-burn-the-midnight-oil",
+      "type": "phrase",
+      "tags": [
+        "ステップ2",
+        "仕事で使う",
+        "イディオム"
+      ],
+      "phrase": "burn the midnight oil",
+      "meaning": "夜遅くまで働く・勉強する",
+      "situation": "締め切り前や試験前のがんばりを話すとき",
+      "examples": [
+        {
+          "text": "I burned the midnight oil to finish the report.",
+          "translation": "報告書を仕上げるため夜遅くまで働いた。"
+        }
+      ],
+      "notes": "ランプの油を夜中まで燃やすことから。やや古風だが今もよく使う。会話でも書き言葉でも使える。"
+    },
+    {
+      "id": "id-last-straw",
+      "type": "phrase",
+      "tags": [
+        "ステップ3",
+        "気持ち・状況を表す",
+        "イディオム"
+      ],
+      "phrase": "the last straw",
+      "meaning": "我慢の限界（を超えさせる最後の一つ）",
+      "situation": "積み重なった不満がついに爆発したとき",
+      "examples": [
+        {
+          "text": "He was late again. That was the last straw.",
+          "translation": "彼はまた遅刻した。それでもう我慢の限界だった。"
+        }
+      ],
+      "notes": "「ラクダの背を折る最後のわら一本」ということわざから。会話でもビジネスでも使える。"
+    },
+    {
+      "id": "id-cat-out-of-the-bag",
+      "type": "phrase",
+      "tags": [
+        "ステップ3",
+        "気持ち・状況を表す",
+        "イディオム"
+      ],
+      "phrase": "let the cat out of the bag",
+      "meaning": "（うっかり）秘密をもらす",
+      "situation": "秘密がばれてしまったとき",
+      "examples": [
+        {
+          "text": "I let the cat out of the bag about the surprise party.",
+          "translation": "サプライズパーティーのことをうっかりしゃべってしまった。"
+        }
+      ],
+      "notes": "うっかりもらすニュアンスが強い。spill the beans とほぼ同じ意味。くだけた会話向き。"
+    },
+    {
+      "id": "id-spill-the-beans",
+      "type": "phrase",
+      "tags": [
+        "ステップ3",
+        "気持ち・状況を表す",
+        "イディオム"
+      ],
+      "phrase": "spill the beans",
+      "meaning": "秘密をばらす・白状する",
+      "situation": "隠していたことを話す・話させるとき",
+      "examples": [
+        {
+          "text": "Come on, spill the beans! Who's your new boyfriend?",
+          "translation": "ねえ、白状しなよ！新しい彼氏って誰？"
+        }
+      ],
+      "notes": "くだけた会話向き。相手に「白状して」と迫るときにもよく使う。"
+    },
+    {
+      "id": "id-blessing-in-disguise",
+      "type": "phrase",
+      "tags": [
+        "ステップ3",
+        "気持ち・状況を表す",
+        "イディオム"
+      ],
+      "phrase": "a blessing in disguise",
+      "meaning": "不幸に見えて実はありがたいこと・けがの功名",
+      "situation": "悪い出来事が結果的によかったとき",
+      "examples": [
+        {
+          "text": "Losing that job was a blessing in disguise. I found a better one.",
+          "translation": "あの仕事を失ったのは、かえってよかった。もっといい仕事が見つかったから。"
+        }
+      ],
+      "notes": "disguise は「変装」。幸運が不幸の姿に変装しているイメージ。会話でも書き言葉でも使える。"
+    },
+    {
+      "id": "id-beat-around-the-bush",
+      "type": "phrase",
+      "tags": [
+        "ステップ3",
+        "気持ち・状況を表す",
+        "イディオム"
+      ],
+      "phrase": "beat around the bush",
+      "meaning": "遠回しに言う・本題を避ける",
+      "situation": "はっきり言わない相手に・自分が率直に言うとき",
+      "examples": [
+        {
+          "text": "Stop beating around the bush and tell me what happened.",
+          "translation": "遠回しに言わないで、何があったのか話して。"
+        }
+      ],
+      "notes": "否定文・命令文で使うことが多い。イギリス英語では beat about the bush。cut to the chase と反対の意味。"
+    },
+    {
+      "id": "id-bite-off-more",
+      "type": "phrase",
+      "tags": [
+        "ステップ3",
+        "気持ち・状況を表す",
+        "イディオム"
+      ],
+      "phrase": "bite off more than one can chew",
+      "meaning": "自分の能力以上のことを引き受ける",
+      "situation": "仕事などを抱えこみすぎたとき",
+      "examples": [
+        {
+          "text": "I think I bit off more than I could chew with this project.",
+          "translation": "このプロジェクトは自分の手に余るものを引き受けてしまったようだ。"
+        }
+      ],
+      "notes": "かみ切れないほど大きくかじるイメージ。one は主語に合わせて I / you などに変える。会話でもビジネスでも使える。"
+    },
+    {
+      "id": "id-get-out-of-hand",
+      "type": "phrase",
+      "tags": [
+        "ステップ3",
+        "気持ち・状況を表す",
+        "イディオム"
+      ],
+      "phrase": "get out of hand",
+      "meaning": "手に負えなくなる",
+      "situation": "状況が制御できなくなるとき",
+      "examples": [
+        {
+          "text": "The party got out of hand and the neighbors called the police.",
+          "translation": "パーティーが手に負えなくなり、近所の人が警察を呼んだ。"
+        }
+      ],
+      "notes": "主語は状況・出来事。会話でもニュースでも使える。"
+    },
+    {
+      "id": "id-get-cold-feet",
+      "type": "phrase",
+      "tags": [
+        "ステップ3",
+        "気持ち・状況を表す",
+        "イディオム"
+      ],
+      "phrase": "get cold feet",
+      "meaning": "（直前になって）怖じ気づく",
+      "situation": "大事な決断の前に不安になったとき",
+      "examples": [
+        {
+          "text": "He got cold feet just before the wedding.",
+          "translation": "彼は結婚式の直前になって怖じ気づいた。"
+        }
+      ],
+      "notes": "くだけた会話向き。計画していたことを直前でやめたくなる気持ちに使う。"
+    },
+    {
+      "id": "id-sit-on-the-fence",
+      "type": "phrase",
+      "tags": [
+        "ステップ3",
+        "気持ち・状況を表す",
+        "イディオム"
+      ],
+      "phrase": "sit on the fence",
+      "meaning": "どっちつかずの態度をとる・態度を決めない",
+      "situation": "意見をはっきりさせない人について",
+      "examples": [
+        {
+          "text": "You can't sit on the fence forever. You have to choose.",
+          "translation": "いつまでも態度を決めずにいるわけにはいかない。選ばないと。"
+        }
+      ],
+      "notes": "批判的なニュアンスがあることが多い。on the fence（迷っている）だけでも使う。"
+    },
+    {
+      "id": "id-on-thin-ice",
+      "type": "phrase",
+      "tags": [
+        "ステップ3",
+        "気持ち・状況を表す",
+        "イディオム"
+      ],
+      "phrase": "on thin ice",
+      "meaning": "危うい立場にある",
+      "situation": "これ以上失敗すると大変なことになる状況で",
+      "examples": [
+        {
+          "text": "You're on thin ice. One more mistake and you're fired.",
+          "translation": "君は危ない立場にいる。もう一度ミスしたらクビだ。"
+        }
+      ],
+      "notes": "薄い氷の上を歩くイメージ。be / skate on thin ice の形で使う。警告として使うことが多い。"
+    },
+    {
+      "id": "id-down-to-earth",
+      "type": "phrase",
+      "tags": [
+        "ステップ3",
+        "気持ち・状況を表す",
+        "イディオム"
+      ],
+      "phrase": "down-to-earth",
+      "meaning": "気取らない・現実的な",
+      "situation": "人柄をほめるとき",
+      "examples": [
+        {
+          "text": "Even though she's famous, she's very down-to-earth.",
+          "translation": "彼女は有名なのに、とても気さくだ。"
+        }
+      ],
+      "notes": "ほめ言葉。名詞の前ではハイフンを付けて a down-to-earth person とするのが普通。会話でもビジネスでも使える。"
+    },
+    {
+      "id": "id-hit-the-road",
+      "type": "phrase",
+      "tags": [
+        "ステップ3",
+        "気持ち・状況を表す",
+        "イディオム"
+      ],
+      "phrase": "hit the road",
+      "meaning": "出発する・帰る",
+      "situation": "その場を離れる・旅に出るとき",
+      "examples": [
+        {
+          "text": "It's getting late. I should hit the road.",
+          "translation": "遅くなってきた。そろそろ帰らなきゃ。"
+        }
+      ],
+      "notes": "くだけた会話向き。Let's hit the road.（さあ出発しよう）もよく使う。"
+    },
+    {
+      "id": "id-off-the-hook",
+      "type": "phrase",
+      "tags": [
+        "ステップ3",
+        "気持ち・状況を表す",
+        "イディオム"
+      ],
+      "phrase": "let 〜 off the hook",
+      "meaning": "（〜を）責任・罰から解放する・大目に見る",
+      "situation": "罰や義務を免除するとき",
+      "examples": [
+        {
+          "text": "I'll let you off the hook this time, but don't do it again.",
+          "translation": "今回は大目に見るけど、二度とやらないでね。"
+        }
+      ],
+      "notes": "釣り針（hook）から魚を外してやるイメージ。be off the hook（責任を免れている）の形でも使う。くだけた会話向き。"
+    },
+    {
+      "id": "id-throw-in-the-towel",
+      "type": "phrase",
+      "tags": [
+        "ステップ3",
+        "気持ち・状況を表す",
+        "イディオム"
+      ],
+      "phrase": "throw in the towel",
+      "meaning": "あきらめる・降参する",
+      "situation": "努力をやめることを話すとき",
+      "examples": [
+        {
+          "text": "After three failed attempts, he finally threw in the towel.",
+          "translation": "3 回失敗して、彼はついにあきらめた。"
+        }
+      ],
+      "notes": "ボクシングでタオルを投げ入れて負けを認めることから。give up の比喩的な言い方。会話でもニュースでも使える。"
+    },
+    {
+      "id": "id-two-birds",
+      "type": "phrase",
+      "tags": [
+        "ステップ3",
+        "気持ち・状況を表す",
+        "イディオム"
+      ],
+      "phrase": "kill two birds with one stone",
+      "meaning": "一石二鳥",
+      "situation": "一つの行動で二つの目的を果たすとき",
+      "examples": [
+        {
+          "text": "I'll visit the client and pick up the samples. That'll kill two birds with one stone.",
+          "translation": "顧客を訪問して、ついでにサンプルも受け取ろう。一石二鳥だ。"
+        }
+      ],
+      "notes": "日本語の「一石二鳥」と同じ発想。会話でもビジネスでも使える。"
+    },
+    {
+      "id": "id-bite-the-bullet",
+      "type": "phrase",
+      "tags": [
+        "ステップ3",
+        "気持ち・状況を表す",
+        "イディオム"
+      ],
+      "phrase": "bite the bullet",
+      "meaning": "（嫌なことを）覚悟を決めてやる",
+      "situation": "避けられないつらいことに向き合うとき",
+      "examples": [
+        {
+          "text": "I hate going to the dentist, but I'll bite the bullet and make an appointment.",
+          "translation": "歯医者は大嫌いだけど、覚悟を決めて予約するよ。"
+        }
+      ],
+      "notes": "会話でもビジネスでも使える。先延ばしにしていたことを決心してやるときに使う。"
+    },
+    {
+      "id": "id-cross-that-bridge",
+      "type": "phrase",
+      "tags": [
+        "ステップ3",
+        "気持ち・状況を表す",
+        "イディオム"
+      ],
+      "phrase": "We'll cross that bridge when we come to it.",
+      "meaning": "そのときになったら考えよう",
+      "situation": "まだ起きていない問題を心配しすぎる相手に",
+      "examples": [
+        {
+          "text": "A: What if the client says no? B: We'll cross that bridge when we come to it.",
+          "translation": "A: もし顧客が断ったら？ B: それはそのときに考えよう。"
+        }
+      ],
+      "notes": "取り越し苦労をやめようという意味。会話でもビジネスでも使える。"
+    },
+    {
+      "id": "id-add-insult-to-injury",
+      "type": "phrase",
+      "tags": [
+        "ステップ3",
+        "気持ち・状況を表す",
+        "イディオム"
+      ],
+      "phrase": "add insult to injury",
+      "meaning": "さらに悪いことに・踏んだり蹴ったり",
+      "situation": "悪いことに悪いことが重なったとき",
+      "examples": [
+        {
+          "text": "My flight was canceled, and to add insult to injury, they lost my bag.",
+          "translation": "飛行機が欠航になり、さらに悪いことに荷物までなくされた。"
+        }
+      ],
+      "notes": "to add insult to injury（さらに悪いことに）の形でよく使う。日本語の「泣きっ面に蜂」に近い。"
+    },
+    {
+      "id": "id-when-pigs-fly",
+      "type": "phrase",
+      "tags": [
+        "ステップ3",
+        "気持ち・状況を表す",
+        "イディオム"
+      ],
+      "phrase": "when pigs fly",
+      "meaning": "ありえない・絶対にない",
+      "situation": "実現しないと強く言うとき",
+      "examples": [
+        {
+          "text": "A: Will he ever clean his room? B: Yeah, when pigs fly.",
+          "translation": "A: 彼が自分の部屋を片づけることなんてある？ B: ありえないね。"
+        }
+      ],
+      "notes": "皮肉を込めたくだけた表現。親しい相手との冗談に限り、職場では使わないほうがよい。"
+    },
+    {
+      "id": "id-jump-on-the-bandwagon",
+      "type": "phrase",
+      "tags": [
+        "ステップ3",
+        "気持ち・状況を表す",
+        "イディオム"
+      ],
+      "phrase": "jump on the bandwagon",
+      "meaning": "時流に乗る・流行に便乗する",
+      "situation": "流行に飛びつく様子を話すとき",
+      "examples": [
+        {
+          "text": "Many companies jumped on the bandwagon and started using AI.",
+          "translation": "多くの企業が流行に乗って AI を使い始めた。"
+        }
+      ],
+      "notes": "bandwagon はパレードの楽隊車。「よく考えずに流行に乗る」という批判的なニュアンスを含むことがある。"
+    },
+    {
+      "id": "id-on-cloud-nine",
+      "type": "phrase",
+      "tags": [
+        "ステップ3",
+        "気持ち・状況を表す",
+        "イディオム"
+      ],
+      "phrase": "on cloud nine",
+      "meaning": "とても幸せな・有頂天で",
+      "situation": "うれしくてたまらないとき",
+      "examples": [
+        {
+          "text": "She's been on cloud nine since she got the job offer.",
+          "translation": "彼女は内定をもらってからずっと有頂天だ。"
+        }
+      ],
+      "notes": "くだけた会話向き。very happy / thrilled で言い換えられる。"
+    },
+    {
+      "id": "id-long-shot",
+      "type": "phrase",
+      "tags": [
+        "ステップ3",
+        "気持ち・状況を表す",
+        "イディオム"
+      ],
+      "phrase": "a long shot",
+      "meaning": "見込みの薄いこと・一か八か",
+      "situation": "成功の可能性が低いが試すとき",
+      "examples": [
+        {
+          "text": "It's a long shot, but let's ask if they have any rooms left.",
+          "translation": "望みは薄いけど、空室があるか聞いてみよう。"
+        }
+      ],
+      "notes": "遠くからのシュートは当たりにくいことから。会話でもビジネスでも使える。not by a long shot は「まったく〜ない」。"
+    },
+    {
+      "id": "id-q-call-it-a-day",
+      "type": "choice",
+      "tags": [
+        "ステップ4",
+        "意味の確認",
+        "選択問題"
+      ],
+      "question": "“We've done enough. Let's call it a day.” の call it a day の意味は？",
+      "choices": [
+        "今日の作業を終わりにする",
+        "一日中電話をする",
+        "明日に延期する",
+        "今日を記念日にする"
+      ],
+      "answer": 0,
+      "explanation": "call it a day は「（その日の作業を）切り上げる」。作業を続ける・延期するという意味はない。"
+    },
+    {
+      "id": "id-q-ball-in-court",
+      "type": "choice",
+      "tags": [
+        "ステップ4",
+        "意味の確認",
+        "選択問題"
+      ],
+      "question": "“We've made our offer. The ball is in your court.” が伝えていることは？",
+      "choices": [
+        "あなたは試合に負けた",
+        "あなたの責任ではない",
+        "次はあなたが決める番だ",
+        "あなたの提案はすでに断られた"
+      ],
+      "answer": 2,
+      "explanation": "テニスで相手のコートにボールがある状態から、「次はあなたが判断・行動する番」。"
+    },
+    {
+      "id": "id-q-square-one",
+      "type": "choice",
+      "tags": [
+        "ステップ4",
+        "意味の確認",
+        "選択問題"
+      ],
+      "question": "“The plan failed, so we're back to square one.” の back to square one の意味は？",
+      "choices": [
+        "計画どおりに進んで",
+        "振り出しに戻って",
+        "広場に集まって",
+        "四角い形に戻って"
+      ],
+      "answer": 1,
+      "explanation": "すごろくの最初のマスに戻るイメージで「振り出しに戻る」。"
+    },
+    {
+      "id": "id-q-beat-around",
+      "type": "choice",
+      "tags": [
+        "ステップ4",
+        "意味の確認",
+        "選択問題"
+      ],
+      "question": "“Don't beat around the bush.” と言われた。相手の気持ちに最も近いものは？",
+      "choices": [
+        "やぶの中に入らないで",
+        "急いで結論を出さないで",
+        "人のうわさをしないで",
+        "遠回しに言わないで、はっきり言って"
+      ],
+      "answer": 3,
+      "explanation": "beat around the bush は「遠回しに言う」。cut to the chase（本題に入る）と反対の意味。"
+    },
+    {
+      "id": "id-q-towel",
+      "type": "choice",
+      "tags": [
+        "ステップ4",
+        "意味の確認",
+        "選択問題"
+      ],
+      "question": "“After many failures, she finally threw in the towel.” の threw in the towel の意味は？",
+      "choices": [
+        "あきらめた",
+        "タオルを洗った",
+        "勝利を宣言した",
+        "休憩をとった"
+      ],
+      "answer": 0,
+      "explanation": "ボクシングで負けを認めてタオルを投げ入れることから「あきらめる・降参する」。勝利とは逆の意味。"
+    },
+    {
+      "id": "id-q-ballpark",
+      "type": "choice",
+      "tags": [
+        "ステップ4",
+        "意味の確認",
+        "選択問題"
+      ],
+      "question": "“Can you give me a ballpark figure?” で求められているものは？",
+      "choices": [
+        "正確な最終金額",
+        "野球の試合の結果",
+        "球場の座席数",
+        "おおよその数字"
+      ],
+      "answer": 3,
+      "explanation": "a ballpark figure は「概算・おおよその数字」。正確な数字ではない点に注意。"
+    },
+    {
+      "id": "id-q-blessing",
+      "type": "choice",
+      "tags": [
+        "ステップ4",
+        "意味の確認",
+        "選択問題"
+      ],
+      "question": "“Missing the train was a blessing in disguise.” の意味に最も近いものは？",
+      "choices": [
+        "電車に乗り遅れたのは、誰かが変装していたせいだ",
+        "電車に乗り遅れたのは、かえって幸運だった",
+        "電車に乗り遅れて、大きな損をした",
+        "電車に乗り遅れたのは、わざとだった"
+      ],
+      "answer": 1,
+      "explanation": "a blessing in disguise は「不幸に見えて実はありがたいこと」。悪い出来事がよい結果につながったときに使う。"
+    },
+    {
+      "id": "id-q-cloud-nine",
+      "type": "choice",
+      "tags": [
+        "ステップ4",
+        "意味の確認",
+        "選択問題"
+      ],
+      "question": "“He's been on cloud nine since he passed the exam.” の on cloud nine の意味は？",
+      "choices": [
+        "ぼんやりして",
+        "とても疲れて",
+        "とても幸せで",
+        "自信をなくして"
+      ],
+      "answer": 2,
+      "explanation": "on cloud nine は「有頂天で・とても幸せで」。ぼんやりしている様子は head in the clouds で、別の表現。"
+    },
+    {
+      "id": "id-q-up-in-the-air",
+      "type": "choice",
+      "tags": [
+        "ステップ4",
+        "意味の確認",
+        "選択問題"
+      ],
+      "question": "“The date of the event is still up in the air.” の意味に最も近いものは？",
+      "choices": [
+        "イベントの日程はまだ決まっていない",
+        "イベントは屋外で行われる",
+        "イベントは中止になった",
+        "イベントの日程はすでに発表された"
+      ],
+      "answer": 0,
+      "explanation": "up in the air は「未定で」。中止や発表済みとは違い、「まだ決まっていない」状態を表す。"
+    },
+    {
+      "id": "id-q-cut-corners",
+      "type": "choice",
+      "tags": [
+        "ステップ4",
+        "意味の確認",
+        "選択問題"
+      ],
+      "question": "“The builder cut corners to save money.” の cut corners の意味は？",
+      "choices": [
+        "近道をした",
+        "予算を増やした",
+        "角を丸く削った",
+        "手を抜いた"
+      ],
+      "answer": 3,
+      "explanation": "cut corners は「（時間やお金を節約するために）手を抜く」。文字通りの「近道」ではなく、品質を落とす手抜きを表す。"
+    }
+  ]
+}

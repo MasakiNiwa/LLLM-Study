@@ -1,0 +1,1205 @@
+{
+  "format": "lllm-study-pack",
+  "version": 1,
+  "id": "programming-sql-80",
+  "title": "SQL 入門 80（SELECT から集計・結合まで）",
+  "description": "社員表 employees と部署表 departments の小さなサンプルデータ（問題の上に表示されます）を使い、SQL の結果を自分で予想しながら学びます。ステップ 1 で SELECT・WHERE・AND/OR・ORDER BY・LIMIT・DISTINCT・LIKE・IN・BETWEEN と NULL の扱い、ステップ 2 で集計関数（COUNT・SUM・AVG・MAX）・GROUP BY・HAVING と句の実行順序、ステップ 3 で INNER JOIN・LEFT JOIN とサブクエリ（IN・EXISTS を含む）、ステップ 4 で INSERT・UPDATE・DELETE、CREATE TABLE と制約（主キー・外部キー・NOT NULL・UNIQUE・CHECK・DEFAULT）、インデックス、トランザクションを扱います。形式は一問一答 29 問（結果の行数・値など）・選択問題 29 問・穴埋め 16 問・並べ替え 6 問。結果はすべて実際に実行して確かめてあります。SQL は標準 SQL を基本とし、LIMIT など製品で違う書き方は解説で補足しています。コマンドラインに慣れていないなら「Git と Linux コマンド 100」、データベース理論（正規化・障害回復）まで広げるなら次は「基本情報技術者の基礎 120」がおすすめです。",
+  "subject": "programming",
+  "language": {
+    "target": "ja",
+    "explanation": "ja"
+  },
+  "level": "プログラミング初級",
+  "tags": [
+    "プログラミング",
+    "SQL",
+    "データベース",
+    "RDB"
+  ],
+  "author": "LLLM-Study",
+  "license": "MIT",
+  "source": "LLLM-Study オリジナル（AI を利用して作成）",
+  "revision": 1,
+  "passages": [
+    {
+      "id": "sql-tables",
+      "title": "サンプルの表（employees と departments）",
+      "text": "employees（社員）\nid | name | dept_id | salary\n1 | 佐藤 | 1 | 300000\n2 | 鈴木 | 2 | 450000\n3 | 高橋 | 2 | 380000\n4 | 田中 | 1 | 280000\n5 | 伊藤 | 3 | 320000\n6 | 渡辺 | 2 | 520000\n7 | 山本 | NULL | 250000\n8 | 中村 | 1 | NULL\n\ndepartments（部署）\nid | name\n1 | 営業\n2 | 開発\n3 | 総務\n4 | 広報\n\n※ employees.dept_id は departments.id を参照する。NULL は「値がない」ことを表す。"
+    }
+  ],
+  "items": [
+    {
+      "id": "sql-c-from",
+      "type": "cloze",
+      "tags": [
+        "ステップ1",
+        "SELECT と FROM"
+      ],
+      "text": "employees 表から name 列を取り出す: SELECT name {{FROM}} employees;",
+      "hint": "キーワード（英字 4 文字）",
+      "explanation": "SELECT 取り出す列 FROM 表名 が基本形。SQL のキーワードは大文字・小文字を区別しないが、大文字で書くと読みやすい。"
+    },
+    {
+      "id": "sql-q-select-all",
+      "type": "qa",
+      "tags": [
+        "ステップ1",
+        "SELECT と FROM"
+      ],
+      "question": "employees 表のすべての列・すべての行を取り出す SQL 文は？",
+      "answer": "SELECT * FROM employees",
+      "explanation": "* は「すべての列」。実務では必要な列だけを書くほうが、読みやすく処理も軽い。文末の ; は文の区切り。"
+    },
+    {
+      "id": "sql-ch-cols-rows",
+      "type": "choice",
+      "tags": [
+        "ステップ1",
+        "SELECT と FROM"
+      ],
+      "passage": "sql-tables",
+      "question": "本文の表に対して\nSELECT name, salary FROM employees;\nを実行した結果の列数と行数はどれ？",
+      "choices": [
+        "2 列・8 行",
+        "2 列・7 行",
+        "4 列・8 行",
+        "8 列・2 行"
+      ],
+      "answer": 0,
+      "explanation": "SELECT に書いた列（name と salary）の 2 列だけが出る。WHERE がないので全 8 行。salary が NULL の中村の行も、NULL のまま出力される。"
+    },
+    {
+      "id": "sql-c-as",
+      "type": "cloze",
+      "tags": [
+        "ステップ1",
+        "SELECT と FROM"
+      ],
+      "text": "列に別名を付けて表示する: SELECT salary {{AS}} 給与 FROM employees;",
+      "hint": "英字 2 文字",
+      "explanation": "AS で結果の列名を変えられる。計算した列（salary * 12 など）に名前を付けるときによく使う。"
+    },
+    {
+      "id": "sql-q-where-gt",
+      "type": "qa",
+      "tags": [
+        "ステップ1",
+        "WHERE（条件）"
+      ],
+      "passage": "sql-tables",
+      "question": "本文の表に対して\nSELECT name FROM employees WHERE salary > 400000;\nを実行すると、結果は何行？",
+      "answer": "2",
+      "accepted": [
+        "2行"
+      ],
+      "explanation": "400000 を超えるのは鈴木（450000）と渡辺（520000）。> は「より大きい」なので、ちょうど 400000 は含まない（含めるなら >=）。"
+    },
+    {
+      "id": "sql-ch-not-equal",
+      "type": "choice",
+      "tags": [
+        "ステップ1",
+        "WHERE（条件）"
+      ],
+      "question": "標準 SQL で「等しくない」を表す比較演算子はどれ？",
+      "choices": [
+        "==",
+        "><",
+        "=/=",
+        "<>"
+      ],
+      "answer": 3,
+      "explanation": "標準 SQL の「等しくない」は <>。多くのデータベースは != も使えるが、== は SQL の比較演算子ではない（等しいは = 1 つ）。"
+    },
+    {
+      "id": "sql-q-where-and",
+      "type": "qa",
+      "tags": [
+        "ステップ1",
+        "WHERE（条件）"
+      ],
+      "passage": "sql-tables",
+      "question": "本文の表に対して\nSELECT name FROM employees WHERE dept_id = 2 AND salary < 400000;\nを実行したとき、結果に出る name は？",
+      "answer": "高橋",
+      "explanation": "dept_id が 2 なのは鈴木・高橋・渡辺。そのうち salary が 400000 未満は高橋（380000）だけ。AND は両方の条件を満たす行だけを残す。"
+    },
+    {
+      "id": "sql-ch-and-or",
+      "type": "choice",
+      "tags": [
+        "ステップ1",
+        "WHERE（条件）"
+      ],
+      "passage": "sql-tables",
+      "question": "本文の表に対して\nSELECT name FROM employees WHERE dept_id = 1 OR dept_id = 2 AND salary > 400000;\nを実行すると、結果は何行？",
+      "choices": [
+        "6 行",
+        "5 行",
+        "3 行",
+        "2 行"
+      ],
+      "answer": 1,
+      "explanation": "AND は OR より先に評価されるので「dept_id = 1」または「dept_id = 2 かつ salary > 400000」となる。営業の 3 人（佐藤・田中・中村）と鈴木・渡辺で 5 行。意図どおりにするには (dept_id = 1 OR dept_id = 2) AND … とかっこを付ける。"
+    },
+    {
+      "id": "sql-c-desc",
+      "type": "cloze",
+      "tags": [
+        "ステップ1",
+        "ORDER BY と LIMIT"
+      ],
+      "text": "salary の大きい順（降順）に並べる: SELECT name FROM employees ORDER BY salary {{DESC}};",
+      "hint": "英字 4 文字",
+      "explanation": "DESC は descending（降順）。ASC（ascending、昇順）は省略したときの既定。"
+    },
+    {
+      "id": "sql-ch-asc-default",
+      "type": "choice",
+      "tags": [
+        "ステップ1",
+        "ORDER BY と LIMIT"
+      ],
+      "question": "ORDER BY salary のように ASC も DESC も書かなかったとき、並び順はどうなる？",
+      "choices": [
+        "表に登録した順",
+        "毎回ランダム",
+        "昇順（小さい順）",
+        "降順（大きい順）"
+      ],
+      "answer": 2,
+      "explanation": "既定は ASC（昇順）。ORDER BY を書かないときの行の順番は保証されないので、順番が必要なら必ず ORDER BY を書く。"
+    },
+    {
+      "id": "sql-q-limit-top",
+      "type": "qa",
+      "tags": [
+        "ステップ1",
+        "ORDER BY と LIMIT"
+      ],
+      "passage": "sql-tables",
+      "question": "本文の表に対して\nSELECT name FROM employees WHERE salary IS NOT NULL ORDER BY salary DESC LIMIT 1;\nを実行したとき、結果に出る name は？",
+      "answer": "渡辺",
+      "explanation": "salary の降順に並べて先頭の 1 行だけを取り出すので、最高額 520000 の渡辺。NULL を並べたときの位置はデータベースによって異なるので、ここでは IS NOT NULL で除いている。"
+    },
+    {
+      "id": "sql-q-order-asc",
+      "type": "qa",
+      "tags": [
+        "ステップ1",
+        "ORDER BY と LIMIT"
+      ],
+      "passage": "sql-tables",
+      "question": "本文の表に対して\nSELECT name FROM employees WHERE dept_id = 2 ORDER BY salary LIMIT 1;\nを実行したとき、結果に出る name は？",
+      "answer": "高橋",
+      "explanation": "開発（dept_id = 2）の 3 人を salary の昇順（既定）に並べると 高橋 380000 → 鈴木 450000 → 渡辺 520000。先頭の 1 行なので高橋。WHERE で絞り込んでから並べ替えが行われる。"
+    },
+    {
+      "id": "sql-c-limit",
+      "type": "cloze",
+      "tags": [
+        "ステップ1",
+        "ORDER BY と LIMIT"
+      ],
+      "text": "給与の高い順に 3 人だけ取り出す: SELECT name FROM employees WHERE salary IS NOT NULL ORDER BY salary DESC {{LIMIT}} 3;",
+      "hint": "英字 5 文字",
+      "explanation": "LIMIT は MySQL・PostgreSQL・SQLite などで使える。標準 SQL では FETCH FIRST 3 ROWS ONLY と書く（SQL Server は SELECT TOP 3 …）。"
+    },
+    {
+      "id": "sql-ch-order-multi",
+      "type": "choice",
+      "tags": [
+        "ステップ1",
+        "ORDER BY と LIMIT"
+      ],
+      "question": "ORDER BY dept_id, salary DESC の意味として正しいものはどれ？",
+      "choices": [
+        "dept_id の昇順に並べ、dept_id が同じ行の中では salary の降順に並べる",
+        "salary の降順に並べ、同じ salary の中で dept_id の昇順に並べる",
+        "dept_id も salary も降順に並べる",
+        "dept_id と salary の合計の降順に並べる"
+      ],
+      "answer": 0,
+      "explanation": "ASC・DESC はそれぞれ直前の列にだけかかる。dept_id には指定がないので昇順。先に書いた列が優先される。"
+    },
+    {
+      "id": "sql-ch-distinct",
+      "type": "choice",
+      "tags": [
+        "ステップ1",
+        "DISTINCT"
+      ],
+      "passage": "sql-tables",
+      "question": "本文の表に対して\nSELECT DISTINCT dept_id FROM employees;\nを実行すると、結果は何行？",
+      "choices": [
+        "8 行",
+        "5 行",
+        "3 行",
+        "4 行"
+      ],
+      "answer": 3,
+      "explanation": "DISTINCT は重複を除く。dept_id の値は 1・2・3 と NULL（山本）の 4 種類。DISTINCT では NULL も 1 つの値としてまとめて残る。"
+    },
+    {
+      "id": "sql-c-like-wild",
+      "type": "cloze",
+      "tags": [
+        "ステップ1",
+        "LIKE"
+      ],
+      "text": "LIKE のパターンでは、% は 0 文字以上の任意の文字列を、{{_}}（アンダースコア）は任意の 1 文字を表す。",
+      "hint": "記号 1 文字",
+      "explanation": "例: '%藤' は「藤で終わる」、'_藤' は「1 文字 + 藤 の 2 文字」、'%藤%' は「藤を含む」。"
+    },
+    {
+      "id": "sql-ch-like-end",
+      "type": "choice",
+      "tags": [
+        "ステップ1",
+        "LIKE"
+      ],
+      "passage": "sql-tables",
+      "question": "本文の表に対して\nSELECT name FROM employees WHERE name LIKE '%藤';\nを実行すると、結果は何行？",
+      "choices": [
+        "1 行",
+        "2 行",
+        "0 行",
+        "3 行"
+      ],
+      "answer": 1,
+      "explanation": "'%藤' は「藤で終わる」文字列。佐藤と伊藤の 2 行。'藤%' なら「藤で始まる」になり、該当者はいない。"
+    },
+    {
+      "id": "sql-q-like-start",
+      "type": "qa",
+      "tags": [
+        "ステップ1",
+        "LIKE"
+      ],
+      "passage": "sql-tables",
+      "question": "本文の表に対して\nSELECT name FROM employees WHERE name LIKE '中%';\nを実行したとき、結果に出る name は？",
+      "answer": "中村",
+      "explanation": "'中%' は「中で始まる」。田中は「中」で終わるので一致しない。含むかどうかを調べるなら '%中%'（田中と中村が一致）。"
+    },
+    {
+      "id": "sql-q-in",
+      "type": "qa",
+      "tags": [
+        "ステップ1",
+        "IN と BETWEEN"
+      ],
+      "passage": "sql-tables",
+      "question": "本文の表に対して\nSELECT name FROM employees WHERE dept_id IN (1, 3);\nを実行すると、結果は何行？",
+      "answer": "4",
+      "accepted": [
+        "4行"
+      ],
+      "explanation": "dept_id が 1 または 3 の行。営業（佐藤・田中・中村）と総務（伊藤）で 4 行。IN (1, 3) は dept_id = 1 OR dept_id = 3 と同じ。"
+    },
+    {
+      "id": "sql-c-not-in",
+      "type": "cloze",
+      "tags": [
+        "ステップ1",
+        "IN と BETWEEN"
+      ],
+      "text": "dept_id が 1 でも 3 でもない行を取り出す: SELECT name FROM employees WHERE dept_id {{NOT}} IN (1, 3);",
+      "hint": "英字 3 文字",
+      "explanation": "NOT IN で「どれでもない」。ただし dept_id が NULL の行（山本）は NOT IN でも結果に出ない。NULL との比較は真にも偽にもならないため。"
+    },
+    {
+      "id": "sql-q-between",
+      "type": "qa",
+      "tags": [
+        "ステップ1",
+        "IN と BETWEEN"
+      ],
+      "passage": "sql-tables",
+      "question": "本文の表に対して\nSELECT name FROM employees WHERE salary BETWEEN 300000 AND 400000;\nを実行すると、結果は何行？",
+      "answer": "3",
+      "accepted": [
+        "3行"
+      ],
+      "explanation": "BETWEEN は両端の値を含む（salary >= 300000 AND salary <= 400000）。佐藤（300000）・高橋（380000）・伊藤（320000）の 3 行。ちょうど 300000 の佐藤を数え忘れないこと。"
+    },
+    {
+      "id": "sql-ch-is-null",
+      "type": "choice",
+      "tags": [
+        "ステップ1",
+        "NULL"
+      ],
+      "question": "dept_id が NULL の行を取り出す WHERE 句として正しいものはどれ？",
+      "choices": [
+        "WHERE dept_id == NULL",
+        "WHERE dept_id = NULL",
+        "WHERE dept_id IS NULL",
+        "WHERE dept_id IN (NULL)"
+      ],
+      "answer": 2,
+      "explanation": "NULL は「値がない」状態なので = では比べられない。NULL かどうかは IS NULL、NULL でないかは IS NOT NULL で調べる。"
+    },
+    {
+      "id": "sql-q-eq-null",
+      "type": "qa",
+      "tags": [
+        "ステップ1",
+        "NULL"
+      ],
+      "passage": "sql-tables",
+      "question": "本文の表に対して\nSELECT name FROM employees WHERE dept_id = NULL;\nを実行すると、結果は何行？",
+      "answer": "0",
+      "accepted": [
+        "0行"
+      ],
+      "explanation": "NULL と = で比べた結果は真でも偽でもない「不明（UNKNOWN）」になり、WHERE では行が選ばれない。山本の dept_id は NULL だが、この書き方では取り出せない。"
+    },
+    {
+      "id": "sql-q-is-null-name",
+      "type": "qa",
+      "tags": [
+        "ステップ1",
+        "NULL"
+      ],
+      "passage": "sql-tables",
+      "question": "本文の表に対して\nSELECT name FROM employees WHERE salary IS NULL;\nを実行したとき、結果に出る name は？",
+      "answer": "中村",
+      "explanation": "salary が NULL（未設定）なのは中村だけ。IS NULL は NULL の判定に使う正しい書き方。"
+    },
+    {
+      "id": "sql-ch-neq-null",
+      "type": "choice",
+      "tags": [
+        "ステップ1",
+        "NULL"
+      ],
+      "passage": "sql-tables",
+      "question": "本文の表に対して\nSELECT name FROM employees WHERE salary <> 300000;\nを実行すると、結果は何行？",
+      "choices": [
+        "7 行",
+        "5 行",
+        "8 行",
+        "6 行"
+      ],
+      "answer": 3,
+      "explanation": "300000 の佐藤が除かれるうえ、salary が NULL の中村も除かれる（NULL <> 300000 は不明になる）。8 − 2 = 6 行。NULL の行は「等しくない」の条件でも残らないのがよくある落とし穴。"
+    },
+    {
+      "id": "sql-q-count-star",
+      "type": "qa",
+      "tags": [
+        "ステップ2",
+        "集計関数"
+      ],
+      "passage": "sql-tables",
+      "question": "本文の表に対して\nSELECT COUNT(*) FROM employees;\nの結果の値は？",
+      "answer": "8",
+      "explanation": "COUNT(*) は NULL を含むかどうかに関係なく、行の数を数える。"
+    },
+    {
+      "id": "sql-q-count-col",
+      "type": "qa",
+      "tags": [
+        "ステップ2",
+        "集計関数"
+      ],
+      "passage": "sql-tables",
+      "question": "本文の表に対して\nSELECT COUNT(salary) FROM employees;\nの結果の値は？",
+      "answer": "7",
+      "explanation": "COUNT(列名) はその列が NULL でない行だけを数える。中村の salary が NULL なので 8 − 1 = 7。COUNT(*) との違いは頻出。"
+    },
+    {
+      "id": "sql-q-count-distinct",
+      "type": "qa",
+      "tags": [
+        "ステップ2",
+        "集計関数"
+      ],
+      "passage": "sql-tables",
+      "question": "本文の表に対して\nSELECT COUNT(DISTINCT dept_id) FROM employees;\nの結果の値は？",
+      "answer": "3",
+      "explanation": "dept_id の種類（1・2・3）を数える。COUNT は NULL を数えないので、山本の NULL は含まれない。SELECT DISTINCT dept_id の行数（4 行）とは違う点に注意。"
+    },
+    {
+      "id": "sql-q-max",
+      "type": "qa",
+      "tags": [
+        "ステップ2",
+        "集計関数"
+      ],
+      "passage": "sql-tables",
+      "question": "本文の表に対して\nSELECT MAX(salary) FROM employees;\nの結果の値は？",
+      "answer": "520000",
+      "explanation": "MAX は最大値、MIN は最小値を返す。NULL は無視される。最小値 MIN(salary) なら山本の 250000。"
+    },
+    {
+      "id": "sql-q-sum",
+      "type": "qa",
+      "tags": [
+        "ステップ2",
+        "集計関数"
+      ],
+      "passage": "sql-tables",
+      "question": "本文の表に対して\nSELECT SUM(salary) FROM employees WHERE dept_id = 2;\nの結果の値は？",
+      "answer": "1350000",
+      "hints": [
+        "dept_id = 2 は 3 人"
+      ],
+      "explanation": "開発（dept_id = 2）の鈴木 450000 + 高橋 380000 + 渡辺 520000 = 1350000。WHERE で絞り込んでから合計する。"
+    },
+    {
+      "id": "sql-ch-avg-null",
+      "type": "choice",
+      "tags": [
+        "ステップ2",
+        "集計関数"
+      ],
+      "passage": "sql-tables",
+      "question": "本文の表に対して\nSELECT AVG(salary) FROM employees WHERE dept_id = 1;\nの結果の値はどれ？",
+      "choices": [
+        "580000",
+        "290000",
+        "193333.33…",
+        "NULL"
+      ],
+      "answer": 1,
+      "explanation": "営業の 3 人のうち中村の salary は NULL なので、AVG は NULL を除いた 2 人で計算する。(300000 + 280000) ÷ 2 = 290000。3 で割った 193333.33… はよくある間違い。"
+    },
+    {
+      "id": "sql-c-group-by",
+      "type": "cloze",
+      "tags": [
+        "ステップ2",
+        "GROUP BY と HAVING"
+      ],
+      "text": "部署ごとに人数を数える: SELECT dept_id, COUNT(*) FROM employees {{GROUP BY}} dept_id;",
+      "hint": "英単語 2 つ",
+      "explanation": "GROUP BY に書いた列の値が同じ行を 1 つのグループにまとめ、集計関数はグループごとに計算される。"
+    },
+    {
+      "id": "sql-q-group-rows",
+      "type": "qa",
+      "tags": [
+        "ステップ2",
+        "GROUP BY と HAVING"
+      ],
+      "passage": "sql-tables",
+      "question": "本文の表に対して\nSELECT dept_id, COUNT(*) FROM employees GROUP BY dept_id;\nを実行すると、結果は何行？",
+      "answer": "4",
+      "accepted": [
+        "4行"
+      ],
+      "hints": [
+        "dept_id が NULL の行もある"
+      ],
+      "explanation": "グループは dept_id = 1・2・3 と NULL（山本）の 4 つ。GROUP BY では NULL の行もまとめて 1 つのグループになる。"
+    },
+    {
+      "id": "sql-q-having-count",
+      "type": "qa",
+      "tags": [
+        "ステップ2",
+        "GROUP BY と HAVING"
+      ],
+      "passage": "sql-tables",
+      "question": "本文の表に対して\nSELECT dept_id, COUNT(*) FROM employees GROUP BY dept_id HAVING COUNT(*) >= 3;\nを実行すると、結果は何行？",
+      "answer": "2",
+      "accepted": [
+        "2行"
+      ],
+      "explanation": "人数は dept_id 1 が 3 人、2 が 3 人、3 が 1 人、NULL が 1 人。3 人以上の 2 グループが残る。"
+    },
+    {
+      "id": "sql-q-having-avg",
+      "type": "qa",
+      "tags": [
+        "ステップ2",
+        "GROUP BY と HAVING"
+      ],
+      "passage": "sql-tables",
+      "question": "本文の表に対して\nSELECT dept_id FROM employees GROUP BY dept_id HAVING AVG(salary) > 400000;\nの結果に出る dept_id は？",
+      "answer": "2",
+      "explanation": "平均は dept_id 1 が 290000（NULL を除く）、2 が 450000、3 が 320000、NULL のグループ（山本）が 250000。400000 を超えるのは 2 だけ。"
+    },
+    {
+      "id": "sql-c-having",
+      "type": "cloze",
+      "tags": [
+        "ステップ2",
+        "GROUP BY と HAVING"
+      ],
+      "text": "集計した結果に対する条件（例: COUNT(*) >= 3）は、WHERE ではなく {{HAVING}} に書く。",
+      "hint": "英字 6 文字",
+      "explanation": "WHERE はグループにまとめる前の各行に対する条件なので、集計関数を書けない。グループ化したあとの条件は HAVING。"
+    },
+    {
+      "id": "sql-ch-where-vs-having",
+      "type": "choice",
+      "tags": [
+        "ステップ2",
+        "GROUP BY と HAVING"
+      ],
+      "question": "WHERE と HAVING の違いとして正しいものはどれ？",
+      "choices": [
+        "WHERE はグループ化の前に行を絞り込み、HAVING はグループ化のあとにグループを絞り込む",
+        "WHERE と HAVING は同じ意味で、どちらを使ってもよい",
+        "WHERE は SELECT 文でしか使えず、HAVING は UPDATE 文でしか使えない",
+        "WHERE は数値の条件、HAVING は文字列の条件に使う"
+      ],
+      "answer": 0,
+      "explanation": "行単位の条件はできるだけ WHERE に書くと、集計する行が減って効率もよい。集計結果を使う条件だけを HAVING に書く。"
+    },
+    {
+      "id": "sql-ch-group-error",
+      "type": "choice",
+      "tags": [
+        "ステップ2",
+        "GROUP BY と HAVING"
+      ],
+      "question": "標準 SQL でエラーになる SELECT 文はどれ？",
+      "choices": [
+        "SELECT dept_id, COUNT(*) FROM employees GROUP BY dept_id",
+        "SELECT dept_id, MAX(salary) FROM employees GROUP BY dept_id",
+        "SELECT dept_id, name, COUNT(*) FROM employees GROUP BY dept_id",
+        "SELECT COUNT(*) FROM employees"
+      ],
+      "answer": 2,
+      "explanation": "GROUP BY を使うとき、SELECT に書けるのは GROUP BY に書いた列と集計関数だけ。name はグループ内に複数あり 1 つに決まらないのでエラーになる（一部のデータベースは設定によって許してしまう）。"
+    },
+    {
+      "id": "sql-o-exec-order",
+      "type": "order",
+      "tags": [
+        "ステップ2",
+        "GROUP BY と HAVING"
+      ],
+      "prompt": "SELECT 文の各句が処理される（論理的な）順に並べてください。",
+      "chunks": [
+        "FROM",
+        "WHERE",
+        "GROUP BY",
+        "HAVING",
+        "SELECT",
+        "ORDER BY"
+      ],
+      "answer": "FROM WHERE GROUP BY HAVING SELECT ORDER BY",
+      "explanation": "表を決め（FROM）→ 行を絞り（WHERE）→ グループにまとめ（GROUP BY）→ グループを絞り（HAVING）→ 列を選び（SELECT）→ 並べる（ORDER BY）。書く順（SELECT が先頭）とは違う。"
+    },
+    {
+      "id": "sql-ch-alias-where",
+      "type": "choice",
+      "tags": [
+        "ステップ2",
+        "GROUP BY と HAVING"
+      ],
+      "question": "SELECT name, salary * 12 AS annual FROM employees WHERE annual > 4000000; がエラーになる理由として正しいものはどれ？",
+      "choices": [
+        "salary * 12 のような計算は SELECT に書けないから",
+        "AS で付けた別名はどこでも使えないから",
+        "WHERE には数値を書けないから",
+        "WHERE は SELECT より先に処理されるので、SELECT で付けた別名 annual がまだ使えない"
+      ],
+      "answer": 3,
+      "explanation": "WHERE salary * 12 > 4000000 と書き直せばよい。ORDER BY は SELECT のあとに処理されるので、ORDER BY annual のように別名を使える。"
+    },
+    {
+      "id": "sql-o-write-order",
+      "type": "order",
+      "tags": [
+        "ステップ2",
+        "GROUP BY と HAVING"
+      ],
+      "prompt": "部署ごとの人数を求める SQL 文になるように、句を書く順に並べてください（給与 300000 以上の社員を対象に、2 人以上の部署だけを dept_id 順に表示する）。",
+      "chunks": [
+        "SELECT dept_id, COUNT(*)",
+        "FROM employees",
+        "WHERE salary >= 300000",
+        "GROUP BY dept_id",
+        "HAVING COUNT(*) >= 2",
+        "ORDER BY dept_id"
+      ],
+      "answer": "SELECT dept_id, COUNT(*) FROM employees WHERE salary >= 300000 GROUP BY dept_id HAVING COUNT(*) >= 2 ORDER BY dept_id",
+      "explanation": "書く順は SELECT → FROM → WHERE → GROUP BY → HAVING → ORDER BY（→ LIMIT）。本文の表で実行すると、dept_id = 2（3 人）の 1 行だけが出る。"
+    },
+    {
+      "id": "sql-c-join-on",
+      "type": "cloze",
+      "tags": [
+        "ステップ3",
+        "JOIN（結合）"
+      ],
+      "text": "社員名と部署名を並べる: SELECT e.name, d.name FROM employees e INNER JOIN departments d {{ON}} e.dept_id = d.id;",
+      "hint": "英字 2 文字",
+      "explanation": "ON のあとに、2 つの表のどの列どうしを対応させるかを書く。e と d は表の別名。"
+    },
+    {
+      "id": "sql-ch-table-alias",
+      "type": "choice",
+      "tags": [
+        "ステップ3",
+        "JOIN（結合）"
+      ],
+      "question": "FROM employees e INNER JOIN departments d … の e や d は何？",
+      "choices": [
+        "表の別名（エイリアス）",
+        "サブクエリの名前",
+        "列の別名",
+        "結合の種類"
+      ],
+      "answer": 0,
+      "explanation": "表名のあとに書くと別名になり、e.name のように短く書ける（FROM employees AS e とも書ける。ただし Oracle は表の別名に AS を使えない）。"
+    },
+    {
+      "id": "sql-q-inner-rows",
+      "type": "qa",
+      "tags": [
+        "ステップ3",
+        "JOIN（結合）"
+      ],
+      "passage": "sql-tables",
+      "question": "本文の表に対して\nSELECT e.name, d.name FROM employees e INNER JOIN departments d ON e.dept_id = d.id;\nを実行すると、結果は何行？",
+      "answer": "7",
+      "accepted": [
+        "7行"
+      ],
+      "hints": [
+        "dept_id が NULL の社員がいる"
+      ],
+      "explanation": "INNER JOIN は両方の表に対応する行があるものだけを結果に出す。dept_id が NULL の山本は対応する部署がないので消え、8 − 1 = 7 行。部署 4（広報）も社員がいないので出ない。"
+    },
+    {
+      "id": "sql-q-left-rows",
+      "type": "qa",
+      "tags": [
+        "ステップ3",
+        "JOIN（結合）"
+      ],
+      "passage": "sql-tables",
+      "question": "本文の表に対して\nSELECT e.name, d.name FROM employees e LEFT JOIN departments d ON e.dept_id = d.id;\nを実行すると、結果は何行？",
+      "answer": "8",
+      "accepted": [
+        "8行"
+      ],
+      "explanation": "LEFT JOIN は左側の表（employees）の行をすべて残す。対応する部署がない山本も、d.name が NULL の行として出るので 8 行。"
+    },
+    {
+      "id": "sql-ch-left-null",
+      "type": "choice",
+      "tags": [
+        "ステップ3",
+        "JOIN（結合）"
+      ],
+      "passage": "sql-tables",
+      "question": "本文の表に対して\nSELECT d.name, e.name FROM departments d LEFT JOIN employees e ON e.dept_id = d.id WHERE d.id = 4;\nの結果として正しいものはどれ？",
+      "choices": [
+        "結果は 0 行",
+        "広報 | 広報 の 1 行",
+        "広報 | NULL の 1 行",
+        "広報 | 山本 の 1 行"
+      ],
+      "answer": 2,
+      "explanation": "広報には社員がいないが、LEFT JOIN なので左側（departments）の行は残り、右側（employees）の列は NULL で埋められる。INNER JOIN なら 0 行になる。"
+    },
+    {
+      "id": "sql-q-left-isnull",
+      "type": "qa",
+      "tags": [
+        "ステップ3",
+        "JOIN（結合）"
+      ],
+      "passage": "sql-tables",
+      "question": "本文の表に対して\nSELECT d.name FROM departments d LEFT JOIN employees e ON e.dept_id = d.id WHERE e.id IS NULL;\nを実行したとき、結果に出る d.name は？",
+      "answer": "広報",
+      "explanation": "LEFT JOIN で対応する社員がいない部署は e の列が NULL になる。それを IS NULL で取り出すと「社員が 1 人もいない部署」が分かる。よく使う定番の書き方。"
+    },
+    {
+      "id": "sql-ch-inner-vs-left",
+      "type": "choice",
+      "tags": [
+        "ステップ3",
+        "JOIN（結合）"
+      ],
+      "question": "INNER JOIN と LEFT JOIN の違いとして正しいものはどれ？",
+      "choices": [
+        "INNER JOIN は左の表の行だけを、LEFT JOIN は右の表の行だけを出す",
+        "INNER JOIN は両方の表に対応する行だけを残し、LEFT JOIN は左の表の行を対応がなくてもすべて残す",
+        "INNER JOIN は 2 つの表、LEFT JOIN は 3 つ以上の表を結合する",
+        "INNER JOIN は結果を昇順に、LEFT JOIN は降順に並べる"
+      ],
+      "answer": 1,
+      "explanation": "LEFT JOIN（LEFT OUTER JOIN）は外部結合の一種で、対応がない部分は NULL になる。右の表をすべて残すのは RIGHT JOIN。JOIN とだけ書くと INNER JOIN になる。"
+    },
+    {
+      "id": "sql-ch-ambiguous",
+      "type": "choice",
+      "tags": [
+        "ステップ3",
+        "JOIN（結合）"
+      ],
+      "question": "SELECT name FROM employees e INNER JOIN departments d ON e.dept_id = d.id; がエラーになる理由はどれ？",
+      "choices": [
+        "ON の条件に = を使えないから",
+        "name 列が両方の表にあり、どちらの name か決まらないから",
+        "INNER JOIN では SELECT に 1 列しか書けないから",
+        "表に別名を付けたときは * しか使えないから"
+      ],
+      "answer": 1,
+      "explanation": "両方の表にある列名は、e.name や d.name のように「表名（別名）.列名」で指定する。片方の表にしかない列はそのまま書いてもよい。"
+    },
+    {
+      "id": "sql-q-join-count",
+      "type": "qa",
+      "tags": [
+        "ステップ3",
+        "JOIN（結合）"
+      ],
+      "passage": "sql-tables",
+      "question": "本文の表に対して\nSELECT COUNT(*) FROM employees e INNER JOIN departments d ON e.dept_id = d.id WHERE d.name = '営業';\nの結果の値は？",
+      "answer": "3",
+      "explanation": "営業（id = 1）に所属するのは佐藤・田中・中村の 3 人。部署名で絞り込むために departments と結合している。COUNT(*) なので salary が NULL の中村も数える。"
+    },
+    {
+      "id": "sql-q-join-group",
+      "type": "qa",
+      "tags": [
+        "ステップ3",
+        "JOIN（結合）"
+      ],
+      "passage": "sql-tables",
+      "question": "本文の表に対して\nSELECT d.name FROM employees e INNER JOIN departments d ON e.dept_id = d.id GROUP BY d.name ORDER BY SUM(e.salary) DESC LIMIT 1;\nを実行したとき、結果に出る d.name は？",
+      "answer": "開発",
+      "explanation": "部署ごとの給与合計は 営業 580000（NULL は除く）・開発 1350000・総務 320000。最大の開発が先頭になる。結合 → グループ化 → 並べ替えの組み合わせ。"
+    },
+    {
+      "id": "sql-o-join-write",
+      "type": "order",
+      "tags": [
+        "ステップ3",
+        "JOIN（結合）"
+      ],
+      "prompt": "社員名と部署名を社員 id 順に表示する SQL 文になるように、書く順に並べてください。",
+      "chunks": [
+        "SELECT e.name, d.name",
+        "FROM employees e",
+        "INNER JOIN departments d",
+        "ON e.dept_id = d.id",
+        "ORDER BY e.id"
+      ],
+      "answer": "SELECT e.name, d.name FROM employees e INNER JOIN departments d ON e.dept_id = d.id ORDER BY e.id",
+      "explanation": "FROM のすぐあとに JOIN 表名 ON 条件 を続ける。WHERE や ORDER BY は JOIN のあとに書く。"
+    },
+    {
+      "id": "sql-q-sub-max",
+      "type": "qa",
+      "tags": [
+        "ステップ3",
+        "サブクエリ"
+      ],
+      "passage": "sql-tables",
+      "question": "本文の表に対して\nSELECT name FROM employees WHERE salary = (SELECT MAX(salary) FROM employees);\nを実行したとき、結果に出る name は？",
+      "answer": "渡辺",
+      "explanation": "かっこの中のサブクエリが先に 520000 を求め、外側の WHERE で salary = 520000 の行を取り出す。WHERE salary = MAX(salary) とは書けない（WHERE に集計関数は書けない）。"
+    },
+    {
+      "id": "sql-q-sub-avg",
+      "type": "qa",
+      "tags": [
+        "ステップ3",
+        "サブクエリ"
+      ],
+      "passage": "sql-tables",
+      "question": "本文の表に対して\nSELECT name FROM employees WHERE salary > (SELECT AVG(salary) FROM employees);\nを実行すると、結果は何行？",
+      "answer": "3",
+      "accepted": [
+        "3行"
+      ],
+      "hints": [
+        "AVG は NULL を除いた 7 人で計算する"
+      ],
+      "explanation": "平均は (300000 + 450000 + 380000 + 280000 + 320000 + 520000 + 250000) ÷ 7 = 2500000 ÷ 7 ≒ 357143。これより多いのは鈴木・高橋・渡辺の 3 行。"
+    },
+    {
+      "id": "sql-ch-sub-in",
+      "type": "choice",
+      "tags": [
+        "ステップ3",
+        "サブクエリ"
+      ],
+      "passage": "sql-tables",
+      "question": "本文の表に対して\nSELECT name FROM employees WHERE dept_id IN (SELECT id FROM departments WHERE name = '開発');\nを実行すると、結果は何行？",
+      "choices": [
+        "2 行",
+        "1 行",
+        "3 行",
+        "4 行"
+      ],
+      "answer": 2,
+      "explanation": "サブクエリが開発の id（2）を返し、dept_id IN (2) の社員（鈴木・高橋・渡辺）の 3 行になる。同じ結果は JOIN でも書ける。"
+    },
+    {
+      "id": "sql-ch-sub-multi",
+      "type": "choice",
+      "tags": [
+        "ステップ3",
+        "サブクエリ"
+      ],
+      "question": "WHERE dept_id = (SELECT id FROM departments WHERE name IN ('営業', '開発')) がエラーになる理由として正しいものはどれ？",
+      "choices": [
+        "サブクエリが 2 行を返すので、= では比べられないから（IN を使う）",
+        "文字列を IN で比べることはできないから",
+        "サブクエリの中では WHERE を使えないから",
+        "サブクエリは SELECT の直後にしか書けないから"
+      ],
+      "answer": 0,
+      "explanation": "= の右側のサブクエリは 1 行 1 列（1 つの値）を返す必要がある。複数行を返すサブクエリと比べるときは dept_id IN (SELECT …) にする。"
+    },
+    {
+      "id": "sql-ch-exists",
+      "type": "choice",
+      "tags": [
+        "ステップ3",
+        "サブクエリ"
+      ],
+      "passage": "sql-tables",
+      "question": "本文の表に対して\nSELECT name FROM departments d WHERE EXISTS (SELECT * FROM employees e WHERE e.dept_id = d.id);\nを実行すると、結果は何行？",
+      "choices": [
+        "4 行",
+        "8 行",
+        "1 行",
+        "3 行"
+      ],
+      "answer": 3,
+      "explanation": "EXISTS は、サブクエリが 1 行でも返せば真になる。社員がいる営業・開発・総務の 3 行で、社員のいない広報は出ない。外側の行（d）を使うこのようなサブクエリを相関サブクエリという。"
+    },
+    {
+      "id": "sql-c-insert",
+      "type": "cloze",
+      "tags": [
+        "ステップ4",
+        "INSERT・UPDATE・DELETE"
+      ],
+      "text": "行を追加する: INSERT {{INTO}} employees (id, name, dept_id, salary) VALUES (9, '小林', 3, 290000);",
+      "hint": "英字 4 文字",
+      "explanation": "INSERT INTO 表名 (列名, …) VALUES (値, …)。列名を書いておくと、表の列の順番が変わっても安全。文字列は ' '（シングルクォート）で囲む。"
+    },
+    {
+      "id": "sql-c-update-set",
+      "type": "cloze",
+      "tags": [
+        "ステップ4",
+        "INSERT・UPDATE・DELETE"
+      ],
+      "text": "値を変更する: UPDATE employees {{SET}} salary = 310000 WHERE id = 1;",
+      "hint": "英字 3 文字",
+      "explanation": "UPDATE 表名 SET 列 = 値 WHERE 条件。複数の列を変えるときは SET a = 1, b = 2 のようにカンマで区切る。"
+    },
+    {
+      "id": "sql-o-update-write",
+      "type": "order",
+      "tags": [
+        "ステップ4",
+        "INSERT・UPDATE・DELETE"
+      ],
+      "prompt": "id が 1 の社員の salary を 310000 に変更する SQL 文になるように、書く順に並べてください。",
+      "chunks": [
+        "UPDATE employees",
+        "SET salary = 310000",
+        "WHERE id = 1"
+      ],
+      "answer": "UPDATE employees SET salary = 310000 WHERE id = 1",
+      "explanation": "UPDATE → SET → WHERE の順。WHERE を書き忘れると全員の salary が 310000 になってしまう。"
+    },
+    {
+      "id": "sql-ch-update-nowhere",
+      "type": "choice",
+      "tags": [
+        "ステップ4",
+        "INSERT・UPDATE・DELETE"
+      ],
+      "question": "UPDATE employees SET salary = 0; を実行するとどうなる？",
+      "choices": [
+        "最初の 1 行だけ salary が 0 になる",
+        "salary が NULL の行だけ 0 になる",
+        "すべての行の salary が 0 になる",
+        "エラーになり何も変わらない"
+      ],
+      "answer": 2,
+      "explanation": "WHERE がない UPDATE・DELETE は全行が対象になる。実行前に同じ条件の SELECT で対象の行を確かめる習慣をつけるとよい。"
+    },
+    {
+      "id": "sql-q-update-calc",
+      "type": "qa",
+      "tags": [
+        "ステップ4",
+        "INSERT・UPDATE・DELETE"
+      ],
+      "passage": "sql-tables",
+      "question": "本文の表に対して\nUPDATE employees SET salary = salary + 10000 WHERE dept_id = 2;\nを実行したあと、鈴木の salary はいくつ？",
+      "answer": "460000",
+      "explanation": "SET の右側の salary は更新前の値を表すので、450000 + 10000 = 460000。dept_id = 2 の 3 人がそれぞれ 10000 ずつ増える。"
+    },
+    {
+      "id": "sql-q-delete-count",
+      "type": "qa",
+      "tags": [
+        "ステップ4",
+        "INSERT・UPDATE・DELETE"
+      ],
+      "passage": "sql-tables",
+      "question": "本文の表に対して\nDELETE FROM employees WHERE salary < 300000;\nを実行すると、何行が削除される？",
+      "answer": "2",
+      "accepted": [
+        "2行"
+      ],
+      "explanation": "300000 未満は田中（280000）と山本（250000）の 2 行。salary が NULL の中村は、NULL < 300000 が不明になるので削除されない。佐藤のちょうど 300000 も対象外。"
+    },
+    {
+      "id": "sql-ch-drop",
+      "type": "choice",
+      "tags": [
+        "ステップ4",
+        "INSERT・UPDATE・DELETE"
+      ],
+      "question": "表 employees を、中のデータだけでなく表の定義ごと削除する SQL 文はどれ？",
+      "choices": [
+        "REMOVE TABLE employees;",
+        "DROP TABLE employees;",
+        "DELETE TABLE employees;",
+        "DELETE FROM employees;"
+      ],
+      "answer": 1,
+      "explanation": "DROP TABLE は表そのものをなくす。DELETE FROM employees; は全行を削除するが、空の表は残る。DELETE TABLE や REMOVE TABLE という文はない。"
+    },
+    {
+      "id": "sql-c-primary-key",
+      "type": "cloze",
+      "tags": [
+        "ステップ4",
+        "CREATE TABLE と制約"
+      ],
+      "text": "表を作る: CREATE TABLE departments (id INTEGER {{PRIMARY KEY}}, name VARCHAR(50) NOT NULL);",
+      "hint": "英単語 2 つ",
+      "explanation": "PRIMARY KEY（主キー）を付けた列は、値の重複も NULL も許されない。行を一意に識別するための列。"
+    },
+    {
+      "id": "sql-ch-not-null",
+      "type": "choice",
+      "tags": [
+        "ステップ4",
+        "CREATE TABLE と制約"
+      ],
+      "question": "列の定義に NOT NULL を付けたときの効果はどれ？",
+      "choices": [
+        "その列の値が重複できなくなる",
+        "その列が主キーになる",
+        "その列に 0 を登録できなくなる",
+        "その列に NULL（値なし）を登録できなくなる"
+      ],
+      "answer": 3,
+      "explanation": "必ず値が必要な列（氏名など）に付ける。値の重複を禁止するのは UNIQUE、主キーにするのは PRIMARY KEY。"
+    },
+    {
+      "id": "sql-ch-unique-vs-pk",
+      "type": "choice",
+      "tags": [
+        "ステップ4",
+        "CREATE TABLE と制約"
+      ],
+      "question": "UNIQUE 制約と PRIMARY KEY 制約の違いとして正しいものはどれ？",
+      "choices": [
+        "PRIMARY KEY は 1 つの表に 1 つだけで NULL を許さないが、UNIQUE は 1 つの表にいくつでも設定できる",
+        "PRIMARY KEY は文字列の列にしか設定できない",
+        "UNIQUE は値の重複を許すが、PRIMARY KEY は許さない",
+        "UNIQUE を設定すると、その列は自動的に外部キーになる"
+      ],
+      "answer": 0,
+      "explanation": "どちらも値の重複を禁止する。主キーは表に 1 つ（複数列の組み合わせでもよい）で NULL 不可。UNIQUE はメールアドレスなど「主キー以外で重複してはいけない列」に使う。"
+    },
+    {
+      "id": "sql-c-references",
+      "type": "cloze",
+      "tags": [
+        "ステップ4",
+        "CREATE TABLE と制約"
+      ],
+      "text": "社員の dept_id が部署表の id を参照するようにする: dept_id INTEGER {{REFERENCES}} departments(id)",
+      "hint": "英字 10 文字",
+      "explanation": "外部キー制約。FOREIGN KEY (dept_id) REFERENCES departments(id) と表の最後にまとめて書くこともできる。"
+    },
+    {
+      "id": "sql-ch-fk-error",
+      "type": "choice",
+      "tags": [
+        "ステップ4",
+        "CREATE TABLE と制約"
+      ],
+      "passage": "sql-tables",
+      "question": "本文の employees.dept_id に departments.id を参照する外部キー制約が設定されている。\nINSERT INTO employees (id, name, dept_id, salary) VALUES (9, '小林', 9, 290000);\nを実行するとどうなる？",
+      "choices": [
+        "dept_id が NULL に置き換えられて登録される",
+        "departments に id = 9 の行が自動で追加される",
+        "そのまま登録される",
+        "departments に id = 9 の行がないのでエラーになる"
+      ],
+      "answer": 3,
+      "explanation": "外部キー制約は、参照先に存在しない値の登録を防ぐ（参照整合性）。先に departments に部署 9 を登録すれば追加できる。"
+    },
+    {
+      "id": "sql-ch-check",
+      "type": "choice",
+      "tags": [
+        "ステップ4",
+        "CREATE TABLE と制約"
+      ],
+      "question": "CREATE TABLE で salary INTEGER CHECK (salary >= 0) と定義したときの効果はどれ？",
+      "choices": [
+        "salary が 0 の行だけを検索できる",
+        "salary に値を入れないとエラーになる",
+        "salary に負の値を登録しようとするとエラーになる",
+        "salary の既定値が 0 になる"
+      ],
+      "answer": 2,
+      "explanation": "CHECK 制約は、登録できる値の条件を指定する。既定値を決めるのは DEFAULT、値の入力を必須にするのは NOT NULL。"
+    },
+    {
+      "id": "sql-c-default",
+      "type": "cloze",
+      "tags": [
+        "ステップ4",
+        "CREATE TABLE と制約"
+      ],
+      "text": "値を省略したときに使われる値を決める: status VARCHAR(10) {{DEFAULT}} 'active'",
+      "hint": "英字 7 文字",
+      "explanation": "INSERT で status を書かなかった行には 'active' が入る。NOT NULL と組み合わせることも多い。"
+    },
+    {
+      "id": "sql-o-create-order",
+      "type": "order",
+      "tags": [
+        "ステップ4",
+        "CREATE TABLE と制約"
+      ],
+      "prompt": "外部キーで employees が departments を参照する 2 つの表を、新しく作ってデータを入れる。エラーにならない順に並べてください。",
+      "chunks": [
+        "CREATE TABLE departments",
+        "CREATE TABLE employees",
+        "INSERT INTO departments",
+        "INSERT INTO employees"
+      ],
+      "answer": "CREATE TABLE departments CREATE TABLE employees INSERT INTO departments INSERT INTO employees",
+      "explanation": "参照される側（departments）を先に作り、データも先に入れる。employees を先に作ろうとすると参照先の表がなく、先に社員を登録すると参照先の部署がないためエラーになる。"
+    },
+    {
+      "id": "sql-c-index",
+      "type": "cloze",
+      "tags": [
+        "ステップ4",
+        "インデックス"
+      ],
+      "text": "dept_id での検索を速くする: CREATE {{INDEX}} idx_emp_dept ON employees (dept_id);",
+      "hint": "英字 5 文字",
+      "explanation": "インデックス（索引）は本の索引のように、目的の行をすばやく探すためのしくみ。"
+    },
+    {
+      "id": "sql-ch-index-tradeoff",
+      "type": "choice",
+      "tags": [
+        "ステップ4",
+        "インデックス"
+      ],
+      "question": "インデックスの説明として正しいものはどれ？",
+      "choices": [
+        "検索は速くなるが、データの追加・更新・削除のたびにインデックスも更新されるため、その処理は遅くなる",
+        "インデックスを作った列には NULL を登録できなくなる",
+        "インデックスを作った列は WHERE の条件に使えなくなる",
+        "作れば作るほど、すべての処理が速くなる"
+      ],
+      "answer": 0,
+      "explanation": "よく検索や結合の条件に使う列に絞って作る。更新が多い表に何でも作ると逆効果になる。記憶領域も余分に使う。"
+    },
+    {
+      "id": "sql-ch-index-like",
+      "type": "choice",
+      "tags": [
+        "ステップ4",
+        "インデックス"
+      ],
+      "question": "name 列にインデックスがあるとき、インデックスが最も効きにくい条件はどれ？",
+      "choices": [
+        "WHERE name IN ('佐藤', '伊藤')",
+        "WHERE name LIKE '%藤'",
+        "WHERE name = '佐藤'",
+        "WHERE name LIKE '佐%'"
+      ],
+      "answer": 1,
+      "explanation": "インデックスは値の先頭から並べて作られるので、先頭が決まらない後方一致（'%藤'）では使えず、全行を調べることになりやすい。前方一致（'佐%'）や等号には効く。"
+    },
+    {
+      "id": "sql-c-commit",
+      "type": "cloze",
+      "tags": [
+        "ステップ4",
+        "トランザクション"
+      ],
+      "text": "トランザクションの中で行った更新を確定させる SQL 文は {{COMMIT}} である。",
+      "hint": "英字 6 文字",
+      "explanation": "COMMIT するまでの変更は、ほかの利用者からは（通常）見えず、取り消すこともできる。"
+    },
+    {
+      "id": "sql-q-rollback",
+      "type": "qa",
+      "tags": [
+        "ステップ4",
+        "トランザクション"
+      ],
+      "question": "トランザクションの中で行った、まだ確定していない更新をすべて取り消す SQL 文は？",
+      "answer": "ROLLBACK",
+      "explanation": "ROLLBACK でトランザクション開始前の状態に戻る。途中でエラーが起きたときに使う。"
+    },
+    {
+      "id": "sql-q-rollback-value",
+      "type": "qa",
+      "tags": [
+        "ステップ4",
+        "トランザクション"
+      ],
+      "passage": "sql-tables",
+      "question": "本文の表に対して、次の順に実行した。\nBEGIN;\nUPDATE employees SET salary = 0 WHERE id = 1;\nROLLBACK;\nこのあと SELECT salary FROM employees WHERE id = 1; の結果の値は？",
+      "answer": "300000",
+      "explanation": "ROLLBACK で UPDATE が取り消されるので、佐藤の salary は元の 300000 のまま。COMMIT していれば 0 になっていた。"
+    },
+    {
+      "id": "sql-o-transfer",
+      "type": "order",
+      "tags": [
+        "ステップ4",
+        "トランザクション"
+      ],
+      "prompt": "口座 A から口座 B へ 1 万円を振り替える処理を、トランザクションとして正しい順に並べてください。",
+      "chunks": [
+        "BEGIN",
+        "UPDATE で口座 A の残高を 1 万円減らす",
+        "UPDATE で口座 B の残高を 1 万円増やす",
+        "COMMIT"
+      ],
+      "answer": "BEGIN UPDATE で口座 A の残高を 1 万円減らす UPDATE で口座 B の残高を 1 万円増やす COMMIT",
+      "explanation": "2 つの UPDATE を 1 つのトランザクションにまとめると、途中で障害が起きても「A だけ減って B が増えない」状態にならない（原子性）。BEGIN は START TRANSACTION とも書く。"
+    },
+    {
+      "id": "sql-ch-atomicity",
+      "type": "choice",
+      "tags": [
+        "ステップ4",
+        "トランザクション"
+      ],
+      "question": "トランザクションの ACID 特性のうち、「トランザクション内の処理は、すべて実行されるか、まったく実行されないかのどちらかになる」性質はどれ？",
+      "choices": [
+        "独立性（Isolation）",
+        "耐久性（Durability）",
+        "一貫性（Consistency）",
+        "原子性（Atomicity）"
+      ],
+      "answer": 3,
+      "explanation": "一貫性は制約などのルールが常に守られること、独立性は同時に実行しても互いに影響しないこと、耐久性は COMMIT した結果が障害でも失われないこと。"
+    }
+  ]
+}

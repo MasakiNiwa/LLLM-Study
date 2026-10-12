@@ -19,7 +19,7 @@
   "author": "LLLM-Study",
   "license": "MIT",
   "source": "LLLM-Study オリジナル",
-  "revision": 2,
+  "revision": 3,
   "items": [
     {
       "id": "c-since",
@@ -123,11 +123,11 @@
       "question": "I have known her ___ ten years.",
       "choices": [
         "since",
-        "for",
         "from",
+        "for",
         "during"
       ],
-      "answer": 1,
+      "answer": 2,
       "explanation": "期間（10年間）を表すので for。起点なら since。"
     },
     {
@@ -135,12 +135,12 @@
       "type": "choice",
       "question": "How ___ water do you drink a day?",
       "choices": [
-        "many",
         "much",
+        "many",
         "lot",
         "few"
       ],
-      "answer": 1,
+      "answer": 0,
       "explanation": "water は数えられない名詞なので much。"
     },
     {
@@ -150,10 +150,10 @@
       "choices": [
         "in",
         "at",
-        "on",
-        "by"
+        "by",
+        "on"
       ],
-      "answer": 2,
+      "answer": 3,
       "explanation": "特定の日（の朝）には on。in the morning でも、曜日が付くと on Monday morning。"
     },
     {
@@ -175,11 +175,11 @@
       "question": "This box is ___ than that one.",
       "choices": [
         "heavy",
-        "heavier",
         "heaviest",
+        "heavier",
         "more heavy"
       ],
-      "answer": 1,
+      "answer": 2,
       "explanation": "比較級は heavier。y で終わる語は y を i に変えて -er。"
     },
     {
@@ -187,12 +187,12 @@
       "type": "choice",
       "question": "I ___ my homework yet.",
       "choices": [
-        "didn't finish",
         "haven't finished",
+        "didn't finish",
         "don't finish",
         "wasn't finished"
       ],
-      "answer": 1,
+      "answer": 0,
       "explanation": "yet（まだ）は現在完了の否定文でよく使う。"
     },
     {
@@ -202,10 +202,10 @@
       "choices": [
         "walk",
         "to walk",
-        "walking",
-        "walked"
+        "walked",
+        "walking"
       ],
-      "answer": 2,
+      "answer": 3,
       "explanation": "enjoy のあとは -ing（動名詞）。to 不定詞はとらない。"
     },
     {
@@ -227,11 +227,11 @@
       "question": "This bridge was ___ in 1990.",
       "choices": [
         "build",
-        "built",
         "building",
+        "built",
         "builds"
       ],
-      "answer": 1,
+      "answer": 2,
       "explanation": "受け身は be + 過去分詞。build - built - built。"
     },
     {
@@ -239,12 +239,12 @@
       "type": "choice",
       "question": "She is ___ honest person.",
       "choices": [
-        "a",
         "an",
+        "a",
         "the",
         "（何も入れない）"
       ],
-      "answer": 1,
+      "answer": 0,
       "explanation": "honest の h は発音しないので母音で始まり、an を使う。"
     },
     {
@@ -253,11 +253,11 @@
       "question": "The man ___ lives next door is a doctor.",
       "choices": [
         "which",
-        "who",
         "whose",
-        "what"
+        "what",
+        "who"
       ],
-      "answer": 1,
+      "answer": 3,
       "explanation": "先行詞が人（the man）で、後ろに動詞が続くので who。"
     },
     {

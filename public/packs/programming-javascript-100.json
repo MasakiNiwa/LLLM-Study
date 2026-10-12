@@ -1,0 +1,1387 @@
+{
+  "format": "lllm-study-pack",
+  "version": 1,
+  "id": "programming-javascript-100",
+  "title": "JavaScript 入門 100（基本文法から非同期処理まで）",
+  "description": "モダンな JavaScript（ES2022 以降）を、let / const / var の違い、型と typeof、== と ===、テンプレートリテラルから始め、配列メソッド（map・filter・reduce・find・some）、オブジェクト・分割代入・スプレッド、関数・アロー関数・this、クロージャ、クラス、モジュール（import / export）、例外、JSON、オプショナルチェーンと ?? へと進みます。最後に Promise・async / await とイベントループ（出力順の問題）、DOM の基本、よくある落とし穴を学び、ステップ 1〜4 の順に力がつく構成です。多くの問題は短いコードを読んで「出力は？」を答える形式で、DOM・fetch・import 以外のコードはすべて Node.js で実行して出力を確かめています（配列やオブジェクトの表示は Node.js の console.log の形式。[1, 2] のように空白を詰めて答えても正解になります）。形式の内訳: 一問一答 42 問・選択問題 34 問・穴埋め 18 問・並べ替え 6 問。複数行の出力は行の順に空白で区切って答えます。先に「Python 入門 100（基本文法から関数・クラスまで）」でプログラミングの基本を押さえておくと、ほかの言語との違いもつかみやすくなります。次は TypeScript や React など、実際の Web アプリ開発へ進みましょう。",
+  "subject": "programming",
+  "language": {
+    "target": "ja",
+    "explanation": "ja"
+  },
+  "level": "プログラミング初級〜中級",
+  "tags": [
+    "プログラミング",
+    "JavaScript",
+    "入門"
+  ],
+  "author": "LLLM-Study",
+  "license": "MIT",
+  "source": "LLLM-Study オリジナル（AI を利用して作成）",
+  "revision": 1,
+  "items": [
+    {
+      "id": "js-cz-const",
+      "type": "cloze",
+      "tags": [
+        "ステップ1",
+        "変数宣言"
+      ],
+      "text": "{{const}} TAX_RATE = 0.1;  // 再代入できない変数を宣言する",
+      "hint": "constant（定数）の略",
+      "explanation": "const は再代入できない変数、let は再代入できる変数を宣言する。まず const を使い、値を変える必要があるときだけ let にするのが現代的な書き方。var は古い書き方で、新しいコードでは使わない。"
+    },
+    {
+      "id": "js-err-const-reassign",
+      "type": "qa",
+      "tags": [
+        "ステップ1",
+        "変数宣言"
+      ],
+      "question": "次のコードを実行すると発生する例外（エラー）の名前は？\n\nconst x = 1;\nx = 2;",
+      "answer": "TypeError",
+      "hints": [
+        "型（Type）に関するエラーとして報告される"
+      ],
+      "explanation": "const で宣言した変数に再代入すると TypeError（Assignment to constant variable）になる。値を変えるなら let で宣言する。"
+    },
+    {
+      "id": "js-ch-let-block",
+      "type": "choice",
+      "tags": [
+        "ステップ1",
+        "変数宣言"
+      ],
+      "question": "次のコードを実行したときの出力は？\n\nlet x = 1;\n{\n  let x = 2;\n}\nconsole.log(x);",
+      "choices": [
+        "1",
+        "2",
+        "ReferenceError が発生する",
+        "undefined"
+      ],
+      "answer": 0,
+      "explanation": "let と const はブロック { } 単位のスコープを持つ。ブロックの中の x は外側の x とは別の変数なので、外側の x は 1 のまま。"
+    },
+    {
+      "id": "js-q-var-hoist",
+      "type": "qa",
+      "tags": [
+        "ステップ1",
+        "変数宣言"
+      ],
+      "question": "次のコードを実行したときの出力は？\n\nconsole.log(a);\nvar a = 5;",
+      "answer": "undefined",
+      "hints": [
+        "宣言だけが先頭に移動したように振る舞う"
+      ],
+      "explanation": "var の宣言は関数（またはスクリプト）の先頭に巻き上げられ（ホイスティング）、代入までは undefined が入っている。値の 5 までは巻き上げられない。"
+    },
+    {
+      "id": "js-err-tdz",
+      "type": "qa",
+      "tags": [
+        "ステップ1",
+        "変数宣言"
+      ],
+      "question": "次のコードを実行すると発生する例外（エラー）の名前は？\n\nconsole.log(b);\nlet b = 5;",
+      "answer": "ReferenceError",
+      "explanation": "let / const も巻き上げられるが、宣言の行より前は TDZ（一時的デッドゾーン）で、参照すると ReferenceError になる。var のように黙って undefined にならないので、ミスに気づきやすい。"
+    },
+    {
+      "id": "js-ch-var-loop-scope",
+      "type": "choice",
+      "tags": [
+        "ステップ1",
+        "変数宣言"
+      ],
+      "question": "次のコードを実行したときの出力は？\n\nfor (var i = 0; i < 3; i++) {}\nconsole.log(i);",
+      "choices": [
+        "3",
+        "2",
+        "undefined",
+        "ReferenceError が発生する"
+      ],
+      "answer": 0,
+      "explanation": "var はブロックスコープを持たないので、for の外でも i が使える。ループは i が 3 になって条件 i < 3 が偽になったときに終わるので 3。let にすると外からは参照できず ReferenceError になる。"
+    },
+    {
+      "id": "js-q-typeof-undef-func",
+      "type": "qa",
+      "tags": [
+        "ステップ1",
+        "型と typeof"
+      ],
+      "question": "次のコードを実行したときの出力は？\n\nlet v;\nconsole.log(typeof v, typeof (() => {}));",
+      "answer": "undefined function",
+      "explanation": "値を入れずに宣言した変数は undefined。関数は typeof で \"function\" になる（内部的にはオブジェクトの一種）。"
+    },
+    {
+      "id": "js-ch-typeof-null",
+      "type": "choice",
+      "tags": [
+        "ステップ1",
+        "型と typeof"
+      ],
+      "question": "次のコードを実行したときの出力は？\n\nconsole.log(typeof null);",
+      "choices": [
+        "null",
+        "undefined",
+        "object",
+        "number"
+      ],
+      "answer": 2,
+      "explanation": "typeof null が \"object\" になるのは JavaScript 初期からの有名な仕様上の不具合で、互換性のため直されていない。null かどうかは value === null で調べる。"
+    },
+    {
+      "id": "js-cz-isarray",
+      "type": "cloze",
+      "tags": [
+        "ステップ1",
+        "型と typeof"
+      ],
+      "text": "console.log(Array.{{isArray}}([1, 2]));  // true（配列かどうかを調べる）",
+      "hint": "「is + Array」の形",
+      "explanation": "typeof [] は \"object\" になり配列と区別できないので、配列かどうかは Array.isArray() で調べる。"
+    },
+    {
+      "id": "js-q-eqeq",
+      "type": "qa",
+      "tags": [
+        "ステップ1",
+        "比較と演算"
+      ],
+      "question": "次のコードを実行したときの出力は？\n\nconsole.log(1 == \"1\", 1 === \"1\");",
+      "answer": "true false",
+      "hints": [
+        "=== は型も比べる"
+      ],
+      "explanation": "== は型を変換してから比べる（緩い等価）ので 1 == \"1\" は true。=== は型も含めて比べる（厳密等価）ので false。ふだんは === を使う。"
+    },
+    {
+      "id": "js-ch-null-undefined",
+      "type": "choice",
+      "tags": [
+        "ステップ1",
+        "比較と演算"
+      ],
+      "question": "次のコードを実行したときの出力は？\n\nconsole.log(null == undefined, null === undefined);",
+      "choices": [
+        "true false",
+        "false false",
+        "true true",
+        "false true"
+      ],
+      "answer": 0,
+      "explanation": "null と undefined は == では互いに等しいとみなされるが、型が違うので === では false。「null か undefined か」をまとめて調べる x == null という書き方もあるが、意図をコメントで示すとよい。"
+    },
+    {
+      "id": "js-ch-strict-eq",
+      "type": "choice",
+      "tags": [
+        "ステップ1",
+        "比較と演算"
+      ],
+      "question": "値と型の両方が等しいかを比べる、ふだん使うべき比較演算子は？",
+      "choices": [
+        "===",
+        "==",
+        "=>",
+        "="
+      ],
+      "answer": 0,
+      "explanation": "=== は厳密等価演算子で、型変換をしない。== は型変換をするので思わぬ結果になりやすい。= は代入、=> はアロー関数の記号。"
+    },
+    {
+      "id": "js-ch-plus-string",
+      "type": "choice",
+      "tags": [
+        "ステップ1",
+        "比較と演算"
+      ],
+      "question": "次のコードを実行したときの出力は？\n\nconsole.log(\"5\" + 3);",
+      "choices": [
+        "8",
+        "TypeError が発生する",
+        "53",
+        "NaN"
+      ],
+      "answer": 2,
+      "explanation": "+ は片方が文字列だと文字列の連結になるので \"5\" + \"3\" → \"53\"。数値として足すなら Number(\"5\") + 3 のように先に変換する。"
+    },
+    {
+      "id": "js-q-minus-string",
+      "type": "qa",
+      "tags": [
+        "ステップ1",
+        "比較と演算"
+      ],
+      "question": "次のコードを実行したときの出力は？\n\nconsole.log(\"5\" - 3);",
+      "answer": "2",
+      "explanation": "- には文字列の意味がないので、\"5\" が数値に変換されて 5 - 3 = 2 になる。+ だけが文字列連結になる点が落とし穴。"
+    },
+    {
+      "id": "js-ch-division",
+      "type": "choice",
+      "tags": [
+        "ステップ1",
+        "比較と演算"
+      ],
+      "question": "次のコードを実行したときの出力は？\n\nconsole.log(7 / 2);",
+      "choices": [
+        "3.0",
+        "3.5",
+        "4",
+        "3"
+      ],
+      "answer": 1,
+      "explanation": "JavaScript の数値は整数と小数の区別がない（number 型）ので、7 / 2 は 3.5。整数の商が欲しいときは Math.floor(7 / 2) や Math.trunc() を使う。"
+    },
+    {
+      "id": "js-cz-pow",
+      "type": "cloze",
+      "tags": [
+        "ステップ1",
+        "比較と演算"
+      ],
+      "text": "console.log(2 {{**}} 10);  // 2 の 10 乗の 1024 を表示",
+      "hint": "記号 2 文字",
+      "explanation": "** はべき乗演算子（ES2016）。Math.pow(2, 10) と同じ。^ はビット演算の XOR なので 2 ^ 10 は 8 になる。"
+    },
+    {
+      "id": "js-q-template",
+      "type": "qa",
+      "tags": [
+        "ステップ1",
+        "文字列"
+      ],
+      "question": "次のコードを実行したときの出力は？\n\nconst a = 2, b = 3;\nconsole.log(`${a} + ${b} = ${a + b}`);",
+      "answer": "2 + 3 = 5",
+      "explanation": "テンプレートリテラルでは ${ } の中に変数や式を書くと、その値が埋め込まれる。${a + b} のように計算も書ける。"
+    },
+    {
+      "id": "js-ch-backtick",
+      "type": "choice",
+      "tags": [
+        "ステップ1",
+        "文字列"
+      ],
+      "question": "テンプレートリテラル（${ } で値を埋め込める文字列）を囲む記号は？",
+      "choices": [
+        "\"（ダブルクォート）",
+        "/（スラッシュ）",
+        "`（バッククォート）",
+        "'（シングルクォート）"
+      ],
+      "answer": 2,
+      "explanation": "テンプレートリテラルはバッククォート ` で囲む。改行もそのまま書ける。' や \" で囲んだ普通の文字列では ${ } は展開されず、そのまま表示される。"
+    },
+    {
+      "id": "js-q-slice",
+      "type": "qa",
+      "tags": [
+        "ステップ1",
+        "文字列"
+      ],
+      "question": "次のコードを実行したときの出力は？\n\nconsole.log(\"JavaScript\".slice(0, 4));",
+      "answer": "Java",
+      "explanation": "slice(start, end) は start から end の「手前」までを取り出す。インデックスは 0 から数えるので 0〜3 の 4 文字。負の数を渡すと後ろから数える。"
+    },
+    {
+      "id": "js-ch-number-parse",
+      "type": "choice",
+      "tags": [
+        "ステップ1",
+        "文字列"
+      ],
+      "question": "次のコードを実行したときの出力は？\n\nconsole.log(Number(\"12px\"), parseInt(\"12px\"));",
+      "choices": [
+        "12 12",
+        "NaN NaN",
+        "12 NaN",
+        "NaN 12"
+      ],
+      "answer": 3,
+      "explanation": "Number() は文字列全体が数値として読めないと NaN（Not a Number）を返す。parseInt() は先頭から読めるところまで読むので 12 になる。"
+    },
+    {
+      "id": "js-cz-touppercase",
+      "type": "cloze",
+      "tags": [
+        "ステップ1",
+        "文字列"
+      ],
+      "text": "console.log(\"hello\".{{toUpperCase}}());  // HELLO",
+      "hint": "to で始まるメソッド名",
+      "explanation": "toUpperCase() は大文字に、toLowerCase() は小文字にした新しい文字列を返す。文字列はイミュータブルなので元の文字列は変わらない。"
+    },
+    {
+      "id": "js-q-const-push",
+      "type": "qa",
+      "tags": [
+        "ステップ2",
+        "配列メソッド"
+      ],
+      "question": "次のコードを実行したときの出力は？\n\nconst a = [1, 2];\na.push(3);\nconsole.log(a);",
+      "answer": "[ 1, 2, 3 ]",
+      "accepted": [
+        "[1, 2, 3]"
+      ],
+      "explanation": "const が禁止するのは「変数への再代入」だけで、配列やオブジェクトの中身は変更できる。push() は末尾に要素を追加する。Node.js の console.log は配列を [ 1, 2, 3 ] のように表示する。"
+    },
+    {
+      "id": "js-q-map",
+      "type": "qa",
+      "tags": [
+        "ステップ2",
+        "配列メソッド"
+      ],
+      "question": "次のコードを実行したときの出力は？\n\nconsole.log([1, 2, 3].map(x => x * 2));",
+      "answer": "[ 2, 4, 6 ]",
+      "accepted": [
+        "[2, 4, 6]"
+      ],
+      "explanation": "map() は各要素に関数を当てはめた結果で「新しい配列」を作る。元の配列は変わらない。要素数は必ず元と同じ。"
+    },
+    {
+      "id": "js-ch-filter",
+      "type": "choice",
+      "tags": [
+        "ステップ2",
+        "配列メソッド"
+      ],
+      "question": "次のコードを実行したときの出力は？\n\nconsole.log([1, 2, 3, 4].filter(n => n % 2 === 0));",
+      "choices": [
+        "[ false, true, false, true ]",
+        "[ 2 ]",
+        "[ 1, 3 ]",
+        "[ 2, 4 ]"
+      ],
+      "answer": 3,
+      "explanation": "filter() は関数が true を返した要素だけを集めた新しい配列を返す。true / false の配列を返すのは map(n => n % 2 === 0) の場合。"
+    },
+    {
+      "id": "js-q-reduce",
+      "type": "qa",
+      "tags": [
+        "ステップ2",
+        "配列メソッド"
+      ],
+      "question": "次のコードを実行したときの出力は？\n\nconsole.log([1, 2, 3, 4].reduce((sum, n) => sum + n, 0));",
+      "answer": "10",
+      "hints": [
+        "合計を求めている"
+      ],
+      "explanation": "reduce((累積値, 要素) => 次の累積値, 初期値) は配列を 1 つの値にまとめる。0 から始めて 1, 2, 3, 4 を足していくので 10。初期値は省略しないのが安全。"
+    },
+    {
+      "id": "js-q-find",
+      "type": "qa",
+      "tags": [
+        "ステップ2",
+        "配列メソッド"
+      ],
+      "question": "次のコードを実行したときの出力は？\n\nconst nums = [5, 12, 8, 130];\nconsole.log(nums.find(n => n > 10));",
+      "answer": "12",
+      "explanation": "find() は条件に合う「最初の 1 つ」の要素を返す。130 も条件に合うが、先に見つかった 12 が返る。すべて欲しいときは filter() を使う。"
+    },
+    {
+      "id": "js-ch-find-none",
+      "type": "choice",
+      "tags": [
+        "ステップ2",
+        "配列メソッド"
+      ],
+      "question": "次のコードを実行したときの出力は？\n\nconst users = [{ id: 1 }, { id: 2 }];\nconsole.log(users.find(u => u.id === 3));",
+      "choices": [
+        "-1",
+        "null",
+        "[]",
+        "undefined"
+      ],
+      "answer": 3,
+      "explanation": "find() は見つからないと undefined を返す。-1 を返すのは findIndex() や indexOf()、空の配列を返すのは filter()。"
+    },
+    {
+      "id": "js-ch-some-every",
+      "type": "choice",
+      "tags": [
+        "ステップ2",
+        "配列メソッド"
+      ],
+      "question": "次のコードを実行したときの出力は？\n\nconst nums = [1, 3, 5];\nconsole.log(nums.some(n => n > 4), nums.every(n => n > 4));",
+      "choices": [
+        "false false",
+        "true false",
+        "true true",
+        "false true"
+      ],
+      "answer": 1,
+      "explanation": "some() は 1 つでも条件に合えば true、every() はすべてが条件に合えば true。5 だけが 4 より大きいので some は true、every は false。"
+    },
+    {
+      "id": "js-cz-map",
+      "type": "cloze",
+      "tags": [
+        "ステップ2",
+        "配列メソッド"
+      ],
+      "text": "const nums = [1, 2, 3];\nconst doubled = nums.{{map}}(n => n * 2);  // [2, 4, 6]",
+      "explanation": "各要素を変換した新しい配列を作るのは map()。forEach() は各要素に処理をするだけで、戻り値は undefined。"
+    },
+    {
+      "id": "js-cz-filter",
+      "type": "cloze",
+      "tags": [
+        "ステップ2",
+        "配列メソッド"
+      ],
+      "text": "const adults = people.{{filter}}(p => p.age >= 20);  // 20 歳以上の人だけを残す",
+      "explanation": "条件に合う要素だけを残すのは filter()。map と filter と reduce は配列処理の三本柱で、組み合わせてメソッドチェーンにできる。"
+    },
+    {
+      "id": "js-ch-sort-default",
+      "type": "choice",
+      "tags": [
+        "ステップ2",
+        "配列メソッド"
+      ],
+      "question": "次のコードを実行したときの出力は？\n\nconsole.log([10, 9, 1].sort());",
+      "choices": [
+        "[ 1, 10, 9 ]",
+        "[ 10, 9, 1 ]",
+        "[ 1, 9, 10 ]",
+        "[ 9, 10, 1 ]"
+      ],
+      "answer": 0,
+      "explanation": "sort() は引数がないと要素を「文字列として」辞書順に並べるので \"10\" が \"9\" より前に来る。数値の昇順は sort((a, b) => a - b) と書く。sort() は元の配列も並べ替える。"
+    },
+    {
+      "id": "js-od-method-chain",
+      "type": "order",
+      "tags": [
+        "ステップ2",
+        "配列メソッド"
+      ],
+      "prompt": "有効（active が true）なユーザーの名前を「, 」でつないだ文字列を作るように、部品を正しい順に並べよ。",
+      "answer": "users .filter(u => u.active) .map(u => u.name) .join(\", \")",
+      "chunks": [
+        "users",
+        ".filter(u => u.active)",
+        ".map(u => u.name)",
+        ".join(\", \")"
+      ],
+      "explanation": "先に filter で絞り込み、次に map で名前だけにして、最後に join で文字列にする。map を先にすると名前の文字列には active がないので絞り込めない。"
+    },
+    {
+      "id": "js-q-destructure-array",
+      "type": "qa",
+      "tags": [
+        "ステップ2",
+        "オブジェクト・分割代入・スプレッド"
+      ],
+      "question": "次のコードを実行したときの出力は？\n\nconst [x, , z] = [10, 20, 30];\nconsole.log(x, z);",
+      "answer": "10 30",
+      "explanation": "配列の分割代入は位置で対応する。カンマだけを書いた場所の要素（20）は読み飛ばされる。"
+    },
+    {
+      "id": "js-q-destructure-obj",
+      "type": "qa",
+      "tags": [
+        "ステップ2",
+        "オブジェクト・分割代入・スプレッド"
+      ],
+      "question": "次のコードを実行したときの出力は？\n\nconst user = { name: \"Aya\", age: 20 };\nconst { name, age } = user;\nconsole.log(name, age);",
+      "answer": "Aya 20",
+      "explanation": "オブジェクトの分割代入は、プロパティ名と同じ名前の変数に値を取り出す。順番ではなく名前で対応する。"
+    },
+    {
+      "id": "js-cz-destructure",
+      "type": "cloze",
+      "tags": [
+        "ステップ2",
+        "オブジェクト・分割代入・スプレッド"
+      ],
+      "text": "const book = { title: \"坊っちゃん\", year: 1906 };\nconst { {{title}} } = book;\nconsole.log(title);  // 坊っちゃん",
+      "explanation": "const { title } = book は const title = book.title と同じ。別の名前にしたいときは const { title: t } = book と書く。"
+    },
+    {
+      "id": "js-q-obj-spread",
+      "type": "qa",
+      "tags": [
+        "ステップ2",
+        "オブジェクト・分割代入・スプレッド"
+      ],
+      "question": "次のコードを実行したときの出力は？\n\nconst base = { a: 1, b: 2 };\nconst o = { ...base, b: 3 };\nconsole.log(o);",
+      "answer": "{ a: 1, b: 3 }",
+      "accepted": [
+        "{a: 1, b: 3}"
+      ],
+      "explanation": "オブジェクトのスプレッドでプロパティをコピーし、後に書いた b: 3 が同じ名前の b を上書きする。設定の既定値を一部だけ変えるときの定番の書き方。"
+    },
+    {
+      "id": "js-q-bracket",
+      "type": "qa",
+      "tags": [
+        "ステップ2",
+        "オブジェクト・分割代入・スプレッド"
+      ],
+      "question": "次のコードを実行したときの出力は？\n\nconst key = \"color\";\nconst car = { color: \"red\" };\nconsole.log(car[key], car.key);",
+      "answer": "red undefined",
+      "explanation": "car[key] は変数 key の中身 \"color\" をプロパティ名として使う。car.key は「key という名前のプロパティ」を探すので undefined。"
+    },
+    {
+      "id": "js-ch-object-keys",
+      "type": "choice",
+      "tags": [
+        "ステップ2",
+        "オブジェクト・分割代入・スプレッド"
+      ],
+      "question": "次のコードを実行したときの出力は？\n\nconsole.log(Object.keys({ x: 1, y: 2 }));",
+      "choices": [
+        "[ 1, 2 ]",
+        "{ x: 1, y: 2 }",
+        "[ [ 'x', 1 ], [ 'y', 2 ] ]",
+        "[ 'x', 'y' ]"
+      ],
+      "answer": 3,
+      "explanation": "Object.keys() はプロパティ名の配列を返す。値の配列は Object.values()、[名前, 値] の組の配列は Object.entries()。"
+    },
+    {
+      "id": "js-ch-falsy",
+      "type": "choice",
+      "tags": [
+        "ステップ2",
+        "制御構文"
+      ],
+      "question": "if の条件で偽（falsy）として扱われる値は？",
+      "choices": [
+        "[]（空の配列）",
+        "\"\"（空文字列）",
+        "{}（空のオブジェクト）",
+        "\"0\"（文字の 0）"
+      ],
+      "answer": 1,
+      "explanation": "falsy な値は false・0・\"\"・null・undefined・NaN など。空の配列や空のオブジェクトは truthy（真）なので、配列が空かどうかは arr.length === 0 で調べる。"
+    },
+    {
+      "id": "js-q-ternary",
+      "type": "qa",
+      "tags": [
+        "ステップ2",
+        "制御構文"
+      ],
+      "question": "次のコードを実行したときの出力は？\n\nconst age = 18;\nconsole.log(age >= 20 ? \"成人\" : \"未成年\");",
+      "answer": "未成年",
+      "explanation": "条件 ? 真のときの値 : 偽のときの値 は条件（三項）演算子。式なので、そのまま変数に代入したり引数に渡したりできる。"
+    },
+    {
+      "id": "js-cz-for-of",
+      "type": "cloze",
+      "tags": [
+        "ステップ2",
+        "制御構文"
+      ],
+      "text": "for (const c {{of}} \"ab\") {\n  console.log(c);  // a、b の順に表示\n}",
+      "hint": "英小文字 2 文字",
+      "explanation": "for...of は配列や文字列などの「値」を順に取り出す。配列の要素を順に処理するときの基本の書き方。"
+    },
+    {
+      "id": "js-ch-for-in",
+      "type": "choice",
+      "tags": [
+        "ステップ2",
+        "制御構文"
+      ],
+      "question": "次のコードを実行したときの出力は？\n\nconst arr = [\"x\", \"y\"];\nfor (const i in arr) {\n  console.log(i);\n}\n\n（複数行の出力は、行の順に空白で区切って示す）",
+      "choices": [
+        "undefined undefined",
+        "0 1",
+        "x y",
+        "1 2"
+      ],
+      "answer": 1,
+      "explanation": "for...in はオブジェクトのプロパティ名（キー）を取り出すので、配列では \"0\", \"1\" というインデックスの文字列になる。配列の値を取り出すなら for...of を使う。"
+    },
+    {
+      "id": "js-ch-switch",
+      "type": "choice",
+      "tags": [
+        "ステップ2",
+        "制御構文"
+      ],
+      "question": "次のコードを実行したときの出力は？\n\nconst x = 1;\nswitch (x) {\n  case 1:\n    console.log(\"one\");\n  case 2:\n    console.log(\"two\");\n    break;\n  default:\n    console.log(\"other\");\n}\n\n（複数行の出力は、行の順に空白で区切って示す）",
+      "choices": [
+        "one two",
+        "two",
+        "one",
+        "one two other"
+      ],
+      "answer": 0,
+      "explanation": "switch では break を書かないと、次の case の処理にも続けて進む（フォールスルー）。case 1 に break がないので two も表示され、case 2 の break で止まる。"
+    },
+    {
+      "id": "js-od-for-header",
+      "type": "order",
+      "tags": [
+        "ステップ2",
+        "制御構文"
+      ],
+      "prompt": "for 文 for ( ) の丸かっこの中に書く 3 つの部分を、書く順に並べよ（0〜2 を表示するループ）。",
+      "answer": "let i = 0; i < 3; i++",
+      "chunks": [
+        "let i = 0;",
+        "i < 3;",
+        "i++"
+      ],
+      "explanation": "for (初期化; 条件; 更新) の順。条件が true の間ブロックを実行し、1 回ごとに更新式（i++）を実行する。"
+    },
+    {
+      "id": "js-cz-arrow",
+      "type": "cloze",
+      "tags": [
+        "ステップ3",
+        "関数とアロー関数"
+      ],
+      "text": "const square = n {{=>}} n * n;\nconsole.log(square(4));  // 16",
+      "hint": "記号 2 文字",
+      "explanation": "アロー関数は (引数) => 式 の形。引数が 1 つなら ( ) を、本体が式 1 つなら { } と return を省略できる。"
+    },
+    {
+      "id": "js-ch-arrow-object",
+      "type": "choice",
+      "tags": [
+        "ステップ3",
+        "関数とアロー関数"
+      ],
+      "question": "次のコードを実行したときの出力は？\n\nconst f = () => { value: 1 };\nconsole.log(f());",
+      "choices": [
+        "SyntaxError が発生する",
+        "undefined",
+        "{ value: 1 }",
+        "1"
+      ],
+      "answer": 1,
+      "explanation": "=> の直後の { } は関数本体のブロックとみなされ、value: はラベルとして解釈されるので何も返さない（undefined）。オブジェクトを返すときは () => ({ value: 1 }) と丸かっこで囲む。"
+    },
+    {
+      "id": "js-q-default-param",
+      "type": "qa",
+      "tags": [
+        "ステップ3",
+        "関数とアロー関数"
+      ],
+      "question": "次のコードを実行したときの出力は？\n\nfunction greet(name = \"ゲスト\") {\n  return \"こんにちは、\" + name;\n}\nconsole.log(greet());",
+      "answer": "こんにちは、ゲスト",
+      "explanation": "引数 = 値 でデフォルト引数を指定できる。引数を省略したとき（undefined が渡されたとき）に使われる。"
+    },
+    {
+      "id": "js-q-rest",
+      "type": "qa",
+      "tags": [
+        "ステップ3",
+        "関数とアロー関数"
+      ],
+      "question": "次のコードを実行したときの出力は？\n\nfunction sum(...nums) {\n  return nums.reduce((a, b) => a + b, 0);\n}\nconsole.log(sum(1, 2, 3));",
+      "answer": "6",
+      "explanation": "...nums（残余引数）は、渡された残りの引数を「配列」として受け取る。同じ ... でも、呼び出し側で使うとスプレッド（展開）になる。"
+    },
+    {
+      "id": "js-err-arrow-hoist",
+      "type": "qa",
+      "tags": [
+        "ステップ3",
+        "関数とアロー関数"
+      ],
+      "question": "次のコードを実行すると発生する例外（エラー）の名前は？\n\nconsole.log(cube(2));\n\nconst cube = n => n ** 3;",
+      "answer": "ReferenceError",
+      "explanation": "const に代入したアロー関数（関数式）は、変数の宣言より前では使えない（TDZ）。function 宣言とは違うので、関数式は使う前に定義する。"
+    },
+    {
+      "id": "js-q-closure-counter",
+      "type": "qa",
+      "tags": [
+        "ステップ3",
+        "クロージャ"
+      ],
+      "question": "次のコードを実行したときの出力は？\n\nfunction makeCounter() {\n  let count = 0;\n  return () => ++count;\n}\nconst c = makeCounter();\nc();\nc();\nconsole.log(c());",
+      "answer": "3",
+      "hints": [
+        "count は呼び出しをまたいで残る"
+      ],
+      "explanation": "内側の関数は、作られたときの外側の変数 count を覚えている（クロージャ）。呼ぶたびに同じ count が増えるので 3 回目は 3。"
+    },
+    {
+      "id": "js-ch-closure-independent",
+      "type": "choice",
+      "tags": [
+        "ステップ3",
+        "クロージャ"
+      ],
+      "question": "次のコードを実行したときの出力は？\n\nfunction makeCounter() {\n  let count = 0;\n  return () => ++count;\n}\nconst c1 = makeCounter();\nconst c2 = makeCounter();\nc1();\nc1();\nconsole.log(c2());",
+      "choices": [
+        "1",
+        "2",
+        "0",
+        "3"
+      ],
+      "answer": 0,
+      "explanation": "makeCounter() を呼ぶたびに新しい count が作られるので、c1 と c2 はそれぞれ別の count を持つ。c2 は初めて呼ばれたので 1。"
+    },
+    {
+      "id": "js-ch-var-timeout",
+      "type": "choice",
+      "tags": [
+        "ステップ3",
+        "クロージャ"
+      ],
+      "question": "次のコードを実行したときの出力は？\n\nfor (var i = 0; i < 3; i++) {\n  setTimeout(() => console.log(i), 0);\n}\n\n（複数行の出力は、行の順に空白で区切って示す）",
+      "choices": [
+        "0 1 2",
+        "2 2 2",
+        "3 3 3",
+        "undefined undefined undefined"
+      ],
+      "answer": 2,
+      "explanation": "var の i はループ全体で 1 つだけ。setTimeout の関数が実行されるのはループが終わったあとなので、どれも最終値の 3 を表示する。"
+    },
+    {
+      "id": "js-q-let-timeout",
+      "type": "qa",
+      "tags": [
+        "ステップ3",
+        "クロージャ"
+      ],
+      "question": "次のコードを実行したときの出力は？\n\nfor (let i = 0; i < 3; i++) {\n  setTimeout(() => console.log(i), 0);\n}\n\n（複数行の出力は、行の順に空白で区切って答える）",
+      "answer": "0 1 2",
+      "explanation": "for 文の let は繰り返しごとに新しい i が作られるので、それぞれの関数がその回の i を覚えている。var との違いを確かめる定番の問題。"
+    },
+    {
+      "id": "js-q-this-method",
+      "type": "qa",
+      "tags": [
+        "ステップ3",
+        "this"
+      ],
+      "question": "次のコードを実行したときの出力は？\n\nconst obj = {\n  name: \"Obj\",\n  hello() {\n    return this.name;\n  },\n};\nconsole.log(obj.hello());",
+      "answer": "Obj",
+      "explanation": "obj.hello() のようにメソッドとして呼ぶと、this は「. の左側のオブジェクト」（obj）になる。this は定義した場所ではなく呼び出し方で決まる。"
+    },
+    {
+      "id": "js-ch-this-arrow",
+      "type": "choice",
+      "tags": [
+        "ステップ3",
+        "this"
+      ],
+      "question": "次のコードを実行したときの出力は？\n\nconst obj = {\n  name: \"Obj\",\n  later() {\n    return [1].map(() => this.name)[0];\n  },\n};\nconsole.log(obj.later());",
+      "choices": [
+        "1",
+        "TypeError が発生する",
+        "Obj",
+        "undefined"
+      ],
+      "answer": 2,
+      "explanation": "アロー関数は自分の this を持たず、外側（ここでは later メソッド）の this をそのまま使う。コールバックの中で this を使いたいときにアロー関数が便利な理由。"
+    },
+    {
+      "id": "js-err-this-lost",
+      "type": "qa",
+      "tags": [
+        "ステップ3",
+        "this"
+      ],
+      "question": "次のコードを実行すると発生する例外（エラー）の名前は？\n\nclass User {\n  constructor(name) {\n    this.name = name;\n  }\n  hello() {\n    return this.name;\n  }\n}\nconst f = new User(\"Aya\").hello;\nf();",
+      "answer": "TypeError",
+      "hints": [
+        "this が undefined になっている"
+      ],
+      "explanation": "メソッドを変数に取り出して f() と呼ぶと、. の左側がないので this は undefined になる（クラスの中は strict モード）。undefined.name を読もうとして TypeError。bind() で this を固定できる。"
+    },
+    {
+      "id": "js-cz-bind",
+      "type": "cloze",
+      "tags": [
+        "ステップ3",
+        "this"
+      ],
+      "text": "const hello = user.hello.{{bind}}(user);  // this を user に固定した関数を作る",
+      "explanation": "bind(obj) は this を obj に固定した新しい関数を返す。イベントハンドラにメソッドを渡すときなどに使う（アロー関数で包む方法もある）。"
+    },
+    {
+      "id": "js-q-class",
+      "type": "qa",
+      "tags": [
+        "ステップ3",
+        "クラス"
+      ],
+      "question": "次のコードを実行したときの出力は？\n\nclass Dog {\n  constructor(name) {\n    this.name = name;\n  }\n  bark() {\n    return `${this.name}: ワン`;\n  }\n}\nconsole.log(new Dog(\"Pochi\").bark());",
+      "answer": "Pochi: ワン",
+      "explanation": "new クラス名(...) でインスタンスを作ると constructor が呼ばれる。メソッドの中では this でそのインスタンスを指す。"
+    },
+    {
+      "id": "js-cz-extends",
+      "type": "cloze",
+      "tags": [
+        "ステップ3",
+        "クラス"
+      ],
+      "text": "class Cat {{extends}} Animal {\n  speak() {\n    return \"ニャー\";\n  }\n}",
+      "explanation": "class 子 extends 親 で継承する。親のメソッドを引き継ぎ、同じ名前のメソッドを定義すると上書き（オーバーライド）できる。"
+    },
+    {
+      "id": "js-cz-super",
+      "type": "cloze",
+      "tags": [
+        "ステップ3",
+        "クラス"
+      ],
+      "text": "class Cat extends Animal {\n  constructor(name) {\n    {{super}}(name);\n    this.sound = \"ニャー\";\n  }\n}",
+      "explanation": "子クラスの constructor では、this を使う前に super(...) で親の constructor を呼ぶ必要がある。親のメソッドは super.メソッド名() で呼べる。"
+    },
+    {
+      "id": "js-err-this-before-super",
+      "type": "qa",
+      "tags": [
+        "ステップ3",
+        "クラス"
+      ],
+      "question": "次のコードを実行すると発生する例外（エラー）の名前は？\n\nclass A {}\nclass B extends A {\n  constructor() {\n    this.x = 1;\n    super();\n  }\n}\nnew B();",
+      "answer": "ReferenceError",
+      "explanation": "継承したクラスの constructor で super() より前に this を使うと ReferenceError。インスタンスは親の constructor で作られるため、super() が先。"
+    },
+    {
+      "id": "js-q-private",
+      "type": "qa",
+      "tags": [
+        "ステップ3",
+        "クラス"
+      ],
+      "question": "次のコードを実行したときの出力は？\n\nclass Account {\n  #balance = 0;\n  deposit(n) {\n    this.#balance += n;\n    return this.#balance;\n  }\n}\nconst acc = new Account();\nacc.deposit(100);\nconsole.log(acc.deposit(50));",
+      "answer": "150",
+      "explanation": "# で始まるフィールドはプライベートで、クラスの中からしか読み書きできない（ES2022）。残高 0 に 100、50 と加えて 150。"
+    },
+    {
+      "id": "js-ch-private-access",
+      "type": "choice",
+      "tags": [
+        "ステップ3",
+        "クラス"
+      ],
+      "question": "次のコードを実行するとどうなる？\n\nclass A {\n  #secret = 1;\n}\nconsole.log(new A().#secret);",
+      "choices": [
+        "undefined と表示される",
+        "1 と表示される",
+        "TypeError が発生する",
+        "SyntaxError（構文エラー）になる"
+      ],
+      "answer": 3,
+      "explanation": "プライベートフィールドをクラスの外から参照するコードは、実行前の構文チェックの段階でエラー（SyntaxError）になる。外から値が必要なら getter などのメソッドを用意する。"
+    },
+    {
+      "id": "js-cz-export",
+      "type": "cloze",
+      "tags": [
+        "ステップ3",
+        "モジュール"
+      ],
+      "text": "// math.js\n{{export}} function add(a, b) {\n  return a + b;\n}",
+      "explanation": "関数や変数の前に export を付けると、ほかのファイルから import できる（名前付きエクスポート）。付けないものはそのファイルの中だけで使える。"
+    },
+    {
+      "id": "js-ch-import-named",
+      "type": "choice",
+      "tags": [
+        "ステップ3",
+        "モジュール"
+      ],
+      "question": "math.js に export function add(a, b) { ... } と書いたとき、add を正しく読み込む書き方は？",
+      "choices": [
+        "require { add } from \"./math.js\";",
+        "import { add } from \"./math.js\";",
+        "import * from \"./math.js\";",
+        "import add from \"./math.js\";"
+      ],
+      "answer": 1,
+      "explanation": "名前付きエクスポートは { } で名前を指定して import する。{ } なしの import add from ... は default エクスポートを読み込む書き方。import * を使うなら import * as math from ... と名前を付ける。"
+    },
+    {
+      "id": "js-ch-export-default",
+      "type": "choice",
+      "tags": [
+        "ステップ3",
+        "モジュール"
+      ],
+      "question": "export default について正しいものは？",
+      "choices": [
+        "関数には使えず、値にしか使えない",
+        "1 つのモジュールに 1 つだけ書ける",
+        "1 つのモジュールに何個でも書ける",
+        "import 側では必ず { } で囲んで読み込む"
+      ],
+      "answer": 1,
+      "explanation": "export default はモジュールの「代表」を 1 つだけ指定する。import 側では { } なしで好きな名前を付けて読み込める（import myAdd from \"./math.js\"）。"
+    },
+    {
+      "id": "js-od-import",
+      "type": "order",
+      "tags": [
+        "ステップ3",
+        "モジュール"
+      ],
+      "prompt": "math.js から add と sub を読み込む import 文になるよう、部品を正しい順に並べよ。",
+      "answer": "import { add, sub } from \"./math.js\";",
+      "chunks": [
+        "import",
+        "{ add, sub }",
+        "from",
+        "\"./math.js\";"
+      ],
+      "explanation": "import { 名前, ... } from \"モジュールのパス\"; の順。ブラウザの ES モジュールでは \"./math.js\" のように拡張子まで書く。"
+    },
+    {
+      "id": "js-q-catch-name",
+      "type": "qa",
+      "tags": [
+        "ステップ3",
+        "例外"
+      ],
+      "question": "次のコードを実行したときの出力は？\n\ntry {\n  JSON.parse(\"{bad}\");\n} catch (e) {\n  console.log(e.name);\n}",
+      "answer": "SyntaxError",
+      "explanation": "JSON として正しくない文字列を JSON.parse() すると SyntaxError が投げられる。catch (e) の e.name で例外の種類、e.message で詳しい内容がわかる。"
+    },
+    {
+      "id": "js-q-finally-return",
+      "type": "qa",
+      "tags": [
+        "ステップ3",
+        "例外"
+      ],
+      "question": "次のコードを実行したときの出力は？\n\nfunction f() {\n  try {\n    return \"try\";\n  } finally {\n    console.log(\"finally\");\n  }\n}\nconsole.log(f());\n\n（複数行の出力は、行の順に空白で区切って答える）",
+      "answer": "finally try",
+      "explanation": "finally は try の中で return しても必ず実行される。関数が値を返す直前に finally が動くので、先に \"finally\" が表示され、そのあと戻り値 \"try\" が表示される。"
+    },
+    {
+      "id": "js-cz-throw",
+      "type": "cloze",
+      "tags": [
+        "ステップ3",
+        "例外"
+      ],
+      "text": "function check(n) {\n  if (n < 0) {{throw}} new Error(\"負の数です\");\n  return n;\n}",
+      "explanation": "throw で例外を投げる。new Error(\"メッセージ\") を投げると、受け取った側で e.message やスタックトレースを使えるので、文字列ではなく Error オブジェクトを投げる。"
+    },
+    {
+      "id": "js-q-json-stringify",
+      "type": "qa",
+      "tags": [
+        "ステップ3",
+        "JSON"
+      ],
+      "question": "次のコードを実行したときの出力は？\n\nconsole.log(JSON.stringify({ a: 1, b: [true, null] }));",
+      "answer": "{\"a\":1,\"b\":[true,null]}",
+      "explanation": "JSON.stringify() はオブジェクトを JSON 文字列に変換する。キーは必ずダブルクォートで囲まれ、余分な空白は入らない（整形するなら第 3 引数にインデント幅を渡す）。"
+    },
+    {
+      "id": "js-ch-json-undefined",
+      "type": "choice",
+      "tags": [
+        "ステップ3",
+        "JSON"
+      ],
+      "question": "次のコードを実行したときの出力は？\n\nconsole.log(JSON.stringify({ a: undefined, b: 1 }));",
+      "choices": [
+        "{\"a\":null,\"b\":1}",
+        "{\"a\":undefined,\"b\":1}",
+        "{\"b\":1}",
+        "{a:undefined,b:1}"
+      ],
+      "answer": 2,
+      "explanation": "JSON には undefined がないので、値が undefined のプロパティは JSON.stringify() で省かれる（関数も同じ）。null は \"a\":null として残る。"
+    },
+    {
+      "id": "js-cz-json-stringify",
+      "type": "cloze",
+      "tags": [
+        "ステップ3",
+        "JSON"
+      ],
+      "text": "const text = JSON.{{stringify}}(data);  // オブジェクトを JSON 文字列に変換する",
+      "hint": "「文字列にする」という意味の英語",
+      "explanation": "オブジェクト → 文字列は JSON.stringify()、文字列 → オブジェクトは JSON.parse()。localStorage への保存やサーバーとの通信で使う。"
+    },
+    {
+      "id": "js-q-optional-chain",
+      "type": "qa",
+      "tags": [
+        "ステップ3",
+        "オプショナルチェーンと ??"
+      ],
+      "question": "次のコードを実行したときの出力は？\n\nconst user = { profile: null };\nconsole.log(user.profile?.name);",
+      "answer": "undefined",
+      "explanation": "?. は左側が null か undefined のとき、エラーにせず undefined を返す（オプショナルチェーン）。データが欠けているかもしれないときに使う。"
+    },
+    {
+      "id": "js-err-no-optional",
+      "type": "qa",
+      "tags": [
+        "ステップ3",
+        "オプショナルチェーンと ??"
+      ],
+      "question": "次のコードを実行すると発生する例外（エラー）の名前は？\n\nconst user = {};\nconsole.log(user.profile.name);",
+      "answer": "TypeError",
+      "explanation": "user.profile は undefined なので、そのプロパティ name を読もうとして TypeError（Cannot read properties of undefined）になる。user.profile?.name と書けば undefined になる。"
+    },
+    {
+      "id": "js-ch-nullish-or",
+      "type": "choice",
+      "tags": [
+        "ステップ3",
+        "オプショナルチェーンと ??"
+      ],
+      "question": "次のコードを実行したときの出力は？\n\nconsole.log(0 || 10, 0 ?? 10);",
+      "choices": [
+        "0 10",
+        "10 10",
+        "10 0",
+        "0 0"
+      ],
+      "answer": 2,
+      "explanation": "|| は左側が falsy（0・\"\" も含む）なら右側を返す。?? は左側が null か undefined のときだけ右側を返すので、0 はそのまま使われる。0 や空文字列が正しい値になりうるときは ?? を使う。"
+    },
+    {
+      "id": "js-ch-nullish-assign",
+      "type": "choice",
+      "tags": [
+        "ステップ3",
+        "オプショナルチェーンと ??"
+      ],
+      "question": "次のコードを実行したときの出力は？\n\nlet a = null;\nlet b = 0;\na ??= 5;\nb ??= 5;\nconsole.log(a, b);",
+      "choices": [
+        "null 5",
+        "5 5",
+        "null 0",
+        "5 0"
+      ],
+      "answer": 3,
+      "explanation": "x ??= y は x が null か undefined のときだけ y を代入する（ES2021）。b は 0 で null でも undefined でもないので変わらない。"
+    },
+    {
+      "id": "js-q-settimeout-order",
+      "type": "qa",
+      "tags": [
+        "ステップ4",
+        "イベントループ"
+      ],
+      "question": "次のコードを実行したときの出力は？\n\nconsole.log(\"A\");\nsetTimeout(() => console.log(\"B\"), 0);\nconsole.log(\"C\");\n\n（複数行の出力は、行の順に空白で区切って答える）",
+      "answer": "A C B",
+      "hints": [
+        "0 ミリ秒でもすぐには実行されない"
+      ],
+      "explanation": "setTimeout の関数は、待ち時間が 0 でも「今実行中のコードがすべて終わったあと」に実行される（タスクキューに入る）。"
+    },
+    {
+      "id": "js-ch-microtask",
+      "type": "choice",
+      "tags": [
+        "ステップ4",
+        "イベントループ"
+      ],
+      "question": "次のコードを実行したときの出力は？\n\nconsole.log(1);\nsetTimeout(() => console.log(2), 0);\nPromise.resolve().then(() => console.log(3));\nconsole.log(4);\n\n（複数行の出力は、行の順に空白で区切って示す）",
+      "choices": [
+        "1 4 2 3",
+        "1 4 3 2",
+        "1 2 3 4",
+        "1 3 4 2"
+      ],
+      "answer": 1,
+      "explanation": "同期処理（1, 4）が先にすべて実行される。その後、Promise の then（マイクロタスク）が setTimeout（タスク）より優先して実行されるので 3 → 2。"
+    },
+    {
+      "id": "js-od-event-order",
+      "type": "order",
+      "tags": [
+        "ステップ4",
+        "イベントループ"
+      ],
+      "prompt": "次のコードの出力を、表示される順に並べよ。\n\nsetTimeout(() => console.log(\"timeout\"), 0);\nPromise.resolve().then(() => console.log(\"promise\"));\nconsole.log(\"sync\");",
+      "answer": "sync promise timeout",
+      "chunks": [
+        "sync",
+        "promise",
+        "timeout"
+      ],
+      "explanation": "同期処理 → マイクロタスク（Promise の then / await の続き）→ タスク（setTimeout）の順。書いた順番ではなく、キューの種類で実行順が決まる。"
+    },
+    {
+      "id": "js-q-then-chain",
+      "type": "qa",
+      "tags": [
+        "ステップ4",
+        "Promise と async/await"
+      ],
+      "question": "次のコードを実行したときの出力は？\n\nPromise.resolve(5)\n  .then(x => x * 2)\n  .then(x => console.log(x));",
+      "answer": "10",
+      "explanation": "then のコールバックが返した値は、次の then に渡される（Promise チェーン）。5 → 10 と受け渡されて表示される。"
+    },
+    {
+      "id": "js-ch-async-returns",
+      "type": "choice",
+      "tags": [
+        "ステップ4",
+        "Promise と async/await"
+      ],
+      "question": "次のコードを実行したときの出力は？\n\nasync function f() {\n  return 1;\n}\nconsole.log(f() instanceof Promise);",
+      "choices": [
+        "1",
+        "false",
+        "undefined",
+        "true"
+      ],
+      "answer": 3,
+      "explanation": "async 関数は常に Promise を返す。return 1 は「1 で解決される Promise」になるので、値を取り出すには await f() か f().then(...) を使う。"
+    },
+    {
+      "id": "js-q-await-order",
+      "type": "qa",
+      "tags": [
+        "ステップ4",
+        "Promise と async/await"
+      ],
+      "question": "次のコードを実行したときの出力は？\n\nasync function main() {\n  console.log(1);\n  await null;\n  console.log(2);\n}\nmain();\nconsole.log(3);\n\n（複数行の出力は、行の順に空白で区切って答える）",
+      "answer": "1 3 2",
+      "explanation": "async 関数は最初の await までは同期的に実行される。await の続きはマイクロタスクとして後回しになるので、先に呼び出し元の console.log(3) が実行される。"
+    },
+    {
+      "id": "js-cz-await",
+      "type": "cloze",
+      "tags": [
+        "ステップ4",
+        "Promise と async/await"
+      ],
+      "text": "async function load(url) {\n  const res = {{await}} fetch(url);  // レスポンスが届くまで待つ\n  return res.json();\n}",
+      "explanation": "await は Promise が解決するまで待ち、その結果の値を取り出す。await を付け忘れると res には Promise そのものが入り、res.json is not a function のようなエラーになる。"
+    },
+    {
+      "id": "js-ch-await-where",
+      "type": "choice",
+      "tags": [
+        "ステップ4",
+        "Promise と async/await"
+      ],
+      "question": "await を書けるのはどこ？",
+      "choices": [
+        "どの関数の中でも書ける",
+        "コールバック関数の中だけ",
+        "class の constructor の中だけ",
+        "async 関数の中（または ES モジュールのトップレベル）"
+      ],
+      "answer": 3,
+      "explanation": "await は async を付けた関数の中で使う。ES モジュールではトップレベルでも使える（トップレベル await）。async でない関数の中では SyntaxError になる。"
+    },
+    {
+      "id": "js-q-catch-reject",
+      "type": "qa",
+      "tags": [
+        "ステップ4",
+        "Promise と async/await"
+      ],
+      "question": "次のコードを実行したときの出力は？\n\nPromise.reject(new Error(\"NG\"))\n  .catch(e => console.log(e.message));",
+      "answer": "NG",
+      "explanation": "reject された Promise のエラーは catch() で受け取れる。catch を付けないと unhandled rejection（処理されなかったエラー）として報告される。"
+    },
+    {
+      "id": "js-q-try-await",
+      "type": "qa",
+      "tags": [
+        "ステップ4",
+        "Promise と async/await"
+      ],
+      "question": "次のコードを実行したときの出力は？\n\nasync function main() {\n  try {\n    await Promise.reject(new Error(\"oops\"));\n  } catch (e) {\n    console.log(\"caught:\", e.message);\n  }\n}\nmain();",
+      "answer": "caught: oops",
+      "explanation": "async 関数の中では、reject された Promise を await すると例外が投げられたのと同じになるので、ふつうの try / catch で受け取れる。"
+    },
+    {
+      "id": "js-ch-promise-all",
+      "type": "choice",
+      "tags": [
+        "ステップ4",
+        "Promise と async/await"
+      ],
+      "question": "複数の Promise を並行して待ち、どれか 1 つでも reject されると（ほかの結果を待たずに）全体が reject されるのは？",
+      "choices": [
+        "Promise.resolve",
+        "Promise.any",
+        "Promise.all",
+        "Promise.allSettled"
+      ],
+      "answer": 2,
+      "explanation": "Promise.all はすべて成功すると結果の配列で解決し、1 つでも失敗するとすぐ reject される。allSettled は成功・失敗にかかわらず全部の結果を待ち、any は最初に成功したものを返す。"
+    },
+    {
+      "id": "js-q-promise-all",
+      "type": "qa",
+      "tags": [
+        "ステップ4",
+        "Promise と async/await"
+      ],
+      "question": "次のコードを実行したときの出力は？\n\nPromise.all([1, Promise.resolve(2), 3]).then(v => console.log(v));",
+      "answer": "[ 1, 2, 3 ]",
+      "accepted": [
+        "[1, 2, 3]"
+      ],
+      "explanation": "Promise.all は結果を「渡した順番どおり」の配列で返す。Promise でないふつうの値はそのまま結果に入る。"
+    },
+    {
+      "id": "js-od-fetch-await",
+      "type": "order",
+      "tags": [
+        "ステップ4",
+        "Promise と async/await"
+      ],
+      "prompt": "async 関数の中で、API からデータを取得して name を表示する処理になるよう、行を正しい順に並べよ。",
+      "answer": "const res = await fetch(url); const data = await res.json(); console.log(data.name);",
+      "chunks": [
+        "const res = await fetch(url);",
+        "const data = await res.json();",
+        "console.log(data.name);"
+      ],
+      "explanation": "fetch() でレスポンスを受け取り、res.json() で本文を JSON として読み取ってから使う。どちらも Promise を返すので、それぞれ await する。"
+    },
+    {
+      "id": "js-od-promise-chain",
+      "type": "order",
+      "tags": [
+        "ステップ4",
+        "Promise と async/await"
+      ],
+      "prompt": "then を使って API のデータを取得・表示し、エラーも処理する Promise チェーンになるよう、部品を正しい順に並べよ。",
+      "answer": "fetch(url) .then(res => res.json()) .then(data => console.log(data)) .catch(err => console.error(err))",
+      "chunks": [
+        "fetch(url)",
+        ".then(res => res.json())",
+        ".then(data => console.log(data))",
+        ".catch(err => console.error(err))"
+      ],
+      "explanation": "fetch の結果を then で順に加工し、最後に catch を付けると、途中のどこで起きたエラーもまとめて受け取れる。"
+    },
+    {
+      "id": "js-ch-queryselector",
+      "type": "choice",
+      "tags": [
+        "ステップ4",
+        "DOM の基本"
+      ],
+      "question": "CSS セレクターに一致する「最初の 1 つ」の要素を取得するメソッドは？",
+      "choices": [
+        "document.querySelector()",
+        "document.createElement()",
+        "document.getElementsByClassName()",
+        "document.querySelectorAll()"
+      ],
+      "answer": 0,
+      "explanation": "querySelector(\"#id\") や querySelector(\".class\") のように CSS セレクターで指定し、最初の 1 つを返す（なければ null）。querySelectorAll は一致するすべてを NodeList で返す。"
+    },
+    {
+      "id": "js-cz-addeventlistener",
+      "type": "cloze",
+      "tags": [
+        "ステップ4",
+        "DOM の基本"
+      ],
+      "text": "button.{{addEventListener}}(\"click\", () => {\n  console.log(\"押されました\");\n});",
+      "hint": "add で始まるメソッド名",
+      "explanation": "addEventListener(イベント名, 関数) で、クリックなどのイベントが起きたときに実行する関数を登録する。onclick への代入と違い、複数の関数を登録できる。"
+    },
+    {
+      "id": "js-ch-textcontent",
+      "type": "choice",
+      "tags": [
+        "ステップ4",
+        "DOM の基本"
+      ],
+      "question": "ユーザーが入力した文字列を要素の中に表示するとき、安全のために使うべきプロパティは？",
+      "choices": [
+        "textContent",
+        "id",
+        "outerHTML",
+        "innerHTML"
+      ],
+      "answer": 0,
+      "explanation": "textContent は文字列をただのテキストとして表示する。innerHTML や outerHTML は HTML として解釈するので、入力に <script> などが含まれると XSS（クロスサイトスクリプティング）の原因になる。"
+    },
+    {
+      "id": "js-ch-preventdefault",
+      "type": "choice",
+      "tags": [
+        "ステップ4",
+        "DOM の基本"
+      ],
+      "question": "フォームの submit イベントで、ページの再読み込み（ブラウザーの既定の動作）を止めるメソッドは？",
+      "choices": [
+        "event.stopPropagation()",
+        "event.preventDefault()",
+        "event.cancel()",
+        "event.stop()"
+      ],
+      "answer": 1,
+      "explanation": "preventDefault() はブラウザーの既定の動作（送信・リンクの移動など）を止める。stopPropagation() はイベントが親要素に伝わる（バブリング）のを止めるもので、役割が違う。"
+    },
+    {
+      "id": "js-q-nan",
+      "type": "qa",
+      "tags": [
+        "ステップ4",
+        "よくある落とし穴"
+      ],
+      "question": "次のコードを実行したときの出力は？\n\nconsole.log(NaN === NaN, Number.isNaN(NaN));",
+      "answer": "false true",
+      "explanation": "NaN は自分自身とも等しくない唯一の値なので、=== では判定できない。NaN かどうかは Number.isNaN() で調べる。"
+    },
+    {
+      "id": "js-q-reference",
+      "type": "qa",
+      "tags": [
+        "ステップ4",
+        "よくある落とし穴"
+      ],
+      "question": "次のコードを実行したときの出力は？\n\nconst a = [1, 2];\nconst b = a;\nb.push(3);\nconsole.log(a === b, a.length);",
+      "answer": "true 3",
+      "explanation": "配列やオブジェクトを代入しても複製はされず、同じ実体を指す参照がコピーされるだけ。b への変更は a にも表れる。=== は同じ実体かどうかを比べる。"
+    },
+    {
+      "id": "js-q-shallow-spread",
+      "type": "qa",
+      "tags": [
+        "ステップ4",
+        "よくある落とし穴"
+      ],
+      "question": "次のコードを実行したときの出力は？\n\nconst a = { inner: { n: 1 } };\nconst b = { ...a };\nb.inner.n = 99;\nconsole.log(a.inner.n);",
+      "answer": "99",
+      "hints": [
+        "コピーされたのは外側だけ"
+      ],
+      "explanation": "スプレッドによるコピーは浅いコピーで、入れ子の inner オブジェクトは a と b で共有される。入れ子まで複製するには structuredClone() を使う。"
+    },
+    {
+      "id": "js-cz-structuredclone",
+      "type": "cloze",
+      "tags": [
+        "ステップ4",
+        "よくある落とし穴"
+      ],
+      "text": "const copy = {{structuredClone}}(original);  // 入れ子のオブジェクトまで丸ごと複製する",
+      "explanation": "structuredClone() はオブジェクトを深くコピー（ディープコピー）する組み込み関数。以前よく使われた JSON.parse(JSON.stringify(x)) と違い、Date や Map なども扱える（関数は複製できない）。"
+    },
+    {
+      "id": "js-q-destructure-default",
+      "type": "qa",
+      "tags": [
+        "ステップ4",
+        "よくある落とし穴"
+      ],
+      "question": "次のコードを実行したときの出力は？\n\nconst { a = 5, b = 2 } = { a: undefined, b: null };\nconsole.log(a, b);",
+      "answer": "5 null",
+      "explanation": "分割代入やデフォルト引数の既定値は、値が undefined のときだけ使われる。null は「値がある」とみなされるので、b は null のまま。"
+    }
+  ]
+}

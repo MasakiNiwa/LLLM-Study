@@ -1,0 +1,1527 @@
+{
+  "format": "lllm-study-pack",
+  "version": 1,
+  "id": "en-grammar-high-100",
+  "title": "高校英文法 100（文の組み立てを深める）",
+  "description": "高校で学ぶ英文法を、文の組み立てを深める順に 100 問で身につけます。ステップ1（時制の応用・完了進行形・助動詞＋have 過去分詞・不定詞と動名詞の使い分け）→ ステップ2（仮定法：過去完了・混合・without / if it were not for・I wish / as if・倒置、分詞構文）→ ステップ3（関係副詞・非制限用法・what の用法・比較の慣用表現）→ ステップ4（強調構文・倒置・否定の表現・無生物主語・名詞構文）の順に進みます。形式は穴埋め 41 問（和訳つき）・選択問題 39 問・並べ替え 20 問。解説では「どういうルールか」「似た形とどう区別するか」を短くまとめています。おすすめの進め方: 「英文法チェック 30」（en-grammar-check）→「中学英文法の総復習 100」（en-grammar-junior-100）→ この教材。仕上げの実践として「TOEIC 文法・語彙問題 100（Part 5 形式）」（en-toeic-part5-100）で、ビジネス英文の中で文法を素早く判断する練習をしましょう。",
+  "subject": "english",
+  "language": {
+    "target": "en",
+    "explanation": "ja"
+  },
+  "level": "高校（英検 2 級〜準 1 級）",
+  "tags": [
+    "英文法",
+    "高校英語",
+    "英検",
+    "穴埋め",
+    "選択問題",
+    "並べ替え"
+  ],
+  "author": "LLLM-Study",
+  "license": "MIT",
+  "source": "LLLM-Study オリジナル（AI を利用して作成）",
+  "revision": 1,
+  "items": [
+    {
+      "id": "h-tense-when-present",
+      "type": "cloze",
+      "text": "I'll call you when I {{get}} home.",
+      "translation": "家に着いたら電話するね。",
+      "hint": "get を適切な形に",
+      "explanation": "「時」や「条件」を表す副詞節（when / if / before / as soon as などで始まる節）の中では、未来のことでも現在形を使う。will get とはしない。",
+      "tags": [
+        "ステップ1",
+        "時制の応用"
+      ]
+    },
+    {
+      "id": "h-tense-if-noun",
+      "type": "choice",
+      "question": "I don't know if he ____ tomorrow.",
+      "choices": [
+        "will come",
+        "comes",
+        "came",
+        "has come"
+      ],
+      "answer": 0,
+      "explanation": "この if 節は know の目的語になる名詞節（〜かどうか）。名詞節では未来のことは will で表す。「もし〜なら」の副詞節（現在形）との区別が頻出。訳: 彼が明日来るかどうか分からない。",
+      "tags": [
+        "ステップ1",
+        "時制の応用"
+      ]
+    },
+    {
+      "id": "h-tense-past-perfect",
+      "type": "choice",
+      "question": "By the time we arrived at the station, the train ____.",
+      "choices": [
+        "has already left",
+        "had already left",
+        "already leaves",
+        "will already leave"
+      ],
+      "answer": 1,
+      "explanation": "「到着した（過去）」より前に「出発してしまっていた」ので過去完了〈had ＋過去分詞〉。過去のある時点より前を表すのが過去完了の役割。訳: 私たちが駅に着いたときには、電車はもう出てしまっていた。",
+      "tags": [
+        "ステップ1",
+        "時制の応用"
+      ]
+    },
+    {
+      "id": "h-tense-future-prog",
+      "type": "cloze",
+      "text": "This time next week, I will {{be}} lying on a beach in Okinawa.",
+      "translation": "来週の今ごろ、私は沖縄の浜辺で寝そべっているだろう。",
+      "explanation": "未来進行形〈will be ＋-ing〉は「未来のある時点で〜しているところだろう」。this time next week（来週の今ごろ）と相性がよい。",
+      "tags": [
+        "ステップ1",
+        "時制の応用"
+      ]
+    },
+    {
+      "id": "h-tense-future-perfect",
+      "type": "choice",
+      "question": "I ____ this book by the end of this month.",
+      "choices": [
+        "have finished",
+        "finished",
+        "will have finished",
+        "had finished"
+      ],
+      "answer": 2,
+      "explanation": "by the end of this month（今月末までに）という未来の時点までの完了は未来完了〈will have ＋過去分詞〉。訳: 今月末までにはこの本を読み終えているだろう。",
+      "tags": [
+        "ステップ1",
+        "時制の応用"
+      ]
+    },
+    {
+      "id": "h-tense-sequence",
+      "type": "order",
+      "prompt": "彼女は、その前の日に財布をなくしたと言った。",
+      "answer": "She said that she had lost her wallet the day before.",
+      "chunks": [
+        "She said",
+        "that",
+        "she",
+        "had lost",
+        "her wallet",
+        "the day before."
+      ],
+      "explanation": "said（過去）より前の出来事なので過去完了 had lost（時制の一致）。間接話法では yesterday が the day before（その前日）に変わる。",
+      "tags": [
+        "ステップ1",
+        "時制の応用"
+      ]
+    },
+    {
+      "id": "h-perfprog-waiting",
+      "type": "cloze",
+      "text": "I have been {{waiting}} for her for an hour.",
+      "translation": "1 時間ずっと彼女を待っている。",
+      "hint": "wait を使って",
+      "explanation": "現在完了進行形〈have been ＋-ing〉は、ある動作が過去から今まで続いていることを表す。wait のような動作動詞の「継続」はこの形が自然。",
+      "tags": [
+        "ステップ1",
+        "完了進行形"
+      ]
+    },
+    {
+      "id": "h-perfprog-had-been",
+      "type": "choice",
+      "question": "She was tired because she ____ all day.",
+      "choices": [
+        "has been working",
+        "is working",
+        "has worked",
+        "had been working"
+      ],
+      "answer": 3,
+      "explanation": "「疲れていた（過去）」時点まで 1 日中働き続けていたので過去完了進行形〈had been ＋-ing〉。現在完了（has 〜）は過去の時点を基準にできない。訳: 彼女は 1 日中働いていたので疲れていた。",
+      "tags": [
+        "ステップ1",
+        "完了進行形"
+      ]
+    },
+    {
+      "id": "h-perfprog-how-long",
+      "type": "choice",
+      "question": "How long ____ you been studying English?",
+      "choices": [
+        "are",
+        "did",
+        "have",
+        "do"
+      ],
+      "answer": 2,
+      "explanation": "been studying があるので現在完了進行形の疑問文〈How long have ＋主語＋been ＋-ing〉。今も続いている動作の期間をたずねる。訳: 英語をどのくらい勉強しているのですか。",
+      "tags": [
+        "ステップ1",
+        "完了進行形"
+      ]
+    },
+    {
+      "id": "h-perfprog-will-have-been",
+      "type": "order",
+      "prompt": "来月で、私はここで 10 年間働いていることになる。",
+      "answer": "By next month, I will have been working here for ten years.",
+      "chunks": [
+        "By next month,",
+        "I",
+        "will have been",
+        "working",
+        "here",
+        "for ten years."
+      ],
+      "explanation": "未来のある時点（来月）までの動作の継続は未来完了進行形〈will have been ＋-ing〉。現在・過去・未来の完了進行形はどれも「基準の時点まで続いている」を表す。",
+      "tags": [
+        "ステップ1",
+        "完了進行形"
+      ]
+    },
+    {
+      "id": "h-modal-must-have",
+      "type": "cloze",
+      "text": "He {{must}} have left his umbrella on the train.",
+      "translation": "彼は電車に傘を置き忘れたにちがいない。",
+      "hint": "「〜したにちがいない」",
+      "explanation": "〈must have ＋過去分詞〉は「〜したにちがいない」という過去への強い確信。must だけだと「今〜にちがいない」なので、過去のことには have ＋過去分詞を付ける。",
+      "tags": [
+        "ステップ1",
+        "助動詞＋have 過去分詞"
+      ]
+    },
+    {
+      "id": "h-modal-cant-have",
+      "type": "cloze",
+      "text": "She can't {{have}} said such a thing. She's always kind.",
+      "translation": "彼女がそんなことを言ったはずがない。いつも優しい人だから。",
+      "explanation": "〈can't have ＋過去分詞〉で「〜したはずがない」。助動詞の後ろなので has ではなく原形の have。must have p.p.（〜したにちがいない）の反対の意味。",
+      "tags": [
+        "ステップ1",
+        "助動詞＋have 過去分詞"
+      ]
+    },
+    {
+      "id": "h-modal-should-have",
+      "type": "choice",
+      "question": "You ____ have told me earlier. I could have helped you.",
+      "choices": [
+        "must",
+        "can't",
+        "need",
+        "should"
+      ],
+      "answer": 3,
+      "explanation": "〈should have ＋過去分詞〉で「〜すべきだったのに（実際にはしなかった）」という後悔・非難。must have は「〜したにちがいない」で意味が合わない。訳: もっと早く言ってくれればよかったのに。手伝えたのに。",
+      "tags": [
+        "ステップ1",
+        "助動詞＋have 過去分詞"
+      ]
+    },
+    {
+      "id": "h-modal-neednt-have",
+      "type": "choice",
+      "question": "We ____ have hurried. The concert started 30 minutes late.（急ぐ必要はなかったのに。）",
+      "choices": [
+        "must",
+        "needn't",
+        "should",
+        "could"
+      ],
+      "answer": 1,
+      "explanation": "〈needn't have ＋過去分詞〉で「〜する必要はなかったのに（実際にはした）」。should have 〜（〜すべきだった）や must have 〜（〜したにちがいない）とは意味がちがう。訳: 急ぐ必要はなかったのに。コンサートは 30 分遅れて始まった。",
+      "tags": [
+        "ステップ1",
+        "助動詞＋have 過去分詞"
+      ]
+    },
+    {
+      "id": "h-modal-cant-have-missed",
+      "type": "choice",
+      "question": "He ____ have missed the train. He left home very early.（彼が電車に乗り遅れたはずがない。）",
+      "choices": [
+        "can't",
+        "must",
+        "should",
+        "may"
+      ],
+      "answer": 0,
+      "explanation": "「〜したはずがない」は can't（cannot）have ＋過去分詞。must have（〜したにちがいない）、may have（〜したかもしれない）と確信の度合いで並べて覚える。訳: 彼が電車に乗り遅れたはずがない。とても早く家を出たのだから。",
+      "tags": [
+        "ステップ1",
+        "助動詞＋have 過去分詞"
+      ]
+    },
+    {
+      "id": "h-modal-may-have",
+      "type": "order",
+      "prompt": "彼は道に迷ったのかもしれない。",
+      "answer": "He may have lost his way.",
+      "chunks": [
+        "He",
+        "may",
+        "have",
+        "lost",
+        "his way."
+      ],
+      "explanation": "〈may have ＋過去分詞〉で「〜したかもしれない」（過去への推量）。lose one's way は「道に迷う」。",
+      "tags": [
+        "ステップ1",
+        "助動詞＋have 過去分詞"
+      ]
+    },
+    {
+      "id": "h-gi-forget-to",
+      "type": "choice",
+      "question": "Don't forget ____ this letter on your way to school.",
+      "choices": [
+        "mailing",
+        "to mail",
+        "mail",
+        "to mailing"
+      ],
+      "answer": 1,
+      "explanation": "forget to 〜 は「（これから）〜するのを忘れる」、forget -ing は「（過去に）〜したことを忘れる」。手紙はこれから出すので to mail。訳: 学校へ行く途中でこの手紙を出すのを忘れないでね。",
+      "tags": [
+        "ステップ1",
+        "不定詞と動名詞の使い分け"
+      ]
+    },
+    {
+      "id": "h-gi-remember-ing",
+      "type": "cloze",
+      "text": "I remember {{meeting}} him at the party last year.",
+      "translation": "去年のパーティーで彼に会ったのを覚えている。",
+      "hint": "meet を使って",
+      "explanation": "remember -ing は「（過去に）〜したことを覚えている」、remember to 〜 は「忘れずに〜する（これからすること）」。last year の出来事なので -ing。",
+      "tags": [
+        "ステップ1",
+        "不定詞と動名詞の使い分け"
+      ]
+    },
+    {
+      "id": "h-gi-stop-ing",
+      "type": "cloze",
+      "text": "He stopped {{smoking}} last year.",
+      "translation": "彼は昨年たばこをやめた。",
+      "hint": "smoke を使って",
+      "explanation": "stop -ing は「〜するのをやめる」。stop to 〜 は「〜するために立ち止まる（手を止める）」で、to 不定詞は目的語ではなく目的を表す。",
+      "tags": [
+        "ステップ1",
+        "不定詞と動名詞の使い分け"
+      ]
+    },
+    {
+      "id": "h-gi-regret-to",
+      "type": "choice",
+      "question": "I regret ____ you that your application was not accepted.（残念ながら、お申し込みが受理されなかったことをお知らせします。）",
+      "choices": [
+        "to inform",
+        "informing",
+        "inform",
+        "to informing"
+      ],
+      "answer": 0,
+      "explanation": "regret to 〜 は「残念ながら〜する」、regret -ing は「〜したことを後悔する」。これから知らせる内容なので to inform。",
+      "tags": [
+        "ステップ1",
+        "不定詞と動名詞の使い分け"
+      ]
+    },
+    {
+      "id": "h-gi-look-forward",
+      "type": "cloze",
+      "text": "I'm looking forward to {{seeing}} you.",
+      "translation": "お会いできるのを楽しみにしています。",
+      "hint": "see を使って",
+      "explanation": "look forward to の to は前置詞なので、後ろは動名詞（seeing）。to see としてしまうのが定番のミス。object to -ing、be used to -ing も同じ。",
+      "tags": [
+        "ステップ1",
+        "不定詞と動名詞の使い分け"
+      ]
+    },
+    {
+      "id": "h-gi-be-used-to",
+      "type": "order",
+      "prompt": "彼女は早起きに慣れている。",
+      "answer": "She is used to getting up early.",
+      "chunks": [
+        "She",
+        "is used to",
+        "getting up",
+        "early."
+      ],
+      "explanation": "〈be used to -ing〉で「〜することに慣れている」。to は前置詞なので後ろは動名詞。〈used to ＋原形〉（以前はよく〜した）と混同しないこと。",
+      "tags": [
+        "ステップ1",
+        "不定詞と動名詞の使い分け"
+      ]
+    },
+    {
+      "id": "h-gi-need-ing",
+      "type": "choice",
+      "question": "This shirt needs ____.",
+      "choices": [
+        "to wash",
+        "wash",
+        "washed",
+        "washing"
+      ],
+      "answer": 3,
+      "explanation": "主語が物のとき〈need -ing〉で「〜される必要がある」（＝ need to be washed）。to wash だと「シャツが（何かを）洗う必要がある」になってしまう。訳: このシャツは洗う必要がある。",
+      "tags": [
+        "ステップ1",
+        "不定詞と動名詞の使い分け"
+      ]
+    },
+    {
+      "id": "h-gi-no-use",
+      "type": "cloze",
+      "text": "It is no use {{crying}} over spilt milk.",
+      "translation": "こぼれたミルクを嘆いても仕方がない（覆水盆に返らず）。",
+      "hint": "cry を使って",
+      "explanation": "〈It is no use -ing〉で「〜しても無駄だ」。動名詞を使う慣用表現として There is no -ing（〜できない）、cannot help -ing（〜せずにいられない）もまとめて覚える。",
+      "tags": [
+        "ステップ1",
+        "不定詞と動名詞の使い分け"
+      ]
+    },
+    {
+      "id": "h-subj-would-have",
+      "type": "cloze",
+      "text": "If I had known your address, I {{would}} have written to you.",
+      "translation": "住所を知っていたら、手紙を書いたのに。",
+      "hint": "「〜したのに」",
+      "explanation": "過去の事実と反対の想像は仮定法過去完了〈If ＋主語＋had 過去分詞, 主語＋would have 過去分詞〉。「〜できたのに」なら could have。",
+      "tags": [
+        "ステップ2",
+        "仮定法"
+      ]
+    },
+    {
+      "id": "h-subj-had-taken",
+      "type": "cloze",
+      "text": "If she {{had}} taken the taxi, she would have arrived on time.",
+      "translation": "タクシーに乗っていたら、彼女は間に合っていただろう。",
+      "explanation": "仮定法過去完了の if 節は〈had ＋過去分詞〉。主節の would have arrived とセットで、過去の事実（タクシーに乗らなかった）と反対の仮定を表す。",
+      "tags": [
+        "ステップ2",
+        "仮定法"
+      ]
+    },
+    {
+      "id": "h-subj-mixed",
+      "type": "choice",
+      "question": "If I had studied harder in high school, I ____ a better job now.",
+      "choices": [
+        "would have had",
+        "will have",
+        "would have",
+        "had had"
+      ],
+      "answer": 2,
+      "explanation": "if 節は過去（高校時代）の仮定＝仮定法過去完了、主節は now（今）の結果＝仮定法過去〈would ＋原形〉。この組み合わせを混合仮定法という。now が決め手。訳: 高校でもっと勉強していたら、今はもっといい仕事に就いているだろう。",
+      "tags": [
+        "ステップ2",
+        "仮定法"
+      ]
+    },
+    {
+      "id": "h-subj-if-it-were-not-for",
+      "type": "choice",
+      "question": "If it were not ____ water, nothing could live.",
+      "choices": [
+        "with",
+        "without",
+        "by",
+        "for"
+      ],
+      "answer": 3,
+      "explanation": "〈If it were not for 〜〉で「（今）〜がなければ」。過去のことなら If it had not been for 〜。どちらも Without 〜 / But for 〜 で言いかえられる。訳: 水がなければ、何も生きられないだろう。",
+      "tags": [
+        "ステップ2",
+        "仮定法"
+      ]
+    },
+    {
+      "id": "h-subj-without",
+      "type": "order",
+      "prompt": "あなたの助けがなかったら、私は失敗していただろう。",
+      "answer": "Without your help, I would have failed.",
+      "chunks": [
+        "Without",
+        "your help,",
+        "I",
+        "would have",
+        "failed."
+      ],
+      "explanation": "Without 〜 は if 節の代わりになり、ここでは If it had not been for your help と同じ意味。主節は仮定法過去完了（would have ＋過去分詞）。",
+      "tags": [
+        "ステップ2",
+        "仮定法"
+      ]
+    },
+    {
+      "id": "h-subj-wish-had",
+      "type": "cloze",
+      "text": "I wish I {{had}} studied harder when I was young.",
+      "translation": "若いころにもっと勉強していればよかった。",
+      "explanation": "〈I wish ＋仮定法過去完了（had ＋過去分詞）〉で「（過去に）〜していればよかったのに」。今の願望なら I wish I studied（仮定法過去）。",
+      "tags": [
+        "ステップ2",
+        "仮定法"
+      ]
+    },
+    {
+      "id": "h-subj-as-if",
+      "type": "cloze",
+      "text": "He talks as if he {{knew}} everything.",
+      "translation": "彼はまるで何でも知っているかのように話す（実際には知らない）。",
+      "hint": "know を仮定法の形に",
+      "explanation": "〈as if ＋仮定法過去〉で「まるで〜であるかのように」。話している時点と同じ時のことでも過去形を使う。",
+      "tags": [
+        "ステップ2",
+        "仮定法"
+      ]
+    },
+    {
+      "id": "h-subj-inversion-had",
+      "type": "cloze",
+      "text": "{{Had}} I known the truth, I would have told you.",
+      "translation": "本当のことを知っていたら、あなたに話していただろう。",
+      "explanation": "仮定法の if を省略すると、主語と had が入れかわる倒置が起こる（If I had known = Had I known）。Were I 〜 / Should 〜 も同じしくみ。",
+      "tags": [
+        "ステップ2",
+        "仮定法"
+      ]
+    },
+    {
+      "id": "h-subj-its-time",
+      "type": "cloze",
+      "text": "It's time you {{went}} to bed.",
+      "translation": "もう寝る時間ですよ。",
+      "hint": "go を仮定法の形に",
+      "explanation": "〈It's time ＋主語＋過去形〉で「もう〜してもいい時間だ（まだしていない）」。仮定法過去の一種なので、今のことでも過去形を使う。",
+      "tags": [
+        "ステップ2",
+        "仮定法"
+      ]
+    },
+    {
+      "id": "h-subj-were-to",
+      "type": "order",
+      "prompt": "もし明日世界が終わるとしたら、あなたは何をしますか。",
+      "answer": "What would you do if the world were to end tomorrow?",
+      "chunks": [
+        "What",
+        "would you do",
+        "if",
+        "the world",
+        "were to end",
+        "tomorrow?"
+      ],
+      "explanation": "〈If ＋主語＋were to ＋原形〉は、実現の可能性がほとんどない未来の仮定。主節は would ＋原形。",
+      "tags": [
+        "ステップ2",
+        "仮定法"
+      ]
+    },
+    {
+      "id": "h-subj-but-for",
+      "type": "cloze",
+      "text": "{{But}} for your help, I couldn't have finished it.",
+      "translation": "あなたの助けがなかったら、それを終えられなかっただろう。",
+      "hint": "Without と同じ意味になる 2 語の表現の 1 語目",
+      "explanation": "But for 〜 は Without 〜 と同じく「〜がなければ（なかったら）」。やや硬い書き言葉の表現。",
+      "tags": [
+        "ステップ2",
+        "仮定法"
+      ]
+    },
+    {
+      "id": "h-subj-if-it-had-not-been",
+      "type": "order",
+      "prompt": "彼の助言がなかったら、私は失敗していただろう。",
+      "answer": "If it had not been for his advice, I would have failed.",
+      "chunks": [
+        "If it",
+        "had not been",
+        "for",
+        "his advice,",
+        "I would have",
+        "failed."
+      ],
+      "explanation": "過去の「〜がなかったら」は〈If it had not been for 〜〉。主節は would have ＋過去分詞。Without his advice でも言いかえられる。",
+      "tags": [
+        "ステップ2",
+        "仮定法"
+      ]
+    },
+    {
+      "id": "h-subj-wish-could",
+      "type": "choice",
+      "question": "I wish I ____ fly like a bird.",
+      "choices": [
+        "can",
+        "will",
+        "could",
+        "may"
+      ],
+      "answer": 2,
+      "explanation": "I wish の後ろは仮定法なので、can ではなく過去形の could。「（実際にはできないが）〜できたらいいのに」。訳: 鳥のように飛べたらいいのに。",
+      "tags": [
+        "ステップ2",
+        "仮定法"
+      ]
+    },
+    {
+      "id": "h-subj-should-inversion",
+      "type": "choice",
+      "question": "____ it rain tomorrow, the game will be canceled.",
+      "choices": [
+        "Should",
+        "Were",
+        "Had",
+        "Would"
+      ],
+      "answer": 0,
+      "explanation": "If it should rain（万一雨が降れば）の if を省略した倒置。should の仮定は「万一」の意味で、主節に will が使える。Were / Had では後ろの原形 rain と合わない。訳: 万一明日雨が降れば、試合は中止になる。",
+      "tags": [
+        "ステップ2",
+        "仮定法"
+      ]
+    },
+    {
+      "id": "h-pc-seeing",
+      "type": "cloze",
+      "text": "{{Seeing}} me, the dog ran away.",
+      "translation": "私を見ると、その犬は逃げ出した。",
+      "hint": "see を使って",
+      "explanation": "分詞構文は接続詞と主語を省いて〈-ing 〜, 主文〉で表す形（＝ When the dog saw me）。分詞の主語は主文の主語（the dog）と同じ。",
+      "tags": [
+        "ステップ2",
+        "分詞構文"
+      ]
+    },
+    {
+      "id": "h-pc-written",
+      "type": "choice",
+      "question": "____ in simple English, this book is easy to read.",
+      "choices": [
+        "Writing",
+        "Written",
+        "To write",
+        "Having written"
+      ],
+      "answer": 1,
+      "explanation": "主語の this book は「書かれた」側なので受け身の分詞構文（Being）written。Being は省略されることが多い。Writing / Having written だと本が書いたことになる。訳: やさしい英語で書かれているので、この本は読みやすい。",
+      "tags": [
+        "ステップ2",
+        "分詞構文"
+      ]
+    },
+    {
+      "id": "h-pc-having-finished",
+      "type": "choice",
+      "question": "____ his homework, he went out to play.",
+      "choices": [
+        "Finished",
+        "Having finished",
+        "Having been finished",
+        "To have finished"
+      ],
+      "answer": 1,
+      "explanation": "主文（went out）より前に終えたことを表すので完了形の分詞構文〈Having ＋過去分詞〉。彼は宿題を「終えた」側なので受け身の Having been finished は不可。訳: 宿題を終えてから、彼は遊びに出かけた。",
+      "tags": [
+        "ステップ2",
+        "分詞構文"
+      ]
+    },
+    {
+      "id": "h-pc-not-knowing",
+      "type": "cloze",
+      "text": "{{Not}} knowing what to say, I kept silent.",
+      "translation": "何と言えばいいか分からず、私は黙っていた。",
+      "explanation": "分詞構文を否定するときは、分詞の直前に not（never）を置く。Knowing not とはしない。",
+      "tags": [
+        "ステップ2",
+        "分詞構文"
+      ]
+    },
+    {
+      "id": "h-pc-absolute",
+      "type": "choice",
+      "question": "The weather ____ fine, we went on a picnic.",
+      "choices": [
+        "is",
+        "was",
+        "been",
+        "being"
+      ],
+      "answer": 3,
+      "explanation": "分詞の主語（The weather）が主文の主語（we）とちがうときは、主語を残したまま分詞構文にする（独立分詞構文）。is / was にすると接続詞なしで 2 つの文をつなぐ誤りになる。訳: 天気がよかったので、私たちはピクニックに行った。",
+      "tags": [
+        "ステップ2",
+        "分詞構文"
+      ]
+    },
+    {
+      "id": "h-pc-generally",
+      "type": "cloze",
+      "text": "{{Generally}} speaking, Japanese people are punctual.",
+      "translation": "一般的に言えば、日本人は時間を守る。",
+      "hint": "「一般的に」",
+      "explanation": "〈副詞＋speaking〉は慣用的な分詞構文。frankly speaking（率直に言えば）、strictly speaking（厳密に言えば）も同じ形。",
+      "tags": [
+        "ステップ2",
+        "分詞構文"
+      ]
+    },
+    {
+      "id": "h-pc-turning",
+      "type": "order",
+      "prompt": "左に曲がると、郵便局が見えます。",
+      "answer": "Turning to the left, you will find the post office.",
+      "chunks": [
+        "Turning",
+        "to the left,",
+        "you",
+        "will find",
+        "the post office."
+      ],
+      "explanation": "Turning to the left ＝ If you turn to the left。分詞構文は条件（〜すれば）の意味も表せる。",
+      "tags": [
+        "ステップ2",
+        "分詞構文"
+      ]
+    },
+    {
+      "id": "h-pc-with-oc",
+      "type": "order",
+      "prompt": "彼女は目を閉じてソファに座っていた。",
+      "answer": "She sat on the sofa with her eyes closed.",
+      "chunks": [
+        "She sat",
+        "on the sofa",
+        "with",
+        "her eyes",
+        "closed."
+      ],
+      "explanation": "〈with ＋名詞＋分詞〉で「〜を…した状態で」（付帯状況）。目は「閉じられている」ので過去分詞 closed。",
+      "tags": [
+        "ステップ2",
+        "分詞構文"
+      ]
+    },
+    {
+      "id": "h-radv-where",
+      "type": "cloze",
+      "text": "This is the house {{where}} my father was born.",
+      "translation": "ここは父が生まれた家だ。",
+      "hint": "場所を表す関係副詞",
+      "explanation": "後ろが欠けのない完全な文（my father was born）なので、場所を表す関係副詞 where（＝ in which）。後ろに名詞の欠けがあれば which を使う。",
+      "tags": [
+        "ステップ3",
+        "関係副詞"
+      ]
+    },
+    {
+      "id": "h-radv-when",
+      "type": "choice",
+      "question": "I'll never forget the day ____ I first met her.",
+      "choices": [
+        "when",
+        "where",
+        "which",
+        "what"
+      ],
+      "answer": 0,
+      "explanation": "先行詞が時（the day）で、後ろが完全な文なので関係副詞 when（＝ on which）。訳: 彼女に初めて会った日のことは決して忘れない。",
+      "tags": [
+        "ステップ3",
+        "関係副詞"
+      ]
+    },
+    {
+      "id": "h-radv-why",
+      "type": "cloze",
+      "text": "That is {{why}} I was late.",
+      "translation": "そういうわけで、私は遅れた。",
+      "explanation": "〈That is why ＋結果〉「そういうわけで〜」、〈That is because ＋原因〉「それは〜だからだ」。前後の因果関係が逆になるので注意。",
+      "tags": [
+        "ステップ3",
+        "関係副詞"
+      ]
+    },
+    {
+      "id": "h-radv-which-visit",
+      "type": "choice",
+      "question": "This is the town ____ I visited last year.",
+      "choices": [
+        "where",
+        "when",
+        "which",
+        "in that"
+      ],
+      "answer": 2,
+      "explanation": "visit は他動詞で目的語が必要。後ろの文に visited の目的語が欠けているので関係代名詞 which。先行詞が場所でも where になるとは限らない、が最重要ポイント。訳: ここは私が去年訪れた町だ。",
+      "tags": [
+        "ステップ3",
+        "関係副詞"
+      ]
+    },
+    {
+      "id": "h-radv-how",
+      "type": "cloze",
+      "text": "This is {{how}} I solved the problem.",
+      "translation": "このようにして、私はその問題を解いた。",
+      "explanation": "〈This is how ＋主語＋動詞〉で「このようにして〜する」。the way how とは言わず、the way か how のどちらか一方を使う。",
+      "tags": [
+        "ステップ3",
+        "関係副詞"
+      ]
+    },
+    {
+      "id": "h-radv-place-where",
+      "type": "order",
+      "prompt": "ここが、私たちが初めて会った場所です。",
+      "answer": "This is the place where we first met.",
+      "chunks": [
+        "This is",
+        "the place",
+        "where",
+        "we",
+        "first met."
+      ],
+      "explanation": "先行詞 the place の後ろに関係副詞 where ＋完全な文（we first met）が続く。",
+      "tags": [
+        "ステップ3",
+        "関係副詞"
+      ]
+    },
+    {
+      "id": "h-nonres-which-clause",
+      "type": "choice",
+      "question": "He said nothing, ____ made her angry.",
+      "choices": [
+        "that",
+        "what",
+        "which",
+        "it"
+      ],
+      "answer": 2,
+      "explanation": "コンマ＋which で前の文全体（彼が何も言わなかったこと）を先行詞にできる。that は非制限用法（コンマの後ろ）では使えない。it では文が 2 つ並ぶだけで接続詞がない。訳: 彼は何も言わず、そのことが彼女を怒らせた。",
+      "tags": [
+        "ステップ3",
+        "関係詞の非制限用法"
+      ]
+    },
+    {
+      "id": "h-nonres-who",
+      "type": "choice",
+      "question": "My brother, ____ lives in London, is a lawyer.",
+      "choices": [
+        "who",
+        "that",
+        "which",
+        "whom"
+      ],
+      "answer": 0,
+      "explanation": "コンマで区切って先行詞に情報を補足する非制限用法。人で主格なので who。that は非制限用法では使えない。訳: 兄はロンドンに住んでいるが、弁護士をしている。",
+      "tags": [
+        "ステップ3",
+        "関係詞の非制限用法"
+      ]
+    },
+    {
+      "id": "h-nonres-who-and",
+      "type": "cloze",
+      "text": "I met Tom, {{who}} told me the news.",
+      "translation": "トムに会ったら、彼がその知らせを教えてくれた。",
+      "explanation": "非制限用法の〈, who〉は〈and he〉のように前から順に訳すと自然。コンマの後ろなので that は使えない。",
+      "tags": [
+        "ステップ3",
+        "関係詞の非制限用法"
+      ]
+    },
+    {
+      "id": "h-nonres-of-whom",
+      "type": "cloze",
+      "text": "I have three sisters, all of {{whom}} are married.",
+      "translation": "私には姉妹が 3 人いて、全員結婚している。",
+      "explanation": "前置詞 of の後ろなので目的格の whom（人）。them にすると接続詞がなく文がつながらない。物なら all of which。",
+      "tags": [
+        "ステップ3",
+        "関係詞の非制限用法"
+      ]
+    },
+    {
+      "id": "h-nonres-which-lie",
+      "type": "order",
+      "prompt": "彼は試験に合格すると言ったが、それはうそだった。",
+      "answer": "He said he would pass the exam, which was a lie.",
+      "chunks": [
+        "He said",
+        "he would pass",
+        "the exam,",
+        "which",
+        "was",
+        "a lie."
+      ],
+      "explanation": "〈, which〉が前の文の内容（合格すると言ったこと）を先行詞にしている。主節が過去なので will は would になる（時制の一致）。",
+      "tags": [
+        "ステップ3",
+        "関係詞の非制限用法"
+      ]
+    },
+    {
+      "id": "h-what-said",
+      "type": "cloze",
+      "text": "{{What}} he said surprised everyone.",
+      "translation": "彼が言ったことはみんなを驚かせた。",
+      "explanation": "関係代名詞 what は先行詞を含み「〜すること・もの」（＝ the thing which）。What he said 全体が文の主語になっている。",
+      "tags": [
+        "ステップ3",
+        "what の用法"
+      ]
+    },
+    {
+      "id": "h-what-ordered",
+      "type": "cloze",
+      "text": "This is not {{what}} I ordered.",
+      "translation": "これは私が注文したものではない。",
+      "explanation": "前に先行詞がなく、ordered の目的語が欠けているので、先行詞を含む関係代名詞 what（〜するもの）。which / that は先行詞が必要。",
+      "tags": [
+        "ステップ3",
+        "what の用法"
+      ]
+    },
+    {
+      "id": "h-what-used-to-be",
+      "type": "cloze",
+      "text": "He is not {{what}} he used to be.",
+      "translation": "彼は昔の彼ではない。",
+      "explanation": "〈what S used to be〉で「昔の S」、〈what S is〉で「今の S」。人柄や状態の変化を言う決まった表現。",
+      "tags": [
+        "ステップ3",
+        "what の用法"
+      ]
+    },
+    {
+      "id": "h-what-is-more",
+      "type": "choice",
+      "question": "She is beautiful, and ____ is more, very kind.",
+      "choices": [
+        "which",
+        "that",
+        "it",
+        "what"
+      ],
+      "answer": 3,
+      "explanation": "〈what is more〉で「さらに・その上」（情報を付け加える）。what is worse（さらに悪いことに）もセットで覚える。訳: 彼女は美しく、その上とても親切だ。",
+      "tags": [
+        "ステップ3",
+        "what の用法"
+      ]
+    },
+    {
+      "id": "h-what-a-is-to-b",
+      "type": "order",
+      "prompt": "読書と心の関係は、食べ物と体の関係と同じだ。",
+      "answer": "Reading is to the mind what food is to the body.",
+      "chunks": [
+        "Reading is",
+        "to the mind",
+        "what",
+        "food is",
+        "to the body."
+      ],
+      "explanation": "〈A is to B what C is to D〉で「A と B の関係は C と D の関係と同じだ」。what 以下が C と D の関係を表す。",
+      "tags": [
+        "ステップ3",
+        "what の用法"
+      ]
+    },
+    {
+      "id": "h-cmp-the-more",
+      "type": "cloze",
+      "text": "The {{more}} you practice, the better you will become.",
+      "translation": "練習すればするほど、上達する。",
+      "explanation": "〈The ＋比較級 〜, the ＋比較級 …〉で「〜すればするほど…」。practice much の much が比較級 more になって前に出た形。",
+      "tags": [
+        "ステップ3",
+        "比較の慣用表現"
+      ]
+    },
+    {
+      "id": "h-cmp-no-other",
+      "type": "order",
+      "prompt": "日本で富士山より高い山はない。",
+      "answer": "No other mountain in Japan is higher than Mt. Fuji.",
+      "chunks": [
+        "No other mountain",
+        "in Japan",
+        "is",
+        "higher",
+        "than",
+        "Mt. Fuji."
+      ],
+      "explanation": "〈No other ＋単数名詞＋比較級＋than A〉で「A ほど〜なものはない」（最上級の意味）。",
+      "tags": [
+        "ステップ3",
+        "比較の慣用表現"
+      ]
+    },
+    {
+      "id": "h-cmp-no-more-than",
+      "type": "choice",
+      "question": "I have ____ more than 1,000 yen.（千円しか持っていない）",
+      "choices": [
+        "not",
+        "no",
+        "any",
+        "much"
+      ],
+      "answer": 1,
+      "explanation": "〈no more than 〜〉＝ only「たった〜だけ」（少ないという気持ち）。〈not more than 〜〉は at most「多くても〜」で、気持ちを含まない。",
+      "tags": [
+        "ステップ3",
+        "比較の慣用表現"
+      ]
+    },
+    {
+      "id": "h-cmp-more-clever",
+      "type": "choice",
+      "question": "She is ____ than wise.",
+      "choices": [
+        "cleverer",
+        "the cleverest",
+        "as clever",
+        "more clever"
+      ],
+      "answer": 3,
+      "explanation": "同じ人の 2 つの性質を比べるときは、短い語でも -er を使わず〈more A than B〉（B というよりむしろ A）。訳: 彼女は賢いというよりむしろ利口だ。",
+      "tags": [
+        "ステップ3",
+        "比較の慣用表現"
+      ]
+    },
+    {
+      "id": "h-cmp-times-as",
+      "type": "cloze",
+      "text": "This bridge is three times {{as}} long as that one.",
+      "translation": "この橋はあの橋の 3 倍の長さだ。",
+      "explanation": "〈X times as ＋原級＋as〉で「〜の X 倍…」。2 倍は twice as 〜 as、半分は half as 〜 as。",
+      "tags": [
+        "ステップ3",
+        "比較の慣用表現"
+      ]
+    },
+    {
+      "id": "h-cmp-much-less",
+      "type": "choice",
+      "question": "He can't swim, ____ less run a marathon.",
+      "choices": [
+        "more",
+        "much",
+        "very",
+        "so"
+      ],
+      "answer": 1,
+      "explanation": "否定文の後ろで〈much less / still less 〜〉は「まして〜ない」。前の否定を受けて、さらに難しいことも否定する。訳: 彼は泳げない、ましてマラソンを走るなど無理だ。",
+      "tags": [
+        "ステップ3",
+        "比較の慣用表現"
+      ]
+    },
+    {
+      "id": "h-cmp-any-other",
+      "type": "order",
+      "prompt": "彼女はクラスのほかのどの生徒よりも速く走る。",
+      "answer": "She runs faster than any other student in her class.",
+      "chunks": [
+        "She",
+        "runs",
+        "faster",
+        "than",
+        "any other student",
+        "in her class."
+      ],
+      "explanation": "〈比較級＋than any other ＋単数名詞〉で最上級の意味。any other の後ろの名詞は単数（student）にする。",
+      "tags": [
+        "ステップ3",
+        "比較の慣用表現"
+      ]
+    },
+    {
+      "id": "h-cmp-that-of",
+      "type": "choice",
+      "question": "The population of Tokyo is larger than ____ of Osaka.",
+      "choices": [
+        "those",
+        "it",
+        "that",
+        "one"
+      ],
+      "answer": 2,
+      "explanation": "比べているのは「東京の人口」と「大阪の人口」。くり返しを避けて the population を that で受ける（複数なら those）。訳: 東京の人口は大阪の人口より多い。",
+      "tags": [
+        "ステップ3",
+        "比較の慣用表現"
+      ]
+    },
+    {
+      "id": "h-cleft-that",
+      "type": "cloze",
+      "text": "It was in this room {{that}} the meeting was held.",
+      "translation": "その会議が開かれたのは、この部屋だった。",
+      "explanation": "〈It is / was 〜 that …〉で「…なのは〜だ」と〜の部分を強調する。強調する語句は名詞だけでなく、in this room のような副詞句でもよい。",
+      "tags": [
+        "ステップ4",
+        "強調構文"
+      ]
+    },
+    {
+      "id": "h-cleft-who",
+      "type": "choice",
+      "question": "It was Tom ____ broke the window.",
+      "choices": [
+        "who",
+        "which",
+        "what",
+        "where"
+      ],
+      "answer": 0,
+      "explanation": "強調構文で強調する語が人のときは that の代わりに who も使える。which は物、where / what は強調構文には使わない。訳: 窓を割ったのはトムだった。",
+      "tags": [
+        "ステップ4",
+        "強調構文"
+      ]
+    },
+    {
+      "id": "h-cleft-not-until",
+      "type": "choice",
+      "question": "It was not until he lost his health ____ he realized its value.",
+      "choices": [
+        "that",
+        "when",
+        "which",
+        "before"
+      ],
+      "answer": 0,
+      "explanation": "〈It is not until 〜 that …〉で「〜して初めて…する」。not until 〜 を強調構文で強調した形。訳: 健康を失って初めて、彼はそのありがたさに気づいた。",
+      "tags": [
+        "ステップ4",
+        "強調構文"
+      ]
+    },
+    {
+      "id": "h-cleft-did",
+      "type": "cloze",
+      "text": "I {{did}} lock the door. I'm sure.",
+      "translation": "ドアには確かに鍵をかけた。間違いない。",
+      "hint": "動詞を強調する助動詞（過去）",
+      "explanation": "肯定文の動詞の前に do / does / did を置き、後ろを原形にすると「本当に〜する（した）」と動詞を強調できる。",
+      "tags": [
+        "ステップ4",
+        "強調構文"
+      ]
+    },
+    {
+      "id": "h-cleft-ken",
+      "type": "order",
+      "prompt": "私が昨日会ったのはケンだった。",
+      "answer": "It was Ken that I met yesterday.",
+      "chunks": [
+        "It was",
+        "Ken",
+        "that",
+        "I",
+        "met",
+        "yesterday."
+      ],
+      "explanation": "I met Ken yesterday. の Ken を強調すると It was Ken that I met yesterday.。It was と that を取り除くと元の文に戻るのが強調構文の見分け方。",
+      "tags": [
+        "ステップ4",
+        "強調構文"
+      ]
+    },
+    {
+      "id": "h-inv-never",
+      "type": "order",
+      "prompt": "こんなに美しい夕日は見たことがない。",
+      "answer": "Never have I seen such a beautiful sunset.",
+      "chunks": [
+        "Never",
+        "have",
+        "I",
+        "seen",
+        "such a beautiful sunset."
+      ],
+      "explanation": "否定の語 Never が文頭に来ると、後ろは疑問文と同じ語順（倒置）になる。I have seen ではなく have I seen。",
+      "tags": [
+        "ステップ4",
+        "倒置"
+      ]
+    },
+    {
+      "id": "h-inv-little",
+      "type": "cloze",
+      "text": "Little {{did}} I dream that I would win.",
+      "translation": "自分が勝つとは夢にも思わなかった。",
+      "explanation": "Little が文頭に出ると「まったく〜ない」の意味になり、後ろは疑問文の語順。一般動詞の過去なので did ＋主語＋原形（dream）。",
+      "tags": [
+        "ステップ4",
+        "倒置"
+      ]
+    },
+    {
+      "id": "h-inv-not-only",
+      "type": "choice",
+      "question": "Not only ____ the piano, but she also sings.",
+      "choices": [
+        "she plays",
+        "plays she",
+        "does she play",
+        "she does play"
+      ],
+      "answer": 2,
+      "explanation": "Not only が文頭に来ると倒置が起こる。一般動詞の現在なので〈does ＋主語＋原形〉。訳: 彼女はピアノを弾くだけでなく、歌も歌う。",
+      "tags": [
+        "ステップ4",
+        "倒置"
+      ]
+    },
+    {
+      "id": "h-inv-hardly-when",
+      "type": "choice",
+      "question": "Hardly had I left home ____ it began to rain.",
+      "choices": [
+        "than",
+        "when",
+        "that",
+        "then"
+      ],
+      "answer": 1,
+      "explanation": "〈Hardly（Scarcely）had S 過去分詞 when / before 〜〉で「S が…するとすぐに〜」。No sooner の場合だけ than を使う。訳: 家を出るとすぐに雨が降り出した。",
+      "tags": [
+        "ステップ4",
+        "倒置"
+      ]
+    },
+    {
+      "id": "h-inv-no-sooner",
+      "type": "cloze",
+      "text": "No sooner had he arrived {{than}} he fell asleep.",
+      "translation": "彼は到着するとすぐに眠ってしまった。",
+      "explanation": "〈No sooner had S 過去分詞 than 〜〉で「〜するとすぐに」。sooner が比較級なので than を使う、と覚えると Hardly 〜 when と区別しやすい。",
+      "tags": [
+        "ステップ4",
+        "倒置"
+      ]
+    },
+    {
+      "id": "h-inv-so-do-i",
+      "type": "choice",
+      "question": "\"I like cats.\" \"____.\"",
+      "choices": [
+        "So I do",
+        "Neither do I",
+        "So am I",
+        "So do I"
+      ],
+      "answer": 3,
+      "explanation": "相手の肯定文に「私もそうだ」は〈So ＋助動詞＋主語〉の倒置。like は一般動詞の現在なので do。否定文への「私も〜ない」は Neither do I。訳: 「猫が好きなんだ」「私も」",
+      "tags": [
+        "ステップ4",
+        "倒置"
+      ]
+    },
+    {
+      "id": "h-inv-only-then",
+      "type": "order",
+      "prompt": "その時になって初めて、私は自分の誤りに気づいた。",
+      "answer": "Only then did I realize my mistake.",
+      "chunks": [
+        "Only then",
+        "did",
+        "I",
+        "realize",
+        "my mistake."
+      ],
+      "explanation": "〈Only ＋副詞（句）〉が文頭に来ると倒置が起こる。過去の一般動詞なので〈did ＋主語＋原形〉。",
+      "tags": [
+        "ステップ4",
+        "倒置"
+      ]
+    },
+    {
+      "id": "h-neg-not-always",
+      "type": "cloze",
+      "text": "The rich are {{not}} always happy.",
+      "translation": "金持ちが必ずしも幸せとは限らない。",
+      "explanation": "not ＋always / all / every / necessarily は「必ずしも〜とは限らない」という部分否定。全部否定（never, none）との区別が大切。",
+      "tags": [
+        "ステップ4",
+        "否定の表現"
+      ]
+    },
+    {
+      "id": "h-neg-far-from",
+      "type": "cloze",
+      "text": "His explanation is far {{from}} satisfactory.",
+      "translation": "彼の説明は決して満足できるものではない。",
+      "explanation": "〈far from 〜〉で「〜からほど遠い＝決して〜ではない」。not を使わずに強い否定を表す表現。",
+      "tags": [
+        "ステップ4",
+        "否定の表現"
+      ]
+    },
+    {
+      "id": "h-neg-anything-but",
+      "type": "choice",
+      "question": "He is ____ a gentleman. He's very rude.",
+      "choices": [
+        "anything but",
+        "nothing but",
+        "all but",
+        "no more than"
+      ],
+      "answer": 0,
+      "explanation": "〈anything but 〜〉は「決して〜ではない」。nothing but 〜 は「〜にすぎない（〜だけ）」、all but は「ほとんど」。but を「〜以外」と考えると区別しやすい。訳: 彼は決して紳士ではない。とても失礼だ。",
+      "tags": [
+        "ステップ4",
+        "否定の表現"
+      ]
+    },
+    {
+      "id": "h-neg-no-longer",
+      "type": "cloze",
+      "text": "I {{no}} longer live in Tokyo.",
+      "translation": "私はもう東京には住んでいない。",
+      "explanation": "〈no longer 〜〉＝ not 〜 any longer で「もはや〜ない」。以前はそうだったが今はちがう、という変化を表す。",
+      "tags": [
+        "ステップ4",
+        "否定の表現"
+      ]
+    },
+    {
+      "id": "h-neg-never-without",
+      "type": "cloze",
+      "text": "I never see this photo {{without}} thinking of my childhood.",
+      "translation": "この写真を見ると、必ず子どものころを思い出す。",
+      "explanation": "〈never A without B〉で「B せずに A することはない＝A すると必ず B する」（二重否定で強い肯定）。without の後ろは動名詞。",
+      "tags": [
+        "ステップ4",
+        "否定の表現"
+      ]
+    },
+    {
+      "id": "h-neg-none",
+      "type": "choice",
+      "question": "____ of my friends came to the party.（友人は誰も来なかった）",
+      "choices": [
+        "No",
+        "None",
+        "Nothing",
+        "Not"
+      ],
+      "answer": 1,
+      "explanation": "〈None of ＋複数名詞〉で「〜のうち誰も（どれも）…ない」（全部否定）。No は名詞の前に置く形容詞的な語で、No of とは言えない。",
+      "tags": [
+        "ステップ4",
+        "否定の表現"
+      ]
+    },
+    {
+      "id": "h-neg-last-person",
+      "type": "order",
+      "prompt": "彼は決して約束を破るような人ではない。",
+      "answer": "He is the last person to break his promise.",
+      "chunks": [
+        "He is",
+        "the last person",
+        "to break",
+        "his promise."
+      ],
+      "explanation": "〈the last ＋名詞＋to 不定詞〉で「最も〜しそうにない…」。直訳の「〜する最後の人」から、否定の意味になる。",
+      "tags": [
+        "ステップ4",
+        "否定の表現"
+      ]
+    },
+    {
+      "id": "h-inan-make",
+      "type": "choice",
+      "question": "This medicine will ____ you feel better.",
+      "choices": [
+        "take",
+        "get",
+        "make",
+        "bring"
+      ],
+      "answer": 2,
+      "explanation": "〈make ＋人＋原形〉で「人に〜させる」。無生物主語の文は「この薬を飲めば気分がよくなる」と訳すと自然。get なら get you to feel のように to が必要。",
+      "tags": [
+        "ステップ4",
+        "無生物主語"
+      ]
+    },
+    {
+      "id": "h-inan-prevented",
+      "type": "cloze",
+      "text": "The heavy rain {{prevented}} us from going out.",
+      "translation": "大雨のせいで、私たちは外出できなかった。",
+      "hint": "p で始まる「妨げる」の過去形",
+      "explanation": "〈prevent ＋人＋from -ing〉で「人が〜するのを妨げる」。無生物主語の文は「〜のせいで…できない」と訳す。keep / stop 人 from -ing も同じ形。",
+      "tags": [
+        "ステップ4",
+        "無生物主語"
+      ]
+    },
+    {
+      "id": "h-inan-what-brought",
+      "type": "choice",
+      "question": "What ____ you to Japan?（日本で出会った人に）",
+      "choices": [
+        "took",
+        "came",
+        "went",
+        "brought"
+      ],
+      "answer": 3,
+      "explanation": "〈What brings（brought）you to 〜?〉は「何があなたを〜に連れてきたのか」＝「なぜ〜に来たのですか」。話し手のいる場所へ「連れてくる」のは bring。訳: どうして日本に来たのですか。",
+      "tags": [
+        "ステップ4",
+        "無生物主語"
+      ]
+    },
+    {
+      "id": "h-inan-take-you",
+      "type": "order",
+      "prompt": "この道を行けば駅に着きます。",
+      "answer": "This road will take you to the station.",
+      "chunks": [
+        "This road",
+        "will take",
+        "you",
+        "to",
+        "the station."
+      ],
+      "explanation": "〈無生物主語＋take ＋人＋to 場所〉で「〜は人を…へ連れて行く」＝「〜を行けば…に着く」。",
+      "tags": [
+        "ステップ4",
+        "無生物主語"
+      ]
+    },
+    {
+      "id": "h-inan-walk-take",
+      "type": "choice",
+      "question": "A ten-minute walk will ____ you to the park.",
+      "choices": [
+        "make",
+        "let",
+        "take",
+        "have"
+      ],
+      "answer": 2,
+      "explanation": "〈take ＋人＋to 場所〉で「〜を…へ連れて行く」。make / let / have は使役動詞で、後ろに〈人＋原形〉が来る。訳: 10 分歩けば公園に着く。",
+      "tags": [
+        "ステップ4",
+        "無生物主語"
+      ]
+    },
+    {
+      "id": "h-inan-remind",
+      "type": "cloze",
+      "text": "This picture {{reminds}} me of my school days.",
+      "translation": "この写真を見ると、学生時代を思い出す。",
+      "hint": "r で始まる動詞",
+      "explanation": "〈remind ＋人＋of 〜〉で「人に〜を思い出させる」。主語が三人称単数なので -s を付ける。",
+      "tags": [
+        "ステップ4",
+        "無生物主語"
+      ]
+    },
+    {
+      "id": "h-noun-swimmer",
+      "type": "choice",
+      "question": "He is a good ____.（彼は泳ぐのがうまい）",
+      "choices": [
+        "swimming",
+        "swim",
+        "swimmed",
+        "swimmer"
+      ],
+      "answer": 3,
+      "explanation": "a good ＋名詞（〜する人）で「〜するのがうまい」。He swims well. を名詞中心に言いかえた形。a good cook（料理がうまい）も同じ。",
+      "tags": [
+        "ステップ4",
+        "名詞構文"
+      ]
+    },
+    {
+      "id": "h-noun-arrival",
+      "type": "cloze",
+      "text": "Her sudden {{arrival}} surprised us.",
+      "translation": "彼女が突然やってきたので、私たちは驚いた。",
+      "hint": "arrive の名詞形",
+      "explanation": "名詞構文では、名詞を動詞に、形容詞を副詞に戻して訳す（She arrived suddenly. → 驚いた）。所有格 Her は意味上の主語。",
+      "tags": [
+        "ステップ4",
+        "名詞構文"
+      ]
+    },
+    {
+      "id": "h-noun-success",
+      "type": "choice",
+      "question": "I'm sure of his ____.（彼はきっと成功すると思う）",
+      "choices": [
+        "succeed",
+        "success",
+        "successful",
+        "successfully"
+      ],
+      "answer": 1,
+      "explanation": "前置詞 of と所有格 his の後ろなので名詞 success。I'm sure that he will succeed. を名詞構文で表した形。",
+      "tags": [
+        "ステップ4",
+        "名詞構文"
+      ]
+    },
+    {
+      "id": "h-noun-short-walk",
+      "type": "order",
+      "prompt": "少し歩けば、気分がよくなるでしょう。",
+      "answer": "A short walk will make you feel better.",
+      "chunks": [
+        "A short walk",
+        "will",
+        "make",
+        "you",
+        "feel",
+        "better."
+      ],
+      "explanation": "A short walk（短い散歩）という名詞が主語。If you walk a little を名詞構文＋無生物主語で表した形。make ＋人＋原形で「人に〜させる」。",
+      "tags": [
+        "ステップ4",
+        "名詞構文"
+      ]
+    },
+    {
+      "id": "h-noun-discovery",
+      "type": "cloze",
+      "text": "The {{discovery}} of oil changed the town.",
+      "translation": "石油が発見されて、その町は変わった。",
+      "hint": "discover の名詞形",
+      "explanation": "〈the 名詞 of 〜〉の of 以下は、名詞の目的語（石油を発見する）にあたることがある。動詞に戻して「〜が発見されて」と訳す。",
+      "tags": [
+        "ステップ4",
+        "名詞構文"
+      ]
+    }
+  ]
+}
