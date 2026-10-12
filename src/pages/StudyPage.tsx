@@ -48,7 +48,7 @@ import { CardInfoButton } from '@/features/study/CardInfoSheet';
 import { useStudyLayout } from '@/features/study/useStudyLayout';
 import { RatingBar } from '@/features/study/RatingBar';
 import { ScopePicker } from '@/features/study/ScopePicker';
-import { ReactionBubble } from '@/features/study/ReactionBubble';
+import { RevealReaction } from '@/features/study/RevealReaction';
 import { StudyTimers } from '@/features/study/StudyTimers';
 import { useStudy } from '@/features/study/studyStore';
 
@@ -490,6 +490,8 @@ export default function StudyPage() {
                   )}
                 </div>
               </Card>
+              {/* 答えを見て解説を読んでいるあいだに出すひとこと（次のカードへ進んだら出さない） */}
+              <RevealReaction />
               {revealed && current.card.lapses >= LEECH_LAPSES && (
                 <div className="flex flex-wrap items-center gap-2 rounded-2xl border border-amber-200 bg-amber-50 px-4 py-3 text-sm text-amber-900 dark:border-amber-900 dark:bg-amber-950/40 dark:text-amber-200">
                   <TriangleAlert className="size-4 shrink-0" />
@@ -516,14 +518,6 @@ export default function StudyPage() {
                 compact ? 'py-2' : 'space-y-2 py-3',
               )}
             >
-              {/* 余白を詰めるときは、ひとことをボタンの上に重ねて表示する（高さを取らない） */}
-              <div
-                className={
-                  compact ? 'pointer-events-none absolute inset-x-3 bottom-full mb-2' : 'h-9'
-                }
-              >
-                <ReactionBubble />
-              </div>
               {revealed ? (
                 <RatingBar
                   card={current.card}

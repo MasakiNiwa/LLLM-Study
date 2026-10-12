@@ -1,5 +1,5 @@
 import { describe, expect, it } from 'vitest';
-import { getPersona, greetingText, PERSONAS, reactionText } from './personas';
+import { getPersona, greetingText, PERSONAS, reactionText, revealText } from './personas';
 
 describe('personas', () => {
   it('すべての性格に必要なテンプレートがある', () => {
@@ -26,5 +26,16 @@ describe('personas', () => {
     expect(getPersona('custom', '関西弁で話す').style).toBe('関西弁で話す');
     expect(getPersona('custom', '').style).toBe(PERSONAS[0].style);
     expect(getPersona('unknown').id).toBe('buddy');
+  });
+});
+
+describe('revealText', () => {
+  const buddy = getPersona('buddy');
+  it('結果が分かれば評価のひとこと、自分で答え合わせ中なら確認を促すひとこと', () => {
+    expect(buddy.reactions[1]).toContain(revealText(buddy, 'wrong', 0, 0));
+    expect(buddy.reactions[1]).toContain(revealText(buddy, 'timeout', 0, 0));
+    expect(buddy.reactions[3]).toContain(revealText(buddy, 'correct', 0, 0));
+    expect(revealText(buddy, 'self', 0, 0)).not.toBe('');
+    expect(revealText(getPersona('custom', '関西弁'), 'self', 0, 0)).not.toBe('');
   });
 });

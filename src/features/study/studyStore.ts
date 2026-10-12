@@ -15,7 +15,7 @@ import { answersInTargetLanguage, expectedAnswer } from '@/lib/packs/itemText';
 import { speechLang } from '@/lib/speech/lang';
 import { errorMessage } from '@/lib/utils/format';
 import { useAiFocus } from '@/features/ai/focusStore';
-import { getPersona, reactionText } from '@/features/ai/personas';
+import { getPersona, reactionText, type RevealOutcome } from '@/features/ai/personas';
 import { useSettings } from '@/features/settings/settingsStore';
 import { setItemSuspended } from './cardActions';
 import { refreshAppBadge } from './appBadge';
@@ -146,6 +146,25 @@ interface StudyState {
    * 学習画面に戻ると、新しい内容で始め直す。packIds が null ならどの教材でも終える。
    */
   invalidate: (packIds: string[] | null) => void;
+}
+
+/**
+ * 答えを見たときの結果（アプリが判定する。ひとことの出し分けに使う）。
+ * 選択・並べ替え・時間切れ・書いた答えの判定から決め、どれもなければ「自分で答え合わせ中」
+ */
+export function revealOutcome(
+  st: Pick<StudyState, 'current' | 'response' | 'answer' | 'shownAt'>,
+): RevealOutcome {
+  const response = st.response?.shownAt === st.shownAt ? st.response : null;
+  if (response?.timedOut) return 'timeout';
+  const item = st.current?.item.item;
+  if (response?.choice !== undefined && item?.type === 'choice') {
+    return response.choice === item.answer ? 'correct' : 'wrong';
+  }
+  if (response?.order) return response.order.correct ? 'correct' : 'wrong';
+  if (item?.type === 'choice' || item?.type === 'order') return 'gaveup';
+  const written = st.answer?.shownAt === st.shownAt ? st.answer : null;
+  return written?.verdict ?? 'self';
 }
 
 function emptyStats(): SessionStats {

@@ -42,6 +42,8 @@ import {
   BACKEND_SETTING_LABELS,
   NEW_CARD_ORDER_LABELS,
   REACTION_LABELS,
+  USER_AGE_LABELS,
+  USER_GENDER_LABELS,
   THEME_LABELS,
   TYPE_ANSWER_LABELS,
 } from '@/features/settings/labels';
@@ -57,6 +59,8 @@ import {
   type ReactionMode,
   type ThemeSetting,
   type TypeAnswerMode,
+  type UserAge,
+  type UserGender,
 } from '@/features/settings/settingsStore';
 import { useStudy } from '@/features/study/studyStore';
 import { TimerOptions } from '@/features/study/StudyTimerMenu';
@@ -482,7 +486,38 @@ export default function SettingsPage() {
               />
             )}
           </div>
-          <Field label="評価したときのひとこと" htmlFor="reaction">
+          <Field
+            label="ユーザーについて（任意）"
+            hint="性別と年齢層を AI に伝えて、話題や言葉づかいの参考にしてもらいます。端末の外には出ません"
+            stacked
+          >
+            <div className="grid grid-cols-2 gap-2">
+              <Select
+                value={s.userGender}
+                onChange={(v) => update({ userGender: v as UserGender })}
+                aria-label="性別"
+                options={(Object.keys(USER_GENDER_LABELS) as UserGender[]).map((v) => ({
+                  value: v,
+                  label: v ? USER_GENDER_LABELS[v] : '性別: 指定しない',
+                }))}
+              />
+              <Select
+                value={s.userAge}
+                onChange={(v) => update({ userAge: v as UserAge })}
+                aria-label="年齢層"
+                options={(Object.keys(USER_AGE_LABELS) as UserAge[]).map((v) => ({
+                  value: v,
+                  label: v ? USER_AGE_LABELS[v] : '年齢層: 指定しない',
+                }))}
+              />
+            </div>
+          </Field>
+          <Field
+            label="答えを見たときのひとこと"
+            htmlFor="reaction"
+            hint="答えを見て解説を読んでいるあいだに話しかけます。AI はときどき 2〜3 回話しかけます。間に合わずに次のカードへ進んだときは出しません"
+            stacked
+          >
             <Select
               id="reaction"
               value={s.reaction}
@@ -491,7 +526,6 @@ export default function SettingsPage() {
                 value: v,
                 label: REACTION_LABELS[v],
               }))}
-              className="w-48 sm:w-64"
             />
           </Field>
           <Field
