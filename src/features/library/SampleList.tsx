@@ -1,17 +1,26 @@
 import { useEffect, useMemo, useState } from 'react';
-import { Check, Download, Loader2, RefreshCw } from 'lucide-react';
+import { Check, ChevronDown, Download, Loader2, RefreshCw } from 'lucide-react';
 import { Button } from '@/components/ui/Button';
 import { Select } from '@/components/ui/Select';
 import { fetchSampleIndex, type SampleEntry } from '@/lib/packs/samples';
-import { subjectKey, subjectLabel } from '@/lib/packs/subjects';
+import {
+  countSubjectGroups,
+  subjectGroupKey,
+  subjectGroupLabel,
+  subjectKey,
+  subjectLabel,
+} from '@/lib/packs/subjects';
 import { ITEM_TYPE_LABELS } from '@/lib/packs/templates';
 import { errorMessage } from '@/lib/utils/format';
 import { installSample } from './packActions';
 import { useLibrary } from './libraryStore';
 import { SearchBox, SubjectChips } from './ListFilters';
-import { countSubjects, matchesQuery } from './listFilter';
+import { matchesQuery } from './listFilter';
 
 type SampleSort = 'default' | 'name' | 'items' | 'new';
+
+/** はじめての案内など狭い場所で、最初に見せる数（残りは「もっと見る」で開く） */
+const COMPACT_LIMIT = 6;
 
 const SORT_OPTIONS: { value: SampleSort; label: string }[] = [
   { value: 'default', label: 'おすすめ順' },
@@ -50,22 +59,22 @@ export function SampleList({ compact }: { compact?: boolean }) {
   const [query, setQuery] = useState('');
   const [subject, setSubject] = useState<string | null>(null);
   const [sort, setSort] = useState<SampleSort>('default');
+  const [expanded, setExpanded] = useState(false);
 
-  const subjects = useMemo(
-    () => countSubjects(samples ?? [], (s) => subjectKey(s.subject)),
-    [samples],
-  );
+  // 分野が多いので、ボタンは大きなまとまり（英語・数学と理科など）で出す
+  const subjects = useMemo(() => countSubjectGroups(samples ?? [], (s) => s.subject), [samples]);
   const visible = useMemo(() => {
     const revisions = new Map(packs.map((p) => [p.id, p.revision ?? 1]));
     const filtered = (samples ?? []).filter(
       (s) =>
-        (!subject || subjectKey(s.subject) === subject) &&
+        (!subject || subjectGroupKey(s.subject) === subject) &&
         matchesQuery(query, [
           s.title,
           s.description,
           s.level,
           s.tags,
           subjectLabel(subjectKey(s.subject)),
+          subjectGroupLabel(subjectGroupKey(s.subject)),
         ]),
     );
     return sortSamples(filtered, sort, (s) => {
@@ -94,11 +103,20 @@ export function SampleList({ compact }: { compact?: boolean }) {
   // 検索と並べ替えは教材の画面だけ。はじめての案内など狭い場所では分野の絞り込みだけ出す
   const showTools = !compact && samples.length >= 4;
   const showChips = samples.length >= 4 && subjects.length >= 2;
+  const shown = compact && !expanded ? visible.slice(0, COMPACT_LIMIT) : visible;
+  const chips = (
+    <SubjectChips
+      subjects={subjects}
+      value={subject}
+      onChange={setSubject}
+      labelOf={subjectGroupLabel}
+    />
+  );
   return (
     <div className="space-y-3">
       {compact && showChips && (
         <div className="flex flex-wrap gap-1.5">
-          <SubjectChips subjects={subjects} value={subject} onChange={setSubject} />
+          {chips}
         </div>
       )}
       {showTools && (
@@ -110,9 +128,7 @@ export function SampleList({ compact }: { compact?: boolean }) {
             label="サンプル教材を検索"
           />
           <div className="flex flex-wrap items-center gap-2">
-            {showChips && (
-              <SubjectChips subjects={subjects} value={subject} onChange={setSubject} />
-            )}
+            {showChips && chips}
             <Select
               value={sort}
               onChange={setSort}
@@ -124,7 +140,7 @@ export function SampleList({ compact }: { compact?: boolean }) {
         </>
       )}
       <ul className="space-y-2">
-        {visible.map((s) => {
+        {shown.map((s) => {
           const installed = packs.find((p) => p.id === s.id);
           const updatable = installed && (installed.revision ?? 1) < s.revision;
           return (
@@ -176,6 +192,12 @@ export function SampleList({ compact }: { compact?: boolean }) {
           </li>
         )}
       </ul>
+      {shown.length < visible.length && (
+        <Button variant="ghost" size="sm" className="w-full" onClick={() => setExpanded(true)}>
+          <ChevronDown />
+          もっと見る（あと {visible.length - shown.length} 件）
+        </Button>
+      )}
     </div>
   );
 }

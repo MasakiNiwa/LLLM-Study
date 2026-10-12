@@ -100,9 +100,10 @@ export default function HomePage() {
     <>
       <PageHeader
         title="ホーム"
+        hideTitleOnMobile
         actions={
           <>
-            <ModelStatusChip className="max-w-36 sm:max-w-56" />
+            <ModelStatusChip className="max-w-52 sm:max-w-56" />
             <ThemeToggle />
           </>
         }

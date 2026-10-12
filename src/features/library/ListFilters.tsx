@@ -34,11 +34,14 @@ export function SubjectChips({
   subjects,
   value,
   onChange,
+  labelOf = subjectLabel,
 }: {
   /** [分野のキー, 件数] */
   subjects: [string, number][];
   value: string | null;
   onChange: (v: string | null) => void;
+  /** キーの表示名（既定は分野の表示名） */
+  labelOf?: (key: string) => string;
 }) {
   const total = subjects.reduce((n, [, c]) => n + c, 0);
   return (
@@ -56,7 +59,7 @@ export function SubjectChips({
               : 'border-slate-300 hover:bg-slate-100 dark:border-slate-700 dark:hover:bg-slate-800',
           )}
         >
-          {k === null ? 'すべて' : subjectLabel(k)}
+          {k === null ? 'すべて' : labelOf(k)}
           <span className="ml-1 opacity-60">{count}</span>
         </button>
       ))}
