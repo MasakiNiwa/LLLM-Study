@@ -90,6 +90,10 @@ interface StudyState {
   current: StudyCard | null;
   revealed: boolean;
   shownAt: number;
+  /** 答えを表示した時刻（問題ごとの経過時間を止める） */
+  revealedAt: number | null;
+  /** 学習全体の制限時間になって終えた */
+  timeUp: boolean;
   /** 最初のキューの内訳（進捗表示用） */
   planned: { new: number; review: number; learning: number };
   stats: SessionStats;
@@ -160,6 +164,7 @@ export const useStudy = create<StudyState>()((set, get) => {
           current: next,
           revealed: false,
           shownAt: Date.now(),
+          revealedAt: null,
           status: 'studying',
           answer: null,
         });
@@ -174,6 +179,17 @@ export const useStudy = create<StudyState>()((set, get) => {
     useAiFocus.getState().setStudyCard(null, false);
   };
 
+  /** 評価したあと次のカードへ。学習全体の制限時間を過ぎていたら、そこで終える */
+  const advance = async (rest: CardRecord[]) => {
+    const limit = useSettings.getState().sessionTimeLimit;
+    if (limit > 0 && rest.length > 0 && Date.now() - get().stats.startedAt >= limit * 60_000) {
+      await showNext([]);
+      set({ timeUp: true });
+      return;
+    }
+    await showNext(rest);
+  };
+
   return {
     status: 'idle',
     mode: 'srs',
@@ -182,6 +198,8 @@ export const useStudy = create<StudyState>()((set, get) => {
     current: null,
     revealed: false,
     shownAt: 0,
+    revealedAt: null,
+    timeUp: false,
     planned: { new: 0, review: 0, learning: 0 },
     stats: emptyStats(),
     undoStack: [],
@@ -193,6 +211,7 @@ export const useStudy = create<StudyState>()((set, get) => {
       set({
         status: 'loading',
         interrupted: false,
+        timeUp: false,
         mode: 'srs',
         practiceKind: null,
         stats: emptyStats(),
@@ -216,6 +235,7 @@ export const useStudy = create<StudyState>()((set, get) => {
       set({
         status: 'loading',
         interrupted: false,
+        timeUp: false,
         mode: 'practice',
         practiceKind: kind,
         stats: emptyStats(),
@@ -235,7 +255,7 @@ export const useStudy = create<StudyState>()((set, get) => {
 
     reveal() {
       if (!get().current || get().revealed) return;
-      set({ revealed: true });
+      set({ revealed: true, revealedAt: Date.now() });
       useAiFocus.getState().setStudyCard(get().current!.card.id, true);
     },
 
@@ -296,7 +316,7 @@ export const useStudy = create<StudyState>()((set, get) => {
             userAnswer: writtenAnswer(),
           },
         });
-        await showNext(rest);
+        await advance(rest);
         return;
       }
       try {
@@ -329,7 +349,7 @@ export const useStudy = create<StudyState>()((set, get) => {
             userAnswer: writtenAnswer(),
           },
         });
-        await showNext(rest);
+        await advance(rest);
       } catch (e) {
         console.error(e);
         toast.error('評価を保存できませんでした', { description: errorMessage(e) });

@@ -20,14 +20,18 @@ export interface AnswerCheck {
 
 /** 比較用に正規化する */
 export function normalizeAnswer(s: string): string {
-  return s
-    .normalize('NFKC')
-    .toLowerCase()
-    .replace(/[‘’`´]/g, "'")
-    .replace(/[“”]/g, '"')
-    .replace(/[.,!?;:"、。！？「」『』（）()]/g, ' ')
-    .replace(/\s+/g, ' ')
-    .trim();
+  return (
+    s
+      .normalize('NFKC')
+      .toLowerCase()
+      .replace(/[‘’`´]/g, "'")
+      .replace(/[“”]/g, '"')
+      .replace(/[.,!?;:"、。！？「」『』（）()]/g, ' ')
+      .replace(/\s+/g, ' ')
+      // 日本語・中国語などの文字の前後の空白は区別しない（「5 冊」と「5冊」を同じにする）
+      .replace(/ ?([\u3040-\u30ff\u3400-\u9fff\uf900-\ufaff〜]) ?/g, '$1')
+      .trim()
+  );
 }
 
 /** 1 つの答えを、候補のどれかと比べる */

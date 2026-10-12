@@ -17,7 +17,7 @@
   "author": "LLLM-Study",
   "license": "MIT",
   "source": "LLLM-Study オリジナル",
-  "revision": 1,
+  "revision": 2,
   "items": [
     {
       "id": "pv-pick-up",
@@ -45,6 +45,9 @@
       "meanings": [
         "（調べて）分かる・知る"
       ],
+      "forms": [
+        "found out"
+      ],
       "examples": [
         {
           "text": "I need to find out what happened.",
@@ -60,6 +63,10 @@
       "meanings": [
         "あきらめる",
         "（習慣を）やめる"
+      ],
+      "forms": [
+        "gave up",
+        "given up"
       ],
       "examples": [
         {
@@ -124,6 +131,9 @@
       "meanings": [
         "身につける・着る"
       ],
+      "forms": [
+        "put on"
+      ],
       "examples": [
         {
           "text": "Put on your coat. It's cold.",
@@ -141,6 +151,10 @@
         "脱ぐ",
         "（飛行機が）離陸する",
         "急に人気が出る"
+      ],
+      "forms": [
+        "took off",
+        "taken off"
       ],
       "examples": [
         {
@@ -189,6 +203,9 @@
       "meanings": [
         "延期する"
       ],
+      "forms": [
+        "put off"
+      ],
       "examples": [
         {
           "text": "Don't put off until tomorrow what you can do today.",
@@ -221,6 +238,9 @@
       "meanings": [
         "（考えなどを）思いつく"
       ],
+      "forms": [
+        "came up with"
+      ],
       "examples": [
         {
           "text": "She came up with a great idea.",
@@ -236,6 +256,10 @@
       "meanings": [
         "〜とうまくやっていく"
       ],
+      "forms": [
+        "got along with",
+        "gotten along with"
+      ],
       "examples": [
         {
           "text": "I get along well with my coworkers.",
@@ -250,6 +274,9 @@
       "pos": "句動詞",
       "meanings": [
         "〜を使い果たす・切らす"
+      ],
+      "forms": [
+        "ran out of"
       ],
       "examples": [
         {
@@ -282,6 +309,9 @@
         "準備する・設置する",
         "設立する"
       ],
+      "forms": [
+        "set up"
+      ],
       "examples": [
         {
           "text": "Let's set up the tent before it gets dark.",
@@ -297,6 +327,10 @@
       "meanings": [
         "（約束の場所に）現れる"
       ],
+      "forms": [
+        "showed up",
+        "shown up"
+      ],
       "examples": [
         {
           "text": "He didn't show up for the meeting.",
@@ -311,6 +345,9 @@
       "pos": "句動詞",
       "meanings": [
         "（友だちと）ぶらぶら過ごす"
+      ],
+      "forms": [
+        "hung out"
       ],
       "examples": [
         {
@@ -359,6 +396,10 @@
       "meanings": [
         "見直す・確認する"
       ],
+      "forms": [
+        "went over",
+        "gone over"
+      ],
       "examples": [
         {
           "text": "Let's go over the plan once more.",
@@ -374,6 +415,9 @@
       "meanings": [
         "追いつく",
         "近況を話す"
+      ],
+      "forms": [
+        "caught up"
       ],
       "examples": [
         {
@@ -392,6 +436,9 @@
         "（話題を）持ち出す",
         "育てる"
       ],
+      "forms": [
+        "brought up"
+      ],
       "examples": [
         {
           "text": "Why did you bring that up?",
@@ -407,6 +454,10 @@
       "meanings": [
         "故障する",
         "（感情的に）取り乱す"
+      ],
+      "forms": [
+        "broke down",
+        "broken down"
       ],
       "examples": [
         {
@@ -455,6 +506,10 @@
       "meanings": [
         "（病気・困難から）立ち直る"
       ],
+      "forms": [
+        "got over",
+        "gotten over"
+      ],
       "examples": [
         {
           "text": "It took me a week to get over the cold.",
@@ -484,6 +539,10 @@
       "pos": "句動詞",
       "meanings": [
         "（親などに）似ている"
+      ],
+      "forms": [
+        "took after",
+        "taken after"
       ],
       "examples": [
         {

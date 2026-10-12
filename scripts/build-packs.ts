@@ -65,6 +65,23 @@ for (const file of readdirSync(packsDir)
   });
 }
 
+// 一覧の並び（おすすめ順）: 分野ごとにまとめる。ここにない分野は後ろへ、同じ分野の中はファイル名の順
+const SUBJECT_ORDER = [
+  'english',
+  'business',
+  'it',
+  'history',
+  'geography',
+  'science',
+  'math',
+  'bookkeeping',
+];
+const rank = (subject?: string) => {
+  const i = SUBJECT_ORDER.indexOf(subject?.toLowerCase() ?? '');
+  return i < 0 ? SUBJECT_ORDER.length : i;
+};
+entries.sort((a, b) => rank(a.subject) - rank(b.subject) || a.file.localeCompare(b.file));
+
 if (errors.length > 0) {
   console.error(errors.join('\n'));
   process.exit(1);

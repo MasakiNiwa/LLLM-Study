@@ -19,6 +19,7 @@ import {
   OPENING_MESSAGE,
   parseFeedback,
   rolePlayPrompt,
+  splitTranslation,
   type Feedback,
   type PracticeConfig,
 } from './scenarios';
@@ -154,7 +155,21 @@ export const usePractice = create<PracticeState>()((set, get) => {
       try {
         const r = await runOneshot({
           task: 'assist',
-          prompt: feedbackPrompt(config.lang, utterances.slice(-12)),
+          prompt: feedbackPrompt(
+            config,
+            utterances.slice(-12),
+            // 理解を深める練習は、AI の質問と合わせて渡す（何に答えたかが分かるように）
+            messages
+              .filter((m) => !m.hidden && m.text)
+              .slice(-16)
+              .map((m) => ({
+                role: m.role,
+                text: (m.role === 'assistant' ? splitTranslation(m.text).line : m.text).slice(
+                  0,
+                  400,
+                ),
+              })),
+          ),
           maxOutputTokens: 1024,
           plain: true,
         });

@@ -42,6 +42,8 @@ import { CardEditor } from './CardEditor';
 import { ItemRow } from './ItemRow';
 import { ItemJsonEditor } from './ItemJsonEditor';
 import { useLibrary, type PackWithStats } from './libraryStore';
+import { SearchBox, SubjectChips } from './ListFilters';
+import { countSubjects, matchesQuery } from './listFilter';
 
 function StatsBar({ pack }: { pack: PackWithStats }) {
   const { cards, newCards, learning, review } = pack.stats;
@@ -440,25 +442,14 @@ export function PackList({ empty }: { empty: React.ReactNode }) {
   const [subject, setSubject] = useState<string | null>(null);
   const [sort, setSort] = useState<SortKey>('order');
 
-  const subjects = useMemo(() => {
-    const counts = new Map<string, number>();
-    for (const p of packs)
-      counts.set(subjectKey(p.subject), (counts.get(subjectKey(p.subject)) ?? 0) + 1);
-    return [...counts.entries()];
-  }, [packs]);
+  const subjects = useMemo(() => countSubjects(packs, (p) => subjectKey(p.subject)), [packs]);
 
   const ordered = useMemo(() => sortPacks(packs, 'order'), [packs]);
   const visible = useMemo(() => {
-    const q = query.trim().toLowerCase();
     const filtered = packs.filter(
       (p) =>
         (!subject || subjectKey(p.subject) === subject) &&
-        (!q ||
-          [p.title, p.description, p.level, ...(p.tags ?? [])]
-            .filter(Boolean)
-            .join(' ')
-            .toLowerCase()
-            .includes(q)),
+        matchesQuery(query, [p.title, p.description, p.level, p.tags]),
     );
     return sortPacks(filtered, sort);
   }, [packs, query, subject, sort]);
@@ -469,16 +460,12 @@ export function PackList({ empty }: { empty: React.ReactNode }) {
     <div className="space-y-3">
       <div className="flex flex-wrap items-center gap-2">
         {packs.length > 0 && (
-          <div className="relative min-w-0 flex-1">
-            <Search className="pointer-events-none absolute top-1/2 left-3 size-4 -translate-y-1/2 text-slate-400" />
-            <input
-              value={query}
-              onChange={(e) => setQuery(e.target.value)}
-              placeholder="教材・項目を検索"
-              aria-label="教材を検索"
-              className="h-10 w-full rounded-xl border border-slate-300 bg-white pr-3 pl-9 text-sm dark:border-slate-700 dark:bg-slate-950"
-            />
-          </div>
+          <SearchBox
+            value={query}
+            onChange={setQuery}
+            placeholder="教材・項目を検索"
+            label="教材を検索"
+          />
         )}
         <Button
           size="sm"
@@ -492,23 +479,9 @@ export function PackList({ empty }: { empty: React.ReactNode }) {
       </div>
       {showTools && (
         <div className="flex flex-wrap items-center gap-2">
-          {subjects.length >= 2 &&
-            [null, ...subjects.map(([k]) => k)].map((k) => (
-              <button
-                key={k ?? 'all'}
-                type="button"
-                aria-pressed={subject === k}
-                onClick={() => setSubject(k)}
-                className={cn(
-                  'rounded-full border px-3 py-1 text-xs transition-colors',
-                  subject === k
-                    ? 'border-accent-500 bg-accent-50 text-accent-800 dark:bg-accent-900/30 dark:text-accent-200'
-                    : 'border-slate-300 hover:bg-slate-100 dark:border-slate-700 dark:hover:bg-slate-800',
-                )}
-              >
-                {k === null ? 'すべて' : subjectLabel(k)}
-              </button>
-            ))}
+          {subjects.length >= 2 && (
+            <SubjectChips subjects={subjects} value={subject} onChange={setSubject} />
+          )}
           <Select
             value={sort}
             onChange={setSort}

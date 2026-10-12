@@ -24,6 +24,16 @@ export const STUDY_FONT_SCALES: Record<StudyFontScale, { label: string; zoom: nu
   lg: { label: '大', zoom: 1.15 },
   xl: { label: '特大', zoom: 1.3 },
 };
+/** テストモード: 1 問の制限時間（秒。0 はなし） */
+export const CARD_TIME_LIMITS = [0, 10, 20, 30, 60] as const;
+/** 時間を決めて学習: 学習全体の制限時間（分。0 はなし） */
+export const SESSION_TIME_LIMITS = [0, 5, 10, 15, 30] as const;
+export function cardLimitLabel(sec: number): string {
+  return sec > 0 ? `${sec} 秒` : 'なし';
+}
+export function sessionLimitLabel(min: number): string {
+  return min > 0 ? `${min} 分` : 'なし';
+}
 /** 学習画面の余白を詰める（auto: 画面の高さが低いときだけ） */
 export type StudyCompact = 'auto' | 'on' | 'off';
 export const STUDY_COMPACT_LABELS: Record<StudyCompact, string> = {
@@ -53,6 +63,14 @@ export interface Settings extends Omit<ConversationSettings, 'systemPrompt'> {
   typeAnswer: TypeAnswerMode;
   studyFontScale: StudyFontScale;
   studyCompact: StudyCompact;
+  /** 問題ごとの経過時間を出す */
+  showCardTimer: boolean;
+  /** 学習全体の経過時間を出す */
+  showSessionTimer: boolean;
+  /** テストモード: 1 問の制限時間（秒。0 はなし）。時間切れで答えを表示する */
+  cardTimeLimit: number;
+  /** 学習全体の制限時間（分。0 はなし）。時間になったら、評価中のカードで終える */
+  sessionTimeLimit: number;
   autoSpeak: boolean;
   speechRate: number;
   /** 読み上げの声（voiceURI。空なら自動） */
@@ -109,6 +127,10 @@ export const DEFAULT_SETTINGS: Settings = {
   typeAnswer: 'off',
   studyFontScale: 'md',
   studyCompact: 'auto',
+  showCardTimer: false,
+  showSessionTimer: false,
+  cardTimeLimit: 0,
+  sessionTimeLimit: 0,
   autoSpeak: false,
   speechRate: 0.9,
   speechVoice: '',

@@ -37,6 +37,38 @@ describe('practice', () => {
     expect(f?.corrections).toHaveLength(1);
     expect(f?.good).toBe('積極的でした');
     expect(parseFeedback('{"corrections":"none"}')).toBeNull();
-    expect(feedbackPrompt('en', ['a'])).toContain('["a"]');
+    expect(feedbackPrompt({ scenario: SCENARIOS[0], lang: 'en' }, ['a'])).toContain('["a"]');
+  });
+
+  it('ビジネス・理解を深める練習は、日本語なら訳を付けず、場面の指示や材料を渡す', () => {
+    const interview = SCENARIOS.find((s) => s.id === 'interview')!;
+    const p = rolePlayPrompt({ scenario: interview, lang: 'ja', level: 'hard', vocab: [] });
+    expect(p).toContain('面接官');
+    expect(p).toContain('手ごわい');
+    expect(p).not.toContain('訳:');
+    const oral = SCENARIOS.find((s) => s.id === 'oral-exam')!;
+    const q = rolePlayPrompt({
+      scenario: oral,
+      lang: 'ja',
+      level: 'easy',
+      vocab: [],
+      topic: '簿記',
+      material: ['現金: 他人振出しの小切手も含む'],
+    });
+    expect(q).toContain('話題: 簿記');
+    expect(q).toContain('- 現金: 他人振出しの小切手も含む');
+    expect(
+      feedbackPrompt(
+        { scenario: oral, lang: 'ja', topic: '簿記' },
+        ['a'],
+        [
+          { role: 'assistant', text: 'Q' },
+          { role: 'user', text: 'a' },
+        ],
+      ),
+    ).toContain('「簿記」について');
+    expect(
+      feedbackPrompt({ scenario: interview, lang: 'ja' }, ['よろしくお願いします']),
+    ).not.toContain('meaning');
   });
 });
