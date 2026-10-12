@@ -23,7 +23,10 @@ interface LibraryState {
 }
 
 async function statsOf(packId: string): Promise<PackStats> {
-  const cards = await db.cards.where('packId').equals(packId).toArray();
+  // 型を外して休止しているカード（suspended = 2）は数えない
+  const cards = (await db.cards.where('packId').equals(packId).toArray()).filter(
+    (c) => c.suspended !== 2,
+  );
   const s: PackStats = {
     cards: cards.length,
     newCards: 0,

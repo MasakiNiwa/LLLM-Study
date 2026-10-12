@@ -29,8 +29,35 @@ export interface OneshotResult {
 const PLAIN_SYSTEM_PROMPT =
   'あなたは正確な学習教材を作るアシスタントです。指示された形式どおりに、簡潔で正確な内容だけを出力します。口調や語尾の飾りは付けません。';
 
+/**
+ * 評価への「ひとこと」は後回しにしてよい生成なので、ほかの生成を頼まれたら止めて譲る。
+ * 止まるまで待つ（長くても数秒）。
+ */
+export async function preemptReaction(): Promise<void> {
+  if (useAiBusy.getState().task !== 'reaction') return;
+  llm.cancel();
+  await new Promise<void>((resolve) => {
+    const timer = setTimeout(done, 3000);
+    const unsub = useAiBusy.subscribe((st) => {
+      if (st.task === null) done();
+    });
+    function done() {
+      clearTimeout(timer);
+      unsub();
+      resolve();
+    }
+  });
+}
+
+/** ひとこと以外の生成中か（ひとことは譲ってもらえるので数えない） */
+export function isAiBusyExceptReaction(): boolean {
+  const task = useAiBusy.getState().task;
+  return task !== null && task !== 'reaction';
+}
+
 export async function runOneshot(opts: OneshotOptions): Promise<OneshotResult> {
   if (useEngine.getState().status !== 'ready') throw new Error('AI モデルが読み込まれていません');
+  if (opts.task !== 'reaction') await preemptReaction();
   if (useAiBusy.getState().task) throw new Error('AI が別の応答を生成中です');
   useAiBusy.setState({ task: opts.task });
   const s = useSettings.getState();

@@ -54,3 +54,17 @@ describe('checkAnswer', () => {
     expect(checkAnswer('forward /', { blanks: ['forward'] }).verdict).toBe('correct');
   });
 });
+
+describe('穴埋めの空欄', () => {
+  it('空欄が 1 つなら、答えに「/」があっても分けない（分数・and/or）', () => {
+    expect(checkAnswer('1/2', { blanks: ['1/2'] }).verdict).toBe('correct');
+    expect(checkAnswer('and/or', { blanks: ['and/or'] }).verdict).toBe('correct');
+  });
+
+  it('空欄が 2 つ以上なら、空欄ごとの答えを配列で受け取る', () => {
+    expect(checkAnswer(['1/2', 'x'], { blanks: ['1/2', 'x'] }).verdict).toBe('correct');
+    expect(checkAnswer(['x', '1/2'], { blanks: ['1/2', 'x'] }).verdict).toBe('wrong');
+    // 文字列で渡したときは、これまでどおり「/」区切り
+    expect(checkAnswer('look / forward', { blanks: ['look', 'forward'] }).verdict).toBe('correct');
+  });
+});

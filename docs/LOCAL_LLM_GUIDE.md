@@ -62,6 +62,9 @@ Engine Worker（lib/llm/engine.worker.ts）… LiteRT-LM を動かす専用 Work
 | `oneshot` | 解説・判定・下書き・クイズなど | 毎回 Conversation を作って捨てる（履歴に混ざらない）                                                       |
 
 - **排他**: エンジンは同時に 1 つしか生成できないので、`useAiBusy` で「誰が使っているか」を共有する。生成中はモデルの読み込み・解放もしない
+- **受付と失敗**: 生成を受け付けられないとき（モデルがない・ほかの生成中）は、ユーザーの入力や既存の応答を消さない（送信は受け付けたかを返し、受け付けたときだけ入力欄を空にする。作り直しは新しい応答ができてから置き換える）
+- **後回しにしてよい生成**: 評価への「ひとこと」のような小さな生成は、ほかの生成を頼まれたら止めて譲る（`preemptReaction`）
+- **古い結果を混ぜない**: 非同期の結果（AI の判定など）は、依頼したときの対象（出題 ID など）と今の対象が同じときだけ反映する
 - **履歴の長さ**: 文脈長（`maxNumTokens`）から応答の分・システムプロンプト・ツール定義・今回の発言を引いた量に収まるよう、古い履歴から削る（`historyBudget.ts`）。削る位置は数件単位にそろえ、KV キャッシュを毎回作り直さないようにする
 - **ツール呼び出し（関数呼び出し）**: LiteRT-LM の `preface.tools`（`[{ type: 'function', function }]`）で宣言し、`chunk.tool_calls` を受けたらメインスレッドの関数を Comlink 経由で実行して `{ role: 'tool', content: [{ type: 'tool_response', name, response }] }` を返す。ループは Worker 側で最大 6 回
 - **思考モード**: Gemma は設定の `enable_thinking`、Qwen3 は本文に `/no_think` を付けて止める（`modelQuirks.ts`）。思考はチャネルまたは本文先頭のタグで来るので `splitThinking` で分ける

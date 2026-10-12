@@ -1,5 +1,6 @@
 import { describe, expect, it } from 'vitest';
 import {
+  answersInTargetLanguage,
   clozeAnswers,
   clozeFull,
   expectedAnswer,
@@ -89,5 +90,14 @@ describe('itemText', () => {
       expect(idx.map((i) => chunks[i])).not.toEqual(chunks);
     }
     expect(shuffleChunks(chunks, 'x')).toEqual(shuffleChunks(chunks, 'x'));
+  });
+});
+
+describe('聞き取りカードの答え', () => {
+  it('表の指示どおり、聞こえた語句の意味を答える', () => {
+    const item = { id: 'w', type: 'vocab' as const, term: 'take', meanings: ['取る'] };
+    expect(expectedAnswer(item, 'listen')).toEqual({ accepted: ['取る'] });
+    expect(answersInTargetLanguage(item, 'listen')).toBe(false);
+    expect(expectedAnswer(item, 'recall')).toEqual({ accepted: ['take'] });
   });
 });

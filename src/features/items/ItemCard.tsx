@@ -306,8 +306,9 @@ function ClozeFace({ item, side, lang }: FaceProps<ClozeItem>) {
   );
 }
 
-function ChoiceFace({ item, side, chosen, onChoose }: FaceProps<ChoiceItem>) {
-  const answered = chosen !== undefined;
+function ChoiceFace({ item, side, chosen, onChoose, locked }: FaceProps<ChoiceItem>) {
+  // 選んだあと・答えを見たあとは選び直せない（正解の選択肢を示す）
+  const answered = chosen !== undefined || !!locked;
   return (
     <div className="space-y-4">
       {side === 'front' && <Prompt>{item.question}</Prompt>}
@@ -403,7 +404,7 @@ function ListenPrompt({ text, lang }: { text: string; lang: string }) {
   );
 }
 
-function OrderFace({ item, side, lang, ordered, onOrder, seed }: FaceProps<OrderItem>) {
+function OrderFace({ item, side, lang, ordered, onOrder, seed, locked }: FaceProps<OrderItem>) {
   const chunks = orderChunks(item);
   const [shuffled] = useState(() => shuffleChunks(chunks, seed ?? item.id));
   const [picked, setPicked] = useState<number[]>([]);
@@ -419,6 +420,18 @@ function OrderFace({ item, side, lang, ordered, onOrder, seed }: FaceProps<Order
         </div>
         <Explanation text={item.explanation} />
         <Notes text={item.notes} />
+      </div>
+    );
+  }
+
+  // 並べずに答えを見たときは、もう並べられないようにする（答えは裏の面に出る）
+  if (!answered && locked) {
+    return (
+      <div className="space-y-4">
+        {item.prompt && <Prompt>{item.prompt}</Prompt>}
+        <p className="rounded-xl border-2 border-dashed border-slate-300 px-3 py-3 text-center text-sm text-slate-500 dark:border-slate-700">
+          並べずに答えを見ました
+        </p>
       </div>
     );
   }
@@ -611,6 +624,8 @@ interface FaceProps<T> {
   onOrder?: (result: OrderResult) => void;
   /** 並べ替えのシャッフルの種 */
   seed?: string;
+  /** 答えを表示したあと（選んだり並べたりできないようにする） */
+  locked?: boolean;
 }
 
 export interface CardFaceProps {
@@ -624,6 +639,8 @@ export interface CardFaceProps {
   ordered?: OrderResult;
   onOrder?: (result: OrderResult) => void;
   seed?: string;
+  /** 答えを表示したあと（選択・並べ替えをできないようにする） */
+  locked?: boolean;
 }
 
 export function CardFace({
@@ -636,6 +653,7 @@ export function CardFace({
   ordered,
   onOrder,
   seed,
+  locked,
 }: CardFaceProps) {
   const face = (
     <Face
@@ -648,6 +666,7 @@ export function CardFace({
       ordered={ordered}
       onOrder={onOrder}
       seed={seed}
+      locked={locked}
     />
   );
   const image = record.item.image;
@@ -677,9 +696,10 @@ function Face({
   ordered,
   onOrder,
   seed,
+  locked,
 }: CardFaceProps) {
   const item = record.item;
-  const common = { template, side, lang, chosen, onChoose, ordered, onOrder, seed };
+  const common = { template, side, lang, chosen, onChoose, ordered, onOrder, seed, locked };
   switch (item.type) {
     case 'vocab':
       return <VocabFace item={item} {...common} />;

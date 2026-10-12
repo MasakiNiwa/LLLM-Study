@@ -64,8 +64,8 @@ export interface CardRecord extends FsrsFields {
   template: string;
   /** 新しいカードの出題順（パック内の項目の順） */
   order: number;
-  /** 1: 一時的に出題しない */
-  suspended: 0 | 1;
+  /** 1: 項目の出題を止めている、2: 教材でこのカードの型を外している（記録は残す） */
+  suspended: 0 | 1 | 2;
   /** 初めて学習した学習日（YYYY-MM-DD） */
   introducedDay?: string;
 }

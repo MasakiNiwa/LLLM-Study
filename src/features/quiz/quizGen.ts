@@ -6,7 +6,7 @@
  * - アプリが形と内容（空欄が 1 つ・答えが元の語句と関係があるか）を検証し、採点もプログラムが行う
  */
 import { z } from 'zod';
-import { normalizeAnswer } from '@/lib/srs/answerCheck';
+import { checkAnswer, normalizeAnswer, type AnswerCheck } from '@/lib/srs/answerCheck';
 import { languageName } from '@/lib/speech/lang';
 import { extractJson } from '@/lib/packs/parse';
 import { isEnglishLike, isInflectionOf } from '@/lib/packs/inflection';
@@ -92,4 +92,30 @@ export function parseQuiz(text: string, item: QuizSource, itemKey: string): Quiz
     answer: q.answer,
     translation: q.translation,
   };
+}
+
+export interface QuizGrade {
+  check: AnswerCheck;
+  /** 単語は合っているが、文に合う形（活用形）になっていない */
+  baseForm: boolean;
+}
+
+/**
+ * クイズの答えを採点する。正解は空欄に実際に入る形（question.answer）だけ。
+ * 元の形（例: went が必要なところに go）を書いたときは「惜しい」にして、形を直すよう伝える。
+ */
+export function gradeQuiz(
+  input: string,
+  question: Pick<QuizQuestion, 'answer' | 'target'>,
+): QuizGrade {
+  const check = checkAnswer(input, { accepted: [question.answer] });
+  if (check.verdict === 'correct') return { check, baseForm: false };
+  const typed = normalizeAnswer(input);
+  if (typed && typed === normalizeAnswer(question.target)) {
+    return {
+      check: { verdict: 'close', expected: question.answer, recommended: 2 },
+      baseForm: true,
+    };
+  }
+  return { check, baseForm: false };
 }

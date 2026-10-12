@@ -4,6 +4,7 @@
  * 同じ ID のパックを取り込むと「更新」として扱い、同じ項目 ID の学習記録はそのまま引き継ぐ。
  * 消えた項目のカードと記録は削除する。
  */
+import { notifyLibraryChange } from '@/lib/db/changes';
 import { db } from '@/lib/db/db';
 import type { CardRecord, ItemRecord, PackOrigin, PackRecord } from '@/lib/db/types';
 import { newFsrsFields } from '@/lib/srs/scheduler';
@@ -26,13 +27,19 @@ export function cardId(key: string, template: string): string {
   return `${key}#${template}`;
 }
 
-/** パックの有効なカードの型に従って、足りないカードを作り、不要なカードを消す */
+/**
+ * パックの有効なカードの型に従って、足りないカードを作り、なくなった項目のカードを消す。
+ * 外したカードの型のカードは消さずに休止（suspended = 2）にして、学習記録を残す（戻せば再開）。
+ */
 async function syncCards(pack: PackRecord, items: ItemRecord[], now: number): Promise<void> {
   const existing = await db.cards.where('packId').equals(pack.id).toArray();
   const byId = new Map(existing.map((c) => [c.id, c]));
+  const itemKeys = new Set(items.map((i) => i.key));
+  // 項目ごとに出題を止めているか（型を戻したカードにも引き継ぐ）
+  const itemSuspended = new Set(existing.filter((c) => c.suspended === 1).map((c) => c.itemKey));
   const wanted = new Set<string>();
   const toAdd: CardRecord[] = [];
-  const toUpdateOrder: CardRecord[] = [];
+  const toPut: CardRecord[] = [];
   const fresh = newFsrsFields(now);
   for (const it of items) {
     for (const template of pack.templates[it.item.type] ?? []) {
@@ -47,16 +54,24 @@ async function syncCards(pack: PackRecord, items: ItemRecord[], now: number): Pr
           itemKey: it.key,
           template,
           order: it.order,
-          suspended: 0,
+          suspended: itemSuspended.has(it.key) ? 1 : 0,
         });
-      } else if (prev.order !== it.order) {
-        toUpdateOrder.push({ ...prev, order: it.order });
+      } else if (prev.order !== it.order || prev.suspended === 2) {
+        const suspended =
+          prev.suspended === 2 ? (itemSuspended.has(it.key) ? 1 : 0) : prev.suspended;
+        toPut.push({ ...prev, order: it.order, suspended });
       }
     }
   }
-  const toDelete = existing.filter((c) => !wanted.has(c.id)).map((c) => c.id);
+  // 項目ごと消えたカードは記録ごと削除、型を外しただけのカードは休止にする
+  const toDelete = existing.filter((c) => !itemKeys.has(c.itemKey)).map((c) => c.id);
+  for (const c of existing) {
+    if (itemKeys.has(c.itemKey) && !wanted.has(c.id) && c.suspended !== 2) {
+      toPut.push({ ...c, suspended: 2 });
+    }
+  }
   await db.cards.bulkAdd(toAdd);
-  if (toUpdateOrder.length) await db.cards.bulkPut(toUpdateOrder);
+  if (toPut.length) await db.cards.bulkPut(toPut);
   if (toDelete.length) {
     await db.cards.bulkDelete(toDelete);
     await db.reviews.where('cardId').anyOf(toDelete).delete();
@@ -69,59 +84,65 @@ export async function installPack(
   options: { sampleFile?: string; now?: number } = {},
 ): Promise<InstallSummary> {
   const now = options.now ?? Date.now();
-  return db.transaction('rw', [db.packs, db.items, db.cards, db.reviews], async () => {
-    const prev = await db.packs.get(pack.id);
-    const { items, format: _f, version: _v, ...meta } = pack;
-    const itemTypes = [...new Set(items.map((i) => i.type))] as ItemType[];
-    // 既存のパックはカードの型の選択を引き継ぎ、新しく増えた種類だけ既定値にする
-    const templates = { ...defaultTemplates(itemTypes), ...(prev?.templates ?? {}) };
-    const maxOrder = (await db.packs.orderBy('order').last())?.order ?? 0;
-    const record: PackRecord = {
-      ...meta,
-      origin,
-      sampleFile: options.sampleFile ?? prev?.sampleFile,
-      itemCount: items.length,
-      itemTypes,
-      installedAt: prev?.installedAt ?? now,
-      updatedAt: now,
-      enabled: prev?.enabled ?? true,
-      templates,
-      order: prev?.order ?? maxOrder + 1,
-    };
-
-    const oldItems = await db.items.where('packId').equals(pack.id).toArray();
-    const oldKeys = new Set(oldItems.map((i) => i.key));
-    const passages = new Map((pack.passages ?? []).map((p) => [p.id, p]));
-    const itemRecords: ItemRecord[] = items.map((item, order) => {
-      const passage = item.passage ? passages.get(item.passage) : undefined;
-      return {
-        key: itemKey(pack.id, item.id),
-        packId: pack.id,
-        itemId: item.id,
-        order,
-        item,
-        ...(passage && { passage }),
+  const summary = await db.transaction(
+    'rw',
+    [db.packs, db.items, db.cards, db.reviews],
+    async () => {
+      const prev = await db.packs.get(pack.id);
+      const { items, format: _f, version: _v, ...meta } = pack;
+      const itemTypes = [...new Set(items.map((i) => i.type))] as ItemType[];
+      // 既存のパックはカードの型の選択を引き継ぎ、新しく増えた種類だけ既定値にする
+      const templates = { ...defaultTemplates(itemTypes), ...(prev?.templates ?? {}) };
+      const maxOrder = (await db.packs.orderBy('order').last())?.order ?? 0;
+      const record: PackRecord = {
+        ...meta,
+        origin,
+        sampleFile: options.sampleFile ?? prev?.sampleFile,
+        itemCount: items.length,
+        itemTypes,
+        installedAt: prev?.installedAt ?? now,
+        updatedAt: now,
+        enabled: prev?.enabled ?? true,
+        templates,
+        order: prev?.order ?? maxOrder + 1,
       };
-    });
-    const newKeys = new Set(itemRecords.map((i) => i.key));
-    const removedKeys = [...oldKeys].filter((k) => !newKeys.has(k));
 
-    await db.packs.put(record);
-    if (removedKeys.length) await db.items.bulkDelete(removedKeys);
-    await db.items.bulkPut(itemRecords);
-    await syncCards(record, itemRecords, now);
+      const oldItems = await db.items.where('packId').equals(pack.id).toArray();
+      const oldKeys = new Set(oldItems.map((i) => i.key));
+      const passages = new Map((pack.passages ?? []).map((p) => [p.id, p]));
+      const itemRecords: ItemRecord[] = items.map((item, order) => {
+        const passage = item.passage ? passages.get(item.passage) : undefined;
+        return {
+          key: itemKey(pack.id, item.id),
+          packId: pack.id,
+          itemId: item.id,
+          order,
+          item,
+          ...(passage && { passage }),
+        };
+      });
+      const newKeys = new Set(itemRecords.map((i) => i.key));
+      const removedKeys = [...oldKeys].filter((k) => !newKeys.has(k));
 
-    return {
-      packId: pack.id,
-      created: !prev,
-      added: itemRecords.filter((i) => !oldKeys.has(i.key)).length,
-      updated: itemRecords.filter((i) => oldKeys.has(i.key)).length,
-      removed: removedKeys.length,
-    };
-  });
+      await db.packs.put(record);
+      if (removedKeys.length) await db.items.bulkDelete(removedKeys);
+      await db.items.bulkPut(itemRecords);
+      await syncCards(record, itemRecords, now);
+
+      return {
+        packId: pack.id,
+        created: !prev,
+        added: itemRecords.filter((i) => !oldKeys.has(i.key)).length,
+        updated: itemRecords.filter((i) => oldKeys.has(i.key)).length,
+        removed: removedKeys.length,
+      };
+    },
+  );
+  notifyLibraryChange([pack.id]);
+  return summary;
 }
 
-/** カードの型の選択を変える（増えた型のカードを作り、外した型のカードと記録を消す） */
+/** カードの型の選択を変える（増えた型のカードを作り、外した型のカードは記録を残したまま休止にする） */
 export async function setPackTemplates(
   packId: string,
   templates: Partial<Record<ItemType, string[]>>,
@@ -134,10 +155,12 @@ export async function setPackTemplates(
     const items = await db.items.where('packId').equals(packId).toArray();
     await syncCards(next, items, Date.now());
   });
+  notifyLibraryChange([packId]);
 }
 
 export async function setPackEnabled(packId: string, enabled: boolean): Promise<void> {
   await db.packs.update(packId, { enabled });
+  notifyLibraryChange([packId]);
 }
 
 /** パックと、その学習記録をすべて削除する */
@@ -149,6 +172,7 @@ export async function uninstallPack(packId: string): Promise<void> {
     await db.items.where('packId').equals(packId).delete();
     await db.packs.delete(packId);
   });
+  notifyLibraryChange([packId]);
 }
 
 /** パックの学習記録だけを消して、最初からやり直す */
@@ -164,6 +188,7 @@ export async function resetPackProgress(packId: string): Promise<void> {
       cards.map((c) => ({ ...c, ...fresh, suspended: c.suspended, introducedDay: undefined })),
     );
   });
+  notifyLibraryChange([packId]);
 }
 
 /**
@@ -201,4 +226,5 @@ export async function updatePackItem(key: string, item: StudyItem): Promise<void
     await db.items.put({ ...rest, item, ...(passage && { passage }) });
     await db.packs.update(pack.id, { updatedAt: Date.now() });
   });
+  notifyLibraryChange([key.slice(0, key.lastIndexOf('/'))]);
 }

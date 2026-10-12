@@ -1,6 +1,7 @@
 import { useState } from 'react';
 import { CheckCheck } from 'lucide-react';
 import { BottomSheet } from '@/components/ui/BottomSheet';
+import { BlankFields } from './AnswerInput';
 import { useSheetClose } from '@/components/ui/sheetContext';
 import { Button } from '@/components/ui/Button';
 import type { StudyItem } from '@/lib/packs/schema';
@@ -11,14 +12,14 @@ function answerHint(item: StudyItem, template: string): string {
   switch (item.type) {
     case 'vocab':
     case 'phrase':
-      if (template === 'listen') return '聞こえた語句を書いてください';
+      if (template === 'listen') return '聞こえた語句の意味を書いてください';
       if (template === 'recall')
         return item.type === 'vocab' ? '単語を書いてください' : 'フレーズを書いてください';
       return '意味を書いてください';
     case 'cloze': {
       const n = clozeAnswers(item.text).length;
       return n > 1
-        ? `空欄に入る語句を書いてください（${n} つは / で区切る）`
+        ? `空欄に入る語句を、空欄ごとに書いてください（${n} つ）`
         : '空欄に入る語句を書いてください';
     }
     default:
@@ -59,13 +60,16 @@ function AnswerForm({
   item: StudyItem;
   template: string;
   lang: string;
-  onSubmit: (text: string) => void;
+  onSubmit: (answer: string | string[]) => void;
 }) {
   const [text, setText] = useState('');
+  const [parts, setParts] = useState<string[]>([]);
+  // 空欄が 2 つ以上の穴埋めは、空欄ごとに入力欄を出す
+  const blanks = item.type === 'cloze' ? clozeAnswers(item.text).length : 0;
   const close = useSheetClose();
   const submit = () => {
     // 先に答え合わせして、シートが下へ閉じるあいだに答えを見せる
-    onSubmit(text);
+    onSubmit(blanks > 1 ? Array.from({ length: blanks }, (_, i) => parts[i] ?? '') : text);
     close();
   };
   const target = answersInTargetLanguage(item, template);
@@ -85,32 +89,45 @@ function AnswerForm({
           {question}
         </p>
       )}
-      <textarea
-        value={text}
-        onChange={(e) => setText(e.target.value)}
-        onKeyDown={(e) => {
-          // 1 行の答えは Enter で、複数行は Ctrl/⌘ + Enter で答え合わせ
-          if (
-            e.key === 'Enter' &&
-            !e.nativeEvent.isComposing &&
-            (!multiline || e.ctrlKey || e.metaKey)
-          ) {
-            e.preventDefault();
-            submit();
-          }
-        }}
-        data-autofocus=""
-        rows={multiline ? 3 : 1}
-        autoComplete="off"
-        autoCapitalize={target ? 'none' : undefined}
-        autoCorrect={target ? 'off' : undefined}
-        spellCheck={false}
-        lang={target ? lang : 'ja'}
-        enterKeyHint={multiline ? 'enter' : 'done'}
-        aria-label="自分の答え"
-        placeholder={answerHint(item, template)}
-        className="w-full resize-none rounded-xl border border-slate-300 bg-white px-4 py-3 text-base dark:border-slate-700 dark:bg-slate-950"
-      />
+      {blanks > 1 ? (
+        <BlankFields
+          count={blanks}
+          values={parts}
+          onChange={setParts}
+          onDone={submit}
+          targetLanguage={target}
+          lang={lang}
+          autoFocusFirst
+          className="h-12 w-full rounded-xl border border-slate-300 bg-white px-4 text-base dark:border-slate-700 dark:bg-slate-950"
+        />
+      ) : (
+        <textarea
+          value={text}
+          onChange={(e) => setText(e.target.value)}
+          onKeyDown={(e) => {
+            // 1 行の答えは Enter で、複数行は Ctrl/⌘ + Enter で答え合わせ
+            if (
+              e.key === 'Enter' &&
+              !e.nativeEvent.isComposing &&
+              (!multiline || e.ctrlKey || e.metaKey)
+            ) {
+              e.preventDefault();
+              submit();
+            }
+          }}
+          data-autofocus=""
+          rows={multiline ? 3 : 1}
+          autoComplete="off"
+          autoCapitalize={target ? 'none' : undefined}
+          autoCorrect={target ? 'off' : undefined}
+          spellCheck={false}
+          lang={target ? lang : 'ja'}
+          enterKeyHint={multiline ? 'enter' : 'done'}
+          aria-label="自分の答え"
+          placeholder={answerHint(item, template)}
+          className="w-full resize-none rounded-xl border border-slate-300 bg-white px-4 py-3 text-base dark:border-slate-700 dark:bg-slate-950"
+        />
+      )}
       <Button type="submit" variant="primary" size="lg" className="w-full">
         <CheckCheck />
         答え合わせする
@@ -140,7 +157,7 @@ export function AnswerSheet({
   item: StudyItem;
   template: string;
   lang: string;
-  onSubmit: (text: string) => void;
+  onSubmit: (answer: string | string[]) => void;
 }) {
   return (
     <BottomSheet open={open} onClose={onClose} title="自分の答えを書く">

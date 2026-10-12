@@ -33,7 +33,7 @@ import type { AnswerVerdict } from '@/lib/srs/answerCheck';
 import { speak, stopSpeaking } from '@/lib/speech/tts';
 import { formatClock } from '@/lib/utils/format';
 import { getPersona } from '@/features/ai/personas';
-import { CardFace, type OrderResult } from '@/features/items/ItemCard';
+import { CardFace } from '@/features/items/ItemCard';
 import { useEngine } from '@/features/engine/engineStore';
 import { useSettings } from '@/features/settings/settingsStore';
 import { AiAssistPanel } from '@/features/study/AiAssistPanel';
@@ -78,6 +78,7 @@ function SessionSummary() {
   const unlimited = useSettings((s) => s.noDailyLimit);
   const practice = useStudy((s) => s.mode === 'practice');
   const timeUp = useStudy((s) => s.timeUp);
+  const canUndo = useStudy((s) => s.undoStack.length > 0);
   const [endedAt] = useState(() => Date.now());
   const [message] = useState(() => {
     const list = stats.done > 0 ? persona.finish : persona.allDone;
@@ -118,7 +119,9 @@ function SessionSummary() {
             <div className="text-2xl font-bold tabular-nums">
               {Math.round((correct / stats.done) * 100)}%
             </div>
-            <div className="text-xs text-slate-500">正解率</div>
+            <div className="text-xs text-slate-500" title="自分で「正解」「簡単」にした割合">
+              正解・簡単（自己評価）
+            </div>
           </div>
           <div>
             <div className="text-2xl font-bold tabular-nums">
@@ -127,6 +130,12 @@ function SessionSummary() {
             <div className="text-xs text-slate-500">時間</div>
           </div>
         </Card>
+      )}
+      {canUndo && (
+        <Button variant="ghost" size="sm" onClick={() => void useStudy.getState().undo()}>
+          <Undo2 />
+          最後の評価を取り消す
+        </Button>
       )}
       {timeUp && !practice && (
         <Button variant="primary" size="sm" onClick={() => void useStudy.getState().start()}>
@@ -204,30 +213,24 @@ export default function StudyPage() {
   const autoSpeak = useSettings((s) => s.autoSpeak);
   const speechRate = useSettings((s) => s.speechRate);
   const speechVoice = useSettings((s) => s.speechVoice);
-  // 選択問題で選んだ番号（カードごと）
-  const [choice, setChoice] = useState<{ showKey: string; index: number } | null>(null);
-  // 並べ替えの結果（カードごと）
-  const [order, setOrder] = useState<{ showKey: string; result: OrderResult } | null>(null);
   const shownAt = useStudy((s) => s.shownAt);
   // 同じカードがもう一度出たとき（おさらい・学習中のステップ）に前の答えを持ち越さないよう、
-  // 回答の状態は「カード + 表示した時刻」ごとに持つ
+  // 回答の状態は「カード + 表示した時刻」ごとに持つ（画面を移っても保つよう store に置く）
   const showKey = current ? `${current.card.id}:${shownAt}` : '';
-  const ordered = order && order.showKey === showKey ? order.result : undefined;
-  const chosen = choice && choice.showKey === showKey ? choice.index : undefined;
+  const stored = useStudy((s) => s.response);
+  const response = stored && stored.shownAt === shownAt ? stored : null;
+  const ordered = response?.order;
+  const chosen = response?.choice;
+  const timedOutNow = !!response?.timedOut;
   const typeAnswer = useSettings((s) => s.typeAnswer);
   // 書いた答えと答え合わせの結果（今表示しているカードのものだけ使う）
   const written = useStudy((s) => s.answer);
   const typedNow = written && written.shownAt === shownAt ? written : null;
   const [answerOpen, setAnswerOpen] = useState(false);
-  // テストモードで時間切れになったカード
-  const [timedOut, setTimedOut] = useState<string | null>(null);
-  const timedOutNow = timedOut === showKey;
+  // テストモードの時間切れ: 答えを表示する（書きかけの答えのシートは閉じる）
   const onCardTimeUp = useCallback(() => {
-    const st = useStudy.getState();
-    if (!st.current || st.revealed) return;
-    setTimedOut(`${st.current.card.id}:${st.shownAt}`);
     setAnswerOpen(false);
-    st.reveal();
+    useStudy.getState().timeOut();
   }, []);
 
   // ページを開いたら今日のキューで始める（自分で中断したときは、始めるボタンを押すまで待つ）
@@ -271,8 +274,9 @@ export default function StudyPage() {
     !!expected &&
     typeAnswer !== 'off' &&
     (typeAnswer === 'all' || answersInTargetLanguage(current.item.item, current.card.template));
-  const recommended: GradeValue | undefined =
-    isChoice && chosen !== undefined && current?.item.item.type === 'choice'
+  const recommended: GradeValue | undefined = timedOutNow
+    ? 1
+    : isChoice && chosen !== undefined && current?.item.item.type === 'choice'
       ? chosen === current.item.item.answer
         ? 3
         : 1
@@ -282,7 +286,8 @@ export default function StudyPage() {
           : 1
         : typedNow?.verdict
           ? VERDICT_GRADE[typedNow.verdict]
-          : timedOutNow
+          : // 選択・並べ替えを「わからない」で答えを見たとき
+            revealed && (isChoice || isOrder)
             ? 1
             : undefined;
 
@@ -294,12 +299,14 @@ export default function StudyPage() {
       // シートやダイアログを開いているあいだは、評価のキーを受け付けない
       if (document.querySelector('dialog[open]')) return;
       const st = useStudy.getState();
-      if (!st.current) return;
+      // 取り消しは、最後のカードを評価して終わった画面でも使える
       if ((e.ctrlKey || e.metaKey) && e.key === 'z') {
+        if (st.undoStack.length === 0) return;
         e.preventDefault();
         void st.undo();
         return;
       }
+      if (!st.current) return;
       if (!st.revealed && (e.key === ' ' || e.key === 'Enter')) {
         if (st.current.item.item.type === 'choice' || st.current.item.item.type === 'order') return;
         e.preventDefault();
@@ -337,7 +344,7 @@ export default function StudyPage() {
         }
         actions={
           <>
-            {status === 'studying' && (
+            {(status === 'studying' || (status === 'done' && canUndo)) && (
               <>
                 <Button
                   size="icon"
@@ -442,16 +449,11 @@ export default function StudyPage() {
                     lang={current.lang}
                     side="front"
                     chosen={chosen}
-                    onChoose={(index) => {
-                      setChoice({ showKey, index });
-                      reveal();
-                    }}
+                    onChoose={useStudy.getState().choose}
                     ordered={ordered}
                     seed={`${current.card.id}:${current.card.reps}`}
-                    onOrder={(result) => {
-                      setOrder({ showKey, result });
-                      reveal();
-                    }}
+                    onOrder={useStudy.getState().submitOrder}
+                    locked={revealed}
                   />
                   {shouldType && !revealed && expected && (
                     <AnswerInput
@@ -470,7 +472,7 @@ export default function StudyPage() {
                       answer={typedNow.text}
                       check={typedNow.check}
                       verdict={typedNow.verdict}
-                      onJudged={setAnswerVerdict}
+                      onJudged={(verdict) => setAnswerVerdict(verdict, typedNow.shownAt)}
                     />
                   )}
                   {revealed && (
@@ -530,14 +532,20 @@ export default function StudyPage() {
                   compact={compact}
                 />
               ) : isChoice || isOrder ? (
-                <p
-                  className={cn(
-                    'flex items-center justify-center text-sm text-slate-500',
-                    compact ? 'h-12' : 'h-14',
-                  )}
-                >
-                  {isChoice ? '答えを選んでください' : '語句を正しい順に並べてください'}
-                </p>
+                <div className={cn('flex items-center gap-2', compact ? 'h-12' : 'h-14')}>
+                  <p className="min-w-0 flex-1 text-center text-sm text-slate-500">
+                    {isChoice ? '答えを選んでください' : '語句を正しい順に並べてください'}
+                  </p>
+                  <Button
+                    variant="secondary"
+                    size="lg"
+                    className={cn('shrink-0 px-4 text-base', compact ? 'h-12' : 'h-14')}
+                    onClick={reveal}
+                  >
+                    <Eye />
+                    わからない
+                  </Button>
+                </div>
               ) : shouldType ? (
                 <Button
                   variant="secondary"

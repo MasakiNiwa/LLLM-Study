@@ -203,3 +203,46 @@ export function getSchedulerOptions(s: Settings): SchedulerOptions {
     shortTerm: s.shortTerm,
   };
 }
+
+/** 端末ごとに決める設定（バックアップに含めない）: モデル・エンジン・読み上げの声・案内の状態など */
+const DEVICE_ONLY: (keyof Settings)[] = [
+  'backend',
+  'maxNumTokens',
+  'saveImportedModels',
+  'autoLoadLastModel',
+  'lastModelName',
+  'backendHints',
+  'speechVoice',
+  'lastBackupAt',
+  'backupSnoozeUntil',
+  'onboarded',
+];
+
+/** バックアップに含める設定（学習の上限・1 日の始まり・AI の性格・表示など） */
+export function portableSettings(s: Settings): Record<string, unknown> {
+  const out: Record<string, unknown> = {};
+  for (const key of Object.keys(DEFAULT_SETTINGS) as (keyof Settings)[]) {
+    if (!DEVICE_ONLY.includes(key)) out[key] = s[key];
+  }
+  return out;
+}
+
+/**
+ * バックアップの設定から、使えるものだけを取り出す（知らない項目・型の違う値・端末ごとの設定は無視）。
+ */
+export function sanitizeSettings(raw: Record<string, unknown>): Partial<Settings> {
+  const out: Record<string, unknown> = {};
+  for (const key of Object.keys(DEFAULT_SETTINGS) as (keyof Settings)[]) {
+    if (DEVICE_ONLY.includes(key) || !(key in raw)) continue;
+    const value = raw[key];
+    const def = DEFAULT_SETTINGS[key];
+    const ok =
+      def === null
+        ? value === null || typeof value === 'string'
+        : typeof def === 'number'
+          ? typeof value === 'number' && Number.isFinite(value)
+          : typeof value === typeof def && (typeof def !== 'object' || value !== null);
+    if (ok) out[key] = value;
+  }
+  return out as Partial<Settings>;
+}

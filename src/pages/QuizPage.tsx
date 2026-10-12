@@ -4,14 +4,14 @@ import { Link } from 'wouter';
 import { PageBody, PageHeader } from '@/app/PageHeader';
 import { Button } from '@/components/ui/Button';
 import { Card } from '@/components/ui/Card';
-import { checkAnswer, type AnswerCheck } from '@/lib/srs/answerCheck';
+import type { AnswerCheck } from '@/lib/srs/answerCheck';
 import { cn } from '@/lib/utils/cn';
 import { errorMessage } from '@/lib/utils/format';
 import { useAiBusy } from '@/features/ai/aiBusy';
 import { cancelAi, runOneshot } from '@/features/ai/oneshot';
 import { getPersona, reactionText } from '@/features/ai/personas';
 import { useEngine } from '@/features/engine/engineStore';
-import { parseQuiz, quizPrompt, type QuizQuestion } from '@/features/quiz/quizGen';
+import { gradeQuiz, parseQuiz, quizPrompt, type QuizQuestion } from '@/features/quiz/quizGen';
 import { pickQuizItems, type QuizPick } from '@/features/quiz/quizSelect';
 import { SpeakButton } from '@/features/items/ItemCard';
 import { speechLang } from '@/lib/speech/lang';
@@ -25,6 +25,8 @@ interface Answered {
   question: QuizQuestion;
   answer: string;
   check: AnswerCheck;
+  /** 単語は合っているが、文に合う形になっていない */
+  baseForm: boolean;
 }
 
 type Phase =
@@ -140,8 +142,8 @@ export default function QuizPage() {
 
   const submit = () => {
     if (!question || current) return;
-    const check = checkAnswer(input, { accepted: [question.answer, question.target] });
-    const answered = { question, answer: input, check };
+    const { check, baseForm } = gradeQuiz(input, question);
+    const answered = { question, answer: input, check, baseForm };
     setCurrent(answered);
     setResults((r) => [...r, answered]);
     const streak = [...results, answered].reverse().findIndex((a) => a.check.verdict !== 'correct');
@@ -267,6 +269,12 @@ export default function QuizPage() {
                           あなたの答え: {current.answer || '（空欄）'}
                         </span>
                       </p>
+                      {current.baseForm && (
+                        <p className="text-sm text-amber-700 dark:text-amber-300">
+                          単語は合っています。文に合う形にしましょう（正解:{' '}
+                          {current.question.answer}）
+                        </p>
+                      )}
                       <p className="text-sm text-slate-600 dark:text-slate-400">
                         <span aria-hidden>{persona.emoji} </span>
                         {reaction}

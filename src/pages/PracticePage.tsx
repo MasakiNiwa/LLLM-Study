@@ -438,8 +438,8 @@ function Conversation() {
           onSubmit={(e) => {
             e.preventDefault();
             if (!text.trim() || generating) return;
-            void send(text);
-            setText('');
+            // 受け付けられなかったとき（AI がほかの処理中など）は、書いた文章を残す
+            if (send(text)) setText('');
           }}
         >
           <textarea
