@@ -42,6 +42,7 @@ import { AnswerInput } from '@/features/study/AnswerInput';
 import { AnswerResult } from '@/features/study/AnswerResult';
 import { PracticePicker } from '@/features/study/PracticePicker';
 import { StudyDisplayMenu } from '@/features/study/StudyDisplayMenu';
+import { CardInfoButton } from '@/features/study/CardInfoSheet';
 import { useStudyLayout } from '@/features/study/useStudyLayout';
 import { ConfirmDialog } from '@/components/ui/ConfirmDialog';
 import { RatingBar } from '@/features/study/RatingBar';
@@ -272,6 +273,8 @@ export default function StudyPage() {
     const onKey = (e: KeyboardEvent) => {
       const target = e.target as HTMLElement;
       if (target.closest('input, textarea, select, [contenteditable]')) return;
+      // シートやダイアログを開いているあいだは、評価のキーを受け付けない
+      if (document.querySelector('dialog[open]')) return;
       const st = useStudy.getState();
       if (!st.current) return;
       if ((e.ctrlKey || e.metaKey) && e.key === 'z') {
@@ -400,10 +403,12 @@ export default function StudyPage() {
                   )}
                   {current.card.reps > 0 && <span>復習 {current.card.reps} 回</span>}
                   {current.card.lapses > 0 && <span>忘れた回数 {current.card.lapses}</span>}
+                  <span className="ml-auto" />
+                  <CardInfoButton card={current.card} item={current.item} revealed={revealed} />
                   <button
                     type="button"
                     onClick={() => void useStudy.getState().suspendCurrent()}
-                    className="ml-auto inline-flex items-center gap-1 rounded-md px-1.5 py-0.5 hover:bg-slate-100 hover:text-slate-700 dark:hover:bg-slate-800 dark:hover:text-slate-200"
+                    className="inline-flex items-center gap-1 rounded-md px-1.5 py-0.5 hover:bg-slate-100 hover:text-slate-700 dark:hover:bg-slate-800 dark:hover:text-slate-200"
                     title="この項目を今後出題しない（教材の項目一覧から再開できます）"
                   >
                     <EyeOff className="size-3.5" />

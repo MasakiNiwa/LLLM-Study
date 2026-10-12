@@ -47,7 +47,9 @@
 
 1. **書き込み**は `FileSystemFileHandle.createWritable()` でストリーム書き込みする。
    一時ファイルに書かれ `close` 時に置き換わるので、他のサイトから書きかけの状態は見えない。
-   失敗・中断したらファイルを削除する。書き終えたらメタデータを書く
+   失敗・中断したら書きかけの内容を捨てる（`writable.abort()`）。
+   **新しく作ったファイルだけを削除し、同名のファイルがもともとあった場合は削除しない**
+   （上書きのダウンロードに失敗しても、他のサイトが保存したモデルを消さないため）。書き終えたらメタデータを書く
 2. **排他制御**: 書き込み・削除は Web Locks で `shared-models:<ファイル名>` をロックして行う
    （全削除は `shared-models:*`）。Web Locks は同じオリジンの全タブ・全サイトで共有される
 3. **変更通知**: 保存・削除したら `BroadcastChannel('shared-models')` に `{ type: 'changed', by: <アプリ名> }` を送る。
@@ -79,8 +81,18 @@ for await (const [name, handle] of dir) {
 
 // 保存
 await navigator.locks.request(`shared-models:${name}`, async () => {
+  const existed = await dir.getFileHandle(name).then(
+    () => true,
+    () => false,
+  );
   const writable = await (await dir.getFileHandle(name, { create: true })).createWritable();
-  await response.body.pipeTo(writable);
+  try {
+    await response.body.pipeTo(writable);
+  } catch (e) {
+    await writable.abort().catch(() => {});
+    if (!existed) await dir.removeEntry(name).catch(() => {}); // 既存のモデルは消さない
+    throw e;
+  }
   const meta = await (
     await dir.getFileHandle(`${name}.meta.json`, { create: true })
   ).createWritable();
@@ -101,3 +113,4 @@ new BroadcastChannel('shared-models').postMessage({ type: 'changed', by: 'My App
 ## 履歴
 
 - v1（2026-10）: 初版（Try Local で策定）。LLLM Study も v1 で対応
+- v1.1（2026-10）: 上書き保存に失敗したとき、既存のファイルを削除しないことを明記（仕様の変更ではなく、実装の不具合の修正に合わせた明確化）

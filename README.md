@@ -7,6 +7,11 @@
 
 🌐 **公開ページ**: https://masakiniwa.github.io/LLLM-Study/
 
+## ほかのアプリの参考に
+
+このリポジトリは、ローカル LLM を使うアプリと、github.io のサイト間で共通にする仕様の**参考リポジトリ**でもあります。
+[docs/README.md](docs/README.md) に、モデルの共有の仕様・ローカル LLM の組み込み方・画面の作り方（ボトムシートなど）をまとめています。
+
 ## 特長
 
 - 🧠 **FSRS で記憶に残る復習** — 最新の間隔反復アルゴリズム（FSRS-6）が、忘れかけた頃に復習を出します。
@@ -68,6 +73,9 @@ npm run licenses   # サードパーティのライセンス一覧の生成
 
 ## ドキュメント
 
+- [ドキュメントの一覧と、新しいリポジトリのチェックリスト](docs/README.md)
+- [ローカル LLM の組み込みガイド](docs/LOCAL_LLM_GUIDE.md)
+- [画面づくりのガイド（ボトムシートなど）](docs/UI_GUIDE.md)
 - [仕様書・ロードマップ](docs/SPEC.md)
 - [教材パック形式](docs/STUDY_PACK_FORMAT.md)（外部 AI に渡す仕様書。自動生成）
 - [共通モデル保存仕様](docs/SHARED_MODEL_STORAGE.md)（github.io のサイト間でモデルを共有する取り決め）
