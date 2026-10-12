@@ -25,6 +25,7 @@ import { useTodayOverview } from '@/features/study/useTodayOverview';
 import { WeekStrip } from '@/features/calendar/WeekStrip';
 import { ScopePicker } from '@/features/study/ScopePicker';
 import { PracticePicker } from '@/features/study/PracticePicker';
+import { useStudy } from '@/features/study/studyStore';
 import { BackupReminder } from '@/features/home/BackupReminder';
 
 function ProgressRing({ value }: { value: number }) {
@@ -148,7 +149,8 @@ export default function HomePage() {
                 </div>
               </div>
             </div>
-            <Link href="/study">
+            {/* 学習画面で中断していても、ここから開いたら今日の分で始め直す */}
+            <Link href="/study" onClick={() => useStudy.setState({ interrupted: false })}>
               <Button variant="primary" size="lg" className="mt-4 w-full" disabled={!overview}>
                 <Play />
                 {remaining > 0 ? '学習を始める' : '今日の分は完了！（確認する）'}

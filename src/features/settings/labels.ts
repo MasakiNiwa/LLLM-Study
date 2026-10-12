@@ -36,7 +36,7 @@ export const NEW_CARD_ORDER_LABELS: Record<NewCardOrder, string> = {
 };
 
 export const TYPE_ANSWER_LABELS: Record<TypeAnswerMode, string> = {
-  off: 'しない',
+  off: '出さない（「答えを書く」から書く）',
   recall: '単語・フレーズを答えるカードと穴埋め',
   all: 'すべてのカード（選択問題を除く）',
 };

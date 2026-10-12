@@ -291,9 +291,9 @@ export default function SettingsPage() {
             />
           </Field>
           <Field
-            label="答えを入力して答え合わせ"
+            label="答えの入力欄を最初から出す"
             htmlFor="type-answer"
-            hint="プログラムが判定し、評価のおすすめを示します（学習画面の ⌨ ボタンでも切り替え）"
+            hint="オフでも、学習画面の「答えを書く」からいつでも答えを書けます。答え合わせはプログラムが行い、評価のおすすめを示します"
             stacked
           >
             <Select

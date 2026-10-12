@@ -22,14 +22,24 @@ function round(n: number, digits = 2): number {
 /** カード 1 枚の学習状況（AI 向け） */
 /** AI に渡す本文の最大文字数 */
 const PASSAGE_LIMIT = 1500;
+const USER_ANSWER_LIMIT = 300;
 
 function truncate(text: string, max: number): string {
   return text.length > max ? `${text.slice(0, max)}…（以下省略）` : text;
 }
 
+/** ユーザーが書いた答え（AI に渡す） */
+export interface UserAnswerForLlm {
+  text: string;
+  /** プログラムの判定（言い切れないときは null） */
+  verdict: 'correct' | 'close' | 'wrong' | null;
+}
+
+const VERDICT_LABELS = { correct: '正解', close: '惜しい', wrong: '不正解' } as const;
+
 export async function cardForLlm(
   card: CardRecord,
-  options: { revealed: boolean; now?: number },
+  options: { revealed: boolean; now?: number; userAnswer?: UserAnswerForLlm | null },
 ): Promise<Record<string, unknown> | null> {
   const now = options.now ?? Date.now();
   const item = await db.items.get(card.itemKey);
@@ -42,6 +52,15 @@ export async function cardForLlm(
     question_style: templateLabel(item.item.type, card.template),
     answer_shown: options.revealed,
     content: itemForLlm(item.item),
+    // ユーザーが自分で書いた答え。判定はアプリが行ったもの（言い切れないときは「判定なし」）
+    ...(options.userAnswer?.text.trim() && {
+      user_answer: {
+        text: truncate(options.userAnswer.text.trim(), USER_ANSWER_LIMIT),
+        app_check: options.userAnswer.verdict
+          ? VERDICT_LABELS[options.userAnswer.verdict]
+          : '判定なし（言い換えの可能性あり）',
+      },
+    }),
     // 長文読解などの本文（長すぎるとコンテキストを圧迫するので先頭だけ）
     ...(item.passage && {
       passage: {

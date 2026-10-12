@@ -23,7 +23,9 @@ function Bubble({ last, llm }: { last: LastRating; llm: boolean }) {
     if (llm && !isAiBusy()) {
       void (async () => {
         const card = await db.cards.get(last.cardId);
-        const json = card ? await cardForLlm(card, { revealed: true }) : null;
+        const json = card
+          ? await cardForLlm(card, { revealed: true, userAnswer: last.userAnswer })
+          : null;
         try {
           const r = await runOneshot({
             task: 'reaction',
