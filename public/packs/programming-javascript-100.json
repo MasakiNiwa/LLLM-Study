@@ -3,7 +3,7 @@
   "version": 1,
   "id": "programming-javascript-100",
   "title": "JavaScript 入門 100（基本文法から非同期処理まで）",
-  "description": "モダンな JavaScript（ES2022 以降）を、let / const / var の違い、型と typeof、== と ===、テンプレートリテラルから始め、配列メソッド（map・filter・reduce・find・some）、オブジェクト・分割代入・スプレッド、関数・アロー関数・this、クロージャ、クラス、モジュール（import / export）、例外、JSON、オプショナルチェーンと ?? へと進みます。最後に Promise・async / await とイベントループ（出力順の問題）、DOM の基本、よくある落とし穴を学び、ステップ 1〜4 の順に力がつく構成です。多くの問題は短いコードを読んで「出力は？」を答える形式で、DOM・fetch・import 以外のコードはすべて Node.js で実行して出力を確かめています（配列やオブジェクトの表示は Node.js の console.log の形式。[1, 2] のように空白を詰めて答えても正解になります）。形式の内訳: 一問一答 59 問・選択問題 32 問・穴埋め 16 問・並べ替え 6 問。複数行の出力は行の順に空白で区切って答えます。先に「Python 入門 100（基本文法から関数・クラスまで）」でプログラミングの基本を押さえておくと、ほかの言語との違いもつかみやすくなります。次は TypeScript や React など、実際の Web アプリ開発へ進みましょう。",
+  "description": "モダンな JavaScript（ES2022 以降）を、let / const / var の違い、型と typeof、== と ===、テンプレートリテラルから始め、配列メソッド（map・filter・reduce・find・some）、オブジェクト・分割代入・スプレッド、関数・アロー関数・this、クロージャ、クラス、モジュール（import / export）、例外、JSON、オプショナルチェーンと ?? へと進みます。最後に Promise・async / await とイベントループ（出力順の問題）、DOM の基本、よくある落とし穴を学び、ステップ 1〜4 の順に力がつく構成です。多くの問題は短いコードを読んで「出力は？」を答える形式で、DOM・fetch・import 以外のコードはすべて Node.js で実行して出力を確かめています（配列やオブジェクトの表示は Node.js の console.log の形式。[1, 2] のように空白を詰めて答えても正解になります）。形式の内訳: 一問一答 42 問・選択問題 34 問・穴埋め 18 問・並べ替え 6 問。複数行の出力は行の順に空白で区切って答えます。先に「Python 入門 100（基本文法から関数・クラスまで）」でプログラミングの基本を押さえておくと、ほかの言語との違いもつかみやすくなります。次は TypeScript や React など、実際の Web アプリ開発へ進みましょう。",
   "subject": "programming",
   "language": {
     "target": "ja",
@@ -55,9 +55,9 @@
       "question": "次のコードを実行したときの出力は？\n\nlet x = 1;\n{\n  let x = 2;\n}\nconsole.log(x);",
       "choices": [
         "1",
+        "2",
         "ReferenceError が発生する",
-        "undefined",
-        "2"
+        "undefined"
       ],
       "answer": 0,
       "explanation": "let と const はブロック { } 単位のスコープを持つ。ブロックの中の x は外側の x とは別の変数なので、外側の x は 1 のまま。"
@@ -96,24 +96,13 @@
       ],
       "question": "次のコードを実行したときの出力は？\n\nfor (var i = 0; i < 3; i++) {}\nconsole.log(i);",
       "choices": [
+        "3",
         "2",
-        "ReferenceError が発生する",
         "undefined",
-        "3"
+        "ReferenceError が発生する"
       ],
-      "answer": 3,
+      "answer": 0,
       "explanation": "var はブロックスコープを持たないので、for の外でも i が使える。ループは i が 3 になって条件 i < 3 が偽になったときに終わるので 3。let にすると外からは参照できず ReferenceError になる。"
-    },
-    {
-      "id": "js-q-typeof-string",
-      "type": "qa",
-      "tags": [
-        "ステップ1",
-        "型と typeof"
-      ],
-      "question": "次のコードを実行したときの出力は？\n\nconsole.log(typeof \"42\");",
-      "answer": "string",
-      "explanation": "typeof は値の型を文字列で返す。\"42\" は引用符で囲まれているので数値ではなく文字列（string）。"
     },
     {
       "id": "js-q-typeof-undef-func",
@@ -136,11 +125,11 @@
       "question": "次のコードを実行したときの出力は？\n\nconsole.log(typeof null);",
       "choices": [
         "null",
-        "object",
         "undefined",
+        "object",
         "number"
       ],
-      "answer": 1,
+      "answer": 2,
       "explanation": "typeof null が \"object\" になるのは JavaScript 初期からの有名な仕様上の不具合で、互換性のため直されていない。null かどうかは value === null で調べる。"
     },
     {
@@ -194,23 +183,29 @@
       ],
       "question": "値と型の両方が等しいかを比べる、ふだん使うべき比較演算子は？",
       "choices": [
-        "==",
-        "=",
         "===",
-        "=>"
+        "==",
+        "=>",
+        "="
       ],
-      "answer": 2,
+      "answer": 0,
       "explanation": "=== は厳密等価演算子で、型変換をしない。== は型変換をするので思わぬ結果になりやすい。= は代入、=> はアロー関数の記号。"
     },
     {
-      "id": "js-q-plus-string",
-      "type": "qa",
+      "id": "js-ch-plus-string",
+      "type": "choice",
       "tags": [
         "ステップ1",
         "比較と演算"
       ],
       "question": "次のコードを実行したときの出力は？\n\nconsole.log(\"5\" + 3);",
-      "answer": "53",
+      "choices": [
+        "8",
+        "TypeError が発生する",
+        "53",
+        "NaN"
+      ],
+      "answer": 2,
       "explanation": "+ は片方が文字列だと文字列の連結になるので \"5\" + \"3\" → \"53\"。数値として足すなら Number(\"5\") + 3 のように先に変換する。"
     },
     {
@@ -233,24 +228,13 @@
       ],
       "question": "次のコードを実行したときの出力は？\n\nconsole.log(7 / 2);",
       "choices": [
-        "3",
         "3.0",
         "3.5",
-        "4"
+        "4",
+        "3"
       ],
-      "answer": 2,
+      "answer": 1,
       "explanation": "JavaScript の数値は整数と小数の区別がない（number 型）ので、7 / 2 は 3.5。整数の商が欲しいときは Math.floor(7 / 2) や Math.trunc() を使う。"
-    },
-    {
-      "id": "js-q-floor-mod",
-      "type": "qa",
-      "tags": [
-        "ステップ1",
-        "比較と演算"
-      ],
-      "question": "次のコードを実行したときの出力は？\n\nconsole.log(Math.floor(7 / 2), 7 % 2);",
-      "answer": "3 1",
-      "explanation": "Math.floor() は小数点以下を切り捨て（より小さい整数へ）、% は割り算の余り。7 = 2 × 3 + 1。"
     },
     {
       "id": "js-cz-pow",
@@ -283,12 +267,12 @@
       ],
       "question": "テンプレートリテラル（${ } で値を埋め込める文字列）を囲む記号は？",
       "choices": [
-        "'（シングルクォート）",
-        "`（バッククォート）",
+        "\"（ダブルクォート）",
         "/（スラッシュ）",
-        "\"（ダブルクォート）"
+        "`（バッククォート）",
+        "'（シングルクォート）"
       ],
-      "answer": 1,
+      "answer": 2,
       "explanation": "テンプレートリテラルはバッククォート ` で囲む。改行もそのまま書ける。' や \" で囲んだ普通の文字列では ${ } は展開されず、そのまま表示される。"
     },
     {
@@ -303,28 +287,6 @@
       "explanation": "slice(start, end) は start から end の「手前」までを取り出す。インデックスは 0 から数えるので 0〜3 の 4 文字。負の数を渡すと後ろから数える。"
     },
     {
-      "id": "js-q-length",
-      "type": "qa",
-      "tags": [
-        "ステップ1",
-        "文字列"
-      ],
-      "question": "次のコードを実行したときの出力は？\n\nconsole.log(\"日本語\".length);",
-      "answer": "3",
-      "explanation": "length は文字列の長さ（UTF-16 の単位数）。ふつうの日本語は 1 文字 1 と数える。ただし一部の絵文字などは 2 と数えられることがある。"
-    },
-    {
-      "id": "js-q-padstart",
-      "type": "qa",
-      "tags": [
-        "ステップ1",
-        "文字列"
-      ],
-      "question": "次のコードを実行したときの出力は？\n\nconsole.log(\"7\".padStart(3, \"0\"));",
-      "answer": "007",
-      "explanation": "padStart(長さ, 埋める文字) は、指定の長さになるまで先頭を埋める。時刻や番号の 0 埋め（07, 007）によく使う。末尾を埋めるのは padEnd。"
-    },
-    {
       "id": "js-ch-number-parse",
       "type": "choice",
       "tags": [
@@ -333,12 +295,12 @@
       ],
       "question": "次のコードを実行したときの出力は？\n\nconsole.log(Number(\"12px\"), parseInt(\"12px\"));",
       "choices": [
-        "NaN 12",
-        "12 NaN",
+        "12 12",
         "NaN NaN",
-        "12 12"
+        "12 NaN",
+        "NaN 12"
       ],
-      "answer": 0,
+      "answer": 3,
       "explanation": "Number() は文字列全体が数値として読めないと NaN（Not a Number）を返す。parseInt() は先頭から読めるところまで読むので 12 になる。"
     },
     {
@@ -390,11 +352,11 @@
       "question": "次のコードを実行したときの出力は？\n\nconsole.log([1, 2, 3, 4].filter(n => n % 2 === 0));",
       "choices": [
         "[ false, true, false, true ]",
-        "[ 2, 4 ]",
         "[ 2 ]",
-        "[ 1, 3 ]"
+        "[ 1, 3 ]",
+        "[ 2, 4 ]"
       ],
-      "answer": 1,
+      "answer": 3,
       "explanation": "filter() は関数が true を返した要素だけを集めた新しい配列を返す。true / false の配列を返すのは map(n => n % 2 === 0) の場合。"
     },
     {
@@ -431,12 +393,12 @@
       ],
       "question": "次のコードを実行したときの出力は？\n\nconst users = [{ id: 1 }, { id: 2 }];\nconsole.log(users.find(u => u.id === 3));",
       "choices": [
-        "undefined",
-        "null",
         "-1",
-        "[]"
+        "null",
+        "[]",
+        "undefined"
       ],
-      "answer": 0,
+      "answer": 3,
       "explanation": "find() は見つからないと undefined を返す。-1 を返すのは findIndex() や indexOf()、空の配列を返すのは filter()。"
     },
     {
@@ -448,12 +410,12 @@
       ],
       "question": "次のコードを実行したときの出力は？\n\nconst nums = [1, 3, 5];\nconsole.log(nums.some(n => n > 4), nums.every(n => n > 4));",
       "choices": [
+        "false false",
         "true false",
         "true true",
-        "false true",
-        "false false"
+        "false true"
       ],
-      "answer": 0,
+      "answer": 1,
       "explanation": "some() は 1 つでも条件に合えば true、every() はすべてが条件に合えば true。5 だけが 4 より大きいので some は true、every は false。"
     },
     {
@@ -475,17 +437,6 @@
       ],
       "text": "const adults = people.{{filter}}(p => p.age >= 20);  // 20 歳以上の人だけを残す",
       "explanation": "条件に合う要素だけを残すのは filter()。map と filter と reduce は配列処理の三本柱で、組み合わせてメソッドチェーンにできる。"
-    },
-    {
-      "id": "js-q-indexof",
-      "type": "qa",
-      "tags": [
-        "ステップ2",
-        "配列メソッド"
-      ],
-      "question": "次のコードを実行したときの出力は？\n\nconsole.log([\"a\", \"b\"].indexOf(\"c\"));",
-      "answer": "-1",
-      "explanation": "indexOf() は要素の位置を返し、見つからないときは -1。あるかどうかだけ知りたいなら includes()（true / false）の方が読みやすい。"
     },
     {
       "id": "js-ch-sort-default",
@@ -520,20 +471,6 @@
         ".join(\", \")"
       ],
       "explanation": "先に filter で絞り込み、次に map で名前だけにして、最後に join で文字列にする。map を先にすると名前の文字列には active がないので絞り込めない。"
-    },
-    {
-      "id": "js-q-spread-array",
-      "type": "qa",
-      "tags": [
-        "ステップ2",
-        "オブジェクト・分割代入・スプレッド"
-      ],
-      "question": "次のコードを実行したときの出力は？\n\nconst a = [1, 2];\nconst b = [0, ...a, 3];\nconsole.log(b);",
-      "answer": "[ 0, 1, 2, 3 ]",
-      "accepted": [
-        "[0, 1, 2, 3]"
-      ],
-      "explanation": "スプレッド構文 ...a は配列の要素を展開する。配列の結合やコピー（[...a]）によく使う。"
     },
     {
       "id": "js-q-destructure-array",
@@ -602,28 +539,12 @@
       "question": "次のコードを実行したときの出力は？\n\nconsole.log(Object.keys({ x: 1, y: 2 }));",
       "choices": [
         "[ 1, 2 ]",
-        "[ 'x', 'y' ]",
+        "{ x: 1, y: 2 }",
         "[ [ 'x', 1 ], [ 'y', 2 ] ]",
-        "{ x: 1, y: 2 }"
+        "[ 'x', 'y' ]"
       ],
-      "answer": 1,
+      "answer": 3,
       "explanation": "Object.keys() はプロパティ名の配列を返す。値の配列は Object.values()、[名前, 値] の組の配列は Object.entries()。"
-    },
-    {
-      "id": "js-q-shorthand",
-      "type": "qa",
-      "tags": [
-        "ステップ2",
-        "オブジェクト・分割代入・スプレッド"
-      ],
-      "question": "次のコードを実行したときの出力は？\n\nconst name = \"Ken\";\nconst age = 30;\nconst obj = { name, age };\nconsole.log(obj);",
-      "answer": "{ name: 'Ken', age: 30 }",
-      "accepted": [
-        "{name: 'Ken', age: 30}",
-        "{ name: \"Ken\", age: 30 }",
-        "{name: \"Ken\", age: 30}"
-      ],
-      "explanation": "{ name, age } は { name: name, age: age } の省略記法（ショートハンドプロパティ）。変数名がそのままプロパティ名になる。"
     },
     {
       "id": "js-ch-falsy",
@@ -635,11 +556,11 @@
       "question": "if の条件で偽（falsy）として扱われる値は？",
       "choices": [
         "[]（空の配列）",
-        "\"0\"（文字の 0）",
         "\"\"（空文字列）",
-        "{}（空のオブジェクト）"
+        "{}（空のオブジェクト）",
+        "\"0\"（文字の 0）"
       ],
-      "answer": 2,
+      "answer": 1,
       "explanation": "falsy な値は false・0・\"\"・null・undefined・NaN など。空の配列や空のオブジェクトは truthy（真）なので、配列が空かどうかは arr.length === 0 で調べる。"
     },
     {
@@ -654,14 +575,14 @@
       "explanation": "条件 ? 真のときの値 : 偽のときの値 は条件（三項）演算子。式なので、そのまま変数に代入したり引数に渡したりできる。"
     },
     {
-      "id": "js-q-for-of",
-      "type": "qa",
+      "id": "js-cz-for-of",
+      "type": "cloze",
       "tags": [
         "ステップ2",
         "制御構文"
       ],
-      "question": "次のコードを実行したときの出力は？\n\nfor (const c of \"ab\") {\n  console.log(c);\n}\n\n（複数行の出力は、行の順に空白で区切って答える）",
-      "answer": "a b",
+      "text": "for (const c {{of}} \"ab\") {\n  console.log(c);  // a、b の順に表示\n}",
+      "hint": "英小文字 2 文字",
       "explanation": "for...of は配列や文字列などの「値」を順に取り出す。配列の要素を順に処理するときの基本の書き方。"
     },
     {
@@ -673,27 +594,13 @@
       ],
       "question": "次のコードを実行したときの出力は？\n\nconst arr = [\"x\", \"y\"];\nfor (const i in arr) {\n  console.log(i);\n}\n\n（複数行の出力は、行の順に空白で区切って示す）",
       "choices": [
-        "x y",
         "undefined undefined",
-        "1 2",
-        "0 1"
+        "0 1",
+        "x y",
+        "1 2"
       ],
-      "answer": 3,
+      "answer": 1,
       "explanation": "for...in はオブジェクトのプロパティ名（キー）を取り出すので、配列では \"0\", \"1\" というインデックスの文字列になる。配列の値を取り出すなら for...of を使う。"
-    },
-    {
-      "id": "js-q-while",
-      "type": "qa",
-      "tags": [
-        "ステップ2",
-        "制御構文"
-      ],
-      "question": "次のコードを実行したときの出力は？\n\nlet n = 1;\nwhile (n < 50) {\n  n *= 2;\n}\nconsole.log(n);",
-      "answer": "64",
-      "hints": [
-        "32 の次で止まる"
-      ],
-      "explanation": "n は 1 → 2 → 4 → 8 → 16 → 32 → 64 と増え、64 で n < 50 が偽になってループを抜ける。"
     },
     {
       "id": "js-ch-switch",
@@ -704,12 +611,12 @@
       ],
       "question": "次のコードを実行したときの出力は？\n\nconst x = 1;\nswitch (x) {\n  case 1:\n    console.log(\"one\");\n  case 2:\n    console.log(\"two\");\n    break;\n  default:\n    console.log(\"other\");\n}\n\n（複数行の出力は、行の順に空白で区切って示す）",
       "choices": [
-        "one two other",
+        "one two",
         "two",
         "one",
-        "one two"
+        "one two other"
       ],
-      "answer": 3,
+      "answer": 0,
       "explanation": "switch では break を書かないと、次の case の処理にも続けて進む（フォールスルー）。case 1 に break がないので two も表示され、case 2 の break で止まる。"
     },
     {
@@ -729,14 +636,14 @@
       "explanation": "for (初期化; 条件; 更新) の順。条件が true の間ブロックを実行し、1 回ごとに更新式（i++）を実行する。"
     },
     {
-      "id": "js-q-arrow",
-      "type": "qa",
+      "id": "js-cz-arrow",
+      "type": "cloze",
       "tags": [
         "ステップ3",
         "関数とアロー関数"
       ],
-      "question": "次のコードを実行したときの出力は？\n\nconst square = n => n * n;\nconsole.log(square(4));",
-      "answer": "16",
+      "text": "const square = n {{=>}} n * n;\nconsole.log(square(4));  // 16",
+      "hint": "記号 2 文字",
       "explanation": "アロー関数は (引数) => 式 の形。引数が 1 つなら ( ) を、本体が式 1 つなら { } と return を省略できる。"
     },
     {
@@ -748,12 +655,12 @@
       ],
       "question": "次のコードを実行したときの出力は？\n\nconst f = () => { value: 1 };\nconsole.log(f());",
       "choices": [
-        "undefined",
         "SyntaxError が発生する",
+        "undefined",
         "{ value: 1 }",
         "1"
       ],
-      "answer": 0,
+      "answer": 1,
       "explanation": "=> の直後の { } は関数本体のブロックとみなされ、value: はラベルとして解釈されるので何も返さない（undefined）。オブジェクトを返すときは () => ({ value: 1 }) と丸かっこで囲む。"
     },
     {
@@ -777,17 +684,6 @@
       "question": "次のコードを実行したときの出力は？\n\nfunction sum(...nums) {\n  return nums.reduce((a, b) => a + b, 0);\n}\nconsole.log(sum(1, 2, 3));",
       "answer": "6",
       "explanation": "...nums（残余引数）は、渡された残りの引数を「配列」として受け取る。同じ ... でも、呼び出し側で使うとスプレッド（展開）になる。"
-    },
-    {
-      "id": "js-q-func-hoist",
-      "type": "qa",
-      "tags": [
-        "ステップ3",
-        "関数とアロー関数"
-      ],
-      "question": "次のコードを実行したときの出力は？\n\nconsole.log(square(3));\n\nfunction square(n) {\n  return n * n;\n}",
-      "answer": "9",
-      "explanation": "function 宣言は関数全体が巻き上げられるので、定義より前の行で呼び出せる。"
     },
     {
       "id": "js-err-arrow-hoist",
@@ -823,12 +719,12 @@
       ],
       "question": "次のコードを実行したときの出力は？\n\nfunction makeCounter() {\n  let count = 0;\n  return () => ++count;\n}\nconst c1 = makeCounter();\nconst c2 = makeCounter();\nc1();\nc1();\nconsole.log(c2());",
       "choices": [
-        "0",
-        "3",
         "1",
-        "2"
+        "2",
+        "0",
+        "3"
       ],
-      "answer": 2,
+      "answer": 0,
       "explanation": "makeCounter() を呼ぶたびに新しい count が作られるので、c1 と c2 はそれぞれ別の count を持つ。c2 は初めて呼ばれたので 1。"
     },
     {
@@ -840,12 +736,12 @@
       ],
       "question": "次のコードを実行したときの出力は？\n\nfor (var i = 0; i < 3; i++) {\n  setTimeout(() => console.log(i), 0);\n}\n\n（複数行の出力は、行の順に空白で区切って示す）",
       "choices": [
-        "undefined undefined undefined",
         "0 1 2",
         "2 2 2",
-        "3 3 3"
+        "3 3 3",
+        "undefined undefined undefined"
       ],
-      "answer": 3,
+      "answer": 2,
       "explanation": "var の i はループ全体で 1 つだけ。setTimeout の関数が実行されるのはループが終わったあとなので、どれも最終値の 3 を表示する。"
     },
     {
@@ -879,12 +775,12 @@
       ],
       "question": "次のコードを実行したときの出力は？\n\nconst obj = {\n  name: \"Obj\",\n  later() {\n    return [1].map(() => this.name)[0];\n  },\n};\nconsole.log(obj.later());",
       "choices": [
+        "1",
         "TypeError が発生する",
         "Obj",
-        "1",
         "undefined"
       ],
-      "answer": 1,
+      "answer": 2,
       "explanation": "アロー関数は自分の this を持たず、外側（ここでは later メソッド）の this をそのまま使う。コールバックの中で this を使いたいときにアロー関数が便利な理由。"
     },
     {
@@ -954,17 +850,6 @@
       "explanation": "継承したクラスの constructor で super() より前に this を使うと ReferenceError。インスタンスは親の constructor で作られるため、super() が先。"
     },
     {
-      "id": "js-q-static",
-      "type": "qa",
-      "tags": [
-        "ステップ3",
-        "クラス"
-      ],
-      "question": "次のコードを実行したときの出力は？\n\nclass MathUtil {\n  static double(n) {\n    return n * 2;\n  }\n}\nconsole.log(MathUtil.double(4));",
-      "answer": "8",
-      "explanation": "static を付けたメソッドはインスタンスではなくクラスから直接呼ぶ（MathUtil.double）。インスタンスに依存しない便利関数に使う。"
-    },
-    {
       "id": "js-q-private",
       "type": "qa",
       "tags": [
@@ -984,12 +869,12 @@
       ],
       "question": "次のコードを実行するとどうなる？\n\nclass A {\n  #secret = 1;\n}\nconsole.log(new A().#secret);",
       "choices": [
-        "1 と表示される",
-        "SyntaxError（構文エラー）になる",
         "undefined と表示される",
-        "TypeError が発生する"
+        "1 と表示される",
+        "TypeError が発生する",
+        "SyntaxError（構文エラー）になる"
       ],
-      "answer": 1,
+      "answer": 3,
       "explanation": "プライベートフィールドをクラスの外から参照するコードは、実行前の構文チェックの段階でエラー（SyntaxError）になる。外から値が必要なら getter などのメソッドを用意する。"
     },
     {
@@ -1012,11 +897,11 @@
       "question": "math.js に export function add(a, b) { ... } と書いたとき、add を正しく読み込む書き方は？",
       "choices": [
         "require { add } from \"./math.js\";",
+        "import { add } from \"./math.js\";",
         "import * from \"./math.js\";",
-        "import add from \"./math.js\";",
-        "import { add } from \"./math.js\";"
+        "import add from \"./math.js\";"
       ],
-      "answer": 3,
+      "answer": 1,
       "explanation": "名前付きエクスポートは { } で名前を指定して import する。{ } なしの import add from ... は default エクスポートを読み込む書き方。import * を使うなら import * as math from ... と名前を付ける。"
     },
     {
@@ -1028,12 +913,12 @@
       ],
       "question": "export default について正しいものは？",
       "choices": [
-        "1 つのモジュールに何個でも書ける",
-        "import 側では必ず { } で囲んで読み込む",
         "関数には使えず、値にしか使えない",
-        "1 つのモジュールに 1 つだけ書ける"
+        "1 つのモジュールに 1 つだけ書ける",
+        "1 つのモジュールに何個でも書ける",
+        "import 側では必ず { } で囲んで読み込む"
       ],
-      "answer": 3,
+      "answer": 1,
       "explanation": "export default はモジュールの「代表」を 1 つだけ指定する。import 側では { } なしで好きな名前を付けて読み込める（import myAdd from \"./math.js\"）。"
     },
     {
@@ -1086,17 +971,6 @@
       "explanation": "throw で例外を投げる。new Error(\"メッセージ\") を投げると、受け取った側で e.message やスタックトレースを使えるので、文字列ではなく Error オブジェクトを投げる。"
     },
     {
-      "id": "js-q-error-message",
-      "type": "qa",
-      "tags": [
-        "ステップ3",
-        "例外"
-      ],
-      "question": "次のコードを実行したときの出力は？\n\ntry {\n  throw new Error(\"失敗\");\n} catch (e) {\n  console.log(e.message);\n}",
-      "answer": "失敗",
-      "explanation": "Error オブジェクトの message プロパティに、作るときに渡した文字列が入っている。"
-    },
-    {
       "id": "js-q-json-stringify",
       "type": "qa",
       "tags": [
@@ -1108,17 +982,6 @@
       "explanation": "JSON.stringify() はオブジェクトを JSON 文字列に変換する。キーは必ずダブルクォートで囲まれ、余分な空白は入らない（整形するなら第 3 引数にインデント幅を渡す）。"
     },
     {
-      "id": "js-q-json-parse",
-      "type": "qa",
-      "tags": [
-        "ステップ3",
-        "JSON"
-      ],
-      "question": "次のコードを実行したときの出力は？\n\nconst obj = JSON.parse('{\"x\": 10}');\nconsole.log(obj.x + 1);",
-      "answer": "11",
-      "explanation": "JSON.parse() は JSON 文字列をオブジェクトに戻す。x は数値 10 として復元されるので 10 + 1 = 11（文字列連結にはならない）。"
-    },
-    {
       "id": "js-ch-json-undefined",
       "type": "choice",
       "tags": [
@@ -1127,12 +990,12 @@
       ],
       "question": "次のコードを実行したときの出力は？\n\nconsole.log(JSON.stringify({ a: undefined, b: 1 }));",
       "choices": [
-        "{a:undefined,b:1}",
-        "{\"b\":1}",
         "{\"a\":null,\"b\":1}",
-        "{\"a\":undefined,\"b\":1}"
+        "{\"a\":undefined,\"b\":1}",
+        "{\"b\":1}",
+        "{a:undefined,b:1}"
       ],
-      "answer": 1,
+      "answer": 2,
       "explanation": "JSON には undefined がないので、値が undefined のプロパティは JSON.stringify() で省かれる（関数も同じ）。null は \"a\":null として残る。"
     },
     {
@@ -1177,23 +1040,29 @@
       ],
       "question": "次のコードを実行したときの出力は？\n\nconsole.log(0 || 10, 0 ?? 10);",
       "choices": [
-        "0 0",
-        "10 10",
         "0 10",
-        "10 0"
+        "10 10",
+        "10 0",
+        "0 0"
       ],
-      "answer": 3,
+      "answer": 2,
       "explanation": "|| は左側が falsy（0・\"\" も含む）なら右側を返す。?? は左側が null か undefined のときだけ右側を返すので、0 はそのまま使われる。0 や空文字列が正しい値になりうるときは ?? を使う。"
     },
     {
-      "id": "js-q-nullish-assign",
-      "type": "qa",
+      "id": "js-ch-nullish-assign",
+      "type": "choice",
       "tags": [
         "ステップ3",
         "オプショナルチェーンと ??"
       ],
       "question": "次のコードを実行したときの出力は？\n\nlet a = null;\nlet b = 0;\na ??= 5;\nb ??= 5;\nconsole.log(a, b);",
-      "answer": "5 0",
+      "choices": [
+        "null 5",
+        "5 5",
+        "null 0",
+        "5 0"
+      ],
+      "answer": 3,
       "explanation": "x ??= y は x が null か undefined のときだけ y を代入する（ES2021）。b は 0 で null でも undefined でもないので変わらない。"
     },
     {
@@ -1220,11 +1089,11 @@
       "question": "次のコードを実行したときの出力は？\n\nconsole.log(1);\nsetTimeout(() => console.log(2), 0);\nPromise.resolve().then(() => console.log(3));\nconsole.log(4);\n\n（複数行の出力は、行の順に空白で区切って示す）",
       "choices": [
         "1 4 2 3",
+        "1 4 3 2",
         "1 2 3 4",
-        "1 3 4 2",
-        "1 4 3 2"
+        "1 3 4 2"
       ],
-      "answer": 3,
+      "answer": 1,
       "explanation": "同期処理（1, 4）が先にすべて実行される。その後、Promise の then（マイクロタスク）が setTimeout（タスク）より優先して実行されるので 3 → 2。"
     },
     {
@@ -1263,12 +1132,12 @@
       ],
       "question": "次のコードを実行したときの出力は？\n\nasync function f() {\n  return 1;\n}\nconsole.log(f() instanceof Promise);",
       "choices": [
-        "false",
         "1",
-        "true",
-        "undefined"
+        "false",
+        "undefined",
+        "true"
       ],
-      "answer": 2,
+      "answer": 3,
       "explanation": "async 関数は常に Promise を返す。return 1 は「1 で解決される Promise」になるので、値を取り出すには await f() か f().then(...) を使う。"
     },
     {
@@ -1301,12 +1170,12 @@
       ],
       "question": "await を書けるのはどこ？",
       "choices": [
-        "class の constructor の中だけ",
         "どの関数の中でも書ける",
-        "async 関数の中（または ES モジュールのトップレベル）",
-        "コールバック関数の中だけ"
+        "コールバック関数の中だけ",
+        "class の constructor の中だけ",
+        "async 関数の中（または ES モジュールのトップレベル）"
       ],
-      "answer": 2,
+      "answer": 3,
       "explanation": "await は async を付けた関数の中で使う。ES モジュールではトップレベルでも使える（トップレベル await）。async でない関数の中ではSyntaxError になる。"
     },
     {
@@ -1340,12 +1209,12 @@
       ],
       "question": "複数の Promise を並行して待ち、どれか 1 つでも reject されると（ほかの結果を待たずに）全体が reject されるのは？",
       "choices": [
-        "Promise.all",
+        "Promise.resolve",
         "Promise.any",
-        "Promise.allSettled",
-        "Promise.resolve"
+        "Promise.all",
+        "Promise.allSettled"
       ],
-      "answer": 0,
+      "answer": 2,
       "explanation": "Promise.all はすべて成功すると結果の配列で解決し、1 つでも失敗するとすぐ reject される。allSettled は成功・失敗にかかわらず全部の結果を待ち、any は最初に成功したものを返す。"
     },
     {
@@ -1404,12 +1273,12 @@
       ],
       "question": "CSS セレクターに一致する「最初の 1 つ」の要素を取得するメソッドは？",
       "choices": [
-        "document.getElementsByClassName()",
-        "document.querySelectorAll()",
         "document.querySelector()",
-        "document.createElement()"
+        "document.createElement()",
+        "document.getElementsByClassName()",
+        "document.querySelectorAll()"
       ],
-      "answer": 2,
+      "answer": 0,
       "explanation": "querySelector(\"#id\") や querySelector(\".class\") のように CSS セレクターで指定し、最初の 1 つを返す（なければ null）。querySelectorAll は一致するすべてを NodeList で返す。"
     },
     {
@@ -1432,12 +1301,12 @@
       ],
       "question": "ユーザーが入力した文字列を要素の中に表示するとき、安全のために使うべきプロパティは？",
       "choices": [
-        "innerHTML",
-        "outerHTML",
         "textContent",
-        "id"
+        "id",
+        "outerHTML",
+        "innerHTML"
       ],
-      "answer": 2,
+      "answer": 0,
       "explanation": "textContent は文字列をただのテキストとして表示する。innerHTML や outerHTML は HTML として解釈するので、入力に <script> などが含まれると XSS（クロスサイトスクリプティング）の原因になる。"
     },
     {
@@ -1449,10 +1318,10 @@
       ],
       "question": "フォームの submit イベントで、ページの再読み込み（ブラウザーの既定の動作）を止めるメソッドは？",
       "choices": [
-        "event.stop()",
+        "event.stopPropagation()",
         "event.preventDefault()",
         "event.cancel()",
-        "event.stopPropagation()"
+        "event.stop()"
       ],
       "answer": 1,
       "explanation": "preventDefault() はブラウザーの既定の動作（送信・リンクの移動など）を止める。stopPropagation() はイベントが親要素に伝わる（バブリング）のを止めるもので、役割が違う。"
@@ -1467,17 +1336,6 @@
       "question": "次のコードを実行したときの出力は？\n\nconsole.log(NaN === NaN, Number.isNaN(NaN));",
       "answer": "false true",
       "explanation": "NaN は自分自身とも等しくない唯一の値なので、=== では判定できない。NaN かどうかは Number.isNaN() で調べる。"
-    },
-    {
-      "id": "js-q-float",
-      "type": "qa",
-      "tags": [
-        "ステップ4",
-        "よくある落とし穴"
-      ],
-      "question": "次のコードを実行したときの出力は？\n\nconsole.log(0.1 + 0.2 === 0.3);",
-      "answer": "false",
-      "explanation": "小数は 2 進数で近似して表すため 0.1 + 0.2 は 0.30000000000000004 になる。金額などは整数（円・セント単位）で計算し、比較は差が十分小さいかで判定する。"
     },
     {
       "id": "js-q-reference",
