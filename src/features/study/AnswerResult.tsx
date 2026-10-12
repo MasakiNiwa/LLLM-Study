@@ -98,9 +98,7 @@ export function AnswerResult({ card, answer, check, verdict, onJudged }: AnswerR
       {verdict && verdict !== 'correct' && !judge && check && (
         <p className="opacity-90">正解: {check.expected}</p>
       )}
-      {!verdict && !judge && (
-        <p className="opacity-90">下の正解と見比べて、評価を選んでください</p>
-      )}
+      {!verdict && !judge && <p className="opacity-90">下の正解と見比べて、評価を選んでください</p>}
       {judge && (
         <p>
           <span aria-hidden>{getPersona(personaId, custom).emoji} </span>
