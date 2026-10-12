@@ -30,8 +30,15 @@ export function normalizeAnswer(s: string): string {
       .replace(/\s+/g, ' ')
       // 日本語・中国語などの文字の前後の空白は区別しない（「5 冊」と「5冊」を同じにする）
       .replace(/ ?([\u3040-\u30ff\u3400-\u9fff\uf900-\ufaff〜]) ?/g, '$1')
+      // 記号の前後の空白も区別しない（「(x + 2)(x - 3)」と「(x+2)(x-3)」、「25 π」と「25π」）
+      .replace(/ ?([^\p{L}\p{N}' ]|[πθ]) ?/gu, '$1')
       .trim()
   );
+}
+
+/** 比較用の形。句読点だけの答え（「??」「?.」など）は、句読点を消すと空になるので空白だけを詰める */
+function comparable(s: string): string {
+  return normalizeAnswer(s) || s.normalize('NFKC').replace(/\s+/g, '');
 }
 
 /** 1 つの答えを、候補のどれかと比べる */
@@ -39,10 +46,10 @@ function checkOne(
   input: string,
   candidates: string[],
 ): { verdict: AnswerVerdict; expected: string } {
-  const a = normalizeAnswer(input);
+  const a = comparable(input);
   let best = { verdict: 'wrong' as AnswerVerdict, expected: candidates[0] ?? '', d: Infinity };
   for (const c of candidates) {
-    const b = normalizeAnswer(c);
+    const b = comparable(c);
     if (!b) continue;
     if (a === b) return { verdict: 'correct', expected: c };
     const d = distance(a, b);

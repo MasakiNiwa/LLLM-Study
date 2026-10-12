@@ -13,9 +13,24 @@ describe('normalizeAnswer', () => {
     expect(normalizeAnswer('報告、連絡、相談')).toBe('報告連絡相談');
     expect(normalizeAnswer('look forward to')).toBe('look forward to');
   });
+
+  it('記号の前後の空白は区別しない（数式・コード）', () => {
+    expect(normalizeAnswer('(x + 2)(x - 3)')).toBe(normalizeAnswer('(x+2)(x-3)'));
+    expect(normalizeAnswer('x = 3')).toBe('x=3');
+    expect(normalizeAnswer('[1, 2, 3]')).toBe(normalizeAnswer('[1,2,3]'));
+    expect(normalizeAnswer('25 π')).toBe(normalizeAnswer('25π'));
+    expect(normalizeAnswer('a == b')).toBe('a==b');
+    expect(normalizeAnswer('take care')).toBe('take care');
+  });
 });
 
 describe('checkAnswer', () => {
+  it('句読点だけの答えも判定できる', () => {
+    expect(checkAnswer('??', { accepted: ['??'] }).verdict).toBe('correct');
+    expect(checkAnswer('?.', { accepted: ['??'] }).verdict).not.toBe('correct');
+    expect(checkAnswer('', { accepted: ['??'] }).verdict).toBe('wrong');
+  });
+
   it('完全一致は正解', () => {
     expect(checkAnswer('Take', { accepted: ['take'] })).toMatchObject({
       verdict: 'correct',

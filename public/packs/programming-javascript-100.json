@@ -1176,7 +1176,7 @@
         "async 関数の中（または ES モジュールのトップレベル）"
       ],
       "answer": 3,
-      "explanation": "await は async を付けた関数の中で使う。ES モジュールではトップレベルでも使える（トップレベル await）。async でない関数の中ではSyntaxError になる。"
+      "explanation": "await は async を付けた関数の中で使う。ES モジュールではトップレベルでも使える（トップレベル await）。async でない関数の中では SyntaxError になる。"
     },
     {
       "id": "js-q-catch-reject",

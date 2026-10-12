@@ -1,0 +1,3835 @@
+{
+  "format": "lllm-study-pack",
+  "version": 1,
+  "id": "en-vocab-advanced-150",
+  "title": "上級英単語 150（大学・ビジネス・英検準 1 級）",
+  "description": "大学の講義や論文、ビジネス文書、英検準 1 級・TOEIC 上級でよく出る学術語・ビジネス語 150 語を 3 ステップで学びます。ステップ1（論文・会議の基本語：assess・implement・feasible・ambiguous など）、ステップ2（allocate・mitigate・inevitable・subsequent など）、ステップ3（契約・財務・プロジェクト管理の語：reimburse・depreciation・deliverable・viable など）が各 50 語です。どの語にも発音記号・品詞・意味・例文と訳・よく使う組み合わせを付け、メモには feasible と viable、mitigate と alleviate、comply と obey のような似た語のニュアンスの違いと派生語をまとめました。形式は単語 150 語。基礎から順に学ぶなら「中学英単語 150」（en-vocab-junior-150）→「高校英単語 150（英検 2 級レベル）」（en-vocab-high-150）→ 本教材の順がおすすめです。基本動詞の使い方は「英語の基本動詞 40」（en-core-verbs）で確認できます。",
+  "subject": "english",
+  "language": {
+    "target": "en",
+    "explanation": "ja"
+  },
+  "level": "大学・社会人（CEFR B2）",
+  "tags": [
+    "英単語",
+    "上級",
+    "ビジネス英語",
+    "英検準1級",
+    "アカデミック"
+  ],
+  "author": "LLLM-Study",
+  "license": "MIT",
+  "source": "LLLM-Study オリジナル（AI を利用して作成）",
+  "revision": 1,
+  "items": [
+    {
+      "id": "av-acknowledge",
+      "type": "vocab",
+      "term": "acknowledge",
+      "reading": "/əkˈnɑːlɪdʒ/",
+      "pos": "動詞",
+      "meanings": [
+        "認める",
+        "（受領を）知らせる",
+        "謝意を示す"
+      ],
+      "examples": [
+        {
+          "text": "The company acknowledged its mistake.",
+          "translation": "その会社は誤りを認めた。"
+        }
+      ],
+      "collocations": [
+        "acknowledge receipt of",
+        "acknowledge that 〜"
+      ],
+      "notes": "admit は「（しぶしぶ）非を認める」、acknowledge は「事実として公に認める」中立的な語。ビジネスでは acknowledge receipt（受領を確認する）。名詞は acknowledgment。",
+      "tags": [
+        "ステップ1",
+        "動詞"
+      ]
+    },
+    {
+      "id": "av-anticipate",
+      "type": "vocab",
+      "term": "anticipate",
+      "reading": "/ænˈtɪsɪpeɪt/",
+      "pos": "動詞",
+      "meanings": [
+        "予期する",
+        "見越して備える"
+      ],
+      "examples": [
+        {
+          "text": "We anticipate a rise in demand next year.",
+          "translation": "来年は需要の増加を見込んでいる。"
+        }
+      ],
+      "collocations": [
+        "anticipate problems",
+        "anticipated results"
+      ],
+      "notes": "expect より「先を読んで備える」ニュアンスが強い。後ろは名詞・動名詞・that 節。名詞は anticipation。",
+      "tags": [
+        "ステップ1",
+        "動詞"
+      ]
+    },
+    {
+      "id": "av-assess",
+      "type": "vocab",
+      "term": "assess",
+      "reading": "/əˈses/",
+      "pos": "動詞",
+      "meanings": [
+        "評価する",
+        "査定する"
+      ],
+      "examples": [
+        {
+          "text": "We need to assess the risks before investing.",
+          "translation": "投資する前にリスクを評価する必要がある。"
+        }
+      ],
+      "collocations": [
+        "assess the impact",
+        "risk assessment"
+      ],
+      "notes": "evaluate とほぼ同じだが、assess は状況・リスク・損害の「程度を見積もる」場面で多い。名詞は assessment。",
+      "tags": [
+        "ステップ1",
+        "動詞"
+      ]
+    },
+    {
+      "id": "av-attribute",
+      "type": "vocab",
+      "term": "attribute",
+      "reading": "/əˈtrɪbjuːt/",
+      "pos": "動詞",
+      "meanings": [
+        "（原因を）〜に帰する",
+        "〜のおかげ（せい）だと考える"
+      ],
+      "examples": [
+        {
+          "text": "He attributed his success to hard work.",
+          "translation": "彼は成功を努力のおかげだと考えた。"
+        }
+      ],
+      "collocations": [
+        "attribute A to B",
+        "key attribute"
+      ],
+      "notes": "attribute A to B の形で使う。名詞 attribute /ˈætrɪbjuːt/ は「属性・特性」で、アクセントが前に移る。",
+      "tags": [
+        "ステップ1",
+        "動詞"
+      ]
+    },
+    {
+      "id": "av-collaborate",
+      "type": "vocab",
+      "term": "collaborate",
+      "reading": "/kəˈlæbəreɪt/",
+      "pos": "動詞",
+      "meanings": [
+        "協力する",
+        "共同で取り組む"
+      ],
+      "examples": [
+        {
+          "text": "The two universities collaborated on the research.",
+          "translation": "2つの大学がその研究で協力した。"
+        }
+      ],
+      "collocations": [
+        "collaborate with",
+        "collaborate on"
+      ],
+      "notes": "cooperate は「（互いに）協力する」、collaborate は「一緒に作り上げる（共同制作・共同研究）」に重点がある。名詞は collaboration。",
+      "tags": [
+        "ステップ1",
+        "動詞"
+      ]
+    },
+    {
+      "id": "av-comply",
+      "type": "vocab",
+      "term": "comply",
+      "reading": "/kəmˈplaɪ/",
+      "pos": "動詞",
+      "meanings": [
+        "（規則・要求に）従う"
+      ],
+      "examples": [
+        {
+          "text": "All products must comply with safety standards.",
+          "translation": "すべての製品は安全基準に適合しなければならない。"
+        }
+      ],
+      "collocations": [
+        "comply with",
+        "comply with regulations"
+      ],
+      "notes": "comply with 〜 の形で使う。obey は命令・人に従う、comply は規則・基準・要求に従う。名詞は compliance（コンプライアンス・法令順守）。",
+      "tags": [
+        "ステップ1",
+        "動詞"
+      ]
+    },
+    {
+      "id": "av-emerge",
+      "type": "vocab",
+      "term": "emerge",
+      "reading": "/ɪˈmɜːrdʒ/",
+      "pos": "動詞",
+      "meanings": [
+        "現れる",
+        "明らかになる"
+      ],
+      "examples": [
+        {
+          "text": "New problems emerged during the project.",
+          "translation": "プロジェクトの途中で新たな問題が浮上した。"
+        }
+      ],
+      "collocations": [
+        "emerge from",
+        "It emerged that 〜"
+      ],
+      "notes": "appear より「隠れていたところから出てくる」ニュアンス。形容詞 emerging は「新興の」（emerging markets）。名詞は emergence。",
+      "tags": [
+        "ステップ1",
+        "動詞"
+      ]
+    },
+    {
+      "id": "av-enhance",
+      "type": "vocab",
+      "term": "enhance",
+      "reading": "/ɪnˈhæns/",
+      "pos": "動詞",
+      "meanings": [
+        "高める",
+        "向上させる"
+      ],
+      "examples": [
+        {
+          "text": "The new design enhances the user experience.",
+          "translation": "新しいデザインはユーザー体験を向上させる。"
+        }
+      ],
+      "collocations": [
+        "enhance quality",
+        "enhance performance"
+      ],
+      "notes": "improve は悪い点を直す場合にも使うが、enhance は「すでにあるものの価値・質をさらに高める」。名詞は enhancement。",
+      "tags": [
+        "ステップ1",
+        "動詞"
+      ]
+    },
+    {
+      "id": "av-ensure",
+      "type": "vocab",
+      "term": "ensure",
+      "reading": "/ɪnˈʃʊr/",
+      "pos": "動詞",
+      "meanings": [
+        "確実にする",
+        "保証する"
+      ],
+      "examples": [
+        {
+          "text": "Please ensure that all doors are locked.",
+          "translation": "すべてのドアに鍵がかかっているよう確認してください。"
+        }
+      ],
+      "collocations": [
+        "ensure that 〜",
+        "ensure safety"
+      ],
+      "notes": "make sure のかたい言い方。insure は「保険をかける」、assure は「（人に）請け合う」で assure 人 that 〜 の形。",
+      "tags": [
+        "ステップ1",
+        "動詞"
+      ]
+    },
+    {
+      "id": "av-exceed",
+      "type": "vocab",
+      "term": "exceed",
+      "reading": "/ɪkˈsiːd/",
+      "pos": "動詞",
+      "meanings": [
+        "超える",
+        "上回る"
+      ],
+      "examples": [
+        {
+          "text": "Sales exceeded our expectations.",
+          "translation": "売上は予想を上回った。"
+        }
+      ],
+      "collocations": [
+        "exceed expectations",
+        "exceed the limit"
+      ],
+      "notes": "数量・限度を「超える」。名詞は excess（超過）、形容詞は excessive（過度の）。",
+      "tags": [
+        "ステップ1",
+        "動詞"
+      ]
+    },
+    {
+      "id": "av-facilitate",
+      "type": "vocab",
+      "term": "facilitate",
+      "reading": "/fəˈsɪlɪteɪt/",
+      "pos": "動詞",
+      "meanings": [
+        "促進する",
+        "容易にする"
+      ],
+      "examples": [
+        {
+          "text": "The new system will facilitate communication between departments.",
+          "translation": "新システムは部署間のコミュニケーションを円滑にするだろう。"
+        }
+      ],
+      "collocations": [
+        "facilitate discussion",
+        "facilitate the process"
+      ],
+      "notes": "物事・過程を目的語にとり、人を目的語にしない。会議の進行役 facilitator もこの語から。",
+      "tags": [
+        "ステップ1",
+        "動詞"
+      ]
+    },
+    {
+      "id": "av-implement",
+      "type": "vocab",
+      "term": "implement",
+      "reading": "/ˈɪmplɪment/",
+      "pos": "動詞",
+      "meanings": [
+        "実行する",
+        "実施する",
+        "実装する"
+      ],
+      "examples": [
+        {
+          "text": "The company implemented a new policy.",
+          "translation": "その会社は新しい方針を実施した。"
+        }
+      ],
+      "collocations": [
+        "implement a plan",
+        "implement changes"
+      ],
+      "notes": "決まった計画・方針を「実行に移す」こと。carry out とほぼ同じ。名詞は implementation（実施・実装）。名詞の implement /ˈɪmplɪmənt/ は「道具」。",
+      "tags": [
+        "ステップ1",
+        "動詞"
+      ]
+    },
+    {
+      "id": "av-interpret",
+      "type": "vocab",
+      "term": "interpret",
+      "reading": "/ɪnˈtɜːrprɪt/",
+      "pos": "動詞",
+      "meanings": [
+        "解釈する",
+        "通訳する"
+      ],
+      "examples": [
+        {
+          "text": "How do you interpret these results?",
+          "translation": "この結果をどう解釈しますか。"
+        }
+      ],
+      "collocations": [
+        "interpret A as B",
+        "interpret data"
+      ],
+      "notes": "interpret A as B（A を B と解釈する）。名詞は interpretation、interpreter（通訳者）。translate は主に書かれた文の「翻訳」。",
+      "tags": [
+        "ステップ1",
+        "動詞"
+      ]
+    },
+    {
+      "id": "av-justify",
+      "type": "vocab",
+      "term": "justify",
+      "reading": "/ˈdʒʌstɪfaɪ/",
+      "pos": "動詞",
+      "meanings": [
+        "正当化する",
+        "正当性を示す"
+      ],
+      "examples": [
+        {
+          "text": "How can you justify the cost?",
+          "translation": "その費用の妥当性をどう説明できますか。"
+        }
+      ],
+      "collocations": [
+        "justify the cost",
+        "justify doing"
+      ],
+      "notes": "名詞は justification。The end justifies the means.（目的は手段を正当化する）。",
+      "tags": [
+        "ステップ1",
+        "動詞"
+      ]
+    },
+    {
+      "id": "av-negotiate",
+      "type": "vocab",
+      "term": "negotiate",
+      "reading": "/nɪˈɡoʊʃieɪt/",
+      "pos": "動詞",
+      "meanings": [
+        "交渉する",
+        "交渉して取り決める"
+      ],
+      "examples": [
+        {
+          "text": "We negotiated a better price with the supplier.",
+          "translation": "仕入れ先とより良い価格で話をまとめた。"
+        }
+      ],
+      "collocations": [
+        "negotiate with",
+        "negotiate a deal"
+      ],
+      "notes": "negotiate with 人 は「人と交渉する」、negotiate 物 は「交渉して〜をまとめる」。名詞は negotiation。",
+      "tags": [
+        "ステップ1",
+        "動詞"
+      ]
+    },
+    {
+      "id": "av-perceive",
+      "type": "vocab",
+      "term": "perceive",
+      "reading": "/pərˈsiːv/",
+      "pos": "動詞",
+      "meanings": [
+        "知覚する",
+        "〜と受け止める"
+      ],
+      "examples": [
+        {
+          "text": "Customers perceive the brand as reliable.",
+          "translation": "顧客はそのブランドを信頼できると受け止めている。"
+        }
+      ],
+      "collocations": [
+        "perceive A as B"
+      ],
+      "notes": "実際どうかより「どう見えるか・受け取られるか」に重点がある。名詞は perception（認識・知覚）。receive と同じ -ceive のつづり。",
+      "tags": [
+        "ステップ1",
+        "動詞"
+      ]
+    },
+    {
+      "id": "av-pursue",
+      "type": "vocab",
+      "term": "pursue",
+      "reading": "/pərˈsuː/",
+      "pos": "動詞",
+      "meanings": [
+        "追求する",
+        "追いかける",
+        "（仕事などを）続ける"
+      ],
+      "examples": [
+        {
+          "text": "She left her job to pursue her dream.",
+          "translation": "彼女は夢を追うために仕事を辞めた。"
+        }
+      ],
+      "collocations": [
+        "pursue a career",
+        "pursue a goal"
+      ],
+      "notes": "chase は物理的に追いかける、pursue は目標・方針を長期的に追い求める場面で多い。名詞は pursuit。",
+      "tags": [
+        "ステップ1",
+        "動詞"
+      ]
+    },
+    {
+      "id": "av-retain",
+      "type": "vocab",
+      "term": "retain",
+      "reading": "/rɪˈteɪn/",
+      "pos": "動詞",
+      "meanings": [
+        "保持する",
+        "（人材を）引き留める"
+      ],
+      "examples": [
+        {
+          "text": "It is hard to retain skilled workers.",
+          "translation": "熟練した労働者を引き留めるのは難しい。"
+        }
+      ],
+      "collocations": [
+        "retain customers",
+        "retain information"
+      ],
+      "notes": "keep のかたい語。名詞 retention（保持・定着）は「顧客・社員の維持」の文脈でよく使う。",
+      "tags": [
+        "ステップ1",
+        "動詞"
+      ]
+    },
+    {
+      "id": "av-verify",
+      "type": "vocab",
+      "term": "verify",
+      "reading": "/ˈverɪfaɪ/",
+      "pos": "動詞",
+      "meanings": [
+        "検証する",
+        "確認する"
+      ],
+      "examples": [
+        {
+          "text": "Please verify your email address.",
+          "translation": "メールアドレスを確認してください。"
+        }
+      ],
+      "collocations": [
+        "verify identity",
+        "verify the data"
+      ],
+      "notes": "check より「証拠で正しいことを確かめる」。confirm は「（予定などを）確定させる・裏付ける」。名詞は verification。",
+      "tags": [
+        "ステップ1",
+        "動詞"
+      ]
+    },
+    {
+      "id": "av-consensus",
+      "type": "vocab",
+      "term": "consensus",
+      "reading": "/kənˈsensəs/",
+      "pos": "名詞",
+      "meanings": [
+        "合意",
+        "総意"
+      ],
+      "examples": [
+        {
+          "text": "There is a growing consensus that action is needed.",
+          "translation": "対策が必要だという合意が広がっている。"
+        }
+      ],
+      "collocations": [
+        "reach a consensus",
+        "general consensus"
+      ],
+      "notes": "agreement より「大多数・全員の一致した意見」。reach (a) consensus で「合意に達する」。",
+      "tags": [
+        "ステップ1",
+        "名詞"
+      ]
+    },
+    {
+      "id": "av-controversy",
+      "type": "vocab",
+      "term": "controversy",
+      "reading": "/ˈkɑːntrəvɜːrsi/",
+      "pos": "名詞",
+      "meanings": [
+        "論争",
+        "物議"
+      ],
+      "examples": [
+        {
+          "text": "The decision caused a lot of controversy.",
+          "translation": "その決定は大きな物議を醸した。"
+        }
+      ],
+      "collocations": [
+        "cause controversy",
+        "controversy over"
+      ],
+      "notes": "形容詞は controversial（議論を呼ぶ）。dispute は当事者同士の具体的な争い、controversy は世間を巻き込む論争。",
+      "tags": [
+        "ステップ1",
+        "名詞"
+      ]
+    },
+    {
+      "id": "av-hypothesis",
+      "type": "vocab",
+      "term": "hypothesis",
+      "reading": "/haɪˈpɑːθəsɪs/",
+      "pos": "名詞",
+      "meanings": [
+        "仮説"
+      ],
+      "examples": [
+        {
+          "text": "The data supports our hypothesis.",
+          "translation": "データは私たちの仮説を裏付けている。"
+        }
+      ],
+      "collocations": [
+        "test a hypothesis",
+        "support a hypothesis"
+      ],
+      "forms": [
+        "hypotheses"
+      ],
+      "notes": "複数形は hypotheses。形容詞は hypothetical（仮定の）。theory は「検証を経た体系的な理論」。",
+      "tags": [
+        "ステップ1",
+        "名詞"
+      ]
+    },
+    {
+      "id": "av-incentive",
+      "type": "vocab",
+      "term": "incentive",
+      "reading": "/ɪnˈsentɪv/",
+      "pos": "名詞",
+      "meanings": [
+        "動機づけ",
+        "奨励策"
+      ],
+      "examples": [
+        {
+          "text": "The government offers tax incentives to small businesses.",
+          "translation": "政府は中小企業に税制上の優遇措置を設けている。"
+        }
+      ],
+      "collocations": [
+        "tax incentive",
+        "incentive to do"
+      ],
+      "notes": "motivation は内面の「やる気」、incentive はやる気を起こさせる外からの「誘因・報酬」。",
+      "tags": [
+        "ステップ1",
+        "名詞"
+      ]
+    },
+    {
+      "id": "av-infrastructure",
+      "type": "vocab",
+      "term": "infrastructure",
+      "reading": "/ˈɪnfrəstrʌktʃər/",
+      "pos": "名詞",
+      "meanings": [
+        "インフラ",
+        "社会基盤"
+      ],
+      "examples": [
+        {
+          "text": "The country needs to invest in infrastructure.",
+          "translation": "その国はインフラに投資する必要がある。"
+        }
+      ],
+      "collocations": [
+        "transport infrastructure",
+        "IT infrastructure"
+      ],
+      "notes": "道路・電力・通信などの基盤。数えられない名詞として使うことが多い。",
+      "tags": [
+        "ステップ1",
+        "名詞"
+      ]
+    },
+    {
+      "id": "av-initiative",
+      "type": "vocab",
+      "term": "initiative",
+      "reading": "/ɪˈnɪʃətɪv/",
+      "pos": "名詞",
+      "meanings": [
+        "主導権・自発性",
+        "新たな取り組み"
+      ],
+      "examples": [
+        {
+          "text": "She took the initiative and organized the event.",
+          "translation": "彼女は率先してそのイベントを企画した。"
+        }
+      ],
+      "collocations": [
+        "take the initiative",
+        "on one's own initiative"
+      ],
+      "notes": "「自ら進んで動く力」と「（組織の）新しい施策」の2つの意味がある。動詞は initiate（始める）。",
+      "tags": [
+        "ステップ1",
+        "名詞"
+      ]
+    },
+    {
+      "id": "av-outcome",
+      "type": "vocab",
+      "term": "outcome",
+      "reading": "/ˈaʊtkʌm/",
+      "pos": "名詞",
+      "meanings": [
+        "結果",
+        "成果"
+      ],
+      "examples": [
+        {
+          "text": "We are waiting for the outcome of the negotiations.",
+          "translation": "交渉の結果を待っている。"
+        }
+      ],
+      "collocations": [
+        "positive outcome",
+        "outcome of"
+      ],
+      "notes": "result とほぼ同じだが、outcome は「（いくつかの可能性のうち）最終的にどうなったか」に重点がある。",
+      "tags": [
+        "ステップ1",
+        "名詞"
+      ]
+    },
+    {
+      "id": "av-prospect",
+      "type": "vocab",
+      "term": "prospect",
+      "reading": "/ˈprɑːspekt/",
+      "pos": "名詞",
+      "meanings": [
+        "見通し",
+        "見込み"
+      ],
+      "examples": [
+        {
+          "text": "The prospects for the economy are uncertain.",
+          "translation": "経済の見通しは不透明だ。"
+        }
+      ],
+      "collocations": [
+        "prospects for",
+        "job prospects"
+      ],
+      "notes": "「将来の見込み」の意味ではふつう複数形。営業では「見込み客」。形容詞は prospective（見込みのある・将来の）。",
+      "tags": [
+        "ステップ1",
+        "名詞"
+      ]
+    },
+    {
+      "id": "av-revenue",
+      "type": "vocab",
+      "term": "revenue",
+      "reading": "/ˈrevənuː/",
+      "pos": "名詞",
+      "meanings": [
+        "収益",
+        "売上高",
+        "歳入"
+      ],
+      "examples": [
+        {
+          "text": "The company's revenue grew by 10% last year.",
+          "translation": "その会社の売上高は昨年10%増えた。"
+        }
+      ],
+      "collocations": [
+        "tax revenue",
+        "revenue growth"
+      ],
+      "notes": "revenue は「収入の総額」、profit は経費を引いた「利益」。決算の話では区別が大切。",
+      "tags": [
+        "ステップ1",
+        "名詞"
+      ]
+    },
+    {
+      "id": "av-stakeholder",
+      "type": "vocab",
+      "term": "stakeholder",
+      "reading": "/ˈsteɪkhoʊldər/",
+      "pos": "名詞",
+      "meanings": [
+        "利害関係者"
+      ],
+      "examples": [
+        {
+          "text": "We need to consult all stakeholders.",
+          "translation": "すべての利害関係者に相談する必要がある。"
+        }
+      ],
+      "collocations": [
+        "key stakeholders"
+      ],
+      "notes": "株主（shareholder）だけでなく、顧客・従業員・地域社会など利害に関わる人すべてを指す。",
+      "tags": [
+        "ステップ1",
+        "名詞"
+      ]
+    },
+    {
+      "id": "av-obligation",
+      "type": "vocab",
+      "term": "obligation",
+      "reading": "/ˌɑːblɪˈɡeɪʃən/",
+      "pos": "名詞",
+      "meanings": [
+        "義務"
+      ],
+      "examples": [
+        {
+          "text": "You are under no obligation to buy anything.",
+          "translation": "何かを購入する義務はございません。"
+        }
+      ],
+      "collocations": [
+        "under no obligation",
+        "legal obligation"
+      ],
+      "notes": "動詞 oblige（be obliged to do で「〜せざるをえない」）、形容詞 obligatory（義務的な）。duty は道徳的・職務上の「務め」。",
+      "tags": [
+        "ステップ1",
+        "名詞"
+      ]
+    },
+    {
+      "id": "av-dispute",
+      "type": "vocab",
+      "term": "dispute",
+      "reading": "/dɪˈspjuːt/",
+      "pos": "名詞／動詞",
+      "meanings": [
+        "紛争",
+        "論争"
+      ],
+      "examples": [
+        {
+          "text": "The two companies are in a dispute over the contract.",
+          "translation": "2社は契約をめぐって争っている。"
+        }
+      ],
+      "collocations": [
+        "in dispute",
+        "settle a dispute",
+        "labor dispute"
+      ],
+      "notes": "settle a dispute で「紛争を解決する」。動詞では「（事実などに）異議を唱える」。",
+      "tags": [
+        "ステップ1",
+        "名詞"
+      ]
+    },
+    {
+      "id": "av-bias",
+      "type": "vocab",
+      "term": "bias",
+      "reading": "/ˈbaɪəs/",
+      "pos": "名詞",
+      "meanings": [
+        "偏見",
+        "偏り"
+      ],
+      "examples": [
+        {
+          "text": "The study was criticized for its bias.",
+          "translation": "その研究は偏りがあると批判された。"
+        }
+      ],
+      "collocations": [
+        "bias against",
+        "unconscious bias"
+      ],
+      "notes": "prejudice は人に対する「偏見（悪感情）」、bias はデータや判断の「偏り」にも使える広い語。形容詞は biased。",
+      "tags": [
+        "ステップ1",
+        "名詞"
+      ]
+    },
+    {
+      "id": "av-compromise",
+      "type": "vocab",
+      "term": "compromise",
+      "reading": "/ˈkɑːmprəmaɪz/",
+      "pos": "名詞／動詞",
+      "meanings": [
+        "妥協（案）",
+        "妥協する"
+      ],
+      "examples": [
+        {
+          "text": "Both sides reached a compromise.",
+          "translation": "双方が妥協に至った。"
+        }
+      ],
+      "collocations": [
+        "reach a compromise",
+        "compromise on"
+      ],
+      "notes": "動詞では「（安全・信用などを）損なう」という否定的な意味もある（compromise security）。",
+      "tags": [
+        "ステップ1",
+        "名詞"
+      ]
+    },
+    {
+      "id": "av-deficit",
+      "type": "vocab",
+      "term": "deficit",
+      "reading": "/ˈdefɪsɪt/",
+      "pos": "名詞",
+      "meanings": [
+        "赤字",
+        "不足"
+      ],
+      "examples": [
+        {
+          "text": "The country has a large budget deficit.",
+          "translation": "その国は多額の財政赤字を抱えている。"
+        }
+      ],
+      "collocations": [
+        "budget deficit",
+        "trade deficit"
+      ],
+      "notes": "反対は surplus（黒字・余剰）。shortage は「（物の）不足」、deficit は主に「金額の不足・赤字」。",
+      "tags": [
+        "ステップ1",
+        "名詞"
+      ]
+    },
+    {
+      "id": "av-notion",
+      "type": "vocab",
+      "term": "notion",
+      "reading": "/ˈnoʊʃən/",
+      "pos": "名詞",
+      "meanings": [
+        "考え",
+        "概念"
+      ],
+      "examples": [
+        {
+          "text": "I reject the notion that money buys happiness.",
+          "translation": "お金で幸福が買えるという考えには賛成できない。"
+        }
+      ],
+      "collocations": [
+        "the notion that 〜"
+      ],
+      "notes": "idea よりかたく、しばしば「（漠然とした・疑わしい）考え」に使う。concept はより体系的な「概念」。",
+      "tags": [
+        "ステップ1",
+        "名詞"
+      ]
+    },
+    {
+      "id": "av-criterion",
+      "type": "vocab",
+      "term": "criterion",
+      "reading": "/kraɪˈtɪriən/",
+      "pos": "名詞",
+      "meanings": [
+        "（判断の）基準"
+      ],
+      "examples": [
+        {
+          "text": "Price is not the only criterion for choosing a supplier.",
+          "translation": "価格だけが仕入れ先を選ぶ基準ではない。"
+        }
+      ],
+      "collocations": [
+        "selection criteria",
+        "meet the criteria"
+      ],
+      "forms": [
+        "criteria"
+      ],
+      "notes": "複数形 criteria のほうがよく使われる。standard は「達成すべき水準」、criterion は「判断・選考のものさし」。",
+      "tags": [
+        "ステップ1",
+        "名詞"
+      ]
+    },
+    {
+      "id": "av-adequate",
+      "type": "vocab",
+      "term": "adequate",
+      "reading": "/ˈædɪkwət/",
+      "pos": "形容詞",
+      "meanings": [
+        "十分な",
+        "適切な"
+      ],
+      "examples": [
+        {
+          "text": "Make sure you get adequate sleep.",
+          "translation": "十分な睡眠をとるようにしなさい。"
+        }
+      ],
+      "collocations": [
+        "adequate supply",
+        "adequate for"
+      ],
+      "notes": "sufficient に近いが、adequate は「（最低限の）必要を満たしている」で、ほめ言葉としては控えめ。反対は inadequate。",
+      "tags": [
+        "ステップ1",
+        "形容詞"
+      ]
+    },
+    {
+      "id": "av-ambiguous",
+      "type": "vocab",
+      "term": "ambiguous",
+      "reading": "/æmˈbɪɡjuəs/",
+      "pos": "形容詞",
+      "meanings": [
+        "あいまいな",
+        "2通り以上に解釈できる"
+      ],
+      "examples": [
+        {
+          "text": "The instructions were ambiguous.",
+          "translation": "指示があいまいだった。"
+        }
+      ],
+      "collocations": [
+        "ambiguous wording"
+      ],
+      "notes": "vague は「ぼんやりして不明確」、ambiguous は「複数の意味に取れる」。名詞は ambiguity。",
+      "tags": [
+        "ステップ1",
+        "形容詞"
+      ]
+    },
+    {
+      "id": "av-comprehensive",
+      "type": "vocab",
+      "term": "comprehensive",
+      "reading": "/ˌkɑːmprɪˈhensɪv/",
+      "pos": "形容詞",
+      "meanings": [
+        "包括的な",
+        "総合的な"
+      ],
+      "examples": [
+        {
+          "text": "The report provides a comprehensive overview.",
+          "translation": "その報告書は包括的な概要を示している。"
+        }
+      ],
+      "collocations": [
+        "comprehensive review",
+        "comprehensive insurance"
+      ],
+      "notes": "「漏れなく全体を扱う」こと。comprehensible（理解できる）とは意味が違う。",
+      "tags": [
+        "ステップ1",
+        "形容詞"
+      ]
+    },
+    {
+      "id": "av-crucial",
+      "type": "vocab",
+      "term": "crucial",
+      "reading": "/ˈkruːʃəl/",
+      "pos": "形容詞",
+      "meanings": [
+        "決定的に重要な"
+      ],
+      "examples": [
+        {
+          "text": "Timing is crucial in business.",
+          "translation": "ビジネスではタイミングが極めて重要だ。"
+        }
+      ],
+      "collocations": [
+        "crucial role",
+        "crucial to"
+      ],
+      "notes": "important より強く「結果を左右するほど重要な」。critical・vital とほぼ同じ強さ。",
+      "tags": [
+        "ステップ1",
+        "形容詞"
+      ]
+    },
+    {
+      "id": "av-diverse",
+      "type": "vocab",
+      "term": "diverse",
+      "reading": "/daɪˈvɜːrs/",
+      "pos": "形容詞",
+      "meanings": [
+        "多様な"
+      ],
+      "examples": [
+        {
+          "text": "The city has a diverse population.",
+          "translation": "その都市には多様な人々が暮らしている。"
+        }
+      ],
+      "collocations": [
+        "diverse backgrounds",
+        "culturally diverse"
+      ],
+      "notes": "various は「いろいろな種類がある」、diverse は「互いに大きく異なる」点を強調する。名詞は diversity（多様性）。",
+      "tags": [
+        "ステップ1",
+        "形容詞"
+      ]
+    },
+    {
+      "id": "av-explicit",
+      "type": "vocab",
+      "term": "explicit",
+      "reading": "/ɪkˈsplɪsɪt/",
+      "pos": "形容詞",
+      "meanings": [
+        "明確な",
+        "明示的な"
+      ],
+      "examples": [
+        {
+          "text": "The rules must be explicit.",
+          "translation": "規則は明確でなければならない。"
+        }
+      ],
+      "collocations": [
+        "explicit instructions",
+        "make explicit"
+      ],
+      "notes": "clear より「はっきり言葉で示された」点を強調する。反対は implicit（暗黙の）。",
+      "tags": [
+        "ステップ1",
+        "形容詞"
+      ]
+    },
+    {
+      "id": "av-feasible",
+      "type": "vocab",
+      "term": "feasible",
+      "reading": "/ˈfiːzəbəl/",
+      "pos": "形容詞",
+      "meanings": [
+        "実行可能な"
+      ],
+      "examples": [
+        {
+          "text": "Is it feasible to finish the project by March?",
+          "translation": "3月までにプロジェクトを終えることは実現可能ですか。"
+        }
+      ],
+      "collocations": [
+        "economically feasible",
+        "feasibility study"
+      ],
+      "notes": "possible が「起こりうる・可能な」と広いのに対し、feasible は「現実的に実行できる」。名詞 feasibility（feasibility study＝実現可能性調査）。",
+      "tags": [
+        "ステップ1",
+        "形容詞"
+      ]
+    },
+    {
+      "id": "av-fundamental",
+      "type": "vocab",
+      "term": "fundamental",
+      "reading": "/ˌfʌndəˈmentəl/",
+      "pos": "形容詞",
+      "meanings": [
+        "基本的な",
+        "根本的な"
+      ],
+      "examples": [
+        {
+          "text": "There is a fundamental difference between the two plans.",
+          "translation": "2つの計画には根本的な違いがある。"
+        }
+      ],
+      "collocations": [
+        "fundamental change",
+        "fundamental rights"
+      ],
+      "notes": "basic より「根本からの・本質的な」。名詞 fundamentals は「基礎・基本原理」。",
+      "tags": [
+        "ステップ1",
+        "形容詞"
+      ]
+    },
+    {
+      "id": "av-substantial",
+      "type": "vocab",
+      "term": "substantial",
+      "reading": "/səbˈstænʃəl/",
+      "pos": "形容詞",
+      "meanings": [
+        "かなりの",
+        "相当な"
+      ],
+      "examples": [
+        {
+          "text": "The company made a substantial profit.",
+          "translation": "その会社は相当な利益をあげた。"
+        }
+      ],
+      "collocations": [
+        "substantial amount",
+        "substantial increase"
+      ],
+      "notes": "considerable とほぼ同じ。substantive（実質的な）と区別する。",
+      "tags": [
+        "ステップ1",
+        "形容詞"
+      ]
+    },
+    {
+      "id": "av-sufficient",
+      "type": "vocab",
+      "term": "sufficient",
+      "reading": "/səˈfɪʃənt/",
+      "pos": "形容詞",
+      "meanings": [
+        "十分な"
+      ],
+      "examples": [
+        {
+          "text": "We don't have sufficient data to draw conclusions.",
+          "translation": "結論を出すのに十分なデータがない。"
+        }
+      ],
+      "collocations": [
+        "sufficient evidence",
+        "sufficient for"
+      ],
+      "notes": "enough のかたい言い方。反対は insufficient。self-sufficient は「自給自足の」。",
+      "tags": [
+        "ステップ1",
+        "形容詞"
+      ]
+    },
+    {
+      "id": "av-whereas",
+      "type": "vocab",
+      "term": "whereas",
+      "reading": "/werˈæz/",
+      "pos": "接続詞",
+      "meanings": [
+        "〜であるのに対して"
+      ],
+      "examples": [
+        {
+          "text": "Some people like summer, whereas others prefer winter.",
+          "translation": "夏が好きな人もいれば、冬のほうが好きな人もいる。"
+        }
+      ],
+      "notes": "2つのことを対比する接続詞。while とほぼ同じだが、よりかたい書き言葉。",
+      "tags": [
+        "ステップ1",
+        "副詞・接続詞"
+      ]
+    },
+    {
+      "id": "av-nonetheless",
+      "type": "vocab",
+      "term": "nonetheless",
+      "reading": "/ˌnʌnðəˈles/",
+      "pos": "副詞",
+      "meanings": [
+        "それにもかかわらず"
+      ],
+      "examples": [
+        {
+          "text": "The plan was risky. Nonetheless, they went ahead.",
+          "translation": "その計画は危険だった。それでも彼らは実行した。"
+        }
+      ],
+      "notes": "nevertheless とほぼ同じ。however より「それでもなお」の意味が強い。副詞なので文と文はピリオドかセミコロンで区切る。",
+      "tags": [
+        "ステップ1",
+        "副詞・接続詞"
+      ]
+    },
+    {
+      "id": "av-consequently",
+      "type": "vocab",
+      "term": "consequently",
+      "reading": "/ˈkɑːnsəkwentli/",
+      "pos": "副詞",
+      "meanings": [
+        "その結果"
+      ],
+      "examples": [
+        {
+          "text": "He missed the train and consequently arrived late.",
+          "translation": "彼は電車に乗り遅れ、その結果遅刻した。"
+        }
+      ],
+      "notes": "as a result とほぼ同じ。therefore は「論理的に、ゆえに」、consequently は「結果として」。名詞は consequence（（重大な）結果）。",
+      "tags": [
+        "ステップ1",
+        "副詞・接続詞"
+      ]
+    },
+    {
+      "id": "av-respectively",
+      "type": "vocab",
+      "term": "respectively",
+      "reading": "/rɪˈspektɪvli/",
+      "pos": "副詞",
+      "meanings": [
+        "それぞれ"
+      ],
+      "examples": [
+        {
+          "text": "Tom and Ann are 20 and 25 years old, respectively.",
+          "translation": "トムとアンはそれぞれ20歳と25歳だ。"
+        }
+      ],
+      "notes": "前に挙げた順番どおりに対応させるときに使う。respectfully（丁重に）と混同しない。",
+      "tags": [
+        "ステップ1",
+        "副詞・接続詞"
+      ]
+    },
+    {
+      "id": "av-allocate",
+      "type": "vocab",
+      "term": "allocate",
+      "reading": "/ˈæləkeɪt/",
+      "pos": "動詞",
+      "meanings": [
+        "割り当てる",
+        "配分する"
+      ],
+      "examples": [
+        {
+          "text": "We allocated more budget to marketing.",
+          "translation": "マーケティングにより多くの予算を割り当てた。"
+        }
+      ],
+      "collocations": [
+        "allocate A to B",
+        "allocate resources"
+      ],
+      "notes": "資金・時間・人員を目的に応じて「配分する」。assign は人に仕事・役割を「割り当てる」。名詞は allocation。",
+      "tags": [
+        "ステップ2",
+        "動詞"
+      ]
+    },
+    {
+      "id": "av-advocate",
+      "type": "vocab",
+      "term": "advocate",
+      "reading": "/ˈædvəkeɪt/",
+      "pos": "動詞／名詞",
+      "meanings": [
+        "提唱する",
+        "擁護する"
+      ],
+      "examples": [
+        {
+          "text": "She advocates equal pay for women.",
+          "translation": "彼女は女性の同一賃金を主張している。"
+        }
+      ],
+      "collocations": [
+        "advocate for",
+        "strong advocate of"
+      ],
+      "notes": "動詞は前置詞なしで目的語をとる（advocate reform）。名詞「支持者・擁護者」は /ˈædvəkət/ と語尾の発音が変わる。support より「公に強く主張する」。",
+      "tags": [
+        "ステップ2",
+        "動詞"
+      ]
+    },
+    {
+      "id": "av-compensate",
+      "type": "vocab",
+      "term": "compensate",
+      "reading": "/ˈkɑːmpənseɪt/",
+      "pos": "動詞",
+      "meanings": [
+        "補償する",
+        "埋め合わせる"
+      ],
+      "examples": [
+        {
+          "text": "The airline compensated passengers for the delay.",
+          "translation": "航空会社は遅延について乗客に補償した。"
+        }
+      ],
+      "collocations": [
+        "compensate for",
+        "compensate 人 for 物"
+      ],
+      "notes": "compensate for 〜 で「〜を埋め合わせる」。名詞は compensation（補償・報酬）。",
+      "tags": [
+        "ステップ2",
+        "動詞"
+      ]
+    },
+    {
+      "id": "av-comprise",
+      "type": "vocab",
+      "term": "comprise",
+      "reading": "/kəmˈpraɪz/",
+      "pos": "動詞",
+      "meanings": [
+        "〜から成る",
+        "構成する"
+      ],
+      "examples": [
+        {
+          "text": "The committee comprises ten members.",
+          "translation": "委員会は10人のメンバーで構成されている。"
+        }
+      ],
+      "collocations": [
+        "be comprised of"
+      ],
+      "notes": "A comprises B（A は B から成る）＝ A consists of B。be comprised of も広く使われるが誤用とみなす人もいるので、改まった文では comprise / consist of が無難。",
+      "tags": [
+        "ステップ2",
+        "動詞"
+      ]
+    },
+    {
+      "id": "av-constrain",
+      "type": "vocab",
+      "term": "constrain",
+      "reading": "/kənˈstreɪn/",
+      "pos": "動詞",
+      "meanings": [
+        "制約する"
+      ],
+      "examples": [
+        {
+          "text": "Our growth is constrained by a lack of staff.",
+          "translation": "人手不足が私たちの成長を制約している。"
+        }
+      ],
+      "collocations": [
+        "be constrained by"
+      ],
+      "notes": "restrict は「（規則で）制限する」、constrain は「（状況・資源の不足が）自由を妨げる」。名詞は constraint（制約）。",
+      "tags": [
+        "ステップ2",
+        "動詞"
+      ]
+    },
+    {
+      "id": "av-deteriorate",
+      "type": "vocab",
+      "term": "deteriorate",
+      "reading": "/dɪˈtɪriəreɪt/",
+      "pos": "動詞",
+      "meanings": [
+        "悪化する"
+      ],
+      "examples": [
+        {
+          "text": "His health deteriorated rapidly.",
+          "translation": "彼の健康は急速に悪化した。"
+        }
+      ],
+      "collocations": [
+        "deteriorate rapidly"
+      ],
+      "notes": "get worse のかたい語で、主に自動詞として使う。名詞は deterioration。反対は improve。",
+      "tags": [
+        "ステップ2",
+        "動詞"
+      ]
+    },
+    {
+      "id": "av-diminish",
+      "type": "vocab",
+      "term": "diminish",
+      "reading": "/dɪˈmɪnɪʃ/",
+      "pos": "動詞",
+      "meanings": [
+        "減少する",
+        "減らす"
+      ],
+      "examples": [
+        {
+          "text": "The risk has diminished over time.",
+          "translation": "時がたつにつれてリスクは小さくなった。"
+        }
+      ],
+      "collocations": [
+        "diminishing returns"
+      ],
+      "notes": "decrease より「（大きさ・重要性が）次第に小さくなる」。diminishing returns は「収穫逓減」。",
+      "tags": [
+        "ステップ2",
+        "動詞"
+      ]
+    },
+    {
+      "id": "av-disrupt",
+      "type": "vocab",
+      "term": "disrupt",
+      "reading": "/dɪsˈrʌpt/",
+      "pos": "動詞",
+      "meanings": [
+        "混乱させる",
+        "中断させる"
+      ],
+      "examples": [
+        {
+          "text": "The storm disrupted train services.",
+          "translation": "嵐で鉄道の運行が乱れた。"
+        }
+      ],
+      "collocations": [
+        "disrupt services",
+        "disrupt the market"
+      ],
+      "notes": "interrupt は「（話・作業を）一時的に遮る」、disrupt は「（仕組み・秩序を）乱す」。名詞 disruption、形容詞 disruptive（disruptive innovation＝破壊的イノベーション）。",
+      "tags": [
+        "ステップ2",
+        "動詞"
+      ]
+    },
+    {
+      "id": "av-eliminate",
+      "type": "vocab",
+      "term": "eliminate",
+      "reading": "/ɪˈlɪmɪneɪt/",
+      "pos": "動詞",
+      "meanings": [
+        "取り除く",
+        "排除する",
+        "敗退させる"
+      ],
+      "examples": [
+        {
+          "text": "We aim to eliminate waste in the process.",
+          "translation": "工程のむだをなくすことを目指している。"
+        }
+      ],
+      "collocations": [
+        "eliminate the need for",
+        "be eliminated from"
+      ],
+      "notes": "remove より「完全になくす」。スポーツでは「敗退させる」。名詞は elimination。",
+      "tags": [
+        "ステップ2",
+        "動詞"
+      ]
+    },
+    {
+      "id": "av-endorse",
+      "type": "vocab",
+      "term": "endorse",
+      "reading": "/ɪnˈdɔːrs/",
+      "pos": "動詞",
+      "meanings": [
+        "支持する",
+        "承認する",
+        "（商品を）推奨する"
+      ],
+      "examples": [
+        {
+          "text": "The plan was endorsed by the board.",
+          "translation": "その計画は取締役会の承認を得た。"
+        }
+      ],
+      "collocations": [
+        "endorse a candidate",
+        "endorse a product"
+      ],
+      "notes": "support より「公式に支持・承認する」。有名人が広告で商品を推薦する意味でも使う。名詞は endorsement。",
+      "tags": [
+        "ステップ2",
+        "動詞"
+      ]
+    },
+    {
+      "id": "av-fluctuate",
+      "type": "vocab",
+      "term": "fluctuate",
+      "reading": "/ˈflʌktʃueɪt/",
+      "pos": "動詞",
+      "meanings": [
+        "変動する"
+      ],
+      "examples": [
+        {
+          "text": "Prices fluctuate depending on demand.",
+          "translation": "価格は需要に応じて変動する。"
+        }
+      ],
+      "collocations": [
+        "fluctuate between A and B"
+      ],
+      "notes": "上下に不規則に揺れ動くこと。vary は「（条件によって）異なる」。名詞は fluctuation。",
+      "tags": [
+        "ステップ2",
+        "動詞"
+      ]
+    },
+    {
+      "id": "av-incorporate",
+      "type": "vocab",
+      "term": "incorporate",
+      "reading": "/ɪnˈkɔːrpəreɪt/",
+      "pos": "動詞",
+      "meanings": [
+        "組み込む",
+        "取り入れる",
+        "法人化する"
+      ],
+      "examples": [
+        {
+          "text": "We incorporated customer feedback into the design.",
+          "translation": "顧客の意見をデザインに取り入れた。"
+        }
+      ],
+      "collocations": [
+        "incorporate A into B"
+      ],
+      "notes": "include は「含んでいる」状態、incorporate は「一部として組み込む」行為。社名の Inc. は incorporated（法人化された）の略。",
+      "tags": [
+        "ステップ2",
+        "動詞"
+      ]
+    },
+    {
+      "id": "av-mitigate",
+      "type": "vocab",
+      "term": "mitigate",
+      "reading": "/ˈmɪtɪɡeɪt/",
+      "pos": "動詞",
+      "meanings": [
+        "緩和する",
+        "軽減する"
+      ],
+      "examples": [
+        {
+          "text": "We took steps to mitigate the risk.",
+          "translation": "リスクを軽減するための措置をとった。"
+        }
+      ],
+      "collocations": [
+        "mitigate risks",
+        "mitigate the impact"
+      ],
+      "notes": "悪影響を完全にはなくせないが「やわらげる・抑える」。reduce より専門的。苦痛を和らげる場面では alleviate が多い。名詞は mitigation。",
+      "tags": [
+        "ステップ2",
+        "動詞"
+      ]
+    },
+    {
+      "id": "av-precede",
+      "type": "vocab",
+      "term": "precede",
+      "reading": "/prɪˈsiːd/",
+      "pos": "動詞",
+      "meanings": [
+        "〜に先行する",
+        "〜より前に起こる"
+      ],
+      "examples": [
+        {
+          "text": "The meeting was preceded by a short presentation.",
+          "translation": "会議の前に短いプレゼンテーションがあった。"
+        }
+      ],
+      "collocations": [
+        "preceding year"
+      ],
+      "notes": "形容詞 preceding（前の）、名詞 precedent（前例）。つづりの似た proceed（進む）と区別。",
+      "tags": [
+        "ステップ2",
+        "動詞"
+      ]
+    },
+    {
+      "id": "av-prevail",
+      "type": "vocab",
+      "term": "prevail",
+      "reading": "/prɪˈveɪl/",
+      "pos": "動詞",
+      "meanings": [
+        "広く行き渡る",
+        "勝つ"
+      ],
+      "examples": [
+        {
+          "text": "This view still prevails among experts.",
+          "translation": "この見方は今も専門家の間で優勢だ。"
+        }
+      ],
+      "collocations": [
+        "prevail over",
+        "prevailing conditions"
+      ],
+      "notes": "形容詞 prevailing（一般的な・優勢な）、prevalent（広まっている）。prevail over 〜 は「〜に打ち勝つ」。",
+      "tags": [
+        "ステップ2",
+        "動詞"
+      ]
+    },
+    {
+      "id": "av-reconcile",
+      "type": "vocab",
+      "term": "reconcile",
+      "reading": "/ˈrekənsaɪl/",
+      "pos": "動詞",
+      "meanings": [
+        "両立させる",
+        "和解させる",
+        "（帳簿を）照合する"
+      ],
+      "examples": [
+        {
+          "text": "It is hard to reconcile work and family life.",
+          "translation": "仕事と家庭生活を両立させるのは難しい。"
+        }
+      ],
+      "collocations": [
+        "reconcile A with B",
+        "be reconciled with"
+      ],
+      "notes": "対立するものを「折り合わせる」。経理では「（帳簿の）数字を照合する」。名詞は reconciliation。",
+      "tags": [
+        "ステップ2",
+        "動詞"
+      ]
+    },
+    {
+      "id": "av-reinforce",
+      "type": "vocab",
+      "term": "reinforce",
+      "reading": "/ˌriːɪnˈfɔːrs/",
+      "pos": "動詞",
+      "meanings": [
+        "強化する",
+        "補強する",
+        "裏付ける"
+      ],
+      "examples": [
+        {
+          "text": "The results reinforce our original theory.",
+          "translation": "その結果は当初の理論を裏付けている。"
+        }
+      ],
+      "collocations": [
+        "reinforce the idea",
+        "reinforced concrete"
+      ],
+      "notes": "strengthen とほぼ同じだが、「考え・印象・構造物をさらに補強する」場面で多い。名詞は reinforcement。",
+      "tags": [
+        "ステップ2",
+        "動詞"
+      ]
+    },
+    {
+      "id": "av-undermine",
+      "type": "vocab",
+      "term": "undermine",
+      "reading": "/ˌʌndərˈmaɪn/",
+      "pos": "動詞",
+      "meanings": [
+        "徐々に損なう",
+        "弱体化させる"
+      ],
+      "examples": [
+        {
+          "text": "Constant criticism can undermine confidence.",
+          "translation": "絶えず批判されると自信が損なわれかねない。"
+        }
+      ],
+      "collocations": [
+        "undermine trust",
+        "undermine efforts"
+      ],
+      "notes": "under（下）+ mine（掘る）で「土台を掘り崩す」イメージ。目立たない形で少しずつ弱めること。",
+      "tags": [
+        "ステップ2",
+        "動詞"
+      ]
+    },
+    {
+      "id": "av-impose",
+      "type": "vocab",
+      "term": "impose",
+      "reading": "/ɪmˈpoʊz/",
+      "pos": "動詞",
+      "meanings": [
+        "課す",
+        "押しつける"
+      ],
+      "examples": [
+        {
+          "text": "The government imposed a new tax on sugary drinks.",
+          "translation": "政府は甘い飲料に新しい税を課した。"
+        }
+      ],
+      "collocations": [
+        "impose A on B",
+        "impose restrictions"
+      ],
+      "notes": "impose A on B（B に A を課す）。I don't want to impose.（ご迷惑はおかけしたくない）の用法もある。名詞は imposition。",
+      "tags": [
+        "ステップ2",
+        "動詞"
+      ]
+    },
+    {
+      "id": "av-discrepancy",
+      "type": "vocab",
+      "term": "discrepancy",
+      "reading": "/dɪˈskrepənsi/",
+      "pos": "名詞",
+      "meanings": [
+        "食い違い",
+        "不一致"
+      ],
+      "examples": [
+        {
+          "text": "There is a discrepancy between the two reports.",
+          "translation": "2つの報告書には食い違いがある。"
+        }
+      ],
+      "collocations": [
+        "discrepancy between",
+        "discrepancy in"
+      ],
+      "notes": "本来一致するはずのものの「ずれ」。数字・証言・記録の食い違いに使い、difference より否定的。",
+      "tags": [
+        "ステップ2",
+        "名詞"
+      ]
+    },
+    {
+      "id": "av-liability",
+      "type": "vocab",
+      "term": "liability",
+      "reading": "/ˌlaɪəˈbɪləti/",
+      "pos": "名詞",
+      "meanings": [
+        "（法的）責任",
+        "負債"
+      ],
+      "examples": [
+        {
+          "text": "The company denied liability for the accident.",
+          "translation": "会社はその事故の責任を否定した。"
+        }
+      ],
+      "collocations": [
+        "limited liability",
+        "assets and liabilities"
+      ],
+      "notes": "形容詞 liable（法的責任がある・〜しがちな）。会計では assets（資産）の反対で「負債」。",
+      "tags": [
+        "ステップ2",
+        "名詞"
+      ]
+    },
+    {
+      "id": "av-rationale",
+      "type": "vocab",
+      "term": "rationale",
+      "reading": "/ˌræʃəˈnæl/",
+      "pos": "名詞",
+      "meanings": [
+        "根拠",
+        "理論的な説明"
+      ],
+      "examples": [
+        {
+          "text": "Can you explain the rationale behind this decision?",
+          "translation": "この決定の根拠を説明してもらえますか。"
+        }
+      ],
+      "collocations": [
+        "rationale behind",
+        "rationale for"
+      ],
+      "notes": "reason より「（決定・方針の）筋道立った理由」。語尾は /-næl/ と発音する。形容詞 rational は「合理的な」。",
+      "tags": [
+        "ステップ2",
+        "名詞"
+      ]
+    },
+    {
+      "id": "av-integrity",
+      "type": "vocab",
+      "term": "integrity",
+      "reading": "/ɪnˈteɡrəti/",
+      "pos": "名詞",
+      "meanings": [
+        "誠実さ",
+        "完全性"
+      ],
+      "examples": [
+        {
+          "text": "He is a man of integrity.",
+          "translation": "彼は誠実な人だ。"
+        }
+      ],
+      "collocations": [
+        "personal integrity",
+        "data integrity"
+      ],
+      "notes": "honesty より広く「信念を曲げない高潔さ」。IT では「（データの）整合性・完全性」。",
+      "tags": [
+        "ステップ2",
+        "名詞"
+      ]
+    },
+    {
+      "id": "av-paradigm",
+      "type": "vocab",
+      "term": "paradigm",
+      "reading": "/ˈpærədaɪm/",
+      "pos": "名詞",
+      "meanings": [
+        "パラダイム（物の見方の枠組み）",
+        "典型"
+      ],
+      "examples": [
+        {
+          "text": "The internet created a new paradigm for business.",
+          "translation": "インターネットはビジネスに新たな枠組みをもたらした。"
+        }
+      ],
+      "collocations": [
+        "paradigm shift"
+      ],
+      "notes": "g は発音しない。paradigm shift は「（考え方の）劇的な転換」。",
+      "tags": [
+        "ステップ2",
+        "名詞"
+      ]
+    },
+    {
+      "id": "av-scrutiny",
+      "type": "vocab",
+      "term": "scrutiny",
+      "reading": "/ˈskruːtəni/",
+      "pos": "名詞",
+      "meanings": [
+        "精査",
+        "監視"
+      ],
+      "examples": [
+        {
+          "text": "The plan came under close scrutiny.",
+          "translation": "その計画は厳しく精査された。"
+        }
+      ],
+      "collocations": [
+        "under scrutiny",
+        "close scrutiny"
+      ],
+      "notes": "examination より「細部まで厳しく調べる」。動詞は scrutinize。",
+      "tags": [
+        "ステップ2",
+        "名詞"
+      ]
+    },
+    {
+      "id": "av-acquisition",
+      "type": "vocab",
+      "term": "acquisition",
+      "reading": "/ˌækwɪˈzɪʃən/",
+      "pos": "名詞",
+      "meanings": [
+        "買収",
+        "獲得",
+        "習得"
+      ],
+      "examples": [
+        {
+          "text": "The company announced the acquisition of a startup.",
+          "translation": "その会社はスタートアップの買収を発表した。"
+        }
+      ],
+      "collocations": [
+        "mergers and acquisitions",
+        "language acquisition"
+      ],
+      "notes": "動詞は acquire（獲得する）。M&A は mergers and acquisitions（合併・買収）の略。",
+      "tags": [
+        "ステップ2",
+        "名詞"
+      ]
+    },
+    {
+      "id": "av-provision",
+      "type": "vocab",
+      "term": "provision",
+      "reading": "/prəˈvɪʒən/",
+      "pos": "名詞",
+      "meanings": [
+        "提供",
+        "（法律・契約の）規定",
+        "備え"
+      ],
+      "examples": [
+        {
+          "text": "The contract includes a provision for early termination.",
+          "translation": "契約には早期解約に関する条項が含まれている。"
+        }
+      ],
+      "collocations": [
+        "provision of",
+        "make provision for"
+      ],
+      "notes": "動詞 provide の名詞形。複数形 provisions は「食料・必需品」の意味もある。",
+      "tags": [
+        "ステップ2",
+        "名詞"
+      ]
+    },
+    {
+      "id": "av-subsidy",
+      "type": "vocab",
+      "term": "subsidy",
+      "reading": "/ˈsʌbsədi/",
+      "pos": "名詞",
+      "meanings": [
+        "補助金"
+      ],
+      "examples": [
+        {
+          "text": "Farmers receive subsidies from the government.",
+          "translation": "農家は政府から補助金を受けている。"
+        }
+      ],
+      "collocations": [
+        "government subsidy",
+        "housing subsidy"
+      ],
+      "notes": "動詞は subsidize（補助金を出す）。grant は研究などへの「助成金」。",
+      "tags": [
+        "ステップ2",
+        "名詞"
+      ]
+    },
+    {
+      "id": "av-commodity",
+      "type": "vocab",
+      "term": "commodity",
+      "reading": "/kəˈmɑːdəti/",
+      "pos": "名詞",
+      "meanings": [
+        "商品",
+        "（相場で取引される）産品"
+      ],
+      "examples": [
+        {
+          "text": "Oil is one of the most traded commodities.",
+          "translation": "石油は最も取引量の多い商品の一つだ。"
+        }
+      ],
+      "collocations": [
+        "commodity prices"
+      ],
+      "notes": "原油・穀物・金属など相場で取引される品。差別化しにくい「ありふれた商品」の意味でも使う。",
+      "tags": [
+        "ステップ2",
+        "名詞"
+      ]
+    },
+    {
+      "id": "av-discretion",
+      "type": "vocab",
+      "term": "discretion",
+      "reading": "/dɪˈskreʃən/",
+      "pos": "名詞",
+      "meanings": [
+        "裁量",
+        "慎重さ"
+      ],
+      "examples": [
+        {
+          "text": "The manager has discretion over the budget.",
+          "translation": "マネージャーには予算の裁量権がある。"
+        }
+      ],
+      "collocations": [
+        "at one's discretion",
+        "use discretion"
+      ],
+      "notes": "at the discretion of 〜 は「〜の判断で」。形容詞 discreet（慎重な・口が堅い）、discretionary（任意の）。",
+      "tags": [
+        "ステップ2",
+        "名詞"
+      ]
+    },
+    {
+      "id": "av-threshold",
+      "type": "vocab",
+      "term": "threshold",
+      "reading": "/ˈθreʃhoʊld/",
+      "pos": "名詞",
+      "meanings": [
+        "境目",
+        "しきい値",
+        "敷居"
+      ],
+      "examples": [
+        {
+          "text": "Income above this threshold is taxed at a higher rate.",
+          "translation": "この基準額を超える所得には高い税率がかかる。"
+        }
+      ],
+      "collocations": [
+        "on the threshold of",
+        "pain threshold"
+      ],
+      "notes": "つづりの h は1つ（thres-hold）。on the threshold of 〜 は「〜の始まりにいる」。",
+      "tags": [
+        "ステップ2",
+        "名詞"
+      ]
+    },
+    {
+      "id": "av-merger",
+      "type": "vocab",
+      "term": "merger",
+      "reading": "/ˈmɜːrdʒər/",
+      "pos": "名詞",
+      "meanings": [
+        "（企業の）合併"
+      ],
+      "examples": [
+        {
+          "text": "The merger created the largest bank in the country.",
+          "translation": "その合併によって国内最大の銀行が誕生した。"
+        }
+      ],
+      "collocations": [
+        "merger with",
+        "mergers and acquisitions"
+      ],
+      "notes": "動詞は merge（合併する・合流する）。acquisition は一方が他方を「買収する」こと。",
+      "tags": [
+        "ステップ2",
+        "名詞"
+      ]
+    },
+    {
+      "id": "av-leverage",
+      "type": "vocab",
+      "term": "leverage",
+      "reading": "/ˈlevərɪdʒ/",
+      "pos": "名詞／動詞",
+      "meanings": [
+        "てこの力",
+        "影響力・交渉力"
+      ],
+      "examples": [
+        {
+          "text": "We can use our network as leverage in the negotiations.",
+          "translation": "交渉では自社のネットワークを強みとして使える。"
+        }
+      ],
+      "collocations": [
+        "gain leverage",
+        "leverage technology"
+      ],
+      "notes": "動詞では「（強み・資源を）最大限に活用する」の意味でビジネスでよく使う。金融では「借入による投資効果（レバレッジ）」。",
+      "tags": [
+        "ステップ2",
+        "名詞"
+      ]
+    },
+    {
+      "id": "av-contingency",
+      "type": "vocab",
+      "term": "contingency",
+      "reading": "/kənˈtɪndʒənsi/",
+      "pos": "名詞",
+      "meanings": [
+        "不測の事態"
+      ],
+      "examples": [
+        {
+          "text": "We need a contingency plan.",
+          "translation": "緊急時対応計画が必要だ。"
+        }
+      ],
+      "collocations": [
+        "contingency plan",
+        "contingency fund"
+      ],
+      "notes": "contingency plan は「万一の場合の計画」。形容詞 contingent は「〜次第の」（contingent on 〜）。",
+      "tags": [
+        "ステップ2",
+        "名詞"
+      ]
+    },
+    {
+      "id": "av-precedent",
+      "type": "vocab",
+      "term": "precedent",
+      "reading": "/ˈpresɪdənt/",
+      "pos": "名詞",
+      "meanings": [
+        "前例",
+        "先例"
+      ],
+      "examples": [
+        {
+          "text": "This decision could set a precedent.",
+          "translation": "この決定は前例になりうる。"
+        }
+      ],
+      "collocations": [
+        "set a precedent",
+        "without precedent"
+      ],
+      "notes": "動詞 precede（先行する）から。president（大統領）と発音・つづりが似ているので注意。",
+      "tags": [
+        "ステップ2",
+        "名詞"
+      ]
+    },
+    {
+      "id": "av-trade-off",
+      "type": "vocab",
+      "term": "trade-off",
+      "reading": "/ˈtreɪdɔːf/",
+      "pos": "名詞",
+      "meanings": [
+        "（両立しないものの）兼ね合い",
+        "トレードオフ"
+      ],
+      "examples": [
+        {
+          "text": "There is a trade-off between speed and quality.",
+          "translation": "スピードと品質はトレードオフの関係にある。"
+        }
+      ],
+      "collocations": [
+        "trade-off between A and B"
+      ],
+      "notes": "一方を得ると他方を失う関係。動詞句 trade off A against B は「A と B のバランスをとる」。",
+      "tags": [
+        "ステップ2",
+        "名詞"
+      ]
+    },
+    {
+      "id": "av-inevitable",
+      "type": "vocab",
+      "term": "inevitable",
+      "reading": "/ɪˈnevɪtəbəl/",
+      "pos": "形容詞",
+      "meanings": [
+        "避けられない",
+        "必然の"
+      ],
+      "examples": [
+        {
+          "text": "Change is inevitable.",
+          "translation": "変化は避けられない。"
+        }
+      ],
+      "collocations": [
+        "inevitable result",
+        "It is inevitable that 〜"
+      ],
+      "notes": "unavoidable とほぼ同じだが、「（成り行きとして）必ず起こる」ニュアンス。副詞は inevitably。",
+      "tags": [
+        "ステップ2",
+        "形容詞"
+      ]
+    },
+    {
+      "id": "av-subsequent",
+      "type": "vocab",
+      "term": "subsequent",
+      "reading": "/ˈsʌbsɪkwənt/",
+      "pos": "形容詞",
+      "meanings": [
+        "その後の",
+        "後続の"
+      ],
+      "examples": [
+        {
+          "text": "Subsequent research confirmed the results.",
+          "translation": "その後の研究で結果が確認された。"
+        }
+      ],
+      "collocations": [
+        "subsequent to",
+        "subsequent years"
+      ],
+      "notes": "following よりかたい。subsequent to 〜 は「〜の後で」。副詞は subsequently。反対は previous / prior。",
+      "tags": [
+        "ステップ2",
+        "形容詞"
+      ]
+    },
+    {
+      "id": "av-arbitrary",
+      "type": "vocab",
+      "term": "arbitrary",
+      "reading": "/ˈɑːrbɪtreri/",
+      "pos": "形容詞",
+      "meanings": [
+        "恣意的な",
+        "任意の"
+      ],
+      "examples": [
+        {
+          "text": "The rules seem arbitrary.",
+          "translation": "その規則は恣意的に思える。"
+        }
+      ],
+      "collocations": [
+        "arbitrary decision",
+        "arbitrary number"
+      ],
+      "notes": "「根拠なく勝手に決めた」という否定的な意味と、数学などの「任意の」という中立的な意味がある。",
+      "tags": [
+        "ステップ2",
+        "形容詞"
+      ]
+    },
+    {
+      "id": "av-coherent",
+      "type": "vocab",
+      "term": "coherent",
+      "reading": "/koʊˈhɪrənt/",
+      "pos": "形容詞",
+      "meanings": [
+        "首尾一貫した",
+        "筋の通った"
+      ],
+      "examples": [
+        {
+          "text": "She presented a coherent argument.",
+          "translation": "彼女は筋の通った主張をした。"
+        }
+      ],
+      "collocations": [
+        "coherent strategy",
+        "coherent explanation"
+      ],
+      "notes": "consistent は「（何度でも）矛盾がない・一貫している」、coherent は「論理が一つにまとまっていてわかりやすい」。名詞は coherence。",
+      "tags": [
+        "ステップ2",
+        "形容詞"
+      ]
+    },
+    {
+      "id": "av-compatible",
+      "type": "vocab",
+      "term": "compatible",
+      "reading": "/kəmˈpætəbəl/",
+      "pos": "形容詞",
+      "meanings": [
+        "互換性のある",
+        "両立できる"
+      ],
+      "examples": [
+        {
+          "text": "This software is compatible with Windows.",
+          "translation": "このソフトは Windows に対応している。"
+        }
+      ],
+      "collocations": [
+        "compatible with",
+        "backward compatible"
+      ],
+      "notes": "compatible with 〜 の形で使う。名詞は compatibility、反対は incompatible。",
+      "tags": [
+        "ステップ2",
+        "形容詞"
+      ]
+    },
+    {
+      "id": "av-conventional",
+      "type": "vocab",
+      "term": "conventional",
+      "reading": "/kənˈvenʃənəl/",
+      "pos": "形容詞",
+      "meanings": [
+        "従来の",
+        "慣習的な"
+      ],
+      "examples": [
+        {
+          "text": "Electric cars are replacing conventional cars.",
+          "translation": "電気自動車が従来の車に取って代わりつつある。"
+        }
+      ],
+      "collocations": [
+        "conventional wisdom",
+        "conventional methods"
+      ],
+      "notes": "traditional が「伝統的な（よさ）」を含むのに対し、conventional は「型どおりの・ありきたりの」ニュアンスを含むことがある。名詞 convention は「慣習・大会」。",
+      "tags": [
+        "ステップ2",
+        "形容詞"
+      ]
+    },
+    {
+      "id": "av-eligible",
+      "type": "vocab",
+      "term": "eligible",
+      "reading": "/ˈelɪdʒəbəl/",
+      "pos": "形容詞",
+      "meanings": [
+        "資格のある",
+        "対象となる"
+      ],
+      "examples": [
+        {
+          "text": "You are eligible for a discount.",
+          "translation": "あなたは割引の対象です。"
+        }
+      ],
+      "collocations": [
+        "eligible for",
+        "eligible to do"
+      ],
+      "notes": "eligible for 〜 / eligible to do で「〜の資格がある」。qualified は「（能力・資格の面で）適任の」。名詞は eligibility。",
+      "tags": [
+        "ステップ2",
+        "形容詞"
+      ]
+    },
+    {
+      "id": "av-sustainable",
+      "type": "vocab",
+      "term": "sustainable",
+      "reading": "/səˈsteɪnəbəl/",
+      "pos": "形容詞",
+      "meanings": [
+        "持続可能な"
+      ],
+      "examples": [
+        {
+          "text": "We need sustainable sources of energy.",
+          "translation": "持続可能なエネルギー源が必要だ。"
+        }
+      ],
+      "collocations": [
+        "sustainable development",
+        "sustainable growth"
+      ],
+      "notes": "動詞は sustain（維持する）。SDGs は Sustainable Development Goals（持続可能な開発目標）の略。",
+      "tags": [
+        "ステップ2",
+        "形容詞"
+      ]
+    },
+    {
+      "id": "av-vulnerable",
+      "type": "vocab",
+      "term": "vulnerable",
+      "reading": "/ˈvʌlnərəbəl/",
+      "pos": "形容詞",
+      "meanings": [
+        "傷つきやすい",
+        "弱い",
+        "脆弱な"
+      ],
+      "examples": [
+        {
+          "text": "Elderly people are vulnerable to heat.",
+          "translation": "高齢者は暑さに弱い。"
+        }
+      ],
+      "collocations": [
+        "vulnerable to",
+        "vulnerable groups"
+      ],
+      "notes": "vulnerable to 〜 で「〜に弱い」。weak より「攻撃・被害を受けやすい」。IT の「脆弱性」は vulnerability。",
+      "tags": [
+        "ステップ2",
+        "形容詞"
+      ]
+    },
+    {
+      "id": "av-reluctant",
+      "type": "vocab",
+      "term": "reluctant",
+      "reading": "/rɪˈlʌktənt/",
+      "pos": "形容詞",
+      "meanings": [
+        "気が進まない"
+      ],
+      "examples": [
+        {
+          "text": "He was reluctant to admit his mistake.",
+          "translation": "彼は自分の誤りを認めたがらなかった。"
+        }
+      ],
+      "collocations": [
+        "be reluctant to do"
+      ],
+      "notes": "unwilling より弱く「しぶしぶ・ためらいながら」。副詞は reluctantly、名詞は reluctance。",
+      "tags": [
+        "ステップ2",
+        "形容詞"
+      ]
+    },
+    {
+      "id": "av-thereby",
+      "type": "vocab",
+      "term": "thereby",
+      "reading": "/ˌðerˈbaɪ/",
+      "pos": "副詞",
+      "meanings": [
+        "それによって"
+      ],
+      "examples": [
+        {
+          "text": "The company cut costs, thereby increasing profits.",
+          "translation": "会社は経費を削減し、それによって利益を増やした。"
+        }
+      ],
+      "notes": "後ろに -ing 形を置いて「そうすることで〜する」の形が多い。かたい書き言葉。",
+      "tags": [
+        "ステップ2",
+        "副詞・接続詞"
+      ]
+    },
+    {
+      "id": "av-albeit",
+      "type": "vocab",
+      "term": "albeit",
+      "reading": "/ɔːlˈbiːɪt/",
+      "pos": "接続詞",
+      "meanings": [
+        "〜ではあるが"
+      ],
+      "examples": [
+        {
+          "text": "The plan worked, albeit slowly.",
+          "translation": "その計画は、ゆっくりではあったがうまくいった。"
+        }
+      ],
+      "notes": "although に近いが、後ろには文ではなく語句（形容詞・副詞・名詞句）を置く。かたい書き言葉。",
+      "tags": [
+        "ステップ2",
+        "副詞・接続詞"
+      ]
+    },
+    {
+      "id": "av-presumably",
+      "type": "vocab",
+      "term": "presumably",
+      "reading": "/prɪˈzuːməbli/",
+      "pos": "副詞",
+      "meanings": [
+        "おそらく"
+      ],
+      "examples": [
+        {
+          "text": "Presumably, the meeting has been canceled.",
+          "translation": "おそらく会議は中止になったのだろう。"
+        }
+      ],
+      "notes": "「（状況から考えて）当然〜だろう」という推測。動詞は presume（推定する）。",
+      "tags": [
+        "ステップ2",
+        "副詞・接続詞"
+      ]
+    },
+    {
+      "id": "av-predominantly",
+      "type": "vocab",
+      "term": "predominantly",
+      "reading": "/prɪˈdɑːmɪnəntli/",
+      "pos": "副詞",
+      "meanings": [
+        "主に",
+        "大部分は"
+      ],
+      "examples": [
+        {
+          "text": "The audience was predominantly young.",
+          "translation": "観客は大半が若者だった。"
+        }
+      ],
+      "notes": "mainly / mostly のかたい語。形容詞は predominant（優勢な・支配的な）。",
+      "tags": [
+        "ステップ2",
+        "副詞・接続詞"
+      ]
+    },
+    {
+      "id": "av-exploit",
+      "type": "vocab",
+      "term": "exploit",
+      "reading": "/ɪkˈsplɔɪt/",
+      "pos": "動詞",
+      "meanings": [
+        "搾取する",
+        "（資源・機会を）活用する"
+      ],
+      "examples": [
+        {
+          "text": "The company was accused of exploiting workers.",
+          "translation": "その会社は労働者を搾取したとして非難された。"
+        }
+      ],
+      "collocations": [
+        "exploit resources",
+        "exploit a weakness"
+      ],
+      "notes": "人に使うと「搾取する・食い物にする」、資源・機会に使うと「最大限に活用する」。名詞は exploitation。",
+      "tags": [
+        "ステップ3",
+        "動詞"
+      ]
+    },
+    {
+      "id": "av-hinder",
+      "type": "vocab",
+      "term": "hinder",
+      "reading": "/ˈhɪndər/",
+      "pos": "動詞",
+      "meanings": [
+        "妨げる"
+      ],
+      "examples": [
+        {
+          "text": "Lack of funding hindered the research.",
+          "translation": "資金不足が研究の妨げになった。"
+        }
+      ],
+      "collocations": [
+        "hinder progress",
+        "hinder 人 from doing"
+      ],
+      "notes": "prevent が「完全に止める」のに対し、hinder は「遅らせる・やりにくくする」。名詞は hindrance。",
+      "tags": [
+        "ステップ3",
+        "動詞"
+      ]
+    },
+    {
+      "id": "av-persist",
+      "type": "vocab",
+      "term": "persist",
+      "reading": "/pərˈsɪst/",
+      "pos": "動詞",
+      "meanings": [
+        "持続する",
+        "固執する"
+      ],
+      "examples": [
+        {
+          "text": "If the symptoms persist, see a doctor.",
+          "translation": "症状が続くなら医者に診てもらいなさい。"
+        }
+      ],
+      "collocations": [
+        "persist in doing"
+      ],
+      "notes": "continue より「（困難・反対にもかかわらず）しぶとく続く」。形容詞は persistent（しつこい・持続的な）。",
+      "tags": [
+        "ステップ3",
+        "動詞"
+      ]
+    },
+    {
+      "id": "av-refine",
+      "type": "vocab",
+      "term": "refine",
+      "reading": "/rɪˈfaɪn/",
+      "pos": "動詞",
+      "meanings": [
+        "改良する",
+        "洗練する",
+        "精製する"
+      ],
+      "examples": [
+        {
+          "text": "We need to refine our approach.",
+          "translation": "私たちはやり方を磨き上げる必要がある。"
+        }
+      ],
+      "collocations": [
+        "refine a process",
+        "refined sugar"
+      ],
+      "notes": "細部を改善して「より精密に・上質に」する。名詞は refinement、refinery（精製所）。",
+      "tags": [
+        "ステップ3",
+        "動詞"
+      ]
+    },
+    {
+      "id": "av-reimburse",
+      "type": "vocab",
+      "term": "reimburse",
+      "reading": "/ˌriːɪmˈbɜːrs/",
+      "pos": "動詞",
+      "meanings": [
+        "払い戻す",
+        "（立て替えた経費を）精算する"
+      ],
+      "examples": [
+        {
+          "text": "The company will reimburse your travel expenses.",
+          "translation": "交通費は会社が精算します。"
+        }
+      ],
+      "collocations": [
+        "reimburse expenses",
+        "reimburse 人 for 物"
+      ],
+      "notes": "立て替えた費用を「返す」。refund は「（購入代金を）返金する」。名詞は reimbursement。",
+      "tags": [
+        "ステップ3",
+        "動詞"
+      ]
+    },
+    {
+      "id": "av-terminate",
+      "type": "vocab",
+      "term": "terminate",
+      "reading": "/ˈtɜːrmɪneɪt/",
+      "pos": "動詞",
+      "meanings": [
+        "終了させる",
+        "解除する"
+      ],
+      "examples": [
+        {
+          "text": "The contract was terminated early.",
+          "translation": "契約は早期に解除された。"
+        }
+      ],
+      "collocations": [
+        "terminate a contract",
+        "terminate employment"
+      ],
+      "notes": "end のかたい語で、契約・雇用などを正式に終わらせる場面で使う。名詞は termination。",
+      "tags": [
+        "ステップ3",
+        "動詞"
+      ]
+    },
+    {
+      "id": "av-warrant",
+      "type": "vocab",
+      "term": "warrant",
+      "reading": "/ˈwɔːrənt/",
+      "pos": "動詞／名詞",
+      "meanings": [
+        "正当化する",
+        "〜に値する"
+      ],
+      "examples": [
+        {
+          "text": "The situation warrants further investigation.",
+          "translation": "その状況はさらなる調査を必要とする。"
+        }
+      ],
+      "collocations": [
+        "search warrant",
+        "be warranted"
+      ],
+      "notes": "「（行動を）妥当なものにする」。名詞では「令状」（search warrant＝捜索令状）。warranty は「（製品の）保証」。",
+      "tags": [
+        "ステップ3",
+        "動詞"
+      ]
+    },
+    {
+      "id": "av-coincide",
+      "type": "vocab",
+      "term": "coincide",
+      "reading": "/ˌkoʊɪnˈsaɪd/",
+      "pos": "動詞",
+      "meanings": [
+        "同時に起こる",
+        "一致する"
+      ],
+      "examples": [
+        {
+          "text": "The festival coincides with the holidays.",
+          "translation": "その祭りは休暇と重なる。"
+        }
+      ],
+      "collocations": [
+        "coincide with"
+      ],
+      "notes": "名詞は coincidence（偶然の一致）。What a coincidence!（なんという偶然！）。",
+      "tags": [
+        "ステップ3",
+        "動詞"
+      ]
+    },
+    {
+      "id": "av-derive",
+      "type": "vocab",
+      "term": "derive",
+      "reading": "/dɪˈraɪv/",
+      "pos": "動詞",
+      "meanings": [
+        "引き出す",
+        "由来する"
+      ],
+      "examples": [
+        {
+          "text": "The word is derived from Latin.",
+          "translation": "その語はラテン語に由来する。"
+        }
+      ],
+      "collocations": [
+        "derive from",
+        "be derived from",
+        "derive pleasure from"
+      ],
+      "notes": "derive A from B は「B から A を得る」、derive from / be derived from 〜 は「〜に由来する」。名詞 derivative は「派生物・派生語・金融派生商品」。",
+      "tags": [
+        "ステップ3",
+        "動詞"
+      ]
+    },
+    {
+      "id": "av-contemplate",
+      "type": "vocab",
+      "term": "contemplate",
+      "reading": "/ˈkɑːntəmpleɪt/",
+      "pos": "動詞",
+      "meanings": [
+        "熟考する",
+        "（〜しようかと）考える"
+      ],
+      "examples": [
+        {
+          "text": "She is contemplating a career change.",
+          "translation": "彼女は転職を考えている。"
+        }
+      ],
+      "collocations": [
+        "contemplate doing"
+      ],
+      "notes": "consider よりじっくり長く考える。後ろは動名詞（contemplate doing）。名詞は contemplation。",
+      "tags": [
+        "ステップ3",
+        "動詞"
+      ]
+    },
+    {
+      "id": "av-concede",
+      "type": "vocab",
+      "term": "concede",
+      "reading": "/kənˈsiːd/",
+      "pos": "動詞",
+      "meanings": [
+        "（しぶしぶ）認める",
+        "譲る"
+      ],
+      "examples": [
+        {
+          "text": "He conceded that he had been wrong.",
+          "translation": "彼は自分が間違っていたと認めた。"
+        }
+      ],
+      "collocations": [
+        "concede defeat",
+        "concede that 〜"
+      ],
+      "notes": "admit より「議論・争いの中で相手に譲って認める」。名詞は concession（譲歩）。",
+      "tags": [
+        "ステップ3",
+        "動詞"
+      ]
+    },
+    {
+      "id": "av-alleviate",
+      "type": "vocab",
+      "term": "alleviate",
+      "reading": "/əˈliːvieɪt/",
+      "pos": "動詞",
+      "meanings": [
+        "軽減する",
+        "和らげる"
+      ],
+      "examples": [
+        {
+          "text": "This medicine will alleviate the pain.",
+          "translation": "この薬で痛みが和らぐでしょう。"
+        }
+      ],
+      "collocations": [
+        "alleviate pain",
+        "alleviate poverty"
+      ],
+      "notes": "苦痛・問題を「楽にする」。mitigate は「（被害・リスクを）抑える」に、alleviate は「苦しみの軽減」に使うことが多い。",
+      "tags": [
+        "ステップ3",
+        "動詞"
+      ]
+    },
+    {
+      "id": "av-circumvent",
+      "type": "vocab",
+      "term": "circumvent",
+      "reading": "/ˌsɜːrkəmˈvent/",
+      "pos": "動詞",
+      "meanings": [
+        "回避する",
+        "（規則の）抜け道を使う"
+      ],
+      "examples": [
+        {
+          "text": "They tried to circumvent the regulations.",
+          "translation": "彼らは規制をすり抜けようとした。"
+        }
+      ],
+      "collocations": [
+        "circumvent the law"
+      ],
+      "notes": "circum-（周りを）+ vent（行く）。avoid より「巧妙に迂回する」否定的なニュアンスがある。",
+      "tags": [
+        "ステップ3",
+        "動詞"
+      ]
+    },
+    {
+      "id": "av-curtail",
+      "type": "vocab",
+      "term": "curtail",
+      "reading": "/kərˈteɪl/",
+      "pos": "動詞",
+      "meanings": [
+        "削減する",
+        "縮小する"
+      ],
+      "examples": [
+        {
+          "text": "The company curtailed spending on travel.",
+          "translation": "会社は出張費を削減した。"
+        }
+      ],
+      "collocations": [
+        "curtail spending",
+        "curtail freedom"
+      ],
+      "notes": "cut back のかたい語。予算・自由・活動を「切り詰める・制限する」。",
+      "tags": [
+        "ステップ3",
+        "動詞"
+      ]
+    },
+    {
+      "id": "av-expedite",
+      "type": "vocab",
+      "term": "expedite",
+      "reading": "/ˈekspədaɪt/",
+      "pos": "動詞",
+      "meanings": [
+        "迅速に処理する",
+        "早める"
+      ],
+      "examples": [
+        {
+          "text": "Could you expedite the shipment?",
+          "translation": "発送を急いでいただけますか。"
+        }
+      ],
+      "collocations": [
+        "expedite the process",
+        "expedite delivery"
+      ],
+      "notes": "speed up のかたい語で、ビジネスメールでよく使う。名詞 expedition は「遠征・探検」。",
+      "tags": [
+        "ステップ3",
+        "動詞"
+      ]
+    },
+    {
+      "id": "av-delegate",
+      "type": "vocab",
+      "term": "delegate",
+      "reading": "/ˈdelɪɡeɪt/",
+      "pos": "動詞／名詞",
+      "meanings": [
+        "（権限・仕事を）任せる",
+        "委任する"
+      ],
+      "examples": [
+        {
+          "text": "A good manager knows how to delegate.",
+          "translation": "よい管理職は仕事の任せ方を心得ている。"
+        }
+      ],
+      "collocations": [
+        "delegate A to B",
+        "delegate authority"
+      ],
+      "notes": "名詞では「（会議の）代表者」で、語尾を /-ɡət/ と発音する。delegation は「委任・代表団」。",
+      "tags": [
+        "ステップ3",
+        "動詞"
+      ]
+    },
+    {
+      "id": "av-consolidate",
+      "type": "vocab",
+      "term": "consolidate",
+      "reading": "/kənˈsɑːlɪdeɪt/",
+      "pos": "動詞",
+      "meanings": [
+        "統合する",
+        "強固にする"
+      ],
+      "examples": [
+        {
+          "text": "The company consolidated its three offices into one.",
+          "translation": "会社は3つの事務所を1つに統合した。"
+        }
+      ],
+      "collocations": [
+        "consolidate debt",
+        "consolidate one's position"
+      ],
+      "notes": "integrate は「（異なるものを）一体化する」、consolidate は「まとめて強化する・地位を固める」。会計の consolidated は「連結の」。",
+      "tags": [
+        "ステップ3",
+        "動詞"
+      ]
+    },
+    {
+      "id": "av-streamline",
+      "type": "vocab",
+      "term": "streamline",
+      "reading": "/ˈstriːmlaɪn/",
+      "pos": "動詞",
+      "meanings": [
+        "合理化する",
+        "効率化する"
+      ],
+      "examples": [
+        {
+          "text": "We streamlined the ordering process.",
+          "translation": "発注手続きを効率化した。"
+        }
+      ],
+      "collocations": [
+        "streamline operations"
+      ],
+      "notes": "もとは「流線形にする」。むだを省いて仕事の流れをスムーズにすること。",
+      "tags": [
+        "ステップ3",
+        "動詞"
+      ]
+    },
+    {
+      "id": "av-deduce",
+      "type": "vocab",
+      "term": "deduce",
+      "reading": "/dɪˈduːs/",
+      "pos": "動詞",
+      "meanings": [
+        "推論する",
+        "演繹する"
+      ],
+      "examples": [
+        {
+          "text": "From the evidence, we deduced that he was innocent.",
+          "translation": "証拠から彼は無実だと推論した。"
+        }
+      ],
+      "collocations": [
+        "deduce from",
+        "deduce that 〜"
+      ],
+      "notes": "infer は「（根拠から）推測する」、deduce は「論理的に結論を導く」。名詞 deduction は「推論・控除」。つづりの似た deduct（差し引く）と区別。",
+      "tags": [
+        "ステップ3",
+        "動詞"
+      ]
+    },
+    {
+      "id": "av-implication",
+      "type": "vocab",
+      "term": "implication",
+      "reading": "/ˌɪmplɪˈkeɪʃən/",
+      "pos": "名詞",
+      "meanings": [
+        "（予想される）影響",
+        "含意"
+      ],
+      "examples": [
+        {
+          "text": "We need to consider the implications of this decision.",
+          "translation": "この決定がもたらす影響を考える必要がある。"
+        }
+      ],
+      "collocations": [
+        "implications for",
+        "by implication"
+      ],
+      "notes": "「影響」の意味ではふつう複数形。consequence は「（実際に生じた）結果」、implication は「（今後起こりうる）影響」。動詞は imply（暗に意味する）。",
+      "tags": [
+        "ステップ3",
+        "名詞"
+      ]
+    },
+    {
+      "id": "av-prerequisite",
+      "type": "vocab",
+      "term": "prerequisite",
+      "reading": "/priːˈrekwəzɪt/",
+      "pos": "名詞",
+      "meanings": [
+        "前提条件",
+        "必須科目"
+      ],
+      "examples": [
+        {
+          "text": "A degree is a prerequisite for this job.",
+          "translation": "この仕事には学位が前提条件だ。"
+        }
+      ],
+      "collocations": [
+        "prerequisite for"
+      ],
+      "notes": "pre-（前もって）+ requisite（必要なもの）。requirement より「事前に満たしておくべき条件」。",
+      "tags": [
+        "ステップ3",
+        "名詞"
+      ]
+    },
+    {
+      "id": "av-anomaly",
+      "type": "vocab",
+      "term": "anomaly",
+      "reading": "/əˈnɑːməli/",
+      "pos": "名詞",
+      "meanings": [
+        "異常",
+        "例外的なもの"
+      ],
+      "examples": [
+        {
+          "text": "The system detected an anomaly in the data.",
+          "translation": "システムがデータの異常を検出した。"
+        }
+      ],
+      "collocations": [
+        "detect an anomaly"
+      ],
+      "notes": "abnormality より「規則・予測から外れた例外」に重点がある。形容詞は anomalous。",
+      "tags": [
+        "ステップ3",
+        "名詞"
+      ]
+    },
+    {
+      "id": "av-jurisdiction",
+      "type": "vocab",
+      "term": "jurisdiction",
+      "reading": "/ˌdʒʊrɪsˈdɪkʃən/",
+      "pos": "名詞",
+      "meanings": [
+        "管轄（権）",
+        "司法権"
+      ],
+      "examples": [
+        {
+          "text": "This case falls outside our jurisdiction.",
+          "translation": "この件は我々の管轄外だ。"
+        }
+      ],
+      "collocations": [
+        "under the jurisdiction of",
+        "have jurisdiction over"
+      ],
+      "notes": "裁判所や行政機関が権限を持つ「範囲（地域・事項）」。",
+      "tags": [
+        "ステップ3",
+        "名詞"
+      ]
+    },
+    {
+      "id": "av-mandate",
+      "type": "vocab",
+      "term": "mandate",
+      "reading": "/ˈmændeɪt/",
+      "pos": "名詞／動詞",
+      "meanings": [
+        "（公的な）命令・権限",
+        "（選挙で得た）信任"
+      ],
+      "examples": [
+        {
+          "text": "The new government has a clear mandate for reform.",
+          "translation": "新政府には改革への明確な信任がある。"
+        }
+      ],
+      "collocations": [
+        "have a mandate",
+        "mandate to do"
+      ],
+      "notes": "動詞では「義務づける」（The law mandates seat belts.）。形容詞 mandatory は「義務的な・必須の」。",
+      "tags": [
+        "ステップ3",
+        "名詞"
+      ]
+    },
+    {
+      "id": "av-benchmark",
+      "type": "vocab",
+      "term": "benchmark",
+      "reading": "/ˈbentʃmɑːrk/",
+      "pos": "名詞",
+      "meanings": [
+        "基準",
+        "指標"
+      ],
+      "examples": [
+        {
+          "text": "This result sets a new benchmark for the industry.",
+          "translation": "この結果は業界の新たな基準となる。"
+        }
+      ],
+      "collocations": [
+        "set a benchmark",
+        "benchmark against"
+      ],
+      "notes": "比較・評価のための「ものさし」。動詞では「（他社などと）比較評価する」。",
+      "tags": [
+        "ステップ3",
+        "名詞"
+      ]
+    },
+    {
+      "id": "av-caveat",
+      "type": "vocab",
+      "term": "caveat",
+      "reading": "/ˈkæviæt/",
+      "pos": "名詞",
+      "meanings": [
+        "注意書き",
+        "但し書き"
+      ],
+      "examples": [
+        {
+          "text": "There is one caveat: the offer is valid only today.",
+          "translation": "一つ注意点があります。この特典は本日限りです。"
+        }
+      ],
+      "collocations": [
+        "with the caveat that 〜"
+      ],
+      "notes": "ラテン語で「注意せよ」の意味。warning より「留保・条件付き」のニュアンス。",
+      "tags": [
+        "ステップ3",
+        "名詞"
+      ]
+    },
+    {
+      "id": "av-depreciation",
+      "type": "vocab",
+      "term": "depreciation",
+      "reading": "/dɪˌpriːʃiˈeɪʃən/",
+      "pos": "名詞",
+      "meanings": [
+        "減価償却",
+        "（価値の）下落"
+      ],
+      "examples": [
+        {
+          "text": "Depreciation is recorded as an expense.",
+          "translation": "減価償却は費用として計上される。"
+        }
+      ],
+      "collocations": [
+        "depreciation of the yen"
+      ],
+      "notes": "動詞は depreciate（価値が下がる）。反対は appreciation（価値の上昇）。通貨では「（円）安」。",
+      "tags": [
+        "ステップ3",
+        "名詞"
+      ]
+    },
+    {
+      "id": "av-dilemma",
+      "type": "vocab",
+      "term": "dilemma",
+      "reading": "/dɪˈlemə/",
+      "pos": "名詞",
+      "meanings": [
+        "板ばさみ",
+        "ジレンマ"
+      ],
+      "examples": [
+        {
+          "text": "We face a dilemma between cost and quality.",
+          "translation": "コストと品質の板ばさみになっている。"
+        }
+      ],
+      "collocations": [
+        "face a dilemma",
+        "moral dilemma"
+      ],
+      "notes": "本来は「どちらを選んでも困る2つの選択肢の間で迷う状況」。単なる problem の意味では使わないほうがよい。",
+      "tags": [
+        "ステップ3",
+        "名詞"
+      ]
+    },
+    {
+      "id": "av-synergy",
+      "type": "vocab",
+      "term": "synergy",
+      "reading": "/ˈsɪnərdʒi/",
+      "pos": "名詞",
+      "meanings": [
+        "相乗効果"
+      ],
+      "examples": [
+        {
+          "text": "The merger will create synergy between the two firms.",
+          "translation": "合併は両社の間に相乗効果を生むだろう。"
+        }
+      ],
+      "collocations": [
+        "create synergy"
+      ],
+      "notes": "合わせると個々の合計以上の効果が出ること。ビジネスで多用されるが、多用すると決まり文句に聞こえる。",
+      "tags": [
+        "ステップ3",
+        "名詞"
+      ]
+    },
+    {
+      "id": "av-catalyst",
+      "type": "vocab",
+      "term": "catalyst",
+      "reading": "/ˈkætəlɪst/",
+      "pos": "名詞",
+      "meanings": [
+        "触媒",
+        "（変化の）きっかけ"
+      ],
+      "examples": [
+        {
+          "text": "The crisis acted as a catalyst for reform.",
+          "translation": "その危機が改革のきっかけになった。"
+        }
+      ],
+      "collocations": [
+        "catalyst for",
+        "act as a catalyst"
+      ],
+      "notes": "化学の「触媒」から、変化を「促すもの」の比喩で使う。trigger は「引き金」で、突然の始まりに重点がある。",
+      "tags": [
+        "ステップ3",
+        "名詞"
+      ]
+    },
+    {
+      "id": "av-collateral",
+      "type": "vocab",
+      "term": "collateral",
+      "reading": "/kəˈlætərəl/",
+      "pos": "名詞／形容詞",
+      "meanings": [
+        "担保"
+      ],
+      "examples": [
+        {
+          "text": "He used his house as collateral for the loan.",
+          "translation": "彼は自宅をローンの担保にした。"
+        }
+      ],
+      "collocations": [
+        "collateral damage"
+      ],
+      "notes": "形容詞では「付随的な」（collateral damage＝巻き添え被害）。security もほぼ同じ「担保」の意味で使う。",
+      "tags": [
+        "ステップ3",
+        "名詞"
+      ]
+    },
+    {
+      "id": "av-attrition",
+      "type": "vocab",
+      "term": "attrition",
+      "reading": "/əˈtrɪʃən/",
+      "pos": "名詞",
+      "meanings": [
+        "（人員の）自然減",
+        "消耗"
+      ],
+      "examples": [
+        {
+          "text": "The company reduced staff through attrition.",
+          "translation": "その会社は自然減によって人員を削減した。"
+        }
+      ],
+      "collocations": [
+        "attrition rate",
+        "war of attrition"
+      ],
+      "notes": "退職者の補充をしないことによる「自然減」。attrition rate は「離職率・脱落率」。war of attrition は「消耗戦」。",
+      "tags": [
+        "ステップ3",
+        "名詞"
+      ]
+    },
+    {
+      "id": "av-overhead",
+      "type": "vocab",
+      "term": "overhead",
+      "reading": "/ˈoʊvərhed/",
+      "pos": "名詞",
+      "meanings": [
+        "間接費",
+        "諸経費"
+      ],
+      "examples": [
+        {
+          "text": "Moving online cut our overhead.",
+          "translation": "オンライン化で間接費が減った。"
+        }
+      ],
+      "collocations": [
+        "overhead costs",
+        "reduce overhead"
+      ],
+      "notes": "家賃・光熱費など、直接の生産に結びつかない費用。イギリス英語では overheads と複数形にすることが多い。",
+      "tags": [
+        "ステップ3",
+        "名詞"
+      ]
+    },
+    {
+      "id": "av-deliverable",
+      "type": "vocab",
+      "term": "deliverable",
+      "reading": "/dɪˈlɪvərəbəl/",
+      "pos": "名詞",
+      "meanings": [
+        "成果物"
+      ],
+      "examples": [
+        {
+          "text": "The key deliverables are due next month.",
+          "translation": "主な成果物の納期は来月だ。"
+        }
+      ],
+      "collocations": [
+        "project deliverables"
+      ],
+      "notes": "プロジェクトで提出・納品すべき報告書・製品など。ふつう複数形で使う。",
+      "tags": [
+        "ステップ3",
+        "名詞"
+      ]
+    },
+    {
+      "id": "av-milestone",
+      "type": "vocab",
+      "term": "milestone",
+      "reading": "/ˈmaɪlstoʊn/",
+      "pos": "名詞",
+      "meanings": [
+        "節目",
+        "画期的な出来事"
+      ],
+      "examples": [
+        {
+          "text": "Reaching one million users was a major milestone.",
+          "translation": "ユーザー100万人の達成は大きな節目だった。"
+        }
+      ],
+      "collocations": [
+        "major milestone",
+        "reach a milestone"
+      ],
+      "notes": "もとは道の「マイル標石」。プロジェクト管理では「中間目標・チェックポイント」。",
+      "tags": [
+        "ステップ3",
+        "名詞"
+      ]
+    },
+    {
+      "id": "av-ramification",
+      "type": "vocab",
+      "term": "ramification",
+      "reading": "/ˌræmɪfɪˈkeɪʃən/",
+      "pos": "名詞",
+      "meanings": [
+        "（予期しない）影響・波及"
+      ],
+      "examples": [
+        {
+          "text": "The decision had serious ramifications for the industry.",
+          "translation": "その決定は業界に深刻な波及効果をもたらした。"
+        }
+      ],
+      "collocations": [
+        "legal ramifications"
+      ],
+      "notes": "ふつう複数形。implication と近いが、ramification は「枝分かれして広がる、しばしば好ましくない副次的な影響」。",
+      "tags": [
+        "ステップ3",
+        "名詞"
+      ]
+    },
+    {
+      "id": "av-empirical",
+      "type": "vocab",
+      "term": "empirical",
+      "reading": "/ɪmˈpɪrɪkəl/",
+      "pos": "形容詞",
+      "meanings": [
+        "経験的な",
+        "実証的な"
+      ],
+      "examples": [
+        {
+          "text": "There is little empirical evidence for this claim.",
+          "translation": "この主張を裏付ける実証的な証拠はほとんどない。"
+        }
+      ],
+      "collocations": [
+        "empirical evidence",
+        "empirical study"
+      ],
+      "notes": "理論ではなく観察・実験に基づくこと。反対は theoretical（理論的な）。",
+      "tags": [
+        "ステップ3",
+        "形容詞"
+      ]
+    },
+    {
+      "id": "av-inherent",
+      "type": "vocab",
+      "term": "inherent",
+      "reading": "/ɪnˈhɪrənt/",
+      "pos": "形容詞",
+      "meanings": [
+        "本来備わっている",
+        "固有の"
+      ],
+      "examples": [
+        {
+          "text": "Every investment has inherent risks.",
+          "translation": "どんな投資にも本来つきもののリスクがある。"
+        }
+      ],
+      "collocations": [
+        "inherent in",
+        "inherent risk"
+      ],
+      "notes": "inherent in 〜 で「〜に内在する」。intrinsic とほぼ同じ。inherit（相続する）とつづりが似ているが別の語。",
+      "tags": [
+        "ステップ3",
+        "形容詞"
+      ]
+    },
+    {
+      "id": "av-tangible",
+      "type": "vocab",
+      "term": "tangible",
+      "reading": "/ˈtændʒəbəl/",
+      "pos": "形容詞",
+      "meanings": [
+        "具体的な",
+        "有形の"
+      ],
+      "examples": [
+        {
+          "text": "We need tangible results.",
+          "translation": "目に見える成果が必要だ。"
+        }
+      ],
+      "collocations": [
+        "tangible assets",
+        "tangible benefits"
+      ],
+      "notes": "もとは「触れることのできる」。反対は intangible（無形の）。concrete も「具体的な」だが、tangible は「実感できる・目に見える」に重点。",
+      "tags": [
+        "ステップ3",
+        "形容詞"
+      ]
+    },
+    {
+      "id": "av-transparent",
+      "type": "vocab",
+      "term": "transparent",
+      "reading": "/trænsˈperənt/",
+      "pos": "形容詞",
+      "meanings": [
+        "透明な",
+        "透明性のある"
+      ],
+      "examples": [
+        {
+          "text": "The selection process should be transparent.",
+          "translation": "選考の過程は透明であるべきだ。"
+        }
+      ],
+      "collocations": [
+        "transparent process"
+      ],
+      "notes": "比喩で「隠しごとのない」。clear より「（組織・手続きが）公開されている」。名詞は transparency（透明性）。",
+      "tags": [
+        "ステップ3",
+        "形容詞"
+      ]
+    },
+    {
+      "id": "av-viable",
+      "type": "vocab",
+      "term": "viable",
+      "reading": "/ˈvaɪəbəl/",
+      "pos": "形容詞",
+      "meanings": [
+        "実行可能な",
+        "（事業として）成り立つ"
+      ],
+      "examples": [
+        {
+          "text": "Is this a viable business model?",
+          "translation": "これは成り立つビジネスモデルだろうか。"
+        }
+      ],
+      "collocations": [
+        "commercially viable",
+        "viable option"
+      ],
+      "notes": "feasible は「実行できる」、viable は「長期的に成り立つ・生き残れる」に重点がある。名詞は viability。",
+      "tags": [
+        "ステップ3",
+        "形容詞"
+      ]
+    },
+    {
+      "id": "av-unprecedented",
+      "type": "vocab",
+      "term": "unprecedented",
+      "reading": "/ʌnˈpresɪdentɪd/",
+      "pos": "形容詞",
+      "meanings": [
+        "前例のない"
+      ],
+      "examples": [
+        {
+          "text": "The company saw unprecedented growth.",
+          "translation": "その会社は前例のない成長を遂げた。"
+        }
+      ],
+      "collocations": [
+        "unprecedented scale"
+      ],
+      "notes": "un-（否定）+ precedent（前例）+ -ed。過去に例がないほど大規模・異例なこと。",
+      "tags": [
+        "ステップ3",
+        "形容詞"
+      ]
+    },
+    {
+      "id": "av-plausible",
+      "type": "vocab",
+      "term": "plausible",
+      "reading": "/ˈplɔːzəbəl/",
+      "pos": "形容詞",
+      "meanings": [
+        "もっともらしい",
+        "妥当そうな"
+      ],
+      "examples": [
+        {
+          "text": "That's a plausible explanation.",
+          "translation": "それはもっともらしい説明だ。"
+        }
+      ],
+      "collocations": [
+        "plausible explanation"
+      ],
+      "notes": "「一見筋が通っている」で、必ずしも正しいとは限らない点に注意。反対は implausible。",
+      "tags": [
+        "ステップ3",
+        "形容詞"
+      ]
+    },
+    {
+      "id": "av-obsolete",
+      "type": "vocab",
+      "term": "obsolete",
+      "reading": "/ˌɑːbsəˈliːt/",
+      "pos": "形容詞",
+      "meanings": [
+        "時代遅れの",
+        "廃れた"
+      ],
+      "examples": [
+        {
+          "text": "This technology will soon become obsolete.",
+          "translation": "この技術はまもなく時代遅れになるだろう。"
+        }
+      ],
+      "collocations": [
+        "become obsolete"
+      ],
+      "notes": "outdated より強く「もはや使われない」。",
+      "tags": [
+        "ステップ3",
+        "形容詞"
+      ]
+    },
+    {
+      "id": "av-redundant",
+      "type": "vocab",
+      "term": "redundant",
+      "reading": "/rɪˈdʌndənt/",
+      "pos": "形容詞",
+      "meanings": [
+        "余分な",
+        "冗長な"
+      ],
+      "examples": [
+        {
+          "text": "Remove redundant words from your essay.",
+          "translation": "作文から余分な語を削りなさい。"
+        }
+      ],
+      "collocations": [
+        "be made redundant",
+        "redundant system"
+      ],
+      "notes": "イギリス英語の be made redundant は「人員整理で解雇される」。IT では「（予備として）冗長化された」。名詞は redundancy。",
+      "tags": [
+        "ステップ3",
+        "形容詞"
+      ]
+    },
+    {
+      "id": "av-tentative",
+      "type": "vocab",
+      "term": "tentative",
+      "reading": "/ˈtentətɪv/",
+      "pos": "形容詞",
+      "meanings": [
+        "仮の",
+        "ためらいがちな"
+      ],
+      "examples": [
+        {
+          "text": "We made a tentative plan for the trip.",
+          "translation": "旅行の仮の計画を立てた。"
+        }
+      ],
+      "collocations": [
+        "tentative agreement",
+        "tentative schedule"
+      ],
+      "notes": "まだ確定していない「暫定的な」。provisional もほぼ同じ。副詞は tentatively。",
+      "tags": [
+        "ステップ3",
+        "形容詞"
+      ]
+    },
+    {
+      "id": "av-hence",
+      "type": "vocab",
+      "term": "hence",
+      "reading": "/hens/",
+      "pos": "副詞",
+      "meanings": [
+        "それゆえに"
+      ],
+      "examples": [
+        {
+          "text": "The material is light and strong, hence its popularity.",
+          "translation": "その素材は軽くて丈夫だ。だから人気がある。"
+        }
+      ],
+      "notes": "therefore のかたい語で、後ろに名詞句だけを置ける（hence its popularity）。",
+      "tags": [
+        "ステップ3",
+        "副詞・前置詞"
+      ]
+    },
+    {
+      "id": "av-likewise",
+      "type": "vocab",
+      "term": "likewise",
+      "reading": "/ˈlaɪkwaɪz/",
+      "pos": "副詞",
+      "meanings": [
+        "同様に"
+      ],
+      "examples": [
+        {
+          "text": "The first test was successful. Likewise, the second one went well.",
+          "translation": "最初の試験は成功した。同様に、2回目もうまくいった。"
+        }
+      ],
+      "notes": "similarly とほぼ同じ。会話では Likewise.（こちらこそ）と返事にも使う（Nice to meet you. – Likewise.）。",
+      "tags": [
+        "ステップ3",
+        "副詞・前置詞"
+      ]
+    },
+    {
+      "id": "av-notwithstanding",
+      "type": "vocab",
+      "term": "notwithstanding",
+      "reading": "/ˌnɑːtwɪθˈstændɪŋ/",
+      "pos": "前置詞",
+      "meanings": [
+        "〜にもかかわらず"
+      ],
+      "examples": [
+        {
+          "text": "Notwithstanding the difficulties, the project was a success.",
+          "translation": "困難にもかかわらず、プロジェクトは成功した。"
+        }
+      ],
+      "notes": "despite / in spite of の非常にかたい語で、契約書・法律文書に多い。名詞の後ろに置くこともある（the difficulties notwithstanding）。",
+      "tags": [
+        "ステップ3",
+        "副詞・前置詞"
+      ]
+    },
+    {
+      "id": "av-inadvertently",
+      "type": "vocab",
+      "term": "inadvertently",
+      "reading": "/ˌɪnədˈvɜːrtəntli/",
+      "pos": "副詞",
+      "meanings": [
+        "うっかり",
+        "意図せずに"
+      ],
+      "examples": [
+        {
+          "text": "I inadvertently deleted the file.",
+          "translation": "うっかりファイルを削除してしまった。"
+        }
+      ],
+      "notes": "accidentally よりかたく、「気づかないうちに・不注意で」。形容詞は inadvertent。",
+      "tags": [
+        "ステップ3",
+        "副詞・前置詞"
+      ]
+    }
+  ]
+}
