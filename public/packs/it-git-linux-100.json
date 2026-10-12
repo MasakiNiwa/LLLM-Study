@@ -1,0 +1,1578 @@
+{
+  "format": "lllm-study-pack",
+  "version": 1,
+  "id": "it-git-linux-100",
+  "title": "Git と Linux コマンド 100",
+  "description": "開発の現場で毎日使う Linux コマンドと Git の操作を、実際に打つコマンドで答えながら身につけます。ステップ 1 で Linux の基本（pwd・cd・ls・mkdir・cp・mv・rm・head・tail など）、ステップ 2 で検索（grep・find）・権限（chmod・chown と 755 などの表記）・プロセス（ps・kill・top）・ディスク（df・du）・tar・curl・ssh・パイプとリダイレクト・環境変数・sudo、ステップ 3 で Git の基本（init・clone・add・commit・log・diff・branch・switch・merge・push・pull）、ステップ 4 で stash・reset と revert の使い分け・.gitignore・コンフリクトの解消・rebase・pull request の流れを学びます。形式は一問一答 61 問（答えはコマンド。同じ意味の別の書き方も正解）・選択問題 29 問・穴埋め 7 問・作業手順の並べ替え 7 問。練習用のディレクトリやリポジトリで実際に打って確かめると定着します。データベースを扱うなら次は「SQL 入門 80」がおすすめです。",
+  "subject": "programming",
+  "language": {
+    "target": "ja",
+    "explanation": "ja"
+  },
+  "level": "プログラミング初級〜実務入門",
+  "tags": [
+    "プログラミング",
+    "Linux",
+    "Git",
+    "コマンドライン",
+    "シェル"
+  ],
+  "author": "LLLM-Study",
+  "license": "MIT",
+  "source": "LLLM-Study オリジナル（AI を利用して作成）",
+  "revision": 1,
+  "items": [
+    {
+      "id": "gl-q-pwd",
+      "type": "qa",
+      "tags": [
+        "ステップ1",
+        "ディレクトリの移動"
+      ],
+      "question": "いま作業しているディレクトリ（カレントディレクトリ）の絶対パスを表示するコマンドは？",
+      "answer": "pwd",
+      "explanation": "print working directory の略。迷子になったらまず pwd で現在地を確かめる。"
+    },
+    {
+      "id": "gl-c-abs-path",
+      "type": "cloze",
+      "tags": [
+        "ステップ1",
+        "ディレクトリの移動"
+      ],
+      "text": "/home/alice/docs のように、ルートディレクトリ（/）から書き始めるパスを{{絶対}}パスという。",
+      "hint": "漢字 2 文字",
+      "explanation": "カレントディレクトリを起点に docs/memo.txt や ../img のように書くのは相対パス。絶対パスはどこにいても同じ場所を指す。"
+    },
+    {
+      "id": "gl-ch-home-tilde",
+      "type": "choice",
+      "tags": [
+        "ステップ1",
+        "ディレクトリの移動"
+      ],
+      "question": "シェルでホームディレクトリを表す記号はどれ？",
+      "choices": [
+        "/",
+        "..",
+        "-",
+        "~"
+      ],
+      "answer": 3,
+      "explanation": "~（チルダ）はログインしているユーザーのホームディレクトリ（例: /home/alice）。/ はルートディレクトリ、.. は 1 つ上のディレクトリを表す。"
+    },
+    {
+      "id": "gl-ch-cd-dotdot",
+      "type": "choice",
+      "tags": [
+        "ステップ1",
+        "ディレクトリの移動"
+      ],
+      "question": "cd .. を実行するとどうなる？",
+      "choices": [
+        "直前にいたディレクトリに戻る",
+        "1 つ上（親）のディレクトリに移動する",
+        "ルートディレクトリに移動する",
+        "ホームディレクトリに移動する"
+      ],
+      "answer": 1,
+      "explanation": ".. は親ディレクトリ、. はカレントディレクトリを表す。ホームへは cd（引数なし）か cd ~、直前のディレクトリへは cd -、ルートへは cd / で移動する。"
+    },
+    {
+      "id": "gl-q-ls-la",
+      "type": "qa",
+      "tags": [
+        "ステップ1",
+        "ファイル操作"
+      ],
+      "question": "カレントディレクトリのファイルを、隠しファイル（名前が . で始まるもの）も含めて詳しい形式（権限・所有者・サイズ・更新日時つき）で一覧表示するコマンドは？",
+      "answer": "ls -la",
+      "accepted": [
+        "ls -al",
+        "ls -l -a",
+        "ls -a -l"
+      ],
+      "hints": [
+        "-l は詳しい形式、-a はすべて"
+      ],
+      "explanation": "-l（long）で詳細表示、-a（all）で隠しファイルも表示。オプションはまとめて -la とも -al とも書ける。"
+    },
+    {
+      "id": "gl-c-hidden",
+      "type": "cloze",
+      "tags": [
+        "ステップ1",
+        "ファイル操作"
+      ],
+      "text": "Linux では、名前が .（ドット）で始まるファイルは {{隠し}} ファイルとして扱われ、ls に -a を付けないと表示されない。",
+      "hint": "ひらがな・漢字",
+      "explanation": ".bashrc や .gitignore などの設定ファイルが代表例。消したり壊したりしないよう注意する。"
+    },
+    {
+      "id": "gl-q-mkdir",
+      "type": "qa",
+      "tags": [
+        "ステップ1",
+        "ファイル操作"
+      ],
+      "question": "カレントディレクトリに project という名前のディレクトリを作るコマンドは？",
+      "answer": "mkdir project",
+      "explanation": "make directory の略。すでに同じ名前があるとエラーになる。"
+    },
+    {
+      "id": "gl-q-mkdir-p",
+      "type": "qa",
+      "tags": [
+        "ステップ1",
+        "ファイル操作"
+      ],
+      "question": "a/b/c のように、途中のディレクトリ（a や a/b）がまだなくても、まとめて作成するコマンドは？",
+      "answer": "mkdir -p a/b/c",
+      "accepted": [
+        "mkdir --parents a/b/c"
+      ],
+      "hints": [
+        "親ディレクトリも作るオプション"
+      ],
+      "explanation": "-p（parents）を付けると途中のディレクトリも作る。すでに存在していてもエラーにならないので、スクリプトでもよく使う。"
+    },
+    {
+      "id": "gl-q-cp-r",
+      "type": "qa",
+      "tags": [
+        "ステップ1",
+        "ファイル操作"
+      ],
+      "question": "ディレクトリ src を、中のファイルやサブディレクトリごと backup という名前でコピーするコマンドは？（backup はまだ存在しない）",
+      "answer": "cp -r src backup",
+      "accepted": [
+        "cp -R src backup",
+        "cp -a src backup"
+      ],
+      "hints": [
+        "再帰的（recursive）にコピーするオプション"
+      ],
+      "explanation": "ディレクトリのコピーには -r（または -R）が必要。付け忘れると「ディレクトリを省略します」などのエラーになる。-a は権限や日時も保ったまま再帰的にコピーする。"
+    },
+    {
+      "id": "gl-q-mv-rename",
+      "type": "qa",
+      "tags": [
+        "ステップ1",
+        "ファイル操作"
+      ],
+      "question": "ファイル old.txt の名前を new.txt に変えるコマンドは？",
+      "answer": "mv old.txt new.txt",
+      "explanation": "mv は移動（move）と名前の変更の両方に使う。new.txt がすでにあると、確認なしで上書きされるので注意（-i で確認できる）。"
+    },
+    {
+      "id": "gl-ch-mv-dir",
+      "type": "choice",
+      "tags": [
+        "ステップ1",
+        "ファイル操作"
+      ],
+      "question": "カレントディレクトリに report.txt とディレクトリ docs がある。mv report.txt docs/ を実行するとどうなる？",
+      "choices": [
+        "report.txt が docs ディレクトリの中に移動する",
+        "report.txt のコピーが docs の中に作られる",
+        "docs ディレクトリが report.txt の中に移動する",
+        "report.txt が docs という名前のファイルに変わる"
+      ],
+      "answer": 0,
+      "explanation": "移動先が既存のディレクトリなら、その中へ同じ名前で移動する。元の場所には残らない（コピーではない）。コピーしたいときは cp を使う。"
+    },
+    {
+      "id": "gl-q-rm",
+      "type": "qa",
+      "tags": [
+        "ステップ1",
+        "ファイル操作"
+      ],
+      "question": "ファイル temp.txt を削除するコマンドは？",
+      "answer": "rm temp.txt",
+      "explanation": "rm（remove）で削除したファイルはゴミ箱に入らず、元に戻すのは困難。不安なときは rm -i で 1 つずつ確認する。"
+    },
+    {
+      "id": "gl-ch-rm-r",
+      "type": "choice",
+      "tags": [
+        "ステップ1",
+        "ファイル操作"
+      ],
+      "question": "rm -r old_project を実行するとどうなる？",
+      "choices": [
+        "old_project の中身だけを削除し、ディレクトリは残す",
+        "old_project の名前を変更する",
+        "ディレクトリ old_project を中身ごと削除する",
+        "old_project をゴミ箱に移動する"
+      ],
+      "answer": 2,
+      "explanation": "-r は再帰的に削除する。ゴミ箱は経由しないので、パスの打ち間違いに特に注意する。空のディレクトリだけを消すなら rmdir。"
+    },
+    {
+      "id": "gl-q-touch",
+      "type": "qa",
+      "tags": [
+        "ステップ1",
+        "ファイル操作"
+      ],
+      "question": "空のファイル empty.txt を作るコマンドは？（すでにあれば更新日時だけが変わる）",
+      "answer": "touch empty.txt",
+      "explanation": "touch は本来ファイルの更新日時を変えるコマンドで、ファイルがなければ空のファイルを作る。"
+    },
+    {
+      "id": "gl-ch-less",
+      "type": "choice",
+      "tags": [
+        "ステップ1",
+        "ファイルの中身を見る"
+      ],
+      "question": "大きなファイルを、1 画面ずつスクロールしたり検索したりしながら読むのに向いたコマンドはどれ？",
+      "choices": [
+        "touch",
+        "less",
+        "echo",
+        "cat"
+      ],
+      "answer": 1,
+      "explanation": "less では矢印キーやスペースで移動し、/単語 で検索、q で終了する。cat は全体を一気に出力するので長いファイルには向かない。"
+    },
+    {
+      "id": "gl-q-head",
+      "type": "qa",
+      "tags": [
+        "ステップ1",
+        "ファイルの中身を見る"
+      ],
+      "question": "ファイル access.log の先頭 10 行を表示するコマンドは？（行数は既定のままでよい）",
+      "answer": "head access.log",
+      "accepted": [
+        "head -n 10 access.log",
+        "head -10 access.log",
+        "head -n10 access.log"
+      ],
+      "explanation": "head は既定で先頭 10 行を表示する。行数を変えるときは -n 行数。"
+    },
+    {
+      "id": "gl-q-tail-n",
+      "type": "qa",
+      "tags": [
+        "ステップ1",
+        "ファイルの中身を見る"
+      ],
+      "question": "ファイル access.log の末尾 20 行を表示するコマンドは？",
+      "answer": "tail -n 20 access.log",
+      "accepted": [
+        "tail -20 access.log",
+        "tail -n20 access.log"
+      ],
+      "hints": [
+        "行数は -n で指定"
+      ],
+      "explanation": "tail は末尾を表示する（既定は 10 行）。最新のログは末尾に追記されるので、ログ調査でよく使う。"
+    },
+    {
+      "id": "gl-q-tail-f",
+      "type": "qa",
+      "tags": [
+        "ステップ1",
+        "ファイルの中身を見る"
+      ],
+      "question": "ログファイル app.log に追記される内容を、リアルタイムに表示し続けるコマンドは？",
+      "answer": "tail -f app.log",
+      "accepted": [
+        "tail -F app.log"
+      ],
+      "hints": [
+        "follow の f"
+      ],
+      "explanation": "-f（follow）で、追記されるたびに表示を続ける。終了は Ctrl + C。-F はログのローテーションでファイルが作り直されても追いかける。"
+    },
+    {
+      "id": "gl-q-man",
+      "type": "qa",
+      "tags": [
+        "ステップ1",
+        "ファイルの中身を見る"
+      ],
+      "question": "ls コマンドのマニュアル（使い方の説明）を表示するコマンドは？",
+      "answer": "man ls",
+      "explanation": "man はマニュアルを表示する。中の操作は less と同じで、q で終了。簡単な説明なら ls --help でも見られる。"
+    },
+    {
+      "id": "gl-o-make-dir-flow",
+      "type": "order",
+      "tags": [
+        "ステップ1",
+        "ファイルの中身を見る"
+      ],
+      "prompt": "ホームディレクトリの下の work ディレクトリに移動し、その中に docs ディレクトリを作って、docs の中に空のファイル readme.txt を作る。コマンドを実行する順に並べてください。",
+      "chunks": [
+        "cd ~/work",
+        "mkdir docs",
+        "cd docs",
+        "touch readme.txt"
+      ],
+      "answer": "cd ~/work mkdir docs cd docs touch readme.txt",
+      "explanation": "移動（cd）→ 作成（mkdir）→ 作ったディレクトリへ移動 → ファイル作成の順。cd docs をとばすと readme.txt は work の直下にできてしまう。"
+    },
+    {
+      "id": "gl-q-grep",
+      "type": "qa",
+      "tags": [
+        "ステップ2",
+        "検索"
+      ],
+      "question": "ファイル app.log の中から、文字列 ERROR を含む行だけを表示するコマンドは？",
+      "answer": "grep ERROR app.log",
+      "accepted": [
+        "grep -e ERROR app.log"
+      ],
+      "explanation": "grep パターン ファイル の順に書く。スペースや記号を含むパターンは \"...\" や '...' で囲む。"
+    },
+    {
+      "id": "gl-q-grep-i",
+      "type": "qa",
+      "tags": [
+        "ステップ2",
+        "検索"
+      ],
+      "question": "ファイル app.log の中から、大文字・小文字を区別せずに error を含む行を表示するコマンドは？",
+      "answer": "grep -i error app.log",
+      "accepted": [
+        "grep --ignore-case error app.log"
+      ],
+      "hints": [
+        "ignore case の i"
+      ],
+      "explanation": "-i を付けると ERROR・Error・error のどれにも一致する。"
+    },
+    {
+      "id": "gl-ch-grep-r",
+      "type": "choice",
+      "tags": [
+        "ステップ2",
+        "検索"
+      ],
+      "question": "grep -r TODO src を実行するとどうなる？",
+      "choices": [
+        "src というファイルから TODO を含まない行を探す",
+        "src ディレクトリにある TODO という名前のファイルを探す",
+        "src ディレクトリ以下のすべてのファイルから TODO を含む行を探す",
+        "src 以下のファイルの TODO を削除する"
+      ],
+      "answer": 2,
+      "explanation": "-r（recursive）でディレクトリの中を再帰的に検索する。ファイル名を探すのは find、一致しない行を表示するのは grep -v。"
+    },
+    {
+      "id": "gl-ch-grep-v",
+      "type": "choice",
+      "tags": [
+        "ステップ2",
+        "検索"
+      ],
+      "question": "grep -v DEBUG app.log の結果として表示されるのはどれ？",
+      "choices": [
+        "DEBUG を含む行の数",
+        "DEBUG を含む行",
+        "DEBUG を含む行の行番号だけ",
+        "DEBUG を含まない行"
+      ],
+      "answer": 3,
+      "explanation": "-v は一致しない行を表示する（invert）。ログからノイズを除くのに便利。行数を数えるのは -c、行番号を付けるのは -n。"
+    },
+    {
+      "id": "gl-q-find-name",
+      "type": "qa",
+      "tags": [
+        "ステップ2",
+        "検索"
+      ],
+      "question": "カレントディレクトリ以下から、名前が .log で終わるファイルをすべて探すコマンドは？（find を使う）",
+      "answer": "find . -name \"*.log\"",
+      "accepted": [
+        "find . -name '*.log'",
+        "find . -name *.log",
+        "find . -type f -name \"*.log\"",
+        "find . -type f -name '*.log'"
+      ],
+      "hints": [
+        "find 探す場所 -name パターン"
+      ],
+      "explanation": "find は「どこから」「どんな条件で」の順に書く。*.log はシェルに先に展開されないよう引用符で囲むのが安全。ディレクトリだけなら -type d、ファイルだけなら -type f を加える。"
+    },
+    {
+      "id": "gl-ch-perm-755",
+      "type": "choice",
+      "tags": [
+        "ステップ2",
+        "権限"
+      ],
+      "question": "パーミッション rwxr-xr-x を数字で表したものはどれ？",
+      "choices": [
+        "755",
+        "775",
+        "744",
+        "644"
+      ],
+      "answer": 0,
+      "explanation": "r = 4、w = 2、x = 1 を所有者・グループ・その他ごとに足す。rwx = 7、r-x = 5、r-x = 5 で 755。"
+    },
+    {
+      "id": "gl-c-perm-num",
+      "type": "cloze",
+      "tags": [
+        "ステップ2",
+        "権限"
+      ],
+      "text": "パーミッションを数字で表すとき、読み取り r = 4、書き込み w = 2、実行 x = {{1}} として足し合わせる。",
+      "hint": "数字で",
+      "explanation": "例: rw- = 4 + 2 = 6、r-- = 4。所有者・グループ・その他の 3 つの数字を並べて 644 のように書く。"
+    },
+    {
+      "id": "gl-q-perm-644",
+      "type": "qa",
+      "tags": [
+        "ステップ2",
+        "権限"
+      ],
+      "question": "パーミッション 644 を rwx の記号（9 文字）で書くと？",
+      "answer": "rw-r--r--",
+      "accepted": [
+        "-rw-r--r--"
+      ],
+      "hints": [
+        "6 = 4 + 2、4 = 4"
+      ],
+      "explanation": "6 = rw-、4 = r--、4 = r--。所有者は読み書き、グループとその他は読み取りだけ。普通のテキストファイルによく使う設定。"
+    },
+    {
+      "id": "gl-q-chmod-755",
+      "type": "qa",
+      "tags": [
+        "ステップ2",
+        "権限"
+      ],
+      "question": "ファイル script.sh のパーミッションを rwxr-xr-x にするコマンドは？（数字で指定する）",
+      "answer": "chmod 755 script.sh",
+      "explanation": "chmod（change mode）で権限を変える。755 は「所有者は読み書き実行、ほかは読み取りと実行」で、スクリプトやディレクトリの定番。"
+    },
+    {
+      "id": "gl-q-chmod-x",
+      "type": "qa",
+      "tags": [
+        "ステップ2",
+        "権限"
+      ],
+      "question": "ファイル run.sh に実行権限を追加するコマンドは？（記号で指定し、ほかの権限は変えない）",
+      "answer": "chmod +x run.sh",
+      "accepted": [
+        "chmod a+x run.sh",
+        "chmod ugo+x run.sh"
+      ],
+      "hints": [
+        "+ で権限を追加"
+      ],
+      "explanation": "+x で実行権限を加える。所有者だけに加えるなら u+x、取り除くなら -x。記号指定は今の権限を残したまま一部だけ変えられる。"
+    },
+    {
+      "id": "gl-ch-chmod-600",
+      "type": "choice",
+      "tags": [
+        "ステップ2",
+        "権限"
+      ],
+      "question": "chmod 600 id_rsa を実行したあとの id_rsa の権限はどれ？",
+      "choices": [
+        "所有者は読み書き実行、ほかは読み取りだけできる",
+        "所有者だけが読み書きでき、ほかのユーザーは何もできない",
+        "所有者だけが読み取りでき、書き込みは誰もできない",
+        "すべてのユーザーが読み書きできる"
+      ],
+      "answer": 1,
+      "explanation": "6 = rw-、0 = ---。SSH の秘密鍵は 600 にしないと、ssh が「権限が緩すぎる」として使用を拒否する。"
+    },
+    {
+      "id": "gl-q-chown",
+      "type": "qa",
+      "tags": [
+        "ステップ2",
+        "権限"
+      ],
+      "question": "ファイル data.txt の所有者をユーザー alice に変更するコマンドは？（管理者権限は sudo で得るものとする）",
+      "answer": "sudo chown alice data.txt",
+      "accepted": [
+        "chown alice data.txt"
+      ],
+      "explanation": "chown（change owner）は通常、管理者権限が必要。グループも同時に変えるなら chown alice:staff data.txt のように書く。"
+    },
+    {
+      "id": "gl-q-ps",
+      "type": "qa",
+      "tags": [
+        "ステップ2",
+        "プロセスとディスク"
+      ],
+      "question": "実行中のすべてのプロセスを、ユーザー名や CPU 使用率などの情報つきで一覧表示するコマンドは？",
+      "answer": "ps aux",
+      "accepted": [
+        "ps -ef",
+        "ps -aux"
+      ],
+      "explanation": "ps aux（BSD 形式）か ps -ef（System V 形式）がよく使われる。2 列目の PID（プロセス ID）を kill などで使う。"
+    },
+    {
+      "id": "gl-q-kill",
+      "type": "qa",
+      "tags": [
+        "ステップ2",
+        "プロセスとディスク"
+      ],
+      "question": "PID が 1234 のプロセスに、終了を求めるシグナル（既定の SIGTERM）を送るコマンドは？",
+      "answer": "kill 1234",
+      "accepted": [
+        "kill -15 1234",
+        "kill -TERM 1234",
+        "kill -SIGTERM 1234"
+      ],
+      "explanation": "kill は既定で SIGTERM（15）を送り、プロセスに後始末をしてから終了するよう求める。"
+    },
+    {
+      "id": "gl-ch-kill-9",
+      "type": "choice",
+      "tags": [
+        "ステップ2",
+        "プロセスとディスク"
+      ],
+      "question": "kill -9 1234 の説明として正しいものはどれ？",
+      "choices": [
+        "後始末の機会を与えずにプロセスを強制終了する",
+        "プロセスに設定を読み直させる",
+        "プロセスを一時停止する",
+        "9 秒後にプロセスを終了する"
+      ],
+      "answer": 0,
+      "explanation": "-9 は SIGKILL で、プロセス側で拒否できない。ファイルの書きかけなどが残ることがあるので、まず通常の kill を試し、応答しないときの最終手段にする。"
+    },
+    {
+      "id": "gl-ch-top",
+      "type": "choice",
+      "tags": [
+        "ステップ2",
+        "プロセスとディスク"
+      ],
+      "question": "top コマンドの説明として正しいものはどれ？",
+      "choices": [
+        "ファイルの先頭部分を表示する",
+        "ディスクの空き容量を表示する",
+        "最も古いプロセスを終了させる",
+        "CPU やメモリの使用状況とプロセスの一覧をリアルタイムに更新しながら表示する"
+      ],
+      "answer": 3,
+      "explanation": "重い処理をしているプロセスを探すときに使う。q で終了。ディスクの空き容量は df、ファイルの先頭は head。"
+    },
+    {
+      "id": "gl-q-df",
+      "type": "qa",
+      "tags": [
+        "ステップ2",
+        "プロセスとディスク"
+      ],
+      "question": "ファイルシステムごとのディスクの使用量と空き容量を、GB・MB などの読みやすい単位で表示するコマンドは？",
+      "answer": "df -h",
+      "explanation": "disk free の略。-h（human-readable）で 1.5G のような単位付きで表示する。"
+    },
+    {
+      "id": "gl-q-du",
+      "type": "qa",
+      "tags": [
+        "ステップ2",
+        "プロセスとディスク"
+      ],
+      "question": "ディレクトリ logs の使用容量の合計だけを、読みやすい単位で表示するコマンドは？",
+      "answer": "du -sh logs",
+      "accepted": [
+        "du -hs logs",
+        "du -s -h logs",
+        "du -h -s logs"
+      ],
+      "hints": [
+        "-s は合計だけ（summary）"
+      ],
+      "explanation": "du（disk usage）はファイルやディレクトリの使用量を表示する。-s を付けないとサブディレクトリごとに表示される。df はファイルシステム全体、du は指定した場所の使用量。"
+    },
+    {
+      "id": "gl-q-tar-c",
+      "type": "qa",
+      "tags": [
+        "ステップ2",
+        "圧縮と通信"
+      ],
+      "question": "ディレクトリ project をまとめて gzip で圧縮し、project.tar.gz を作るコマンドは？（tar を使う）",
+      "answer": "tar -czf project.tar.gz project",
+      "accepted": [
+        "tar czf project.tar.gz project",
+        "tar -zcf project.tar.gz project",
+        "tar -czvf project.tar.gz project",
+        "tar czvf project.tar.gz project",
+        "tar -zcvf project.tar.gz project",
+        "tar zcvf project.tar.gz project"
+      ],
+      "hints": [
+        "c = 作成、z = gzip、f = ファイル名の指定"
+      ],
+      "explanation": "c（create）・z（gzip）・f（file）。f の直後に作るファイル名、その後にまとめる対象を書く。v を加えると処理中のファイル名を表示する。"
+    },
+    {
+      "id": "gl-q-tar-x",
+      "type": "qa",
+      "tags": [
+        "ステップ2",
+        "圧縮と通信"
+      ],
+      "question": "project.tar.gz をカレントディレクトリに展開するコマンドは？（tar を使う）",
+      "answer": "tar -xzf project.tar.gz",
+      "accepted": [
+        "tar xzf project.tar.gz",
+        "tar -zxf project.tar.gz",
+        "tar -xf project.tar.gz",
+        "tar xf project.tar.gz",
+        "tar -xzvf project.tar.gz",
+        "tar xzvf project.tar.gz",
+        "tar -zxvf project.tar.gz",
+        "tar zxvf project.tar.gz"
+      ],
+      "hints": [
+        "展開は x（extract）"
+      ],
+      "explanation": "x（extract）で展開。最近の GNU tar は圧縮形式を自動で判別するので tar -xf でもよい。中身を一覧するだけなら t（list）。"
+    },
+    {
+      "id": "gl-q-curl-o",
+      "type": "qa",
+      "tags": [
+        "ステップ2",
+        "圧縮と通信"
+      ],
+      "question": "https://example.com/data.csv を、同じファイル名 data.csv でカレントディレクトリに保存する curl コマンドは？",
+      "answer": "curl -O https://example.com/data.csv",
+      "accepted": [
+        "curl -o data.csv https://example.com/data.csv",
+        "curl --remote-name https://example.com/data.csv"
+      ],
+      "hints": [
+        "大文字の O は URL のファイル名で保存"
+      ],
+      "explanation": "オプションなしの curl は内容を画面に出力する。-O は URL の末尾のファイル名で保存、-o 名前 は名前を指定して保存する。"
+    },
+    {
+      "id": "gl-q-ssh",
+      "type": "qa",
+      "tags": [
+        "ステップ2",
+        "圧縮と通信"
+      ],
+      "question": "ユーザー名 alice で、サーバ server.example.com に SSH でログインするコマンドは？",
+      "answer": "ssh alice@server.example.com",
+      "accepted": [
+        "ssh -l alice server.example.com"
+      ],
+      "explanation": "ssh ユーザー名@ホスト名 が基本形。ポート番号を変えるときは -p、鍵ファイルを指定するときは -i を使う。"
+    },
+    {
+      "id": "gl-ch-pipe",
+      "type": "choice",
+      "tags": [
+        "ステップ2",
+        "パイプとリダイレクト"
+      ],
+      "question": "コマンドの間に書く |（パイプ）の働きはどれ？",
+      "choices": [
+        "前のコマンドが成功したときだけ次のコマンドを実行する",
+        "前のコマンドの出力をファイルに保存する",
+        "前のコマンドの標準出力を、次のコマンドの標準入力に渡す",
+        "2 つのコマンドを同時に別々に実行する"
+      ],
+      "answer": 2,
+      "explanation": "例: ps aux | grep nginx。小さなコマンドを組み合わせられるのが Linux の強み。ファイルへの保存は >、成功したときだけ次を実行するのは &&。"
+    },
+    {
+      "id": "gl-q-redirect",
+      "type": "qa",
+      "tags": [
+        "ステップ2",
+        "パイプとリダイレクト"
+      ],
+      "question": "ls -l の結果を、ファイル list.txt に保存するコマンドは？（list.txt があれば上書きする）",
+      "answer": "ls -l > list.txt",
+      "explanation": "> は標準出力をファイルに書き込む（上書き）。追記したいときは >>。"
+    },
+    {
+      "id": "gl-ch-append",
+      "type": "choice",
+      "tags": [
+        "ステップ2",
+        "パイプとリダイレクト"
+      ],
+      "question": "echo done >> log.txt の説明として正しいものはどれ？",
+      "choices": [
+        "log.txt の内容を done で上書きする",
+        "log.txt に done が含まれるか調べる",
+        "log.txt の内容を画面に表示する",
+        "log.txt の末尾に done という行を追記する"
+      ],
+      "answer": 3,
+      "explanation": ">> は追記、> は上書き。> を使うと元の内容が消えるので、ログに書き足すときは >> を使う。"
+    },
+    {
+      "id": "gl-c-stderr",
+      "type": "cloze",
+      "tags": [
+        "ステップ2",
+        "パイプとリダイレクト"
+      ],
+      "text": "エラーメッセージ（標準エラー出力）だけをファイルに保存するには、command {{2}}> error.log のように書く。",
+      "hint": "数字で",
+      "explanation": "標準入力は 0、標準出力は 1、標準エラー出力は 2。両方をまとめて保存するなら command > all.log 2>&1。"
+    },
+    {
+      "id": "gl-q-grep-wc",
+      "type": "qa",
+      "tags": [
+        "ステップ2",
+        "パイプとリダイレクト"
+      ],
+      "question": "ファイル app.log のうち ERROR を含む行の数を、grep と wc をパイプでつないで数えるコマンドは？",
+      "answer": "grep ERROR app.log | wc -l",
+      "accepted": [
+        "cat app.log | grep ERROR | wc -l"
+      ],
+      "hints": [
+        "wc -l は行数を数える"
+      ],
+      "explanation": "grep で行を絞り込み、wc -l（行数）で数える。grep -c ERROR app.log でも同じ数が得られる。"
+    },
+    {
+      "id": "gl-q-echo-path",
+      "type": "qa",
+      "tags": [
+        "ステップ2",
+        "環境変数と sudo"
+      ],
+      "question": "環境変数 PATH の値を echo で表示するコマンドは？",
+      "answer": "echo $PATH",
+      "accepted": [
+        "echo ${PATH}"
+      ],
+      "hints": [
+        "変数の値は $ を付けて取り出す"
+      ],
+      "explanation": "PATH はコマンドを探すディレクトリの一覧（: 区切り）。printenv PATH でも表示できる。"
+    },
+    {
+      "id": "gl-q-export",
+      "type": "qa",
+      "tags": [
+        "ステップ2",
+        "環境変数と sudo"
+      ],
+      "question": "環境変数 EDITOR に vim を設定し、このシェルから起動するプログラムにも引き継がれるようにするコマンドは？",
+      "answer": "export EDITOR=vim",
+      "hints": [
+        "= の前後に空白を入れない"
+      ],
+      "explanation": "export を付けると子プロセスにも引き継がれる環境変数になる。= の前後に空白を入れるとエラーになるのはよくある間違い。ログインのたびに設定したいなら ~/.bashrc などに書く。"
+    },
+    {
+      "id": "gl-ch-sudo",
+      "type": "choice",
+      "tags": [
+        "ステップ2",
+        "環境変数と sudo"
+      ],
+      "question": "sudo apt update の sudo の役割はどれ？",
+      "choices": [
+        "コマンドをバックグラウンドで実行する",
+        "コマンドを一定時間ごとに繰り返し実行する",
+        "管理者（root）など、ほかのユーザーの権限でコマンドを実行する",
+        "コマンドの実行結果をファイルに保存する"
+      ],
+      "answer": 2,
+      "explanation": "システムの設定変更やソフトウェアのインストールには管理者権限が必要。sudo は実行した記録が残り、許可されたユーザーだけが使える。何でも sudo を付けて実行する癖は避ける。"
+    },
+    {
+      "id": "gl-o-script-flow",
+      "type": "order",
+      "tags": [
+        "ステップ2",
+        "環境変数と sudo"
+      ],
+      "prompt": "新しく tools ディレクトリを作り、その中にシェルスクリプト run.sh を作って実行するまでの手順を正しい順に並べてください。",
+      "chunks": [
+        "mkdir tools",
+        "cd tools",
+        "エディタで run.sh を作って保存する",
+        "chmod +x run.sh",
+        "./run.sh で実行する"
+      ],
+      "answer": "mkdir tools cd tools エディタで run.sh を作って保存する chmod +x run.sh ./run.sh で実行する",
+      "explanation": "ファイルを作っただけでは実行権限がないので chmod +x が必要。./ はカレントディレクトリを表し、PATH に含まれない場所のスクリプトは ./run.sh のように場所を指定して実行する。"
+    },
+    {
+      "id": "gl-q-config-name",
+      "type": "qa",
+      "tags": [
+        "ステップ3",
+        "Git の準備と記録"
+      ],
+      "question": "Git のコミットに記録する名前を、このコンピュータ全体の設定として Taro Yamada にするコマンドは？",
+      "answer": "git config --global user.name \"Taro Yamada\"",
+      "accepted": [
+        "git config --global user.name 'Taro Yamada'"
+      ],
+      "explanation": "--global はユーザー全体の設定（~/.gitconfig）。メールアドレスは user.email で設定する。最初に 1 回だけ設定すればよい。"
+    },
+    {
+      "id": "gl-q-init",
+      "type": "qa",
+      "tags": [
+        "ステップ3",
+        "Git の準備と記録"
+      ],
+      "question": "カレントディレクトリを新しい Git リポジトリにする（.git ディレクトリを作る）コマンドは？",
+      "answer": "git init",
+      "explanation": "git init で履歴を管理するための .git ディレクトリが作られる。既存のリポジトリを手元に複製するときは git clone を使う。"
+    },
+    {
+      "id": "gl-q-clone",
+      "type": "qa",
+      "tags": [
+        "ステップ3",
+        "Git の準備と記録"
+      ],
+      "question": "https://github.com/example/app.git のリポジトリを手元に複製するコマンドは？",
+      "answer": "git clone https://github.com/example/app.git",
+      "explanation": "clone すると app ディレクトリが作られ、すべての履歴が取り込まれる。複製元は自動的に origin という名前のリモートとして登録される。"
+    },
+    {
+      "id": "gl-ch-origin",
+      "type": "choice",
+      "tags": [
+        "ステップ3",
+        "Git の準備と記録"
+      ],
+      "question": "git clone でリポジトリを複製したとき、複製元のリモートリポジトリに自動で付けられる名前はどれ？",
+      "choices": [
+        "origin",
+        "main",
+        "HEAD",
+        "upstream"
+      ],
+      "answer": 0,
+      "explanation": "origin は慣習的な既定のリモート名。main はブランチ名、HEAD は今いる位置を指すもの。upstream はフォーク元を登録するときによく使う名前だが、自動では付かない。"
+    },
+    {
+      "id": "gl-q-status",
+      "type": "qa",
+      "tags": [
+        "ステップ3",
+        "Git の準備と記録"
+      ],
+      "question": "作業ツリーの状態（変更されたファイル・ステージされたファイル・追跡されていないファイル）を確認するコマンドは？",
+      "answer": "git status",
+      "explanation": "迷ったらまず git status。次に何をすればよいか（git add や git restore など）のヒントも表示される。"
+    },
+    {
+      "id": "gl-o-areas",
+      "type": "order",
+      "tags": [
+        "ステップ3",
+        "Git の準備と記録"
+      ],
+      "prompt": "Git で変更が記録・共有されていく場所を、変更が流れる順に並べてください。",
+      "chunks": [
+        "作業ツリー",
+        "ステージングエリア",
+        "ローカルリポジトリ",
+        "リモートリポジトリ"
+      ],
+      "answer": "作業ツリー ステージングエリア ローカルリポジトリ リモートリポジトリ",
+      "explanation": "ファイルを編集する場所が作業ツリー、git add でステージングエリア（インデックス）へ、git commit でローカルリポジトリへ、git push でリモートリポジトリへ送られる。"
+    },
+    {
+      "id": "gl-q-add",
+      "type": "qa",
+      "tags": [
+        "ステップ3",
+        "Git の準備と記録"
+      ],
+      "question": "ファイル index.html の変更をステージする（次のコミットに含める）コマンドは？",
+      "answer": "git add index.html",
+      "explanation": "ステージした変更だけがコミットされる。複数のファイルを指定することもできる。"
+    },
+    {
+      "id": "gl-q-add-all",
+      "type": "qa",
+      "tags": [
+        "ステップ3",
+        "Git の準備と記録"
+      ],
+      "question": "作業ツリーのすべての変更（新しいファイル・変更・削除）をまとめてステージするコマンドは？（オプションを使う）",
+      "answer": "git add -A",
+      "accepted": [
+        "git add --all",
+        "git add ."
+      ],
+      "explanation": "-A（--all）はリポジトリ全体の変更をステージする。git add . はカレントディレクトリ以下が対象。まとめて add する前に git status で不要なファイルが含まれていないか確かめる。"
+    },
+    {
+      "id": "gl-ch-staging",
+      "type": "choice",
+      "tags": [
+        "ステップ3",
+        "Git の準備と記録"
+      ],
+      "question": "Git のステージングエリア（インデックス）の説明として正しいものはどれ？",
+      "choices": [
+        "リモートリポジトリにある変更を一時的に保管する場所",
+        "次のコミットに含める変更を置いておく場所",
+        "ブランチの一覧を記録する場所",
+        "削除したファイルを保管するゴミ箱"
+      ],
+      "answer": 1,
+      "explanation": "ステージを経由するので、変更したファイルの一部だけを選んでコミットできる。意味のまとまりごとにコミットを分けるのに役立つ。"
+    },
+    {
+      "id": "gl-q-commit",
+      "type": "qa",
+      "tags": [
+        "ステップ3",
+        "Git の準備と記録"
+      ],
+      "question": "ステージした変更を、メッセージ「Fix typo」を付けてコミットするコマンドは？",
+      "answer": "git commit -m \"Fix typo\"",
+      "accepted": [
+        "git commit -m 'Fix typo'",
+        "git commit --message \"Fix typo\""
+      ],
+      "explanation": "-m でメッセージを指定する。-m を付けないとエディタが開いてメッセージを入力する。メッセージは「何を・なぜ変えたか」が分かるように書く。"
+    },
+    {
+      "id": "gl-o-basic-flow",
+      "type": "order",
+      "tags": [
+        "ステップ3",
+        "Git の準備と記録"
+      ],
+      "prompt": "ファイルを変更してから GitHub などのリモートに反映するまでの基本の流れを、正しい順に並べてください。",
+      "chunks": [
+        "ファイルを編集する",
+        "git add で変更をステージする",
+        "git commit で記録する",
+        "git push でリモートに送る"
+      ],
+      "answer": "ファイルを編集する git add で変更をステージする git commit で記録する git push でリモートに送る",
+      "explanation": "編集 → add → commit → push が基本のサイクル。push の前に git status や git log で内容を確かめる習慣をつけると、ミスに早く気づける。"
+    },
+    {
+      "id": "gl-q-log-oneline",
+      "type": "qa",
+      "tags": [
+        "ステップ3",
+        "履歴と差分"
+      ],
+      "question": "コミット履歴を 1 コミット 1 行の簡潔な形式で表示するコマンドは？",
+      "answer": "git log --oneline",
+      "explanation": "短いコミット ID とメッセージの 1 行目だけが表示される。--graph を加えるとブランチの分岐・合流も図で見られる。"
+    },
+    {
+      "id": "gl-q-show",
+      "type": "qa",
+      "tags": [
+        "ステップ3",
+        "履歴と差分"
+      ],
+      "question": "コミット abc1234 のメッセージと変更内容（差分）を表示するコマンドは？",
+      "answer": "git show abc1234",
+      "explanation": "git show は 1 つのコミットの詳細を表示する。コミット ID は先頭の数文字だけでも、ほかと区別できれば指定できる。"
+    },
+    {
+      "id": "gl-q-diff",
+      "type": "qa",
+      "tags": [
+        "ステップ3",
+        "履歴と差分"
+      ],
+      "question": "作業ツリーで変更したが、まだステージしていない変更の差分を表示するコマンドは？",
+      "answer": "git diff",
+      "explanation": "引数なしの git diff は「ステージングエリアと作業ツリーの差」を表示する。すでにステージした変更は表示されないことに注意。"
+    },
+    {
+      "id": "gl-q-diff-staged",
+      "type": "qa",
+      "tags": [
+        "ステップ3",
+        "履歴と差分"
+      ],
+      "question": "ステージ済み（次にコミットされる）の変更の差分を表示するコマンドは？",
+      "answer": "git diff --staged",
+      "accepted": [
+        "git diff --cached"
+      ],
+      "explanation": "--staged と --cached は同じ意味。コミット直前に、何がコミットされるかを確認するのに使う。"
+    },
+    {
+      "id": "gl-c-head",
+      "type": "cloze",
+      "tags": [
+        "ステップ3",
+        "履歴と差分"
+      ],
+      "text": "Git で、いま作業しているブランチ（の最新のコミット）を指すものを {{HEAD}} という。",
+      "hint": "英字 4 文字",
+      "explanation": "ブランチを切り替えると HEAD の指す先が変わる。HEAD~1（HEAD~）は HEAD の 1 つ前のコミットを表す。"
+    },
+    {
+      "id": "gl-q-branch",
+      "type": "qa",
+      "tags": [
+        "ステップ3",
+        "ブランチとマージ"
+      ],
+      "question": "ローカルのブランチの一覧を表示するコマンドは？",
+      "answer": "git branch",
+      "explanation": "今いるブランチには * が付く。リモートのブランチも含めて見るなら git branch -a。"
+    },
+    {
+      "id": "gl-q-switch-c",
+      "type": "qa",
+      "tags": [
+        "ステップ3",
+        "ブランチとマージ"
+      ],
+      "question": "新しいブランチ feature-login を作り、同時にそのブランチに切り替えるコマンドは？",
+      "answer": "git switch -c feature-login",
+      "accepted": [
+        "git checkout -b feature-login"
+      ],
+      "hints": [
+        "switch なら -c（create）"
+      ],
+      "explanation": "git switch -c は Git 2.23 で加わった書き方で、昔ながらの git checkout -b と同じ動作。新しいブランチは今いるコミットから作られる。"
+    },
+    {
+      "id": "gl-q-switch",
+      "type": "qa",
+      "tags": [
+        "ステップ3",
+        "ブランチとマージ"
+      ],
+      "question": "既存のブランチ main に切り替えるコマンドは？",
+      "answer": "git switch main",
+      "accepted": [
+        "git checkout main"
+      ],
+      "explanation": "switch はブランチの切り替え専用のコマンド。checkout はファイルの復元にも使うため、役割を分けた switch と restore が追加された。"
+    },
+    {
+      "id": "gl-q-merge",
+      "type": "qa",
+      "tags": [
+        "ステップ3",
+        "ブランチとマージ"
+      ],
+      "question": "いま main ブランチにいる。ブランチ feature-login の変更を main に統合するコマンドは？",
+      "answer": "git merge feature-login",
+      "explanation": "git merge は「指定したブランチを、今いるブランチに取り込む」。取り込む側のブランチに切り替えてから実行する。"
+    },
+    {
+      "id": "gl-ch-ff-merge",
+      "type": "choice",
+      "tags": [
+        "ステップ3",
+        "ブランチとマージ"
+      ],
+      "question": "main から feature を作ったあと main には新しいコミットがなく、feature にだけコミットがある。この状態で main に feature をマージするとどうなる？",
+      "choices": [
+        "feature のコミットがすべて削除される",
+        "main と feature の両方に新しいブランチが作られる",
+        "main が feature の最新コミットまで進むだけで、マージコミットは作られない（fast-forward）",
+        "必ずコンフリクトが発生する"
+      ],
+      "answer": 2,
+      "explanation": "分岐後に main 側が進んでいなければ、ブランチの指す位置を前に進めるだけで済む（早送り）。両方にコミットがあるときは、2 つをまとめるマージコミットが作られる。"
+    },
+    {
+      "id": "gl-q-branch-d",
+      "type": "qa",
+      "tags": [
+        "ステップ3",
+        "ブランチとマージ"
+      ],
+      "question": "マージ済みのブランチ feature-login を削除するコマンドは？",
+      "answer": "git branch -d feature-login",
+      "accepted": [
+        "git branch --delete feature-login"
+      ],
+      "explanation": "-d はマージされていないブランチの削除を拒否するので安全。マージしていない変更ごと捨てるときだけ -D（強制削除）を使う。"
+    },
+    {
+      "id": "gl-q-remote-v",
+      "type": "qa",
+      "tags": [
+        "ステップ3",
+        "リモート"
+      ],
+      "question": "登録されているリモートリポジトリの名前と URL を一覧表示するコマンドは？",
+      "answer": "git remote -v",
+      "accepted": [
+        "git remote --verbose"
+      ],
+      "explanation": "-v（verbose）で URL も表示される。fetch 用と push 用の URL が 1 行ずつ出る。"
+    },
+    {
+      "id": "gl-q-remote-add",
+      "type": "qa",
+      "tags": [
+        "ステップ3",
+        "リモート"
+      ],
+      "question": "リモートリポジトリ https://github.com/example/app.git を origin という名前で登録するコマンドは？",
+      "answer": "git remote add origin https://github.com/example/app.git",
+      "explanation": "git init で作ったリポジトリを GitHub などとつなぐときに使う。clone したリポジトリでは origin が最初から登録されている。"
+    },
+    {
+      "id": "gl-q-push",
+      "type": "qa",
+      "tags": [
+        "ステップ3",
+        "リモート"
+      ],
+      "question": "ローカルの main ブランチのコミットを、リモート origin に送るコマンドは？（リモートとブランチを明示する）",
+      "answer": "git push origin main",
+      "explanation": "git push リモート名 ブランチ名。上流ブランチが設定されていれば git push だけでもよい。"
+    },
+    {
+      "id": "gl-q-push-u",
+      "type": "qa",
+      "tags": [
+        "ステップ3",
+        "リモート"
+      ],
+      "question": "新しく作ったブランチ feature-login を初めてリモート origin に送り、同時に上流ブランチ（追跡先）として設定するコマンドは？",
+      "answer": "git push -u origin feature-login",
+      "accepted": [
+        "git push --set-upstream origin feature-login"
+      ],
+      "hints": [
+        "-u は --set-upstream の短縮形"
+      ],
+      "explanation": "一度 -u で設定すれば、以後そのブランチでは git push や git pull だけで origin/feature-login とやりとりできる。"
+    },
+    {
+      "id": "gl-ch-fetch-pull",
+      "type": "choice",
+      "tags": [
+        "ステップ3",
+        "リモート"
+      ],
+      "question": "git fetch と git pull の違いとして正しいものはどれ？",
+      "choices": [
+        "fetch はリモートの変更を取得するだけで、今いるブランチには統合しない。pull は取得したうえで統合まで行う",
+        "fetch はコミットを取り消し、pull はコミットを作る",
+        "fetch は変更をリモートに送り、pull はリモートから受け取る",
+        "fetch と pull はまったく同じ動作をする"
+      ],
+      "answer": 0,
+      "explanation": "fetch は安全に「何が変わったか」を確かめられる。リモートに送るのは push。pull は fetch のあとに統合（merge または rebase）を行う。"
+    },
+    {
+      "id": "gl-c-pull",
+      "type": "cloze",
+      "tags": [
+        "ステップ3",
+        "リモート"
+      ],
+      "text": "git pull は、git {{fetch}} でリモートの変更を取り込んだあと、それを現在のブランチに統合するコマンドである。",
+      "hint": "英字 5 文字",
+      "explanation": "統合の方法は設定により merge か rebase になる。何が来るか確かめてから統合したいときは、fetch してから git log や git diff で確認する。"
+    },
+    {
+      "id": "gl-ch-push-rejected",
+      "type": "choice",
+      "tags": [
+        "ステップ3",
+        "リモート"
+      ],
+      "question": "git push をしたら rejected（non-fast-forward）と表示されて拒否された。主な原因はどれ？",
+      "choices": [
+        "リモートリポジトリの名前が origin ではない",
+        "リモートのブランチに、手元にないコミットが追加されている",
+        "ステージしていない変更が残っている",
+        "コミットメッセージが英語ではない"
+      ],
+      "answer": 1,
+      "explanation": "ほかの人が先に push していると起こる。git pull でリモートの変更を取り込んで（必要ならコンフリクトを解消して）から push し直す。--force で上書きすると他人のコミットを消してしまうので避ける。"
+    },
+    {
+      "id": "gl-q-stash",
+      "type": "qa",
+      "tags": [
+        "ステップ4",
+        "変更の退避"
+      ],
+      "question": "作業途中のまだコミットしていない変更を一時的に退避し、作業ツリーをきれいな状態に戻すコマンドは？（サブコマンドは 1 語）",
+      "answer": "git stash",
+      "accepted": [
+        "git stash push"
+      ],
+      "explanation": "急ぎで別のブランチの作業をしなければならないときに便利。退避した変更は git stash list で確認できる。"
+    },
+    {
+      "id": "gl-q-stash-list",
+      "type": "qa",
+      "tags": [
+        "ステップ4",
+        "変更の退避"
+      ],
+      "question": "git stash で退避した変更の一覧を表示するコマンドは？",
+      "answer": "git stash list",
+      "explanation": "stash@{0} が最新の退避。複数あるときは番号を指定して取り出せる。"
+    },
+    {
+      "id": "gl-q-stash-pop",
+      "type": "qa",
+      "tags": [
+        "ステップ4",
+        "変更の退避"
+      ],
+      "question": "最後に退避した変更を作業ツリーに戻し、同時に退避の一覧から削除するコマンドは？",
+      "answer": "git stash pop",
+      "explanation": "pop は「戻して削除」。戻すときにコンフリクトが起きた場合は、一覧から削除されずに残る。"
+    },
+    {
+      "id": "gl-ch-stash-apply",
+      "type": "choice",
+      "tags": [
+        "ステップ4",
+        "変更の退避"
+      ],
+      "question": "git stash apply と git stash pop の違いとして正しいものはどれ？",
+      "choices": [
+        "apply は変更を削除し、pop は変更を戻す",
+        "apply はリモートに送り、pop はリモートから受け取る",
+        "apply は最も古い退避、pop は最も新しい退避を戻す",
+        "apply は変更を戻しても退避の一覧に残し、pop は戻したあと一覧から削除する"
+      ],
+      "answer": 3,
+      "explanation": "同じ変更を複数のブランチに適用したいときは apply、普通に戻すだけなら pop が便利。apply で残った退避は git stash drop で消す。"
+    },
+    {
+      "id": "gl-q-restore-staged",
+      "type": "qa",
+      "tags": [
+        "ステップ4",
+        "取り消し"
+      ],
+      "question": "ステージした index.html をステージから外すコマンドは？（作業ツリーの変更は残す。restore を使う）",
+      "answer": "git restore --staged index.html",
+      "accepted": [
+        "git restore -S index.html"
+      ],
+      "explanation": "--staged でステージだけを取り消す。古い書き方は git reset HEAD index.html。"
+    },
+    {
+      "id": "gl-q-restore",
+      "type": "qa",
+      "tags": [
+        "ステップ4",
+        "取り消し"
+      ],
+      "question": "index.html の作業ツリーでの変更を破棄し、ステージされている状態（ステージしていなければ最後のコミットの状態）に戻すコマンドは？（restore を使う）",
+      "answer": "git restore index.html",
+      "explanation": "破棄した変更は元に戻せないので注意。古い書き方は git checkout -- index.html。"
+    },
+    {
+      "id": "gl-q-amend",
+      "type": "qa",
+      "tags": [
+        "ステップ4",
+        "取り消し"
+      ],
+      "question": "直前のコミットのメッセージを書き直す（または直前のコミットにステージした変更を追加する）コマンドは？",
+      "answer": "git commit --amend",
+      "explanation": "直前のコミットを作り直すので、コミット ID が変わる。すでに push して共有したコミットには使わない。"
+    },
+    {
+      "id": "gl-ch-revert-vs-reset",
+      "type": "choice",
+      "tags": [
+        "ステップ4",
+        "取り消し"
+      ],
+      "question": "すでに push して他の人も取り込んでいる main ブランチのコミットを取り消したい。最も適切な方法はどれ？",
+      "choices": [
+        "git reset --hard でコミットを消し、git push --force で上書きする",
+        "リポジトリを削除して作り直す",
+        "git revert で、そのコミットを打ち消す新しいコミットを作る",
+        "そのコミットで変更したファイルを削除してコミットする"
+      ],
+      "answer": 2,
+      "explanation": "revert は履歴を残したまま変更を打ち消すので、共有済みのブランチでも安全。reset は履歴そのものを書き換えるため、他の人の手元の履歴と食い違ってしまう。"
+    },
+    {
+      "id": "gl-q-revert",
+      "type": "qa",
+      "tags": [
+        "ステップ4",
+        "取り消し"
+      ],
+      "question": "コミット abc1234 の変更を打ち消す新しいコミットを作るコマンドは？",
+      "answer": "git revert abc1234",
+      "explanation": "abc1234 で加えた変更の逆の変更を持つコミットが作られる。元のコミットも履歴に残る。"
+    },
+    {
+      "id": "gl-q-reset-mixed",
+      "type": "qa",
+      "tags": [
+        "ステップ4",
+        "取り消し"
+      ],
+      "question": "直前のコミットを取り消し、その変更はステージされていない状態で作業ツリーに残すコマンドは？（reset を使い、HEAD からの相対指定で書く）",
+      "answer": "git reset HEAD~1",
+      "accepted": [
+        "git reset HEAD~",
+        "git reset HEAD^",
+        "git reset --mixed HEAD~1",
+        "git reset --mixed HEAD~",
+        "git reset --mixed HEAD^"
+      ],
+      "hints": [
+        "既定のモードは --mixed"
+      ],
+      "explanation": "オプションなしの reset は --mixed で、コミットとステージを取り消し、ファイルの変更は残す。HEAD~1 は 1 つ前のコミット。"
+    },
+    {
+      "id": "gl-ch-reset-soft",
+      "type": "choice",
+      "tags": [
+        "ステップ4",
+        "取り消し"
+      ],
+      "question": "git reset --soft HEAD~1 を実行したときの状態はどれ？",
+      "choices": [
+        "直前のコミットがリモートからも削除される",
+        "直前のコミットが取り消され、変更も作業ツリーから消える",
+        "直前のコミットを打ち消す新しいコミットが作られる",
+        "直前のコミットだけが取り消され、その変更はステージされたまま残る"
+      ],
+      "answer": 3,
+      "explanation": "--soft はコミットだけ、--mixed（既定）はコミットとステージ、--hard はファイルの変更まで取り消す。打ち消すコミットを作るのは revert。"
+    },
+    {
+      "id": "gl-ch-reset-hard",
+      "type": "choice",
+      "tags": [
+        "ステップ4",
+        "取り消し"
+      ],
+      "question": "git reset --hard HEAD~1 について正しいものはどれ？",
+      "choices": [
+        "直前のコミットを取り消し、コミットしていない変更も含めて作業ツリーの内容まで 1 つ前の状態に戻す",
+        "リモートの直前のコミットだけを取り消す",
+        "直前のコミットを打ち消すコミットを作る",
+        "直前のコミットを取り消すが、ファイルの変更はステージされたまま残る"
+      ],
+      "answer": 0,
+      "explanation": "--hard はコミットしていない変更まで消えるので最も危険。うっかり実行したときは git reflog で以前のコミットを探して戻せることがある。"
+    },
+    {
+      "id": "gl-o-reset-modes",
+      "type": "order",
+      "tags": [
+        "ステップ4",
+        "取り消し"
+      ],
+      "prompt": "git reset のモードを、取り消す範囲が小さい順に並べてください。",
+      "chunks": [
+        "--soft",
+        "--mixed",
+        "--hard"
+      ],
+      "answer": "--soft --mixed --hard",
+      "explanation": "--soft はコミットだけ、--mixed（既定）はコミットとステージ、--hard はコミット・ステージ・作業ツリーの変更まで取り消す。"
+    },
+    {
+      "id": "gl-c-gitignore",
+      "type": "cloze",
+      "tags": [
+        "ステップ4",
+        ".gitignore"
+      ],
+      "text": "Git に追跡させたくないファイルやディレクトリのパターンは、{{.gitignore}} というファイルに書く。",
+      "hint": "ドットで始まるファイル名",
+      "explanation": "ログ・ビルド結果・依存パッケージ（node_modules など）・パスワードを書いた設定ファイルなどを指定する。このファイル自体はコミットしてチームで共有する。"
+    },
+    {
+      "id": "gl-ch-gitignore-dir",
+      "type": "choice",
+      "tags": [
+        "ステップ4",
+        ".gitignore"
+      ],
+      "question": ".gitignore に node_modules/ と 1 行書いたときの効果はどれ？",
+      "choices": [
+        "node_modules をリモートにだけ送る",
+        "node_modules という名前のディレクトリを中身ごと追跡の対象外にする",
+        "node_modules ディレクトリだけを追跡の対象にする",
+        "node_modules ディレクトリを削除する"
+      ],
+      "answer": 1,
+      "explanation": "末尾の / はディレクトリだけに一致することを表す。*.log と書けば拡張子 .log のファイルすべてが対象外になる。"
+    },
+    {
+      "id": "gl-ch-gitignore-tracked",
+      "type": "choice",
+      "tags": [
+        "ステップ4",
+        ".gitignore"
+      ],
+      "question": "すでにコミット済みの config.local を .gitignore に追加したのに、変更が git status に表示され続ける。理由はどれ？",
+      "choices": [
+        "git status は .gitignore を読まないから",
+        ".gitignore は、すでに追跡されているファイルには効かないから",
+        ".gitignore にはディレクトリしか書けないから",
+        ".gitignore はコミットしないと有効にならないから"
+      ],
+      "answer": 1,
+      "explanation": ".gitignore は未追跡のファイルにだけ効く。git rm --cached config.local で追跡をやめれば（手元のファイルは残る）、以後は無視される。"
+    },
+    {
+      "id": "gl-q-rm-cached",
+      "type": "qa",
+      "tags": [
+        "ステップ4",
+        ".gitignore"
+      ],
+      "question": "手元のファイルは残したまま、config.local を Git の追跡対象から外すコマンドは？",
+      "answer": "git rm --cached config.local",
+      "explanation": "--cached はリポジトリ（インデックス）からだけ削除し、作業ツリーのファイルは消さない。実行後にコミットすると追跡が外れる。"
+    },
+    {
+      "id": "gl-ch-conflict-marker",
+      "type": "choice",
+      "tags": [
+        "ステップ4",
+        "コンフリクト"
+      ],
+      "question": "マージでコンフリクトが起きたファイルの中で、<<<<<<< HEAD から ======= までの部分は何を表す？",
+      "choices": [
+        "Git が自動で選んだ正しい内容",
+        "マージしようとしているブランチ側の内容",
+        "両方のブランチに共通する元の内容",
+        "今いるブランチ（HEAD）側の内容"
+      ],
+      "answer": 3,
+      "explanation": "======= から >>>>>>> ブランチ名 までが取り込もうとしているブランチ側の内容。どちらを残すか（または両方を組み合わせるか）を人が判断して書き直し、マーカーの行を消す。"
+    },
+    {
+      "id": "gl-o-conflict-flow",
+      "type": "order",
+      "tags": [
+        "ステップ4",
+        "コンフリクト"
+      ],
+      "prompt": "git merge でコンフリクトが起きたときの解消の手順を、正しい順に並べてください。",
+      "chunks": [
+        "git status で衝突したファイルを確かめる",
+        "ファイルを開いて正しい内容に直し、マーカーを消す",
+        "git add で解消したファイルをステージする",
+        "git commit でマージを完了する"
+      ],
+      "answer": "git status で衝突したファイルを確かめる ファイルを開いて正しい内容に直し、マーカーを消す git add で解消したファイルをステージする git commit でマージを完了する",
+      "explanation": "add することで「このファイルの衝突は解消した」と Git に伝える。途中でやめたいときは git merge --abort でマージ前の状態に戻せる。"
+    },
+    {
+      "id": "gl-ch-rebase",
+      "type": "choice",
+      "tags": [
+        "ステップ4",
+        "rebase"
+      ],
+      "question": "git rebase の説明として正しいものはどれ？",
+      "choices": [
+        "コミットを打ち消す新しいコミットを作る",
+        "2 つのブランチを統合するマージコミットを作る",
+        "今のブランチのコミットを、指定したブランチの最新コミットの後ろに付け直し、履歴を一直線にする",
+        "リモートの変更を取得するだけで統合はしない"
+      ],
+      "answer": 2,
+      "explanation": "rebase はコミットを作り直して並べ替えるので、履歴が分岐のない 1 本の線になる。マージコミットを作るのは merge、打ち消すのは revert、取得だけは fetch。"
+    },
+    {
+      "id": "gl-q-rebase-main",
+      "type": "qa",
+      "tags": [
+        "ステップ4",
+        "rebase"
+      ],
+      "question": "いま feature ブランチにいる。feature のコミットを main ブランチの最新コミットの上に付け直すコマンドは？",
+      "answer": "git rebase main",
+      "explanation": "途中でコンフリクトが起きたら、解消して git add してから git rebase --continue。やめるときは git rebase --abort。"
+    },
+    {
+      "id": "gl-ch-rebase-caution",
+      "type": "choice",
+      "tags": [
+        "ステップ4",
+        "rebase"
+      ],
+      "question": "rebase を使うときの注意として正しいものはどれ？",
+      "choices": [
+        "すでに push して他の人と共有しているコミットは rebase しない",
+        "rebase のあとは必ずリポジトリを clone し直す",
+        "rebase は main ブランチでしか実行できない",
+        "rebase するとすべてのコミットメッセージが消える"
+      ],
+      "answer": 0,
+      "explanation": "rebase するとコミット ID が変わるため、共有済みの履歴を書き換えると他の人の履歴と食い違う。自分だけが使っているブランチを整えるのに使う。"
+    },
+    {
+      "id": "gl-ch-pr",
+      "type": "choice",
+      "tags": [
+        "ステップ4",
+        "共同作業"
+      ],
+      "question": "GitHub などの pull request（プルリクエスト）の説明として正しいものはどれ？",
+      "choices": [
+        "リモートの変更を手元に取り込むための git のコマンド",
+        "リポジトリの所有者を変更する手続き",
+        "ブランチを削除するための申請",
+        "自分のブランチの変更を別のブランチに取り込んでもらうよう依頼し、レビューや議論を行う仕組み"
+      ],
+      "answer": 3,
+      "explanation": "pull request は Git 本体のコマンドではなく、GitHub などのサービスの機能（GitLab ではマージリクエスト）。git pull とは別物。"
+    },
+    {
+      "id": "gl-o-pr-flow",
+      "type": "order",
+      "tags": [
+        "ステップ4",
+        "共同作業"
+      ],
+      "prompt": "pull request を使って main に変更を取り込むまでの流れを、正しい順に並べてください。",
+      "chunks": [
+        "作業用のブランチを作る",
+        "変更をコミットする",
+        "ブランチをリモートに push する",
+        "pull request を作成する",
+        "レビューを受けて修正する",
+        "main にマージする"
+      ],
+      "answer": "作業用のブランチを作る 変更をコミットする ブランチをリモートに push する pull request を作成する レビューを受けて修正する main にマージする",
+      "explanation": "main に直接コミットせず、ブランチ → push → pull request → レビュー → マージ の順に進めるのがチーム開発の基本。レビューで指摘された修正は、同じブランチにコミットして push すれば pull request に反映される。"
+    }
+  ]
+}

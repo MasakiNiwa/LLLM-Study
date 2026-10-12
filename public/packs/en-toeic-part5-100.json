@@ -1,0 +1,1727 @@
+{
+  "format": "lllm-study-pack",
+  "version": 1,
+  "id": "en-toeic-part5-100",
+  "title": "TOEIC 文法・語彙問題 100（Part 5 形式）",
+  "description": "TOEIC L&R の Part 5（短文穴埋め）と同じ形式の 4 択問題 100 問。ビジネスの場面の 1 文の空所（____）に入る語句を選びます。出題の内訳は品詞 19 問・動詞の形 21 問・代名詞 10 問・前置詞と接続詞 18 問・関係詞 13 問・語彙 19 問。ステップ1（空所の前後を見れば解ける基本問題）→ ステップ2（文の構造と意味から判断する問題）→ ステップ3（構文・語法の知識が必要な問題）と、易しい順に並んでいます。解説には正解の根拠・ほかの選択肢が誤りになる理由・全文の和訳を付けました。これまでの文法教材（「英文法チェック 30」en-grammar-check →「中学英文法の総復習 100」en-grammar-junior-100 →「高校英文法 100」en-grammar-high-100）で学んだ知識を、実際の試験形式で使う実践編です。1 問 20 秒以内で答えられるようになるまで繰り返すのがおすすめです。",
+  "subject": "english",
+  "language": {
+    "target": "en",
+    "explanation": "ja"
+  },
+  "level": "TOEIC 500〜800 点",
+  "tags": [
+    "TOEIC",
+    "Part 5",
+    "ビジネス英語",
+    "英文法",
+    "語彙",
+    "選択問題"
+  ],
+  "author": "LLLM-Study",
+  "license": "MIT",
+  "source": "LLLM-Study オリジナル（AI を利用して作成）。TOEIC は ETS の登録商標です。",
+  "revision": 1,
+  "items": [
+    {
+      "id": "t-pos-carefully",
+      "type": "choice",
+      "question": "Please read the instructions ____ before using the machine.",
+      "choices": [
+        "carefully",
+        "careful",
+        "care",
+        "carefulness"
+      ],
+      "answer": 0,
+      "explanation": "空所がなくても read the instructions で文が完成しているので、動詞を修飾する副詞 carefully が入る。形容詞 careful や名詞 care / carefulness は動詞を修飾できない。 訳: 機械を使う前に、説明書を注意深く読んでください。",
+      "tags": [
+        "ステップ1",
+        "品詞"
+      ]
+    },
+    {
+      "id": "t-pos-efficient",
+      "type": "choice",
+      "question": "The new software has made our work much more ____.",
+      "choices": [
+        "efficiency",
+        "efficient",
+        "efficiently",
+        "efficiencies"
+      ],
+      "answer": 1,
+      "explanation": "〈make ＋O＋C〉の C（補語）には形容詞が入る（our work = efficient）。much more は形容詞を比較級にしている。副詞 efficiently は補語になれない。 訳: 新しいソフトウェアのおかげで、私たちの仕事はずっと効率的になった。",
+      "tags": [
+        "ステップ1",
+        "品詞"
+      ]
+    },
+    {
+      "id": "t-pos-announcement",
+      "type": "choice",
+      "question": "Ms. Tanaka made an important ____ at the meeting.",
+      "choices": [
+        "announce",
+        "announced",
+        "announcement",
+        "announcing"
+      ],
+      "answer": 2,
+      "explanation": "冠詞 an と形容詞 important の後ろなので名詞 announcement。make an announcement（発表する）はよく出る組み合わせ。 訳: 田中さんは会議で重要な発表をした。",
+      "tags": [
+        "ステップ1",
+        "品詞"
+      ]
+    },
+    {
+      "id": "t-verb-sent",
+      "type": "choice",
+      "question": "Mr. Lee ____ the report to the manager yesterday.",
+      "choices": [
+        "sends",
+        "will send",
+        "sending",
+        "sent"
+      ],
+      "answer": 3,
+      "explanation": "yesterday があるので過去形 sent。文に動詞がほかにないため、-ing 形だけでは文が成立しない。時を表す語を最初に探すのが動詞問題のコツ。 訳: リーさんは昨日、報告書を部長に送った。",
+      "tags": [
+        "ステップ1",
+        "動詞の形"
+      ]
+    },
+    {
+      "id": "t-verb-meets",
+      "type": "choice",
+      "question": "The sales team ____ every Monday morning.",
+      "choices": [
+        "meet",
+        "meeting",
+        "meets",
+        "have met"
+      ],
+      "answer": 2,
+      "explanation": "every Monday morning は習慣なので現在形。主語 The sales team は 1 つのチーム（三人称単数）として扱うので meets。have met は主語と数が合わない。 訳: 営業チームは毎週月曜日の朝に集まる。",
+      "tags": [
+        "ステップ1",
+        "動詞の形"
+      ]
+    },
+    {
+      "id": "t-pron-her",
+      "type": "choice",
+      "question": "Ms. Garcia asked ____ assistant to book a hotel room.",
+      "choices": [
+        "she",
+        "hers",
+        "herself",
+        "her"
+      ],
+      "answer": 3,
+      "explanation": "名詞 assistant の前なので所有格 her。hers は「彼女のもの」で後ろに名詞を置けない。herself は目的語や強調で使う。 訳: ガルシアさんはアシスタントにホテルの部屋を予約するよう頼んだ。",
+      "tags": [
+        "ステップ1",
+        "代名詞"
+      ]
+    },
+    {
+      "id": "t-pc-from-to",
+      "type": "choice",
+      "question": "The store is open ____ 9 A.M. to 6 P.M.",
+      "choices": [
+        "between",
+        "from",
+        "since",
+        "at"
+      ],
+      "answer": 1,
+      "explanation": "後ろの to とセットで〈from A to B〉「A から B まで」。between は between A and B の形で使う。since は「〜以来」で現在完了と使う。 訳: その店は午前 9 時から午後 6 時まで営業している。",
+      "tags": [
+        "ステップ1",
+        "前置詞と接続詞"
+      ]
+    },
+    {
+      "id": "t-voc-review",
+      "type": "choice",
+      "question": "Please ____ the attached file and let me know your opinion.",
+      "choices": [
+        "review",
+        "attend",
+        "reply",
+        "arrive"
+      ],
+      "answer": 0,
+      "explanation": "目的語 the attached file をとり、意味が通るのは review（目を通す・検討する）。reply は reply to 〜、arrive は arrive at 〜 のように前置詞が必要。attend は会議などに「出席する」。 訳: 添付ファイルをご確認のうえ、ご意見をお聞かせください。",
+      "tags": [
+        "ステップ1",
+        "語彙"
+      ]
+    },
+    {
+      "id": "t-pc-despite",
+      "type": "choice",
+      "question": "____ the heavy rain, the event was held as planned.",
+      "choices": [
+        "Although",
+        "Despite",
+        "Because",
+        "Even"
+      ],
+      "answer": 1,
+      "explanation": "空所の後ろは名詞句（the heavy rain）だけで、主語と動詞がない。名詞句の前に置けるのは前置詞の Despite。Although / Because は接続詞で後ろに節（主語＋動詞）が必要。 訳: 大雨にもかかわらず、イベントは予定どおり開催された。",
+      "tags": [
+        "ステップ1",
+        "前置詞と接続詞"
+      ]
+    },
+    {
+      "id": "t-rel-who",
+      "type": "choice",
+      "question": "The employee ____ won the award will give a speech.",
+      "choices": [
+        "who",
+        "which",
+        "whose",
+        "whom"
+      ],
+      "answer": 0,
+      "explanation": "先行詞が人（The employee）で、後ろに主語が欠けている（won the award）ので主格の who。whom は目的格、whose は後ろに名詞が必要。 訳: 賞を受賞した社員がスピーチをする。",
+      "tags": [
+        "ステップ1",
+        "関係詞"
+      ]
+    },
+    {
+      "id": "t-pos-significantly",
+      "type": "choice",
+      "question": "The company has ____ increased its sales this year.",
+      "choices": [
+        "significant",
+        "significance",
+        "signify",
+        "significantly"
+      ],
+      "answer": 3,
+      "explanation": "has と過去分詞 increased の間は副詞の定位置。副詞 significantly（大幅に）が動詞を修飾する。 訳: その会社は今年、売上を大幅に伸ばした。",
+      "tags": [
+        "ステップ1",
+        "品詞"
+      ]
+    },
+    {
+      "id": "t-verb-required-to",
+      "type": "choice",
+      "question": "All visitors are required ____ in at the front desk.",
+      "choices": [
+        "signing",
+        "sign",
+        "to sign",
+        "signed"
+      ],
+      "answer": 2,
+      "explanation": "〈be required to ＋原形〉で「〜することが求められる」。require 人 to 〜 の受け身。sign in は「記帳する・受付をする」。 訳: すべての訪問者は受付で記帳する必要がある。",
+      "tags": [
+        "ステップ1",
+        "動詞の形"
+      ]
+    },
+    {
+      "id": "t-pron-their",
+      "type": "choice",
+      "question": "Employees must keep ____ desks clean.",
+      "choices": [
+        "them",
+        "theirs",
+        "themselves",
+        "their"
+      ],
+      "answer": 3,
+      "explanation": "名詞 desks の前なので所有格 their。代名詞問題は「空所の後ろに名詞があるか」をまず見る。 訳: 社員は自分の机をきれいに保たなければならない。",
+      "tags": [
+        "ステップ1",
+        "代名詞"
+      ]
+    },
+    {
+      "id": "t-pc-moved-to",
+      "type": "choice",
+      "question": "The meeting has been moved ____ Thursday.",
+      "choices": [
+        "at",
+        "for",
+        "to",
+        "by"
+      ],
+      "answer": 2,
+      "explanation": "move A to B で「A を B（日時）に移す・変更する」。曜日の前に at は使わない。 訳: 会議は木曜日に変更された。",
+      "tags": [
+        "ステップ1",
+        "前置詞と接続詞"
+      ]
+    },
+    {
+      "id": "t-pc-by-deadline",
+      "type": "choice",
+      "question": "Please submit your expense report ____ Friday.",
+      "choices": [
+        "by",
+        "until",
+        "during",
+        "within"
+      ],
+      "answer": 0,
+      "explanation": "submit（提出する）は 1 回で終わる動作なので、期限「〜までに」の by。until は「〜までずっと」で継続する動作に使う。within は期間（within three days）、during は特定の期間の名詞に使う。 訳: 金曜日までに経費報告書を提出してください。",
+      "tags": [
+        "ステップ1",
+        "前置詞と接続詞"
+      ]
+    },
+    {
+      "id": "t-pos-complaints",
+      "type": "choice",
+      "question": "We received many ____ from customers about the new product.",
+      "choices": [
+        "complain",
+        "complaints",
+        "complained",
+        "complaining"
+      ],
+      "answer": 1,
+      "explanation": "many の後ろには可算名詞の複数形が入る。動詞 complain の名詞形 complaints（苦情）。 訳: 新製品について、お客様から多くの苦情が寄せられた。",
+      "tags": [
+        "ステップ1",
+        "品詞"
+      ]
+    },
+    {
+      "id": "t-verb-will-be-delivered",
+      "type": "choice",
+      "question": "The package ____ to your office tomorrow morning.",
+      "choices": [
+        "delivered",
+        "will be delivered",
+        "will deliver",
+        "has delivered"
+      ],
+      "answer": 1,
+      "explanation": "tomorrow morning で未来。荷物は「配達される」側なので受け身の will be delivered。will deliver だと荷物が何かを配達することになる。 訳: 荷物は明朝、御社のオフィスに配達されます。",
+      "tags": [
+        "ステップ1",
+        "動詞の形"
+      ]
+    },
+    {
+      "id": "t-pc-when",
+      "type": "choice",
+      "question": "Please call me ____ you arrive at the airport.",
+      "choices": [
+        "during",
+        "by",
+        "since",
+        "when"
+      ],
+      "answer": 3,
+      "explanation": "空所の後ろは〈主語＋動詞〉の節なので接続詞が入る。意味が通るのは when（〜したら）。during と by は前置詞。since は「〜以来・〜なので」で、ここでは意味が合わない。 訳: 空港に着いたら電話してください。",
+      "tags": [
+        "ステップ1",
+        "前置詞と接続詞"
+      ]
+    },
+    {
+      "id": "t-voc-transportation",
+      "type": "choice",
+      "question": "The hotel offers free ____ to the airport.",
+      "choices": [
+        "transportation",
+        "destination",
+        "location",
+        "departure"
+      ],
+      "answer": 0,
+      "explanation": "「空港への無料〜」で意味が通るのは transportation（送迎・交通手段）。destination は目的地、location は場所、departure は出発。 訳: そのホテルは空港への無料送迎を提供している。",
+      "tags": [
+        "ステップ1",
+        "語彙"
+      ]
+    },
+    {
+      "id": "t-pron-himself",
+      "type": "choice",
+      "question": "The manager reviewed the proposal ____ before the meeting.",
+      "choices": [
+        "him",
+        "his",
+        "himself",
+        "he"
+      ],
+      "answer": 2,
+      "explanation": "文はすでに完成しているので、「自分で」と主語を強調する再帰代名詞 himself が入る。him / his / he はこの位置に置くと文法的に成り立たない。 訳: 部長は会議の前に自ら提案書に目を通した。",
+      "tags": [
+        "ステップ1",
+        "代名詞"
+      ]
+    },
+    {
+      "id": "t-rel-that-obj",
+      "type": "choice",
+      "question": "This is the laptop ____ I bought last week.",
+      "choices": [
+        "who",
+        "what",
+        "that",
+        "where"
+      ],
+      "answer": 2,
+      "explanation": "先行詞が物（the laptop）で、bought の目的語が欠けているので目的格の that（which も可）。what は先行詞を含むので名詞の後ろには来ない。where は後ろが完全な文のとき。 訳: これは私が先週買ったノートパソコンです。",
+      "tags": [
+        "ステップ1",
+        "関係詞"
+      ]
+    },
+    {
+      "id": "t-pos-opening",
+      "type": "choice",
+      "question": "The ____ of the new branch is scheduled for May.",
+      "choices": [
+        "opening",
+        "open",
+        "opened",
+        "opens"
+      ],
+      "answer": 0,
+      "explanation": "冠詞 The と前置詞 of の間なので名詞が入る。opening は「開店・開設」という名詞。open は形容詞・動詞。 訳: 新支店の開設は 5 月に予定されている。",
+      "tags": [
+        "ステップ1",
+        "品詞"
+      ]
+    },
+    {
+      "id": "t-verb-has-worked",
+      "type": "choice",
+      "question": "Mr. Kim has ____ for this company for ten years.",
+      "choices": [
+        "work",
+        "working",
+        "works",
+        "worked"
+      ],
+      "answer": 3,
+      "explanation": "has の後ろは過去分詞で現在完了〈has ＋過去分詞〉。for ten years（10 年間）と組んで継続を表す。 訳: キムさんはこの会社で 10 年間働いている。",
+      "tags": [
+        "ステップ1",
+        "動詞の形"
+      ]
+    },
+    {
+      "id": "t-pc-although",
+      "type": "choice",
+      "question": "____ he was busy, he helped us with the project.",
+      "choices": [
+        "Despite",
+        "Although",
+        "In spite",
+        "Because of"
+      ],
+      "answer": 1,
+      "explanation": "空所の後ろが〈主語＋動詞〉（he was busy）なので接続詞の Although。Despite / Because of は前置詞（句）で名詞の前に置く。In spite は of がないと使えない。 訳: 彼は忙しかったが、プロジェクトを手伝ってくれた。",
+      "tags": [
+        "ステップ1",
+        "前置詞と接続詞"
+      ]
+    },
+    {
+      "id": "t-pos-careful",
+      "type": "choice",
+      "question": "Please be ____ when you handle the glass items.",
+      "choices": [
+        "carefully",
+        "care",
+        "carefulness",
+        "careful"
+      ],
+      "answer": 3,
+      "explanation": "be 動詞の後ろの補語なので形容詞 careful。副詞 carefully は補語になれない。名詞 care / carefulness では意味が通らない。 訳: ガラス製品を扱うときは注意してください。",
+      "tags": [
+        "ステップ1",
+        "品詞"
+      ]
+    },
+    {
+      "id": "t-pron-our",
+      "type": "choice",
+      "question": "Ms. Sato and I will present ____ findings at the conference.",
+      "choices": [
+        "us",
+        "our",
+        "ours",
+        "we"
+      ],
+      "answer": 1,
+      "explanation": "名詞 findings の前なので所有格。主語が Ms. Sato and I（＝ we）なので our。 訳: 佐藤さんと私は、学会で私たちの調査結果を発表する予定だ。",
+      "tags": [
+        "ステップ1",
+        "代名詞"
+      ]
+    },
+    {
+      "id": "t-pc-between",
+      "type": "choice",
+      "question": "The museum is located ____ the bank and the post office.",
+      "choices": [
+        "among",
+        "through",
+        "between",
+        "along"
+      ],
+      "answer": 2,
+      "explanation": "後ろが A and B の 2 つなので between（2 つの間）。among は 3 つ以上のものの間。through は「〜を通り抜けて」、along は「〜に沿って」。 訳: その博物館は銀行と郵便局の間にある。",
+      "tags": [
+        "ステップ1",
+        "前置詞と接続詞"
+      ]
+    },
+    {
+      "id": "t-rel-whose",
+      "type": "choice",
+      "question": "We hired a designer ____ work has won several awards.",
+      "choices": [
+        "whose",
+        "who",
+        "which",
+        "whom"
+      ],
+      "answer": 0,
+      "explanation": "空所の直後に名詞 work があり、「そのデザイナーの作品」という所有の関係なので whose。who / which / whom の後ろに名詞はそのまま続かない。 訳: 私たちは、作品がいくつもの賞を受賞しているデザイナーを雇った。",
+      "tags": [
+        "ステップ1",
+        "関係詞"
+      ]
+    },
+    {
+      "id": "t-pos-informative",
+      "type": "choice",
+      "question": "The seminar was very ____.",
+      "choices": [
+        "informative",
+        "information",
+        "inform",
+        "informatively"
+      ],
+      "answer": 0,
+      "explanation": "be 動詞の後ろで very に修飾されるのは形容詞 informative（有益な・情報の多い）。名詞 information は very で修飾できない。 訳: そのセミナーはとても有益だった。",
+      "tags": [
+        "ステップ1",
+        "品詞"
+      ]
+    },
+    {
+      "id": "t-verb-working",
+      "type": "choice",
+      "question": "The printer is not ____ properly.",
+      "choices": [
+        "work",
+        "worked",
+        "working",
+        "works"
+      ],
+      "answer": 2,
+      "explanation": "is not の後ろに -ing 形を置いて現在進行形。work には「（機械が）正常に動く」の意味がある。worked にすると受け身になり意味が通らない。 訳: プリンターが正常に動いていない。",
+      "tags": [
+        "ステップ1",
+        "動詞の形"
+      ]
+    },
+    {
+      "id": "t-pron-us",
+      "type": "choice",
+      "question": "Thank you for sending ____ the catalog.",
+      "choices": [
+        "our",
+        "us",
+        "ours",
+        "we"
+      ],
+      "answer": 1,
+      "explanation": "〈send ＋人＋物〉の「人」の位置なので目的格の us。our は後ろに名詞が必要で、the catalog の前の冠詞と重ならない。 訳: カタログをお送りいただき、ありがとうございます。",
+      "tags": [
+        "ステップ1",
+        "代名詞"
+      ]
+    },
+    {
+      "id": "t-voc-take-effect",
+      "type": "choice",
+      "question": "The new policy will ____ effect next month.",
+      "choices": [
+        "make",
+        "have",
+        "get",
+        "take"
+      ],
+      "answer": 3,
+      "explanation": "take effect で「（法律・規則が）発効する・効力を持つ」。have an effect on 〜（〜に影響を与える）と区別する。 訳: 新しい方針は来月から施行される。",
+      "tags": [
+        "ステップ1",
+        "語彙"
+      ]
+    },
+    {
+      "id": "t-voc-reservation",
+      "type": "choice",
+      "question": "Please make a ____ at least two days in advance.",
+      "choices": [
+        "reservation",
+        "reception",
+        "receipt",
+        "resignation"
+      ],
+      "answer": 0,
+      "explanation": "make a reservation で「予約する」。reception は受付・歓迎会、receipt は領収書、resignation は辞職。つづりの似た語を区別させる典型問題。 訳: 少なくとも 2 日前までにご予約ください。",
+      "tags": [
+        "ステップ1",
+        "語彙"
+      ]
+    },
+    {
+      "id": "t-pos-satisfaction",
+      "type": "choice",
+      "question": "Customer ____ is our top priority.",
+      "choices": [
+        "satisfy",
+        "satisfaction",
+        "satisfied",
+        "satisfying"
+      ],
+      "answer": 1,
+      "explanation": "Customer ＋空所が文の主語になるので名詞。customer satisfaction（顧客満足）は名詞＋名詞の複合名詞。 訳: お客様の満足が私たちの最優先事項です。",
+      "tags": [
+        "ステップ1",
+        "品詞"
+      ]
+    },
+    {
+      "id": "t-pos-steadily",
+      "type": "choice",
+      "question": "Our sales have grown ____ since the new product was launched.",
+      "choices": [
+        "steady",
+        "steadiness",
+        "steadily",
+        "steadied"
+      ],
+      "answer": 2,
+      "explanation": "grow（増える）は自動詞で、have grown で文が完成している。動詞を修飾する副詞 steadily（着実に）が入る。 訳: 新製品の発売以来、売上は着実に伸びている。",
+      "tags": [
+        "ステップ2",
+        "品詞"
+      ]
+    },
+    {
+      "id": "t-verb-had-started",
+      "type": "choice",
+      "question": "By the time the manager arrived, the meeting ____.",
+      "choices": [
+        "has already started",
+        "already starts",
+        "will already start",
+        "had already started"
+      ],
+      "answer": 3,
+      "explanation": "〈By the time ＋過去形〉で「〜したときには（すでに）」。過去の時点より前に完了しているので過去完了 had started。 訳: 部長が着いたときには、会議はすでに始まっていた。",
+      "tags": [
+        "ステップ2",
+        "動詞の形"
+      ]
+    },
+    {
+      "id": "t-verb-be-approved",
+      "type": "choice",
+      "question": "The budget proposal must ____ by the board before work can begin.",
+      "choices": [
+        "approve",
+        "approving",
+        "be approved",
+        "have approving"
+      ],
+      "answer": 2,
+      "explanation": "予算案は「承認される」側で、後ろに by the board があるので受け身。助動詞 must の後ろなので〈be ＋過去分詞〉。 訳: 作業を始める前に、予算案は取締役会で承認されなければならない。",
+      "tags": [
+        "ステップ2",
+        "動詞の形"
+      ]
+    },
+    {
+      "id": "t-verb-look-forward",
+      "type": "choice",
+      "question": "We look forward to ____ with you again.",
+      "choices": [
+        "work",
+        "worked",
+        "be working",
+        "working"
+      ],
+      "answer": 3,
+      "explanation": "look forward to の to は前置詞なので、後ろは動名詞 working。ビジネスメールの結びの定番で、to work としてしまうミスを狙う問題。 訳: また御社とお仕事ができることを楽しみにしております。",
+      "tags": [
+        "ステップ2",
+        "動詞の形"
+      ]
+    },
+    {
+      "id": "t-pc-once",
+      "type": "choice",
+      "question": "____ the contract is signed, we will start the construction.",
+      "choices": [
+        "Upon",
+        "Once",
+        "Due to",
+        "During"
+      ],
+      "answer": 1,
+      "explanation": "後ろが〈主語＋動詞〉の節なので接続詞 Once（いったん〜すれば・〜したらすぐ）。Upon / Due to / During は前置詞で、節を続けられない。 訳: 契約が締結されしだい、工事を始めます。",
+      "tags": [
+        "ステップ2",
+        "前置詞と接続詞"
+      ]
+    },
+    {
+      "id": "t-pc-due-to",
+      "type": "choice",
+      "question": "The flight was delayed ____ bad weather.",
+      "choices": [
+        "due to",
+        "because",
+        "since",
+        "although"
+      ],
+      "answer": 0,
+      "explanation": "後ろが名詞句（bad weather）なので前置詞の due to（〜のために）。because / since / although は接続詞で、後ろに節が必要。because of なら正解になる。 訳: 悪天候のため、その便は遅れた。",
+      "tags": [
+        "ステップ2",
+        "前置詞と接続詞"
+      ]
+    },
+    {
+      "id": "t-rel-which-nonres",
+      "type": "choice",
+      "question": "The conference room, ____ was renovated last month, can hold 50 people.",
+      "choices": [
+        "that",
+        "which",
+        "what",
+        "where"
+      ],
+      "answer": 1,
+      "explanation": "コンマで区切られた非制限用法で、先行詞は物、後ろに主語が欠けているので which。that は非制限用法では使えない。where は後ろが完全な文のとき。 訳: その会議室は先月改装されたもので、50 人を収容できる。",
+      "tags": [
+        "ステップ2",
+        "関係詞"
+      ]
+    },
+    {
+      "id": "t-rel-where",
+      "type": "choice",
+      "question": "The city ____ the company opened its first store is Seattle.",
+      "choices": [
+        "where",
+        "which",
+        "when",
+        "what"
+      ],
+      "answer": 0,
+      "explanation": "後ろの the company opened its first store は欠けのない完全な文なので、場所の関係副詞 where。which は後ろに名詞の欠けが必要。 訳: その会社が最初の店舗を開いた都市はシアトルだ。",
+      "tags": [
+        "ステップ2",
+        "関係詞"
+      ]
+    },
+    {
+      "id": "t-pron-by-herself",
+      "type": "choice",
+      "question": "Ms. Ito prefers to organize the event by ____.",
+      "choices": [
+        "her",
+        "hers",
+        "she",
+        "herself"
+      ],
+      "answer": 3,
+      "explanation": "〈by oneself〉で「一人で・自力で」。主語 Ms. Ito に合わせて herself。 訳: 伊藤さんはそのイベントを一人で準備するほうを好む。",
+      "tags": [
+        "ステップ2",
+        "代名詞"
+      ]
+    },
+    {
+      "id": "t-pron-those",
+      "type": "choice",
+      "question": "The sales figures for this year are higher than ____ for last year.",
+      "choices": [
+        "that",
+        "them",
+        "those",
+        "it"
+      ],
+      "answer": 2,
+      "explanation": "比べているのは「今年の売上高」と「昨年の売上高」。複数名詞 figures のくり返しを避けるので those。単数なら that。 訳: 今年の売上高は昨年の売上高を上回っている。",
+      "tags": [
+        "ステップ2",
+        "代名詞"
+      ]
+    },
+    {
+      "id": "t-voc-expand",
+      "type": "choice",
+      "question": "The company plans to ____ its business into Asia.",
+      "choices": [
+        "rise",
+        "arrive",
+        "proceed",
+        "expand"
+      ],
+      "answer": 3,
+      "explanation": "目的語 its business をとる他動詞で、「事業をアジアに拡大する」と意味が通るのは expand。rise / arrive / proceed は自動詞で目的語をとれない。 訳: その会社はアジアへ事業を拡大する計画だ。",
+      "tags": [
+        "ステップ2",
+        "語彙"
+      ]
+    },
+    {
+      "id": "t-voc-proof",
+      "type": "choice",
+      "question": "Please keep your receipt as ____ of purchase.",
+      "choices": [
+        "reason",
+        "cause",
+        "proof",
+        "method"
+      ],
+      "answer": 2,
+      "explanation": "proof of purchase で「購入の証明」。reason は理由、cause は原因、method は方法で、レシートの役割に合わない。 訳: 購入の証明としてレシートを保管してください。",
+      "tags": [
+        "ステップ2",
+        "語彙"
+      ]
+    },
+    {
+      "id": "t-voc-compatible",
+      "type": "choice",
+      "question": "The new model is ____ with older versions of the software.",
+      "choices": [
+        "compatible",
+        "capable",
+        "competitive",
+        "complete"
+      ],
+      "answer": 0,
+      "explanation": "be compatible with 〜 で「〜と互換性がある」。capable は capable of 〜、competitive は「競争力のある」、complete は「完全な」で with と結びつかない。 訳: 新モデルは旧バージョンのソフトウェアと互換性がある。",
+      "tags": [
+        "ステップ2",
+        "語彙"
+      ]
+    },
+    {
+      "id": "t-pos-detailed",
+      "type": "choice",
+      "question": "The proposal was rejected because it was not ____ enough.",
+      "choices": [
+        "detail",
+        "detailed",
+        "details",
+        "detailing"
+      ],
+      "answer": 1,
+      "explanation": "be 動詞の補語で、enough に前から修飾されるのは形容詞。detailed（詳細な）は過去分詞から生まれた形容詞。 訳: その提案は十分に詳しくなかったので却下された。",
+      "tags": [
+        "ステップ2",
+        "品詞"
+      ]
+    },
+    {
+      "id": "t-verb-suggest-be",
+      "type": "choice",
+      "question": "Ms. Park requested that the meeting ____ postponed.",
+      "choices": [
+        "is",
+        "be",
+        "was",
+        "being"
+      ],
+      "answer": 1,
+      "explanation": "request・recommend・suggest（提案する）などの後ろの that 節では、動詞は原形（または should ＋原形）を使う（仮定法現在）。時制や主語に関係なく be。 訳: パクさんは会議を延期するよう求めた。",
+      "tags": [
+        "ステップ2",
+        "動詞の形"
+      ]
+    },
+    {
+      "id": "t-verb-having-reviewed",
+      "type": "choice",
+      "question": "____ the survey results, the team decided to change the design.",
+      "choices": [
+        "Reviewed",
+        "Being reviewed",
+        "Have reviewed",
+        "Having reviewed"
+      ],
+      "answer": 3,
+      "explanation": "主語 the team が結果を「検討した」のは、決めた（decided）より前なので完了形の分詞構文 Having reviewed。Reviewed / Being reviewed は受け身で、チームが検討されたことになる。 訳: 調査結果を検討したうえで、チームはデザインを変更することにした。",
+      "tags": [
+        "ステップ2",
+        "動詞の形"
+      ]
+    },
+    {
+      "id": "t-pc-before",
+      "type": "choice",
+      "question": "Please turn off the lights ____ you leave the office.",
+      "choices": [
+        "before",
+        "during",
+        "prior to",
+        "in front of"
+      ],
+      "answer": 0,
+      "explanation": "後ろが節（you leave the office）なので接続詞 before。prior to（〜より前に）は前置詞なので後ろは名詞か -ing（prior to leaving）。during / in front of も前置詞。 訳: 退社する前に電気を消してください。",
+      "tags": [
+        "ステップ2",
+        "前置詞と接続詞"
+      ]
+    },
+    {
+      "id": "t-rel-whoever",
+      "type": "choice",
+      "question": "Please send the documents to ____ is in charge of the project.",
+      "choices": [
+        "whomever",
+        "whatever",
+        "whoever",
+        "anyone"
+      ],
+      "answer": 2,
+      "explanation": "whoever は「〜する人は誰でも」（＝ anyone who）。前置詞 to の後ろでも、節の中では is の主語なので主格の whoever。anyone だけでは is in charge をつなげない。 訳: 書類はプロジェクトの担当者に送ってください。",
+      "tags": [
+        "ステップ2",
+        "関係詞"
+      ]
+    },
+    {
+      "id": "t-voc-comply",
+      "type": "choice",
+      "question": "All employees must ____ with the safety regulations.",
+      "choices": [
+        "follow",
+        "obey",
+        "comply",
+        "observe"
+      ],
+      "answer": 2,
+      "explanation": "空所の後ろに with があるので、comply with 〜（〜に従う）。follow / obey / observe も「従う・守る」だが他動詞なので with は不要。 訳: 全社員は安全規則に従わなければならない。",
+      "tags": [
+        "ステップ2",
+        "語彙"
+      ]
+    },
+    {
+      "id": "t-pos-extremely",
+      "type": "choice",
+      "question": "The marketing campaign was ____ successful.",
+      "choices": [
+        "extremely",
+        "extreme",
+        "extremes",
+        "extremity"
+      ],
+      "answer": 0,
+      "explanation": "形容詞 successful を修飾するのは副詞 extremely（非常に）。形容詞 extreme は形容詞を修飾できない。 訳: その販促キャンペーンは非常に成功した。",
+      "tags": [
+        "ステップ2",
+        "品詞"
+      ]
+    },
+    {
+      "id": "t-verb-neither-nor",
+      "type": "choice",
+      "question": "Neither the manager nor the employees ____ aware of the change.",
+      "choices": [
+        "was",
+        "is",
+        "being",
+        "were"
+      ],
+      "answer": 3,
+      "explanation": "〈Neither A nor B〉が主語のとき、動詞は B（近いほう）に合わせる。the employees は複数なので were。 訳: 部長も社員たちも、その変更に気づいていなかった。",
+      "tags": [
+        "ステップ2",
+        "動詞の形"
+      ]
+    },
+    {
+      "id": "t-voc-high-demand",
+      "type": "choice",
+      "question": "Due to ____ demand, the product is temporarily out of stock.",
+      "choices": [
+        "tall",
+        "high",
+        "expensive",
+        "long"
+      ],
+      "answer": 1,
+      "explanation": "demand（需要）の大きさは high / strong で表す。tall は背の高さ、expensive は値段、long は長さで、demand と結びつかない。 訳: 需要が高いため、その商品は一時的に在庫切れとなっている。",
+      "tags": [
+        "ステップ2",
+        "語彙"
+      ]
+    },
+    {
+      "id": "t-pc-available-to",
+      "type": "choice",
+      "question": "The discount is available only ____ members.",
+      "choices": [
+        "by",
+        "with",
+        "from",
+        "to"
+      ],
+      "answer": 3,
+      "explanation": "〈available to 人〉で「人が利用できる」。available は to（または for）と結びつく。 訳: その割引は会員のみが利用できる。",
+      "tags": [
+        "ステップ2",
+        "前置詞と接続詞"
+      ]
+    },
+    {
+      "id": "t-verb-if-present",
+      "type": "choice",
+      "question": "If the shipment ____ late, we will contact you immediately.",
+      "choices": [
+        "will arrive",
+        "arrives",
+        "arrived",
+        "arriving"
+      ],
+      "answer": 1,
+      "explanation": "条件を表す if 節（副詞節）では、未来のことでも現在形を使う。主語 the shipment は三人称単数なので arrives。 訳: 万一、出荷品の到着が遅れる場合は、すぐにご連絡いたします。",
+      "tags": [
+        "ステップ2",
+        "動詞の形"
+      ]
+    },
+    {
+      "id": "t-pos-responsible",
+      "type": "choice",
+      "question": "Mr. Wong is ____ for managing the company's social media accounts.",
+      "choices": [
+        "responsibility",
+        "responsibly",
+        "responsible",
+        "response"
+      ],
+      "answer": 2,
+      "explanation": "〈be responsible for 〜〉で「〜を担当している・〜に責任がある」。be 動詞の補語なので形容詞。 訳: ウォンさんは会社の SNS アカウントの管理を担当している。",
+      "tags": [
+        "ステップ2",
+        "品詞"
+      ]
+    },
+    {
+      "id": "t-voc-ensure",
+      "type": "choice",
+      "question": "Please ____ that all the windows are closed before leaving.",
+      "choices": [
+        "ensure",
+        "assure",
+        "inform",
+        "remind"
+      ],
+      "answer": 0,
+      "explanation": "〈ensure that 〜〉で「〜を確実にする・必ず〜であるようにする」。assure / inform / remind は〈動詞＋人＋that 〜〉の形で、人を表す目的語が必要。 訳: 退出する前に、必ずすべての窓が閉まっているようにしてください。",
+      "tags": [
+        "ステップ2",
+        "語彙"
+      ]
+    },
+    {
+      "id": "t-pron-each-other",
+      "type": "choice",
+      "question": "The two companies agreed to share resources with ____ other.",
+      "choices": [
+        "each",
+        "one",
+        "another",
+        "the"
+      ],
+      "answer": 0,
+      "explanation": "each other で「お互い」。前置詞 with の後ろに置いて「互いに」。one another も同じ意味だが、ここでは other が続くので each。 訳: その 2 社は互いに資源を共有することで合意した。",
+      "tags": [
+        "ステップ2",
+        "代名詞"
+      ]
+    },
+    {
+      "id": "t-pc-in-spite-of",
+      "type": "choice",
+      "question": "The project was completed on time ____ the shortage of staff.",
+      "choices": [
+        "even though",
+        "although",
+        "in spite of",
+        "so that"
+      ],
+      "answer": 2,
+      "explanation": "後ろが名詞句（the shortage of staff）なので前置詞句の in spite of（〜にもかかわらず）。even though / although / so that は接続詞で節が必要。 訳: 人手不足にもかかわらず、プロジェクトは期限どおりに完了した。",
+      "tags": [
+        "ステップ2",
+        "前置詞と接続詞"
+      ]
+    },
+    {
+      "id": "t-rel-whom",
+      "type": "choice",
+      "question": "Ms. Lopez is the person ____ I spoke with on the phone.",
+      "choices": [
+        "whose",
+        "whom",
+        "which",
+        "what"
+      ],
+      "answer": 1,
+      "explanation": "先行詞が人で、前置詞 with の目的語が欠けているので目的格の whom（who / that も可、省略も可）。which は物、whose は後ろに名詞が必要。 訳: ロペスさんは、私が電話で話した人だ。",
+      "tags": [
+        "ステップ2",
+        "関係詞"
+      ]
+    },
+    {
+      "id": "t-voc-postponed",
+      "type": "choice",
+      "question": "The meeting has been ____ until next week due to the manager's illness.",
+      "choices": [
+        "attended",
+        "reserved",
+        "prevented",
+        "postponed"
+      ],
+      "answer": 3,
+      "explanation": "until next week（来週まで）と組んで意味が通るのは postpone（延期する）。attend は出席する、reserve は予約する、prevent は妨げる。 訳: 部長の体調不良のため、会議は来週に延期された。",
+      "tags": [
+        "ステップ2",
+        "語彙"
+      ]
+    },
+    {
+      "id": "t-verb-along-with",
+      "type": "choice",
+      "question": "The CEO, along with the board members, ____ expected to attend.",
+      "choices": [
+        "is",
+        "are",
+        "be",
+        "being"
+      ],
+      "answer": 0,
+      "explanation": "along with 〜 / as well as 〜 で付け足された語句は主語に数えない。主語は The CEO（単数）なので is。 訳: 最高経営責任者は、取締役たちとともに出席する予定だ。",
+      "tags": [
+        "ステップ2",
+        "動詞の形"
+      ]
+    },
+    {
+      "id": "t-pos-exceptional",
+      "type": "choice",
+      "question": "The hotel is known for its ____ service.",
+      "choices": [
+        "exception",
+        "exceptional",
+        "exceptionally",
+        "except"
+      ],
+      "answer": 1,
+      "explanation": "所有格 its と名詞 service の間なので形容詞 exceptional（並外れた・非常に優れた）。副詞は名詞を修飾できない。 訳: そのホテルは並外れたサービスで知られている。",
+      "tags": [
+        "ステップ2",
+        "品詞"
+      ]
+    },
+    {
+      "id": "t-verb-should-inversion",
+      "type": "choice",
+      "question": "____ you have any questions, please do not hesitate to contact us.",
+      "choices": [
+        "Were",
+        "Had",
+        "Should",
+        "Would"
+      ],
+      "answer": 2,
+      "explanation": "If you should have any questions（万一ご質問があれば）の if を省略した倒置。後ろの動詞が原形 have なので Should。Were / Had では原形が続かない。ビジネス文書の定番。 訳: ご不明な点がございましたら、お気軽にお問い合わせください。",
+      "tags": [
+        "ステップ3",
+        "動詞の形"
+      ]
+    },
+    {
+      "id": "t-rel-whose-resumes",
+      "type": "choice",
+      "question": "Applicants ____ résumés are incomplete will not be considered.",
+      "choices": [
+        "who",
+        "which",
+        "whom",
+        "whose"
+      ],
+      "answer": 3,
+      "explanation": "直後に名詞 résumés があり「その応募者の履歴書」という所有の関係なので whose。 訳: 履歴書に不備のある応募者は選考の対象外となる。",
+      "tags": [
+        "ステップ3",
+        "関係詞"
+      ]
+    },
+    {
+      "id": "t-pc-unless",
+      "type": "choice",
+      "question": "The event will be held outdoors ____ it rains.",
+      "choices": [
+        "otherwise",
+        "despite",
+        "unless",
+        "without"
+      ],
+      "answer": 2,
+      "explanation": "後ろが節（it rains）なので接続詞が必要。unless は「〜しない限り」（＝ if 〜 not）。otherwise は副詞、despite / without は前置詞で節を続けられない。 訳: 雨が降らない限り、イベントは屋外で行われる。",
+      "tags": [
+        "ステップ3",
+        "前置詞と接続詞"
+      ]
+    },
+    {
+      "id": "t-pos-independently",
+      "type": "choice",
+      "question": "The new system will allow staff to work more ____.",
+      "choices": [
+        "independent",
+        "independence",
+        "independents",
+        "independently"
+      ],
+      "answer": 3,
+      "explanation": "work は自動詞で、more と組んで動詞を修飾する副詞が入る。independently（自主的に・単独で）。 訳: 新しいシステムによって、スタッフはより自立して働けるようになる。",
+      "tags": [
+        "ステップ3",
+        "品詞"
+      ]
+    },
+    {
+      "id": "t-voc-committed-to",
+      "type": "choice",
+      "question": "The company is ____ to providing high-quality service.",
+      "choices": [
+        "interested",
+        "committed",
+        "eager",
+        "willing"
+      ],
+      "answer": 1,
+      "explanation": "〈be committed to -ing〉で「〜に全力で取り組む」。to が前置詞なので後ろが -ing になる。eager / willing は to 不定詞（原形）をとり、interested は in と組む。 訳: その会社は質の高いサービスの提供に全力を注いでいる。",
+      "tags": [
+        "ステップ3",
+        "語彙"
+      ]
+    },
+    {
+      "id": "t-verb-had-known",
+      "type": "choice",
+      "question": "Had the manager known about the problem earlier, she ____ it.",
+      "choices": [
+        "would have solved",
+        "would solve",
+        "will solve",
+        "had solved"
+      ],
+      "answer": 0,
+      "explanation": "Had the manager known ＝ If the manager had known（仮定法過去完了の倒置）。主節は〈would have ＋過去分詞〉。 訳: 部長がもっと早くその問題を知っていたら、解決していただろう。",
+      "tags": [
+        "ステップ3",
+        "動詞の形"
+      ]
+    },
+    {
+      "id": "t-pron-neither",
+      "type": "choice",
+      "question": "Of the two proposals submitted, ____ was accepted, so the team will have to start over.",
+      "choices": [
+        "either",
+        "neither",
+        "both",
+        "any"
+      ],
+      "answer": 1,
+      "explanation": "2 つのうち「どちらも〜ない」は neither。やり直すことになったという文脈から、どちらも採用されなかったと分かる。both は複数扱いで was と合わず、any は 3 つ以上に使う。 訳: 提出された 2 つの提案はどちらも採用されなかったので、チームは一からやり直さなければならない。",
+      "tags": [
+        "ステップ3",
+        "代名詞"
+      ]
+    },
+    {
+      "id": "t-pc-in-the-absence",
+      "type": "choice",
+      "question": "____ the absence of the director, Mr. Hill will lead the meeting.",
+      "choices": [
+        "In",
+        "On",
+        "At",
+        "By"
+      ],
+      "answer": 0,
+      "explanation": "in the absence of 〜 で「〜の不在時に・〜がいないので」。前置詞と名詞の決まった組み合わせとして覚える。 訳: 部長の不在のため、ヒルさんが会議の進行役を務める。",
+      "tags": [
+        "ステップ3",
+        "前置詞と接続詞"
+      ]
+    },
+    {
+      "id": "t-rel-two-of-which",
+      "type": "choice",
+      "question": "The company has three factories, two of ____ are located in Vietnam.",
+      "choices": [
+        "them",
+        "that",
+        "where",
+        "which"
+      ],
+      "answer": 3,
+      "explanation": "〈数詞＋of which〉で前の名詞（three factories）を受け、文をつなぐ。them だと接続詞がなく 2 つの文をつなげない。前置詞の後ろに that は置けない。 訳: その会社には工場が 3 つあり、そのうち 2 つはベトナムにある。",
+      "tags": [
+        "ステップ3",
+        "関係詞"
+      ]
+    },
+    {
+      "id": "t-voc-mandatory",
+      "type": "choice",
+      "question": "Attendance at the safety training is ____ for all new employees, so no one may skip it.",
+      "choices": [
+        "optional",
+        "eligible",
+        "mandatory",
+        "potential"
+      ],
+      "answer": 2,
+      "explanation": "「誰も欠席できない」という後半から、mandatory（義務の・必須の）。optional（任意の）は逆の意味。eligible は「資格のある」、potential は「潜在的な」。 訳: 安全研修への出席は全新入社員の義務なので、誰も欠席できない。",
+      "tags": [
+        "ステップ3",
+        "語彙"
+      ]
+    },
+    {
+      "id": "t-pos-merger",
+      "type": "choice",
+      "question": "The ____ of the two companies was announced yesterday.",
+      "choices": [
+        "merge",
+        "merged",
+        "mergeable",
+        "merger"
+      ],
+      "answer": 3,
+      "explanation": "The と of の間なので名詞。merge（合併する）の名詞形は merger。-er で終わるが「人」ではなく「合併」を表す点がひっかけ。 訳: 2 社の合併が昨日発表された。",
+      "tags": [
+        "ステップ3",
+        "品詞"
+      ]
+    },
+    {
+      "id": "t-verb-expected-to-be",
+      "type": "choice",
+      "question": "The new office building is expected ____ by the end of next year.",
+      "choices": [
+        "to complete",
+        "completing",
+        "to be completed",
+        "being completed"
+      ],
+      "answer": 2,
+      "explanation": "〈be expected to ＋原形〉で「〜する見込みだ」。建物は「完成される」側なので受け身の to be completed。 訳: 新しいオフィスビルは来年末までに完成する見込みだ。",
+      "tags": [
+        "ステップ3",
+        "動詞の形"
+      ]
+    },
+    {
+      "id": "t-pc-as-soon-as",
+      "type": "choice",
+      "question": "The shipment will be sent ____ payment is received.",
+      "choices": [
+        "as soon as",
+        "as well as",
+        "upon",
+        "in case of"
+      ],
+      "answer": 0,
+      "explanation": "後ろが節（payment is received）なので接続詞の as soon as（〜しだい）。upon / in case of は前置詞で節を続けられない。as well as は「〜と同様に」で語句と語句を並べる表現。 訳: お支払いを確認しだい、商品を発送いたします。",
+      "tags": [
+        "ステップ3",
+        "前置詞と接続詞"
+      ]
+    },
+    {
+      "id": "t-voc-promoted",
+      "type": "choice",
+      "question": "Mr. Ahmed was ____ to the position of sales director last month.",
+      "choices": [
+        "raised",
+        "promoted",
+        "lifted",
+        "grown"
+      ],
+      "answer": 1,
+      "explanation": "〈be promoted to 〜〉で「〜に昇進する」。raise は給料などを上げる（raise salaries）、lift は物を持ち上げる、grow は育つ・増える。 訳: アーメドさんは先月、営業部長に昇進した。",
+      "tags": [
+        "ステップ3",
+        "語彙"
+      ]
+    },
+    {
+      "id": "t-verb-have-repair",
+      "type": "choice",
+      "question": "The manager had the technician ____ the copy machine.",
+      "choices": [
+        "repaired",
+        "repair",
+        "to repair",
+        "repairs"
+      ],
+      "answer": 1,
+      "explanation": "使役動詞の〈have ＋人＋原形〉で「人に〜してもらう・させる」。技術者が修理する（能動の関係）なので原形 repair。物が目的語なら have the machine repaired。 訳: 部長は技術者にコピー機を修理してもらった。",
+      "tags": [
+        "ステップ3",
+        "動詞の形"
+      ]
+    },
+    {
+      "id": "t-pc-either-or",
+      "type": "choice",
+      "question": "Employees may choose ____ the morning or the afternoon session.",
+      "choices": [
+        "both",
+        "neither",
+        "whether",
+        "either"
+      ],
+      "answer": 3,
+      "explanation": "後ろの or とペアになるのは〈either A or B〉（A か B のどちらか）。both は and、neither は nor と組む。 訳: 社員は午前の部と午後の部のどちらかを選べる。",
+      "tags": [
+        "ステップ3",
+        "前置詞と接続詞"
+      ]
+    },
+    {
+      "id": "t-rel-whatever",
+      "type": "choice",
+      "question": "____ the company decides, we will support the plan.",
+      "choices": [
+        "Whatever",
+        "Whoever",
+        "Whose",
+        "Which"
+      ],
+      "answer": 0,
+      "explanation": "decides の目的語が欠けた節を導き、「何を〜しようとも」の意味になるのは Whatever（＝ No matter what）。Whoever は人、Whose / Which ではこの形の譲歩の意味にならない。 訳: 会社が何を決定しようとも、私たちはその計画を支持する。",
+      "tags": [
+        "ステップ3",
+        "関係詞"
+      ]
+    },
+    {
+      "id": "t-pos-unanimously",
+      "type": "choice",
+      "question": "The proposal was ____ approved by the board.",
+      "choices": [
+        "unanimous",
+        "unanimity",
+        "unanimously",
+        "unanimities"
+      ],
+      "answer": 2,
+      "explanation": "was と過去分詞 approved の間で動詞を修飾するのは副詞 unanimously（満場一致で）。 訳: その提案は取締役会で満場一致で承認された。",
+      "tags": [
+        "ステップ3",
+        "品詞"
+      ]
+    },
+    {
+      "id": "t-voc-address",
+      "type": "choice",
+      "question": "The company issued a statement to ____ concerns about product safety.",
+      "choices": [
+        "respond",
+        "cope",
+        "address",
+        "reply"
+      ],
+      "answer": 2,
+      "explanation": "空所の直後に目的語 concerns があるので他動詞が必要。address は「（問題・懸念）に対処する」という他動詞。respond / reply は to、cope は with が必要。 訳: その会社は製品の安全性に関する懸念に対応するため、声明を出した。",
+      "tags": [
+        "ステップ3",
+        "語彙"
+      ]
+    },
+    {
+      "id": "t-verb-essential-that",
+      "type": "choice",
+      "question": "It is essential that every employee ____ the new guidelines.",
+      "choices": [
+        "follow",
+        "follows",
+        "followed",
+        "following"
+      ],
+      "answer": 0,
+      "explanation": "〈It is essential / important / necessary that 〜〉の that 節では、動詞は原形（仮定法現在）。主語が every employee でも follows にはならない。 訳: 全社員が新しいガイドラインに従うことが不可欠だ。",
+      "tags": [
+        "ステップ3",
+        "動詞の形"
+      ]
+    },
+    {
+      "id": "t-pc-regardless-of",
+      "type": "choice",
+      "question": "The new policy applies to all employees, ____ of their position.",
+      "choices": [
+        "despite",
+        "although",
+        "instead",
+        "regardless"
+      ],
+      "answer": 3,
+      "explanation": "空所の後ろの of とセットで regardless of 〜（〜に関係なく）。despite は of を伴わない。instead of は「〜の代わりに」で意味が合わない。 訳: 新しい方針は、役職に関係なく全社員に適用される。",
+      "tags": [
+        "ステップ3",
+        "前置詞と接続詞"
+      ]
+    },
+    {
+      "id": "t-rel-the-reason-why",
+      "type": "choice",
+      "question": "This is the reason ____ we decided to relocate our headquarters.",
+      "choices": [
+        "which",
+        "why",
+        "what",
+        "how"
+      ],
+      "answer": 1,
+      "explanation": "先行詞が the reason で、後ろは欠けのない完全な文なので関係副詞 why。which だと後ろに名詞の欠けが必要。 訳: これが、私たちが本社の移転を決めた理由だ。",
+      "tags": [
+        "ステップ3",
+        "関係詞"
+      ]
+    },
+    {
+      "id": "t-voc-conflict",
+      "type": "choice",
+      "question": "Due to a scheduling ____, the interview has been moved to Thursday.",
+      "choices": [
+        "contrast",
+        "contact",
+        "contract",
+        "conflict"
+      ],
+      "answer": 3,
+      "explanation": "scheduling conflict で「予定の重なり（ダブルブッキング）」。contrast は対比、contact は連絡、contract は契約。つづりの似た語のひっかけ。 訳: 予定が重なったため、面接は木曜日に変更された。",
+      "tags": [
+        "ステップ3",
+        "語彙"
+      ]
+    },
+    {
+      "id": "t-pos-attention",
+      "type": "choice",
+      "question": "Ms. Yamada's ____ to detail makes her an excellent editor.",
+      "choices": [
+        "attentive",
+        "attention",
+        "attentively",
+        "attend"
+      ],
+      "answer": 1,
+      "explanation": "所有格 Ms. Yamada's の後ろで文の主語になるので名詞。attention to detail（細部への気配り）はビジネスで頻出の表現。 訳: 山田さんは細部まで気を配るので、優れた編集者だ。",
+      "tags": [
+        "ステップ3",
+        "品詞"
+      ]
+    },
+    {
+      "id": "t-verb-not-until",
+      "type": "choice",
+      "question": "Not until the report was published ____ the public learn about the problem.",
+      "choices": [
+        "does",
+        "has",
+        "did",
+        "was"
+      ],
+      "answer": 2,
+      "explanation": "否定の語句 Not until 〜 が文頭に出ると、主節は疑問文の語順（倒置）。過去の話で、後ろが原形 learn なので did。 訳: 報告書が公表されて初めて、一般の人々はその問題を知った。",
+      "tags": [
+        "ステップ3",
+        "動詞の形"
+      ]
+    },
+    {
+      "id": "t-pc-so-that",
+      "type": "choice",
+      "question": "The new procedures will be introduced gradually ____ employees have time to adjust.",
+      "choices": [
+        "so that",
+        "in order to",
+        "because of",
+        "such as"
+      ],
+      "answer": 0,
+      "explanation": "後ろが節（employees have time）なので接続詞の so that（〜するように）。in order to は原形、because of と such as は名詞を続ける。 訳: 社員が慣れる時間を持てるよう、新しい手順は段階的に導入される。",
+      "tags": [
+        "ステップ3",
+        "前置詞と接続詞"
+      ]
+    },
+    {
+      "id": "t-pron-themselves",
+      "type": "choice",
+      "question": "The new interns introduced ____ to the team.",
+      "choices": [
+        "themselves",
+        "them",
+        "their",
+        "theirs"
+      ],
+      "answer": 0,
+      "explanation": "主語（The new interns）と目的語が同じ人なので再帰代名詞 themselves。them にすると別の人たちを紹介したことになる。 訳: 新しいインターンたちはチームに自己紹介をした。",
+      "tags": [
+        "ステップ3",
+        "代名詞"
+      ]
+    },
+    {
+      "id": "t-rel-those-who",
+      "type": "choice",
+      "question": "Only those ____ completed the survey will receive a gift card.",
+      "choices": [
+        "whose",
+        "which",
+        "who",
+        "they"
+      ],
+      "answer": 2,
+      "explanation": "those who 〜 で「〜する人々」。後ろに主語が欠けているので主格の who。they では接続詞がなく文がつながらない。 訳: アンケートに回答した人だけがギフトカードを受け取れる。",
+      "tags": [
+        "ステップ3",
+        "関係詞"
+      ]
+    },
+    {
+      "id": "t-voc-exceeded",
+      "type": "choice",
+      "question": "Sales of the new product ____ expectations.",
+      "choices": [
+        "excelled",
+        "exceeded",
+        "extended",
+        "exchanged"
+      ],
+      "answer": 1,
+      "explanation": "exceed expectations で「予想を上回る」。excel は「秀でる」（excel in 〜）、extend は延長する、exchange は交換する。 訳: 新製品の売上は予想を上回った。",
+      "tags": [
+        "ステップ3",
+        "語彙"
+      ]
+    },
+    {
+      "id": "t-verb-were-released",
+      "type": "choice",
+      "question": "The quarterly figures, which ____ yesterday, show a 5% increase.",
+      "choices": [
+        "released",
+        "have released",
+        "were releasing",
+        "were released"
+      ],
+      "answer": 3,
+      "explanation": "which の先行詞は The quarterly figures（数字）で、数字は「発表される」側なので受け身。yesterday があるので過去の were released。 訳: 昨日発表された四半期の数字は、5% の増加を示している。",
+      "tags": [
+        "ステップ3",
+        "動詞の形"
+      ]
+    },
+    {
+      "id": "t-pos-officially",
+      "type": "choice",
+      "question": "We are pleased to announce that our new branch is now ____ open.",
+      "choices": [
+        "officially",
+        "official",
+        "officiate",
+        "officials"
+      ],
+      "answer": 0,
+      "explanation": "形容詞 open を修飾するのは副詞 officially（正式に）。 訳: 新支店が正式に開業したことをお知らせいたします。",
+      "tags": [
+        "ステップ3",
+        "品詞"
+      ]
+    },
+    {
+      "id": "t-voc-complete-form",
+      "type": "choice",
+      "question": "Please ____ the enclosed form and return it by May 31.",
+      "choices": [
+        "achieve",
+        "complete",
+        "perform",
+        "accomplish"
+      ],
+      "answer": 1,
+      "explanation": "complete a form で「用紙に記入する」。achieve / accomplish は目標を達成する、perform は任務・演技を行う。 訳: 同封の用紙にご記入のうえ、5 月 31 日までにご返送ください。",
+      "tags": [
+        "ステップ3",
+        "語彙"
+      ]
+    },
+    {
+      "id": "t-rel-to-which",
+      "type": "choice",
+      "question": "The firm ____ we outsourced our accounting has gone bankrupt.",
+      "choices": [
+        "which",
+        "whom",
+        "to which",
+        "in which"
+      ],
+      "answer": 2,
+      "explanation": "outsource A to B（A を B に外部委託する）の to B が関係詞になった形なので〈to which〉。which だけでは to が足りない。in which では意味が合わない。 訳: 当社が経理を外部委託していた会社が倒産した。",
+      "tags": [
+        "ステップ3",
+        "関係詞"
+      ]
+    },
+    {
+      "id": "t-voc-refrain",
+      "type": "choice",
+      "question": "Please ____ from using your phone during the presentation.",
+      "choices": [
+        "avoid",
+        "stop",
+        "prevent",
+        "refrain"
+      ],
+      "answer": 3,
+      "explanation": "空所の後ろが from -ing なので refrain from -ing（〜を控える）。avoid は avoid -ing（from は不要）、stop / prevent は〈stop / prevent ＋人＋from -ing〉のように目的語が必要。 訳: プレゼンテーション中は携帯電話の使用をお控えください。",
+      "tags": [
+        "ステップ3",
+        "語彙"
+      ]
+    }
+  ]
+}

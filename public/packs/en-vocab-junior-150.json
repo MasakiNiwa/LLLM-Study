@@ -1,0 +1,3940 @@
+{
+  "format": "lllm-study-pack",
+  "version": 1,
+  "id": "en-vocab-junior-150",
+  "title": "中学英単語 150（基礎の総復習）",
+  "description": "中学校で習う最重要の名詞・動詞・形容詞・副詞・前置詞を 150 語に厳選し、とても基本的な語から中学卒業レベルの語へと並べました。ステップ1（中1レベル）・ステップ2（中2レベル）・ステップ3（中3レベル）が各 50 語で、どの語にも発音記号・品詞・主な意味・例文と訳・よく使う組み合わせ・不規則な変化形（eat – ate – eaten など）・使い分けや間違えやすい点のメモを付けています。形式は単語 150 語。中学英語の学び直しや高校入学前の総復習に使えます。take・get・make などの基本動詞は「英語の基本動詞 40」（en-core-verbs）に収録しているので、あわせて学ぶと中学の語彙がそろいます。次は「高校英単語 150（英検 2 級レベル）」（en-vocab-high-150）、さらに「上級英単語 150（大学・ビジネス・英検準 1 級）」（en-vocab-advanced-150）へとステップアップできます。",
+  "subject": "english",
+  "language": {
+    "target": "en",
+    "explanation": "ja"
+  },
+  "level": "中学（CEFR A1）",
+  "tags": [
+    "英単語",
+    "中学",
+    "基礎",
+    "学び直し"
+  ],
+  "author": "LLLM-Study",
+  "license": "MIT",
+  "source": "LLLM-Study オリジナル（AI を利用して作成）",
+  "revision": 1,
+  "items": [
+    {
+      "id": "jv-family",
+      "type": "vocab",
+      "term": "family",
+      "reading": "/ˈfæməli/",
+      "pos": "名詞",
+      "meanings": [
+        "家族",
+        "一家"
+      ],
+      "examples": [
+        {
+          "text": "There are five people in my family.",
+          "translation": "私の家族は5人です。"
+        }
+      ],
+      "collocations": [
+        "family name",
+        "family members"
+      ],
+      "notes": "家族全体をひとまとまりとして指す。家族の一人ひとりは family members と言う。",
+      "tags": [
+        "ステップ1",
+        "名詞"
+      ]
+    },
+    {
+      "id": "jv-friend",
+      "type": "vocab",
+      "term": "friend",
+      "reading": "/frend/",
+      "pos": "名詞",
+      "meanings": [
+        "友だち"
+      ],
+      "examples": [
+        {
+          "text": "She is my best friend.",
+          "translation": "彼女は私のいちばんの友だちです。"
+        }
+      ],
+      "collocations": [
+        "best friend",
+        "make friends with"
+      ],
+      "notes": "make friends with 〜（〜と友だちになる）では friends と複数形にする。",
+      "tags": [
+        "ステップ1",
+        "名詞"
+      ]
+    },
+    {
+      "id": "jv-school",
+      "type": "vocab",
+      "term": "school",
+      "reading": "/skuːl/",
+      "pos": "名詞",
+      "meanings": [
+        "学校",
+        "授業"
+      ],
+      "examples": [
+        {
+          "text": "We go to school by bus.",
+          "translation": "私たちはバスで学校に通う。"
+        }
+      ],
+      "collocations": [
+        "go to school",
+        "after school",
+        "high school"
+      ],
+      "notes": "「勉強しに学校へ行く」の意味の go to school では a や the を付けない。",
+      "tags": [
+        "ステップ1",
+        "名詞"
+      ]
+    },
+    {
+      "id": "jv-morning",
+      "type": "vocab",
+      "term": "morning",
+      "reading": "/ˈmɔːrnɪŋ/",
+      "pos": "名詞",
+      "meanings": [
+        "朝",
+        "午前"
+      ],
+      "examples": [
+        {
+          "text": "I get up at six in the morning.",
+          "translation": "私は朝6時に起きる。"
+        }
+      ],
+      "collocations": [
+        "in the morning",
+        "this morning",
+        "every morning"
+      ],
+      "notes": "ふつうは in the morning だが、特定の日の朝は on Sunday morning のように on を使う。this morning には前置詞を付けない。",
+      "tags": [
+        "ステップ1",
+        "名詞"
+      ]
+    },
+    {
+      "id": "jv-night",
+      "type": "vocab",
+      "term": "night",
+      "reading": "/naɪt/",
+      "pos": "名詞",
+      "meanings": [
+        "夜"
+      ],
+      "examples": [
+        {
+          "text": "I watched a movie last night.",
+          "translation": "昨夜、映画を見た。"
+        }
+      ],
+      "collocations": [
+        "at night",
+        "last night",
+        "Good night."
+      ],
+      "notes": "「夜に」は at night。evening は夕方から寝るころまで、night は暗くなってから朝までを指す。",
+      "tags": [
+        "ステップ1",
+        "名詞"
+      ]
+    },
+    {
+      "id": "jv-week",
+      "type": "vocab",
+      "term": "week",
+      "reading": "/wiːk/",
+      "pos": "名詞",
+      "meanings": [
+        "週"
+      ],
+      "examples": [
+        {
+          "text": "I play tennis twice a week.",
+          "translation": "私は週に2回テニスをする。"
+        }
+      ],
+      "collocations": [
+        "last week",
+        "next week",
+        "twice a week"
+      ],
+      "notes": "last week / next week には前置詞を付けない。weekend は「週末」。",
+      "tags": [
+        "ステップ1",
+        "名詞"
+      ]
+    },
+    {
+      "id": "jv-year",
+      "type": "vocab",
+      "term": "year",
+      "reading": "/jɪr/",
+      "pos": "名詞",
+      "meanings": [
+        "年",
+        "〜歳"
+      ],
+      "examples": [
+        {
+          "text": "I am thirteen years old.",
+          "translation": "私は13歳です。"
+        }
+      ],
+      "collocations": [
+        "last year",
+        "next year",
+        "〜 years old"
+      ],
+      "notes": "「〜歳」は 〜 years old。名詞の前では a thirteen-year-old boy のように year を単数形にする。",
+      "tags": [
+        "ステップ1",
+        "名詞"
+      ]
+    },
+    {
+      "id": "jv-water",
+      "type": "vocab",
+      "term": "water",
+      "reading": "/ˈwɔːtər/",
+      "pos": "名詞",
+      "meanings": [
+        "水"
+      ],
+      "examples": [
+        {
+          "text": "Can I have a glass of water?",
+          "translation": "水を1杯もらえますか。"
+        }
+      ],
+      "collocations": [
+        "a glass of water",
+        "drink water",
+        "hot water"
+      ],
+      "notes": "数えられない名詞なので a water とはせず、a glass of water のように数える。「お湯」は hot water。",
+      "tags": [
+        "ステップ1",
+        "名詞"
+      ]
+    },
+    {
+      "id": "jv-food",
+      "type": "vocab",
+      "term": "food",
+      "reading": "/fuːd/",
+      "pos": "名詞",
+      "meanings": [
+        "食べ物",
+        "食料"
+      ],
+      "examples": [
+        {
+          "text": "Japanese food is popular around the world.",
+          "translation": "和食は世界中で人気がある。"
+        }
+      ],
+      "collocations": [
+        "Japanese food",
+        "fast food",
+        "food and drink"
+      ],
+      "notes": "ふつう数えられない名詞として使う。",
+      "tags": [
+        "ステップ1",
+        "名詞"
+      ]
+    },
+    {
+      "id": "jv-money",
+      "type": "vocab",
+      "term": "money",
+      "reading": "/ˈmʌni/",
+      "pos": "名詞",
+      "meanings": [
+        "お金"
+      ],
+      "examples": [
+        {
+          "text": "I don't have much money.",
+          "translation": "お金をあまり持っていない。"
+        }
+      ],
+      "collocations": [
+        "save money",
+        "spend money"
+      ],
+      "notes": "数えられない名詞なので many ではなく much や a lot of を使う。",
+      "tags": [
+        "ステップ1",
+        "名詞"
+      ]
+    },
+    {
+      "id": "jv-child",
+      "type": "vocab",
+      "term": "child",
+      "reading": "/tʃaɪld/",
+      "pos": "名詞",
+      "meanings": [
+        "子ども"
+      ],
+      "examples": [
+        {
+          "text": "The children are playing in the park.",
+          "translation": "子どもたちは公園で遊んでいる。"
+        }
+      ],
+      "collocations": [
+        "as a child",
+        "only child"
+      ],
+      "forms": [
+        "children"
+      ],
+      "notes": "複数形は children /ˈtʃɪldrən/ と不規則。as a child は「子どものころ」。",
+      "tags": [
+        "ステップ1",
+        "名詞"
+      ]
+    },
+    {
+      "id": "jv-country",
+      "type": "vocab",
+      "term": "country",
+      "reading": "/ˈkʌntri/",
+      "pos": "名詞",
+      "meanings": [
+        "国",
+        "いなか"
+      ],
+      "examples": [
+        {
+          "text": "Which country do you want to visit?",
+          "translation": "どの国に行ってみたい？"
+        }
+      ],
+      "collocations": [
+        "foreign country",
+        "in the country"
+      ],
+      "notes": "the country で「いなか」の意味にもなる。ou を /ʌ/ と読み「カントリー」と発音する。",
+      "tags": [
+        "ステップ1",
+        "名詞"
+      ]
+    },
+    {
+      "id": "jv-city",
+      "type": "vocab",
+      "term": "city",
+      "reading": "/ˈsɪti/",
+      "pos": "名詞",
+      "meanings": [
+        "市",
+        "都市"
+      ],
+      "examples": [
+        {
+          "text": "Tokyo is a big city.",
+          "translation": "東京は大都市だ。"
+        }
+      ],
+      "collocations": [
+        "big city",
+        "city hall"
+      ],
+      "notes": "town より大きな都市。複数形は cities（y を i に変えて es）。",
+      "tags": [
+        "ステップ1",
+        "名詞"
+      ]
+    },
+    {
+      "id": "jv-eat",
+      "type": "vocab",
+      "term": "eat",
+      "reading": "/iːt/",
+      "pos": "動詞",
+      "meanings": [
+        "食べる",
+        "食事をする"
+      ],
+      "examples": [
+        {
+          "text": "What did you eat for lunch?",
+          "translation": "昼食に何を食べたの？"
+        }
+      ],
+      "collocations": [
+        "eat lunch",
+        "eat out"
+      ],
+      "forms": [
+        "ate",
+        "eaten"
+      ],
+      "notes": "活用は eat – ate – eaten。eat out は「外食する」。",
+      "tags": [
+        "ステップ1",
+        "動詞"
+      ]
+    },
+    {
+      "id": "jv-drink",
+      "type": "vocab",
+      "term": "drink",
+      "reading": "/drɪŋk/",
+      "pos": "動詞",
+      "meanings": [
+        "飲む"
+      ],
+      "examples": [
+        {
+          "text": "I drink milk every morning.",
+          "translation": "私は毎朝牛乳を飲む。"
+        }
+      ],
+      "collocations": [
+        "drink water",
+        "something to drink"
+      ],
+      "forms": [
+        "drank",
+        "drunk"
+      ],
+      "notes": "活用は drink – drank – drunk。something to drink は「何か飲むもの」。",
+      "tags": [
+        "ステップ1",
+        "動詞"
+      ]
+    },
+    {
+      "id": "jv-read",
+      "type": "vocab",
+      "term": "read",
+      "reading": "/riːd/",
+      "pos": "動詞",
+      "meanings": [
+        "読む",
+        "読書する"
+      ],
+      "examples": [
+        {
+          "text": "I read a book before bed every night.",
+          "translation": "毎晩寝る前に本を読む。"
+        }
+      ],
+      "collocations": [
+        "read a book",
+        "read aloud"
+      ],
+      "forms": [
+        "read",
+        "read"
+      ],
+      "notes": "過去形・過去分詞も read と同じつづりだが、発音は /red/ に変わる。",
+      "tags": [
+        "ステップ1",
+        "動詞"
+      ]
+    },
+    {
+      "id": "jv-write",
+      "type": "vocab",
+      "term": "write",
+      "reading": "/raɪt/",
+      "pos": "動詞",
+      "meanings": [
+        "書く"
+      ],
+      "examples": [
+        {
+          "text": "Please write your name here.",
+          "translation": "ここに名前を書いてください。"
+        }
+      ],
+      "collocations": [
+        "write a letter",
+        "write down"
+      ],
+      "forms": [
+        "wrote",
+        "written"
+      ],
+      "notes": "活用は write – wrote – written。w は発音しない。writer は「作家」。",
+      "tags": [
+        "ステップ1",
+        "動詞"
+      ]
+    },
+    {
+      "id": "jv-speak",
+      "type": "vocab",
+      "term": "speak",
+      "reading": "/spiːk/",
+      "pos": "動詞",
+      "meanings": [
+        "話す",
+        "（言語を）話す"
+      ],
+      "examples": [
+        {
+          "text": "Can you speak English?",
+          "translation": "英語を話せますか。"
+        }
+      ],
+      "collocations": [
+        "speak English",
+        "speak to",
+        "speak up"
+      ],
+      "forms": [
+        "spoke",
+        "spoken"
+      ],
+      "notes": "言語を話すときは speak を使う。相手と会話をするときは talk to / talk with もよく使う。",
+      "tags": [
+        "ステップ1",
+        "動詞"
+      ]
+    },
+    {
+      "id": "jv-play",
+      "type": "vocab",
+      "term": "play",
+      "reading": "/pleɪ/",
+      "pos": "動詞",
+      "meanings": [
+        "（スポーツを）する",
+        "（楽器を）演奏する",
+        "遊ぶ"
+      ],
+      "examples": [
+        {
+          "text": "She plays the piano very well.",
+          "translation": "彼女はピアノをとても上手に弾く。"
+        }
+      ],
+      "collocations": [
+        "play soccer",
+        "play the guitar",
+        "play with"
+      ],
+      "notes": "スポーツには the を付けない（play tennis）が、楽器には付ける（play the piano）。",
+      "tags": [
+        "ステップ1",
+        "動詞"
+      ]
+    },
+    {
+      "id": "jv-study",
+      "type": "vocab",
+      "term": "study",
+      "reading": "/ˈstʌdi/",
+      "pos": "動詞",
+      "meanings": [
+        "勉強する",
+        "研究する"
+      ],
+      "examples": [
+        {
+          "text": "I study English for an hour every day.",
+          "translation": "私は毎日1時間英語を勉強する。"
+        }
+      ],
+      "collocations": [
+        "study for a test",
+        "study abroad"
+      ],
+      "notes": "三単現は studies、過去形は studied（y を i に変える）。study は「勉強する（過程）」、learn は「身につける（結果）」。",
+      "tags": [
+        "ステップ1",
+        "動詞"
+      ]
+    },
+    {
+      "id": "jv-live",
+      "type": "vocab",
+      "term": "live",
+      "reading": "/lɪv/",
+      "pos": "動詞",
+      "meanings": [
+        "住む",
+        "生きる"
+      ],
+      "examples": [
+        {
+          "text": "I live in Osaka.",
+          "translation": "私は大阪に住んでいる。"
+        }
+      ],
+      "collocations": [
+        "live in",
+        "live with"
+      ],
+      "notes": "動詞は /lɪv/。形容詞の live（生の・ライブの）は /laɪv/ と発音が違う。",
+      "tags": [
+        "ステップ1",
+        "動詞"
+      ]
+    },
+    {
+      "id": "jv-walk",
+      "type": "vocab",
+      "term": "walk",
+      "reading": "/wɔːk/",
+      "pos": "動詞",
+      "meanings": [
+        "歩く",
+        "（犬を）散歩させる"
+      ],
+      "examples": [
+        {
+          "text": "I walk to school every day.",
+          "translation": "私は毎日歩いて学校に行く。"
+        }
+      ],
+      "collocations": [
+        "walk to school",
+        "take a walk",
+        "walk the dog"
+      ],
+      "notes": "walk to 〜 で「歩いて〜へ行く」。名詞では take a walk（散歩する）。l は発音しない。",
+      "tags": [
+        "ステップ1",
+        "動詞"
+      ]
+    },
+    {
+      "id": "jv-open",
+      "type": "vocab",
+      "term": "open",
+      "reading": "/ˈoʊpən/",
+      "pos": "動詞／形容詞",
+      "meanings": [
+        "開ける",
+        "開く",
+        "開いている（形容詞）"
+      ],
+      "examples": [
+        {
+          "text": "Could you open the window?",
+          "translation": "窓を開けてもらえますか。"
+        }
+      ],
+      "collocations": [
+        "open the door",
+        "be open"
+      ],
+      "notes": "反対は close（閉める）。形容詞で The shop is open.（その店は開いている）とも使う。",
+      "tags": [
+        "ステップ1",
+        "動詞"
+      ]
+    },
+    {
+      "id": "jv-help",
+      "type": "vocab",
+      "term": "help",
+      "reading": "/help/",
+      "pos": "動詞",
+      "meanings": [
+        "手伝う",
+        "助ける"
+      ],
+      "examples": [
+        {
+          "text": "Can you help me with my homework?",
+          "translation": "宿題を手伝ってくれる？"
+        }
+      ],
+      "collocations": [
+        "help 人 with 物",
+        "Help yourself."
+      ],
+      "notes": "「人の〜を手伝う」は help 人 with 物 の形（help my homework とはしない）。Help yourself. は「ご自由にどうぞ」。",
+      "tags": [
+        "ステップ1",
+        "動詞"
+      ]
+    },
+    {
+      "id": "jv-swim",
+      "type": "vocab",
+      "term": "swim",
+      "reading": "/swɪm/",
+      "pos": "動詞",
+      "meanings": [
+        "泳ぐ"
+      ],
+      "examples": [
+        {
+          "text": "Let's swim in the sea.",
+          "translation": "海で泳ごう。"
+        }
+      ],
+      "collocations": [
+        "go swimming",
+        "swim across"
+      ],
+      "forms": [
+        "swam",
+        "swum"
+      ],
+      "notes": "活用は swim – swam – swum。-ing 形は m を重ねて swimming。",
+      "tags": [
+        "ステップ1",
+        "動詞"
+      ]
+    },
+    {
+      "id": "jv-sing",
+      "type": "vocab",
+      "term": "sing",
+      "reading": "/sɪŋ/",
+      "pos": "動詞",
+      "meanings": [
+        "歌う"
+      ],
+      "examples": [
+        {
+          "text": "She sings in the school choir.",
+          "translation": "彼女は学校の合唱団で歌っている。"
+        }
+      ],
+      "collocations": [
+        "sing a song",
+        "sing along"
+      ],
+      "forms": [
+        "sang",
+        "sung"
+      ],
+      "notes": "活用は sing – sang – sung。名詞は singer（歌手）、song（歌）。",
+      "tags": [
+        "ステップ1",
+        "動詞"
+      ]
+    },
+    {
+      "id": "jv-buy",
+      "type": "vocab",
+      "term": "buy",
+      "reading": "/baɪ/",
+      "pos": "動詞",
+      "meanings": [
+        "買う"
+      ],
+      "examples": [
+        {
+          "text": "I bought a new bag yesterday.",
+          "translation": "昨日、新しいかばんを買った。"
+        }
+      ],
+      "collocations": [
+        "buy 人 物",
+        "buy 物 for 人"
+      ],
+      "forms": [
+        "bought",
+        "bought"
+      ],
+      "notes": "過去形・過去分詞は bought /bɔːt/。反対は sell（売る）。",
+      "tags": [
+        "ステップ1",
+        "動詞"
+      ]
+    },
+    {
+      "id": "jv-big",
+      "type": "vocab",
+      "term": "big",
+      "reading": "/bɪɡ/",
+      "pos": "形容詞",
+      "meanings": [
+        "大きい"
+      ],
+      "examples": [
+        {
+          "text": "They live in a big house.",
+          "translation": "彼らは大きな家に住んでいる。"
+        }
+      ],
+      "collocations": [
+        "big city",
+        "a big fan of"
+      ],
+      "notes": "large よりくだけた言い方。a big fan of 〜 で「〜の大ファン」。比較級は g を重ねて bigger。",
+      "tags": [
+        "ステップ1",
+        "形容詞"
+      ]
+    },
+    {
+      "id": "jv-small",
+      "type": "vocab",
+      "term": "small",
+      "reading": "/smɔːl/",
+      "pos": "形容詞",
+      "meanings": [
+        "小さい"
+      ],
+      "examples": [
+        {
+          "text": "This shirt is too small for me.",
+          "translation": "このシャツは私には小さすぎる。"
+        }
+      ],
+      "collocations": [
+        "a small town",
+        "small talk"
+      ],
+      "notes": "little は「小さくてかわいい」という気持ちが入りやすい。small talk は「世間話」。",
+      "tags": [
+        "ステップ1",
+        "形容詞"
+      ]
+    },
+    {
+      "id": "jv-new",
+      "type": "vocab",
+      "term": "new",
+      "reading": "/nuː/",
+      "pos": "形容詞",
+      "meanings": [
+        "新しい"
+      ],
+      "examples": [
+        {
+          "text": "I want a new smartphone.",
+          "translation": "新しいスマホがほしい。"
+        }
+      ],
+      "collocations": [
+        "New Year",
+        "brand-new"
+      ],
+      "notes": "反対は old。イギリス英語では /njuː/ と発音する。",
+      "tags": [
+        "ステップ1",
+        "形容詞"
+      ]
+    },
+    {
+      "id": "jv-old",
+      "type": "vocab",
+      "term": "old",
+      "reading": "/oʊld/",
+      "pos": "形容詞",
+      "meanings": [
+        "古い",
+        "年をとった",
+        "〜歳の"
+      ],
+      "examples": [
+        {
+          "text": "My grandfather is eighty years old.",
+          "translation": "祖父は80歳です。"
+        }
+      ],
+      "collocations": [
+        "old friend",
+        "〜 years old"
+      ],
+      "notes": "「古い」の反対は new、「年をとった」の反対は young。an old friend は「昔からの友だち」。",
+      "tags": [
+        "ステップ1",
+        "形容詞"
+      ]
+    },
+    {
+      "id": "jv-happy",
+      "type": "vocab",
+      "term": "happy",
+      "reading": "/ˈhæpi/",
+      "pos": "形容詞",
+      "meanings": [
+        "幸せな",
+        "うれしい"
+      ],
+      "examples": [
+        {
+          "text": "I'm happy to see you.",
+          "translation": "会えてうれしい。"
+        }
+      ],
+      "collocations": [
+        "Happy birthday!",
+        "be happy to do"
+      ],
+      "notes": "名詞は happiness、反対は unhappy。比較級は happier。",
+      "tags": [
+        "ステップ1",
+        "形容詞"
+      ]
+    },
+    {
+      "id": "jv-beautiful",
+      "type": "vocab",
+      "term": "beautiful",
+      "reading": "/ˈbjuːtɪfəl/",
+      "pos": "形容詞",
+      "meanings": [
+        "美しい"
+      ],
+      "examples": [
+        {
+          "text": "What a beautiful view!",
+          "translation": "なんて美しい景色だろう。"
+        }
+      ],
+      "collocations": [
+        "beautiful flower",
+        "beautiful day"
+      ],
+      "notes": "名詞は beauty。比較級は more beautiful、最上級は most beautiful。",
+      "tags": [
+        "ステップ1",
+        "形容詞"
+      ]
+    },
+    {
+      "id": "jv-easy",
+      "type": "vocab",
+      "term": "easy",
+      "reading": "/ˈiːzi/",
+      "pos": "形容詞",
+      "meanings": [
+        "簡単な",
+        "楽な"
+      ],
+      "examples": [
+        {
+          "text": "This question is easy.",
+          "translation": "この問題は簡単だ。"
+        }
+      ],
+      "collocations": [
+        "easy to do",
+        "Take it easy."
+      ],
+      "notes": "It is easy to 〜（〜するのは簡単だ）の形でよく使う。副詞は easily、反対は difficult / hard。",
+      "tags": [
+        "ステップ1",
+        "形容詞"
+      ]
+    },
+    {
+      "id": "jv-difficult",
+      "type": "vocab",
+      "term": "difficult",
+      "reading": "/ˈdɪfɪkəlt/",
+      "pos": "形容詞",
+      "meanings": [
+        "難しい"
+      ],
+      "examples": [
+        {
+          "text": "It is difficult for me to get up early.",
+          "translation": "私には早起きが難しい。"
+        }
+      ],
+      "collocations": [
+        "difficult problem",
+        "difficult for 人 to do"
+      ],
+      "notes": "hard とほぼ同じ意味。比較級は more difficult。名詞は difficulty。",
+      "tags": [
+        "ステップ1",
+        "形容詞"
+      ]
+    },
+    {
+      "id": "jv-cold",
+      "type": "vocab",
+      "term": "cold",
+      "reading": "/koʊld/",
+      "pos": "形容詞／名詞",
+      "meanings": [
+        "寒い",
+        "冷たい",
+        "風邪（名詞）"
+      ],
+      "examples": [
+        {
+          "text": "It's very cold today.",
+          "translation": "今日はとても寒い。"
+        }
+      ],
+      "collocations": [
+        "catch a cold",
+        "cold water"
+      ],
+      "notes": "名詞では「風邪」。「風邪をひく」は catch a cold、「風邪をひいている」は have a cold。",
+      "tags": [
+        "ステップ1",
+        "形容詞"
+      ]
+    },
+    {
+      "id": "jv-hungry",
+      "type": "vocab",
+      "term": "hungry",
+      "reading": "/ˈhʌŋɡri/",
+      "pos": "形容詞",
+      "meanings": [
+        "おなかがすいた"
+      ],
+      "examples": [
+        {
+          "text": "I'm hungry. Let's eat lunch.",
+          "translation": "おなかがすいた。昼ご飯を食べよう。"
+        }
+      ],
+      "collocations": [
+        "get hungry"
+      ],
+      "notes": "「のどがかわいた」は thirsty。名詞は hunger。",
+      "tags": [
+        "ステップ1",
+        "形容詞"
+      ]
+    },
+    {
+      "id": "jv-favorite",
+      "type": "vocab",
+      "term": "favorite",
+      "reading": "/ˈfeɪvərɪt/",
+      "pos": "形容詞",
+      "meanings": [
+        "いちばん好きな",
+        "お気に入りの"
+      ],
+      "examples": [
+        {
+          "text": "My favorite subject is music.",
+          "translation": "私のいちばん好きな教科は音楽です。"
+        }
+      ],
+      "collocations": [
+        "favorite food",
+        "favorite color"
+      ],
+      "notes": "それだけで「いちばん好きな」なので most favorite とはしない。イギリス英語のつづりは favourite。",
+      "tags": [
+        "ステップ1",
+        "形容詞"
+      ]
+    },
+    {
+      "id": "jv-always",
+      "type": "vocab",
+      "term": "always",
+      "reading": "/ˈɔːlweɪz/",
+      "pos": "副詞",
+      "meanings": [
+        "いつも"
+      ],
+      "examples": [
+        {
+          "text": "She is always kind to everyone.",
+          "translation": "彼女はいつもみんなに親切だ。"
+        }
+      ],
+      "collocations": [
+        "as always",
+        "not always"
+      ],
+      "notes": "頻度の副詞は一般動詞の前、be 動詞の後ろに置く。not always は「いつも〜とは限らない」（部分否定）。",
+      "tags": [
+        "ステップ1",
+        "副詞"
+      ]
+    },
+    {
+      "id": "jv-usually",
+      "type": "vocab",
+      "term": "usually",
+      "reading": "/ˈjuːʒuəli/",
+      "pos": "副詞",
+      "meanings": [
+        "ふつうは",
+        "たいてい"
+      ],
+      "examples": [
+        {
+          "text": "I usually go to bed at eleven.",
+          "translation": "私はたいてい11時に寝る。"
+        }
+      ],
+      "notes": "頻度は always > usually > often > sometimes > never の順。形容詞は usual（いつもの：as usual＝いつものように）。",
+      "tags": [
+        "ステップ1",
+        "副詞"
+      ]
+    },
+    {
+      "id": "jv-sometimes",
+      "type": "vocab",
+      "term": "sometimes",
+      "reading": "/ˈsʌmtaɪmz/",
+      "pos": "副詞",
+      "meanings": [
+        "ときどき"
+      ],
+      "examples": [
+        {
+          "text": "I sometimes walk to the station.",
+          "translation": "私はときどき駅まで歩く。"
+        }
+      ],
+      "notes": "文頭・文中・文末のどこにも置ける。1語でつづり、sometime（いつか）とは別の語。",
+      "tags": [
+        "ステップ1",
+        "副詞"
+      ]
+    },
+    {
+      "id": "jv-often",
+      "type": "vocab",
+      "term": "often",
+      "reading": "/ˈɔːfən/",
+      "pos": "副詞",
+      "meanings": [
+        "よく",
+        "しばしば"
+      ],
+      "examples": [
+        {
+          "text": "How often do you go to the library?",
+          "translation": "どのくらいの頻度で図書館に行きますか。"
+        }
+      ],
+      "collocations": [
+        "How often 〜?",
+        "very often"
+      ],
+      "notes": "t はふつう発音しない（/ˈɔːftən/ と言う人もいる）。How often 〜? で頻度をたずねる。",
+      "tags": [
+        "ステップ1",
+        "副詞"
+      ]
+    },
+    {
+      "id": "jv-very",
+      "type": "vocab",
+      "term": "very",
+      "reading": "/ˈveri/",
+      "pos": "副詞",
+      "meanings": [
+        "とても"
+      ],
+      "examples": [
+        {
+          "text": "Thank you very much.",
+          "translation": "どうもありがとう。"
+        }
+      ],
+      "collocations": [
+        "very much",
+        "very well"
+      ],
+      "notes": "形容詞・副詞を強める。動詞を強めるときは very much を文末に置く（I like it very much.）。",
+      "tags": [
+        "ステップ1",
+        "副詞"
+      ]
+    },
+    {
+      "id": "jv-together",
+      "type": "vocab",
+      "term": "together",
+      "reading": "/təˈɡeðər/",
+      "pos": "副詞",
+      "meanings": [
+        "いっしょに"
+      ],
+      "examples": [
+        {
+          "text": "Let's study together after school.",
+          "translation": "放課後いっしょに勉強しよう。"
+        }
+      ],
+      "collocations": [
+        "get together",
+        "together with"
+      ],
+      "notes": "get together は「集まる」。all together は「みんなで・全部で」。",
+      "tags": [
+        "ステップ1",
+        "副詞"
+      ]
+    },
+    {
+      "id": "jv-in",
+      "type": "vocab",
+      "term": "in",
+      "reading": "/ɪn/",
+      "pos": "前置詞",
+      "meanings": [
+        "〜の中に",
+        "〜に（月・年・季節・広い場所）",
+        "〜後に"
+      ],
+      "examples": [
+        {
+          "text": "My birthday is in May.",
+          "translation": "私の誕生日は5月です。"
+        }
+      ],
+      "collocations": [
+        "in Japan",
+        "in 2020",
+        "in the morning"
+      ],
+      "notes": "月・年・季節など幅のある時は in、日付・曜日は on、時刻は at。in ten minutes は「10分後に」。",
+      "tags": [
+        "ステップ1",
+        "前置詞"
+      ]
+    },
+    {
+      "id": "jv-on",
+      "type": "vocab",
+      "term": "on",
+      "reading": "/ɑːn/",
+      "pos": "前置詞",
+      "meanings": [
+        "〜の上に（接して）",
+        "〜に（日付・曜日）"
+      ],
+      "examples": [
+        {
+          "text": "There is a cat on the sofa.",
+          "translation": "ソファの上にねこがいる。"
+        }
+      ],
+      "collocations": [
+        "on Sunday",
+        "on the wall",
+        "on TV"
+      ],
+      "notes": "on のイメージは「接触」。壁にかかった絵も on the wall。",
+      "tags": [
+        "ステップ1",
+        "前置詞"
+      ]
+    },
+    {
+      "id": "jv-at",
+      "type": "vocab",
+      "term": "at",
+      "reading": "/æt/",
+      "pos": "前置詞",
+      "meanings": [
+        "〜で（地点）",
+        "〜に（時刻）"
+      ],
+      "examples": [
+        {
+          "text": "The movie starts at seven.",
+          "translation": "映画は7時に始まる。"
+        }
+      ],
+      "collocations": [
+        "at home",
+        "at school",
+        "at night"
+      ],
+      "notes": "at のイメージは「点」。時刻やせまい地点に使う。",
+      "tags": [
+        "ステップ1",
+        "前置詞"
+      ]
+    },
+    {
+      "id": "jv-with",
+      "type": "vocab",
+      "term": "with",
+      "reading": "/wɪð/",
+      "pos": "前置詞",
+      "meanings": [
+        "〜といっしょに",
+        "〜を使って",
+        "〜を持った"
+      ],
+      "examples": [
+        {
+          "text": "I went shopping with my mother.",
+          "translation": "母と買い物に行った。"
+        }
+      ],
+      "collocations": [
+        "with a friend",
+        "with a pen"
+      ],
+      "notes": "「道具を使って」は with（write with a pen）、「交通手段で」は by（by bus）。",
+      "tags": [
+        "ステップ1",
+        "前置詞"
+      ]
+    },
+    {
+      "id": "jv-from",
+      "type": "vocab",
+      "term": "from",
+      "reading": "/frʌm/",
+      "pos": "前置詞",
+      "meanings": [
+        "〜から（出発点・出身）"
+      ],
+      "examples": [
+        {
+          "text": "I'm from Hokkaido.",
+          "translation": "私は北海道出身です。"
+        }
+      ],
+      "collocations": [
+        "from A to B",
+        "be different from"
+      ],
+      "notes": "from 〜 to … で範囲を表す（from Monday to Friday）。",
+      "tags": [
+        "ステップ1",
+        "前置詞"
+      ]
+    },
+    {
+      "id": "jv-for",
+      "type": "vocab",
+      "term": "for",
+      "reading": "/fɔːr/",
+      "pos": "前置詞",
+      "meanings": [
+        "〜のために",
+        "〜の間（期間の長さ）",
+        "〜に向けて"
+      ],
+      "examples": [
+        {
+          "text": "I have lived here for five years.",
+          "translation": "私はここに5年間住んでいる。"
+        }
+      ],
+      "collocations": [
+        "for example",
+        "for a long time",
+        "wait for"
+      ],
+      "notes": "for + 期間の長さ（for three days）、during + 特定の期間（during the summer）と使い分ける。",
+      "tags": [
+        "ステップ1",
+        "前置詞"
+      ]
+    },
+    {
+      "id": "jv-weather",
+      "type": "vocab",
+      "term": "weather",
+      "reading": "/ˈweðər/",
+      "pos": "名詞",
+      "meanings": [
+        "天気"
+      ],
+      "examples": [
+        {
+          "text": "How is the weather today?",
+          "translation": "今日の天気はどう？"
+        }
+      ],
+      "collocations": [
+        "weather forecast",
+        "bad weather"
+      ],
+      "notes": "数えられない名詞なので a weather とはしない。発音が同じ whether（〜かどうか）と区別。",
+      "tags": [
+        "ステップ2",
+        "名詞"
+      ]
+    },
+    {
+      "id": "jv-question",
+      "type": "vocab",
+      "term": "question",
+      "reading": "/ˈkwestʃən/",
+      "pos": "名詞",
+      "meanings": [
+        "質問",
+        "問題"
+      ],
+      "examples": [
+        {
+          "text": "May I ask you a question?",
+          "translation": "質問してもいいですか。"
+        }
+      ],
+      "collocations": [
+        "ask a question",
+        "answer a question"
+      ],
+      "notes": "反対は answer（答え）。「解決すべき問題」は problem を使う。",
+      "tags": [
+        "ステップ2",
+        "名詞"
+      ]
+    },
+    {
+      "id": "jv-idea",
+      "type": "vocab",
+      "term": "idea",
+      "reading": "/aɪˈdiːə/",
+      "pos": "名詞",
+      "meanings": [
+        "考え",
+        "アイデア"
+      ],
+      "examples": [
+        {
+          "text": "That's a good idea!",
+          "translation": "それはいい考えだね。"
+        }
+      ],
+      "collocations": [
+        "have no idea",
+        "good idea"
+      ],
+      "notes": "I have no idea. は「まったくわからない」。アクセントは後ろ（i-DE-a）に置く。",
+      "tags": [
+        "ステップ2",
+        "名詞"
+      ]
+    },
+    {
+      "id": "jv-story",
+      "type": "vocab",
+      "term": "story",
+      "reading": "/ˈstɔːri/",
+      "pos": "名詞",
+      "meanings": [
+        "物語",
+        "話"
+      ],
+      "examples": [
+        {
+          "text": "My father often tells me interesting stories.",
+          "translation": "父はよく私におもしろい話をしてくれる。"
+        }
+      ],
+      "collocations": [
+        "tell a story",
+        "short story",
+        "true story"
+      ],
+      "notes": "複数形は stories。アメリカ英語では「（建物の）階」の意味もある（a two-story house）。",
+      "tags": [
+        "ステップ2",
+        "名詞"
+      ]
+    },
+    {
+      "id": "jv-language",
+      "type": "vocab",
+      "term": "language",
+      "reading": "/ˈlæŋɡwɪdʒ/",
+      "pos": "名詞",
+      "meanings": [
+        "言語",
+        "ことば"
+      ],
+      "examples": [
+        {
+          "text": "How many languages can you speak?",
+          "translation": "何か国語を話せますか。"
+        }
+      ],
+      "collocations": [
+        "foreign language",
+        "body language",
+        "first language"
+      ],
+      "notes": "発音は「ラングウィッジ」。「母語」は first language や native language。",
+      "tags": [
+        "ステップ2",
+        "名詞"
+      ]
+    },
+    {
+      "id": "jv-world",
+      "type": "vocab",
+      "term": "world",
+      "reading": "/wɜːrld/",
+      "pos": "名詞",
+      "meanings": [
+        "世界"
+      ],
+      "examples": [
+        {
+          "text": "She wants to travel around the world.",
+          "translation": "彼女は世界中を旅したいと思っている。"
+        }
+      ],
+      "collocations": [
+        "around the world",
+        "in the world",
+        "all over the world"
+      ],
+      "notes": "最上級といっしょに the highest mountain in the world（世界一高い山）のように使う。",
+      "tags": [
+        "ステップ2",
+        "名詞"
+      ]
+    },
+    {
+      "id": "jv-life",
+      "type": "vocab",
+      "term": "life",
+      "reading": "/laɪf/",
+      "pos": "名詞",
+      "meanings": [
+        "生活",
+        "人生",
+        "生命"
+      ],
+      "examples": [
+        {
+          "text": "Life in the city is exciting.",
+          "translation": "都会での生活はわくわくする。"
+        }
+      ],
+      "collocations": [
+        "daily life",
+        "school life",
+        "all my life"
+      ],
+      "forms": [
+        "lives"
+      ],
+      "notes": "複数形は lives /laɪvz/。動詞 live（住む・生きる）とセットで覚える。",
+      "tags": [
+        "ステップ2",
+        "名詞"
+      ]
+    },
+    {
+      "id": "jv-place",
+      "type": "vocab",
+      "term": "place",
+      "reading": "/pleɪs/",
+      "pos": "名詞",
+      "meanings": [
+        "場所"
+      ],
+      "examples": [
+        {
+          "text": "Kyoto is a good place to visit.",
+          "translation": "京都は訪れるのによい場所だ。"
+        }
+      ],
+      "collocations": [
+        "take place",
+        "a place to do"
+      ],
+      "notes": "take place は「（行事が）行われる」。a place to 〜 で「〜するための場所」。動詞では「置く」。",
+      "tags": [
+        "ステップ2",
+        "名詞"
+      ]
+    },
+    {
+      "id": "jv-plan",
+      "type": "vocab",
+      "term": "plan",
+      "reading": "/plæn/",
+      "pos": "名詞／動詞",
+      "meanings": [
+        "計画",
+        "予定"
+      ],
+      "examples": [
+        {
+          "text": "Do you have any plans for the weekend?",
+          "translation": "週末に何か予定はある？"
+        }
+      ],
+      "collocations": [
+        "make a plan",
+        "plan to do"
+      ],
+      "notes": "動詞では「計画する」。-ing 形・過去形は n を重ねて planning / planned。",
+      "tags": [
+        "ステップ2",
+        "名詞"
+      ]
+    },
+    {
+      "id": "jv-trip",
+      "type": "vocab",
+      "term": "trip",
+      "reading": "/trɪp/",
+      "pos": "名詞",
+      "meanings": [
+        "旅行"
+      ],
+      "examples": [
+        {
+          "text": "We went on a school trip to Nara.",
+          "translation": "私たちは修学旅行で奈良に行った。"
+        }
+      ],
+      "collocations": [
+        "school trip",
+        "go on a trip",
+        "business trip"
+      ],
+      "notes": "trip は比較的短い旅行、travel は「旅行（すること）」全般、journey は長い旅。",
+      "tags": [
+        "ステップ2",
+        "名詞"
+      ]
+    },
+    {
+      "id": "jv-example",
+      "type": "vocab",
+      "term": "example",
+      "reading": "/ɪɡˈzæmpəl/",
+      "pos": "名詞",
+      "meanings": [
+        "例"
+      ],
+      "examples": [
+        {
+          "text": "Can you give me an example?",
+          "translation": "例を挙げてもらえますか。"
+        }
+      ],
+      "collocations": [
+        "for example",
+        "set an example"
+      ],
+      "notes": "for example（たとえば）は文頭・文中どちらでも使える。e.g. と略されることもある。",
+      "tags": [
+        "ステップ2",
+        "名詞"
+      ]
+    },
+    {
+      "id": "jv-culture",
+      "type": "vocab",
+      "term": "culture",
+      "reading": "/ˈkʌltʃər/",
+      "pos": "名詞",
+      "meanings": [
+        "文化"
+      ],
+      "examples": [
+        {
+          "text": "I'm interested in Japanese culture.",
+          "translation": "私は日本の文化に興味がある。"
+        }
+      ],
+      "collocations": [
+        "pop culture",
+        "culture shock"
+      ],
+      "notes": "形容詞は cultural（文化の）。",
+      "tags": [
+        "ステップ2",
+        "名詞"
+      ]
+    },
+    {
+      "id": "jv-begin",
+      "type": "vocab",
+      "term": "begin",
+      "reading": "/bɪˈɡɪn/",
+      "pos": "動詞",
+      "meanings": [
+        "始める",
+        "始まる"
+      ],
+      "examples": [
+        {
+          "text": "School begins in April in Japan.",
+          "translation": "日本では学校は4月に始まる。"
+        }
+      ],
+      "collocations": [
+        "begin to do",
+        "begin with"
+      ],
+      "forms": [
+        "began",
+        "begun"
+      ],
+      "notes": "start とほぼ同じ意味。活用は begin – began – begun。-ing 形は n を重ねて beginning。",
+      "tags": [
+        "ステップ2",
+        "動詞"
+      ]
+    },
+    {
+      "id": "jv-teach",
+      "type": "vocab",
+      "term": "teach",
+      "reading": "/tiːtʃ/",
+      "pos": "動詞",
+      "meanings": [
+        "教える"
+      ],
+      "examples": [
+        {
+          "text": "Ms. Sato teaches us English.",
+          "translation": "佐藤先生は私たちに英語を教えている。"
+        }
+      ],
+      "collocations": [
+        "teach 人 物",
+        "teach 人 how to do"
+      ],
+      "forms": [
+        "taught",
+        "taught"
+      ],
+      "notes": "過去形・過去分詞は taught /tɔːt/。「道を教える」には teach ではなく tell や show を使う。",
+      "tags": [
+        "ステップ2",
+        "動詞"
+      ]
+    },
+    {
+      "id": "jv-learn",
+      "type": "vocab",
+      "term": "learn",
+      "reading": "/lɜːrn/",
+      "pos": "動詞",
+      "meanings": [
+        "学ぶ",
+        "身につける",
+        "知る"
+      ],
+      "examples": [
+        {
+          "text": "I want to learn how to cook.",
+          "translation": "料理の仕方を身につけたい。"
+        }
+      ],
+      "collocations": [
+        "learn about",
+        "learn to do",
+        "learn from"
+      ],
+      "notes": "study は「勉強する（努力）」、learn は「身につける（結果）」に重点がある。",
+      "tags": [
+        "ステップ2",
+        "動詞"
+      ]
+    },
+    {
+      "id": "jv-understand",
+      "type": "vocab",
+      "term": "understand",
+      "reading": "/ˌʌndərˈstænd/",
+      "pos": "動詞",
+      "meanings": [
+        "理解する",
+        "わかる"
+      ],
+      "examples": [
+        {
+          "text": "I don't understand this word.",
+          "translation": "この単語の意味がわからない。"
+        }
+      ],
+      "collocations": [
+        "understand each other",
+        "easy to understand"
+      ],
+      "forms": [
+        "understood",
+        "understood"
+      ],
+      "notes": "過去形・過去分詞は understood。ふつう進行形にはしない。",
+      "tags": [
+        "ステップ2",
+        "動詞"
+      ]
+    },
+    {
+      "id": "jv-forget",
+      "type": "vocab",
+      "term": "forget",
+      "reading": "/fərˈɡet/",
+      "pos": "動詞",
+      "meanings": [
+        "忘れる"
+      ],
+      "examples": [
+        {
+          "text": "Don't forget to bring your lunch.",
+          "translation": "お弁当を持ってくるのを忘れないで。"
+        }
+      ],
+      "collocations": [
+        "forget to do",
+        "forget doing"
+      ],
+      "forms": [
+        "forgot",
+        "forgotten"
+      ],
+      "notes": "forget to do は「（これから）〜するのを忘れる」、forget doing は「（過去に）〜したことを忘れる」。",
+      "tags": [
+        "ステップ2",
+        "動詞"
+      ]
+    },
+    {
+      "id": "jv-remember",
+      "type": "vocab",
+      "term": "remember",
+      "reading": "/rɪˈmembər/",
+      "pos": "動詞",
+      "meanings": [
+        "覚えている",
+        "思い出す"
+      ],
+      "examples": [
+        {
+          "text": "I remember his name.",
+          "translation": "彼の名前を覚えている。"
+        }
+      ],
+      "collocations": [
+        "remember to do",
+        "remember doing"
+      ],
+      "notes": "remember to do は「忘れずに〜する」、remember doing は「〜したことを覚えている」。",
+      "tags": [
+        "ステップ2",
+        "動詞"
+      ]
+    },
+    {
+      "id": "jv-decide",
+      "type": "vocab",
+      "term": "decide",
+      "reading": "/dɪˈsaɪd/",
+      "pos": "動詞",
+      "meanings": [
+        "決める",
+        "決心する"
+      ],
+      "examples": [
+        {
+          "text": "I decided to join the tennis club.",
+          "translation": "テニス部に入ることに決めた。"
+        }
+      ],
+      "collocations": [
+        "decide to do",
+        "decide on"
+      ],
+      "notes": "後ろは to 不定詞（decide doing とはしない）。名詞は decision。",
+      "tags": [
+        "ステップ2",
+        "動詞"
+      ]
+    },
+    {
+      "id": "jv-visit",
+      "type": "vocab",
+      "term": "visit",
+      "reading": "/ˈvɪzɪt/",
+      "pos": "動詞",
+      "meanings": [
+        "訪れる",
+        "訪問する"
+      ],
+      "examples": [
+        {
+          "text": "I visited my grandparents last summer.",
+          "translation": "去年の夏、祖父母を訪ねた。"
+        }
+      ],
+      "collocations": [
+        "visit a museum",
+        "pay a visit to"
+      ],
+      "notes": "他動詞なので visit to 〜 とはしない（名詞なら a visit to 〜）。visitor は「訪問者」。",
+      "tags": [
+        "ステップ2",
+        "動詞"
+      ]
+    },
+    {
+      "id": "jv-arrive",
+      "type": "vocab",
+      "term": "arrive",
+      "reading": "/əˈraɪv/",
+      "pos": "動詞",
+      "meanings": [
+        "着く",
+        "到着する"
+      ],
+      "examples": [
+        {
+          "text": "We arrived at the station at noon.",
+          "translation": "私たちは正午に駅に着いた。"
+        }
+      ],
+      "collocations": [
+        "arrive at",
+        "arrive in"
+      ],
+      "notes": "せまい地点は arrive at、都市・国など広い場所は arrive in。reach は前置詞なしで reach the station。",
+      "tags": [
+        "ステップ2",
+        "動詞"
+      ]
+    },
+    {
+      "id": "jv-wait",
+      "type": "vocab",
+      "term": "wait",
+      "reading": "/weɪt/",
+      "pos": "動詞",
+      "meanings": [
+        "待つ"
+      ],
+      "examples": [
+        {
+          "text": "Please wait for me here.",
+          "translation": "ここで私を待っていてください。"
+        }
+      ],
+      "collocations": [
+        "wait for",
+        "can't wait to do"
+      ],
+      "notes": "「〜を待つ」は wait for 〜。I can't wait to 〜. は「〜するのが待ちきれない」。",
+      "tags": [
+        "ステップ2",
+        "動詞"
+      ]
+    },
+    {
+      "id": "jv-ask",
+      "type": "vocab",
+      "term": "ask",
+      "reading": "/æsk/",
+      "pos": "動詞",
+      "meanings": [
+        "たずねる",
+        "頼む"
+      ],
+      "examples": [
+        {
+          "text": "Can I ask you something?",
+          "translation": "ちょっと聞いてもいい？"
+        }
+      ],
+      "collocations": [
+        "ask a question",
+        "ask 人 to do",
+        "ask for"
+      ],
+      "notes": "ask 人 to do は「人に〜するよう頼む」、ask for 〜 は「〜を求める」。",
+      "tags": [
+        "ステップ2",
+        "動詞"
+      ]
+    },
+    {
+      "id": "jv-worry",
+      "type": "vocab",
+      "term": "worry",
+      "reading": "/ˈwɜːri/",
+      "pos": "動詞",
+      "meanings": [
+        "心配する"
+      ],
+      "examples": [
+        {
+          "text": "Don't worry about the test.",
+          "translation": "テストのことは心配しないで。"
+        }
+      ],
+      "collocations": [
+        "worry about",
+        "be worried about"
+      ],
+      "notes": "be worried about でも「心配している」。三単現は worries、過去形は worried。",
+      "tags": [
+        "ステップ2",
+        "動詞"
+      ]
+    },
+    {
+      "id": "jv-change",
+      "type": "vocab",
+      "term": "change",
+      "reading": "/tʃeɪndʒ/",
+      "pos": "動詞／名詞",
+      "meanings": [
+        "変える",
+        "変わる",
+        "乗り換える"
+      ],
+      "examples": [
+        {
+          "text": "You need to change trains at Shinjuku.",
+          "translation": "新宿で電車を乗り換える必要がある。"
+        }
+      ],
+      "collocations": [
+        "change trains",
+        "change one's mind"
+      ],
+      "notes": "「乗り換える」は trains と複数形にする。名詞では「変化」のほか「おつり・小銭」の意味もある。",
+      "tags": [
+        "ステップ2",
+        "動詞"
+      ]
+    },
+    {
+      "id": "jv-finish",
+      "type": "vocab",
+      "term": "finish",
+      "reading": "/ˈfɪnɪʃ/",
+      "pos": "動詞",
+      "meanings": [
+        "終える",
+        "終わる"
+      ],
+      "examples": [
+        {
+          "text": "Have you finished your homework?",
+          "translation": "宿題は終わった？"
+        }
+      ],
+      "collocations": [
+        "finish doing",
+        "finish school"
+      ],
+      "notes": "「〜し終える」は finish doing（finish to do とはしない）。",
+      "tags": [
+        "ステップ2",
+        "動詞"
+      ]
+    },
+    {
+      "id": "jv-enjoy",
+      "type": "vocab",
+      "term": "enjoy",
+      "reading": "/ɪnˈdʒɔɪ/",
+      "pos": "動詞",
+      "meanings": [
+        "楽しむ"
+      ],
+      "examples": [
+        {
+          "text": "We enjoyed swimming in the river.",
+          "translation": "私たちは川で泳ぐのを楽しんだ。"
+        }
+      ],
+      "collocations": [
+        "enjoy doing",
+        "enjoy oneself"
+      ],
+      "notes": "後ろは動名詞（enjoy doing）。enjoy oneself は「楽しく過ごす」。",
+      "tags": [
+        "ステップ2",
+        "動詞"
+      ]
+    },
+    {
+      "id": "jv-grow",
+      "type": "vocab",
+      "term": "grow",
+      "reading": "/ɡroʊ/",
+      "pos": "動詞",
+      "meanings": [
+        "育つ",
+        "育てる",
+        "（だんだん）〜になる"
+      ],
+      "examples": [
+        {
+          "text": "My father grows tomatoes in the garden.",
+          "translation": "父は庭でトマトを育てている。"
+        }
+      ],
+      "collocations": [
+        "grow up",
+        "grow vegetables"
+      ],
+      "forms": [
+        "grew",
+        "grown"
+      ],
+      "notes": "活用は grow – grew – grown。grow up は「成長する・大人になる」。",
+      "tags": [
+        "ステップ2",
+        "動詞"
+      ]
+    },
+    {
+      "id": "jv-build",
+      "type": "vocab",
+      "term": "build",
+      "reading": "/bɪld/",
+      "pos": "動詞",
+      "meanings": [
+        "建てる"
+      ],
+      "examples": [
+        {
+          "text": "This temple was built 500 years ago.",
+          "translation": "この寺は500年前に建てられた。"
+        }
+      ],
+      "collocations": [
+        "build a house",
+        "build a bridge"
+      ],
+      "forms": [
+        "built",
+        "built"
+      ],
+      "notes": "過去形・過去分詞は built。名詞 building は「建物」。",
+      "tags": [
+        "ステップ2",
+        "動詞"
+      ]
+    },
+    {
+      "id": "jv-sell",
+      "type": "vocab",
+      "term": "sell",
+      "reading": "/sel/",
+      "pos": "動詞",
+      "meanings": [
+        "売る"
+      ],
+      "examples": [
+        {
+          "text": "That store sells fresh fruit.",
+          "translation": "あの店は新鮮な果物を売っている。"
+        }
+      ],
+      "collocations": [
+        "sell out",
+        "be sold out"
+      ],
+      "forms": [
+        "sold",
+        "sold"
+      ],
+      "notes": "反対は buy。be sold out で「売り切れている」。",
+      "tags": [
+        "ステップ2",
+        "動詞"
+      ]
+    },
+    {
+      "id": "jv-become",
+      "type": "vocab",
+      "term": "become",
+      "reading": "/bɪˈkʌm/",
+      "pos": "動詞",
+      "meanings": [
+        "〜になる"
+      ],
+      "examples": [
+        {
+          "text": "She became a doctor.",
+          "translation": "彼女は医者になった。"
+        }
+      ],
+      "collocations": [
+        "become friends",
+        "become famous"
+      ],
+      "forms": [
+        "became",
+        "become"
+      ],
+      "notes": "活用は become – became – become（過去分詞は原形と同じ形）。",
+      "tags": [
+        "ステップ2",
+        "動詞"
+      ]
+    },
+    {
+      "id": "jv-important",
+      "type": "vocab",
+      "term": "important",
+      "reading": "/ɪmˈpɔːrtənt/",
+      "pos": "形容詞",
+      "meanings": [
+        "大切な",
+        "重要な"
+      ],
+      "examples": [
+        {
+          "text": "It is important to sleep well.",
+          "translation": "よく眠ることは大切だ。"
+        }
+      ],
+      "collocations": [
+        "important for",
+        "It is important to do"
+      ],
+      "notes": "名詞は importance。比較級は more important。",
+      "tags": [
+        "ステップ2",
+        "形容詞"
+      ]
+    },
+    {
+      "id": "jv-interesting",
+      "type": "vocab",
+      "term": "interesting",
+      "reading": "/ˈɪntrəstɪŋ/",
+      "pos": "形容詞",
+      "meanings": [
+        "おもしろい",
+        "興味深い"
+      ],
+      "examples": [
+        {
+          "text": "This book is very interesting.",
+          "translation": "この本はとてもおもしろい。"
+        }
+      ],
+      "collocations": [
+        "interesting story"
+      ],
+      "notes": "物事が「おもしろい」は interesting、人が「興味がある」は interested（I'm interested in 〜）。",
+      "tags": [
+        "ステップ2",
+        "形容詞"
+      ]
+    },
+    {
+      "id": "jv-popular",
+      "type": "vocab",
+      "term": "popular",
+      "reading": "/ˈpɑːpjələr/",
+      "pos": "形容詞",
+      "meanings": [
+        "人気のある"
+      ],
+      "examples": [
+        {
+          "text": "This song is popular among young people.",
+          "translation": "この歌は若者の間で人気がある。"
+        }
+      ],
+      "collocations": [
+        "popular with",
+        "popular among"
+      ],
+      "notes": "「〜に人気がある」は popular with / among 〜。名詞は popularity。",
+      "tags": [
+        "ステップ2",
+        "形容詞"
+      ]
+    },
+    {
+      "id": "jv-famous",
+      "type": "vocab",
+      "term": "famous",
+      "reading": "/ˈfeɪməs/",
+      "pos": "形容詞",
+      "meanings": [
+        "有名な"
+      ],
+      "examples": [
+        {
+          "text": "Kyoto is famous for its old temples.",
+          "translation": "京都は古い寺で有名だ。"
+        }
+      ],
+      "collocations": [
+        "famous for",
+        "famous as"
+      ],
+      "notes": "famous for 〜 は「〜で有名」、famous as 〜 は「〜として有名」。",
+      "tags": [
+        "ステップ2",
+        "形容詞"
+      ]
+    },
+    {
+      "id": "jv-busy",
+      "type": "vocab",
+      "term": "busy",
+      "reading": "/ˈbɪzi/",
+      "pos": "形容詞",
+      "meanings": [
+        "忙しい",
+        "にぎやかな"
+      ],
+      "examples": [
+        {
+          "text": "I'm busy with my homework.",
+          "translation": "宿題で忙しい。"
+        }
+      ],
+      "collocations": [
+        "busy with",
+        "busy street"
+      ],
+      "notes": "u を /ɪ/ と読み「ビジー」。be busy doing で「〜するのに忙しい」。",
+      "tags": [
+        "ステップ2",
+        "形容詞"
+      ]
+    },
+    {
+      "id": "jv-kind",
+      "type": "vocab",
+      "term": "kind",
+      "reading": "/kaɪnd/",
+      "pos": "形容詞／名詞",
+      "meanings": [
+        "親切な",
+        "種類（名詞）"
+      ],
+      "examples": [
+        {
+          "text": "It's very kind of you to help me.",
+          "translation": "手伝ってくれてご親切にありがとう。"
+        }
+      ],
+      "collocations": [
+        "kind to",
+        "a kind of",
+        "What kind of 〜?"
+      ],
+      "notes": "名詞では「種類」（What kind of music do you like?）。It's kind of you to 〜 で相手の親切に感謝する。",
+      "tags": [
+        "ステップ2",
+        "形容詞"
+      ]
+    },
+    {
+      "id": "jv-tired",
+      "type": "vocab",
+      "term": "tired",
+      "reading": "/ˈtaɪərd/",
+      "pos": "形容詞",
+      "meanings": [
+        "疲れた",
+        "うんざりした"
+      ],
+      "examples": [
+        {
+          "text": "I was tired after the long walk.",
+          "translation": "長い散歩のあとで疲れた。"
+        }
+      ],
+      "collocations": [
+        "get tired",
+        "be tired of"
+      ],
+      "notes": "be tired of 〜 は「〜にうんざりしている」。tiring は「（物事が）疲れさせる」。",
+      "tags": [
+        "ステップ2",
+        "形容詞"
+      ]
+    },
+    {
+      "id": "jv-sure",
+      "type": "vocab",
+      "term": "sure",
+      "reading": "/ʃʊr/",
+      "pos": "形容詞",
+      "meanings": [
+        "確信して",
+        "確かな"
+      ],
+      "examples": [
+        {
+          "text": "Are you sure?",
+          "translation": "本当に？（確かなの？）"
+        }
+      ],
+      "collocations": [
+        "be sure of",
+        "make sure",
+        "Sure."
+      ],
+      "notes": "返事の Sure. は「もちろん・いいよ」。make sure は「確かめる」。",
+      "tags": [
+        "ステップ2",
+        "形容詞"
+      ]
+    },
+    {
+      "id": "jv-different",
+      "type": "vocab",
+      "term": "different",
+      "reading": "/ˈdɪfərənt/",
+      "pos": "形容詞",
+      "meanings": [
+        "違った",
+        "異なる",
+        "さまざまな"
+      ],
+      "examples": [
+        {
+          "text": "My opinion is different from yours.",
+          "translation": "私の意見はあなたのとは違う。"
+        }
+      ],
+      "collocations": [
+        "different from",
+        "different kinds of"
+      ],
+      "notes": "「〜と違う」は different from 〜。名詞は difference。反対は the same（as 〜）。",
+      "tags": [
+        "ステップ2",
+        "形容詞"
+      ]
+    },
+    {
+      "id": "jv-dangerous",
+      "type": "vocab",
+      "term": "dangerous",
+      "reading": "/ˈdeɪndʒərəs/",
+      "pos": "形容詞",
+      "meanings": [
+        "危ない",
+        "危険な"
+      ],
+      "examples": [
+        {
+          "text": "It is dangerous to swim in this river.",
+          "translation": "この川で泳ぐのは危険だ。"
+        }
+      ],
+      "collocations": [
+        "dangerous place"
+      ],
+      "notes": "名詞は danger（be in danger で「危険な状態にある」）。反対は safe。",
+      "tags": [
+        "ステップ2",
+        "形容詞"
+      ]
+    },
+    {
+      "id": "jv-already",
+      "type": "vocab",
+      "term": "already",
+      "reading": "/ɔːlˈredi/",
+      "pos": "副詞",
+      "meanings": [
+        "すでに",
+        "もう"
+      ],
+      "examples": [
+        {
+          "text": "I have already eaten lunch.",
+          "translation": "もう昼ご飯を食べた。"
+        }
+      ],
+      "notes": "肯定文で「もう〜した」。疑問文・否定文では yet を使うのが基本。",
+      "tags": [
+        "ステップ2",
+        "副詞"
+      ]
+    },
+    {
+      "id": "jv-still",
+      "type": "vocab",
+      "term": "still",
+      "reading": "/stɪl/",
+      "pos": "副詞",
+      "meanings": [
+        "まだ",
+        "それでもなお"
+      ],
+      "examples": [
+        {
+          "text": "It is still raining.",
+          "translation": "まだ雨が降っている。"
+        }
+      ],
+      "notes": "「（前から）まだ続いている」感じ。「まだ〜していない」は not yet で表す。",
+      "tags": [
+        "ステップ2",
+        "副詞"
+      ]
+    },
+    {
+      "id": "jv-soon",
+      "type": "vocab",
+      "term": "soon",
+      "reading": "/suːn/",
+      "pos": "副詞",
+      "meanings": [
+        "すぐに",
+        "まもなく"
+      ],
+      "examples": [
+        {
+          "text": "See you soon!",
+          "translation": "またね（近いうちに会おう）。"
+        }
+      ],
+      "collocations": [
+        "as soon as",
+        "sooner or later"
+      ],
+      "notes": "as soon as 〜 は「〜するとすぐに」。sooner or later は「遅かれ早かれ」。",
+      "tags": [
+        "ステップ2",
+        "副詞"
+      ]
+    },
+    {
+      "id": "jv-early",
+      "type": "vocab",
+      "term": "early",
+      "reading": "/ˈɜːrli/",
+      "pos": "副詞／形容詞",
+      "meanings": [
+        "早く",
+        "早い（形容詞）"
+      ],
+      "examples": [
+        {
+          "text": "I got up early this morning.",
+          "translation": "今朝は早く起きた。"
+        }
+      ],
+      "collocations": [
+        "early in the morning",
+        "early bird"
+      ],
+      "notes": "時期・時刻が「早い」は early、速度が「速い」は fast。反対は late。",
+      "tags": [
+        "ステップ2",
+        "副詞"
+      ]
+    },
+    {
+      "id": "jv-about",
+      "type": "vocab",
+      "term": "about",
+      "reading": "/əˈbaʊt/",
+      "pos": "前置詞／副詞",
+      "meanings": [
+        "〜について",
+        "約"
+      ],
+      "examples": [
+        {
+          "text": "Let's talk about the plan.",
+          "translation": "その計画について話し合おう。"
+        }
+      ],
+      "collocations": [
+        "think about",
+        "How about 〜?"
+      ],
+      "notes": "数の前では「約」（about 100 people）。How about 〜? は提案・誘いの表現。",
+      "tags": [
+        "ステップ2",
+        "前置詞・接続詞"
+      ]
+    },
+    {
+      "id": "jv-during",
+      "type": "vocab",
+      "term": "during",
+      "reading": "/ˈdʊrɪŋ/",
+      "pos": "前置詞",
+      "meanings": [
+        "〜の間に（特定の期間）"
+      ],
+      "examples": [
+        {
+          "text": "I visited Okinawa during the summer vacation.",
+          "translation": "夏休みの間に沖縄を訪れた。"
+        }
+      ],
+      "collocations": [
+        "during the day"
+      ],
+      "notes": "during は「いつ」を表す（during the vacation）。「どれだけの長さ」は for（for two weeks）。",
+      "tags": [
+        "ステップ2",
+        "前置詞・接続詞"
+      ]
+    },
+    {
+      "id": "jv-between",
+      "type": "vocab",
+      "term": "between",
+      "reading": "/bɪˈtwiːn/",
+      "pos": "前置詞",
+      "meanings": [
+        "（2つ）の間に"
+      ],
+      "examples": [
+        {
+          "text": "The bank is between the post office and the hotel.",
+          "translation": "銀行は郵便局とホテルの間にある。"
+        }
+      ],
+      "collocations": [
+        "between A and B"
+      ],
+      "notes": "ふつう2つのものの間に使う。3つ以上の中では among。",
+      "tags": [
+        "ステップ2",
+        "前置詞・接続詞"
+      ]
+    },
+    {
+      "id": "jv-because",
+      "type": "vocab",
+      "term": "because",
+      "reading": "/bɪˈkɔːz/",
+      "pos": "接続詞",
+      "meanings": [
+        "〜なので",
+        "なぜなら"
+      ],
+      "examples": [
+        {
+          "text": "I stayed home because it was raining.",
+          "translation": "雨が降っていたので家にいた。"
+        }
+      ],
+      "collocations": [
+        "because of"
+      ],
+      "notes": "Why 〜? の答えにも使う。because of + 名詞 で「〜のために」（because of the rain）。",
+      "tags": [
+        "ステップ2",
+        "前置詞・接続詞"
+      ]
+    },
+    {
+      "id": "jv-until",
+      "type": "vocab",
+      "term": "until",
+      "reading": "/ənˈtɪl/",
+      "pos": "前置詞／接続詞",
+      "meanings": [
+        "〜まで（ずっと）"
+      ],
+      "examples": [
+        {
+          "text": "I waited until six o'clock.",
+          "translation": "6時まで待った。"
+        }
+      ],
+      "notes": "until は「〜までずっと（継続）」、by は「〜までに（期限）」。till とも言う。",
+      "tags": [
+        "ステップ2",
+        "前置詞・接続詞"
+      ]
+    },
+    {
+      "id": "jv-experience",
+      "type": "vocab",
+      "term": "experience",
+      "reading": "/ɪkˈspɪriəns/",
+      "pos": "名詞",
+      "meanings": [
+        "経験",
+        "体験"
+      ],
+      "examples": [
+        {
+          "text": "It was a wonderful experience.",
+          "translation": "すばらしい経験だった。"
+        }
+      ],
+      "collocations": [
+        "work experience",
+        "from experience"
+      ],
+      "notes": "「経験」全般は数えないが、具体的な「出来事としての体験」は an experience と数える。動詞では「経験する」。",
+      "tags": [
+        "ステップ3",
+        "名詞"
+      ]
+    },
+    {
+      "id": "jv-information",
+      "type": "vocab",
+      "term": "information",
+      "reading": "/ˌɪnfərˈmeɪʃən/",
+      "pos": "名詞",
+      "meanings": [
+        "情報"
+      ],
+      "examples": [
+        {
+          "text": "I found useful information on the Internet.",
+          "translation": "インターネットで役に立つ情報を見つけた。"
+        }
+      ],
+      "collocations": [
+        "a piece of information",
+        "information about"
+      ],
+      "notes": "数えられない名詞なので informations とはしない。数えるときは a piece of information。",
+      "tags": [
+        "ステップ3",
+        "名詞"
+      ]
+    },
+    {
+      "id": "jv-future",
+      "type": "vocab",
+      "term": "future",
+      "reading": "/ˈfjuːtʃər/",
+      "pos": "名詞",
+      "meanings": [
+        "未来",
+        "将来"
+      ],
+      "examples": [
+        {
+          "text": "What do you want to be in the future?",
+          "translation": "将来何になりたいですか。"
+        }
+      ],
+      "collocations": [
+        "in the future",
+        "near future"
+      ],
+      "notes": "「将来に」は in the future。反対は past（過去）。",
+      "tags": [
+        "ステップ3",
+        "名詞"
+      ]
+    },
+    {
+      "id": "jv-nature",
+      "type": "vocab",
+      "term": "nature",
+      "reading": "/ˈneɪtʃər/",
+      "pos": "名詞",
+      "meanings": [
+        "自然",
+        "性質"
+      ],
+      "examples": [
+        {
+          "text": "We should protect nature.",
+          "translation": "私たちは自然を守るべきだ。"
+        }
+      ],
+      "collocations": [
+        "by nature",
+        "human nature"
+      ],
+      "notes": "「自然」の意味では the を付けない。形容詞は natural。by nature は「生まれつき」。",
+      "tags": [
+        "ステップ3",
+        "名詞"
+      ]
+    },
+    {
+      "id": "jv-health",
+      "type": "vocab",
+      "term": "health",
+      "reading": "/helθ/",
+      "pos": "名詞",
+      "meanings": [
+        "健康"
+      ],
+      "examples": [
+        {
+          "text": "Sleep is important for your health.",
+          "translation": "睡眠は健康にとって大切だ。"
+        }
+      ],
+      "collocations": [
+        "good health",
+        "health care"
+      ],
+      "notes": "形容詞は healthy（健康な・健康によい）。",
+      "tags": [
+        "ステップ3",
+        "名詞"
+      ]
+    },
+    {
+      "id": "jv-reason",
+      "type": "vocab",
+      "term": "reason",
+      "reading": "/ˈriːzən/",
+      "pos": "名詞",
+      "meanings": [
+        "理由"
+      ],
+      "examples": [
+        {
+          "text": "That's the reason why I was late.",
+          "translation": "それが私が遅れた理由です。"
+        }
+      ],
+      "collocations": [
+        "the reason for",
+        "for this reason"
+      ],
+      "notes": "the reason why 〜 で「〜する理由」。for this reason は「この理由で」。",
+      "tags": [
+        "ステップ3",
+        "名詞"
+      ]
+    },
+    {
+      "id": "jv-opinion",
+      "type": "vocab",
+      "term": "opinion",
+      "reading": "/əˈpɪnjən/",
+      "pos": "名詞",
+      "meanings": [
+        "意見"
+      ],
+      "examples": [
+        {
+          "text": "In my opinion, the plan is good.",
+          "translation": "私の意見では、その計画はよいと思う。"
+        }
+      ],
+      "collocations": [
+        "in my opinion",
+        "public opinion"
+      ],
+      "notes": "In my opinion, 〜 は意見を述べるときの定番の言い方。",
+      "tags": [
+        "ステップ3",
+        "名詞"
+      ]
+    },
+    {
+      "id": "jv-volunteer",
+      "type": "vocab",
+      "term": "volunteer",
+      "reading": "/ˌvɑːlənˈtɪr/",
+      "pos": "名詞",
+      "meanings": [
+        "ボランティア"
+      ],
+      "examples": [
+        {
+          "text": "I worked as a volunteer at the event.",
+          "translation": "そのイベントでボランティアとして働いた。"
+        }
+      ],
+      "collocations": [
+        "volunteer work",
+        "volunteer activities"
+      ],
+      "notes": "アクセントは最後の /tɪr/。動詞では「自ら進んで申し出る」。",
+      "tags": [
+        "ステップ3",
+        "名詞"
+      ]
+    },
+    {
+      "id": "jv-peace",
+      "type": "vocab",
+      "term": "peace",
+      "reading": "/piːs/",
+      "pos": "名詞",
+      "meanings": [
+        "平和"
+      ],
+      "examples": [
+        {
+          "text": "Everyone hopes for world peace.",
+          "translation": "誰もが世界平和を願っている。"
+        }
+      ],
+      "collocations": [
+        "world peace",
+        "in peace"
+      ],
+      "notes": "同じ発音の piece（1つ・かけら）と区別。形容詞は peaceful。",
+      "tags": [
+        "ステップ3",
+        "名詞"
+      ]
+    },
+    {
+      "id": "jv-energy",
+      "type": "vocab",
+      "term": "energy",
+      "reading": "/ˈenərdʒi/",
+      "pos": "名詞",
+      "meanings": [
+        "エネルギー",
+        "元気"
+      ],
+      "examples": [
+        {
+          "text": "Solar energy is a clean source of power.",
+          "translation": "太陽エネルギーはクリーンな電力源だ。"
+        }
+      ],
+      "collocations": [
+        "save energy",
+        "full of energy"
+      ],
+      "notes": "発音は「エナジー」。「元気いっぱい」は full of energy。",
+      "tags": [
+        "ステップ3",
+        "名詞"
+      ]
+    },
+    {
+      "id": "jv-believe",
+      "type": "vocab",
+      "term": "believe",
+      "reading": "/bɪˈliːv/",
+      "pos": "動詞",
+      "meanings": [
+        "信じる",
+        "思う"
+      ],
+      "examples": [
+        {
+          "text": "I believe you.",
+          "translation": "あなたを信じるよ。"
+        }
+      ],
+      "collocations": [
+        "believe in"
+      ],
+      "notes": "believe 人 は「（人の言うことを）信じる」、believe in 〜 は「〜の存在・価値を信じる」。名詞は belief。",
+      "tags": [
+        "ステップ3",
+        "動詞"
+      ]
+    },
+    {
+      "id": "jv-explain",
+      "type": "vocab",
+      "term": "explain",
+      "reading": "/ɪkˈspleɪn/",
+      "pos": "動詞",
+      "meanings": [
+        "説明する"
+      ],
+      "examples": [
+        {
+          "text": "Can you explain the rule to me?",
+          "translation": "そのルールを私に説明してくれる？"
+        }
+      ],
+      "collocations": [
+        "explain 物 to 人"
+      ],
+      "notes": "「人に説明する」は explain to 人（explain me とはしない）。名詞は explanation。",
+      "tags": [
+        "ステップ3",
+        "動詞"
+      ]
+    },
+    {
+      "id": "jv-agree",
+      "type": "vocab",
+      "term": "agree",
+      "reading": "/əˈɡriː/",
+      "pos": "動詞",
+      "meanings": [
+        "同意する",
+        "賛成する"
+      ],
+      "examples": [
+        {
+          "text": "I agree with you.",
+          "translation": "あなたに賛成です。"
+        }
+      ],
+      "collocations": [
+        "agree with",
+        "agree to"
+      ],
+      "notes": "人・意見には agree with、提案・条件には agree to。反対は disagree。",
+      "tags": [
+        "ステップ3",
+        "動詞"
+      ]
+    },
+    {
+      "id": "jv-introduce",
+      "type": "vocab",
+      "term": "introduce",
+      "reading": "/ˌɪntrəˈduːs/",
+      "pos": "動詞",
+      "meanings": [
+        "紹介する",
+        "導入する"
+      ],
+      "examples": [
+        {
+          "text": "Let me introduce myself.",
+          "translation": "自己紹介させてください。"
+        }
+      ],
+      "collocations": [
+        "introduce A to B",
+        "introduce oneself"
+      ],
+      "notes": "introduce A to B で「A を B に紹介する」。名詞は introduction。",
+      "tags": [
+        "ステップ3",
+        "動詞"
+      ]
+    },
+    {
+      "id": "jv-protect",
+      "type": "vocab",
+      "term": "protect",
+      "reading": "/prəˈtekt/",
+      "pos": "動詞",
+      "meanings": [
+        "守る",
+        "保護する"
+      ],
+      "examples": [
+        {
+          "text": "We must protect the forest.",
+          "translation": "私たちはその森を守らなければならない。"
+        }
+      ],
+      "collocations": [
+        "protect A from B"
+      ],
+      "notes": "protect A from B で「B から A を守る」。名詞は protection。",
+      "tags": [
+        "ステップ3",
+        "動詞"
+      ]
+    },
+    {
+      "id": "jv-save",
+      "type": "vocab",
+      "term": "save",
+      "reading": "/seɪv/",
+      "pos": "動詞",
+      "meanings": [
+        "救う",
+        "節約する",
+        "貯める",
+        "保存する"
+      ],
+      "examples": [
+        {
+          "text": "We should save water.",
+          "translation": "水を節約すべきだ。"
+        }
+      ],
+      "collocations": [
+        "save money",
+        "save time",
+        "save a life"
+      ],
+      "notes": "「救う」「ためる」「保存する」はどれも「失わないようにとっておく」イメージ。",
+      "tags": [
+        "ステップ3",
+        "動詞"
+      ]
+    },
+    {
+      "id": "jv-solve",
+      "type": "vocab",
+      "term": "solve",
+      "reading": "/sɑːlv/",
+      "pos": "動詞",
+      "meanings": [
+        "解く",
+        "解決する"
+      ],
+      "examples": [
+        {
+          "text": "She solved the problem easily.",
+          "translation": "彼女はその問題を簡単に解いた。"
+        }
+      ],
+      "collocations": [
+        "solve a problem",
+        "solve a mystery"
+      ],
+      "notes": "名詞は solution（解決策）。",
+      "tags": [
+        "ステップ3",
+        "動詞"
+      ]
+    },
+    {
+      "id": "jv-share",
+      "type": "vocab",
+      "term": "share",
+      "reading": "/ʃer/",
+      "pos": "動詞",
+      "meanings": [
+        "共有する",
+        "分け合う"
+      ],
+      "examples": [
+        {
+          "text": "Let's share this pizza.",
+          "translation": "このピザを分け合おう。"
+        }
+      ],
+      "collocations": [
+        "share A with B",
+        "share an idea"
+      ],
+      "notes": "share A with B で「A を B と分け合う」。",
+      "tags": [
+        "ステップ3",
+        "動詞"
+      ]
+    },
+    {
+      "id": "jv-invent",
+      "type": "vocab",
+      "term": "invent",
+      "reading": "/ɪnˈvent/",
+      "pos": "動詞",
+      "meanings": [
+        "発明する"
+      ],
+      "examples": [
+        {
+          "text": "Who invented the telephone?",
+          "translation": "電話を発明したのは誰ですか。"
+        }
+      ],
+      "notes": "名詞は invention（発明）、inventor（発明家）。discover は「すでにあるものを発見する」。",
+      "tags": [
+        "ステップ3",
+        "動詞"
+      ]
+    },
+    {
+      "id": "jv-wish",
+      "type": "vocab",
+      "term": "wish",
+      "reading": "/wɪʃ/",
+      "pos": "動詞",
+      "meanings": [
+        "願う",
+        "〜ならいいのに"
+      ],
+      "examples": [
+        {
+          "text": "I wish I could fly.",
+          "translation": "空を飛べたらいいのに。"
+        }
+      ],
+      "collocations": [
+        "make a wish",
+        "Best wishes."
+      ],
+      "notes": "I wish + 過去形 で「（実際は違うが）〜ならいいのに」（仮定法）。実現しそうなことには hope を使う。",
+      "tags": [
+        "ステップ3",
+        "動詞"
+      ]
+    },
+    {
+      "id": "jv-die",
+      "type": "vocab",
+      "term": "die",
+      "reading": "/daɪ/",
+      "pos": "動詞",
+      "meanings": [
+        "死ぬ",
+        "枯れる"
+      ],
+      "examples": [
+        {
+          "text": "My dog died last year.",
+          "translation": "私の犬は去年死んだ。"
+        }
+      ],
+      "collocations": [
+        "die of",
+        "die young"
+      ],
+      "notes": "-ing 形は dying。形容詞 dead（死んでいる）、名詞 death（死）と区別する。",
+      "tags": [
+        "ステップ3",
+        "動詞"
+      ]
+    },
+    {
+      "id": "jv-fall",
+      "type": "vocab",
+      "term": "fall",
+      "reading": "/fɔːl/",
+      "pos": "動詞",
+      "meanings": [
+        "落ちる",
+        "倒れる",
+        "（ある状態に）なる"
+      ],
+      "examples": [
+        {
+          "text": "Leaves fall in autumn.",
+          "translation": "秋には葉が落ちる。"
+        }
+      ],
+      "collocations": [
+        "fall down",
+        "fall asleep",
+        "fall in love"
+      ],
+      "forms": [
+        "fell",
+        "fallen"
+      ],
+      "notes": "活用は fall – fell – fallen。アメリカ英語では名詞 fall で「秋」。",
+      "tags": [
+        "ステップ3",
+        "動詞"
+      ]
+    },
+    {
+      "id": "jv-throw",
+      "type": "vocab",
+      "term": "throw",
+      "reading": "/θroʊ/",
+      "pos": "動詞",
+      "meanings": [
+        "投げる"
+      ],
+      "examples": [
+        {
+          "text": "Don't throw stones.",
+          "translation": "石を投げてはいけません。"
+        }
+      ],
+      "collocations": [
+        "throw away",
+        "throw a ball"
+      ],
+      "forms": [
+        "threw",
+        "thrown"
+      ],
+      "notes": "活用は throw – threw – thrown。throw away は「捨てる」。",
+      "tags": [
+        "ステップ3",
+        "動詞"
+      ]
+    },
+    {
+      "id": "jv-borrow",
+      "type": "vocab",
+      "term": "borrow",
+      "reading": "/ˈbɑːroʊ/",
+      "pos": "動詞",
+      "meanings": [
+        "借りる"
+      ],
+      "examples": [
+        {
+          "text": "Can I borrow your pen?",
+          "translation": "ペンを借りてもいい？"
+        }
+      ],
+      "collocations": [
+        "borrow A from B"
+      ],
+      "notes": "持ち運べるものを（無料で）借りるときに使う。トイレなどその場で使うものは use（Can I use the bathroom?）。lend（貸す）と区別。",
+      "tags": [
+        "ステップ3",
+        "動詞"
+      ]
+    },
+    {
+      "id": "jv-lend",
+      "type": "vocab",
+      "term": "lend",
+      "reading": "/lend/",
+      "pos": "動詞",
+      "meanings": [
+        "貸す"
+      ],
+      "examples": [
+        {
+          "text": "Could you lend me your dictionary?",
+          "translation": "辞書を貸してもらえますか。"
+        }
+      ],
+      "collocations": [
+        "lend 人 物",
+        "lend a hand"
+      ],
+      "forms": [
+        "lent",
+        "lent"
+      ],
+      "notes": "過去形・過去分詞は lent。borrow（借りる）と逆。lend a hand は「手を貸す」。",
+      "tags": [
+        "ステップ3",
+        "動詞"
+      ]
+    },
+    {
+      "id": "jv-return",
+      "type": "vocab",
+      "term": "return",
+      "reading": "/rɪˈtɜːrn/",
+      "pos": "動詞",
+      "meanings": [
+        "戻る",
+        "返す"
+      ],
+      "examples": [
+        {
+          "text": "I must return this book to the library.",
+          "translation": "この本を図書館に返さなければならない。"
+        }
+      ],
+      "collocations": [
+        "return home",
+        "return to"
+      ],
+      "notes": "return は「戻る」なので return back とはしない（意味が重なる）。",
+      "tags": [
+        "ステップ3",
+        "動詞"
+      ]
+    },
+    {
+      "id": "jv-prepare",
+      "type": "vocab",
+      "term": "prepare",
+      "reading": "/prɪˈper/",
+      "pos": "動詞",
+      "meanings": [
+        "準備する",
+        "用意する"
+      ],
+      "examples": [
+        {
+          "text": "I'm preparing for the exam.",
+          "translation": "試験の準備をしている。"
+        }
+      ],
+      "collocations": [
+        "prepare for",
+        "prepare dinner"
+      ],
+      "notes": "prepare for 〜 は「〜に備えて準備する」、prepare 〜 は「〜を用意する」。名詞は preparation。",
+      "tags": [
+        "ステップ3",
+        "動詞"
+      ]
+    },
+    {
+      "id": "jv-hurt",
+      "type": "vocab",
+      "term": "hurt",
+      "reading": "/hɜːrt/",
+      "pos": "動詞",
+      "meanings": [
+        "傷つける",
+        "痛む"
+      ],
+      "examples": [
+        {
+          "text": "I hurt my leg playing soccer.",
+          "translation": "サッカーをしていて脚をけがした。"
+        }
+      ],
+      "collocations": [
+        "get hurt",
+        "hurt one's feelings"
+      ],
+      "forms": [
+        "hurt",
+        "hurt"
+      ],
+      "notes": "活用は hurt – hurt – hurt（すべて同じ形）。My head hurts. で「頭が痛い」。",
+      "tags": [
+        "ステップ3",
+        "動詞"
+      ]
+    },
+    {
+      "id": "jv-necessary",
+      "type": "vocab",
+      "term": "necessary",
+      "reading": "/ˈnesəseri/",
+      "pos": "形容詞",
+      "meanings": [
+        "必要な"
+      ],
+      "examples": [
+        {
+          "text": "Is it necessary to bring lunch?",
+          "translation": "お弁当を持ってくる必要がありますか。"
+        }
+      ],
+      "collocations": [
+        "if necessary",
+        "necessary for"
+      ],
+      "notes": "It is necessary (for 人) to 〜 の形で使う。「私は〜する必要がある」を I am necessary to 〜 とはしない。",
+      "tags": [
+        "ステップ3",
+        "形容詞"
+      ]
+    },
+    {
+      "id": "jv-possible",
+      "type": "vocab",
+      "term": "possible",
+      "reading": "/ˈpɑːsəbəl/",
+      "pos": "形容詞",
+      "meanings": [
+        "可能な",
+        "ありうる"
+      ],
+      "examples": [
+        {
+          "text": "Is it possible to finish by tomorrow?",
+          "translation": "明日までに終えることは可能ですか。"
+        }
+      ],
+      "collocations": [
+        "as soon as possible",
+        "if possible"
+      ],
+      "notes": "反対は impossible。as 〜 as possible で「できるだけ〜」。",
+      "tags": [
+        "ステップ3",
+        "形容詞"
+      ]
+    },
+    {
+      "id": "jv-useful",
+      "type": "vocab",
+      "term": "useful",
+      "reading": "/ˈjuːsfəl/",
+      "pos": "形容詞",
+      "meanings": [
+        "役に立つ"
+      ],
+      "examples": [
+        {
+          "text": "This app is useful for learning words.",
+          "translation": "このアプリは単語を覚えるのに役に立つ。"
+        }
+      ],
+      "collocations": [
+        "useful for",
+        "useful information"
+      ],
+      "notes": "use（使う）+ -ful。use の部分は /juːs/ で s は濁らない。反対は useless。",
+      "tags": [
+        "ステップ3",
+        "形容詞"
+      ]
+    },
+    {
+      "id": "jv-special",
+      "type": "vocab",
+      "term": "special",
+      "reading": "/ˈspeʃəl/",
+      "pos": "形容詞",
+      "meanings": [
+        "特別な"
+      ],
+      "examples": [
+        {
+          "text": "Today is a special day for me.",
+          "translation": "今日は私にとって特別な日だ。"
+        }
+      ],
+      "collocations": [
+        "special event",
+        "nothing special"
+      ],
+      "notes": "nothing special は「特に何もない」。副詞は specially / especially。",
+      "tags": [
+        "ステップ3",
+        "形容詞"
+      ]
+    },
+    {
+      "id": "jv-strange",
+      "type": "vocab",
+      "term": "strange",
+      "reading": "/streɪndʒ/",
+      "pos": "形容詞",
+      "meanings": [
+        "奇妙な",
+        "見知らぬ"
+      ],
+      "examples": [
+        {
+          "text": "I heard a strange sound.",
+          "translation": "奇妙な音が聞こえた。"
+        }
+      ],
+      "collocations": [
+        "strange noise"
+      ],
+      "notes": "名詞 stranger は「見知らぬ人・その土地に不案内な人」。",
+      "tags": [
+        "ステップ3",
+        "形容詞"
+      ]
+    },
+    {
+      "id": "jv-careful",
+      "type": "vocab",
+      "term": "careful",
+      "reading": "/ˈkerfəl/",
+      "pos": "形容詞",
+      "meanings": [
+        "注意深い"
+      ],
+      "examples": [
+        {
+          "text": "Be careful!",
+          "translation": "気をつけて！"
+        }
+      ],
+      "collocations": [
+        "be careful with",
+        "be careful not to do"
+      ],
+      "notes": "care（注意）+ -ful。副詞は carefully、反対は careless（不注意な）。",
+      "tags": [
+        "ステップ3",
+        "形容詞"
+      ]
+    },
+    {
+      "id": "jv-enough",
+      "type": "vocab",
+      "term": "enough",
+      "reading": "/ɪˈnʌf/",
+      "pos": "形容詞／副詞",
+      "meanings": [
+        "十分な",
+        "十分に（副詞）"
+      ],
+      "examples": [
+        {
+          "text": "We have enough time.",
+          "translation": "時間は十分にある。"
+        }
+      ],
+      "collocations": [
+        "enough to do",
+        "old enough to do"
+      ],
+      "notes": "名詞には前に置き（enough money）、形容詞・副詞には後ろに置く（old enough）。gh を /f/ と読む。",
+      "tags": [
+        "ステップ3",
+        "形容詞"
+      ]
+    },
+    {
+      "id": "jv-true",
+      "type": "vocab",
+      "term": "true",
+      "reading": "/truː/",
+      "pos": "形容詞",
+      "meanings": [
+        "本当の"
+      ],
+      "examples": [
+        {
+          "text": "Is that story true?",
+          "translation": "その話は本当？"
+        }
+      ],
+      "collocations": [
+        "come true",
+        "true story"
+      ],
+      "notes": "come true は「（夢が）実現する」。名詞は truth（真実）。",
+      "tags": [
+        "ステップ3",
+        "形容詞"
+      ]
+    },
+    {
+      "id": "jv-foreign",
+      "type": "vocab",
+      "term": "foreign",
+      "reading": "/ˈfɔːrən/",
+      "pos": "形容詞",
+      "meanings": [
+        "外国の"
+      ],
+      "examples": [
+        {
+          "text": "I want to learn a foreign language.",
+          "translation": "外国語を学びたい。"
+        }
+      ],
+      "collocations": [
+        "foreign country",
+        "foreign language"
+      ],
+      "notes": "g は発音しない。「外国人」は people from other countries などと言い換えることも多い。",
+      "tags": [
+        "ステップ3",
+        "形容詞"
+      ]
+    },
+    {
+      "id": "jv-afraid",
+      "type": "vocab",
+      "term": "afraid",
+      "reading": "/əˈfreɪd/",
+      "pos": "形容詞",
+      "meanings": [
+        "恐れて",
+        "心配して"
+      ],
+      "examples": [
+        {
+          "text": "My little brother is afraid of dogs.",
+          "translation": "弟は犬をこわがっている。"
+        }
+      ],
+      "collocations": [
+        "be afraid of",
+        "I'm afraid 〜."
+      ],
+      "notes": "名詞の前には置かず be afraid of 〜 の形で使う。I'm afraid 〜. は言いにくいことをやわらげる「残念ながら〜」。",
+      "tags": [
+        "ステップ3",
+        "形容詞"
+      ]
+    },
+    {
+      "id": "jv-wonderful",
+      "type": "vocab",
+      "term": "wonderful",
+      "reading": "/ˈwʌndərfəl/",
+      "pos": "形容詞",
+      "meanings": [
+        "すばらしい"
+      ],
+      "examples": [
+        {
+          "text": "We had a wonderful time.",
+          "translation": "すばらしい時間を過ごした。"
+        }
+      ],
+      "collocations": [
+        "wonderful idea"
+      ],
+      "notes": "wonder（驚き）+ -ful。o を /ʌ/ と読み「ワンダフル」。",
+      "tags": [
+        "ステップ3",
+        "形容詞"
+      ]
+    },
+    {
+      "id": "jv-international",
+      "type": "vocab",
+      "term": "international",
+      "reading": "/ˌɪntərˈnæʃənəl/",
+      "pos": "形容詞",
+      "meanings": [
+        "国際的な"
+      ],
+      "examples": [
+        {
+          "text": "Narita is an international airport.",
+          "translation": "成田は国際空港だ。"
+        }
+      ],
+      "collocations": [
+        "international airport",
+        "international student"
+      ],
+      "notes": "inter-（〜の間）+ national（国の）。",
+      "tags": [
+        "ステップ3",
+        "形容詞"
+      ]
+    },
+    {
+      "id": "jv-abroad",
+      "type": "vocab",
+      "term": "abroad",
+      "reading": "/əˈbrɔːd/",
+      "pos": "副詞",
+      "meanings": [
+        "外国へ",
+        "外国で"
+      ],
+      "examples": [
+        {
+          "text": "I want to study abroad.",
+          "translation": "留学したい。"
+        }
+      ],
+      "collocations": [
+        "study abroad",
+        "go abroad",
+        "travel abroad"
+      ],
+      "notes": "副詞なので go to abroad とはしない（go abroad）。",
+      "tags": [
+        "ステップ3",
+        "副詞"
+      ]
+    },
+    {
+      "id": "jv-however",
+      "type": "vocab",
+      "term": "however",
+      "reading": "/haʊˈevər/",
+      "pos": "副詞",
+      "meanings": [
+        "しかしながら"
+      ],
+      "examples": [
+        {
+          "text": "It was raining. However, we went out.",
+          "translation": "雨が降っていた。しかし、私たちは出かけた。"
+        }
+      ],
+      "notes": "but と違い接続詞ではなく副詞。文と文はピリオドなどで区切り、However の後ろにコンマを置く。",
+      "tags": [
+        "ステップ3",
+        "副詞"
+      ]
+    },
+    {
+      "id": "jv-finally",
+      "type": "vocab",
+      "term": "finally",
+      "reading": "/ˈfaɪnəli/",
+      "pos": "副詞",
+      "meanings": [
+        "ついに",
+        "最後に"
+      ],
+      "examples": [
+        {
+          "text": "We finally reached the top of the mountain.",
+          "translation": "私たちはついに山頂に着いた。"
+        }
+      ],
+      "notes": "「待ったすえについに」の気持ち。順番を述べる「最後に」にも使う（First, … Finally, …）。",
+      "tags": [
+        "ステップ3",
+        "副詞"
+      ]
+    },
+    {
+      "id": "jv-probably",
+      "type": "vocab",
+      "term": "probably",
+      "reading": "/ˈprɑːbəbli/",
+      "pos": "副詞",
+      "meanings": [
+        "たぶん"
+      ],
+      "examples": [
+        {
+          "text": "It will probably rain tomorrow.",
+          "translation": "明日はたぶん雨だろう。"
+        }
+      ],
+      "notes": "確信の度合いは probably（かなり確か）> maybe / perhaps（五分五分）。",
+      "tags": [
+        "ステップ3",
+        "副詞"
+      ]
+    },
+    {
+      "id": "jv-almost",
+      "type": "vocab",
+      "term": "almost",
+      "reading": "/ˈɔːlmoʊst/",
+      "pos": "副詞",
+      "meanings": [
+        "ほとんど",
+        "もう少しで"
+      ],
+      "examples": [
+        {
+          "text": "Dinner is almost ready.",
+          "translation": "夕食はほとんどできている。"
+        }
+      ],
+      "collocations": [
+        "almost all",
+        "almost every"
+      ],
+      "notes": "「ほとんどの生徒」は almost all the students または most students（almost students とはしない）。",
+      "tags": [
+        "ステップ3",
+        "副詞"
+      ]
+    },
+    {
+      "id": "jv-ago",
+      "type": "vocab",
+      "term": "ago",
+      "reading": "/əˈɡoʊ/",
+      "pos": "副詞",
+      "meanings": [
+        "〜前に"
+      ],
+      "examples": [
+        {
+          "text": "I came to this town three years ago.",
+          "translation": "私は3年前にこの町に来た。"
+        }
+      ],
+      "collocations": [
+        "long ago"
+      ],
+      "notes": "期間 + ago で「（今から）〜前」。過去形と使い、現在完了形とはいっしょに使わない。",
+      "tags": [
+        "ステップ3",
+        "副詞"
+      ]
+    },
+    {
+      "id": "jv-through",
+      "type": "vocab",
+      "term": "through",
+      "reading": "/θruː/",
+      "pos": "前置詞",
+      "meanings": [
+        "〜を通り抜けて",
+        "〜を通して"
+      ],
+      "examples": [
+        {
+          "text": "The train went through a long tunnel.",
+          "translation": "列車は長いトンネルを通り抜けた。"
+        }
+      ],
+      "collocations": [
+        "through the window",
+        "through the night"
+      ],
+      "notes": "「中を通って向こう側へ」がイメージ。発音は threw（throw の過去形）と同じ。",
+      "tags": [
+        "ステップ3",
+        "前置詞・接続詞"
+      ]
+    },
+    {
+      "id": "jv-against",
+      "type": "vocab",
+      "term": "against",
+      "reading": "/əˈɡenst/",
+      "pos": "前置詞",
+      "meanings": [
+        "〜に反対して",
+        "〜にもたれて",
+        "〜と対戦して"
+      ],
+      "examples": [
+        {
+          "text": "Are you for or against the plan?",
+          "translation": "あなたはその計画に賛成ですか、反対ですか。"
+        }
+      ],
+      "collocations": [
+        "against the wall",
+        "play against"
+      ],
+      "notes": "for（賛成）の反対。力が向き合うイメージで「〜にぶつかる・寄りかかる」にも使う。",
+      "tags": [
+        "ステップ3",
+        "前置詞・接続詞"
+      ]
+    },
+    {
+      "id": "jv-since",
+      "type": "vocab",
+      "term": "since",
+      "reading": "/sɪns/",
+      "pos": "前置詞／接続詞",
+      "meanings": [
+        "〜以来",
+        "〜なので（接続詞）"
+      ],
+      "examples": [
+        {
+          "text": "I have lived in Kobe since 2020.",
+          "translation": "私は2020年から神戸に住んでいる。"
+        }
+      ],
+      "collocations": [
+        "since then",
+        "ever since"
+      ],
+      "notes": "現在完了形といっしょに「〜以来ずっと」。接続詞では「〜なので」の意味もある。",
+      "tags": [
+        "ステップ3",
+        "前置詞・接続詞"
+      ]
+    },
+    {
+      "id": "jv-though",
+      "type": "vocab",
+      "term": "though",
+      "reading": "/ðoʊ/",
+      "pos": "接続詞",
+      "meanings": [
+        "〜だけれども"
+      ],
+      "examples": [
+        {
+          "text": "Though he was tired, he kept working.",
+          "translation": "彼は疲れていたが、働き続けた。"
+        }
+      ],
+      "collocations": [
+        "even though",
+        "as though"
+      ],
+      "notes": "although とほぼ同じでややくだけた語。文末で「でも」の意味にもなる（It was hard, though.）。",
+      "tags": [
+        "ステップ3",
+        "前置詞・接続詞"
+      ]
+    }
+  ]
+}
