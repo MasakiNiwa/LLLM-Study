@@ -53,7 +53,7 @@ export function ModelStatusChip({
       >
         <span className={cn('size-2 shrink-0 rounded-full', dot)} />
         {label && <span className="truncate">{label}</span>}
-      {suffix && <span className="shrink-0 tabular-nums">{suffix}</span>}
+        {suffix && <span className="shrink-0 tabular-nums">{suffix}</span>}
       </span>
     );
   }

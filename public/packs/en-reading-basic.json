@@ -18,7 +18,7 @@
   "author": "LLLM-Study",
   "license": "MIT",
   "source": "LLLM-Study オリジナル",
-  "revision": 2,
+  "revision": 3,
   "passages": [
     {
       "id": "r-library",
@@ -108,11 +108,11 @@
       "question": "トムがサラにお願いしていることは何ですか。",
       "choices": [
         "報告書を書き直すこと",
-        "3 月の数字を確認し直すこと",
         "会議の日程を変えること",
-        "大阪に行くこと"
+        "大阪に行くこと",
+        "3 月の数字を確認し直すこと"
       ],
-      "answer": 1,
+      "answer": 3,
       "explanation": "\"Could you check them again before the meeting on Thursday?\" の them は the numbers for March を指します。"
     },
     {
@@ -122,11 +122,11 @@
       "question": "トムが金曜日に会社にいないのはなぜですか。",
       "choices": [
         "休暇を取るから",
-        "体調が悪いから",
         "大阪の取引先を訪問するから",
+        "体調が悪いから",
         "電車が止まるから"
       ],
-      "answer": 2,
+      "answer": 1,
       "explanation": "\"because I have to visit a client in Osaka\" とあります。"
     },
     {
@@ -158,11 +158,11 @@
       "question": "眠っている間に脳がしていることとして、本文の内容に合うものはどれですか。",
       "choices": [
         "新しい情報を忘れている",
-        "その日に学んだ情報を整理している",
         "何もせずに休んでいる",
+        "その日に学んだ情報を整理している",
         "夢だけを見ている"
       ],
-      "answer": 1,
+      "answer": 2,
       "explanation": "\"our brains organize the information we learned during the day\" とあります。"
     },
     {
@@ -187,12 +187,12 @@
       "passage": "r-sleep",
       "question": "寝る前にスマートフォンを使わないほうがよい理由は何ですか。",
       "choices": [
+        "画面の光で目が覚めてしまうことがあるから",
         "電池がなくなるから",
         "目が疲れるから",
-        "画面の光で目が覚めてしまうことがあるから",
         "音がうるさいから"
       ],
-      "answer": 2,
+      "answer": 0,
       "explanation": "\"because the light from the screen can keep us awake\" keep 人 awake で「人を起きたままにする」。"
     },
     {
@@ -210,11 +210,11 @@
       "question": "ミカたちがすぐに席に着けないのはなぜですか。",
       "choices": [
         "予約していなかったから",
-        "席の準備ができていないから",
         "店が閉まっているから",
-        "人数が多すぎるから"
+        "人数が多すぎるから",
+        "席の準備ができていないから"
       ],
-      "answer": 1,
+      "answer": 3,
       "explanation": "\"your table isn't ready yet\" とあります。"
     },
     {
@@ -258,11 +258,11 @@
       "question": "シェアサイクルの自転車はどこに返せますか。",
       "choices": [
         "借りたステーションだけ",
-        "市内のどのステーションでも",
         "駅の駐輪場だけ",
+        "市内のどのステーションでも",
         "どこにでも置いてよい"
       ],
-      "answer": 1,
+      "answer": 2,
       "explanation": "\"return it at any station in the city\" とあります。"
     },
     {
@@ -271,12 +271,12 @@
       "passage": "r-bike",
       "question": "本文で挙げられているシェアサイクルの問題点は何ですか。",
       "choices": [
-        "料金が高いこと",
         "自転車が歩道に放置されること",
+        "料金が高いこと",
         "アプリが使いにくいこと",
         "自転車が足りないこと"
       ],
-      "answer": 1,
+      "answer": 0,
       "explanation": "\"Some users leave bikes on the sidewalk, which can be dangerous for people walking.\""
     },
     {

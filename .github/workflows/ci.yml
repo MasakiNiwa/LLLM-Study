@@ -26,6 +26,8 @@ jobs:
         run: npm run licenses:check
       - name: Sample packs are valid and generated files are up to date
         run: npm run packs:check
+      - name: Sample packs pass the authoring checks
+        run: npm run packs:lint
       - run: npm run format:check
       - run: npm run lint
       - run: npm run typecheck

@@ -11,6 +11,7 @@ import {
   subjectLabel,
 } from '@/lib/packs/subjects';
 import { ITEM_TYPE_LABELS } from '@/lib/packs/templates';
+import { cn } from '@/lib/utils/cn';
 import { errorMessage } from '@/lib/utils/format';
 import { installSample } from './packActions';
 import { useLibrary } from './libraryStore';
@@ -47,6 +48,23 @@ function sortSamples(
     default:
       return out;
   }
+}
+
+/** 教材の説明（長いものは 3 行まで。押すと全文） */
+function SampleDescription({ text }: { text: string }) {
+  const [open, setOpen] = useState(false);
+  const cls = 'mt-0.5 text-sm text-slate-600 dark:text-slate-400';
+  if (text.length <= 80) return <p className={cls}>{text}</p>;
+  return (
+    <button
+      type="button"
+      aria-expanded={open}
+      onClick={() => setOpen((v) => !v)}
+      className={cn(cls, 'block text-left', !open && 'line-clamp-3')}
+    >
+      {text}
+    </button>
+  );
 }
 
 /** リポジトリに同梱しているサンプル教材の一覧（追加・更新。検索・分野での絞り込み・並べ替え） */
@@ -114,11 +132,7 @@ export function SampleList({ compact }: { compact?: boolean }) {
   );
   return (
     <div className="space-y-3">
-      {compact && showChips && (
-        <div className="flex flex-wrap gap-1.5">
-          {chips}
-        </div>
-      )}
+      {compact && showChips && <div className="flex flex-wrap gap-1.5">{chips}</div>}
       {showTools && (
         <>
           <SearchBox
@@ -150,11 +164,7 @@ export function SampleList({ compact }: { compact?: boolean }) {
             >
               <div className="min-w-0 flex-1">
                 <div className="font-semibold">{s.title}</div>
-                {!compact && s.description && (
-                  <p className="mt-0.5 text-sm text-slate-600 dark:text-slate-400">
-                    {s.description}
-                  </p>
-                )}
+                {!compact && s.description && <SampleDescription text={s.description} />}
                 <div className="mt-1 flex flex-wrap gap-x-3 gap-y-0.5 text-xs text-slate-500 dark:text-slate-400">
                   <span>{subjectLabel(subjectKey(s.subject))}</span>
                   <span>{s.itemCount} 項目</span>

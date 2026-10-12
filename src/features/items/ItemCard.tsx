@@ -278,13 +278,7 @@ function ClozeText({ text, reveal }: { text: string; reveal: boolean }) {
   // 改行を含む穴埋め（コードなど）は、字下げを保って等幅で表示する
   const code = text.includes('\n');
   return (
-    <p
-      className={
-        code
-          ? cn(CODE_BLOCK, 'text-base')
-          : 'text-center text-xl leading-loose font-medium sm:text-2xl'
-      }
-    >
+    <p className={code ? CODE_BLOCK : 'text-center text-xl leading-loose font-medium sm:text-2xl'}>
       {parts.map((p, i) => {
         const m = /^\{\{([^{}]+)\}\}$/.exec(p);
         if (!m) return <span key={i}>{p}</span>;
@@ -298,7 +292,10 @@ function ClozeText({ text, reveal }: { text: string; reveal: boolean }) {
         ) : (
           <span
             key={i}
-            className="mx-0.5 inline-block min-w-16 border-b-2 border-accent-500 text-transparent select-none"
+            className={cn(
+              'inline-block border-b-2 border-accent-500 text-transparent select-none',
+              code ? 'min-w-8' : 'mx-0.5 min-w-16',
+            )}
           >
             {m[1].replace(/./g, '_')}
           </span>
@@ -324,10 +321,15 @@ function ClozeFace({ item, side, lang }: FaceProps<ClozeItem>) {
   }
   return (
     <div className="space-y-4">
-      <div className="flex items-center justify-center gap-1">
+      {item.text.includes('\n') ? (
+        // コードなどは読み上げない（幅も広く使う）
         <ClozeText text={item.text} reveal />
-        <SpeakButton text={item.text.replace(/\{\{([^{}]+)\}\}/g, '$1')} lang={lang} />
-      </div>
+      ) : (
+        <div className="flex items-center justify-center gap-1">
+          <ClozeText text={item.text} reveal />
+          <SpeakButton text={item.text.replace(/\{\{([^{}]+)\}\}/g, '$1')} lang={lang} />
+        </div>
+      )}
       <p className="text-center text-sm text-slate-500">
         答え: {clozeAnswers(item.text).join(' / ')}
       </p>
