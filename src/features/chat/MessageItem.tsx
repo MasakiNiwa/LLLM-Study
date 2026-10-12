@@ -1,6 +1,7 @@
 import { lazy, memo, Suspense, useState, type ReactNode } from 'react';
 import { AlertCircle, Brain, Check, ChevronRight, Copy, RotateCcw, Wrench } from 'lucide-react';
 import { toast } from 'sonner';
+import { ElapsedCounter } from '@/components/ui/ElapsedCounter';
 import { cn } from '@/lib/utils/cn';
 import { formatDuration } from '@/lib/utils/format';
 import { TOOL_LABELS } from '@/features/ai/tools';
@@ -155,6 +156,12 @@ export const MessageItem = memo(function MessageItem({
             <TypingDots />
           ) : null}
         </div>
+        {streaming && (
+          <ElapsedCounter
+            since={message.createdAt}
+            label={toolActivity ? '調べています' : message.text ? '生成中' : '考え中'}
+          />
+        )}
         {message.proposals?.map((p, i) => (
           <ProposalCard
             key={i}

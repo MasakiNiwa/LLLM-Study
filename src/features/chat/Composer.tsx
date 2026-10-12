@@ -1,5 +1,5 @@
 import { useRef, useState, type KeyboardEvent } from 'react';
-import { ArrowUp, Square } from 'lucide-react';
+import { ArrowUp, Brain, Square } from 'lucide-react';
 import { Button } from '@/components/ui/Button';
 import { cn } from '@/lib/utils/cn';
 import { useEngine } from '@/features/engine/engineStore';
@@ -20,6 +20,10 @@ export function Composer({ initialText = '' }: { initialText?: string }) {
   const ready = useEngine((s) => s.status === 'ready');
   const enterToSend = useSettings((s) => s.enterToSend);
   const helpMode = useChat((s) => s.helpMode);
+  // 思考モード（入力欄で送信ごとに切り替える。最初は設定の値）
+  const thinkingSetting = useSettings((s) => s.enableThinking);
+  const thinking = useChat((s) => s.thinking) ?? thinkingSetting;
+  const setThinking = useChat((s) => s.setThinking);
   // ほかの AI の処理（例文クイズ・会話練習など）の最中は送れない（ひとことは譲ってもらえる）
   const otherBusy = useAiBusy((s) => s.task !== null && s.task !== 'reaction' && s.task !== 'chat');
 
@@ -47,12 +51,32 @@ export function Composer({ initialText = '' }: { initialText?: string }) {
   return (
     <div className="shrink-0 bg-gradient-to-t from-slate-50 via-slate-50 to-transparent px-3 pt-2 pb-3 sm:px-4 dark:from-slate-950 dark:via-slate-950">
       <form
-        className="mx-auto flex w-full max-w-3xl items-end gap-2 rounded-3xl border border-slate-300 bg-white p-1.5 pl-4 shadow-sm transition-colors focus-within:border-accent-500 dark:border-slate-700 dark:bg-slate-900"
+        className="mx-auto flex w-full max-w-3xl items-end gap-1.5 rounded-3xl border border-slate-300 bg-white p-1.5 shadow-sm transition-colors focus-within:border-accent-500 dark:border-slate-700 dark:bg-slate-900"
         onSubmit={(e) => {
           e.preventDefault();
           submit();
         }}
       >
+        <button
+          type="button"
+          onClick={() => setThinking(!thinking)}
+          aria-pressed={thinking}
+          aria-label="考えてから答える（思考モード）"
+          title={
+            thinking
+              ? '思考モード: オン（考えてから答えます。遅くなります）'
+              : '思考モード: オフ（すぐに答えます）'
+          }
+          className={cn(
+            'flex h-10 shrink-0 items-center gap-1 rounded-full px-2.5 text-xs font-medium transition-colors',
+            thinking
+              ? 'bg-accent-100 text-accent-800 dark:bg-accent-900/50 dark:text-accent-200'
+              : 'text-slate-500 hover:bg-slate-100 dark:hover:bg-slate-800',
+          )}
+        >
+          <Brain className="size-4" />
+          考える
+        </button>
         <textarea
           ref={ref}
           autoFocus={initialText !== ''}

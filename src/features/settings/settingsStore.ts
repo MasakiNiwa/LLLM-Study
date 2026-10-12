@@ -80,6 +80,13 @@ export interface Settings extends Omit<ConversationSettings, 'systemPrompt'> {
   shareStudyState: boolean;
   /** AI にツール（学習記録の検索など）を使わせる */
   useTools: boolean;
+  /**
+   * タスクごとに温度を変える（判定・カードの下書きは低く、例文クイズは中くらい）。
+   * false なら、すべての応答に設定の温度を使う
+   */
+  taskTemperature: boolean;
+  /** 単発の生成（解説・ひとことなど）のあとも、チャットの文脈（KV キャッシュ）を残す（実験的） */
+  keepChatContext: boolean;
   // ---- エンジン（変更後はモデルの再読み込みが必要） ----
   backend: BackendSetting;
   maxNumTokens: number;
@@ -135,6 +142,8 @@ export const DEFAULT_SETTINGS: Settings = {
   reaction: 'template',
   shareStudyState: true,
   useTools: true,
+  taskTemperature: true,
+  keepChatContext: true,
 
   temperature: 1.0,
   topK: 64,
@@ -152,7 +161,7 @@ export const DEFAULT_SETTINGS: Settings = {
 
   theme: 'system',
   enterToSend: true,
-  showStats: false,
+  showStats: true,
   appBadge: true,
 
   lastBackupAt: null,
@@ -183,8 +192,13 @@ export const useSettings = create<SettingsState>()(
     }),
     {
       name: `${STORAGE_PREFIX}:settings`,
-      version: 1,
+      version: 2,
       partialize: ({ update: _u, reset: _r, ...rest }) => rest,
+      // v2: 生成の統計の表示を既定でオンにした（以前の既定のオフのままの人もオンにする）
+      migrate: (persisted, version) => {
+        const s = persisted as Partial<Settings>;
+        return (version < 2 ? { ...s, showStats: true } : s) as SettingsState;
+      },
     },
   ),
 );

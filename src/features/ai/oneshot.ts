@@ -18,6 +18,35 @@ export interface OneshotOptions {
   plain?: boolean;
   /** 生成中の本文（フレームごとにまとめて呼ばれる） */
   onText?: (text: string) => void;
+  /**
+   * 生成の種類（温度の決め方）。judge: 判定、structured: 決まった形の下書き・添削、
+   * varied: 毎回違うものを作る問題づくり、free（既定）: 解説・ひとことなど自由な文章
+   */
+  purpose?: OneshotPurpose;
+  /** 作り直しの回数（0 から）。形が合わずに作り直すたびに、温度を少し上げて違う出力にする */
+  attempt?: number;
+}
+
+export type OneshotPurpose = 'judge' | 'structured' | 'varied' | 'free';
+
+/** タスクごとの温度。決まった形の出力ほど低くする（0 にすると作り直しても同じ出力になるので避ける） */
+const PURPOSE_TEMPERATURE: Record<Exclude<OneshotPurpose, 'free'>, number> = {
+  judge: 0.2,
+  structured: 0.3,
+  varied: 0.7,
+};
+
+/**
+ * 単発の生成の温度。設定で「タスクごとに温度を変える」がオフなら、いつも設定の温度。
+ * 作り直すたびに 0.15 ずつ上げる（上限 1.0）
+ */
+export function oneshotTemperature(
+  purpose: OneshotPurpose,
+  attempt: number,
+  s: { temperature: number; taskTemperature: boolean },
+): number {
+  if (!s.taskTemperature || purpose === 'free') return s.temperature;
+  return Math.min(1, PURPOSE_TEMPERATURE[purpose] + 0.15 * attempt);
 }
 
 export interface OneshotResult {
@@ -73,7 +102,7 @@ export async function runOneshot(opts: OneshotOptions): Promise<OneshotResult> {
         mode: 'oneshot',
         settings: {
           systemPrompt: opts.plain ? PLAIN_SYSTEM_PROMPT : buildSystemPrompt(s, { tools: false }),
-          temperature: s.temperature,
+          temperature: oneshotTemperature(opts.purpose ?? 'free', opts.attempt ?? 0, s),
           topK: s.topK,
           topP: s.topP,
           maxOutputTokens: opts.maxOutputTokens ?? s.maxOutputTokens,
@@ -83,6 +112,8 @@ export async function runOneshot(opts: OneshotOptions): Promise<OneshotResult> {
         history: [],
         message: { id: createId(), role: 'user', text: opts.prompt },
         assistantId: createId(),
+        // チャットの文脈（KV キャッシュ）を残したまま生成する（設定でオフにできる）
+        keepChat: s.keepChatContext,
       },
       (ev) => {
         if (ev.type !== 'delta' || ev.channel) return;
@@ -97,6 +128,24 @@ export async function runOneshot(opts: OneshotOptions): Promise<OneshotResult> {
     cancelAnimationFrame(raf);
     useAiBusy.setState({ task: null });
   }
+}
+
+/**
+ * 決まった形（JSON など）の出力を生成して読み取る。読み取れなければ、温度を少し上げて作り直す。
+ * 止めたときは cancelled、作り直しても読み取れなければ value が null。
+ */
+export async function runOneshotParsed<T>(
+  opts: Omit<OneshotOptions, 'attempt'>,
+  parse: (text: string) => T | null,
+  retries = 1,
+): Promise<{ value: T | null; cancelled: boolean }> {
+  for (let attempt = 0; attempt <= retries; attempt++) {
+    const r = await runOneshot({ ...opts, attempt });
+    if (r.cancelled) return { value: null, cancelled: true };
+    const value = parse(r.text);
+    if (value !== null) return { value, cancelled: false };
+  }
+  return { value: null, cancelled: false };
 }
 
 export function cancelAi(): void {

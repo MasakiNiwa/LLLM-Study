@@ -40,6 +40,9 @@ async function generate(pick: QuizPick): Promise<QuizQuestion | null> {
       prompt: quizPrompt(pick.item, pick.lang),
       plain: true,
       maxOutputTokens: 200,
+      // 毎回違う例文にしたいので温度は中くらい（形が合わなければ少し上げて作り直す）
+      purpose: 'varied',
+      attempt: i,
     });
     if (r.cancelled) return null;
     const q = parseQuiz(r.text, pick.item, pick.itemKey);

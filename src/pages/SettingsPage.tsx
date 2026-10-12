@@ -550,6 +550,18 @@ export default function SettingsPage() {
               format={(v) => v.toFixed(2)}
             />
           </Field>
+          <Field
+            label="タスクごとに温度を変える"
+            htmlFor="task-temperature"
+            hint="AI の判定は 0.2、カードの下書き・添削は 0.3、例文クイズは 0.7 にして、形の決まった出力を安定させます（形が合わずに作り直すときは少し上げます）。オフにすると、すべての応答に上の温度を使います。チャット・解説・ひとことはいつも上の温度です"
+            stacked
+          >
+            <Switch
+              id="task-temperature"
+              checked={s.taskTemperature}
+              onChange={(v) => update({ taskTemperature: v })}
+            />
+          </Field>
           <Field label="最大出力トークン数" htmlFor="max-output">
             <Slider
               id="max-output"
@@ -563,7 +575,7 @@ export default function SettingsPage() {
           <Field
             label="考えてから答える（思考モード）"
             htmlFor="thinking"
-            hint="対応モデルのみ。回答の質が上がることがありますが遅くなります"
+            hint="対応モデルのみ。回答の質が上がることがありますが遅くなります。チャットでは入力欄の「考える」で送信ごとに切り替えられます"
           >
             <Switch
               id="thinking"
@@ -571,7 +583,11 @@ export default function SettingsPage() {
               onChange={(v) => update({ enableThinking: v })}
             />
           </Field>
-          <Field label="生成の統計を表示" htmlFor="show-stats">
+          <Field
+            label="生成の統計を表示"
+            htmlFor="show-stats"
+            hint="チャットの応答の下に、かかった時間と速さを表示します"
+          >
             <Switch
               id="show-stats"
               checked={s.showStats}
@@ -587,6 +603,18 @@ export default function SettingsPage() {
               id="enter-send"
               checked={s.enterToSend}
               onChange={(v) => update({ enterToSend: v })}
+            />
+          </Field>
+          <Field
+            label="チャットの文脈を残す（実験的）"
+            htmlFor="keep-chat"
+            hint="解説・ひとことなどを生成したあとも、チャットで読み込み済みの会話を残し、次の送信で読み直さずに済むようにします。メモリを多く使うので、動作が不安定になったらオフにしてください"
+            stacked
+          >
+            <Switch
+              id="keep-chat"
+              checked={s.keepChatContext}
+              onChange={(v) => update({ keepChatContext: v })}
             />
           </Field>
         </Section>
