@@ -14,6 +14,10 @@ export type ReactionMode = 'off' | 'template' | 'llm';
 
 export type NewCardOrder = 'pack' | 'random';
 
+/** AI の応答に反映するユーザーのこと（任意。空は指定しない） */
+export type UserGender = '' | 'female' | 'male' | 'other';
+export type UserAge = '' | 'child' | 'teen' | '20s' | '30s' | '40s' | '50s' | '60plus';
+
 /** 答えを入力して答え合わせするカード。recall: 単語・フレーズを答えるカードと穴埋め、all: すべて */
 export type TypeAnswerMode = 'off' | 'recall' | 'all';
 /** 学習画面のカードの文字の大きさ */
@@ -73,6 +77,9 @@ export interface Settings extends Omit<ConversationSettings, 'systemPrompt'> {
   persona: string;
   /** persona = 'custom' のときの性格の説明 */
   customPersona: string;
+  /** ユーザーの性別・年齢層（任意。AI の話題や言葉づかいの参考にする） */
+  userGender: UserGender;
+  userAge: UserAge;
   /** ユーザーが追加する指示（システムプロンプトの末尾に付ける） */
   extraInstructions: string;
   reaction: ReactionMode;
@@ -138,8 +145,10 @@ export const DEFAULT_SETTINGS: Settings = {
 
   persona: 'buddy',
   customPersona: '',
+  userGender: '',
+  userAge: '',
   extraInstructions: '',
-  reaction: 'template',
+  reaction: 'llm',
   shareStudyState: true,
   useTools: true,
   taskTemperature: true,
@@ -192,12 +201,15 @@ export const useSettings = create<SettingsState>()(
     }),
     {
       name: `${STORAGE_PREFIX}:settings`,
-      version: 2,
+      version: 3,
       partialize: ({ update: _u, reset: _r, ...rest }) => rest,
       // v2: 生成の統計の表示を既定でオンにした（以前の既定のオフのままの人もオンにする）
+      // v3: 答えを見たときのひとことの既定を「AI が考える」にした（以前の既定のままの人も）
       migrate: (persisted, version) => {
-        const s = persisted as Partial<Settings>;
-        return (version < 2 ? { ...s, showStats: true } : s) as SettingsState;
+        let s = persisted as Partial<Settings>;
+        if (version < 2) s = { ...s, showStats: true };
+        if (version < 3 && s.reaction === 'template') s = { ...s, reaction: 'llm' };
+        return s as SettingsState;
       },
     },
   ),

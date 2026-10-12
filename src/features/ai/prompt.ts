@@ -4,6 +4,7 @@
  */
 import type { ConversationSettings } from '@/lib/llm/types';
 import type { Settings } from '@/features/settings/settingsStore';
+import { USER_AGE_LABELS, USER_GENDER_LABELS } from '@/features/settings/labels';
 import { getPersona } from './personas';
 
 export function buildSystemPrompt(s: Settings, options: { tools: boolean }): string {
@@ -26,10 +27,26 @@ export function buildSystemPrompt(s: Settings, options: { tools: boolean }): str
       '- 新しい単語や表現を教えたときや、ユーザーが覚えたいと言ったときは propose_card でカードを提案できます（保存はユーザーが決めます）。',
     );
   }
+  const about = userProfileText(s);
+  if (about) {
+    lines.push(
+      `【ユーザーについて】${about}。話題や例の選び方・言葉づかいの参考にしてください（決めつけた言い方や、性別・年齢による固定観念に基づく発言はしないでください）。`,
+    );
+  }
   if (s.extraInstructions.trim()) {
     lines.push('【ユーザーからの追加の指示】', s.extraInstructions.trim());
   }
   return lines.join('\n');
+}
+
+/** ユーザーの性別・年齢層（設定したものだけ。何も設定していなければ空） */
+export function userProfileText(s: Pick<Settings, 'userGender' | 'userAge'>): string {
+  return [
+    s.userGender && `性別: ${USER_GENDER_LABELS[s.userGender]}`,
+    s.userAge && `年齢層: ${USER_AGE_LABELS[s.userAge]}`,
+  ]
+    .filter(Boolean)
+    .join('、');
 }
 
 export function getConversationSettings(

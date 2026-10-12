@@ -12,7 +12,7 @@ import {
 } from '@/lib/packs/install';
 import { DEFAULT_SETTINGS, useSettings } from '@/features/settings/settingsStore';
 import { setItemSuspended } from './cardActions';
-import { useStudy } from './studyStore';
+import { revealOutcome, useStudy } from './studyStore';
 
 const pack = {
   format: 'lllm-study-pack' as const,
@@ -160,5 +160,22 @@ describe('出題ごとの状態', () => {
     await useStudy.getState().undo();
     expect(useStudy.getState().status).toBe('studying');
     expect(await db.reviews.count()).toBe(0);
+  });
+});
+
+describe('答えを見たときの結果（ひとことの出し分け）', () => {
+  it('時間切れ・書いた答えの判定・自分で答え合わせを見分ける', async () => {
+    await useStudy.getState().start();
+    useStudy.getState().reveal();
+    expect(revealOutcome(useStudy.getState())).toBe('self');
+    await useStudy.getState().rate(3);
+    useStudy.getState().timeOut();
+    expect(revealOutcome(useStudy.getState())).toBe('timeout');
+    await useStudy.getState().rate(1);
+    const { current } = useStudy.getState();
+    useStudy
+      .getState()
+      .submitAnswer(current!.item.item.type === 'qa' ? current!.item.item.answer : 'x');
+    expect(revealOutcome(useStudy.getState())).toBe('correct');
   });
 });

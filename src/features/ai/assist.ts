@@ -1,3 +1,5 @@
+import type { RevealOutcome } from './personas';
+
 /**
  * 学習画面の「AI に聞く」ボタンのプロンプト。
  * カードの内容と学習状況（構造化データ）を渡し、目的に合わせた短い応答を作ってもらう。
@@ -92,22 +94,61 @@ export function assistPrompt(
   return [...instructions, '', '<card>', JSON.stringify(cardJson), '</card>'].join('\n');
 }
 
-/** 評価へのひとことを AI に考えてもらうプロンプト */
-export function reactionPrompt(
-  grade: number,
+/** 答えを見たときの結果の説明（AI に渡す） */
+const OUTCOME_LABELS: Record<RevealOutcome, string> = {
+  correct: '正解した（アプリの判定）',
+  close: '惜しかった（アプリの判定。つづりの小さな違いなど）',
+  wrong: '間違えた（アプリの判定）',
+  timeout: '制限時間内に答えられなかった',
+  gaveup: '分からなくて答えを見た',
+  self: '頭の中で思い出してから答えを見た（正誤は本人がこれから評価する）',
+};
+
+/**
+ * ひとことの吹き出しの数（プログラムが決める）。たいていは 1 つ、ときどき 2〜3 つ。
+ * rand: 0〜1 の乱数
+ */
+export function pickReactionLineCount(rand: number): number {
+  return rand < 0.6 ? 1 : rand < 0.88 ? 2 : 3;
+}
+
+/**
+ * 答えを見て解説を読んでいるユーザーへの「ひとこと」を AI に考えてもらうプロンプト。
+ * 結果（正誤）はアプリが決めて渡し、AI は性格を出した言葉にするだけ。
+ */
+export function revealReactionPrompt(
+  outcome: RevealOutcome,
+  lines: number,
   cardJson: Record<string, unknown> | null,
   sessionStats: { done: number; correctStreak: number },
 ): string {
-  const label = { 1: 'もう一度（思い出せなかった）', 2: '難しい', 3: '正解', 4: '簡単' }[grade];
   return [
-    `ユーザーがカードを評価しました: ${label}`,
-    `このセッションで ${sessionStats.done} 枚目、連続正解 ${sessionStats.correctStreak} 回。`,
+    `ユーザーが学習カードの答えを見て、解説を読んでいます。結果: ${OUTCOME_LABELS[outcome]}`,
+    `このセッションで ${sessionStats.done + 1} 枚目、ここまでの連続正解 ${sessionStats.correctStreak} 回。`,
     cardJson ? `<card>${JSON.stringify(cardJson)}</card>` : '',
     cardJson && 'user_answer' in cardJson
-      ? 'ユーザーは自分で答えを書いていました（card の user_answer）。その答えにも触れてください（判定は app_check と評価に合わせる）。'
+      ? 'ユーザーは自分で答えを書いていました（card の user_answer）。その答えにも触れてよい（正誤は app_check と結果に合わせる）。'
       : '',
-    'あなたの性格で、ひとことだけ（30 文字程度・1 文）リアクションしてください。絵文字は 1 つまで。説明はしないでください。',
+    `あなたの性格をはっきり出して、ユーザーに話しかけてください。ちょうど ${lines} 行で書きます（1 行が 1 つの吹き出し。1 行は 1〜2 文・60 文字くらいまで）。`,
+    '- 励まし・ほめ言葉・覚え方のヒント・カードの内容にまつわる豆知識など、行ごとに違うことを言う',
+    '- カードの答えと食い違うこと、不確かなことは書かない。結果と矛盾することも言わない',
+    '- 番号・箇条書きの記号・かぎかっこ・前置きは付けない。絵文字は 1 行に 1 つまで',
   ]
     .filter(Boolean)
     .join('\n');
+}
+
+/** AI の出力を吹き出しの行に分ける（番号や記号を取り、長すぎる行は切る） */
+export function parseReactionLines(text: string, max: number): string[] {
+  return text
+    .split('\n')
+    .map((l) =>
+      l
+        .replace(/^\s*(?:[-*・•]|\d+[.)、．]|[（(]?\d+[)）])\s*/, '')
+        .replace(/^[「『"]|[」』"]$/g, '')
+        .trim(),
+    )
+    .filter(Boolean)
+    .slice(0, max)
+    .map((l) => (l.length > 120 ? `${l.slice(0, 120)}…` : l));
 }

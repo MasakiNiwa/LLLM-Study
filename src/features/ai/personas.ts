@@ -218,3 +218,45 @@ export function greetingText(
       : pick(persona.allDone, seed);
   return `${hello}\n${status}`;
 }
+
+/**
+ * 答えを見たときの結果（ひとことの出し分けに使う。アプリが判定する）。
+ * self: 自分で思い出して答え合わせ中（正誤はまだ分からない）
+ */
+export type RevealOutcome = 'correct' | 'close' | 'wrong' | 'timeout' | 'gaveup' | 'self';
+
+/** 自分で答え合わせをしているとき（正誤が分からないとき）のひとこと */
+const REVEAL_LINES: Record<string, string[]> = {
+  buddy: ['どうだった？思い出せたかな', '答え合わせしよ！', 'これ、覚えてた？'],
+  teacher: [
+    '思い出せたか、答えと見比べてみましょう',
+    '解説も読んでおくと定着しやすいですよ',
+    'どこまで思い出せたか確かめましょう',
+  ],
+  coach: ['さあ答え合わせだ！', 'どうだ、思い出せたか！', '自分に正直に評価しよう！'],
+  cat: ['思い出せたかにゃ？', '答え合わせの時間にゃ', 'どうだったにゃ？'],
+  butler: [
+    '答え合わせをいたしましょう',
+    'いかがでございましたか',
+    '解説もあわせてご覧くださいませ',
+  ],
+};
+
+/** 答えを見たときのひとこと（テンプレート）。結果が分かれば評価のひとことを使う */
+export function revealText(
+  persona: Persona,
+  outcome: RevealOutcome,
+  correctStreak: number,
+  seed?: number,
+): string {
+  switch (outcome) {
+    case 'correct':
+      return reactionText(persona, 3, correctStreak + 1, seed);
+    case 'close':
+      return pick(persona.reactions[2], seed);
+    case 'self':
+      return pick(REVEAL_LINES[persona.id] ?? REVEAL_LINES.buddy, seed);
+    default:
+      return pick(persona.reactions[1], seed);
+  }
+}
