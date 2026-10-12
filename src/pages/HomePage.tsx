@@ -13,6 +13,7 @@ import {
 import { Link, useLocation } from 'wouter';
 import { cn } from '@/lib/utils/cn';
 import { PageBody, PageHeader } from '@/app/PageHeader';
+import { ThemeToggle } from '@/app/ThemeToggle';
 import { Button } from '@/components/ui/Button';
 import { Card } from '@/components/ui/Card';
 import { greetingText, getPersona } from '@/features/ai/personas';
@@ -97,7 +98,15 @@ export default function HomePage() {
 
   return (
     <>
-      <PageHeader title="ホーム" actions={<ModelStatusChip className="max-w-40 sm:max-w-56" />} />
+      <PageHeader
+        title="ホーム"
+        actions={
+          <>
+            <ModelStatusChip className="max-w-36 sm:max-w-56" />
+            <ThemeToggle />
+          </>
+        }
+      />
       <PageBody>
         <div className="flex items-start gap-3">
           <div className="flex size-12 shrink-0 items-center justify-center rounded-2xl bg-white text-2xl shadow-sm ring-1 ring-slate-200 dark:bg-slate-900 dark:ring-slate-800">

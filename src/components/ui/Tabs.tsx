@@ -34,7 +34,7 @@ export function Tabs<T extends string>({ value, items, onChange, className }: Ta
           className={cn(
             'flex min-w-fit flex-1 flex-col items-center justify-center gap-0.5 rounded-xl px-2 py-1.5 text-xs font-medium whitespace-nowrap transition-colors sm:flex-row sm:gap-1.5 sm:px-3 sm:py-2 sm:text-sm [&_svg]:size-4',
             value === t.value
-              ? 'bg-white text-slate-900 shadow-sm dark:bg-slate-900 dark:text-white'
+              ? 'bg-white text-slate-900 shadow-sm dark:bg-slate-700 dark:text-white'
               : 'text-slate-600 hover:text-slate-900 dark:text-slate-400 dark:hover:text-white',
           )}
         >

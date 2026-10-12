@@ -11,7 +11,7 @@
       content="自分のペースで使えるローカルLLMタイプの学習アプリ。記憶のアルゴリズム（FSRS）で復習を管理し、ブラウザ内で動く AI がパートナーになります。"
     />
     <meta name="theme-color" content="#f8fafc" media="(prefers-color-scheme: light)" />
-    <meta name="theme-color" content="#0b1120" media="(prefers-color-scheme: dark)" />
+    <meta name="theme-color" content="#212121" media="(prefers-color-scheme: dark)" />
     <link rel="icon" type="image/svg+xml" href="./favicon.svg" />
     <link rel="apple-touch-icon" href="./icons/apple-touch-icon.png" />
     <title>LLLM Study</title>
@@ -20,6 +20,7 @@
       try {
         var s = JSON.parse(localStorage.getItem('lllm-study:settings') || '{}').state || {};
         var t = s.theme || 'system';
+        document.documentElement.dataset.darkPalette = s.darkPalette || 'neutral';
         if (
           t === 'dark' ||
           (t === 'system' && matchMedia('(prefers-color-scheme: dark)').matches)

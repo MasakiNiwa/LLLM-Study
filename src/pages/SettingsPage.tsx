@@ -15,6 +15,8 @@ import {
 } from 'lucide-react';
 import { toast } from 'sonner';
 import { PageBody, PageHeader } from '@/app/PageHeader';
+import { ThemeToggle } from '@/app/ThemeToggle';
+import { cn } from '@/lib/utils/cn';
 import { Button } from '@/components/ui/Button';
 import { Section } from '@/components/ui/Card';
 import { ConfirmDialog } from '@/components/ui/ConfirmDialog';
@@ -41,6 +43,7 @@ import { useLibrary } from '@/features/library/libraryStore';
 import {
   BACKEND_SETTING_LABELS,
   NEW_CARD_ORDER_LABELS,
+  DARK_PALETTE_LABELS,
   REACTION_LABELS,
   USER_AGE_LABELS,
   USER_GENDER_LABELS,
@@ -55,6 +58,7 @@ import {
   type StudyCompact,
   type StudyFontScale,
   type BackendSetting,
+  type DarkPalette,
   type NewCardOrder,
   type ReactionMode,
   type ThemeSetting,
@@ -145,6 +149,28 @@ function NumberField({
 
 type ConfirmKind = null | 'models' | 'reset' | 'progress' | 'all' | 'restore';
 
+/** ダークモードの配色の見本（背景・カード・アクセント・文字） */
+const SWATCHES: Record<DarkPalette, [string, string, string, string]> = {
+  neutral: ['#212121', '#2f2f2f', '#5b6577', '#ececec'],
+  warm: ['#262624', '#33322f', '#a86a52', '#eeece6'],
+  vivid: ['#020617', '#0f172a', '#4f46e5', '#f1f5f9'],
+};
+
+function PaletteSwatch({ palette }: { palette: DarkPalette }) {
+  const [bg, card, accent, text] = SWATCHES[palette];
+  return (
+    <span
+      className="flex size-11 shrink-0 flex-col justify-center gap-1 rounded-lg p-1.5 ring-1 ring-slate-300 dark:ring-slate-600"
+      style={{ background: bg }}
+      aria-hidden
+    >
+      <span className="h-2 rounded-sm" style={{ background: card }} />
+      <span className="h-1.5 w-2/3 rounded-sm" style={{ background: text }} />
+      <span className="h-2 w-1/2 rounded-sm" style={{ background: accent }} />
+    </span>
+  );
+}
+
 export default function SettingsPage() {
   const s = useSettings();
   const update = s.update;
@@ -199,7 +225,7 @@ export default function SettingsPage() {
 
   return (
     <>
-      <PageHeader title="設定" />
+      <PageHeader title="設定" actions={<ThemeToggle />} />
       <PageBody>
         <Section
           collapsible
@@ -726,6 +752,43 @@ export default function SettingsPage() {
               }))}
               className="w-44"
             />
+          </Field>
+          <Field
+            label="ダークモードの配色"
+            hint="ダークモードのときの色合い。落ち着いた配色は、彩度を抑えて長く見ていても疲れにくくしています"
+            stacked
+          >
+            <div
+              className="grid gap-2 sm:grid-cols-3"
+              role="radiogroup"
+              aria-label="ダークモードの配色"
+            >
+              {(Object.keys(DARK_PALETTE_LABELS) as DarkPalette[]).map((k) => (
+                <button
+                  key={k}
+                  type="button"
+                  role="radio"
+                  aria-checked={s.darkPalette === k}
+                  onClick={() => update({ darkPalette: k })}
+                  className={cn(
+                    'flex items-center gap-3 rounded-xl border p-2.5 text-left transition-colors',
+                    s.darkPalette === k
+                      ? 'border-accent-500 bg-accent-50 dark:bg-accent-900/30'
+                      : 'border-slate-200 hover:bg-slate-50 dark:border-slate-700 dark:hover:bg-slate-800',
+                  )}
+                >
+                  <PaletteSwatch palette={k} />
+                  <span className="min-w-0">
+                    <span className="block text-sm font-medium">
+                      {DARK_PALETTE_LABELS[k].label}
+                    </span>
+                    <span className="block text-xs text-slate-500 dark:text-slate-400">
+                      {DARK_PALETTE_LABELS[k].hint}
+                    </span>
+                  </span>
+                </button>
+              ))}
+            </div>
           </Field>
           <Field
             label="アイコンに残りの枚数を出す"

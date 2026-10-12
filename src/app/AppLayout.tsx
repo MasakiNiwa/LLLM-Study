@@ -6,6 +6,7 @@ import { APP_TITLE } from '@/lib/constants';
 import { ModelStatusChip } from '@/features/engine/ModelStatusChip';
 import { AI_TOOL_ITEMS, NAV_ITEMS, SETTINGS_ITEM, SUB_NAV_ITEMS, type NavItem } from './navItems';
 import { AiToolsSheet } from './AiToolsSheet';
+import { ThemeToggle } from './ThemeToggle';
 
 function Logo() {
   return (
@@ -75,8 +76,9 @@ function SideNav() {
           <SideLink key={item.to} item={item} location={location} />
         ))}
       </nav>
-      <div className="mt-auto">
-        <ModelStatusChip className="w-full justify-start" />
+      <div className="mt-auto flex items-center gap-1">
+        <ModelStatusChip className="min-w-0 flex-1 justify-start" />
+        <ThemeToggle className="shrink-0" />
       </div>
     </aside>
   );

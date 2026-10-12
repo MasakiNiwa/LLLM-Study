@@ -5,6 +5,8 @@ import type { BackendKind, ConversationSettings } from '@/lib/llm/types';
 import type { SchedulerOptions } from '@/lib/srs/scheduler';
 
 export type ThemeSetting = 'system' | 'light' | 'dark';
+/** ダークモードの配色。neutral: 色味のないグレー、warm: 暖かいグレー、vivid: 以前の鮮やかな配色 */
+export type DarkPalette = 'neutral' | 'warm' | 'vivid';
 
 /** auto: WebGPU が使えれば GPU（Artisan）、使えなければ CPU */
 export type BackendSetting = 'auto' | BackendKind;
@@ -105,6 +107,7 @@ export interface Settings extends Omit<ConversationSettings, 'systemPrompt'> {
   backendHints: Record<string, BackendKind>;
   // ---- 表示・操作 ----
   theme: ThemeSetting;
+  darkPalette: DarkPalette;
   enterToSend: boolean;
   showStats: boolean;
   /** アプリのアイコンに今日の残りの枚数を出す（ホーム画面に追加したとき） */
@@ -169,6 +172,7 @@ export const DEFAULT_SETTINGS: Settings = {
   backendHints: {},
 
   theme: 'system',
+  darkPalette: 'neutral',
   enterToSend: true,
   showStats: true,
   appBadge: true,

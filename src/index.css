@@ -153,3 +153,127 @@
   --viz-blue: #3987e5;
   --viz-neutral: #475569;
 }
+
+/*
+ * ---- 落ち着いたダークテーマ（docs/DARK_THEME.md） ----
+ * Tailwind の色はすべて CSS 変数なので、ダークモードのときだけ変数を差し替えて、
+ * 部品のクラスを変えずに配色をまとめて切り替える。
+ * - neutral: 色味のないグレー（ChatGPT のダークモードに近い）
+ * - warm: ほんの少し暖かいグレーと、くすんだテラコッタのアクセント（Claude に近い）
+ * - vivid: 以前の配色（差し替えない）
+ * 状態の色（正解の緑・不正解の赤など）は、どちらも彩度を半分にして目に刺さらないようにする。
+ */
+.dark[data-dark-palette='neutral'],
+.dark[data-dark-palette='warm'] {
+  --color-emerald-50: oklch(0.979 0.011 166.1);
+  --color-emerald-100: oklch(0.95 0.026 163.1);
+  --color-emerald-200: oklch(0.905 0.046 164.2);
+  --color-emerald-300: oklch(0.845 0.071 165);
+  --color-emerald-400: oklch(0.765 0.088 163.2);
+  --color-emerald-500: oklch(0.696 0.085 162.5);
+  --color-emerald-600: oklch(0.596 0.072 163.2);
+  --color-emerald-700: oklch(0.508 0.059 165.6);
+  --color-emerald-800: oklch(0.432 0.048 166.9);
+  --color-emerald-900: oklch(0.378 0.038 168.9);
+  --color-emerald-950: oklch(0.262 0.025 172.6);
+  --color-rose-50: oklch(0.969 0.007 12.4);
+  --color-rose-100: oklch(0.941 0.015 12.6);
+  --color-rose-200: oklch(0.892 0.029 10);
+  --color-rose-300: oklch(0.81 0.059 11.6);
+  --color-rose-400: oklch(0.712 0.097 13.4);
+  --color-rose-500: oklch(0.645 0.123 16.4);
+  --color-rose-600: oklch(0.586 0.127 17.6);
+  --color-rose-700: oklch(0.514 0.111 16.9);
+  --color-rose-800: oklch(0.455 0.094 13.7);
+  --color-rose-900: oklch(0.41 0.08 10.3);
+  --color-rose-950: oklch(0.271 0.052 12.1);
+  --color-amber-50: oklch(0.987 0.011 95.3);
+  --color-amber-100: oklch(0.962 0.029 95.6);
+  --color-amber-200: oklch(0.924 0.06 95.7);
+  --color-amber-300: oklch(0.879 0.085 91.6);
+  --color-amber-400: oklch(0.828 0.095 84.4);
+  --color-amber-500: oklch(0.769 0.094 70.1);
+  --color-amber-600: oklch(0.666 0.089 58.3);
+  --color-amber-700: oklch(0.555 0.082 49);
+  --color-amber-800: oklch(0.473 0.069 46.2);
+  --color-amber-900: oklch(0.414 0.056 45.9);
+  --color-amber-950: oklch(0.279 0.038 45.6);
+  --color-sky-50: oklch(0.977 0.006 236.6);
+  --color-sky-100: oklch(0.951 0.013 236.8);
+  --color-sky-200: oklch(0.901 0.029 230.9);
+  --color-sky-300: oklch(0.828 0.056 230.3);
+  --color-sky-400: oklch(0.746 0.08 232.7);
+  --color-sky-500: oklch(0.685 0.085 237.3);
+  --color-sky-600: oklch(0.588 0.079 242);
+  --color-sky-700: oklch(0.5 0.067 242.7);
+  --color-sky-800: oklch(0.443 0.055 240.8);
+  --color-sky-900: oklch(0.391 0.045 240.9);
+  --color-sky-950: oklch(0.293 0.033 243.2);
+  --color-violet-50: oklch(0.969 0.008 293.8);
+  --color-violet-100: oklch(0.943 0.015 294.6);
+  --color-violet-200: oklch(0.894 0.029 293.3);
+  --color-violet-300: oklch(0.811 0.056 293.6);
+  --color-violet-400: oklch(0.702 0.091 293.5);
+  --color-violet-500: oklch(0.606 0.125 292.7);
+  --color-violet-600: oklch(0.541 0.141 293);
+  --color-violet-700: oklch(0.491 0.135 292.6);
+  --color-violet-800: oklch(0.432 0.116 292.8);
+  --color-violet-900: oklch(0.38 0.095 293.7);
+  --color-violet-950: oklch(0.283 0.07 291.1);
+}
+.dark[data-dark-palette='neutral'] {
+  --color-slate-50: oklch(0.965 0 0);
+  --color-slate-100: oklch(0.935 0 0);
+  --color-slate-200: oklch(0.885 0 0);
+  --color-slate-300: oklch(0.82 0 0);
+  --color-slate-400: oklch(0.73 0 0);
+  --color-slate-500: oklch(0.635 0 0);
+  --color-slate-600: oklch(0.47 0 0);
+  --color-slate-700: oklch(0.395 0 0);
+  --color-slate-800: oklch(0.33 0 0);
+  --color-slate-900: oklch(0.275 0 0);
+  --color-slate-950: oklch(0.225 0 0);
+  --color-accent-50: oklch(0.96 0.008 255);
+  --color-accent-100: oklch(0.92 0.016 255);
+  --color-accent-200: oklch(0.87 0.045 255);
+  --color-accent-300: oklch(0.8 0.07 255);
+  --color-accent-400: oklch(0.72 0.08 255);
+  --color-accent-500: oklch(0.6 0.055 255);
+  --color-accent-600: oklch(0.5 0.055 255);
+  --color-accent-700: oklch(0.44 0.05 255);
+  --color-accent-800: oklch(0.4 0.05 255);
+  --color-accent-900: oklch(0.34 0.04 255);
+}
+.dark[data-dark-palette='warm'] {
+  --color-slate-50: oklch(0.965 0.006 85);
+  --color-slate-100: oklch(0.935 0.006 85);
+  --color-slate-200: oklch(0.885 0.006 85);
+  --color-slate-300: oklch(0.82 0.006 85);
+  --color-slate-400: oklch(0.73 0.006 85);
+  --color-slate-500: oklch(0.635 0.004 85);
+  --color-slate-600: oklch(0.47 0.004 85);
+  --color-slate-700: oklch(0.395 0.004 85);
+  --color-slate-800: oklch(0.33 0.004 85);
+  --color-slate-900: oklch(0.275 0.004 85);
+  --color-slate-950: oklch(0.225 0.004 85);
+  --color-accent-50: oklch(0.965 0.012 55);
+  --color-accent-100: oklch(0.93 0.025 52);
+  --color-accent-200: oklch(0.87 0.045 50);
+  --color-accent-300: oklch(0.79 0.07 47);
+  --color-accent-400: oklch(0.71 0.09 44);
+  --color-accent-500: oklch(0.63 0.1 42);
+  --color-accent-600: oklch(0.55 0.1 40);
+  --color-accent-700: oklch(0.48 0.09 40);
+  --color-accent-800: oklch(0.4 0.07 40);
+  --color-accent-900: oklch(0.33 0.05 40);
+}
+/* 記録のグラフの「その他」の色も、青みのないグレーにする */
+.dark[data-dark-palette='neutral'],
+.dark[data-dark-palette='warm'] {
+  --viz-neutral: oklch(0.45 0.004 85);
+}
+/* 背景を暗くするときの幕も、青みのない黒にする */
+.dark[data-dark-palette='neutral'] dialog::backdrop,
+.dark[data-dark-palette='warm'] dialog::backdrop {
+  background: rgb(0 0 0 / 0.55);
+}
