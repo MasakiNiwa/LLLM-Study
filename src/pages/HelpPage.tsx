@@ -202,9 +202,10 @@ export default function HelpPage() {
         <Section collapsible storageKey="help" title="教材の形式" icon={<Wand2 />}>
           <Body>
             <p>
-              教材は JSON 形式（教材パック）です。単語・フレーズ・一問一答・穴埋め・選択問題の 5
-              種類の項目に対応しており、英語以外の分野にも使えます。 形式の詳しい説明は「教材」→「AI
-              で作る」から仕様書（.md）をダウンロードするか、
+              教材は JSON
+              形式（教材パック）です。単語・フレーズ・一問一答・穴埋め・選択問題・並べ替え・仕訳・複数選択・数値入力・○×・組み合わせ・表の穴埋めの
+              12 種類の項目に対応しており、英語以外の分野にも使えます。
+              形式の詳しい説明は「教材」→「AI で作る」から仕様書（.md）をダウンロードするか、
               <ExtLink href={`${REPOSITORY_URL}/blob/main/docs/STUDY_PACK_FORMAT.md`}>
                 教材パック形式
               </ExtLink>{' '}

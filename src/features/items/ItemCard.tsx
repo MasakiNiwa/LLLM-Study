@@ -1,5 +1,6 @@
 /**
- * 項目（単語・フレーズ・一問一答・穴埋め・選択問題）のカード表示。
+ * 項目のカード表示（単語・フレーズ・一問一答・穴埋め・選択問題・並べ替え）。
+ * 仕訳・複数選択・数値入力・○×・組み合わせ・表の穴埋めは InteractiveFaces.tsx。
  * 種類を増やすときは lib/packs/schema.ts・templates.ts と、ここに表示を追加する。
  */
 import { useState, type ReactNode } from 'react';
