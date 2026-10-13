@@ -183,6 +183,150 @@ export const OrderItemSchema = z
   })
   .describe('並べ替えカード');
 
+/** 金額（整数でも小数でもよい。マイナスは使わない） */
+const amount = z.number().finite().min(0);
+
+/** 仕訳の 1 行（勘定科目と金額） */
+export const JournalLineSchema = z
+  .object({
+    account: shortText.describe('勘定科目'),
+    amount: amount.describe('金額（数値。単位は問題文や unit で示す）'),
+  })
+  .describe('仕訳の 1 行');
+
+/** 仕訳（借方と貸方の勘定科目・金額を答える。正誤はアプリが判定する） */
+export const JournalItemSchema = z
+  .object({
+    type: z.literal('journal'),
+    ...itemBase,
+    question: longText.describe('取引の内容（例: 商品 100,000 円を掛けで仕入れた。）'),
+    debit: z.array(JournalLineSchema).min(1).max(8).describe('借方（左側）の行'),
+    credit: z.array(JournalLineSchema).min(1).max(8).describe('貸方（右側）の行'),
+    accounts: z
+      .array(shortText)
+      .max(20)
+      .optional()
+      .describe(
+        '選択肢に加える勘定科目（紛らわしいもの）。正解の科目は自動で選択肢に入るので書かなくてよい',
+      ),
+    unit: z.string().trim().max(20).optional().describe('金額の単位（例: 円, 千円）。既定は「円」'),
+    explanation: longText.optional(),
+  })
+  .refine((v) => sumAmounts(v.debit) === sumAmounts(v.credit), {
+    message: '借方の合計と貸方の合計を一致させてください',
+    path: ['credit'],
+  })
+  .describe('仕訳カード');
+
+/** 複数選択（正しいものをすべて選ぶ。正誤はアプリが判定する） */
+export const MultiItemSchema = z
+  .object({
+    type: z.literal('multi'),
+    ...itemBase,
+    question: longText.describe('問題（例: リースに該当するものをすべて選びなさい。）'),
+    choices: z.array(shortText).min(3).max(8).describe('選択肢'),
+    answers: z
+      .array(z.number().int().min(0))
+      .min(1)
+      .max(8)
+      .describe('正解の選択肢の番号（0 始まり）。1 つ以上'),
+    explanation: longText.optional(),
+  })
+  .refine((v) => v.answers.every((a) => a < v.choices.length), {
+    message: 'answers は choices の範囲内の番号にしてください',
+    path: ['answers'],
+  })
+  .refine((v) => new Set(v.answers).size === v.answers.length, {
+    message: 'answers に同じ番号が重複しています',
+    path: ['answers'],
+  })
+  .describe('複数選択カード');
+
+/** 数値入力（計算問題。許容誤差つきでアプリが判定する） */
+export const NumericItemSchema = z
+  .object({
+    type: z.literal('numeric'),
+    ...itemBase,
+    question: longText.describe('問題'),
+    answer: z.number().finite().describe('正解の数値'),
+    unit: z
+      .string()
+      .trim()
+      .max(20)
+      .optional()
+      .describe('単位（例: 円, %, 年）。入力欄の横に表示する'),
+    tolerance: z
+      .number()
+      .finite()
+      .min(0)
+      .optional()
+      .describe('許容する誤差（絶対値）。端数処理で答えがずれうるとき。既定は 0'),
+    hints: z.array(shortText).max(3).optional().describe('ヒント（弱いものから順に）'),
+    explanation: longText.optional(),
+  })
+  .describe('数値入力カード');
+
+/** 正誤（○×） */
+export const TrueFalseItemSchema = z
+  .object({
+    type: z.literal('truefalse'),
+    ...itemBase,
+    statement: longText.describe('正誤を判断する文'),
+    answer: z.boolean().describe('文が正しければ true'),
+    explanation: longText
+      .optional()
+      .describe('解説（誤りの文では、どこが誤りで正しくはどうかを書く）'),
+  })
+  .describe('○×カード');
+
+/** 組み合わせ（左の語句に右の語句を対応させる） */
+export const MatchItemSchema = z
+  .object({
+    type: z.literal('match'),
+    ...itemBase,
+    prompt: longText.optional().describe('問題文（例: 用語と意味を組み合わせなさい。）'),
+    pairs: z
+      .array(z.object({ left: shortText, right: shortText }))
+      .min(2)
+      .max(8)
+      .describe('正しい組み合わせ（左と右）。右の語句は表示するときに並べ替える'),
+    explanation: longText.optional(),
+  })
+  .refine((v) => new Set(v.pairs.map((p) => p.right.trim())).size === v.pairs.length, {
+    message: '右の語句が重複しています（どれも違う語句にしてください）',
+    path: ['pairs'],
+  })
+  .describe('組み合わせカード');
+
+/** 表の穴埋め（返済表・計算表などのマスを埋める） */
+export const TableItemSchema = z
+  .object({
+    type: z.literal('table'),
+    ...itemBase,
+    question: longText.describe('問題文（表の前に表示する）'),
+    columns: z.array(shortText).min(2).max(6).describe('列の見出し'),
+    rows: z
+      .array(z.array(z.string().trim().max(100)).min(2).max(6))
+      .min(1)
+      .max(12)
+      .describe('行。各マスは文字列で、答えにするマスは {{ }} で囲む（例: "{{9,000}}"）'),
+    explanation: longText.optional(),
+  })
+  .refine((v) => v.rows.every((r) => r.length === v.columns.length), {
+    message: 'すべての行のマスの数を columns の数とそろえてください',
+    path: ['rows'],
+  })
+  .refine((v) => v.rows.some((r) => r.some((c) => /\{\{[^{}]+\}\}/.test(c))), {
+    message: '答えにするマスを 1 つ以上 {{ }} で囲んでください',
+    path: ['rows'],
+  })
+  .describe('表の穴埋めカード');
+
+/** 仕訳の行の金額の合計（小数の誤差を丸める） */
+export function sumAmounts(lines: { amount: number }[]): number {
+  return Math.round(lines.reduce((n, l) => n + l.amount, 0) * 1e6) / 1e6;
+}
+
 export const ItemSchema = z.discriminatedUnion('type', [
   VocabItemSchema,
   PhraseItemSchema,
@@ -190,9 +334,28 @@ export const ItemSchema = z.discriminatedUnion('type', [
   ClozeItemSchema,
   ChoiceItemSchema,
   OrderItemSchema,
+  JournalItemSchema,
+  MultiItemSchema,
+  NumericItemSchema,
+  TrueFalseItemSchema,
+  MatchItemSchema,
+  TableItemSchema,
 ]);
 
-export const ITEM_TYPES = ['vocab', 'phrase', 'qa', 'cloze', 'choice', 'order'] as const;
+export const ITEM_TYPES = [
+  'vocab',
+  'phrase',
+  'qa',
+  'cloze',
+  'choice',
+  'order',
+  'journal',
+  'multi',
+  'numeric',
+  'truefalse',
+  'match',
+  'table',
+] as const;
 
 export const PackSchema = z
   .object({
@@ -269,6 +432,13 @@ export type QaItem = z.infer<typeof QaItemSchema>;
 export type ClozeItem = z.infer<typeof ClozeItemSchema>;
 export type ChoiceItem = z.infer<typeof ChoiceItemSchema>;
 export type OrderItem = z.infer<typeof OrderItemSchema>;
+export type JournalLine = z.infer<typeof JournalLineSchema>;
+export type JournalItem = z.infer<typeof JournalItemSchema>;
+export type MultiItem = z.infer<typeof MultiItemSchema>;
+export type NumericItem = z.infer<typeof NumericItemSchema>;
+export type TrueFalseItem = z.infer<typeof TrueFalseItemSchema>;
+export type MatchItem = z.infer<typeof MatchItemSchema>;
+export type TableItem = z.infer<typeof TableItemSchema>;
 export type StudyItem = z.infer<typeof ItemSchema>;
 export type ItemType = StudyItem['type'];
 export type StudyPack = z.infer<typeof PackSchema>;

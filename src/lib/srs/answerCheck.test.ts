@@ -20,6 +20,8 @@ describe('normalizeAnswer', () => {
     expect(normalizeAnswer('[1, 2, 3]')).toBe(normalizeAnswer('[1,2,3]'));
     expect(normalizeAnswer('25 π')).toBe(normalizeAnswer('25π'));
     expect(normalizeAnswer('a == b')).toBe('a==b');
+    expect(normalizeAnswer('1,000万円')).toBe(normalizeAnswer('1000万円'));
+    expect(normalizeAnswer('2,723,248')).toBe('2723248');
     expect(normalizeAnswer('take care')).toBe('take care');
   });
 });

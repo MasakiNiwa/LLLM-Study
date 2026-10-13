@@ -27,6 +27,18 @@ export const ITEM_TYPE_GUIDES: Record<ItemType, string> = {
     '選択問題。question・choices（2〜6 個）・answer（正解の番号。0 始まり）が必須。explanation は任意',
   order:
     '並べ替え。answer（正しい文）が必須。chunks（並べ替える語句を正しい順に。日本語など空白で区切らない言語では必須）・prompt（訳や問題文）・explanation は任意',
+  journal:
+    '仕訳（簿記・会計）。question（取引の内容）・debit（借方の行）・credit（貸方の行）が必須。各行は { "account": 勘定科目, "amount": 金額（数値） }。借方と貸方の合計を一致させる。accounts（選択肢に足す紛らわしい科目）・unit（単位。既定は円）・explanation は任意',
+  multi:
+    '複数選択（正しいものをすべて選ぶ）。question・choices（3〜8 個）・answers（正解の番号の配列。0 始まり、1 つ以上。全部を正解にはしない）が必須。explanation は任意',
+  numeric:
+    '数値入力（計算問題）。question・answer（正解の数値。単位は付けない）が必須。unit（単位。例: 円, %）・tolerance（許容する誤差）・hints・explanation は任意',
+  truefalse:
+    '○×（正誤）。statement（判断する文）・answer（正しければ true、誤りなら false）が必須。explanation（誤りの文ではどこが誤りか）は任意',
+  match:
+    '組み合わせ。pairs（[{ "left": 語句, "right": 対応する語句 }] を 2〜8 組。右の語句はどれも違うものにする）が必須。prompt（指示）・explanation は任意',
+  table:
+    '表の穴埋め（返済表・計算表など）。question・columns（列の見出し）・rows（行の配列。各マスは文字列で、答えにするマスを {{ }} で囲む）が必須。explanation は任意',
 };
 
 const EXAMPLE_ITEMS: Record<ItemType, StudyPack['items'][number]> = {
@@ -87,6 +99,60 @@ const EXAMPLE_ITEMS: Record<ItemType, StudyPack['items'][number]> = {
     prompt: '私は一度もパリに行ったことがない。',
     answer: 'I have never been to Paris.',
     explanation: 'have never been to 〜 で「〜に行ったことがない」（経験）。',
+  },
+  journal: {
+    id: 'j-credit-purchase',
+    type: 'journal',
+    question: '商品 100,000 円を仕入れ、代金は掛けとした。',
+    debit: [{ account: '仕入', amount: 100000 }],
+    credit: [{ account: '買掛金', amount: 100000 }],
+    accounts: ['売掛金', '未払金', '現金'],
+    explanation: '商品の仕入は「仕入」（費用）、代金の後払いは「買掛金」（負債）。',
+  },
+  multi: {
+    id: 'm-assets',
+    type: 'multi',
+    question: '資産の勘定科目をすべて選びなさい。',
+    choices: ['売掛金', '買掛金', '建物', '資本金', '前払費用'],
+    answers: [0, 2, 4],
+    explanation: '買掛金は負債、資本金は純資産。',
+  },
+  numeric: {
+    id: 'n-straight-line',
+    type: 'numeric',
+    question:
+      '取得原価 1,200,000 円、耐用年数 5 年、残存価額 0 円の備品を定額法で償却する。1 年分の減価償却費は？',
+    answer: 240000,
+    unit: '円',
+    explanation: '1,200,000 ÷ 5 = 240,000 円。',
+  },
+  truefalse: {
+    id: 'tf-capital',
+    type: 'truefalse',
+    statement: '日本の首都は大阪である。',
+    answer: false,
+    explanation: '首都は東京。',
+  },
+  match: {
+    id: 'mt-capitals',
+    type: 'match',
+    prompt: '国と首都を組み合わせなさい。',
+    pairs: [
+      { left: 'フランス', right: 'パリ' },
+      { left: 'イタリア', right: 'ローマ' },
+      { left: 'スペイン', right: 'マドリード' },
+    ],
+  },
+  table: {
+    id: 't-interest',
+    type: 'table',
+    question: '元金 10,000 円を年利 5%（複利）で預けたときの残高の表を埋めなさい。',
+    columns: ['年', '利息', '年末残高'],
+    rows: [
+      ['1', '500', '{{10,500}}'],
+      ['2', '{{525}}', '11,025'],
+    ],
+    explanation: '利息は前年末の残高 × 5%。',
   },
 };
 

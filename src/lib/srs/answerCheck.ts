@@ -24,6 +24,8 @@ export function normalizeAnswer(s: string): string {
     s
       .normalize('NFKC')
       .toLowerCase()
+      // 数字の桁区切り（1,000）は区切らない（句読点として空白にしない）
+      .replace(/(\d),(?=\d{3}(?!\d))/g, '$1')
       .replace(/[‘’`´]/g, "'")
       .replace(/[“”]/g, '"')
       .replace(/[.,!?;:"、。！？「」『』（）()]/g, ' ')
