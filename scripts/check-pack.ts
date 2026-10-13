@@ -54,7 +54,11 @@ for (const file of files) {
               ? item.text
               : item.type === 'order'
                 ? item.answer
-                : item.question;
+                : item.type === 'truefalse'
+                  ? item.statement
+                  : item.type === 'match'
+                    ? item.pairs.map((p) => p.left).join('|')
+                    : item.question;
       const norm = `${item.type}:${key.replace(/\s+/g, '')}`;
       if (seenQ.has(norm)) warnings.push(`${item.id}: ${seenQ.get(norm)} と同じ問題です`);
       seenQ.set(norm, item.id);
@@ -70,6 +74,21 @@ for (const file of files) {
         for (const b of blanks)
           if (b.length > 30)
             warnings.push(`${item.id}: 空欄の答え「${b}」が長すぎます（30 文字まで推奨）`);
+      }
+      if (item.type === 'multi' && item.answers.length === item.choices.length)
+        warnings.push(`${item.id}: すべての選択肢が正解です（誤りの選択肢も入れてください）`);
+      if (item.type === 'journal') {
+        const accounts = [...item.debit, ...item.credit].map((l) => l.account);
+        const extra = item.accounts ?? [];
+        if (new Set([...accounts, ...extra]).size < 4)
+          warnings.push(
+            `${item.id}: 勘定科目の選択肢が少なすぎます（accounts で紛らわしい科目を足してください）`,
+          );
+      }
+      if (item.type === 'table') {
+        const blanks = item.rows.flat().filter((c) => /\{\{[^{}]+\}\}/.test(c)).length;
+        if (blanks > 6)
+          warnings.push(`${item.id}: 表の空欄が ${blanks} 個あります（6 個まで推奨）`);
       }
       if (item.type === 'qa' && item.answer.length > 60 && !item.explanation)
         warnings.push(`${item.id}: 答えが長いときは explanation で要点を補ってください`);

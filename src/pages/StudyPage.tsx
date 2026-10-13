@@ -34,6 +34,8 @@ import { speak, stopSpeaking } from '@/lib/speech/tts';
 import { formatClock } from '@/lib/utils/format';
 import { getPersona } from '@/features/ai/personas';
 import { CardFace } from '@/features/items/ItemCard';
+import { isInteractive } from '@/lib/packs/interactiveCheck';
+import type { ItemType } from '@/lib/packs/schema';
 import { useEngine } from '@/features/engine/engineStore';
 import { useSettings } from '@/features/settings/settingsStore';
 import { AiAssistPanel } from '@/features/study/AiAssistPanel';
@@ -51,6 +53,18 @@ import { ScopePicker } from '@/features/study/ScopePicker';
 import { RevealReaction } from '@/features/study/RevealReaction';
 import { StudyTimers } from '@/features/study/StudyTimers';
 import { useStudy } from '@/features/study/studyStore';
+
+/** カードの中で答える種類で、答える前に下の欄に出す案内 */
+const IN_CARD_HINTS: Partial<Record<ItemType, string>> = {
+  choice: '答えを選んでください',
+  order: '語句を正しい順に並べてください',
+  journal: '仕訳を入力して答え合わせ',
+  multi: '当てはまるものをすべて選んでください',
+  numeric: '数値を入力して答え合わせ',
+  truefalse: '○ か × を選んでください',
+  match: '組み合わせを選んで答え合わせ',
+  table: '空欄を埋めて答え合わせ',
+};
 
 const VERDICT_GRADE: Record<AnswerVerdict, GradeValue> = { correct: 3, close: 2, wrong: 1 };
 
@@ -222,6 +236,7 @@ export default function StudyPage() {
   const response = stored && stored.shownAt === shownAt ? stored : null;
   const ordered = response?.order;
   const chosen = response?.choice;
+  const interactiveResult = response?.result;
   const timedOutNow = !!response?.timedOut;
   const typeAnswer = useSettings((s) => s.typeAnswer);
   // 書いた答えと答え合わせの結果（今表示しているカードのものだけ使う）
@@ -268,7 +283,8 @@ export default function StudyPage() {
   }, [revealed, showKey, autoSpeak, speechRate, speechVoice]);
 
   const isChoice = current?.item.item.type === 'choice';
-  const isOrder = current?.item.item.type === 'order';
+  // カードの中で答えてアプリが判定する種類（選択・並べ替え・仕訳・複数選択・数値入力・○×・組み合わせ・表）
+  const inCard = !!current && isInteractive(current.item.item);
   const expected = current ? expectedAnswer(current.item.item, current.card.template) : undefined;
   const shouldType =
     !!current &&
@@ -285,12 +301,16 @@ export default function StudyPage() {
         ? ordered.correct
           ? 3
           : 1
-        : typedNow?.verdict
-          ? VERDICT_GRADE[typedNow.verdict]
-          : // 選択・並べ替えを「わからない」で答えを見たとき
-            revealed && (isChoice || isOrder)
-            ? 1
-            : undefined;
+        : interactiveResult
+          ? interactiveResult.correct
+            ? 3
+            : 1
+          : typedNow?.verdict
+            ? VERDICT_GRADE[typedNow.verdict]
+            : // 選択・並べ替えなどを「わからない」で答えを見たとき
+              revealed && inCard
+              ? 1
+              : undefined;
 
   // キーボード操作: Space / Enter で答えを見る、1〜4 で評価、Ctrl+Z で取り消し
   useEffect(() => {
@@ -309,7 +329,7 @@ export default function StudyPage() {
       }
       if (!st.current) return;
       if (!st.revealed && (e.key === ' ' || e.key === 'Enter')) {
-        if (st.current.item.item.type === 'choice' || st.current.item.item.type === 'order') return;
+        if (isInteractive(st.current.item.item)) return;
         e.preventDefault();
         st.reveal();
         return;
@@ -455,6 +475,8 @@ export default function StudyPage() {
                     ordered={ordered}
                     seed={`${current.card.id}:${current.card.reps}`}
                     onOrder={useStudy.getState().submitOrder}
+                    result={interactiveResult}
+                    onSubmit={useStudy.getState().submitResult}
                     locked={revealed}
                   />
                   {shouldType && !revealed && expected && (
@@ -527,10 +549,10 @@ export default function StudyPage() {
                   practice={practice}
                   compact={compact}
                 />
-              ) : isChoice || isOrder ? (
+              ) : inCard ? (
                 <div className={cn('flex items-center gap-2', compact ? 'h-12' : 'h-14')}>
                   <p className="min-w-0 flex-1 text-center text-sm text-slate-500">
-                    {isChoice ? '答えを選んでください' : '語句を正しい順に並べてください'}
+                    {IN_CARD_HINTS[current.item.item.type] ?? '答えてください'}
                   </p>
                   <Button
                     variant="secondary"

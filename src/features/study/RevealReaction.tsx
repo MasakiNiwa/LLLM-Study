@@ -11,7 +11,7 @@ import { getPersona, revealText } from '@/features/ai/personas';
 import { cardForLlm } from '@/features/ai/studyContext';
 import { useEngine } from '@/features/engine/engineStore';
 import { useSettings } from '@/features/settings/settingsStore';
-import { revealOutcome, useStudy } from './studyStore';
+import { currentUserAnswer, revealOutcome, useStudy } from './studyStore';
 
 /** 1 枚のカードの答えを見たときのひとこと（カードが変わったら作り直す・生成中なら止める） */
 function Bubbles({ llm }: { llm: boolean }) {
@@ -36,9 +36,8 @@ function Bubbles({ llm }: { llm: boolean }) {
     let alive = true;
     void (async () => {
       const st = useStudy.getState();
-      const written = st.answer?.shownAt === st.shownAt ? st.answer : null;
       const json = st.current
-        ? await cardForLlm(st.current.card, { revealed: true, userAnswer: written })
+        ? await cardForLlm(st.current.card, { revealed: true, userAnswer: currentUserAnswer(st) })
         : null;
       if (!alive) return;
       // ほかの生成（解説など）の最中なら、待たせずテンプレートにする

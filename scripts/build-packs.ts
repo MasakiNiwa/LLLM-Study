@@ -124,6 +124,19 @@ const RECOMMENDED_ORDER = [
   'business-marketing-80',
   'ja-bookkeeping-accounts-001',
   'business-financial-statements-80',
+  // 経理実務マスター（会計の論点別）: 日々の決算 → 主要な基準 → 税務 → 連結
+  'acct-closing-practice-80',
+  'acct-fixed-assets-80',
+  'acct-financial-instruments-80',
+  'acct-provisions-retirement-80',
+  'acct-foreign-currency-60',
+  'acct-revenue-100',
+  'acct-lease-100',
+  'acct-impairment-80',
+  'acct-tax-effect-80',
+  'acct-consumption-tax-80',
+  'acct-corporate-tax-80',
+  'acct-consolidation-100',
 ];
 const rank = (e: SampleIndexEntry) => {
   const i = RECOMMENDED_ORDER.indexOf(e.id);

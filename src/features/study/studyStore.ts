@@ -6,6 +6,7 @@
  */
 import { toast } from 'sonner';
 import { create } from 'zustand';
+import { interactiveAnswerText, isInteractive } from '@/lib/packs/interactiveCheck';
 import { onLibraryChange } from '@/lib/db/changes';
 import { db } from '@/lib/db/db';
 import type { CardRecord, GradeValue, ItemRecord } from '@/lib/db/types';
@@ -77,6 +78,8 @@ export interface CardResponse {
   order?: { built: string[]; correct: boolean };
   /** テストモードで時間切れになった */
   timedOut?: boolean;
+  /** 仕訳・複数選択・数値入力・○×・組み合わせ・表の穴埋めの答え合わせの結果 */
+  result?: { correct: boolean; value: unknown };
 }
 
 /** 表示中のカードにユーザーが書いた答えと、答え合わせの結果 */
@@ -132,6 +135,8 @@ interface StudyState {
   choose: (index: number) => void;
   /** 並べ替えの答え合わせをする（答えを表示する） */
   submitOrder: (result: { built: string[]; correct: boolean }) => void;
+  /** 仕訳・複数選択などの答え合わせをする（答えを表示する） */
+  submitResult: (result: { correct: boolean; value: unknown }) => void;
   /** テストモードの時間切れ（答えを表示する） */
   timeOut: () => void;
   rate: (grade: GradeValue) => Promise<void>;
@@ -162,9 +167,41 @@ export function revealOutcome(
     return response.choice === item.answer ? 'correct' : 'wrong';
   }
   if (response?.order) return response.order.correct ? 'correct' : 'wrong';
-  if (item?.type === 'choice' || item?.type === 'order') return 'gaveup';
+  if (response?.result) return response.result.correct ? 'correct' : 'wrong';
+  if (item && isInteractive(item)) return 'gaveup';
   const written = st.answer?.shownAt === st.shownAt ? st.answer : null;
   return written?.verdict ?? 'self';
+}
+
+/**
+ * ユーザーが答えた内容（AI のひとこと・解説で触れる）。書いた答えのほか、
+ * 仕訳・複数選択などカードの中で答えた内容も文字にして渡す（判定はアプリのもの）
+ */
+export function currentUserAnswer(
+  st: Pick<StudyState, 'current' | 'response' | 'answer' | 'shownAt'>,
+): { text: string; verdict: AnswerVerdict | null } | null {
+  const written = st.answer?.shownAt === st.shownAt ? st.answer : null;
+  if (written) return { text: written.text, verdict: written.verdict };
+  const response = st.response?.shownAt === st.shownAt ? st.response : null;
+  const item = st.current?.item.item;
+  if (!item || !response) return null;
+  if (response.result) {
+    const text = interactiveAnswerText(item, response.result.value);
+    return text ? { text, verdict: response.result.correct ? 'correct' : 'wrong' } : null;
+  }
+  if (response.choice !== undefined && item.type === 'choice') {
+    return {
+      text: interactiveAnswerText(item, response.choice),
+      verdict: response.choice === item.answer ? 'correct' : 'wrong',
+    };
+  }
+  if (response.order) {
+    return {
+      text: response.order.built.join(' '),
+      verdict: response.order.correct ? 'correct' : 'wrong',
+    };
+  }
+  return null;
 }
 
 function emptyStats(): SessionStats {
@@ -364,6 +401,13 @@ export const useStudy = create<StudyState>()((set, get) => {
       get().reveal();
     },
 
+    submitResult(result) {
+      const { current, revealed, shownAt } = get();
+      if (!current || revealed) return;
+      set({ response: { shownAt, result } });
+      get().reveal();
+    },
+
     timeOut() {
       const { current, revealed, shownAt } = get();
       if (!current || revealed) return;
@@ -377,10 +421,7 @@ export const useStudy = create<StudyState>()((set, get) => {
       const gen = session;
       const now = Date.now();
       const settings = useSettings.getState();
-      const writtenAnswer = () => {
-        const a = get().answer;
-        return a && a.shownAt === shownAt ? { text: a.text, verdict: a.verdict } : undefined;
-      };
+      const writtenAnswer = () => currentUserAnswer(get()) ?? undefined;
       const nextStats = (correctStreak: number): SessionStats => ({
         ...stats,
         done: stats.done + 1,

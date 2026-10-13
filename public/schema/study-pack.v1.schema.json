@@ -692,6 +692,542 @@
             ],
             "additionalProperties": false,
             "description": "並べ替えカード"
+          },
+          {
+            "type": "object",
+            "properties": {
+              "type": {
+                "type": "string",
+                "const": "journal"
+              },
+              "id": {
+                "type": "string",
+                "pattern": "^[A-Za-z0-9][A-Za-z0-9._-]{0,63}$",
+                "description": "パック内で一意な ID（更新時に学習記録を引き継ぐキー。後から変えない）"
+              },
+              "tags": {
+                "description": "分類用のタグ",
+                "maxItems": 20,
+                "type": "array",
+                "items": {
+                  "type": "string",
+                  "minLength": 1,
+                  "maxLength": 40
+                }
+              },
+              "notes": {
+                "description": "補足・語法・注意点など",
+                "type": "string",
+                "minLength": 1,
+                "maxLength": 2000
+              },
+              "passage": {
+                "description": "この項目が参照する本文の ID（passages の id）。本文を問題の上に表示する",
+                "type": "string",
+                "pattern": "^[A-Za-z0-9][A-Za-z0-9._-]{0,63}$"
+              },
+              "image": {
+                "description": "問題の上に表示する画像（data URL で埋め込む。外部の URL は使えない）。通常はアプリ内で追加するので、外部 AI は省略する",
+                "type": "string",
+                "maxLength": 1000000,
+                "pattern": "^data:image\\/(png|jpeg|webp|gif);base64,[A-Za-z0-9+/=]+$"
+              },
+              "question": {
+                "type": "string",
+                "minLength": 1,
+                "maxLength": 2000,
+                "description": "取引の内容（例: 商品 100,000 円を掛けで仕入れた。）"
+              },
+              "debit": {
+                "minItems": 1,
+                "maxItems": 8,
+                "type": "array",
+                "items": {
+                  "type": "object",
+                  "properties": {
+                    "account": {
+                      "type": "string",
+                      "minLength": 1,
+                      "maxLength": 300,
+                      "description": "勘定科目"
+                    },
+                    "amount": {
+                      "type": "number",
+                      "minimum": 0,
+                      "description": "金額（数値。単位は問題文や unit で示す）"
+                    }
+                  },
+                  "required": [
+                    "account",
+                    "amount"
+                  ],
+                  "additionalProperties": false,
+                  "description": "仕訳の 1 行"
+                },
+                "description": "借方（左側）の行"
+              },
+              "credit": {
+                "minItems": 1,
+                "maxItems": 8,
+                "type": "array",
+                "items": {
+                  "type": "object",
+                  "properties": {
+                    "account": {
+                      "type": "string",
+                      "minLength": 1,
+                      "maxLength": 300,
+                      "description": "勘定科目"
+                    },
+                    "amount": {
+                      "type": "number",
+                      "minimum": 0,
+                      "description": "金額（数値。単位は問題文や unit で示す）"
+                    }
+                  },
+                  "required": [
+                    "account",
+                    "amount"
+                  ],
+                  "additionalProperties": false,
+                  "description": "仕訳の 1 行"
+                },
+                "description": "貸方（右側）の行"
+              },
+              "accounts": {
+                "description": "選択肢に加える勘定科目（紛らわしいもの）。正解の科目は自動で選択肢に入るので書かなくてよい",
+                "maxItems": 20,
+                "type": "array",
+                "items": {
+                  "type": "string",
+                  "minLength": 1,
+                  "maxLength": 300
+                }
+              },
+              "unit": {
+                "description": "金額の単位（例: 円, 千円）。既定は「円」",
+                "type": "string",
+                "maxLength": 20
+              },
+              "explanation": {
+                "type": "string",
+                "minLength": 1,
+                "maxLength": 2000
+              }
+            },
+            "required": [
+              "type",
+              "id",
+              "question",
+              "debit",
+              "credit"
+            ],
+            "additionalProperties": false,
+            "description": "仕訳カード"
+          },
+          {
+            "type": "object",
+            "properties": {
+              "type": {
+                "type": "string",
+                "const": "multi"
+              },
+              "id": {
+                "type": "string",
+                "pattern": "^[A-Za-z0-9][A-Za-z0-9._-]{0,63}$",
+                "description": "パック内で一意な ID（更新時に学習記録を引き継ぐキー。後から変えない）"
+              },
+              "tags": {
+                "description": "分類用のタグ",
+                "maxItems": 20,
+                "type": "array",
+                "items": {
+                  "type": "string",
+                  "minLength": 1,
+                  "maxLength": 40
+                }
+              },
+              "notes": {
+                "description": "補足・語法・注意点など",
+                "type": "string",
+                "minLength": 1,
+                "maxLength": 2000
+              },
+              "passage": {
+                "description": "この項目が参照する本文の ID（passages の id）。本文を問題の上に表示する",
+                "type": "string",
+                "pattern": "^[A-Za-z0-9][A-Za-z0-9._-]{0,63}$"
+              },
+              "image": {
+                "description": "問題の上に表示する画像（data URL で埋め込む。外部の URL は使えない）。通常はアプリ内で追加するので、外部 AI は省略する",
+                "type": "string",
+                "maxLength": 1000000,
+                "pattern": "^data:image\\/(png|jpeg|webp|gif);base64,[A-Za-z0-9+/=]+$"
+              },
+              "question": {
+                "type": "string",
+                "minLength": 1,
+                "maxLength": 2000,
+                "description": "問題（例: リースに該当するものをすべて選びなさい。）"
+              },
+              "choices": {
+                "minItems": 3,
+                "maxItems": 8,
+                "type": "array",
+                "items": {
+                  "type": "string",
+                  "minLength": 1,
+                  "maxLength": 300
+                },
+                "description": "選択肢"
+              },
+              "answers": {
+                "minItems": 1,
+                "maxItems": 8,
+                "type": "array",
+                "items": {
+                  "type": "integer",
+                  "minimum": 0,
+                  "maximum": 9007199254740991
+                },
+                "description": "正解の選択肢の番号（0 始まり）。1 つ以上"
+              },
+              "explanation": {
+                "type": "string",
+                "minLength": 1,
+                "maxLength": 2000
+              }
+            },
+            "required": [
+              "type",
+              "id",
+              "question",
+              "choices",
+              "answers"
+            ],
+            "additionalProperties": false,
+            "description": "複数選択カード"
+          },
+          {
+            "type": "object",
+            "properties": {
+              "type": {
+                "type": "string",
+                "const": "numeric"
+              },
+              "id": {
+                "type": "string",
+                "pattern": "^[A-Za-z0-9][A-Za-z0-9._-]{0,63}$",
+                "description": "パック内で一意な ID（更新時に学習記録を引き継ぐキー。後から変えない）"
+              },
+              "tags": {
+                "description": "分類用のタグ",
+                "maxItems": 20,
+                "type": "array",
+                "items": {
+                  "type": "string",
+                  "minLength": 1,
+                  "maxLength": 40
+                }
+              },
+              "notes": {
+                "description": "補足・語法・注意点など",
+                "type": "string",
+                "minLength": 1,
+                "maxLength": 2000
+              },
+              "passage": {
+                "description": "この項目が参照する本文の ID（passages の id）。本文を問題の上に表示する",
+                "type": "string",
+                "pattern": "^[A-Za-z0-9][A-Za-z0-9._-]{0,63}$"
+              },
+              "image": {
+                "description": "問題の上に表示する画像（data URL で埋め込む。外部の URL は使えない）。通常はアプリ内で追加するので、外部 AI は省略する",
+                "type": "string",
+                "maxLength": 1000000,
+                "pattern": "^data:image\\/(png|jpeg|webp|gif);base64,[A-Za-z0-9+/=]+$"
+              },
+              "question": {
+                "type": "string",
+                "minLength": 1,
+                "maxLength": 2000,
+                "description": "問題"
+              },
+              "answer": {
+                "type": "number",
+                "description": "正解の数値"
+              },
+              "unit": {
+                "description": "単位（例: 円, %, 年）。入力欄の横に表示する",
+                "type": "string",
+                "maxLength": 20
+              },
+              "tolerance": {
+                "description": "許容する誤差（絶対値）。端数処理で答えがずれうるとき。既定は 0",
+                "type": "number",
+                "minimum": 0
+              },
+              "hints": {
+                "description": "ヒント（弱いものから順に）",
+                "maxItems": 3,
+                "type": "array",
+                "items": {
+                  "type": "string",
+                  "minLength": 1,
+                  "maxLength": 300
+                }
+              },
+              "explanation": {
+                "type": "string",
+                "minLength": 1,
+                "maxLength": 2000
+              }
+            },
+            "required": [
+              "type",
+              "id",
+              "question",
+              "answer"
+            ],
+            "additionalProperties": false,
+            "description": "数値入力カード"
+          },
+          {
+            "type": "object",
+            "properties": {
+              "type": {
+                "type": "string",
+                "const": "truefalse"
+              },
+              "id": {
+                "type": "string",
+                "pattern": "^[A-Za-z0-9][A-Za-z0-9._-]{0,63}$",
+                "description": "パック内で一意な ID（更新時に学習記録を引き継ぐキー。後から変えない）"
+              },
+              "tags": {
+                "description": "分類用のタグ",
+                "maxItems": 20,
+                "type": "array",
+                "items": {
+                  "type": "string",
+                  "minLength": 1,
+                  "maxLength": 40
+                }
+              },
+              "notes": {
+                "description": "補足・語法・注意点など",
+                "type": "string",
+                "minLength": 1,
+                "maxLength": 2000
+              },
+              "passage": {
+                "description": "この項目が参照する本文の ID（passages の id）。本文を問題の上に表示する",
+                "type": "string",
+                "pattern": "^[A-Za-z0-9][A-Za-z0-9._-]{0,63}$"
+              },
+              "image": {
+                "description": "問題の上に表示する画像（data URL で埋め込む。外部の URL は使えない）。通常はアプリ内で追加するので、外部 AI は省略する",
+                "type": "string",
+                "maxLength": 1000000,
+                "pattern": "^data:image\\/(png|jpeg|webp|gif);base64,[A-Za-z0-9+/=]+$"
+              },
+              "statement": {
+                "type": "string",
+                "minLength": 1,
+                "maxLength": 2000,
+                "description": "正誤を判断する文"
+              },
+              "answer": {
+                "type": "boolean",
+                "description": "文が正しければ true"
+              },
+              "explanation": {
+                "description": "解説（誤りの文では、どこが誤りで正しくはどうかを書く）",
+                "type": "string",
+                "minLength": 1,
+                "maxLength": 2000
+              }
+            },
+            "required": [
+              "type",
+              "id",
+              "statement",
+              "answer"
+            ],
+            "additionalProperties": false,
+            "description": "○×カード"
+          },
+          {
+            "type": "object",
+            "properties": {
+              "type": {
+                "type": "string",
+                "const": "match"
+              },
+              "id": {
+                "type": "string",
+                "pattern": "^[A-Za-z0-9][A-Za-z0-9._-]{0,63}$",
+                "description": "パック内で一意な ID（更新時に学習記録を引き継ぐキー。後から変えない）"
+              },
+              "tags": {
+                "description": "分類用のタグ",
+                "maxItems": 20,
+                "type": "array",
+                "items": {
+                  "type": "string",
+                  "minLength": 1,
+                  "maxLength": 40
+                }
+              },
+              "notes": {
+                "description": "補足・語法・注意点など",
+                "type": "string",
+                "minLength": 1,
+                "maxLength": 2000
+              },
+              "passage": {
+                "description": "この項目が参照する本文の ID（passages の id）。本文を問題の上に表示する",
+                "type": "string",
+                "pattern": "^[A-Za-z0-9][A-Za-z0-9._-]{0,63}$"
+              },
+              "image": {
+                "description": "問題の上に表示する画像（data URL で埋め込む。外部の URL は使えない）。通常はアプリ内で追加するので、外部 AI は省略する",
+                "type": "string",
+                "maxLength": 1000000,
+                "pattern": "^data:image\\/(png|jpeg|webp|gif);base64,[A-Za-z0-9+/=]+$"
+              },
+              "prompt": {
+                "description": "問題文（例: 用語と意味を組み合わせなさい。）",
+                "type": "string",
+                "minLength": 1,
+                "maxLength": 2000
+              },
+              "pairs": {
+                "minItems": 2,
+                "maxItems": 8,
+                "type": "array",
+                "items": {
+                  "type": "object",
+                  "properties": {
+                    "left": {
+                      "type": "string",
+                      "minLength": 1,
+                      "maxLength": 300
+                    },
+                    "right": {
+                      "type": "string",
+                      "minLength": 1,
+                      "maxLength": 300
+                    }
+                  },
+                  "required": [
+                    "left",
+                    "right"
+                  ],
+                  "additionalProperties": false
+                },
+                "description": "正しい組み合わせ（左と右）。右の語句は表示するときに並べ替える"
+              },
+              "explanation": {
+                "type": "string",
+                "minLength": 1,
+                "maxLength": 2000
+              }
+            },
+            "required": [
+              "type",
+              "id",
+              "pairs"
+            ],
+            "additionalProperties": false,
+            "description": "組み合わせカード"
+          },
+          {
+            "type": "object",
+            "properties": {
+              "type": {
+                "type": "string",
+                "const": "table"
+              },
+              "id": {
+                "type": "string",
+                "pattern": "^[A-Za-z0-9][A-Za-z0-9._-]{0,63}$",
+                "description": "パック内で一意な ID（更新時に学習記録を引き継ぐキー。後から変えない）"
+              },
+              "tags": {
+                "description": "分類用のタグ",
+                "maxItems": 20,
+                "type": "array",
+                "items": {
+                  "type": "string",
+                  "minLength": 1,
+                  "maxLength": 40
+                }
+              },
+              "notes": {
+                "description": "補足・語法・注意点など",
+                "type": "string",
+                "minLength": 1,
+                "maxLength": 2000
+              },
+              "passage": {
+                "description": "この項目が参照する本文の ID（passages の id）。本文を問題の上に表示する",
+                "type": "string",
+                "pattern": "^[A-Za-z0-9][A-Za-z0-9._-]{0,63}$"
+              },
+              "image": {
+                "description": "問題の上に表示する画像（data URL で埋め込む。外部の URL は使えない）。通常はアプリ内で追加するので、外部 AI は省略する",
+                "type": "string",
+                "maxLength": 1000000,
+                "pattern": "^data:image\\/(png|jpeg|webp|gif);base64,[A-Za-z0-9+/=]+$"
+              },
+              "question": {
+                "type": "string",
+                "minLength": 1,
+                "maxLength": 2000,
+                "description": "問題文（表の前に表示する）"
+              },
+              "columns": {
+                "minItems": 2,
+                "maxItems": 6,
+                "type": "array",
+                "items": {
+                  "type": "string",
+                  "minLength": 1,
+                  "maxLength": 300
+                },
+                "description": "列の見出し"
+              },
+              "rows": {
+                "minItems": 1,
+                "maxItems": 12,
+                "type": "array",
+                "items": {
+                  "minItems": 2,
+                  "maxItems": 6,
+                  "type": "array",
+                  "items": {
+                    "type": "string",
+                    "maxLength": 100
+                  }
+                },
+                "description": "行。各マスは文字列で、答えにするマスは {{ }} で囲む（例: \"{{9,000}}\"）"
+              },
+              "explanation": {
+                "type": "string",
+                "minLength": 1,
+                "maxLength": 2000
+              }
+            },
+            "required": [
+              "type",
+              "id",
+              "question",
+              "columns",
+              "rows"
+            ],
+            "additionalProperties": false,
+            "description": "表の穴埋めカード"
           }
         ]
       }

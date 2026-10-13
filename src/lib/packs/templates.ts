@@ -21,6 +21,12 @@ export const ITEM_TYPE_LABELS: Record<ItemType, string> = {
   cloze: '穴埋め',
   choice: '選択問題',
   order: '並べ替え',
+  journal: '仕訳',
+  multi: '複数選択',
+  numeric: '数値入力',
+  truefalse: '○×',
+  match: '組み合わせ',
+  table: '表の穴埋め',
 };
 
 export const TEMPLATES: Record<ItemType, TemplateDef[]> = {
@@ -76,6 +82,44 @@ export const TEMPLATES: Record<ItemType, TemplateDef[]> = {
       id: 'basic',
       label: '並べ替える',
       description: '語句を正しい順に並べる',
+      defaultEnabled: true,
+    },
+  ],
+  journal: [
+    {
+      id: 'basic',
+      label: '仕訳を切る',
+      description: '取引を読んで借方・貸方の科目と金額を答える',
+      defaultEnabled: true,
+    },
+  ],
+  multi: [
+    {
+      id: 'basic',
+      label: 'すべて選ぶ',
+      description: '正しいものをすべて選ぶ',
+      defaultEnabled: true,
+    },
+  ],
+  numeric: [
+    { id: 'basic', label: '計算する', description: '数値を計算して答える', defaultEnabled: true },
+  ],
+  truefalse: [
+    { id: 'basic', label: '○×で答える', description: '文の正誤を判断する', defaultEnabled: true },
+  ],
+  match: [
+    {
+      id: 'basic',
+      label: '組み合わせる',
+      description: '左の語句に合う右の語句を選ぶ',
+      defaultEnabled: true,
+    },
+  ],
+  table: [
+    {
+      id: 'basic',
+      label: '表を埋める',
+      description: '計算表・返済表などの空欄を埋める',
       defaultEnabled: true,
     },
   ],

@@ -2,7 +2,7 @@
  * 項目の種類ごとのテキスト表現（一覧の見出し・検索・読み上げ・LLM に渡す形）。
  * React の表示は features/items/ に置き、ここは UI に依存しない処理だけにする。
  */
-import type { OrderItem, StudyItem } from './schema';
+import type { JournalItem, JournalLine, OrderItem, StudyItem } from './schema';
 
 /** 穴埋めの {{ }} を取り除いた完全な文 */
 export function clozeFull(text: string): string {
@@ -28,12 +28,27 @@ export function itemTitle(item: StudyItem): string {
       return item.phrase;
     case 'qa':
     case 'choice':
+    case 'journal':
+    case 'multi':
+    case 'numeric':
+    case 'table':
       return item.question;
     case 'cloze':
       return clozeFull(item.text);
     case 'order':
       return item.prompt ?? item.answer;
+    case 'truefalse':
+      return item.statement;
+    case 'match':
+      return item.prompt ?? item.pairs.map((p) => p.left).join('・');
   }
+}
+
+/** 仕訳を 1 行の文字にする（例: 仕入 100,000 / 買掛金 100,000） */
+export function journalText(item: Pick<JournalItem, 'debit' | 'credit'>): string {
+  const side = (lines: JournalLine[]) =>
+    lines.map((l) => `${l.account} ${l.amount.toLocaleString('ja-JP')}`).join('、');
+  return `${side(item.debit)} / ${side(item.credit)}`;
 }
 
 /** 答え（短い表現） */
@@ -51,6 +66,21 @@ export function itemAnswer(item: StudyItem): string {
       return item.choices[item.answer] ?? '';
     case 'order':
       return item.answer;
+    case 'journal':
+      return journalText(item);
+    case 'multi':
+      return item.answers.map((i) => item.choices[i]).join('、');
+    case 'numeric':
+      return `${item.answer.toLocaleString('ja-JP')}${item.unit ?? ''}`;
+    case 'truefalse':
+      return item.answer ? '○（正しい）' : '×（誤り）';
+    case 'match':
+      return item.pairs.map((p) => `${p.left} → ${p.right}`).join('、');
+    case 'table':
+      return item.rows
+        .flat()
+        .flatMap((c) => clozeAnswers(c))
+        .join(' / ');
   }
 }
 
@@ -107,6 +137,7 @@ export function itemForLlm(item: StudyItem): Record<string, unknown> {
   if (image) out.has_image = true;
   if (item.type === 'choice') out.correct_choice = item.choices[item.answer];
   if (item.type === 'order') out.chunks = orderChunks(item);
+  if (item.type === 'multi') out.correct_choices = item.answers.map((i) => item.choices[i]);
   return out;
 }
 
@@ -129,8 +160,15 @@ export function expectedAnswer(
       return { accepted: [item.answer, ...(item.accepted ?? [])] };
     case 'cloze':
       return { blanks: clozeAnswers(item.text) };
+    // カードの中で答えてアプリが判定する種類は、入力欄を使わない
     case 'choice':
     case 'order':
+    case 'journal':
+    case 'multi':
+    case 'numeric':
+    case 'truefalse':
+    case 'match':
+    case 'table':
       return undefined;
   }
 }

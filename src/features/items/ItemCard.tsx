@@ -1,9 +1,10 @@
 /**
- * 項目（単語・フレーズ・一問一答・穴埋め・選択問題）のカード表示。
+ * 項目のカード表示（単語・フレーズ・一問一答・穴埋め・選択問題・並べ替え）。
+ * 仕訳・複数選択・数値入力・○×・組み合わせ・表の穴埋めは InteractiveFaces.tsx。
  * 種類を増やすときは lib/packs/schema.ts・templates.ts と、ここに表示を追加する。
  */
 import { useState, type ReactNode } from 'react';
-import { BookOpenText, CheckCircle2, Lightbulb, Maximize2, Volume2, XCircle } from 'lucide-react';
+import { BookOpenText, CheckCircle2, Maximize2, Volume2, XCircle } from 'lucide-react';
 import { BottomSheet } from '@/components/ui/BottomSheet';
 import type { ItemRecord } from '@/lib/db/types';
 import { clozeAnswers, orderChunks, shuffleChunks } from '@/lib/packs/itemText';
@@ -20,6 +21,17 @@ import type {
 } from '@/lib/packs/schema';
 import { speak } from '@/lib/speech/tts';
 import { cn } from '@/lib/utils/cn';
+import { Explanation, Hints, Label, Notes, Prompt } from './cardParts';
+import {
+  JournalFace,
+  MatchFace,
+  MultiFace,
+  NumericFace,
+  TableFace,
+  TrueFalseFace,
+  type InteractiveResult,
+} from './InteractiveFaces';
+import { CODE_BLOCK } from './cardStyles';
 import { useSettings } from '@/features/settings/settingsStore';
 
 export function SpeakButton({ text, lang = 'en-US' }: { text: string; lang?: string }) {
@@ -43,14 +55,6 @@ export function SpeakButton({ text, lang = 'en-US' }: { text: string; lang?: str
     >
       <Volume2 className="size-5" />
     </button>
-  );
-}
-
-function Label({ children }: { children: ReactNode }) {
-  return (
-    <div className="mb-1 text-[0.7rem] font-semibold tracking-wide text-slate-400 uppercase dark:text-slate-500">
-      {children}
-    </div>
   );
 }
 
@@ -97,25 +101,6 @@ function Chips({ title, values }: { title: string; values?: string[] }) {
   );
 }
 
-function Notes({ text }: { text?: string }) {
-  if (!text) return null;
-  return (
-    <p className="rounded-xl bg-amber-50 px-3 py-2 text-sm leading-relaxed text-amber-900 dark:bg-amber-950/40 dark:text-amber-200">
-      {text}
-    </p>
-  );
-}
-
-function Explanation({ text }: { text?: string }) {
-  if (!text) return null;
-  return (
-    <div>
-      <Label>解説</Label>
-      <p className="leading-relaxed">{text}</p>
-    </div>
-  );
-}
-
 function Headword({ text, sub, lang }: { text: string; sub?: ReactNode; lang: string }) {
   return (
     <div className="flex flex-col items-center gap-1 text-center">
@@ -124,60 +109,6 @@ function Headword({ text, sub, lang }: { text: string; sub?: ReactNode; lang: st
         <SpeakButton text={text} lang={lang} />
       </div>
       {sub && <div className="text-sm text-slate-500 dark:text-slate-400">{sub}</div>}
-    </div>
-  );
-}
-
-/** コード・表など、改行や字下げをそのまま見せる部分 */
-const CODE_BLOCK =
-  'overflow-x-auto rounded-xl bg-slate-100 px-3 py-2.5 text-left font-mono text-sm leading-relaxed whitespace-pre text-slate-800 dark:bg-slate-800 dark:text-slate-200';
-
-/**
- * 問題文。1 行なら中央に大きく。改行を含む（条件の箇条書き・コードつきの問題など）なら左寄せにし、
- * 空行のあとの部分はコードとして等幅・字下げを保って表示する。
- */
-function Prompt({ children }: { children: string }) {
-  if (!children.includes('\n')) {
-    return (
-      <div className="text-center text-xl leading-relaxed font-semibold sm:text-2xl">
-        {children}
-      </div>
-    );
-  }
-  const [lead, ...blocks] = children.split(/\n[ \t]*\n/);
-  return (
-    <div className="space-y-3">
-      <p className="text-lg leading-relaxed font-semibold whitespace-pre-line sm:text-xl">{lead}</p>
-      {blocks.map((b, i) => (
-        <pre key={i} className={CODE_BLOCK}>
-          <code>{b}</code>
-        </pre>
-      ))}
-    </div>
-  );
-}
-
-/** ヒントを 1 つずつ表示するボタン */
-function Hints({ hints }: { hints?: string[] }) {
-  const [shown, setShown] = useState(0);
-  if (!hints?.length) return null;
-  return (
-    <div className="flex flex-col items-center gap-2">
-      {hints.slice(0, shown).map((h, i) => (
-        <p key={i} className="text-sm text-amber-700 dark:text-amber-300">
-          ヒント: {h}
-        </p>
-      ))}
-      {shown < hints.length && (
-        <button
-          type="button"
-          onClick={() => setShown((n) => n + 1)}
-          className="inline-flex items-center gap-1 rounded-full px-3 py-1 text-sm text-amber-700 hover:bg-amber-50 dark:text-amber-300 dark:hover:bg-amber-950/40"
-        >
-          <Lightbulb className="size-4" />
-          ヒントを見る
-        </button>
-      )}
     </div>
   );
 }
@@ -659,6 +590,9 @@ interface FaceProps<T> {
   seed?: string;
   /** 答えを表示したあと（選んだり並べたりできないようにする） */
   locked?: boolean;
+  /** 仕訳・複数選択などの答え合わせの結果 */
+  result?: InteractiveResult;
+  onSubmit?: (result: InteractiveResult) => void;
 }
 
 export interface CardFaceProps {
@@ -674,6 +608,9 @@ export interface CardFaceProps {
   seed?: string;
   /** 答えを表示したあと（選択・並べ替えをできないようにする） */
   locked?: boolean;
+  /** 仕訳・複数選択・数値入力・○×・組み合わせ・表の穴埋めの答え合わせの結果 */
+  result?: InteractiveResult;
+  onSubmit?: (result: InteractiveResult) => void;
 }
 
 export function CardFace({
@@ -687,6 +624,8 @@ export function CardFace({
   onOrder,
   seed,
   locked,
+  result,
+  onSubmit,
 }: CardFaceProps) {
   const face = (
     <Face
@@ -700,6 +639,8 @@ export function CardFace({
       onOrder={onOrder}
       seed={seed}
       locked={locked}
+      result={result}
+      onSubmit={onSubmit}
     />
   );
   const image = record.item.image;
@@ -730,9 +671,12 @@ function Face({
   onOrder,
   seed,
   locked,
+  result,
+  onSubmit,
 }: CardFaceProps) {
   const item = record.item;
   const common = { template, side, lang, chosen, onChoose, ordered, onOrder, seed, locked };
+  const interactive = { side, seed, locked, result, onSubmit };
   switch (item.type) {
     case 'vocab':
       return <VocabFace item={item} {...common} />;
@@ -746,5 +690,17 @@ function Face({
       return <ChoiceFace item={item} {...common} />;
     case 'order':
       return <OrderFace item={item} {...common} />;
+    case 'journal':
+      return <JournalFace item={item} {...interactive} />;
+    case 'multi':
+      return <MultiFace item={item} {...interactive} />;
+    case 'numeric':
+      return <NumericFace item={item} {...interactive} />;
+    case 'truefalse':
+      return <TrueFalseFace item={item} {...interactive} />;
+    case 'match':
+      return <MatchFace item={item} {...interactive} />;
+    case 'table':
+      return <TableFace item={item} {...interactive} />;
   }
 }
