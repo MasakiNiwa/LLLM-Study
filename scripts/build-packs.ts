@@ -124,6 +124,16 @@ const RECOMMENDED_ORDER = [
   'business-marketing-80',
   'ja-bookkeeping-accounts-001',
   'business-financial-statements-80',
+  // 勘定科目の選び方（取引ごとの科目選び）: 考え方 → 分野別 → 総合演習
+  'kamoku-logic-80',
+  'kamoku-expense-claims-100',
+  'kamoku-purchasing-80',
+  'kamoku-sales-receipts-80',
+  'kamoku-payroll-80',
+  'kamoku-taxes-fees-80',
+  'kamoku-assets-liabilities-80',
+  'kamoku-it-marketing-80',
+  'kamoku-mixed-practice-100',
   // 経理実務マスター（会計の論点別）: 日々の決算 → 主要な基準 → 税務 → 連結
   'acct-closing-practice-80',
   'acct-fixed-assets-80',
