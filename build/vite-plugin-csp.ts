@@ -14,8 +14,9 @@ import type { Plugin } from 'vite';
 
 /** ページから通信してよい先（同じオリジンのほか） */
 export const CONNECT_SOURCES = [
-  // クラウド AI: Gemini API
+  // クラウド AI: Gemini API・OpenAI API
   'https://generativelanguage.googleapis.com',
+  'https://api.openai.com',
   // モデルの入手元（ダウンロードは Worker で行うが、Worker にもページのポリシーを当てるブラウザがあるため）
   'https://huggingface.co',
   'https://*.huggingface.co',

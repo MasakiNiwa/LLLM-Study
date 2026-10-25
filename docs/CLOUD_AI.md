@@ -1,6 +1,6 @@
 # クラウド AI の API をブラウザから使う（キーはユーザーが持ち込む）
 
-LLLM Study は、端末内で動く AI（ローカル LLM）に加えて、**ユーザー自身の API キー**でクラウド AI（まずは Gemini API）を使えます。
+LLLM Study は、端末内で動く AI（ローカル LLM）に加えて、**ユーザー自身の API キー**でクラウド AI（Gemini API・OpenAI API）を使えます。
 GitHub Pages で公開しているのでサーバーはありません。キーの保管も API の呼び出しも、すべてブラウザの中で行います。
 
 この文書は、サーバーのない静的サイトで「キーの持ち込み（BYOK: Bring Your Own Key）」を安全側に作るための考え方と作り方です。
@@ -24,8 +24,10 @@ GitHub Pages で公開しているのでサーバーはありません。キー�
    ▼
 features/cloud/aiClient.ts（入口。設定の「AI の接続先」で振り分ける）
    ├─ 端末内:   lib/llm/client.ts → Web Worker（LiteRT-LM）
-   └─ クラウド: lib/cloud/gemini.ts → fetch（ストリーミング）→ Gemini API
-                    ▲ キーは lib/cloud/keyVault.ts のメモリーから受け取る
+   └─ クラウド: lib/cloud/providers.ts（接続先の一覧）
+                  ├─ lib/cloud/gemini.ts → fetch（ストリーミング）→ Gemini API
+                  └─ lib/cloud/openai.ts → fetch（ストリーミング）→ OpenAI API
+                    ▲ キーは lib/cloud/keyVault.ts のメモリーから受け取る（接続先ごとに別のキー）
 ```
 
 - 呼び出し側（チャットなど）は**どちらの AI かを区別しない**。入口を 1 つにして、生成の要求と結果の形をそろえる
@@ -37,6 +39,9 @@ features/cloud/aiClient.ts（入口。設定の「AI の接続先」で振り分
 | -------------------------------------- | ------------------------------------------------------------------------------- |
 | `src/lib/cloud/keyVault.ts`            | キーの暗号化・保存・解除・ロック（WebCrypto）。解除したキーはメモリーにだけ置く |
 | `src/lib/cloud/gemini.ts`              | Gemini API の呼び出し（ストリーミング・考える過程・ツール・エラーの言い換え）   |
+| `src/lib/cloud/openai.ts`              | OpenAI API の呼び出し（Chat Completions・推論モデル・ツール・エラーの言い換え） |
+| `src/lib/cloud/providers.ts`           | 接続先の一覧（名前・モデル一覧・既定のモデル・生成）。入口はここから選ぶ        |
+| `src/lib/cloud/errors.ts`              | 接続先に共通のエラー（`CloudError`: 状態コードと「答え直せるか」）              |
 | `src/lib/cloud/sse.ts`                 | ストリーミング応答（Server-Sent Events）の読み取り                              |
 | `src/features/cloud/aiClient.ts`       | 入口（端末内とクラウドの振り分け・答え直し）と「AI を使えるか」の判定           |
 | `src/features/cloud/cloudStore.ts`     | 画面用の状態（保存済みか・解除済みか・モデルの一覧）。キーそのものは持たない    |
@@ -69,7 +74,7 @@ GitHub Pages では HTTP ヘッダーを設定できないので、**本番ビ�
 ```text
 default-src 'self';
 script-src 'self' 'sha256-…（初回描画前のテーマ用スクリプト）' 'wasm-unsafe-eval';
-connect-src 'self' https://generativelanguage.googleapis.com https://huggingface.co https://*.huggingface.co https://*.hf.co;
+connect-src 'self' https://generativelanguage.googleapis.com https://api.openai.com https://huggingface.co https://*.huggingface.co https://*.hf.co;
 style-src 'self' 'unsafe-inline'; img-src 'self' data: blob:; worker-src 'self' blob:;
 object-src 'none'; base-uri 'self'; form-action 'self'; …
 ```
@@ -83,7 +88,7 @@ object-src 'none'; base-uri 'self'; form-action 'self'; …
 
 ## 5. キーの送り方
 
-- **キーは URL に入れず、ヘッダーで送る**（Gemini は `x-goog-api-key`）。URL は履歴・ログ・Referer に残りやすい
+- **キーは URL に入れず、ヘッダーで送る**（Gemini は `x-goog-api-key`、OpenAI は `Authorization: Bearer`）。URL は履歴・ログ・Referer に残りやすい
 - SDK は使わず **fetch だけ**で書く。依存パッケージを増やさない（サプライチェーンの危険を減らす）うえ、送る内容を 1 ファイルで見渡せる
 - エラーの文はアプリで言い換え、キーを表示しない
 - `<meta name="referrer" content="strict-origin-when-cross-origin">` で、API にはオリジン（`https://ユーザー名.github.io/`）だけを Referer として送る（キーの「ウェブサイト」制限が効くように）
@@ -98,7 +103,11 @@ object-src 'none'; base-uri 'self'; form-action 'self'; …
     （ブラウザはほかのオリジンへの通信でオリジンだけを Referer にするので、`/リポジトリ名/*` のようなパスまでの指定では一致しない）
   - API の制限: Generative Language API だけを許可する
   - AI Studio で作ったキーは Google Cloud のプロジェクトの中にあるが、コンソールに表示されないことがある。そのときは AI Studio でプロジェクトを読み込む（インポートする）と制限を設定できる。請求先（課金）を設定しなければ無料枠のまま
-- OpenAI・Anthropic などでは、**プロジェクトごとのキー**と**利用額の上限**を設定する
+- **OpenAI のキーを絞る**（platform.openai.com）
+  - このアプリ専用の**プロジェクト**を作り、その中でキーを作る
+  - プロジェクトの **Limits で利用額の上限（予算）** を設定する。従量課金なので、漏れたときの被害を金額で止められる
+  - キーの権限は **Restricted** にして、Models を Read、Model capabilities を Write だけにする（一覧の取得と生成だけ）
+  - OpenAI のキーには「ウェブサイト」の制限がない。使わないときはロックし、心配なら作り直す
 - 心配なときは、いつでもキーを無効化して作り直す
 - 共用のパソコンでは「今回だけ」を選ぶか、使い終わったらロックする
 
@@ -108,13 +117,16 @@ object-src 'none'; base-uri 'self'; form-action 'self'; …
 
 - AI に頼んだ内容（問題と答え・ユーザーの答え・チャット・学習の状況）が、その会社に送られる
 - **Gemini API の無料枠では、送った内容が Google のサービス改善に使われ、人が読むこともある**（有料枠では使われない）。個人情報や社外秘の内容は送らない
+- **OpenAI API は従量課金**（使った分だけ請求される）。API に送った内容は原則として学習に使われないが、不正利用の監視のため一定期間保存される（最新の規約を確かめる）
+- 同意は接続先ごとに取る（Gemini に同意しても、OpenAI を選ぶときにあらためて説明する）
 - キーは暗号化してその端末にだけ保存し、その会社以外には送らない。学習記録・教材は端末内に残る
 - 応答には「クラウド」の印を付け、どちらの AI が答えたか分かるようにする
 
 ## 8. 設定・バックアップとの関係
 
-- 「AI の接続先」「使うモデル」「同意したか」は**端末ごとの設定**（バックアップの設定に含めない。ほかの端末で復元しても勝手にクラウドに接続しない）
-- 暗号化したキーは設定とは別の localStorage のキー（`lllm-study:cloud-key:gemini`）に置き、バックアップにも含めない
+- 「AI の接続先」（`aiProvider`）「使うモデル」（`cloudModels`: 接続先ごと）「同意したか」（`cloudConsents`: 接続先ごと）は**端末ごとの設定**（バックアップの設定に含めない。ほかの端末で復元しても勝手にクラウドに接続しない）
+- 暗号化したキーは設定とは別の localStorage のキー（`lllm-study:cloud-key:gemini`・`lllm-study:cloud-key:openai`）に置き、バックアップにも含めない
+- 設定の版 4 で、以前の `geminiModel` / `cloudConsent` を `cloudModels` / `cloudConsents` に移す（`migrateSettings`）
 
 ## 9. Gemini API の呼び出し（`src/lib/cloud/gemini.ts`）
 
@@ -130,22 +142,37 @@ object-src 'none'; base-uri 'self'; form-action 'self'; …
 - モデルの一覧: `GET /v1beta/models`。文章の生成に使えるもの（`generateContent`）だけを出し、既定は安定版の Flash
 - エラー: 400（キーが違う）・403（キーの制限・API が無効）・404（モデルがない）・429（上限。待てば使える）・5xx（サーバーの不調）を言い換える
 
-## 10. ほかの AI に広げるとき
+## 10. OpenAI API の呼び出し（`src/lib/cloud/openai.ts`）
 
-- **入口（`aiClient.ts`）とやりとりの形（`GenerateRequest` / `GenerateEvent`）は変えずに**、`lib/cloud/` に接続を足す
-  - OpenAI 互換（OpenAI・OpenRouter・Groq など）: `POST /v1/chat/completions`（`stream: true`）。キーは `Authorization: Bearer`
+- `POST /v1/chat/completions`（`stream: true`、`stream_options: { include_usage: true }` で使ったトークン数も受け取る）。キーは `Authorization: Bearer`
+- 履歴は毎回すべて送る。システムプロンプトは `system` の役割、出力の上限は `max_completion_tokens`
+- **推論モデル（`o1`・`o3`・`o4-mini`・`gpt-5` 系）は受け付ける設定が違う**
+  - `temperature` を送らない（既定以外は断られる）
+  - 考える過程のオン・オフは `reasoning_effort`（`high` / `low`）で表す。考える過程の中身は API から返らない
+  - 考える分も出力の上限に数えるので、上限に下限（4096。考えるときは 16384）を設ける
+  - それでも 400 で断られたら、最小限の設定で送り直し、そのモデルでは次からも最小限で送る
+- ツール: ストリーミングでは `tool_calls` が**番号（index）ごとに少しずつ**届くので、つなげてから実行する。結果は `tool` の役割（`tool_call_id` 付き）で返し、続きを生成する
+- モデルの一覧: `GET /v1/models`。文章の生成に使う系統（`gpt-`・`o` + 数字・`chatgpt-`）だけを出し、音声・画像・埋め込みなどは除く。既定は日付の付かない `mini`（例: `gpt-5-mini`）
+- エラー: 401（キーが違う）・403（権限・地域）・404（モデルがない・使う権限がない）・429 を言い換える
+  - 429 のうち `insufficient_quota`（残高・予算の不足）は**待っても直らない**ので答え直さない。それ以外の 429 と 5xx は端末内の AI で答え直せる
+- ブラウザからの直接の呼び出し（CORS）は OpenAI が許可している
+
+## 11. ほかの AI に広げるとき
+
+- **入口（`aiClient.ts`）とやりとりの形（`GenerateRequest` / `GenerateEvent`）は変えずに**、`lib/cloud/` に接続を足し、`providers.ts` に登録する
+  - OpenAI 互換（OpenRouter・Groq など）: `openai.ts` と同じ形。送信先と一覧の絞り方を変える
   - Anthropic（Claude）: `POST /v1/messages`。キーは `x-api-key`。ブラウザから直接呼ぶには `anthropic-dangerous-direct-browser-access: true` が要る
 - キーの保管は `keyVault.ts` の `CloudProviderId` を増やすだけで、同じ暗号化を使える
 - **CSP の `CONNECT_SOURCES` に送信先を足す**ことを忘れない
 - 同意の説明は、その会社のデータの扱い（学習に使うか）に合わせて書き分ける
 
-## 11. 新しいリポジトリでのチェックリスト
+## 12. 新しいリポジトリでのチェックリスト
 
 - [ ] キーは既定で暗号化して保存（PBKDF2 + AES-GCM）。「今回だけ」も選べる。解除したキーはメモリーだけ
 - [ ] キーを設定・バックアップ・書き出し・ログ・AI への入力に入れない。画面では伏せ字
 - [ ] 本番ビルドに CSP（meta）を入れ、connect-src を API とモデルの入手元だけにする。インラインのスクリプトはハッシュで許可
 - [ ] キーはヘッダーで送る（URL に入れない）。SDK を使わず fetch で書く
 - [ ] 送る内容の説明と同意。無料枠のデータの扱いを明記する
-- [ ] キーの制限（ウェブサイト・API）と専用のキーを案内する
+- [ ] キーの制限（ウェブサイト・API・権限）・専用のキー・利用額の上限を案内する
 - [ ] 正誤の判定や保存はプログラムが行い、AI は解説・会話に限る。クラウドが使えないときの戻り先（端末内の AI・テンプレート）を用意する
 - [ ] 本番ビルドをブラウザで開き、CSP の違反（コンソールの「Refused to …」）が出ないことを確かめる。API への通信はテストで差し替えて確かめる

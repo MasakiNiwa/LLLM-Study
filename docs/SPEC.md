@@ -387,6 +387,15 @@ scripts/        ライセンス一覧・サンプル教材の検証と生成
 - [x] 引数のないツールに中身のない parameters を付けない
 - [x] AI Studio で作ったキーが Google Cloud に表示されないときの、制限のかけ方を案内に追記
 
+### v1.9.0: OpenAI API も選べるように
+
+- [x] 接続先に OpenAI を追加（Chat Completions のストリーミング・ツールの呼び出し・推論モデルの設定・エラーの言い換え）。`insufficient_quota` は待っても直らないので答え直さない
+- [x] 接続先の一覧（`lib/cloud/providers.ts`）を作り、入口・設定画面・モデルの表示を接続先に依らない形に。キー・使うモデル・同意は接続先ごと
+- [x] 設定の版 4: `geminiModel` / `cloudConsent` を `cloudModels` / `cloudConsents` に移す
+- [x] CSP の connect-src に `https://api.openai.com` を追加
+- [x] OpenAI のキーを安全に使う案内（専用のプロジェクト・利用額の上限・Restricted の権限）と、送る内容の説明
+- [x] [docs/CLOUD_AI.md](CLOUD_AI.md) を複数の接続先に合わせて更新
+
 ### 今後の候補
 
 - [ ] 学習記録からの FSRS パラメーター最適化（Worker で実行）

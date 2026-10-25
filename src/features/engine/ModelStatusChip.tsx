@@ -3,6 +3,7 @@ import { Link } from 'wouter';
 import { cn } from '@/lib/utils/cn';
 import { formatPercent } from '@/lib/utils/format';
 import { useEngine } from './engineStore';
+import { CLOUD_PROVIDERS } from '@/lib/cloud/providers';
 import { useCloud } from '@/features/cloud/cloudStore';
 import { useSettings } from '@/features/settings/settingsStore';
 
@@ -20,20 +21,21 @@ export function ModelStatusChip({
   const loadingName = useEngine((s) => s.loadingName);
   const progress = useEngine((s) => s.progress);
 
-  const provider = useSettings((s) => s.aiProvider);
-  const geminiModel = useSettings((s) => s.geminiModel);
-  const cloudUnlocked = useCloud((s) => s.unlocked);
+  const aiProvider = useSettings((s) => s.aiProvider);
+  const provider = aiProvider === 'local' ? null : aiProvider;
+  const cloudModel = useSettings((s) => (provider ? s.cloudModels[provider] : undefined));
+  const cloudUnlocked = useCloud((s) => (provider ? s.unlocked[provider] : false));
 
   let dot = 'bg-slate-400';
   let label = 'モデル未読み込み';
   /** 幅が足りなくても省略しない部分（読み込みの割合など） */
   let suffix = '';
-  if (provider === 'gemini' && cloudUnlocked && geminiModel) {
+  if (provider && cloudUnlocked && cloudModel) {
     dot = 'bg-sky-500';
-    label = `Gemini · ${geminiModel.replace(/^gemini-/, '')}`;
-  } else if (provider === 'gemini' && status !== 'ready') {
+    label = `${CLOUD_PROVIDERS[provider].label} · ${CLOUD_PROVIDERS[provider].shortModel(cloudModel)}`;
+  } else if (provider && status !== 'ready') {
     dot = 'bg-amber-500';
-    label = 'Gemini（ロック中）';
+    label = `${CLOUD_PROVIDERS[provider].label}（ロック中）`;
   } else if (status === 'ready' && model) {
     dot = 'bg-emerald-500';
     label = model.name.replace(/\.litertlm$/, '');

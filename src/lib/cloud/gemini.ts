@@ -16,7 +16,10 @@ import type {
   ToolCallInfo,
   ToolSchema,
 } from '@/lib/llm/types';
+import { CloudError } from './errors';
 import { readSse } from './sse';
+
+export { CloudError };
 
 export const GEMINI_ORIGIN = 'https://generativelanguage.googleapis.com';
 const API = `${GEMINI_ORIGIN}/v1beta`;
@@ -25,18 +28,6 @@ const API = `${GEMINI_ORIGIN}/v1beta`;
 const MAX_TOOL_ROUNDS = 5;
 /** 考える過程を出すとき、答えまで届くよう出力の上限をこれ以上にする */
 const MIN_OUTPUT_TOKENS_WITH_THINKING = 8192;
-
-/** クラウド AI のエラー（retryable: 少し待てば・別の AI なら答えられる見込みがある） */
-export class CloudError extends Error {
-  constructor(
-    message: string,
-    readonly status: number,
-    readonly retryable: boolean,
-  ) {
-    super(message);
-    this.name = 'CloudError';
-  }
-}
 
 interface GeminiPart {
   text?: string;

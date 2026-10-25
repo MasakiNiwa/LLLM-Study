@@ -1,6 +1,7 @@
 /**
- * 「AI モデル」画面の「クラウド AI（Gemini API）」: 接続先の切り替え・API キーの登録と解除・モデルの選択。
- * キーは合言葉で暗号化してこの端末に保存するのが既定（lib/cloud/keyVault.ts）。考え方は docs/CLOUD_AI.md。
+ * 「AI モデル」画面の「AI の接続先」: 端末内の AI / クラウド AI（Gemini・OpenAI）の切り替え、
+ * API キーの登録と解除、モデルの選択。キーは合言葉で暗号化してこの端末に保存するのが既定
+ * （lib/cloud/keyVault.ts）。考え方は docs/CLOUD_AI.md。
  */
 import { useState, type FormEvent, type ReactNode } from 'react';
 import { Cloud, KeyRound, Lock, LockOpen, RefreshCw, ShieldCheck, Trash2 } from 'lucide-react';
@@ -9,13 +10,11 @@ import { Button } from '@/components/ui/Button';
 import { Card } from '@/components/ui/Card';
 import { ConfirmDialog } from '@/components/ui/ConfirmDialog';
 import { Select } from '@/components/ui/Select';
-import { MIN_PASSPHRASE_LENGTH } from '@/lib/cloud/keyVault';
+import { MIN_PASSPHRASE_LENGTH, type CloudProviderId } from '@/lib/cloud/keyVault';
 import { cn } from '@/lib/utils/cn';
 import { errorMessage } from '@/lib/utils/format';
 import { useSettings, type AiProvider } from '@/features/settings/settingsStore';
 import { useCloud } from './cloudStore';
-
-const AI_STUDIO_KEY_URL = 'https://aistudio.google.com/apikey';
 
 const INPUT =
   'h-11 w-full min-w-0 rounded-xl border border-slate-300 bg-white px-3 text-base dark:border-slate-700 dark:bg-slate-950';
@@ -33,48 +32,123 @@ function ExtLink({ href, children }: { href: string; children: ReactNode }) {
   );
 }
 
-/** クラウド AI に送る内容の説明（はじめて Gemini を選ぶときに同意してもらう） */
-function ConsentText() {
-  return (
-    <div className="space-y-2 text-sm">
-      <p>
-        Gemini API を使うと、AI に頼んだ内容（カードの問題と答え・あなたの答え・チャットの文章・
-        学習の状況）が Google に送られます。
-      </p>
-      <p className="rounded-lg bg-amber-50 px-3 py-2 text-amber-900 dark:bg-amber-950/40 dark:text-amber-200">
-        <strong>
-          無料枠では、送った内容が Google のサービスの改善に使われ、人が読むこともあります。
-        </strong>
-        個人情報や社外秘の内容は送らないでください。
-      </p>
-      <p>
-        API キーは合言葉で暗号化してこの端末にだけ保存し、Google 以外には送りません。
-        学習記録・教材はこれまでどおり端末内に保存されます。
-      </p>
-    </div>
-  );
+function Code({ children }: { children: ReactNode }) {
+  return <code className="rounded bg-white px-1 dark:bg-slate-900">{children}</code>;
 }
+
+interface ProviderInfo {
+  label: string;
+  hint: string;
+  company: string;
+  keyPage: { url: string; name: string };
+  keyPlaceholder: string;
+  /** 送る内容の説明（はじめて選ぶときに同意してもらう） */
+  consent: ReactNode;
+  /** キーを安全に使うための設定 */
+  safety: ReactNode[];
+}
+
+const COMMON_CONSENT_TAIL = (company: string) => (
+  <p>
+    API キーは合言葉で暗号化してこの端末にだけ保存し、{company}
+    以外には送りません。学習記録・教材はこれまでどおり端末内に保存されます。
+  </p>
+);
+
+const SENT_CONTENT =
+  'AI に頼んだ内容（カードの問題と答え・あなたの答え・チャットの文章・学習の状況）';
+
+const PROVIDERS: Record<CloudProviderId, ProviderInfo> = {
+  gemini: {
+    label: 'Gemini API',
+    hint: 'Google のクラウド AI。無料枠があります',
+    company: 'Google',
+    keyPage: { url: 'https://aistudio.google.com/apikey', name: 'Google AI Studio' },
+    keyPlaceholder: 'AIza…',
+    consent: (
+      <>
+        <p>Gemini API を使うと、{SENT_CONTENT}が Google に送られます。</p>
+        <p className="rounded-lg bg-amber-50 px-3 py-2 text-amber-900 dark:bg-amber-950/40 dark:text-amber-200">
+          <strong>
+            無料枠では、送った内容が Google のサービスの改善に使われ、人が読むこともあります。
+          </strong>
+          個人情報や社外秘の内容は送らないでください。
+        </p>
+        {COMMON_CONSENT_TAIL('Google')}
+      </>
+    ),
+    safety: [
+      'このアプリ専用のキーを作り、ほかの用途と使い回さないでください。',
+      <>
+        <ExtLink href="https://console.cloud.google.com/apis/credentials">
+          Google Cloud の「認証情報」
+        </ExtLink>
+        でキーを開き、「アプリケーションの制限」を「ウェブサイト」にして{' '}
+        <Code>https://masakiniwa.github.io/*</Code> を追加し、「API の制限」で Generative Language
+        API だけを許可すると、キーが漏れても他のサイトからは使えません。
+      </>,
+      'AI Studio で作ったキーは Google Cloud のプロジェクトの中にあります。Google Cloud の画面にキーが出ないときは、AI Studio でそのプロジェクトを読み込む（インポートする）と、制限を設定できるようになります。請求先（課金）を設定しなければ無料枠のまま使えます。制限をかけなくてもアプリは使えます。',
+      '心配なときは、いつでもキーを削除（AI Studio で無効化）して作り直せます。',
+    ],
+  },
+  openai: {
+    label: 'OpenAI API',
+    hint: 'ChatGPT の OpenAI のモデル。使った分だけ課金されます',
+    company: 'OpenAI',
+    keyPage: { url: 'https://platform.openai.com/api-keys', name: 'OpenAI の API keys' },
+    keyPlaceholder: 'sk-…',
+    consent: (
+      <>
+        <p>OpenAI API を使うと、{SENT_CONTENT}が OpenAI に送られます。</p>
+        <p className="rounded-lg bg-amber-50 px-3 py-2 text-amber-900 dark:bg-amber-950/40 dark:text-amber-200">
+          <strong>使った分だけ料金がかかります（トークン数に応じた従量課金）。</strong>
+          OpenAI の説明では、API
+          に送った内容は原則として学習には使われず、不正利用の監視のため一定期間保存されます（詳しくは
+          OpenAI の規約を確認してください）。個人情報や社外秘の内容は送らないでください。
+        </p>
+        {COMMON_CONSENT_TAIL('OpenAI')}
+      </>
+    ),
+    safety: [
+      <>
+        OpenAI の画面で<strong>このアプリ専用のプロジェクト</strong>
+        を作り、そのプロジェクトでキーを作ってください。
+      </>,
+      <>
+        プロジェクトの「Limits」で<strong>月の予算（使える上限額）</strong>
+        を設定すると、万一キーが漏れても使われる金額を抑えられます。
+      </>,
+      <>
+        キーを作るときに権限を「Restricted」にして、Models を Read、Model capabilities を Write
+        だけにすると、ほかの機能には使えないキーになります。
+      </>,
+      'OpenAI のキーには「このサイトからだけ」という制限がありません。使わないときはロックし、心配なときはすぐキーを削除（OpenAI の画面で無効化）して作り直してください。',
+    ],
+  },
+};
+
+const PROVIDER_IDS = Object.keys(PROVIDERS) as CloudProviderId[];
 
 function ProviderChoice() {
   const provider = useSettings((s) => s.aiProvider);
-  const consent = useSettings((s) => s.cloudConsent);
+  const consents = useSettings((s) => s.cloudConsents);
   const update = useSettings((s) => s.update);
-  const [askConsent, setAskConsent] = useState(false);
+  const [askConsent, setAskConsent] = useState<CloudProviderId | null>(null);
 
   const choose = (p: AiProvider) => {
-    if (p === 'gemini' && !consent) {
-      setAskConsent(true);
+    if (p !== 'local' && !consents[p]) {
+      setAskConsent(p);
       return;
     }
     update({ aiProvider: p });
   };
   const options: { value: AiProvider; label: string; hint: string }[] = [
     { value: 'local', label: '端末内の AI', hint: 'ブラウザの中で動くモデル。内容は外に出ません' },
-    { value: 'gemini', label: 'Gemini API', hint: 'Google のクラウド AI。詳しく解説してくれます' },
+    ...PROVIDER_IDS.map((p) => ({ value: p, label: PROVIDERS[p].label, hint: PROVIDERS[p].hint })),
   ];
   return (
     <>
-      <div role="radiogroup" aria-label="AI の接続先" className="grid gap-2 sm:grid-cols-2">
+      <div role="radiogroup" aria-label="AI の接続先" className="grid gap-2 sm:grid-cols-3">
         {options.map((o) => (
           <button
             key={o.value}
@@ -95,23 +169,30 @@ function ProviderChoice() {
         ))}
       </div>
       <ConfirmDialog
-        open={askConsent}
-        title="Gemini API に送る内容について"
-        description={<ConsentText />}
+        open={askConsent !== null}
+        title={askConsent ? `${PROVIDERS[askConsent].label} に送る内容について` : ''}
+        description={
+          askConsent && <div className="space-y-2 text-sm">{PROVIDERS[askConsent].consent}</div>
+        }
         confirmLabel="同意して使う"
         onConfirm={() => {
-          update({ cloudConsent: true, aiProvider: 'gemini' });
-          setAskConsent(false);
+          if (!askConsent) return;
+          update({
+            cloudConsents: { ...consents, [askConsent]: true },
+            aiProvider: askConsent,
+          });
+          setAskConsent(null);
         }}
-        onClose={() => setAskConsent(false)}
+        onClose={() => setAskConsent(null)}
       />
     </>
   );
 }
 
-function RegisterForm() {
+function RegisterForm({ provider }: { provider: CloudProviderId }) {
+  const info = PROVIDERS[provider];
   const register = useCloud((s) => s.register);
-  const checking = useCloud((s) => s.checking);
+  const checking = useCloud((s) => s.checking === provider);
   const [apiKey, setApiKey] = useState('');
   const [mode, setMode] = useState<'encrypted' | 'session'>('encrypted');
   const [pass, setPass] = useState('');
@@ -134,11 +215,11 @@ function RegisterForm() {
     if (!canSubmit) return;
     setError(null);
     try {
-      await register(apiKey, mode === 'encrypted' ? pass : null);
+      await register(provider, apiKey, mode === 'encrypted' ? pass : null);
       setApiKey('');
       setPass('');
       setPass2('');
-      toast.success('API キーを登録しました');
+      toast.success(`${info.label} のキーを登録しました`);
     } catch (err) {
       setError(errorMessage(err));
     }
@@ -147,8 +228,8 @@ function RegisterForm() {
   return (
     <form onSubmit={(e) => void submit(e)} className="space-y-3">
       <p className="text-sm text-slate-600 dark:text-slate-400">
-        <ExtLink href={AI_STUDIO_KEY_URL}>Google AI Studio</ExtLink> で API
-        キーを作って貼り付けてください（無料枠で使えます）。
+        <ExtLink href={info.keyPage.url}>{info.keyPage.name}</ExtLink> で API
+        キーを作って貼り付けてください。
       </p>
       <label className="block space-y-1">
         <span className="text-sm font-medium">API キー</span>
@@ -158,7 +239,7 @@ function RegisterForm() {
           onChange={(e) => setApiKey(e.target.value)}
           autoComplete="off"
           spellCheck={false}
-          placeholder="AIza…"
+          placeholder={info.keyPlaceholder}
           className={INPUT}
         />
       </label>
@@ -177,7 +258,7 @@ function RegisterForm() {
           <label key={value} className="flex cursor-pointer items-start gap-2">
             <input
               type="radio"
-              name="cloud-key-mode"
+              name={`cloud-key-mode-${provider}`}
               checked={mode === value}
               onChange={() => setMode(value)}
               className="mt-1 accent-accent-600"
@@ -229,8 +310,8 @@ function RegisterForm() {
   );
 }
 
-function UnlockForm() {
-  const stored = useCloud((s) => s.stored);
+function UnlockForm({ provider }: { provider: CloudProviderId }) {
+  const stored = useCloud((s) => s.stored[provider]);
   const unlock = useCloud((s) => s.unlock);
   const [pass, setPass] = useState('');
   const [busy, setBusy] = useState(false);
@@ -241,7 +322,7 @@ function UnlockForm() {
     setBusy(true);
     setError(null);
     try {
-      await unlock(pass);
+      await unlock(provider, pass);
       setPass('');
     } catch (err) {
       setError(errorMessage(err));
@@ -275,14 +356,15 @@ function UnlockForm() {
   );
 }
 
-function UnlockedPanel() {
-  const stored = useCloud((s) => s.stored);
-  const models = useCloud((s) => s.models);
-  const modelsError = useCloud((s) => s.modelsError);
-  const checking = useCloud((s) => s.checking);
+function UnlockedPanel({ provider }: { provider: CloudProviderId }) {
+  const stored = useCloud((s) => s.stored[provider]);
+  const models = useCloud((s) => s.models[provider]);
+  const modelsError = useCloud((s) => s.modelsError[provider]);
+  const checking = useCloud((s) => s.checking === provider);
   const refresh = useCloud((s) => s.refreshModels);
   const lock = useCloud((s) => s.lock);
-  const model = useSettings((s) => s.geminiModel);
+  const cloudModels = useSettings((s) => s.cloudModels);
+  const model = cloudModels[provider] ?? '';
   const update = useSettings((s) => s.update);
   const options = models.length
     ? models.map((m) => ({ value: m.id, label: m.displayName }))
@@ -301,13 +383,18 @@ function UnlockedPanel() {
         {options.length > 0 && (
           <Select
             value={model}
-            onChange={(v) => update({ geminiModel: v })}
+            onChange={(v) => update({ cloudModels: { ...cloudModels, [provider]: v } })}
             options={options}
-            aria-label="Gemini のモデル"
+            aria-label={`${PROVIDERS[provider].label} のモデル`}
             className="min-w-0 flex-1 basis-48"
           />
         )}
-        <Button size="sm" variant="ghost" onClick={() => void refresh()} disabled={checking}>
+        <Button
+          size="sm"
+          variant="ghost"
+          onClick={() => void refresh(provider)}
+          disabled={checking}
+        >
           <RefreshCw className={checking ? 'animate-spin' : undefined} />
           接続を確かめる
         </Button>
@@ -318,7 +405,7 @@ function UnlockedPanel() {
         </p>
       )}
       {stored && (
-        <Button size="sm" variant="secondary" onClick={lock}>
+        <Button size="sm" variant="secondary" onClick={() => lock(provider)}>
           <Lock />
           ロックする
         </Button>
@@ -327,32 +414,16 @@ function UnlockedPanel() {
   );
 }
 
-/** キーの漏れに備える設定（Google Cloud の画面で行う） */
-function KeySafetyGuide() {
+function KeySafetyGuide({ provider }: { provider: CloudProviderId }) {
   return (
     <details className="rounded-xl bg-slate-50 px-3 py-2 text-sm text-slate-600 dark:bg-slate-800/60 dark:text-slate-300">
       <summary className="cursor-pointer font-medium">
         キーを安全に使うために（おすすめの設定）
       </summary>
       <ul className="mt-2 list-disc space-y-1.5 pl-5">
-        <li>このアプリ専用のキーを作り、ほかの用途と使い回さないでください。</li>
-        <li>
-          <ExtLink href="https://console.cloud.google.com/apis/credentials">
-            Google Cloud の「認証情報」
-          </ExtLink>
-          でキーを開き、「アプリケーションの制限」を「ウェブサイト」にして{' '}
-          <code className="rounded bg-white px-1 dark:bg-slate-900">
-            https://masakiniwa.github.io/*
-          </code>{' '}
-          を追加し、「API の制限」で Generative Language API
-          だけを許可すると、キーが漏れても他のサイトからは使えません。
-        </li>
-        <li>
-          AI Studio で作ったキーは Google Cloud のプロジェクトの中にあります。Google Cloud
-          の画面にキーが出ないときは、AI Studio
-          でそのプロジェクトを読み込む（インポートする）と、制限を設定できるようになります。請求先（課金）を設定しなければ無料枠のまま使えます。制限をかけなくてもアプリは使えます。
-        </li>
-        <li>心配なときは、いつでもキーを削除（AI Studio で無効化）して作り直せます。</li>
+        {PROVIDERS[provider].safety.map((item, i) => (
+          <li key={i}>{item}</li>
+        ))}
         <li>共用のパソコンでは「今回だけ」を選ぶか、使い終わったらロックしてください。</li>
       </ul>
     </details>
@@ -360,9 +431,10 @@ function KeySafetyGuide() {
 }
 
 export function CloudSettings() {
-  const provider = useSettings((s) => s.aiProvider);
-  const stored = useCloud((s) => s.stored);
-  const unlocked = useCloud((s) => s.unlocked);
+  const aiProvider = useSettings((s) => s.aiProvider);
+  const provider = aiProvider === 'local' ? null : aiProvider;
+  const stored = useCloud((s) => (provider ? s.stored[provider] : null));
+  const unlocked = useCloud((s) => (provider ? s.unlocked[provider] : false));
   const remove = useCloud((s) => s.remove);
   const [confirmRemove, setConfirmRemove] = useState(false);
   return (
@@ -374,16 +446,22 @@ export function CloudSettings() {
         <div className="min-w-0">
           <h2 className="font-semibold">AI の接続先</h2>
           <p className="text-sm text-slate-600 dark:text-slate-400">
-            クラウド AI（Gemini API）の API キーを使うと、より詳しい解説やチャットができます。
+            クラウド AI（Gemini・OpenAI）の API キーを使うと、より詳しい解説やチャットができます。
             正誤の判定や学習記録はこれまでどおりアプリが行います。
           </p>
         </div>
       </div>
       <ProviderChoice />
-      {provider === 'gemini' && (
+      {provider && (
         <div className="space-y-4 border-t border-slate-100 pt-4 dark:border-slate-800">
-          {unlocked ? <UnlockedPanel /> : stored ? <UnlockForm /> : <RegisterForm />}
-          <KeySafetyGuide />
+          {unlocked ? (
+            <UnlockedPanel provider={provider} />
+          ) : stored ? (
+            <UnlockForm provider={provider} />
+          ) : (
+            <RegisterForm key={provider} provider={provider} />
+          )}
+          <KeySafetyGuide provider={provider} />
           {(stored || unlocked) && (
             <Button size="sm" variant="ghost" onClick={() => setConfirmRemove(true)}>
               <Trash2 />
@@ -394,12 +472,13 @@ export function CloudSettings() {
       )}
       <ConfirmDialog
         open={confirmRemove}
-        title="API キーを削除しますか？"
+        title={provider ? `${PROVIDERS[provider].label} のキーを削除しますか？` : ''}
         description="この端末に保存した暗号化済みのキーと、使用中のキーを消します。AI の接続先は端末内の AI に戻ります。"
         confirmLabel="削除"
         danger
         onConfirm={() => {
-          remove();
+          if (!provider) return;
+          remove(provider);
           setConfirmRemove(false);
           toast.success('API キーを削除しました');
         }}

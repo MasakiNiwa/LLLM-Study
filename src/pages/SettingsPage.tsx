@@ -910,7 +910,7 @@ export default function SettingsPage() {
         onConfirm={async () => {
           await clearAllData();
           await useChat.getState().clear();
-          useCloud.getState().remove();
+          useCloud.getState().removeAll();
           afterDataChange();
           toast.success('すべての学習データを削除しました');
         }}

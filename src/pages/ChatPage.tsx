@@ -78,7 +78,7 @@ function EmptyState({ onPick }: { onPick: (text: string) => void }) {
           <div className="space-y-3 rounded-2xl border border-dashed border-slate-300 p-4 text-sm text-slate-600 dark:border-slate-700 dark:text-slate-400">
             <p>
               AI パートナーはこの端末のブラウザの中で動くローカル AI
-              です（会話の内容は外部に送信されません）。クラウド AI（Gemini API）の API
+              です（会話の内容は外部に送信されません）。クラウド AI（Gemini・OpenAI）の API
               キーを登録して使うこともできます。
             </p>
             <Link href="/models">

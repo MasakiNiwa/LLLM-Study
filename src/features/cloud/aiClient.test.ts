@@ -18,6 +18,11 @@ vi.mock('@/lib/cloud/gemini', async (orig) => ({
   ...(await orig<typeof import('@/lib/cloud/gemini')>()),
   geminiGenerate: (...args: unknown[]) => geminiGenerate(...args),
 }));
+const openaiGenerate = vi.fn();
+vi.mock('@/lib/cloud/openai', async (orig) => ({
+  ...(await orig<typeof import('@/lib/cloud/openai')>()),
+  openaiGenerate: (...args: unknown[]) => openaiGenerate(...args),
+}));
 vi.mock('sonner', () => ({ toast: { info: vi.fn(), error: vi.fn(), success: vi.fn() } }));
 
 const { ai, aiReadyNow } = await import('./aiClient');
@@ -42,8 +47,9 @@ const req = {
 beforeEach(() => {
   localGenerate.mockClear();
   geminiGenerate.mockReset();
+  openaiGenerate.mockReset();
   unlockedKey = 'KEY';
-  useSettings.setState({ aiProvider: 'gemini', geminiModel: 'gemini-test' });
+  useSettings.setState({ aiProvider: 'gemini', cloudModels: { gemini: 'gemini-test' } });
   useEngine.setState({ status: 'empty' });
 });
 
@@ -55,6 +61,15 @@ describe('aiClient', () => {
     expect(geminiGenerate).toHaveBeenCalledOnce();
     expect(geminiGenerate.mock.calls[0][1]).toMatchObject({ apiKey: 'KEY', model: 'gemini-test' });
     expect(localGenerate).not.toHaveBeenCalled();
+  });
+
+  it('接続先が OpenAI なら OpenAI のキーとモデルで生成する', async () => {
+    useSettings.setState({ aiProvider: 'openai', cloudModels: { openai: 'gpt-test-mini' } });
+    openaiGenerate.mockResolvedValue({ status: 'done', stats: { totalMs: 1 } });
+    await ai.generate(req, () => {});
+    expect(openaiGenerate).toHaveBeenCalledOnce();
+    expect(openaiGenerate.mock.calls[0][1]).toMatchObject({ model: 'gpt-test-mini' });
+    expect(geminiGenerate).not.toHaveBeenCalled();
   });
 
   it('接続先が端末内なら、キーがあっても端末内で生成する', async () => {
