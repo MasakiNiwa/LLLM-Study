@@ -14,6 +14,7 @@ import { LoadProgressCard } from '@/features/models/LoadProgressCard';
 import { ModelStatusChip } from '@/features/engine/ModelStatusChip';
 import { useEngine } from '@/features/engine/engineStore';
 import { useSettings } from '@/features/settings/settingsStore';
+import { useAiReady } from '@/features/cloud/aiClient';
 
 const SUGGESTIONS = [
   '今日の学習の調子はどう？',
@@ -41,7 +42,7 @@ const CARD_SUGGESTIONS = [
 function EmptyState({ onPick }: { onPick: (text: string) => void }) {
   const personaId = useSettings((s) => s.persona);
   const custom = useSettings((s) => s.customPersona);
-  const ready = useEngine((s) => s.status === 'ready');
+  const ready = useAiReady();
   const engineStatus = useEngine((s) => s.status);
   const attached = useAiFocus((s) => s.attachedCardId);
   const helpMode = useChat((s) => s.helpMode);
@@ -77,7 +78,8 @@ function EmptyState({ onPick }: { onPick: (text: string) => void }) {
           <div className="space-y-3 rounded-2xl border border-dashed border-slate-300 p-4 text-sm text-slate-600 dark:border-slate-700 dark:text-slate-400">
             <p>
               AI パートナーはこの端末のブラウザの中で動くローカル AI
-              です。会話の内容は外部に送信されません。
+              です（会話の内容は外部に送信されません）。クラウド AI（Gemini API）の API
+              キーを登録して使うこともできます。
             </p>
             <Link href="/models">
               <Button variant="primary">

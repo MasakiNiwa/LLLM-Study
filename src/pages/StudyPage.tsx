@@ -36,7 +36,6 @@ import { getPersona } from '@/features/ai/personas';
 import { CardFace } from '@/features/items/ItemCard';
 import { isInteractive } from '@/lib/packs/interactiveCheck';
 import type { ItemType } from '@/lib/packs/schema';
-import { useEngine } from '@/features/engine/engineStore';
 import { useSettings } from '@/features/settings/settingsStore';
 import { AiAssistPanel } from '@/features/study/AiAssistPanel';
 import { LEECH_LAPSES } from '@/features/study/cardActions';
@@ -53,6 +52,7 @@ import { ScopePicker } from '@/features/study/ScopePicker';
 import { RevealReaction } from '@/features/study/RevealReaction';
 import { StudyTimers } from '@/features/study/StudyTimers';
 import { useStudy } from '@/features/study/studyStore';
+import { useAiReady } from '@/features/cloud/aiClient';
 
 /** カードの中で答える種類で、答える前に下の欄に出す案内 */
 const IN_CARD_HINTS: Partial<Record<ItemType, string>> = {
@@ -89,7 +89,7 @@ function SessionSummary() {
   const personaId = useSettings((s) => s.persona);
   const custom = useSettings((s) => s.customPersona);
   const persona = getPersona(personaId, custom);
-  const aiReady = useEngine((s) => s.status === 'ready');
+  const aiReady = useAiReady();
   const unlimited = useSettings((s) => s.noDailyLimit);
   const practice = useStudy((s) => s.mode === 'practice');
   const timeUp = useStudy((s) => s.timeUp);

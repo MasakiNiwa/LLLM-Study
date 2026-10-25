@@ -16,6 +16,7 @@ import { pickQuizItems, type QuizPick } from '@/features/quiz/quizSelect';
 import { SpeakButton } from '@/features/items/ItemCard';
 import { speechLang } from '@/lib/speech/lang';
 import { useSettings } from '@/features/settings/settingsStore';
+import { useAiReady } from '@/features/cloud/aiClient';
 
 const COUNT = 5;
 /** 1 問あたりの作り直しの上限（AI の出力が検証を通らないとき） */
@@ -73,7 +74,7 @@ function Sentence({ text, answer }: { text: string; answer?: string }) {
  * 練習なので、FSRS の復習予定には影響しない。
  */
 export default function QuizPage() {
-  const ready = useEngine((s) => s.status === 'ready');
+  const ready = useAiReady();
   const engineStatus = useEngine((s) => s.status);
   const personaId = useSettings((s) => s.persona);
   const custom = useSettings((s) => s.customPersona);

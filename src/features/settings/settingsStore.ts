@@ -42,6 +42,9 @@ export const STUDY_COMPACT_LABELS: Record<StudyCompact, string> = {
   off: '詰めない',
 };
 
+/** AI の接続先 */
+export type AiProvider = 'local' | 'gemini';
+
 export interface Settings extends Omit<ConversationSettings, 'systemPrompt'> {
   // ---- 学習（アルゴリズム） ----
   newPerDay: number;
@@ -99,6 +102,12 @@ export interface Settings extends Omit<ConversationSettings, 'systemPrompt'> {
   // ---- エンジン（変更後はモデルの再読み込みが必要） ----
   backend: BackendSetting;
   maxNumTokens: number;
+  /** AI の接続先（端末内のモデルか、クラウド AI の API か） */
+  aiProvider: AiProvider;
+  /** Gemini API で使うモデル（空なら、キーを登録したときに既定のモデルを選ぶ） */
+  geminiModel: string;
+  /** クラウド AI に送る内容の説明に同意したか */
+  cloudConsent: boolean;
   // ---- モデル管理 ----
   saveImportedModels: boolean;
   autoLoadLastModel: boolean;
@@ -164,6 +173,9 @@ export const DEFAULT_SETTINGS: Settings = {
   enableThinking: false,
 
   backend: 'auto',
+  aiProvider: 'local',
+  geminiModel: '',
+  cloudConsent: false,
   maxNumTokens: 4096,
 
   saveImportedModels: true,
@@ -231,6 +243,10 @@ export function getSchedulerOptions(s: Settings): SchedulerOptions {
 /** 端末ごとに決める設定（バックアップに含めない）: モデル・エンジン・読み上げの声・案内の状態など */
 const DEVICE_ONLY: (keyof Settings)[] = [
   'backend',
+  // クラウド AI の接続はキーと一緒に端末ごとに決める（バックアップから戻しても勝手に接続しない）
+  'aiProvider',
+  'geminiModel',
+  'cloudConsent',
   'maxNumTokens',
   'saveImportedModels',
   'autoLoadLastModel',

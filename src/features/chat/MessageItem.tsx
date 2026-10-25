@@ -5,9 +5,9 @@ import { ElapsedCounter } from '@/components/ui/ElapsedCounter';
 import { cn } from '@/lib/utils/cn';
 import { formatDuration } from '@/lib/utils/format';
 import { TOOL_LABELS } from '@/features/ai/tools';
-import { useEngine } from '@/features/engine/engineStore';
 import { useChat, type ChatMessage } from './chatStore';
 import { ProposalCard } from './ProposalCard';
+import { useAiReady } from '@/features/cloud/aiClient';
 
 const Markdown = lazy(() => import('./markdown/Markdown'));
 
@@ -84,7 +84,7 @@ export const MessageItem = memo(function MessageItem({
 }: MessageItemProps) {
   const regenerate = useChat((s) => s.regenerate);
   // モデルが読み込まれていないときは作り直せないので、ボタンを出さない
-  const engineReady = useEngine((s) => s.status === 'ready');
+  const engineReady = useAiReady();
   const toolActivity = useChat((s) => (isLast ? s.toolActivity : null));
   const [showThought, setShowThought] = useState(false);
 
@@ -189,6 +189,14 @@ export const MessageItem = memo(function MessageItem({
             )}
             {showStats && message.stats && (
               <span className="ml-1 text-[0.7rem] text-slate-400 tabular-nums">
+                {message.stats.provider && (
+                  <span
+                    className="mr-1 rounded bg-sky-100 px-1 py-px text-sky-800 dark:bg-sky-900/40 dark:text-sky-200"
+                    title={`クラウド AI: ${message.stats.provider}`}
+                  >
+                    クラウド
+                  </span>
+                )}
                 {formatDuration(message.stats.totalMs)}
                 {message.stats.decodeTokensPerSec
                   ? ` · ${message.stats.decodeTokensPerSec.toFixed(1)} tok/s`

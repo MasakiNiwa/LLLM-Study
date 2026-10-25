@@ -3,6 +3,8 @@ import { Link } from 'wouter';
 import { cn } from '@/lib/utils/cn';
 import { formatPercent } from '@/lib/utils/format';
 import { useEngine } from './engineStore';
+import { useCloud } from '@/features/cloud/cloudStore';
+import { useSettings } from '@/features/settings/settingsStore';
 
 /** 現在のモデル状態を表示する小さなチップ（クリックでモデル画面へ） */
 export function ModelStatusChip({
@@ -18,11 +20,21 @@ export function ModelStatusChip({
   const loadingName = useEngine((s) => s.loadingName);
   const progress = useEngine((s) => s.progress);
 
+  const provider = useSettings((s) => s.aiProvider);
+  const geminiModel = useSettings((s) => s.geminiModel);
+  const cloudUnlocked = useCloud((s) => s.unlocked);
+
   let dot = 'bg-slate-400';
   let label = 'モデル未読み込み';
   /** 幅が足りなくても省略しない部分（読み込みの割合など） */
   let suffix = '';
-  if (status === 'ready' && model) {
+  if (provider === 'gemini' && cloudUnlocked && geminiModel) {
+    dot = 'bg-sky-500';
+    label = `Gemini · ${geminiModel.replace(/^gemini-/, '')}`;
+  } else if (provider === 'gemini' && status !== 'ready') {
+    dot = 'bg-amber-500';
+    label = 'Gemini（ロック中）';
+  } else if (status === 'ready' && model) {
     dot = 'bg-emerald-500';
     label = model.name.replace(/\.litertlm$/, '');
   } else if (status === 'loading') {

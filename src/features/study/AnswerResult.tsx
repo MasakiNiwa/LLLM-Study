@@ -11,8 +11,8 @@ import { judgePrompt, parseJudge, type JudgeResult } from '@/features/ai/judge';
 import { runOneshotParsed } from '@/features/ai/oneshot';
 import { getPersona } from '@/features/ai/personas';
 import { cardForLlm } from '@/features/ai/studyContext';
-import { useEngine } from '@/features/engine/engineStore';
 import { useSettings } from '@/features/settings/settingsStore';
+import { useAiReady } from '@/features/cloud/aiClient';
 
 const VIEW: Record<AnswerVerdict, { label: string; icon: typeof CheckCircle2; className: string }> =
   {
@@ -46,7 +46,7 @@ interface AnswerResultProps {
 
 /** 入力した答えの答え合わせの結果。プログラムの判定に、必要なら AI の判定を重ねる */
 export function AnswerResult({ card, answer, check, verdict, onJudged }: AnswerResultProps) {
-  const ready = useEngine((s) => s.status === 'ready');
+  const ready = useAiReady();
   const busy = useAiBusy((s) => s.task !== null && s.task !== 'reaction');
   const personaId = useSettings((s) => s.persona);
   const custom = useSettings((s) => s.customPersona);

@@ -10,6 +10,7 @@ LLLM Study は、**ローカル LLM を使うアプリと、github.io のサイ�
 | [SHARED_MODEL_STORAGE.md](SHARED_MODEL_STORAGE.md) | 同じ github.io のサイト間で AI モデルを共有する保存領域の仕様（OPFS・ロック・通知・バックアップ）                                           | **モデルを扱うなら必ず従う** |
 | [LOCAL_LLM_GUIDE.md](LOCAL_LLM_GUIDE.md)           | ブラウザ内で LLM（LiteRT-LM）を動かす組み込み方。コピーして使うファイル・読み込みとフォールバック・生成・AI に任せすぎない設計・PWA・テスト | 参考にする                   |
 | [UI_GUIDE.md](UI_GUIDE.md)                         | スマホ / PC の画面の作り方と部品（ボトムシートの払う操作・折りたたみ見出しなど）                                                            | 参考にする                   |
+| [CLOUD_AI.md](CLOUD_AI.md)                         | クラウド AI の API をブラウザから使う方法（ユーザーが持ち込むキーの暗号化・CSP による送信先の限定・同意・端末内 AI への戻り先）             | クラウド AI を使うなら従う   |
 | [DARK_THEME.md](DARK_THEME.md)                     | 落ち着いたダークテーマの考え方と作り方（青みのないグレー・彩度を抑えたアクセントと状態の色・CSS 変数の差し替え）                            | 参考にする                   |
 | [SPEC.md](SPEC.md)                                 | LLLM Study の仕様とロードマップ                                                                                                             | このアプリ固有               |
 | [STUDY_PACK_FORMAT.md](STUDY_PACK_FORMAT.md)       | 教材パックの形式（自動生成）                                                                                                                | このアプリ固有               |
@@ -27,6 +28,7 @@ LLLM Study は、**ローカル LLM を使うアプリと、github.io のサイ�
   - [ ] [共通モデル保存領域](SHARED_MODEL_STORAGE.md) に従う（`shared-models/`・Web Locks・BroadcastChannel・アプリ名）
   - [ ] localStorage のキーや IndexedDB の名前にはアプリ固有の接頭辞を付ける（同じオリジンのほかのサイトとぶつけない）
   - [ ] [LOCAL_LLM_GUIDE.md](LOCAL_LLM_GUIDE.md) のファイルをコピーし、`APP_NAME` などを差し替える
+- [ ] クラウド AI の API を使うなら [CLOUD_AI.md](CLOUD_AI.md) に従う（キーは暗号化して保存・本番ビルドに CSP・キーはヘッダーで送る・送る内容の同意）
 - [ ] PWA にするなら manifest の `id` を決めて変えない
 - [ ] データを扱うなら:
   - [ ] バックアップの復元は、全件を検証してから置き換える（失敗したら今のデータに触れない）

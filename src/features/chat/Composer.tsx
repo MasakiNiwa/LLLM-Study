@@ -2,10 +2,10 @@ import { useRef, useState, type KeyboardEvent } from 'react';
 import { ArrowUp, Brain, Square } from 'lucide-react';
 import { Button } from '@/components/ui/Button';
 import { cn } from '@/lib/utils/cn';
-import { useEngine } from '@/features/engine/engineStore';
 import { useSettings } from '@/features/settings/settingsStore';
 import { useAiBusy } from '@/features/ai/aiBusy';
 import { useChat } from './chatStore';
+import { useAiReady } from '@/features/cloud/aiClient';
 
 /** タッチ主体の端末では Enter は改行にする */
 const isCoarsePointer = () => matchMedia('(pointer: coarse)').matches;
@@ -17,7 +17,7 @@ export function Composer({ initialText = '' }: { initialText?: string }) {
   const isGenerating = useChat((s) => s.isGenerating);
   const send = useChat((s) => s.send);
   const stop = useChat((s) => s.stop);
-  const ready = useEngine((s) => s.status === 'ready');
+  const ready = useAiReady();
   const enterToSend = useSettings((s) => s.enterToSend);
   const helpMode = useChat((s) => s.helpMode);
   // 思考モード（入力欄で送信ごとに切り替える。最初は設定の値）

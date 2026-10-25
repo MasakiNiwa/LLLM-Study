@@ -4,7 +4,7 @@
  */
 import { toast } from 'sonner';
 import { create } from 'zustand';
-import { llm } from '@/lib/llm/client';
+import { ai, aiReadyNow } from '@/features/cloud/aiClient';
 import type { ChatTurn } from '@/lib/llm/types';
 import { errorMessage } from '@/lib/utils/format';
 import { createId } from '@/lib/utils/id';
@@ -12,7 +12,6 @@ import { useAiBusy } from '@/features/ai/aiBusy';
 import { isAiBusyExceptReaction, preemptReaction, runOneshotParsed } from '@/features/ai/oneshot';
 import { splitThinking } from '@/features/chat/thinking';
 import { estimateTokens, trimHistory } from '@/features/chat/historyBudget';
-import { useEngine } from '@/features/engine/engineStore';
 import { useSettings } from '@/features/settings/settingsStore';
 import {
   feedbackPrompt,
@@ -50,8 +49,8 @@ interface PracticeState {
 export const usePractice = create<PracticeState>()((set, get) => {
   /** 今すぐ生成を始められるか（できなければ理由を知らせる） */
   const canGenerate = (): boolean => {
-    if (useEngine.getState().status !== 'ready') {
-      toast.error('AI モデルが読み込まれていません');
+    if (!aiReadyNow()) {
+      toast.error('AI が使えません');
       return false;
     }
     if (isAiBusyExceptReaction() || get().generating) {
@@ -90,7 +89,7 @@ export const usePractice = create<PracticeState>()((set, get) => {
     try {
       const systemPrompt = rolePlayPrompt(config);
       const userTurn = toTurn(user);
-      await llm.generate(
+      await ai.generate(
         {
           mode: 'chat',
           settings: {
@@ -140,7 +139,7 @@ export const usePractice = create<PracticeState>()((set, get) => {
     feedbackLoading: false,
 
     async start(config) {
-      if (get().generating) llm.cancel();
+      if (get().generating) ai.cancel();
       set({ config, messages: [], feedback: null });
       await generate([], { id: createId(), role: 'user', text: OPENING_MESSAGE, hidden: true });
     },
@@ -153,7 +152,7 @@ export const usePractice = create<PracticeState>()((set, get) => {
     },
 
     stop() {
-      if (get().generating) llm.cancel();
+      if (get().generating) ai.cancel();
     },
 
     async requestFeedback() {
@@ -197,7 +196,7 @@ export const usePractice = create<PracticeState>()((set, get) => {
     },
 
     reset() {
-      if (get().generating) llm.cancel();
+      if (get().generating) ai.cancel();
       set({ config: null, messages: [], feedback: null });
     },
   };

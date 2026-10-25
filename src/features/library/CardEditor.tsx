@@ -15,9 +15,9 @@ import { errorMessage } from '@/lib/utils/format';
 import { useAiBusy } from '@/features/ai/aiBusy';
 import { draftPrompt, parseDraft, type DraftType } from '@/features/ai/draft';
 import { runOneshotParsed } from '@/features/ai/oneshot';
-import { useEngine } from '@/features/engine/engineStore';
 import { ImagePicker } from '@/features/items/ImagePicker';
 import { useLibrary } from './libraryStore';
+import { useAiReady } from '@/features/cloud/aiClient';
 
 /** フォームの値（どの種類でも同じ形で持ち、保存時に項目へ変換する） */
 interface Form {
@@ -172,7 +172,7 @@ function EditorBody({ editing, onClose }: { editing: StudyItem | null; onClose: 
   const [form, setForm] = useState<Form>(() => (editing ? fromItem(editing) : EMPTY));
   const [saving, setSaving] = useState(false);
   const [drafting, setDrafting] = useState(false);
-  const ready = useEngine((s) => s.status === 'ready');
+  const ready = useAiReady();
   const busy = useAiBusy((s) => s.task !== null);
   const set = (patch: Partial<Form>) => setForm((f) => ({ ...f, ...patch }));
 

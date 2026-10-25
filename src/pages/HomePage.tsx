@@ -18,7 +18,6 @@ import { Button } from '@/components/ui/Button';
 import { Card } from '@/components/ui/Card';
 import { greetingText, getPersona } from '@/features/ai/personas';
 import { ModelStatusChip } from '@/features/engine/ModelStatusChip';
-import { useEngine } from '@/features/engine/engineStore';
 import { useLibrary } from '@/features/library/libraryStore';
 import { SampleList } from '@/features/library/SampleList';
 import { useSettings } from '@/features/settings/settingsStore';
@@ -28,6 +27,7 @@ import { ScopePicker } from '@/features/study/ScopePicker';
 import { PracticePicker } from '@/features/study/PracticePicker';
 import { useStudy } from '@/features/study/studyStore';
 import { BackupReminder } from '@/features/home/BackupReminder';
+import { useAiReady } from '@/features/cloud/aiClient';
 
 function ProgressRing({ value }: { value: number }) {
   const r = 34;
@@ -75,7 +75,7 @@ export default function HomePage() {
   const { overview } = useTodayOverview();
   const personaId = useSettings((s) => s.persona);
   const custom = useSettings((s) => s.customPersona);
-  const engineStatus = useEngine((s) => s.status);
+  const aiReady = useAiReady();
   const packCount = useLibrary((s) => s.packs.length);
   const libraryLoaded = useLibrary((s) => s.loaded);
   const persona = getPersona(personaId, custom);
@@ -204,7 +204,7 @@ export default function HomePage() {
           </Card>
         </Link>
 
-        {engineStatus === 'ready' && (
+        {aiReady && (
           <div className="grid grid-cols-2 gap-3">
             {!noPacks && (
               <Link href="/quiz" className="block">
@@ -229,17 +229,17 @@ export default function HomePage() {
           </div>
         )}
 
-        <Link href={engineStatus === 'ready' ? '/chat' : '/models'} className="block">
+        <Link href={aiReady ? '/chat' : '/models'} className="block">
           <Card className="flex items-center gap-3 p-4 transition-colors hover:bg-slate-50 dark:hover:bg-slate-800/50">
             <div className="flex size-10 items-center justify-center rounded-xl bg-gradient-to-br from-accent-500 to-violet-500 text-white">
               <Sparkles className="size-5" />
             </div>
             <div className="min-w-0 flex-1">
               <div className="font-semibold">
-                {engineStatus === 'ready' ? `${persona.name}と話す` : 'AI パートナーを呼ぶ'}
+                {aiReady ? `${persona.name}と話す` : 'AI パートナーを呼ぶ'}
               </div>
               <p className="text-sm text-slate-500 dark:text-slate-400">
-                {engineStatus === 'ready'
+                {aiReady
                   ? '学習の相談・解説・例文づくりなど'
                   : 'ブラウザ内で動くローカル AI（Gemma 4 など）を読み込みます'}
               </p>

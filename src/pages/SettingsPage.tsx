@@ -71,6 +71,7 @@ import { TimerOptions } from '@/features/study/StudyTimerMenu';
 import { ModelStatusChip } from '@/features/engine/ModelStatusChip';
 import { Link } from 'wouter';
 import { backupNow } from '@/features/home/backup';
+import { useCloud } from '@/features/cloud/cloudStore';
 
 const CONTEXT_OPTIONS = [2048, 4096, 8192, 16384, 32768].map((n) => ({
   value: String(n),
@@ -514,7 +515,7 @@ export default function SettingsPage() {
           </div>
           <Field
             label="ユーザーについて（任意）"
-            hint="性別と年齢層を AI に伝えて、話題や言葉づかいの参考にしてもらいます。端末の外には出ません"
+            hint="性別と年齢層を AI に伝えて、話題や言葉づかいの参考にしてもらいます（端末内の AI なら端末の外には出ません）"
             stacked
           >
             <div className="grid grid-cols-2 gap-2">
@@ -557,7 +558,7 @@ export default function SettingsPage() {
           <Field
             label="学習状況を AI に伝える"
             htmlFor="share-state"
-            hint="今日の学習数・連続日数・見ているカードなどを構造化データで渡します（端末の外には出ません）"
+            hint="今日の学習数・連続日数・見ているカードなどを構造化データで渡します（端末内の AI なら端末の外には出ません）"
           >
             <Switch
               id="share-state"
@@ -903,12 +904,13 @@ export default function SettingsPage() {
       <ConfirmDialog
         open={confirm === 'all'}
         title="すべての学習データを削除しますか？"
-        description="教材・学習記録・チャットをすべて削除します。必要ならバックアップを書き出してください。"
+        description="教材・学習記録・チャットと、この端末に保存したクラウド AI の API キーをすべて削除します。必要ならバックアップを書き出してください。"
         confirmLabel="削除"
         danger
         onConfirm={async () => {
           await clearAllData();
           await useChat.getState().clear();
+          useCloud.getState().remove();
           afterDataChange();
           toast.success('すべての学習データを削除しました');
         }}
