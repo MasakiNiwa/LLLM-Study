@@ -70,23 +70,27 @@ describe('geminiGenerate', () => {
     const events: GenerateEvent[] = [];
     const r = await geminiGenerate(
       request(),
-      { apiKey: 'SECRET-KEY', model: 'gemini-test', signal: new AbortController().signal },
+      { apiKey: 'SECRET-KEY', model: 'gemini-2.5-flash', signal: new AbortController().signal },
       (e) => events.push(e),
     );
     expect(r.status).toBe('done');
     expect(r.stats).toMatchObject({
-      provider: 'Gemini（gemini-test）',
+      provider: 'Gemini（gemini-2.5-flash）',
       prefillTokens: 20,
       decodeTokens: 6,
     });
     const [url, init] = fetchMock.mock.calls[0] as unknown as [string, RequestInit];
-    expect(url).toContain('/models/gemini-test:streamGenerateContent?alt=sse');
+    expect(url).toContain('/models/gemini-2.5-flash:streamGenerateContent?alt=sse');
     expect(url).not.toContain('SECRET-KEY');
     expect((init.headers as Record<string, string>)['x-goog-api-key']).toBe('SECRET-KEY');
     const body = JSON.parse(init.body as string);
     expect(body.systemInstruction.parts[0].text).toBe('あなたは先生です');
     expect(body.contents.map((c: { role: string }) => c.role)).toEqual(['user', 'model', 'user']);
+    // 2.5 Flash は考える過程を止められる。topK・topP（端末内のモデル向け）は送らない
     expect(body.generationConfig.thinkingConfig).toEqual({ thinkingBudget: 0 });
+    expect(body.generationConfig.topK).toBeUndefined();
+    expect(body.generationConfig.topP).toBeUndefined();
+    expect(body.generationConfig.maxOutputTokens).toBe(512);
     expect(events.filter((e) => e.type === 'delta').map((e) => 'text' in e && e.text)).toEqual([
       '借方は',
       '仕入です',
@@ -129,6 +133,11 @@ describe('geminiGenerate', () => {
             description: 'ヘルプを探す',
             parameters: { type: 'object', properties: { query: { type: 'string' } } },
           },
+          {
+            name: 'get_stats',
+            description: '統計',
+            parameters: { type: 'object', properties: {} },
+          },
         ],
       }),
       { apiKey: 'k', model: 'm', signal: new AbortController().signal },
@@ -143,6 +152,8 @@ describe('geminiGenerate', () => {
       (fetchMock.mock.calls[0] as unknown as [string, RequestInit])[1].body as string,
     );
     expect(first.tools[0].functionDeclarations[0].parameters.type).toBe('OBJECT');
+    // 引数のないツールには parameters を付けない
+    expect(first.tools[0].functionDeclarations[1].parameters).toBeUndefined();
     const second = JSON.parse(
       (fetchMock.mock.calls[1] as unknown as [string, RequestInit])[1].body as string,
     );
@@ -183,6 +194,82 @@ describe('geminiGenerate', () => {
       { type: 'delta', text: '考え中', channel: 'thought' },
       { type: 'delta', text: '答え' },
     ]);
+  });
+
+  it('考える過程を止められないモデルには止める設定を送らず、出力の上限に余裕を持たせる', async () => {
+    const fetchMock = vi.fn(
+      async () =>
+        new Response(
+          stream(
+            sse({ candidates: [{ content: { parts: [{ text: 'ok' }] }, finishReason: 'STOP' }] }),
+          ),
+          { status: 200 },
+        ),
+    );
+    vi.stubGlobal('fetch', fetchMock);
+    await geminiGenerate(
+      request(),
+      { apiKey: 'k', model: 'gemini-3-flash', signal: new AbortController().signal },
+      () => {},
+    );
+    const body = JSON.parse(
+      (fetchMock.mock.calls[0] as unknown as [string, RequestInit])[1].body as string,
+    );
+    expect(body.generationConfig.thinkingConfig).toBeUndefined();
+    expect(body.generationConfig.maxOutputTokens).toBeGreaterThanOrEqual(4096);
+  });
+
+  it('設定を受け付けない（400）なら、最小限の設定で送り直し、次からも最小限で送る', async () => {
+    const replies = [
+      new Response(
+        JSON.stringify({ error: { message: 'Request contains an invalid argument.' } }),
+        { status: 400 },
+      ),
+      new Response(
+        stream(
+          sse({ candidates: [{ content: { parts: [{ text: '答え' }] }, finishReason: 'STOP' }] }),
+        ),
+        { status: 200 },
+      ),
+      new Response(
+        stream(
+          sse({ candidates: [{ content: { parts: [{ text: '答え' }] }, finishReason: 'STOP' }] }),
+        ),
+        { status: 200 },
+      ),
+    ];
+    const fetchMock = vi.fn(async () => replies.shift() as Response);
+    vi.stubGlobal('fetch', fetchMock);
+    const thinking = request({ settings: { ...request().settings, enableThinking: true } });
+    const opts = { apiKey: 'k', model: 'gemini-new', signal: new AbortController().signal };
+    const r = await geminiGenerate(thinking, opts, () => {});
+    expect(r.status).toBe('done');
+    const bodyOf = (i: number) =>
+      JSON.parse((fetchMock.mock.calls[i] as unknown as [string, RequestInit])[1].body as string);
+    expect(bodyOf(0).generationConfig.thinkingConfig).toEqual({ includeThoughts: true });
+    expect(bodyOf(1).generationConfig.thinkingConfig).toBeUndefined();
+    expect(bodyOf(1).generationConfig.temperature).toBeUndefined();
+    await geminiGenerate(thinking, opts, () => {});
+    expect(fetchMock).toHaveBeenCalledTimes(3);
+    expect(bodyOf(2).generationConfig.thinkingConfig).toBeUndefined();
+  });
+
+  it('送り直しても受け付けられなければ、モデルを変える案内をつけて伝える', async () => {
+    vi.stubGlobal(
+      'fetch',
+      async () =>
+        new Response(
+          JSON.stringify({ error: { message: 'Request contains an invalid argument.' } }),
+          { status: 400 },
+        ),
+    );
+    await expect(
+      geminiGenerate(
+        request(),
+        { apiKey: 'k', model: 'gemini-broken', signal: new AbortController().signal },
+        () => {},
+      ),
+    ).rejects.toThrow('別のモデルを選ぶ');
   });
 
   it('上限に達したら、待てば使えるエラーにする', async () => {

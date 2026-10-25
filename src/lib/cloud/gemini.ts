@@ -105,6 +105,12 @@ async function toCloudError(res: Response): Promise<CloudError> {
       true,
     );
   if (s >= 500) return new CloudError(`Gemini のサーバーが応答できませんでした（${s}）。`, s, true);
+  if (s === 400)
+    return new CloudError(
+      `Gemini API が要求を受け付けませんでした（400）${detail ? `: ${detail}` : ''}\n「AI モデル」画面で別のモデルを選ぶと直ることがあります。`,
+      s,
+      false,
+    );
   return new CloudError(`Gemini API のエラー（${s}）${detail ? `: ${detail}` : ''}`, s, false);
 }
 
@@ -180,8 +186,19 @@ function turnToContent(t: ChatTurn): GeminiContent {
   return { role: t.role === 'assistant' ? 'model' : 'user', parts: [{ text: t.text }] };
 }
 
-/** 考える設定を受け付けないモデル（一度断られたら送らない） */
-const noThinkingConfig = new Set<string>();
+/**
+ * 細かい生成の設定を受け付けなかったモデル（一度 400 で断られたら、最小限の設定だけで送る）。
+ * モデルの世代によって受け付ける設定が違うため（例: 考える過程を止める thinkingBudget: 0 は 2.5 Flash 系だけ）
+ */
+const minimalConfigModels = new Set<string>();
+
+/** 考える過程を 0 にして止められるモデル（2.5 Flash 系）。ほかのモデルは止められないので、設定を送らない */
+function canDisableThinking(model: string): boolean {
+  return /gemini-2\.5-flash/i.test(model);
+}
+
+/** 考えるモデルは考える分も出力の上限に数えるので、答えまで届くよう下限を設ける */
+const MIN_OUTPUT_TOKENS = 4096;
 
 export interface GeminiGenerateOptions {
   apiKey: string;
@@ -208,48 +225,51 @@ export async function geminiGenerate(
             functionDeclarations: req.tools.map((t) => ({
               name: t.name,
               description: t.description,
-              ...(t.parameters && { parameters: toGeminiSchema(t.parameters) }),
+              // 引数のないツールは parameters を付けない（中身のない OBJECT は受け付けられない）
+              ...(t.parameters?.properties &&
+                Object.keys(t.parameters.properties).length > 0 && {
+                  parameters: toGeminiSchema(t.parameters),
+                }),
             })),
           },
         ]
       : undefined;
 
-  const body = (withThinkingConfig: boolean) => ({
+  // topK・topP は端末内のモデル（Gemma）向けの値なので送らない（クラウドのモデルは既定のほうが安定する）
+  const thinkingOff = !settings.enableThinking && canDisableThinking(opts.model);
+  const body = (minimal: boolean) => ({
     ...(settings.systemPrompt && {
       systemInstruction: { parts: [{ text: settings.systemPrompt }] },
     }),
     contents,
     ...(tools && { tools }),
     generationConfig: {
-      temperature: settings.temperature,
-      topP: settings.topP,
-      topK: settings.topK,
+      ...(!minimal && { temperature: settings.temperature }),
       maxOutputTokens: settings.enableThinking
         ? Math.max(settings.maxOutputTokens, MIN_OUTPUT_TOKENS_WITH_THINKING)
-        : settings.maxOutputTokens,
-      ...(withThinkingConfig && {
-        thinkingConfig: settings.enableThinking ? { includeThoughts: true } : { thinkingBudget: 0 },
-      }),
+        : thinkingOff
+          ? settings.maxOutputTokens
+          : Math.max(settings.maxOutputTokens, MIN_OUTPUT_TOKENS),
+      ...(!minimal && settings.enableThinking && { thinkingConfig: { includeThoughts: true } }),
+      ...(!minimal && thinkingOff && { thinkingConfig: { thinkingBudget: 0 } }),
     },
   });
 
   const post = async (): Promise<Response> => {
-    const send = (withThinking: boolean) =>
+    const send = (minimal: boolean) =>
       fetch(`${API}/models/${encodeURIComponent(opts.model)}:streamGenerateContent?alt=sse`, {
         method: 'POST',
         headers: headers(opts.apiKey),
-        body: JSON.stringify(body(withThinking)),
+        body: JSON.stringify(body(minimal)),
         signal: opts.signal,
       });
-    const useThinking = !noThinkingConfig.has(opts.model);
-    let res = await send(useThinking);
-    // 考える設定を受け付けないモデルなら、付けずに送り直す
-    if (res.status === 400 && useThinking) {
-      const text = await res.clone().text();
-      if (/thinking/i.test(text)) {
-        noThinkingConfig.add(opts.model);
-        res = await send(false);
-      }
+    const minimal = minimalConfigModels.has(opts.model);
+    const res = await send(minimal);
+    // 設定を受け付けないモデルなら、最小限の設定で送り直す（次からも最小限で送る）
+    if (res.status === 400 && !minimal) {
+      const retry = await send(true);
+      if (retry.ok) minimalConfigModels.add(opts.model);
+      return retry;
     }
     return res;
   };

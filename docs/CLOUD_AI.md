@@ -97,6 +97,7 @@ object-src 'none'; base-uri 'self'; form-action 'self'; …
   - アプリケーションの制限: 「ウェブサイト」にして `https://ユーザー名.github.io/*` を追加する
     （ブラウザはほかのオリジンへの通信でオリジンだけを Referer にするので、`/リポジトリ名/*` のようなパスまでの指定では一致しない）
   - API の制限: Generative Language API だけを許可する
+  - AI Studio で作ったキーは Google Cloud のプロジェクトの中にあるが、コンソールに表示されないことがある。そのときは AI Studio でプロジェクトを読み込む（インポートする）と制限を設定できる。請求先（課金）を設定しなければ無料枠のまま
 - OpenAI・Anthropic などでは、**プロジェクトごとのキー**と**利用額の上限**を設定する
 - 心配なときは、いつでもキーを無効化して作り直す
 - 共用のパソコンでは「今回だけ」を選ぶか、使い終わったらロックする
@@ -119,7 +120,12 @@ object-src 'none'; base-uri 'self'; form-action 'self'; …
 
 - `POST /v1beta/models/{モデル}:streamGenerateContent?alt=sse`（ストリーミング）
 - 履歴は毎回すべて送る（クラウドは会話を覚えていない）。役割は `user` / `model`、システムプロンプトは `systemInstruction`
-- 考える過程: オフなら `thinkingConfig: { thinkingBudget: 0 }`、オンなら `{ includeThoughts: true }`（考える過程は `thought: true` の部分で届く）。受け付けないモデルなら付けずに送り直す
+- **モデルの世代で受け付ける設定が違う**ので、送る設定は最小限にする
+  - `topK` / `topP` は送らない（端末内のモデル向けの値。クラウドのモデルは既定のほうが安定する）
+  - 考える過程: オンなら `thinkingConfig: { includeThoughts: true }`（`thought: true` の部分で届く）。オフで止められるのは 2.5 Flash 系だけ（`thinkingBudget: 0`）。ほかのモデルには止める設定を送らない
+  - 考えるモデルは考える分も出力の上限に数えるので、上限に下限（4096）を設ける
+  - それでも 400 で断られたら、最小限の設定（温度・考える設定なし）で送り直し、そのモデルでは次からも最小限で送る
+- ツールの引数がないときは `parameters` を付けない（中身のない OBJECT は受け付けられない）
 - ツール（関数呼び出し）: モデルが `functionCall` を返したら、アプリのツールを実行して `functionResponse` を返し、続きを生成する。**モデルが返した部分（署名 `thoughtSignature` を含む）はそのまま履歴に戻す**
 - モデルの一覧: `GET /v1beta/models`。文章の生成に使えるもの（`generateContent`）だけを出し、既定は安定版の Flash
 - エラー: 400（キーが違う）・403（キーの制限・API が無効）・404（モデルがない）・429（上限。待てば使える）・5xx（サーバーの不調）を言い換える
