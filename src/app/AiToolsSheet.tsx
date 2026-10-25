@@ -3,8 +3,8 @@ import { Link } from 'wouter';
 import { BottomSheet } from '@/components/ui/BottomSheet';
 import { useSheetClose } from '@/components/ui/sheetContext';
 import { ModelStatusChip } from '@/features/engine/ModelStatusChip';
-import { useEngine } from '@/features/engine/engineStore';
 import { AI_TOOL_ITEMS, MODELS_ITEM } from './navItems';
+import { useAiReady } from '@/features/cloud/aiClient';
 
 /**
  * スマホ: 下部ナビの「AI練習」から開く選択画面（画面の下から出るシート）。
@@ -19,7 +19,7 @@ export function AiToolsSheet({ open, onClose }: { open: boolean; onClose: () => 
 }
 
 function AiToolsList() {
-  const ready = useEngine((s) => s.status === 'ready');
+  const ready = useAiReady();
   const close = useSheetClose();
   return (
     <div className="space-y-3">

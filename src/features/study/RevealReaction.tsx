@@ -9,9 +9,9 @@ import { isAiBusy, useAiBusy } from '@/features/ai/aiBusy';
 import { cancelAi, runOneshot } from '@/features/ai/oneshot';
 import { getPersona, revealText } from '@/features/ai/personas';
 import { cardForLlm } from '@/features/ai/studyContext';
-import { useEngine } from '@/features/engine/engineStore';
 import { useSettings } from '@/features/settings/settingsStore';
 import { currentUserAnswer, revealOutcome, useStudy } from './studyStore';
+import { useAiReady } from '@/features/cloud/aiClient';
 
 /** 1 枚のカードの答えを見たときのひとこと（カードが変わったら作り直す・生成中なら止める） */
 function Bubbles({ llm }: { llm: boolean }) {
@@ -111,7 +111,7 @@ function Bubbles({ llm }: { llm: boolean }) {
  */
 export function RevealReaction() {
   const mode = useSettings((s) => s.reaction);
-  const engineReady = useEngine((s) => s.status === 'ready');
+  const engineReady = useAiReady();
   const revealed = useStudy((s) => s.revealed);
   const cardId = useStudy((s) => s.current?.card.id);
   const shownAt = useStudy((s) => s.shownAt);

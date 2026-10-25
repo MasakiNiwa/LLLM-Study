@@ -41,6 +41,7 @@ import {
 import { STORAGE_PREFIX } from '@/lib/constants';
 import { pickQuizItems } from '@/features/quiz/quizSelect';
 import { targetOf } from '@/features/quiz/quizGen';
+import { useAiReady } from '@/features/cloud/aiClient';
 
 function AiBubble({ message, lang }: { message: PracticeMessage; lang: string }) {
   const [showTr, setShowTr] = useState(false);
@@ -494,7 +495,7 @@ function Conversation() {
 
 /** 会話練習（AI が役を演じるロールプレイ。添削は AI、カードへの保存はアプリ） */
 export default function PracticePage() {
-  const ready = useEngine((s) => s.status === 'ready');
+  const ready = useAiReady();
   const engineStatus = useEngine((s) => s.status);
   const active = usePractice((s) => s.config !== null);
   const reset = usePractice((s) => s.reset);

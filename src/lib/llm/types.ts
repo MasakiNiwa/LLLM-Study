@@ -108,6 +108,8 @@ export type GenerateEvent =
 export interface GenerationStats {
   /** 生成に使ったバックエンド */
   backend?: BackendKind;
+  /** クラウド AI で生成したとき、その名前（例: Gemini（gemini-2.5-flash）） */
+  provider?: string;
   totalMs: number;
   ttftMs?: number;
   prefillTokens?: number;

@@ -123,6 +123,8 @@ export default function HelpPage() {
             <p>
               教材・学習記録・AI
               モデルはすべてこの端末のブラウザ内に保存され、外部のサーバーに送信されることはありません。
+              クラウド AI（Gemini API）を選んだときだけ、AI に頼んだ内容が Google に送られます（API
+              キーは合言葉で暗号化して端末に保存し、Google 以外には送りません）。
             </p>
           </Body>
         </Section>

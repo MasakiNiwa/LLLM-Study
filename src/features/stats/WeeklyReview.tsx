@@ -9,9 +9,9 @@ import { errorMessage } from '@/lib/utils/format';
 import { getPersona } from '@/features/ai/personas';
 import { useAiBusy } from '@/features/ai/aiBusy';
 import { cancelAi, runOneshot } from '@/features/ai/oneshot';
-import { useEngine } from '@/features/engine/engineStore';
 import { useSettings } from '@/features/settings/settingsStore';
 import { reviewPrompt, summaryLines, weeklySummary } from './review';
+import { useAiReady } from '@/features/cloud/aiClient';
 
 /** 苦手な項目として AI に渡す数 */
 const WEAK_ITEMS = 5;
@@ -43,7 +43,7 @@ export function WeeklyReview({
 }) {
   const summary = weeklySummary(stats);
   const lines = summaryLines(summary);
-  const engineReady = useEngine((s) => s.status === 'ready');
+  const engineReady = useAiReady();
   const busy = useAiBusy((s) => s.task);
   const personaId = useSettings((s) => s.persona);
   const custom = useSettings((s) => s.customPersona);

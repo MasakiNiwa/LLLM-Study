@@ -2,9 +2,8 @@
  * 履歴を持たない単発の生成（カードの解説・例文・ひとことなど）。
  * チャットの会話（KV キャッシュ）とは別に毎回作り直す。
  */
-import { llm } from '@/lib/llm/client';
+import { ai, aiReadyNow } from '@/features/cloud/aiClient';
 import { useSettings } from '@/features/settings/settingsStore';
-import { useEngine } from '@/features/engine/engineStore';
 import { splitThinking } from '@/features/chat/thinking';
 import { createId } from '@/lib/utils/id';
 import { buildSystemPrompt } from './prompt';
@@ -64,7 +63,7 @@ const PLAIN_SYSTEM_PROMPT =
  */
 export async function preemptReaction(): Promise<void> {
   if (useAiBusy.getState().task !== 'reaction') return;
-  llm.cancel();
+  ai.cancel();
   await new Promise<void>((resolve) => {
     const timer = setTimeout(done, 3000);
     const unsub = useAiBusy.subscribe((st) => {
@@ -85,7 +84,8 @@ export function isAiBusyExceptReaction(): boolean {
 }
 
 export async function runOneshot(opts: OneshotOptions): Promise<OneshotResult> {
-  if (useEngine.getState().status !== 'ready') throw new Error('AI モデルが読み込まれていません');
+  if (!aiReadyNow())
+    throw new Error('AI が使えません（モデルを読み込むか、Gemini のキーを解除してください）');
   if (opts.task !== 'reaction') await preemptReaction();
   if (useAiBusy.getState().task) throw new Error('AI が別の応答を生成中です');
   useAiBusy.setState({ task: opts.task });
@@ -97,7 +97,7 @@ export async function runOneshot(opts: OneshotOptions): Promise<OneshotResult> {
     opts.onText?.(splitThinking(raw).answer);
   };
   try {
-    const result = await llm.generate(
+    const result = await ai.generate(
       {
         mode: 'oneshot',
         settings: {
@@ -149,5 +149,5 @@ export async function runOneshotParsed<T>(
 }
 
 export function cancelAi(): void {
-  llm.cancel();
+  ai.cancel();
 }

@@ -9,7 +9,7 @@ import { toast } from 'sonner';
 import { create } from 'zustand';
 import { db } from '@/lib/db/db';
 import type { ChatRecord } from '@/lib/db/types';
-import { llm } from '@/lib/llm/client';
+import { ai, aiReadyNow } from '@/features/cloud/aiClient';
 import type { ChatTurn, GenerationStats } from '@/lib/llm/types';
 import { errorMessage } from '@/lib/utils/format';
 import { createId } from '@/lib/utils/id';
@@ -21,7 +21,6 @@ import { useAiFocus } from '@/features/ai/focusStore';
 import { getConversationSettings } from '@/features/ai/prompt';
 import { buildAppState, formatAppState } from '@/features/ai/studyContext';
 import { executeTool, TOOL_DECLARATIONS, TOOL_LABELS } from '@/features/ai/tools';
-import { useEngine } from '@/features/engine/engineStore';
 import { useLibrary } from '@/features/library/libraryStore';
 import { useSettings } from '@/features/settings/settingsStore';
 import { addUserItem } from '@/lib/packs/userPack';
@@ -88,9 +87,9 @@ export const useChat = create<ChatState>()((set, get) => {
 
   /** 今すぐ生成を始められるか（できなければ理由を知らせる） */
   const canGenerate = (): boolean => {
-    if (useEngine.getState().status !== 'ready') {
-      toast.error('AI モデルが読み込まれていません', {
-        description: '「モデル」画面でモデルを読み込んでください',
+    if (!aiReadyNow()) {
+      toast.error('AI が使えません', {
+        description: '「AI モデル」画面でモデルを読み込むか、Gemini のキーを解除してください',
       });
       return false;
     }
@@ -165,7 +164,7 @@ export const useChat = create<ChatState>()((set, get) => {
           estimateTokens(messageText) +
           64,
       });
-      const result = await llm.generate(
+      const result = await ai.generate(
         {
           mode: 'chat',
           settings: conversation,
@@ -324,7 +323,7 @@ export const useChat = create<ChatState>()((set, get) => {
     },
 
     stop() {
-      if (get().isGenerating) llm.cancel();
+      if (get().isGenerating) ai.cancel();
     },
 
     async addProposal(messageId, index) {
@@ -347,19 +346,19 @@ export const useChat = create<ChatState>()((set, get) => {
     },
 
     async reload() {
-      if (get().isGenerating) llm.cancel();
+      if (get().isGenerating) ai.cancel();
       useAiFocus.getState().attach(null);
       // 会話の内容が入れ替わるので、モデル側の会話（KV キャッシュ）も作り直す
-      void llm.resetConversation();
+      void ai.resetConversation();
       const records = await db.chat.orderBy('createdAt').toArray();
       set({ messages: records.map((r) => ({ ...r, status: r.error ? 'error' : 'done' })) });
     },
 
     async clear() {
-      if (get().isGenerating) llm.cancel();
+      if (get().isGenerating) ai.cancel();
       set({ messages: [] });
       useAiFocus.getState().attach(null);
-      void llm.resetConversation();
+      void ai.resetConversation();
       await db.chat.clear();
     },
   };
