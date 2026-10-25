@@ -47,7 +47,7 @@ export function WebGpuNotice({ className }: { className?: string }) {
         <p className="opacity-90">
           {gpuForced
             ? '設定のバックエンドが GPU になっているため読み込みに失敗します。「自動」か「CPU」に変更してください。'
-            : 'AI モデル（Gemma 4 の Web 版）は WebGPU 専用のため、この端末では端末内の AI を使えません。クラウド AI（Gemini API）なら使えます。学習はそのまま使えます。'}{' '}
+            : 'AI モデル（Gemma 4 の Web 版）は WebGPU 専用のため、この端末では端末内の AI を使えません。クラウド AI（Gemini・OpenAI）なら使えます。学習はそのまま使えます。'}{' '}
           <Link href="/help" className="underline underline-offset-2">
             WebGPU を有効にする方法
           </Link>

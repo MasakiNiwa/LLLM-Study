@@ -89,7 +89,8 @@ export const useChat = create<ChatState>()((set, get) => {
   const canGenerate = (): boolean => {
     if (!aiReadyNow()) {
       toast.error('AI が使えません', {
-        description: '「AI モデル」画面でモデルを読み込むか、Gemini のキーを解除してください',
+        description:
+          '「AI モデル」画面でモデルを読み込むか、クラウド AI（Gemini・OpenAI）のキーを解除してください',
       });
       return false;
     }

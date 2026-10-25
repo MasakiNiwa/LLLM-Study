@@ -24,3 +24,30 @@ describe('バックアップの設定', () => {
     ).toEqual({ newPerDay: 25, persona: 'teacher', focusPackId: null });
   });
 });
+
+describe('設定の移行', () => {
+  it('v4: Gemini だけの設定を、クラウド AI ごとの設定に移す', async () => {
+    const { migrateSettings } = await import('./settingsStore');
+    const out = migrateSettings(
+      {
+        aiProvider: 'gemini',
+        geminiModel: 'gemini-3.5-flash-lite',
+        cloudConsent: true,
+        reaction: 'llm',
+      },
+      3,
+    ) as Record<string, unknown>;
+    expect(out.cloudModels).toEqual({ gemini: 'gemini-3.5-flash-lite' });
+    expect(out.cloudConsents).toEqual({ gemini: true });
+    expect(out.aiProvider).toBe('gemini');
+    expect('geminiModel' in out).toBe(false);
+    expect('cloudConsent' in out).toBe(false);
+  });
+
+  it('v4: クラウド AI を使っていなかった人は空のまま', async () => {
+    const { migrateSettings } = await import('./settingsStore');
+    const out = migrateSettings({ reaction: 'llm' }, 3) as Record<string, unknown>;
+    expect(out.cloudModels).toEqual({});
+    expect(out.cloudConsents).toEqual({});
+  });
+});

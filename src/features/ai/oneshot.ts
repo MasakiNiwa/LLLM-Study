@@ -85,7 +85,7 @@ export function isAiBusyExceptReaction(): boolean {
 
 export async function runOneshot(opts: OneshotOptions): Promise<OneshotResult> {
   if (!aiReadyNow())
-    throw new Error('AI が使えません（モデルを読み込むか、Gemini のキーを解除してください）');
+    throw new Error('AI が使えません（モデルを読み込むか、クラウド AI のキーを解除してください）');
   if (opts.task !== 'reaction') await preemptReaction();
   if (useAiBusy.getState().task) throw new Error('AI が別の応答を生成中です');
   useAiBusy.setState({ task: opts.task });

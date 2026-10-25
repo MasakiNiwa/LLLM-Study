@@ -1,14 +1,15 @@
 /**
  * AI への入口。設定の「AI の接続先」に応じて、端末内のモデル（lib/llm/client.ts）か
- * クラウド AI（lib/cloud/gemini.ts）に振り分ける。呼び出し側（チャット・解説・ひとことなど）は区別しない。
+ * クラウド AI（lib/cloud/providers.ts の Gemini・OpenAI）に振り分ける。呼び出し側は区別しない。
  *
- * - クラウド AI が回数の上限・通信エラーで答えられず、端末内のモデルが読み込み済みなら、端末内で答え直す
+ * - クラウド AI が回数の上限・通信エラーで答えられず、まだ何も出しておらず、端末内のモデルが読み込み済みなら、端末内で答え直す
  * - キーがロック中で端末内のモデルがあれば、端末内で答える（解除はユーザーが「AI モデル」画面で行う）
  */
 import { toast } from 'sonner';
 import { llm } from '@/lib/llm/client';
-import { CloudError, geminiGenerate } from '@/lib/cloud/gemini';
-import { getUnlockedKey } from '@/lib/cloud/keyVault';
+import { CloudError } from '@/lib/cloud/errors';
+import { getUnlockedKey, type CloudProviderId } from '@/lib/cloud/keyVault';
+import { CLOUD_PROVIDERS } from '@/lib/cloud/providers';
 import type {
   GenerateEvent,
   GenerateRequest,
@@ -17,17 +18,20 @@ import type {
   ToolCallInfo,
 } from '@/lib/llm/types';
 import { useEngine } from '@/features/engine/engineStore';
-import { useSettings } from '@/features/settings/settingsStore';
+import { useSettings, type AiProvider } from '@/features/settings/settingsStore';
 import { useCloud } from './cloudStore';
 
 let current: AbortController | null = null;
 
 const localReady = () => useEngine.getState().status === 'ready';
 
+const asCloud = (p: AiProvider): CloudProviderId | null => (p === 'local' ? null : p);
+
 /** クラウド AI で生成できる状態か（接続先がクラウドで、キーが解除済みで、モデルが決まっている） */
 export function cloudReady(): boolean {
   const s = useSettings.getState();
-  return s.aiProvider === 'gemini' && !!s.geminiModel && !!getUnlockedKey('gemini');
+  const p = asCloud(s.aiProvider);
+  return !!p && !!s.cloudModels[p] && !!getUnlockedKey(p);
 }
 
 /** AI を使える状態か（クラウドか、端末内のモデルのどちらかで答えられる） */
@@ -38,10 +42,10 @@ export function aiReadyNow(): boolean {
 /** 画面用: AI を使える状態か */
 export function useAiReady(): boolean {
   const local = useEngine((s) => s.status === 'ready');
-  const provider = useSettings((s) => s.aiProvider);
-  const model = useSettings((s) => s.geminiModel);
-  const unlocked = useCloud((s) => s.unlocked);
-  return local || (provider === 'gemini' && !!model && unlocked);
+  const provider = useSettings((s) => asCloud(s.aiProvider));
+  const model = useSettings((s) => (provider ? s.cloudModels[provider] : undefined));
+  const unlocked = useCloud((s) => (provider ? s.unlocked[provider] : false));
+  return local || (!!provider && !!model && unlocked);
 }
 
 let notifiedLocked = false;
@@ -53,16 +57,19 @@ export const ai = {
     onToolCall?: (call: ToolCallInfo) => Promise<JsonValue>,
   ): Promise<GenerateResult> {
     const s = useSettings.getState();
-    if (s.aiProvider === 'gemini') {
-      const apiKey = getUnlockedKey('gemini');
-      if (apiKey && s.geminiModel) {
+    const provider = asCloud(s.aiProvider);
+    if (provider) {
+      const info = CLOUD_PROVIDERS[provider];
+      const apiKey = getUnlockedKey(provider);
+      const model = s.cloudModels[provider];
+      if (apiKey && model) {
         const ctrl = new AbortController();
         current = ctrl;
         let emitted = false;
         try {
-          return await geminiGenerate(
+          return await info.generate(
             req,
-            { apiKey, model: s.geminiModel, signal: ctrl.signal },
+            { apiKey, model, signal: ctrl.signal },
             (e) => {
               emitted = true;
               onEvent(e);
@@ -72,7 +79,7 @@ export const ai = {
         } catch (e) {
           // まだ何も出していなければ、端末内のモデルで答え直す（途中まで出ていたら重ならないよう諦める）
           if (e instanceof CloudError && e.retryable && !emitted && localReady()) {
-            toast.info('Gemini が使えなかったので、端末内の AI で答えます', {
+            toast.info(`${info.label} が使えなかったので、端末内の AI で答えます`, {
               description: e.message,
             });
             return llm.generate(req, onEvent, onToolCall);
@@ -85,14 +92,14 @@ export const ai = {
       if (!localReady()) {
         throw new Error(
           apiKey
-            ? 'Gemini のモデルが選ばれていません。「AI モデル」画面で選んでください。'
-            : 'Gemini の API キーがロックされています。「AI モデル」画面で合言葉を入れて解除してください。',
+            ? `${info.label} のモデルが選ばれていません。「AI モデル」画面で選んでください。`
+            : `${info.label} の API キーがロックされています。「AI モデル」画面で合言葉を入れて解除してください。`,
         );
       }
       if (!notifiedLocked) {
         notifiedLocked = true;
-        toast.info('Gemini のキーがロック中なので、端末内の AI で答えます', {
-          description: '「AI モデル」画面で合言葉を入れると Gemini に切り替わります。',
+        toast.info(`${info.label} のキーがロック中なので、端末内の AI で答えます`, {
+          description: `「AI モデル」画面で合言葉を入れると ${info.label} に切り替わります。`,
         });
       }
     }

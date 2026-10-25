@@ -1,5 +1,6 @@
 import { create } from 'zustand';
 import { persist } from 'zustand/middleware';
+import type { CloudProviderId } from '@/lib/cloud/keyVault';
 import { STORAGE_PREFIX } from '@/lib/constants';
 import type { BackendKind, ConversationSettings } from '@/lib/llm/types';
 import type { SchedulerOptions } from '@/lib/srs/scheduler';
@@ -42,8 +43,8 @@ export const STUDY_COMPACT_LABELS: Record<StudyCompact, string> = {
   off: '詰めない',
 };
 
-/** AI の接続先 */
-export type AiProvider = 'local' | 'gemini';
+/** AI の接続先（端末内のモデルか、クラウド AI のどれか） */
+export type AiProvider = 'local' | CloudProviderId;
 
 export interface Settings extends Omit<ConversationSettings, 'systemPrompt'> {
   // ---- 学習（アルゴリズム） ----
@@ -104,10 +105,10 @@ export interface Settings extends Omit<ConversationSettings, 'systemPrompt'> {
   maxNumTokens: number;
   /** AI の接続先（端末内のモデルか、クラウド AI の API か） */
   aiProvider: AiProvider;
-  /** Gemini API で使うモデル（空なら、キーを登録したときに既定のモデルを選ぶ） */
-  geminiModel: string;
-  /** クラウド AI に送る内容の説明に同意したか */
-  cloudConsent: boolean;
+  /** クラウド AI ごとの使うモデル（無ければ、キーを登録したときに既定のモデルを選ぶ） */
+  cloudModels: Partial<Record<CloudProviderId, string>>;
+  /** クラウド AI ごとに、送る内容の説明に同意したか */
+  cloudConsents: Partial<Record<CloudProviderId, boolean>>;
   // ---- モデル管理 ----
   saveImportedModels: boolean;
   autoLoadLastModel: boolean;
@@ -174,8 +175,8 @@ export const DEFAULT_SETTINGS: Settings = {
 
   backend: 'auto',
   aiProvider: 'local',
-  geminiModel: '',
-  cloudConsent: false,
+  cloudModels: {},
+  cloudConsents: {},
   maxNumTokens: 4096,
 
   saveImportedModels: true,
@@ -217,19 +218,32 @@ export const useSettings = create<SettingsState>()(
     }),
     {
       name: `${STORAGE_PREFIX}:settings`,
-      version: 3,
+      version: 4,
       partialize: ({ update: _u, reset: _r, ...rest }) => rest,
       // v2: 生成の統計の表示を既定でオンにした（以前の既定のオフのままの人もオンにする）
       // v3: 答えを見たときのひとことの既定を「AI が考える」にした（以前の既定のままの人も）
-      migrate: (persisted, version) => {
-        let s = persisted as Partial<Settings>;
-        if (version < 2) s = { ...s, showStats: true };
-        if (version < 3 && s.reaction === 'template') s = { ...s, reaction: 'llm' };
-        return s as SettingsState;
-      },
+      migrate: (persisted, version) => migrateSettings(persisted, version) as SettingsState,
     },
   ),
 );
+
+/** 保存されていた設定を今の形にする（persist の migrate。テストのため外に出している） */
+export function migrateSettings(persisted: unknown, version: number): Partial<Settings> {
+  let s = persisted as Partial<Settings>;
+  if (version < 2) s = { ...s, showStats: true };
+  if (version < 3 && s.reaction === 'template') s = { ...s, reaction: 'llm' };
+  if (version < 4) {
+    // v4: クラウド AI を複数にした（Gemini だけの設定をクラウド AI ごとの設定に移す）
+    const old = s as Partial<Settings> & { geminiModel?: string; cloudConsent?: boolean };
+    const { geminiModel, cloudConsent, ...rest } = old;
+    s = {
+      ...rest,
+      cloudModels: geminiModel ? { gemini: geminiModel } : {},
+      cloudConsents: cloudConsent ? { gemini: true } : {},
+    };
+  }
+  return s;
+}
 
 export function getSchedulerOptions(s: Settings): SchedulerOptions {
   return {
@@ -245,8 +259,8 @@ const DEVICE_ONLY: (keyof Settings)[] = [
   'backend',
   // クラウド AI の接続はキーと一緒に端末ごとに決める（バックアップから戻しても勝手に接続しない）
   'aiProvider',
-  'geminiModel',
-  'cloudConsent',
+  'cloudModels',
+  'cloudConsents',
   'maxNumTokens',
   'saveImportedModels',
   'autoLoadLastModel',

@@ -12,7 +12,7 @@
  */
 import { STORAGE_PREFIX } from '@/lib/constants';
 
-export type CloudProviderId = 'gemini';
+export type CloudProviderId = 'gemini' | 'openai';
 
 /** 保存する形（暗号文とその復号に必要な公開してよい値だけ） */
 interface StoredSecret {

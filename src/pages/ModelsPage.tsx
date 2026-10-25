@@ -114,7 +114,7 @@ export default function ModelsPage() {
       <PageBody>
         <p className="px-1 text-sm text-slate-600 dark:text-slate-400">
           AI パートナーは、この端末のブラウザの中で動くローカル LLM（LiteRT-LM）です。クラウド
-          AI（Gemini API）の API キーを使うこともできます。学習カードだけならモデルは不要です。
+          AI（Gemini・OpenAI）の API キーを使うこともできます。学習カードだけならモデルは不要です。
         </p>
         <CloudSettings />
         <WebGpuNotice />
