@@ -12,7 +12,7 @@
  */
 import { STORAGE_PREFIX } from '@/lib/constants';
 
-export type CloudProviderId = 'gemini' | 'openai';
+export type CloudProviderId = 'gemini' | 'openai' | 'anthropic' | 'openrouter';
 
 /** 保存する形（暗号文とその復号に必要な公開してよい値だけ） */
 interface StoredSecret {
@@ -167,4 +167,27 @@ export function deleteKey(provider: CloudProviderId): void {
   localStorage.removeItem(storageKey(provider));
   unlocked.delete(provider);
   emit();
+}
+
+/**
+ * ログイン（OpenRouter の OAuth）で受け取った、まだ保存していないキー。
+ * 合言葉を決めて保存するまでのあいだ、メモリーにだけ置く（画面にもストアにも出さない）
+ */
+const pending = new Map<CloudProviderId, string>();
+
+export function holdPendingKey(provider: CloudProviderId, key: string): void {
+  pending.set(provider, key);
+  emit();
+}
+
+export function hasPendingKey(provider: CloudProviderId): boolean {
+  return pending.has(provider);
+}
+
+/** 受け取ったキーを取り出す（取り出したら消える） */
+export function takePendingKey(provider: CloudProviderId): string | null {
+  const key = pending.get(provider) ?? null;
+  pending.delete(provider);
+  emit();
+  return key;
 }

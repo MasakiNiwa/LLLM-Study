@@ -90,7 +90,7 @@ export const useChat = create<ChatState>()((set, get) => {
     if (!aiReadyNow()) {
       toast.error('AI が使えません', {
         description:
-          '「AI モデル」画面でモデルを読み込むか、クラウド AI（Gemini・OpenAI）のキーを解除してください',
+          '「AI モデル」画面でモデルを読み込むか、クラウド AI（Gemini・OpenAI・Claude・OpenRouter）のキーを解除してください',
       });
       return false;
     }

@@ -1,4 +1,4 @@
-import { beforeEach, describe, expect, it } from 'vitest';
+import { beforeEach, describe, expect, it, vi } from 'vitest';
 import {
   deleteKey,
   getUnlockedKey,
@@ -65,5 +65,26 @@ describe('keyVault', () => {
     deleteKey('gemini');
     expect(storedKeyInfo('gemini')).toBeNull();
     expect(isUnlocked('gemini')).toBe(false);
+  });
+});
+
+describe('同じ合言葉のキーをまとめて解除する', () => {
+  it('同じ合言葉で保存したほかの接続先も解除し、違う合言葉のものはロックのまま', async () => {
+    const { useCloud } = await import('@/features/cloud/cloudStore');
+    await saveKey('gemini', 'AIza-1', 'same-pass-1', FAST);
+    await saveKey('openai', 'sk-2', 'same-pass-1', FAST);
+    await saveKey('anthropic', 'sk-ant-3', 'other-pass-2', FAST);
+    for (const p of ['gemini', 'openai', 'anthropic'] as const) lockKey(p);
+    vi.stubGlobal(
+      'fetch',
+      vi.fn(async () => new Response('{}', { status: 500 })),
+    );
+    const also = await useCloud.getState().unlock('gemini', 'same-pass-1');
+    expect(also).toEqual(['openai']);
+    expect(getUnlockedKey('openai')).toBe('sk-2');
+    expect(isUnlocked('anthropic')).toBe(false);
+    vi.unstubAllGlobals();
+    deleteKey('openai');
+    deleteKey('anthropic');
   });
 });

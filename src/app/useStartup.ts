@@ -1,4 +1,8 @@
 import { useEffect } from 'react';
+import { toast } from 'sonner';
+import { navigate } from 'wouter/use-hash-location';
+import { holdPendingKey } from '@/lib/cloud/keyVault';
+import { handleOpenRouterCallback } from '@/lib/cloud/openrouterAuth';
 import { llm } from '@/lib/llm/client';
 import { subscribeSharedModels } from '@/lib/llm/modelStorage';
 import { useChat } from '@/features/chat/chatStore';
@@ -11,6 +15,7 @@ import { useSettings } from '@/features/settings/settingsStore';
  * - 保存済みモデル一覧の取得（同じ github.io の他のサイトが保存したモデルも含む）
  * - 前回のモデルの自動読み込み（設定でオン かつ 保存領域に存在する場合）
  * - それ以外はアイドル時に Wasm ランタイムを先読みして初回読み込みを速くする
+ * - 「OpenRouter でログイン」から戻ってきたら、キーを受け取って「AI モデル」画面で保存してもらう
  */
 const idle: (cb: () => void) => void =
   typeof requestIdleCallback === 'function'
@@ -18,6 +23,23 @@ const idle: (cb: () => void) => void =
     : (cb) => setTimeout(cb, 1500);
 
 export function useStartup() {
+  useEffect(() => {
+    void handleOpenRouterCallback().then((r) => {
+      if (r.status === 'none') return;
+      navigate('/models', { replace: true });
+      if (r.status === 'error') {
+        toast.error(r.message);
+        return;
+      }
+      holdPendingKey('openrouter', r.key);
+      const { cloudConsents, update } = useSettings.getState();
+      if (cloudConsents.openrouter) update({ aiProvider: 'openrouter' });
+      toast.success('OpenRouter からキーを受け取りました', {
+        description: '保存のしかた（合言葉）を決めて登録してください。',
+      });
+    });
+  }, []);
+
   useEffect(() => {
     let cancelled = false;
     void useChat.getState().init();

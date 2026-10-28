@@ -396,6 +396,17 @@ scripts/        ライセンス一覧・サンプル教材の検証と生成
 - [x] OpenAI のキーを安全に使う案内（専用のプロジェクト・利用額の上限・Restricted の権限）と、送る内容の説明
 - [x] [docs/CLOUD_AI.md](CLOUD_AI.md) を複数の接続先に合わせて更新
 
+### v1.10.0: Claude・OpenRouter と、使う場面での切り替え
+
+- [x] 接続先に Claude（Anthropic API・Messages API）を追加（考える過程の要約・ツール・署名つきの考える過程の受け渡し・残高不足や混雑の言い換え）
+- [x] 接続先に OpenRouter を追加（OpenAI 互換の共通部分 `openaiCompat.ts` を OpenAI と共有。ツール非対応のモデルはツールなしで送り直す）
+- [x] OpenRouter のモデル選び: 料金・ツール対応・考える過程の対応つきの一覧を、検索・絞り込み・★・最近使ったものから選べるシートに
+- [x] 「OpenRouter でログイン」（OAuth PKCE）でキーを受け取る。受け取ったキーも合言葉で暗号化してから保存する
+- [x] モデルのチップから開く「使う AI を選ぶ」シート: 接続先・モデルをその場で切り替え、ロック中のキーはその場で解除
+- [x] 同じ合言葉で保存したキーは、まとめて解除する
+- [x] 「最近使ったモデル」（実際に答えたもの）を覚え、切り替えのシートから 1 回で戻せる
+- [x] CSP の connect-src に `https://api.anthropic.com`・`https://openrouter.ai` を追加
+
 ### 今後の候補
 
 - [ ] 学習記録からの FSRS パラメーター最適化（Worker で実行）

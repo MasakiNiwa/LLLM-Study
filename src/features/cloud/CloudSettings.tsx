@@ -1,133 +1,27 @@
 /**
- * 「AI モデル」画面の「AI の接続先」: 端末内の AI / クラウド AI（Gemini・OpenAI）の切り替え、
+ * 「AI モデル」画面の「AI の接続先」: 端末内の AI / クラウド AI（Gemini・OpenAI・Claude・OpenRouter）の切り替え、
  * API キーの登録と解除、モデルの選択。キーは合言葉で暗号化してこの端末に保存するのが既定
  * （lib/cloud/keyVault.ts）。考え方は docs/CLOUD_AI.md。
  */
-import { useState, type FormEvent, type ReactNode } from 'react';
-import { Cloud, KeyRound, Lock, LockOpen, RefreshCw, ShieldCheck, Trash2 } from 'lucide-react';
+import { useState, type FormEvent } from 'react';
+import { Cloud, KeyRound, Lock, LockOpen, LogIn, ShieldCheck, Trash2 } from 'lucide-react';
 import { toast } from 'sonner';
 import { Button } from '@/components/ui/Button';
 import { Card } from '@/components/ui/Card';
 import { ConfirmDialog } from '@/components/ui/ConfirmDialog';
-import { Select } from '@/components/ui/Select';
 import { MIN_PASSPHRASE_LENGTH, type CloudProviderId } from '@/lib/cloud/keyVault';
+import { canLoginHere, startOpenRouterLogin } from '@/lib/cloud/openrouterAuth';
+import { CLOUD_PROVIDERS } from '@/lib/cloud/providers';
 import { cn } from '@/lib/utils/cn';
 import { errorMessage } from '@/lib/utils/format';
 import { useSettings, type AiProvider } from '@/features/settings/settingsStore';
 import { useCloud } from './cloudStore';
+import { ModelPicker } from './ModelPicker';
+import { ExtLink } from './ExtLink';
+import { PROVIDERS, PROVIDER_IDS } from './providerInfo';
 
 const INPUT =
   'h-11 w-full min-w-0 rounded-xl border border-slate-300 bg-white px-3 text-base dark:border-slate-700 dark:bg-slate-950';
-
-function ExtLink({ href, children }: { href: string; children: ReactNode }) {
-  return (
-    <a
-      href={href}
-      target="_blank"
-      rel="noopener noreferrer"
-      className="text-accent-700 underline dark:text-accent-300"
-    >
-      {children}
-    </a>
-  );
-}
-
-function Code({ children }: { children: ReactNode }) {
-  return <code className="rounded bg-white px-1 dark:bg-slate-900">{children}</code>;
-}
-
-interface ProviderInfo {
-  label: string;
-  hint: string;
-  company: string;
-  keyPage: { url: string; name: string };
-  keyPlaceholder: string;
-  /** 送る内容の説明（はじめて選ぶときに同意してもらう） */
-  consent: ReactNode;
-  /** キーを安全に使うための設定 */
-  safety: ReactNode[];
-}
-
-const COMMON_CONSENT_TAIL = (company: string) => (
-  <p>
-    API キーは合言葉で暗号化してこの端末にだけ保存し、{company}
-    以外には送りません。学習記録・教材はこれまでどおり端末内に保存されます。
-  </p>
-);
-
-const SENT_CONTENT =
-  'AI に頼んだ内容（カードの問題と答え・あなたの答え・チャットの文章・学習の状況）';
-
-const PROVIDERS: Record<CloudProviderId, ProviderInfo> = {
-  gemini: {
-    label: 'Gemini API',
-    hint: 'Google のクラウド AI。無料枠があります',
-    company: 'Google',
-    keyPage: { url: 'https://aistudio.google.com/apikey', name: 'Google AI Studio' },
-    keyPlaceholder: 'AIza…',
-    consent: (
-      <>
-        <p>Gemini API を使うと、{SENT_CONTENT}が Google に送られます。</p>
-        <p className="rounded-lg bg-amber-50 px-3 py-2 text-amber-900 dark:bg-amber-950/40 dark:text-amber-200">
-          <strong>
-            無料枠では、送った内容が Google のサービスの改善に使われ、人が読むこともあります。
-          </strong>
-          個人情報や社外秘の内容は送らないでください。
-        </p>
-        {COMMON_CONSENT_TAIL('Google')}
-      </>
-    ),
-    safety: [
-      'このアプリ専用のキーを作り、ほかの用途と使い回さないでください。',
-      <>
-        <ExtLink href="https://console.cloud.google.com/apis/credentials">
-          Google Cloud の「認証情報」
-        </ExtLink>
-        でキーを開き、「アプリケーションの制限」を「ウェブサイト」にして{' '}
-        <Code>https://masakiniwa.github.io/*</Code> を追加し、「API の制限」で Generative Language
-        API だけを許可すると、キーが漏れても他のサイトからは使えません。
-      </>,
-      'AI Studio で作ったキーは Google Cloud のプロジェクトの中にあります。Google Cloud の画面にキーが出ないときは、AI Studio でそのプロジェクトを読み込む（インポートする）と、制限を設定できるようになります。請求先（課金）を設定しなければ無料枠のまま使えます。制限をかけなくてもアプリは使えます。',
-      '心配なときは、いつでもキーを削除（AI Studio で無効化）して作り直せます。',
-    ],
-  },
-  openai: {
-    label: 'OpenAI API',
-    hint: 'ChatGPT の OpenAI のモデル。使った分だけ課金されます',
-    company: 'OpenAI',
-    keyPage: { url: 'https://platform.openai.com/api-keys', name: 'OpenAI の API keys' },
-    keyPlaceholder: 'sk-…',
-    consent: (
-      <>
-        <p>OpenAI API を使うと、{SENT_CONTENT}が OpenAI に送られます。</p>
-        <p className="rounded-lg bg-amber-50 px-3 py-2 text-amber-900 dark:bg-amber-950/40 dark:text-amber-200">
-          <strong>使った分だけ料金がかかります（トークン数に応じた従量課金）。</strong>
-          OpenAI の説明では、API
-          に送った内容は原則として学習には使われず、不正利用の監視のため一定期間保存されます（詳しくは
-          OpenAI の規約を確認してください）。個人情報や社外秘の内容は送らないでください。
-        </p>
-        {COMMON_CONSENT_TAIL('OpenAI')}
-      </>
-    ),
-    safety: [
-      <>
-        OpenAI の画面で<strong>このアプリ専用のプロジェクト</strong>
-        を作り、そのプロジェクトでキーを作ってください。
-      </>,
-      <>
-        プロジェクトの「Limits」で<strong>月の予算（使える上限額）</strong>
-        を設定すると、万一キーが漏れても使われる金額を抑えられます。
-      </>,
-      <>
-        キーを作るときに権限を「Restricted」にして、Models を Read、Model capabilities を Write
-        だけにすると、ほかの機能には使えないキーになります。
-      </>,
-      'OpenAI のキーには「このサイトからだけ」という制限がありません。使わないときはロックし、心配なときはすぐキーを削除（OpenAI の画面で無効化）して作り直してください。',
-    ],
-  },
-};
-
-const PROVIDER_IDS = Object.keys(PROVIDERS) as CloudProviderId[];
 
 function ProviderChoice() {
   const provider = useSettings((s) => s.aiProvider);
@@ -148,7 +42,7 @@ function ProviderChoice() {
   ];
   return (
     <>
-      <div role="radiogroup" aria-label="AI の接続先" className="grid gap-2 sm:grid-cols-3">
+      <div role="radiogroup" aria-label="AI の接続先" className="grid gap-2 sm:grid-cols-2">
         {options.map((o) => (
           <button
             key={o.value}
@@ -192,6 +86,9 @@ function ProviderChoice() {
 function RegisterForm({ provider }: { provider: CloudProviderId }) {
   const info = PROVIDERS[provider];
   const register = useCloud((s) => s.register);
+  const registerPending = useCloud((s) => s.registerPending);
+  /** ログイン（OpenRouter）で受け取ったキーがある。貼り付けの代わりに、それを保存する */
+  const pending = useCloud((s) => s.pending[provider]);
   const checking = useCloud((s) => s.checking === provider);
   const [apiKey, setApiKey] = useState('');
   const [mode, setMode] = useState<'encrypted' | 'session'>('encrypted');
@@ -206,7 +103,7 @@ function RegisterForm({ provider }: { provider: CloudProviderId }) {
         ? '確認用の合言葉が一致しません'
         : null;
   const canSubmit =
-    !!apiKey.trim() &&
+    (pending || !!apiKey.trim()) &&
     !checking &&
     (mode === 'session' || (pass.length >= MIN_PASSPHRASE_LENGTH && pass === pass2));
 
@@ -215,7 +112,9 @@ function RegisterForm({ provider }: { provider: CloudProviderId }) {
     if (!canSubmit) return;
     setError(null);
     try {
-      await register(provider, apiKey, mode === 'encrypted' ? pass : null);
+      const passphrase = mode === 'encrypted' ? pass : null;
+      if (pending) await registerPending(provider, passphrase);
+      else await register(provider, apiKey, passphrase);
       setApiKey('');
       setPass('');
       setPass2('');
@@ -227,22 +126,47 @@ function RegisterForm({ provider }: { provider: CloudProviderId }) {
 
   return (
     <form onSubmit={(e) => void submit(e)} className="space-y-3">
-      <p className="text-sm text-slate-600 dark:text-slate-400">
-        <ExtLink href={info.keyPage.url}>{info.keyPage.name}</ExtLink> で API
-        キーを作って貼り付けてください。
-      </p>
-      <label className="block space-y-1">
-        <span className="text-sm font-medium">API キー</span>
-        <input
-          type="password"
-          value={apiKey}
-          onChange={(e) => setApiKey(e.target.value)}
-          autoComplete="off"
-          spellCheck={false}
-          placeholder={info.keyPlaceholder}
-          className={INPUT}
-        />
-      </label>
+      {pending ? (
+        <p className="flex items-center gap-1.5 rounded-xl bg-emerald-50 px-3 py-2 text-sm text-emerald-800 dark:bg-emerald-950/40 dark:text-emerald-200">
+          <ShieldCheck className="size-4 shrink-0" />
+          {info.company} からキーを受け取りました。保存のしかたを決めて登録してください。
+        </p>
+      ) : (
+        <>
+          {provider === 'openrouter' && canLoginHere() && (
+            <div className="space-y-1.5">
+              <Button
+                variant="secondary"
+                className="w-full"
+                onClick={() => void startOpenRouterLogin()}
+              >
+                <LogIn />
+                OpenRouter でログイン
+              </Button>
+              <p className="text-xs text-slate-500 dark:text-slate-400">
+                OpenRouter
+                の画面でログインして許可すると、このアプリ用のキーが作られて戻ってきます（貼り付け不要）。または、下にキーを貼り付けてください。
+              </p>
+            </div>
+          )}
+          <p className="text-sm text-slate-600 dark:text-slate-400">
+            <ExtLink href={info.keyPage.url}>{info.keyPage.name}</ExtLink> で API
+            キーを作って貼り付けてください。
+          </p>
+          <label className="block space-y-1">
+            <span className="text-sm font-medium">API キー</span>
+            <input
+              type="password"
+              value={apiKey}
+              onChange={(e) => setApiKey(e.target.value)}
+              autoComplete="off"
+              spellCheck={false}
+              placeholder={info.keyPlaceholder}
+              className={INPUT}
+            />
+          </label>
+        </>
+      )}
       <fieldset className="space-y-1.5">
         <legend className="text-sm font-medium">保存のしかた</legend>
         {(
@@ -322,8 +246,12 @@ function UnlockForm({ provider }: { provider: CloudProviderId }) {
     setBusy(true);
     setError(null);
     try {
-      await unlock(provider, pass);
+      const also = await unlock(provider, pass);
       setPass('');
+      if (also.length)
+        toast.success(
+          `同じ合言葉の ${also.map((p) => CLOUD_PROVIDERS[p].label).join('・')} のキーも解除しました`,
+        );
     } catch (err) {
       setError(errorMessage(err));
     } finally {
@@ -358,19 +286,8 @@ function UnlockForm({ provider }: { provider: CloudProviderId }) {
 
 function UnlockedPanel({ provider }: { provider: CloudProviderId }) {
   const stored = useCloud((s) => s.stored[provider]);
-  const models = useCloud((s) => s.models[provider]);
   const modelsError = useCloud((s) => s.modelsError[provider]);
-  const checking = useCloud((s) => s.checking === provider);
-  const refresh = useCloud((s) => s.refreshModels);
   const lock = useCloud((s) => s.lock);
-  const cloudModels = useSettings((s) => s.cloudModels);
-  const model = cloudModels[provider] ?? '';
-  const update = useSettings((s) => s.update);
-  const options = models.length
-    ? models.map((m) => ({ value: m.id, label: m.displayName }))
-    : model
-      ? [{ value: model, label: model }]
-      : [];
   return (
     <div className="space-y-3">
       <p className="flex items-center gap-1.5 text-sm text-emerald-700 dark:text-emerald-300">
@@ -378,26 +295,9 @@ function UnlockedPanel({ provider }: { provider: CloudProviderId }) {
         使える状態です
         {stored ? `（キー …${stored.hint}・暗号化して保存済み）` : '（今回だけ・保存していません）'}
       </p>
-      <div className="flex flex-wrap items-center gap-2">
-        <span className="text-sm font-medium">モデル</span>
-        {options.length > 0 && (
-          <Select
-            value={model}
-            onChange={(v) => update({ cloudModels: { ...cloudModels, [provider]: v } })}
-            options={options}
-            aria-label={`${PROVIDERS[provider].label} のモデル`}
-            className="min-w-0 flex-1 basis-48"
-          />
-        )}
-        <Button
-          size="sm"
-          variant="ghost"
-          onClick={() => void refresh(provider)}
-          disabled={checking}
-        >
-          <RefreshCw className={checking ? 'animate-spin' : undefined} />
-          接続を確かめる
-        </Button>
+      <div className="space-y-1">
+        <span className="text-sm font-medium">使うモデル</span>
+        <ModelPicker provider={provider} />
       </div>
       {modelsError && (
         <p className="text-sm whitespace-pre-line text-rose-600 dark:text-rose-400">
@@ -435,6 +335,7 @@ export function CloudSettings() {
   const provider = aiProvider === 'local' ? null : aiProvider;
   const stored = useCloud((s) => (provider ? s.stored[provider] : null));
   const unlocked = useCloud((s) => (provider ? s.unlocked[provider] : false));
+  const pending = useCloud((s) => (provider ? s.pending[provider] : false));
   const remove = useCloud((s) => s.remove);
   const [confirmRemove, setConfirmRemove] = useState(false);
   return (
@@ -446,7 +347,8 @@ export function CloudSettings() {
         <div className="min-w-0">
           <h2 className="font-semibold">AI の接続先</h2>
           <p className="text-sm text-slate-600 dark:text-slate-400">
-            クラウド AI（Gemini・OpenAI）の API キーを使うと、より詳しい解説やチャットができます。
+            クラウド AI（Gemini・OpenAI・Claude・OpenRouter）の API
+            キーを使うと、より詳しい解説やチャットができます。
             正誤の判定や学習記録はこれまでどおりアプリが行います。
           </p>
         </div>
@@ -456,7 +358,7 @@ export function CloudSettings() {
         <div className="space-y-4 border-t border-slate-100 pt-4 dark:border-slate-800">
           {unlocked ? (
             <UnlockedPanel provider={provider} />
-          ) : stored ? (
+          ) : stored && !pending ? (
             <UnlockForm provider={provider} />
           ) : (
             <RegisterForm key={provider} provider={provider} />
