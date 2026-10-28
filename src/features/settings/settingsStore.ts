@@ -109,6 +109,10 @@ export interface Settings extends Omit<ConversationSettings, 'systemPrompt'> {
   cloudModels: Partial<Record<CloudProviderId, string>>;
   /** クラウド AI ごとに、送る内容の説明に同意したか */
   cloudConsents: Partial<Record<CloudProviderId, boolean>>;
+  /** 最近使ったクラウド AI のモデル（「接続先|モデル」。新しい順） */
+  recentCloudModels: string[];
+  /** ★ を付けた OpenRouter のモデル */
+  openrouterFavorites: string[];
   // ---- モデル管理 ----
   saveImportedModels: boolean;
   autoLoadLastModel: boolean;
@@ -177,6 +181,8 @@ export const DEFAULT_SETTINGS: Settings = {
   aiProvider: 'local',
   cloudModels: {},
   cloudConsents: {},
+  recentCloudModels: [],
+  openrouterFavorites: [],
   maxNumTokens: 4096,
 
   saveImportedModels: true,
@@ -261,6 +267,8 @@ const DEVICE_ONLY: (keyof Settings)[] = [
   'aiProvider',
   'cloudModels',
   'cloudConsents',
+  'recentCloudModels',
+  'openrouterFavorites',
   'maxNumTokens',
   'saveImportedModels',
   'autoLoadLastModel',

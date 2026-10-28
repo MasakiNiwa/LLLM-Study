@@ -49,13 +49,9 @@ function AiToolsList() {
       </ul>
       <div className="flex items-center gap-2 rounded-2xl bg-slate-50 p-3 dark:bg-slate-800/50">
         <span className="min-w-0 flex-1 text-xs text-slate-600 dark:text-slate-400">
-          {ready
-            ? '使う AI モデル（押すとモデルの画面へ）'
-            : 'AI の機能は、AI モデルを読み込むと使えます'}
+          {ready ? '使う AI（押すと切り替え）' : 'AI の機能は、AI モデルを読み込むと使えます'}
         </span>
-        <span onClick={close}>
-          <ModelStatusChip className="max-w-48" />
-        </span>
+        <ModelStatusChip className="max-w-48" />
       </div>
       <Link
         href={MODELS_ITEM.to}

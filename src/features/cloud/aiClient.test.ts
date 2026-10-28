@@ -12,6 +12,7 @@ vi.mock('@/lib/cloud/keyVault', () => ({
   getUnlockedKey: () => unlockedKey,
   isUnlocked: () => unlockedKey !== null,
   storedKeyInfo: () => null,
+  hasPendingKey: () => false,
   subscribeVault: () => () => {},
 }));
 vi.mock('@/lib/cloud/gemini', async (orig) => ({

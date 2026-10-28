@@ -1,9 +1,9 @@
 /**
  * AI への入口。設定の「AI の接続先」に応じて、端末内のモデル（lib/llm/client.ts）か
- * クラウド AI（lib/cloud/providers.ts の Gemini・OpenAI）に振り分ける。呼び出し側は区別しない。
+ * クラウド AI（lib/cloud/providers.ts の Gemini・OpenAI・Claude・OpenRouter）に振り分ける。呼び出し側は区別しない。
  *
  * - クラウド AI が回数の上限・通信エラーで答えられず、まだ何も出しておらず、端末内のモデルが読み込み済みなら、端末内で答え直す
- * - キーがロック中で端末内のモデルがあれば、端末内で答える（解除はユーザーが「AI モデル」画面で行う）
+ * - キーがロック中で端末内のモデルがあれば、端末内で答える（解除はユーザーがモデルのチップの切り替え・「AI モデル」画面で行う）
  */
 import { toast } from 'sonner';
 import { llm } from '@/lib/llm/client';
@@ -19,7 +19,7 @@ import type {
 } from '@/lib/llm/types';
 import { useEngine } from '@/features/engine/engineStore';
 import { useSettings, type AiProvider } from '@/features/settings/settingsStore';
-import { useCloud } from './cloudStore';
+import { rememberRecentModel, useCloud } from './cloudStore';
 
 let current: AbortController | null = null;
 
@@ -67,7 +67,7 @@ export const ai = {
         current = ctrl;
         let emitted = false;
         try {
-          return await info.generate(
+          const result = await info.generate(
             req,
             { apiKey, model, signal: ctrl.signal },
             (e) => {
@@ -76,6 +76,8 @@ export const ai = {
             },
             onToolCall,
           );
+          if (result.status === 'done') rememberRecentModel(provider, model);
+          return result;
         } catch (e) {
           // まだ何も出していなければ、端末内のモデルで答え直す（途中まで出ていたら重ならないよう諦める）
           if (e instanceof CloudError && e.retryable && !emitted && localReady()) {
@@ -93,13 +95,13 @@ export const ai = {
         throw new Error(
           apiKey
             ? `${info.label} のモデルが選ばれていません。「AI モデル」画面で選んでください。`
-            : `${info.label} の API キーがロックされています。「AI モデル」画面で合言葉を入れて解除してください。`,
+            : `${info.label} の API キーがロックされています。画面上のモデルのチップを押して、合言葉で解除してください。`,
         );
       }
       if (!notifiedLocked) {
         notifiedLocked = true;
         toast.info(`${info.label} のキーがロック中なので、端末内の AI で答えます`, {
-          description: `「AI モデル」画面で合言葉を入れると ${info.label} に切り替わります。`,
+          description: `モデルのチップを押して合言葉を入れると ${info.label} に切り替わります。`,
         });
       }
     }

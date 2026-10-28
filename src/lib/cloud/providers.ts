@@ -9,14 +9,22 @@ import type {
   JsonValue,
   ToolCallInfo,
 } from '@/lib/llm/types';
+import { anthropicGenerate, listAnthropicModels, pickDefaultAnthropicModel } from './anthropic';
 import { geminiGenerate, listGeminiModels, pickDefaultGeminiModel } from './gemini';
 import type { CloudProviderId } from './keyVault';
 import { listOpenAiModels, openaiGenerate, pickDefaultOpenAiModel } from './openai';
+import {
+  listOpenRouterModels,
+  openrouterGenerate,
+  pickDefaultOpenRouterModel,
+  shortOpenRouterModel,
+  type OpenRouterModel,
+} from './openrouter';
 
-export interface CloudModel {
-  id: string;
-  displayName: string;
-}
+/** モデル。OpenRouter のモデルは料金・ツール対応などの情報も持つ */
+export type CloudModel = { id: string; displayName: string } & Partial<
+  Omit<OpenRouterModel, 'id' | 'displayName'>
+>;
 
 export interface CloudGenerateOptions {
   apiKey: string;
@@ -30,7 +38,8 @@ export interface CloudProvider {
   label: string;
   /** 生成に使えるモデルの一覧（キーの確認にも使う） */
   listModels: (apiKey: string, signal?: AbortSignal) => Promise<CloudModel[]>;
-  pickDefaultModel: (models: CloudModel[]) => string | null;
+  // 接続先ごとのモデルの型（情報の多い OpenRouter など）を受け取れるよう、引数は双変にしておく
+  pickDefaultModel(models: CloudModel[]): string | null;
   generate: (
     req: GenerateRequest,
     opts: CloudGenerateOptions,
@@ -57,6 +66,22 @@ export const CLOUD_PROVIDERS: Record<CloudProviderId, CloudProvider> = {
     pickDefaultModel: pickDefaultOpenAiModel,
     generate: openaiGenerate,
     shortModel: (m) => m,
+  },
+  anthropic: {
+    id: 'anthropic',
+    label: 'Claude',
+    listModels: listAnthropicModels,
+    pickDefaultModel: pickDefaultAnthropicModel,
+    generate: anthropicGenerate,
+    shortModel: (m) => m.replace(/^claude-/, ''),
+  },
+  openrouter: {
+    id: 'openrouter',
+    label: 'OpenRouter',
+    listModels: listOpenRouterModels,
+    pickDefaultModel: (models) => pickDefaultOpenRouterModel(models as OpenRouterModel[]),
+    generate: openrouterGenerate,
+    shortModel: shortOpenRouterModel,
   },
 };
 
