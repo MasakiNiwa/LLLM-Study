@@ -530,7 +530,7 @@ export default function StudyPage() {
                   </Button>
                 </div>
               )}
-              {revealed && <AiAssistPanel key={showKey} card={current.card} />}
+              {revealed && <AiAssistPanel key={showKey} card={current.card} threadKey={showKey} />}
             </div>
           </div>
           <div className="pb-safe relative shrink-0 border-t border-slate-200 bg-slate-50/90 backdrop-blur-md dark:border-slate-800 dark:bg-slate-950/90">

@@ -19,6 +19,7 @@ import type {
 } from '@/lib/llm/types';
 import { useEngine } from '@/features/engine/engineStore';
 import { useSettings, type AiProvider } from '@/features/settings/settingsStore';
+import type { AiTask } from '@/features/ai/aiBusy';
 import { rememberRecentModel, useCloud } from './cloudStore';
 
 let current: AbortController | null = null;
@@ -34,9 +35,12 @@ export function cloudReady(): boolean {
   return !!p && !!s.cloudModels[p] && !!getUnlockedKey(p);
 }
 
-/** AI を使える状態か（クラウドか、端末内のモデルのどちらかで答えられる） */
-export function aiReadyNow(): boolean {
-  return cloudReady() || localReady();
+/**
+ * AI を使える状態か（クラウドか、端末内のモデルのどちらかで答えられる）。
+ * task を渡すと、その種類に決めた AI で答えられるときも使える状態とみなす
+ */
+export function aiReadyNow(task?: AiTask): boolean {
+  return cloudReady() || localReady() || !!taskRoute(task);
 }
 
 /** 画面用: AI を使える状態か */
@@ -50,18 +54,39 @@ export function useAiReady(): boolean {
 
 let notifiedLocked = false;
 
+/**
+ * 応答の種類ごとの AI（設定の「応答ごとの AI」）。使えないとき（キーがロック中・端末内のモデルが無い）は
+ * null を返し、いつもの AI で答える
+ */
+export function taskRoute(
+  task: AiTask | undefined,
+): { kind: 'local' } | { kind: 'cloud'; provider: CloudProviderId; model: string } | null {
+  if (!task) return null;
+  const route = useSettings.getState().taskModels[task];
+  if (!route) return null;
+  if (route.provider === 'local') return localReady() ? { kind: 'local' } : null;
+  const model = route.model || useSettings.getState().cloudModels[route.provider];
+  return model && getUnlockedKey(route.provider)
+    ? { kind: 'cloud', provider: route.provider, model }
+    : null;
+}
+
 export const ai = {
   async generate(
     req: GenerateRequest,
     onEvent: (e: GenerateEvent) => void,
     onToolCall?: (call: ToolCallInfo) => Promise<JsonValue>,
+    /** 応答の種類（設定で種類ごとに AI を変えているとき、その AI で答える） */
+    task?: AiTask,
   ): Promise<GenerateResult> {
     const s = useSettings.getState();
-    const provider = asCloud(s.aiProvider);
+    const route = taskRoute(task);
+    if (route?.kind === 'local') return llm.generate(req, onEvent, onToolCall);
+    const provider = route?.kind === 'cloud' ? route.provider : asCloud(s.aiProvider);
     if (provider) {
       const info = CLOUD_PROVIDERS[provider];
       const apiKey = getUnlockedKey(provider);
-      const model = s.cloudModels[provider];
+      const model = route?.kind === 'cloud' ? route.model : s.cloudModels[provider];
       if (apiKey && model) {
         const ctrl = new AbortController();
         current = ctrl;

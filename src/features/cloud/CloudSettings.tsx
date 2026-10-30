@@ -4,18 +4,18 @@
  * （lib/cloud/keyVault.ts）。考え方は docs/CLOUD_AI.md。
  */
 import { useState, type FormEvent } from 'react';
-import { Cloud, KeyRound, Lock, LockOpen, LogIn, ShieldCheck, Trash2 } from 'lucide-react';
+import { Cloud, KeyRound, Lock, LogIn, ShieldCheck, Trash2 } from 'lucide-react';
 import { toast } from 'sonner';
 import { Button } from '@/components/ui/Button';
 import { Card } from '@/components/ui/Card';
 import { ConfirmDialog } from '@/components/ui/ConfirmDialog';
 import { MIN_PASSPHRASE_LENGTH, type CloudProviderId } from '@/lib/cloud/keyVault';
 import { canLoginHere, startOpenRouterLogin } from '@/lib/cloud/openrouterAuth';
-import { CLOUD_PROVIDERS } from '@/lib/cloud/providers';
 import { cn } from '@/lib/utils/cn';
 import { errorMessage } from '@/lib/utils/format';
 import { useSettings, type AiProvider } from '@/features/settings/settingsStore';
-import { useCloud } from './cloudStore';
+import { useCloud, type SaveMode } from './cloudStore';
+import { UnlockLegacyForm, VaultPanel } from './VaultForms';
 import { ModelPicker } from './ModelPicker';
 import { ExtLink } from './ExtLink';
 import { PROVIDERS, PROVIDER_IDS } from './providerInfo';
@@ -90,31 +90,39 @@ function RegisterForm({ provider }: { provider: CloudProviderId }) {
   /** ログイン（OpenRouter）で受け取ったキーがある。貼り付けの代わりに、それを保存する */
   const pending = useCloud((s) => s.pending[provider]);
   const checking = useCloud((s) => s.checking === provider);
+  const vault = useCloud((s) => s.vault);
   const [apiKey, setApiKey] = useState('');
   const [mode, setMode] = useState<'encrypted' | 'session'>('encrypted');
   const [pass, setPass] = useState('');
   const [pass2, setPass2] = useState('');
   const [error, setError] = useState<string | null>(null);
 
+  /** アプリの合言葉: open なら入力不要、locked なら今の合言葉、none なら新しく決める（確認つき） */
+  const creating = vault === 'none';
   const passError =
-    mode === 'encrypted' && pass && pass.length < MIN_PASSPHRASE_LENGTH
+    mode === 'encrypted' && creating && pass && pass.length < MIN_PASSPHRASE_LENGTH
       ? `合言葉は ${MIN_PASSPHRASE_LENGTH} 文字以上にしてください`
-      : mode === 'encrypted' && pass2 && pass !== pass2
+      : mode === 'encrypted' && creating && pass2 && pass !== pass2
         ? '確認用の合言葉が一致しません'
         : null;
-  const canSubmit =
-    (pending || !!apiKey.trim()) &&
-    !checking &&
-    (mode === 'session' || (pass.length >= MIN_PASSPHRASE_LENGTH && pass === pass2));
+  const passOk =
+    mode === 'session' ||
+    vault === 'open' ||
+    (vault === 'locked' && !!pass) ||
+    (creating && pass.length >= MIN_PASSPHRASE_LENGTH && pass === pass2);
+  const canSubmit = (pending || !!apiKey.trim()) && !checking && passOk;
 
   const submit = async (e: FormEvent) => {
     e.preventDefault();
     if (!canSubmit) return;
     setError(null);
     try {
-      const passphrase = mode === 'encrypted' ? pass : null;
-      if (pending) await registerPending(provider, passphrase);
-      else await register(provider, apiKey, passphrase);
+      const save: SaveMode =
+        mode === 'encrypted'
+          ? { mode: 'vault', passphrase: pass || undefined }
+          : { mode: 'session' };
+      if (pending) await registerPending(provider, save);
+      else await register(provider, apiKey, save);
       setApiKey('');
       setPass('');
       setPass2('');
@@ -173,8 +181,8 @@ function RegisterForm({ provider }: { provider: CloudProviderId }) {
           [
             [
               'encrypted',
-              '合言葉で暗号化して、この端末に保存（おすすめ）',
-              '次からは合言葉を入れるだけで使えます',
+              'アプリの合言葉で暗号化して、この端末に保存（おすすめ）',
+              '合言葉はすべての AI のキーで共通。次からは合言葉を 1 回入れるだけで、すべてのキーが使えます',
             ],
             ['session', '今回だけ（保存しない）', 'タブを閉じると消えます。毎回キーを貼り付けます'],
           ] as const
@@ -194,10 +202,29 @@ function RegisterForm({ provider }: { provider: CloudProviderId }) {
           </label>
         ))}
       </fieldset>
-      {mode === 'encrypted' && (
+      {mode === 'encrypted' && vault === 'open' && (
+        <p className="text-xs text-slate-500 dark:text-slate-400">
+          解除中のアプリの合言葉で暗号化します（入力は不要です）。
+        </p>
+      )}
+      {mode === 'encrypted' && vault === 'locked' && (
+        <label className="block space-y-1">
+          <span className="text-sm font-medium">アプリの合言葉</span>
+          <input
+            type="password"
+            value={pass}
+            onChange={(e) => setPass(e.target.value)}
+            autoComplete="current-password"
+            className={INPUT}
+          />
+        </label>
+      )}
+      {mode === 'encrypted' && creating && (
         <div className="grid gap-2 sm:grid-cols-2">
           <label className="block space-y-1">
-            <span className="text-sm font-medium">合言葉（{MIN_PASSPHRASE_LENGTH} 文字以上）</span>
+            <span className="text-sm font-medium">
+              アプリの合言葉を決める（{MIN_PASSPHRASE_LENGTH} 文字以上）
+            </span>
             <input
               type="password"
               value={pass}
@@ -217,7 +244,8 @@ function RegisterForm({ provider }: { provider: CloudProviderId }) {
             />
           </label>
           <p className="text-xs text-slate-500 sm:col-span-2 dark:text-slate-400">
-            合言葉は保存されません。忘れたときはキーを削除して登録し直してください。
+            ほかの AI
+            のキーも、この合言葉で暗号化します。合言葉は保存されません。忘れたときはキーを削除して登録し直してください。
           </p>
         </div>
       )}
@@ -234,60 +262,9 @@ function RegisterForm({ provider }: { provider: CloudProviderId }) {
   );
 }
 
-function UnlockForm({ provider }: { provider: CloudProviderId }) {
-  const stored = useCloud((s) => s.stored[provider]);
-  const unlock = useCloud((s) => s.unlock);
-  const [pass, setPass] = useState('');
-  const [busy, setBusy] = useState(false);
-  const [error, setError] = useState<string | null>(null);
-  const submit = async (e: FormEvent) => {
-    e.preventDefault();
-    if (!pass) return;
-    setBusy(true);
-    setError(null);
-    try {
-      const also = await unlock(provider, pass);
-      setPass('');
-      if (also.length)
-        toast.success(
-          `同じ合言葉の ${also.map((p) => CLOUD_PROVIDERS[p].label).join('・')} のキーも解除しました`,
-        );
-    } catch (err) {
-      setError(errorMessage(err));
-    } finally {
-      setBusy(false);
-    }
-  };
-  return (
-    <form onSubmit={(e) => void submit(e)} className="space-y-2">
-      <p className="flex items-center gap-1.5 text-sm">
-        <Lock className="size-4 text-amber-600" />
-        キー（…{stored?.hint}）はロック中です。合言葉を入れると使えます。
-      </p>
-      <div className="flex gap-2">
-        <input
-          type="password"
-          value={pass}
-          onChange={(e) => setPass(e.target.value)}
-          autoComplete="current-password"
-          aria-label="合言葉"
-          placeholder="合言葉"
-          className={INPUT}
-        />
-        <Button type="submit" variant="primary" disabled={!pass || busy}>
-          <LockOpen />
-          {busy ? '解除中…' : '解除'}
-        </Button>
-      </div>
-      {error && <p className="text-sm text-rose-600 dark:text-rose-400">{error}</p>}
-    </form>
-  );
-}
-
 function UnlockedPanel({ provider }: { provider: CloudProviderId }) {
   const stored = useCloud((s) => s.stored[provider]);
   const modelsError = useCloud((s) => s.modelsError[provider]);
-  const lock = useCloud((s) => s.lock);
   return (
     <div className="space-y-3">
       <p className="flex items-center gap-1.5 text-sm text-emerald-700 dark:text-emerald-300">
@@ -303,12 +280,6 @@ function UnlockedPanel({ provider }: { provider: CloudProviderId }) {
         <p className="text-sm whitespace-pre-line text-rose-600 dark:text-rose-400">
           {modelsError}
         </p>
-      )}
-      {stored && (
-        <Button size="sm" variant="secondary" onClick={() => lock(provider)}>
-          <Lock />
-          ロックする
-        </Button>
       )}
     </div>
   );
@@ -336,6 +307,8 @@ export function CloudSettings() {
   const stored = useCloud((s) => (provider ? s.stored[provider] : null));
   const unlocked = useCloud((s) => (provider ? s.unlocked[provider] : false));
   const pending = useCloud((s) => (provider ? s.pending[provider] : false));
+  const legacy = useCloud((s) => (provider ? s.legacy[provider] : false));
+  const vault = useCloud((s) => s.vault);
   const remove = useCloud((s) => s.remove);
   const [confirmRemove, setConfirmRemove] = useState(false);
   return (
@@ -353,13 +326,21 @@ export function CloudSettings() {
           </p>
         </div>
       </div>
+      <VaultPanel />
       <ProviderChoice />
       {provider && (
         <div className="space-y-4 border-t border-slate-100 pt-4 dark:border-slate-800">
           {unlocked ? (
             <UnlockedPanel provider={provider} />
           ) : stored && !pending ? (
-            <UnlockForm provider={provider} />
+            legacy && vault === 'open' ? (
+              <UnlockLegacyForm provider={provider} />
+            ) : (
+              <p className="flex items-center gap-1.5 text-sm">
+                <Lock className="size-4 shrink-0 text-amber-600" />
+                キー（…{stored.hint}）はロック中です。上の「アプリの合言葉」で解除すると使えます。
+              </p>
+            )
           ) : (
             <RegisterForm key={provider} provider={provider} />
           )}

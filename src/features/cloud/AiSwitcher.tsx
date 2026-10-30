@@ -1,72 +1,21 @@
 /**
  * 使う場面で AI を切り替えるシート（モデルの状態のチップを押すと開く）。
- * 接続先（端末内・キーを登録したクラウド AI）とモデルをその場で選べる。ロック中のキーはここで解除できる。
+ * 接続先（端末内・キーを登録したクラウド AI）とモデルをその場で選べる。ロック中のキーはここでアプリの合言葉を入れて解除できる。
  * キーの登録・削除などの詳しい設定は「AI モデル」画面で行う。
  */
-import { useState, type FormEvent, type ReactNode } from 'react';
+import type { ReactNode } from 'react';
 import { Check, ChevronRight, Cpu, Lock, LockOpen } from 'lucide-react';
-import { toast } from 'sonner';
 import { Link } from 'wouter';
 import { BottomSheet } from '@/components/ui/BottomSheet';
-import { Button } from '@/components/ui/Button';
 import { useSheetClose } from '@/components/ui/sheetContext';
 import type { CloudProviderId } from '@/lib/cloud/keyVault';
 import { CLOUD_PROVIDERS, CLOUD_PROVIDER_IDS } from '@/lib/cloud/providers';
 import { cn } from '@/lib/utils/cn';
-import { errorMessage } from '@/lib/utils/format';
 import { useEngine } from '@/features/engine/engineStore';
 import { useSettings, type AiProvider } from '@/features/settings/settingsStore';
 import { parseRecent, selectCloudModel, useCloud } from './cloudStore';
 import { ModelPicker } from './ModelPicker';
-
-function UnlockInline({ provider }: { provider: CloudProviderId }) {
-  const unlock = useCloud((s) => s.unlock);
-  const [pass, setPass] = useState('');
-  const [busy, setBusy] = useState(false);
-  const [error, setError] = useState<string | null>(null);
-  const submit = async (e: FormEvent) => {
-    e.preventDefault();
-    if (!pass) return;
-    setBusy(true);
-    setError(null);
-    try {
-      const also = await unlock(provider, pass);
-      setPass('');
-      if (also.length)
-        toast.success(
-          `同じ合言葉の ${also.map((p) => CLOUD_PROVIDERS[p].label).join('・')} のキーも解除しました`,
-        );
-    } catch (err) {
-      setError(errorMessage(err));
-    } finally {
-      setBusy(false);
-    }
-  };
-  return (
-    <form onSubmit={(e) => void submit(e)} className="space-y-1.5">
-      <p className="flex items-center gap-1.5 text-sm">
-        <Lock className="size-4 text-amber-600" />
-        キーはロック中です。合言葉を入れると使えます。
-      </p>
-      <div className="flex gap-2">
-        <input
-          type="password"
-          value={pass}
-          onChange={(e) => setPass(e.target.value)}
-          autoComplete="current-password"
-          aria-label={`${CLOUD_PROVIDERS[provider].label} の合言葉`}
-          placeholder="合言葉"
-          className="h-10 w-full min-w-0 rounded-xl border border-slate-300 bg-white px-3 text-base dark:border-slate-700 dark:bg-slate-950"
-        />
-        <Button type="submit" variant="primary" disabled={!pass || busy}>
-          <LockOpen />
-          {busy ? '解除中…' : '解除'}
-        </Button>
-      </div>
-      {error && <p className="text-sm text-rose-600 dark:text-rose-400">{error}</p>}
-    </form>
-  );
-}
+import { UnlockLegacyForm, UnlockVaultForm } from './VaultForms';
 
 function OptionRow({
   selected,
@@ -115,6 +64,8 @@ function AiSwitcherBody() {
   const update = useSettings((s) => s.update);
   const stored = useCloud((s) => s.stored);
   const unlocked = useCloud((s) => s.unlocked);
+  const legacy = useCloud((s) => s.legacy);
+  const vault = useCloud((s) => s.vault);
   const engineStatus = useEngine((s) => s.status);
   const localModel = useEngine((s) => s.model);
 
@@ -171,8 +122,10 @@ function AiSwitcherBody() {
               <span className="text-sm font-medium">{CLOUD_PROVIDERS[cloud].label} のモデル</span>
               <ModelPicker provider={cloud} />
             </>
+          ) : legacy[cloud] && vault === 'open' ? (
+            <UnlockLegacyForm provider={cloud} />
           ) : (
-            <UnlockInline key={cloud} provider={cloud} />
+            <UnlockVaultForm compact />
           )}
         </div>
       )}

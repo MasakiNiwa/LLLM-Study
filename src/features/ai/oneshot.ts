@@ -6,12 +6,15 @@ import { ai, aiReadyNow } from '@/features/cloud/aiClient';
 import { useSettings } from '@/features/settings/settingsStore';
 import { splitThinking } from '@/features/chat/thinking';
 import { createId } from '@/lib/utils/id';
+import type { ChatTurn } from '@/lib/llm/types';
 import { buildSystemPrompt } from './prompt';
 import { useAiBusy, type AiTask } from './aiBusy';
 
 export interface OneshotOptions {
   task: Exclude<AiTask, 'chat' | 'practice'>;
   prompt: string;
+  /** 前のやりとり（続けて質問するとき） */
+  history?: ChatTurn[];
   maxOutputTokens?: number;
   /** true: 性格（口調）を付けず、教材づくり用の中立なシステムプロンプトで生成する */
   plain?: boolean;
@@ -84,7 +87,7 @@ export function isAiBusyExceptReaction(): boolean {
 }
 
 export async function runOneshot(opts: OneshotOptions): Promise<OneshotResult> {
-  if (!aiReadyNow())
+  if (!aiReadyNow(opts.task))
     throw new Error('AI が使えません（モデルを読み込むか、クラウド AI のキーを解除してください）');
   if (opts.task !== 'reaction') await preemptReaction();
   if (useAiBusy.getState().task) throw new Error('AI が別の応答を生成中です');
@@ -109,7 +112,7 @@ export async function runOneshot(opts: OneshotOptions): Promise<OneshotResult> {
           // 単発の生成では考える過程を省いて速く返す
           enableThinking: false,
         },
-        history: [],
+        history: opts.history ?? [],
         message: { id: createId(), role: 'user', text: opts.prompt },
         assistantId: createId(),
         // チャットの文脈（KV キャッシュ）を残したまま生成する（設定でオフにできる）
@@ -120,6 +123,8 @@ export async function runOneshot(opts: OneshotOptions): Promise<OneshotResult> {
         raw += ev.text;
         if (!raf) raf = requestAnimationFrame(flush);
       },
+      undefined,
+      opts.task,
     );
     cancelAnimationFrame(raf);
     flush();

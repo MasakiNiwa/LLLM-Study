@@ -114,6 +114,8 @@ export const usePractice = create<PracticeState>()((set, get) => {
           raw += ev.text;
           if (!raf) raf = requestAnimationFrame(flush);
         },
+        undefined,
+        'practice',
       );
       cancelAnimationFrame(raf);
       flush();

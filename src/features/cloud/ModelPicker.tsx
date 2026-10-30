@@ -14,7 +14,7 @@ import { useSettings } from '@/features/settings/settingsStore';
 import { selectCloudModel, useCloud } from './cloudStore';
 import { OpenRouterBrowser } from './OpenRouterBrowser';
 
-function OpenRouterPicker({ value }: { value: string }) {
+function OpenRouterPicker({ value, onChange }: { value: string; onChange: (id: string) => void }) {
   const [open, setOpen] = useState(false);
   const info = useCloud((s) =>
     (s.models.openrouter as OpenRouterModel[]).find((m) => m.id === value),
@@ -44,14 +44,28 @@ function OpenRouterPicker({ value }: { value: string }) {
         open={open}
         onClose={() => setOpen(false)}
         value={value}
-        onSelect={(id) => selectCloudModel('openrouter', id)}
+        onSelect={onChange}
       />
     </>
   );
 }
 
-export function ModelPicker({ provider }: { provider: CloudProviderId }) {
-  const model = useSettings((s) => s.cloudModels[provider] ?? '');
+/**
+ * value・onChange を渡さなければ、その接続先の「使うモデル」（cloudModels）を選ぶ。
+ * 渡せば、別の設定（応答ごとの AI など）のモデルを選ぶ
+ */
+export function ModelPicker({
+  provider,
+  value,
+  onChange,
+}: {
+  provider: CloudProviderId;
+  value?: string;
+  onChange?: (model: string) => void;
+}) {
+  const current = useSettings((s) => s.cloudModels[provider] ?? '');
+  const model = value ?? current;
+  const choose = onChange ?? ((m: string) => selectCloudModel(provider, m));
   const models = useCloud((s) => s.models[provider]);
   const checking = useCloud((s) => s.checking === provider);
   const refresh = useCloud((s) => s.refreshModels);
@@ -61,7 +75,7 @@ export function ModelPicker({ provider }: { provider: CloudProviderId }) {
 
   const commit = () => {
     const v = draft.trim();
-    if (v && v !== model) selectCloudModel(provider, v);
+    if (v && v !== model) choose(v);
   };
   const options = [
     ...models.map((m) => ({
@@ -74,7 +88,7 @@ export function ModelPicker({ provider }: { provider: CloudProviderId }) {
   return (
     <div className="flex flex-wrap items-center gap-2">
       {provider === 'openrouter' && !manual ? (
-        <OpenRouterPicker value={model} />
+        <OpenRouterPicker value={model} onChange={choose} />
       ) : manual ? (
         <input
           value={draft}
@@ -92,7 +106,7 @@ export function ModelPicker({ provider }: { provider: CloudProviderId }) {
       ) : options.length > 0 ? (
         <Select
           value={model}
-          onChange={(v) => selectCloudModel(provider, v)}
+          onChange={(v) => choose(v)}
           options={options}
           aria-label={`${label} のモデル`}
           className="min-w-0 flex-1 basis-48"

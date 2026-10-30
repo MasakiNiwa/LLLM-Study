@@ -3,17 +3,23 @@
  */
 import { create } from 'zustand';
 import {
+  changePassphrase,
+  createVault,
   deleteKey,
+  deleteVault,
   getUnlockedKey,
   hasPendingKey,
   holdPendingKey,
+  isLegacyKey,
   isUnlocked,
-  lockKey,
+  lockVault,
+  openVault,
   saveKey,
   storedKeyInfo,
   subscribeVault,
   takePendingKey,
-  unlockKey,
+  unlockLegacyKey,
+  vaultState,
   type CloudProviderId,
 } from '@/lib/cloud/keyVault';
 import { CLOUD_PROVIDERS, CLOUD_PROVIDER_IDS, type CloudModel } from '@/lib/cloud/providers';
@@ -22,9 +28,19 @@ import { useSettings } from '@/features/settings/settingsStore';
 
 type PerProvider<T> = Record<CloudProviderId, T>;
 
+/**
+ * 保存のしかた。vault: アプリの合言葉で暗号化して保存（解除中でなければ passphrase で解除する。
+ * まだ合言葉がなければ passphrase を合言葉にする）、session: 今回だけ
+ */
+export type SaveMode = { mode: 'vault'; passphrase?: string } | { mode: 'session' };
+
 interface CloudState {
+  /** アプリの合言葉の状態（none: まだ決めていない、locked: ロック中、open: 解除中） */
+  vault: 'none' | 'locked' | 'open';
   /** 暗号化して保存したキー（末尾 4 文字と保存日時） */
   stored: PerProvider<{ hint: string; savedAt: number } | null>;
+  /** 以前の形（キーごとの別の合言葉）で保存したキー */
+  legacy: PerProvider<boolean>;
   /** 解除済み（このタブで使える） */
   unlocked: PerProvider<boolean>;
   /** ログインで受け取った、まだ保存していないキーがある */
@@ -33,18 +49,19 @@ interface CloudState {
   modelsError: PerProvider<string | null>;
   checking: CloudProviderId | null;
 
-  /** キーを確かめて（モデルの一覧を取って）から登録する。passphrase が null なら今回だけ */
-  register: (provider: CloudProviderId, apiKey: string, passphrase: string | null) => Promise<void>;
+  /** キーを確かめて（モデルの一覧を取って）から登録する */
+  register: (provider: CloudProviderId, apiKey: string, save: SaveMode) => Promise<void>;
   /** ログインで受け取ったキーを登録する */
-  registerPending: (provider: CloudProviderId, passphrase: string | null) => Promise<void>;
-  /**
-   * 合言葉でキーを解除する。同じ合言葉で保存したほかの接続先のキーも、まとめて解除する。
-   * 戻り値は、まとめて解除できたほかの接続先
-   */
-  unlock: (provider: CloudProviderId, passphrase: string) => Promise<CloudProviderId[]>;
-  lock: (provider: CloudProviderId) => void;
+  registerPending: (provider: CloudProviderId, save: SaveMode) => Promise<void>;
+  /** アプリの合言葉で、保存したすべてのキーを解除する。戻り値は解除できた接続先 */
+  unlock: (passphrase: string) => Promise<CloudProviderId[]>;
+  /** 別の合言葉で保存した以前のキーを解除する（アプリの合言葉の形に移す） */
+  unlockLegacy: (provider: CloudProviderId, passphrase: string) => Promise<void>;
+  /** 保存したすべてのキーをロックする */
+  lock: () => void;
+  changePassphrase: (passphrase: string) => Promise<void>;
   remove: (provider: CloudProviderId) => void;
-  /** すべての接続先のキーを消す（すべてのデータの削除） */
+  /** すべての接続先のキーとアプリの合言葉を消す（すべてのデータの削除・合言葉を忘れたとき） */
   removeAll: () => void;
   refreshModels: (provider: CloudProviderId) => Promise<void>;
 }
@@ -53,7 +70,9 @@ const each = <T>(f: (p: CloudProviderId) => T) =>
   Object.fromEntries(CLOUD_PROVIDER_IDS.map((p) => [p, f(p)])) as PerProvider<T>;
 
 const snapshot = () => ({
+  vault: vaultState(),
   stored: each((p) => storedKeyInfo(p)),
+  legacy: each((p) => isLegacyKey(p)),
   unlocked: each((p) => isUnlocked(p)),
   pending: each((p) => hasPendingKey(p)),
 });
@@ -64,12 +83,17 @@ export const useCloud = create<CloudState>()((set, get) => ({
   modelsError: each(() => null as string | null),
   checking: null,
 
-  async register(provider, apiKey, passphrase) {
+  async register(provider, apiKey, save) {
     set({ checking: provider });
     try {
       // 先にキーを確かめる（正しくないキーは保存しない）
       const models = await CLOUD_PROVIDERS[provider].listModels(apiKey.trim());
-      await saveKey(provider, apiKey, passphrase);
+      if (save.mode === 'vault' && vaultState() !== 'open') {
+        if (!save.passphrase) throw new Error('アプリの合言葉を入れてください');
+        if (vaultState() === 'none') await createVault(save.passphrase);
+        else await get().unlock(save.passphrase);
+      }
+      await saveKey(provider, apiKey, save.mode);
       set((st) => ({
         models: { ...st.models, [provider]: models },
         modelsError: { ...st.modelsError, [provider]: null },
@@ -80,11 +104,11 @@ export const useCloud = create<CloudState>()((set, get) => ({
     }
   },
 
-  async registerPending(provider, passphrase) {
+  async registerPending(provider, save) {
     const key = takePendingKey(provider);
     if (!key) throw new Error('受け取ったキーがありません。もう一度ログインしてください。');
     try {
-      await get().register(provider, key, passphrase);
+      await get().register(provider, key, save);
     } catch (e) {
       // 確かめられなかったときは、もう一度試せるよう戻しておく
       holdPendingKey(provider, key);
@@ -92,30 +116,27 @@ export const useCloud = create<CloudState>()((set, get) => ({
     }
   },
 
-  async unlock(provider, passphrase) {
-    await unlockKey(provider, passphrase);
-    void get().refreshModels(provider);
-    const also: CloudProviderId[] = [];
-    for (const p of CLOUD_PROVIDER_IDS) {
-      if (p === provider || isUnlocked(p) || !storedKeyInfo(p)) continue;
-      try {
-        await unlockKey(p, passphrase);
-        also.push(p);
-        void get().refreshModels(p);
-      } catch {
-        // 別の合言葉で保存したキー。そのままロックしておく
-      }
-    }
-    return also;
+  async unlock(passphrase) {
+    const opened = await openVault(passphrase);
+    for (const p of opened) void get().refreshModels(p);
+    return opened;
   },
 
-  lock(provider) {
-    lockKey(provider);
+  async unlockLegacy(provider, passphrase) {
+    await unlockLegacyKey(provider, passphrase);
+    void get().refreshModels(provider);
+  },
+
+  lock() {
+    lockVault();
+  },
+
+  async changePassphrase(passphrase) {
+    await changePassphrase(passphrase);
   },
 
   remove(provider) {
     deleteKey(provider);
-    takePendingKey(provider);
     set((st) => ({ models: { ...st.models, [provider]: [] } }));
     if (useSettings.getState().aiProvider === provider)
       useSettings.getState().update({ aiProvider: 'local' });
@@ -123,6 +144,7 @@ export const useCloud = create<CloudState>()((set, get) => ({
 
   removeAll() {
     for (const p of CLOUD_PROVIDER_IDS) get().remove(p);
+    deleteVault();
   },
 
   async refreshModels(provider) {
