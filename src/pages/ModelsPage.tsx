@@ -7,6 +7,7 @@ import { formatBytes, formatDuration } from '@/lib/utils/format';
 import { resolveBackend, useEngine } from '@/features/engine/engineStore';
 import { WebGpuNotice } from '@/features/engine/WebGpuNotice';
 import { CloudSettings } from '@/features/cloud/CloudSettings';
+import { TaskModels } from '@/features/cloud/TaskModels';
 import { LoadProgressCard } from '@/features/models/LoadProgressCard';
 import { ModelDownload } from '@/features/models/ModelDownload';
 import { ModelImport } from '@/features/models/ModelImport';
@@ -118,6 +119,7 @@ export default function ModelsPage() {
           キーを使うこともできます。学習カードだけならモデルは不要です。
         </p>
         <CloudSettings />
+        <TaskModels />
         <WebGpuNotice />
         <CurrentModel />
         <LoadProgressCard />

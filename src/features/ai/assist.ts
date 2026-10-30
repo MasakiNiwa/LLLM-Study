@@ -94,6 +94,19 @@ export function assistPrompt(
   return [...instructions, '', '<card>', JSON.stringify(cardJson), '</card>'].join('\n');
 }
 
+/** ボタンにない質問を書いて聞くときのプロンプト（前のやりとりは履歴として渡す） */
+export function followupPrompt(question: string, cardJson: Record<string, unknown>): string {
+  return [
+    `ユーザーがこのカードについて質問しています。前のやりとりも踏まえて、短く分かりやすく答えてください。カードの答えと食い違うこと、不確かなことは書かないでください。`,
+    '',
+    `質問: ${question}`,
+    '',
+    '<card>',
+    JSON.stringify(cardJson),
+    '</card>',
+  ].join('\n');
+}
+
 /** 答えを見たときの結果の説明（AI に渡す） */
 const OUTCOME_LABELS: Record<RevealOutcome, string> = {
   correct: '正解した（アプリの判定）',

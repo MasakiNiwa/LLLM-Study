@@ -1,6 +1,7 @@
 import { create } from 'zustand';
 import { persist } from 'zustand/middleware';
 import type { CloudProviderId } from '@/lib/cloud/keyVault';
+import type { AiTask } from '@/features/ai/aiBusy';
 import { STORAGE_PREFIX } from '@/lib/constants';
 import type { BackendKind, ConversationSettings } from '@/lib/llm/types';
 import type { SchedulerOptions } from '@/lib/srs/scheduler';
@@ -45,6 +46,12 @@ export const STUDY_COMPACT_LABELS: Record<StudyCompact, string> = {
 
 /** AI の接続先（端末内のモデルか、クラウド AI のどれか） */
 export type AiProvider = 'local' | CloudProviderId;
+
+/** 応答の種類ごとの接続先（cloud のときはモデルも） */
+export interface TaskRoute {
+  provider: AiProvider;
+  model?: string;
+}
 
 export interface Settings extends Omit<ConversationSettings, 'systemPrompt'> {
   // ---- 学習（アルゴリズム） ----
@@ -113,6 +120,11 @@ export interface Settings extends Omit<ConversationSettings, 'systemPrompt'> {
   recentCloudModels: string[];
   /** ★ を付けた OpenRouter のモデル */
   openrouterFavorites: string[];
+  /**
+   * 応答の種類ごとの AI（ひとことは安いモデル、解説は賢いモデル、など）。
+   * 無い種類は「いつもの AI」（aiProvider）で答える。使えないとき（ロック中など）もいつもの AI に戻す
+   */
+  taskModels: Partial<Record<AiTask, TaskRoute>>;
   // ---- モデル管理 ----
   saveImportedModels: boolean;
   autoLoadLastModel: boolean;
@@ -183,6 +195,7 @@ export const DEFAULT_SETTINGS: Settings = {
   cloudConsents: {},
   recentCloudModels: [],
   openrouterFavorites: [],
+  taskModels: {},
   maxNumTokens: 4096,
 
   saveImportedModels: true,
@@ -269,6 +282,7 @@ const DEVICE_ONLY: (keyof Settings)[] = [
   'cloudConsents',
   'recentCloudModels',
   'openrouterFavorites',
+  'taskModels',
   'maxNumTokens',
   'saveImportedModels',
   'autoLoadLastModel',

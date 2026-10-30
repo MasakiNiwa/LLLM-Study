@@ -207,6 +207,7 @@ export const useChat = create<ChatState>()((set, get) => {
                   })),
               })
           : undefined,
+        'chat',
       );
       cancelAnimationFrame(raf);
       dirty = true;

@@ -13,6 +13,8 @@ vi.mock('@/lib/cloud/keyVault', () => ({
   isUnlocked: () => unlockedKey !== null,
   storedKeyInfo: () => null,
   hasPendingKey: () => false,
+  isLegacyKey: () => false,
+  vaultState: () => 'none',
   subscribeVault: () => () => {},
 }));
 vi.mock('@/lib/cloud/gemini', async (orig) => ({
@@ -50,7 +52,11 @@ beforeEach(() => {
   geminiGenerate.mockReset();
   openaiGenerate.mockReset();
   unlockedKey = 'KEY';
-  useSettings.setState({ aiProvider: 'gemini', cloudModels: { gemini: 'gemini-test' } });
+  useSettings.setState({
+    aiProvider: 'gemini',
+    cloudModels: { gemini: 'gemini-test' },
+    taskModels: {},
+  });
   useEngine.setState({ status: 'empty' });
 });
 
@@ -117,6 +123,31 @@ describe('aiClient', () => {
     unlockedKey = null;
     useEngine.setState({ status: 'ready' });
     await ai.generate(req, () => {});
+    expect(localGenerate).toHaveBeenCalledOnce();
+  });
+
+  it('応答の種類ごとに決めた AI とモデルで答える（決めていない種類はいつもの AI）', async () => {
+    useSettings.setState({
+      cloudModels: { gemini: 'gemini-test', openai: 'gpt-big' },
+      taskModels: { reaction: { provider: 'openai', model: 'gpt-cheap-mini' } },
+    });
+    openaiGenerate.mockResolvedValue({ status: 'done', stats: { totalMs: 1 } });
+    geminiGenerate.mockResolvedValue({ status: 'done', stats: { totalMs: 1 } });
+    await ai.generate(req, () => {}, undefined, 'reaction');
+    expect(openaiGenerate.mock.calls[0][1]).toMatchObject({ model: 'gpt-cheap-mini' });
+    await ai.generate(req, () => {}, undefined, 'assist');
+    expect(geminiGenerate).toHaveBeenCalledOnce();
+  });
+
+  it('種類ごとの AI が使えないとき（端末内のモデルが無い・キーがロック中）は、いつもの AI で答える', async () => {
+    useSettings.setState({ taskModels: { reaction: { provider: 'local' } } });
+    geminiGenerate.mockResolvedValue({ status: 'done', stats: { totalMs: 1 } });
+    await ai.generate(req, () => {}, undefined, 'reaction');
+    expect(geminiGenerate).toHaveBeenCalledOnce();
+    expect(localGenerate).not.toHaveBeenCalled();
+
+    useEngine.setState({ status: 'ready' });
+    await ai.generate(req, () => {}, undefined, 'reaction');
     expect(localGenerate).toHaveBeenCalledOnce();
   });
 });

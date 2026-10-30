@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react';
+import { useCallback, useEffect, useState } from 'react';
 import { cn } from '@/lib/utils/cn';
 import {
   parseReactionLines,
@@ -13,8 +13,14 @@ import { useSettings } from '@/features/settings/settingsStore';
 import { currentUserAnswer, revealOutcome, useStudy } from './studyStore';
 import { useAiReady } from '@/features/cloud/aiClient';
 
+/**
+ * 最後に出したひとこと（カードの表示ごと）。ほかの画面へ行って戻ってきたときは、作り直さずにこれを出す
+ * （クラウド AI の呼び出しを増やさないため）
+ */
+let shown: { key: string; lines: string[] } | null = null;
+
 /** 1 枚のカードの答えを見たときのひとこと（カードが変わったら作り直す・生成中なら止める） */
-function Bubbles({ llm }: { llm: boolean }) {
+function Bubbles({ llm, showKey }: { llm: boolean; showKey: string }) {
   const personaId = useSettings((s) => s.persona);
   const custom = useSettings((s) => s.customPersona);
   const persona = getPersona(personaId, custom);
@@ -29,10 +35,20 @@ function Bubbles({ llm }: { llm: boolean }) {
     };
   });
   // null: AI が考え中
-  const [lines, setLines] = useState<string[] | null>(llm ? null : [start.template]);
+  const [cached] = useState(() => (shown?.key === showKey ? shown.lines : null));
+  const [lines, setLinesState] = useState<string[] | null>(
+    cached ?? (llm ? null : [start.template]),
+  );
+  const setLines = useCallback(
+    (next: string[]) => {
+      shown = { key: showKey, lines: next };
+      setLinesState(next);
+    },
+    [showKey],
+  );
 
   useEffect(() => {
-    if (!llm) return;
+    if (!llm || cached) return;
     let alive = true;
     void (async () => {
       const st = useStudy.getState();
@@ -53,7 +69,7 @@ function Bubbles({ llm }: { llm: boolean }) {
           prompt: revealReactionPrompt(start.outcome, count, json, start.stats),
           maxOutputTokens: 90 * count,
           onText: (text) => {
-            if (alive) setLines(parseReactionLines(text, count));
+            if (alive) setLinesState(parseReactionLines(text, count));
           },
         });
         if (!alive) return;
@@ -69,7 +85,7 @@ function Bubbles({ llm }: { llm: boolean }) {
       // 次のカードに進んだら、間に合わなかったひとことは出さずに止める
       if (useAiBusy.getState().task === 'reaction') cancelAi();
     };
-  }, [llm, start]);
+  }, [llm, start, cached, setLines]);
 
   return (
     <div className="flex animate-fade-in gap-2.5" aria-live="polite">
@@ -116,5 +132,6 @@ export function RevealReaction() {
   const cardId = useStudy((s) => s.current?.card.id);
   const shownAt = useStudy((s) => s.shownAt);
   if (!revealed || !cardId || mode === 'off') return null;
-  return <Bubbles key={`${cardId}:${shownAt}`} llm={mode === 'llm' && engineReady} />;
+  const showKey = `${cardId}:${shownAt}`;
+  return <Bubbles key={showKey} showKey={showKey} llm={mode === 'llm' && engineReady} />;
 }
