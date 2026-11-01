@@ -31,9 +31,8 @@ export function useStartup() {
         toast.error(r.message);
         return;
       }
+      // 「AI モデル」画面の「API キーを追加」で、名前と保存のしかたを決めて登録してもらう
       holdPendingKey('openrouter', r.key);
-      const { cloudConsents, update } = useSettings.getState();
-      if (cloudConsents.openrouter) update({ aiProvider: 'openrouter' });
       toast.success('OpenRouter からキーを受け取りました', {
         description: '保存のしかた（合言葉）を決めて登録してください。',
       });

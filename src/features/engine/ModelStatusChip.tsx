@@ -5,7 +5,7 @@ import { formatPercent } from '@/lib/utils/format';
 import { useEngine } from './engineStore';
 import { CLOUD_PROVIDERS } from '@/lib/cloud/providers';
 import { AiSwitcher } from '@/features/cloud/AiSwitcher';
-import { useCloud } from '@/features/cloud/cloudStore';
+import { keyLabel, useCloud } from '@/features/cloud/cloudStore';
 import { useSettings } from '@/features/settings/settingsStore';
 
 /** 現在のモデル状態を表示する小さなチップ（押すと、使う AI を切り替えるシートを開く） */
@@ -26,18 +26,19 @@ export function ModelStatusChip({
   const aiProvider = useSettings((s) => s.aiProvider);
   const provider = aiProvider === 'local' ? null : aiProvider;
   const cloudModel = useSettings((s) => (provider ? s.cloudModels[provider] : undefined));
-  const cloudUnlocked = useCloud((s) => (provider ? s.unlocked[provider] : false));
+  const key = useCloud((s) => (provider ? s.keys.find((k) => k.id === provider) : undefined));
+  const cloudUnlocked = !!key?.unlocked;
 
   let dot = 'bg-slate-400';
   let label = 'モデル未読み込み';
   /** 幅が足りなくても省略しない部分（読み込みの割合など） */
   let suffix = '';
-  if (provider && cloudUnlocked && cloudModel) {
+  if (key && cloudUnlocked && cloudModel) {
     dot = 'bg-sky-500';
-    label = `${CLOUD_PROVIDERS[provider].label} · ${CLOUD_PROVIDERS[provider].shortModel(cloudModel)}`;
-  } else if (provider && status !== 'ready') {
+    label = `${keyLabel(key)} · ${CLOUD_PROVIDERS[key.provider].shortModel(cloudModel)}`;
+  } else if (key && status !== 'ready') {
     dot = 'bg-amber-500';
-    label = `${CLOUD_PROVIDERS[provider].label}（ロック中）`;
+    label = `${keyLabel(key)}（ロック中）`;
   } else if (status === 'ready' && model) {
     dot = 'bg-emerald-500';
     label = model.name.replace(/\.litertlm$/, '');

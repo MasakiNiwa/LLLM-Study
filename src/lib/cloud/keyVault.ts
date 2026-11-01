@@ -25,7 +25,12 @@ export type CloudProviderId = 'gemini' | 'openai' | 'anthropic' | 'openrouter';
 /** 登録した API キーの id（以前から登録していたキーは会社の id と同じ） */
 export type CloudKeyId = string;
 
-export const CLOUD_PROVIDER_ID_LIST: CloudProviderId[] = ['gemini', 'openai', 'anthropic', 'openrouter'];
+export const CLOUD_PROVIDER_ID_LIST: CloudProviderId[] = [
+  'gemini',
+  'openai',
+  'anthropic',
+  'openrouter',
+];
 
 /** 登録した API キーの、秘密でない情報 */
 export interface KeyEntry {
@@ -249,9 +254,13 @@ function writeRegistry(list: KeyEntry[]) {
 function readRegistry(): KeyEntry[] {
   const list = readJson<KeyEntry[]>(REGISTRY_KEY);
   if (Array.isArray(list)) return list.filter((e) => e?.id && e.provider);
-  const migrated = CLOUD_PROVIDER_ID_LIST.filter((p) => readStored(p)).map(
-    (p): KeyEntry => ({ id: p, provider: p, label: '', models: [], createdAt: readStored(p)!.savedAt }),
-  );
+  const migrated = CLOUD_PROVIDER_ID_LIST.filter((p) => readStored(p)).map((p): KeyEntry => ({
+    id: p,
+    provider: p,
+    label: '',
+    models: [],
+    createdAt: readStored(p)!.savedAt,
+  }));
   if (migrated.length) writeRegistry(migrated);
   return migrated;
 }
@@ -273,8 +282,7 @@ export function updateKeyEntry(id: CloudKeyId, patch: Partial<Pick<KeyEntry, 'la
   emit();
 }
 
-const newKeyId = (provider: CloudProviderId) =>
-  `${provider}-${toB64Url(toB64(rand(6)))}`;
+const newKeyId = (provider: CloudProviderId) => `${provider}-${toB64Url(toB64(rand(6)))}`;
 
 // ---------------------------------------------------------------- 状態
 
@@ -431,7 +439,9 @@ export async function unlockLegacyKey(id: CloudKeyId, passphrase: string): Promi
 }
 
 /** 合言葉で DEK の中身を一時的に取り出す（パスキーの登録・合言葉の変更のときだけ） */
-async function dekWithPassphrase(passphrase: string): Promise<{ raw: Uint8Array; meta: VaultMetaV2 }> {
+async function dekWithPassphrase(
+  passphrase: string,
+): Promise<{ raw: Uint8Array; meta: VaultMetaV2 }> {
   let meta = readMeta();
   if (meta?.v === 1) {
     await openVault(passphrase);
@@ -483,7 +493,8 @@ async function evalPrf(p: { credentialId: string; prfSalt: string }): Promise<Ar
   })) as PublicKeyCredential | null;
   if (!assertion) throw new Error('認証がキャンセルされました');
   const first = (assertion.getClientExtensionResults() as PrfResults).prf?.results?.first;
-  if (!first) throw new Error('この端末のパスキーから秘密値を受け取れませんでした（PRF 拡張に未対応）');
+  if (!first)
+    throw new Error('この端末のパスキーから秘密値を受け取れませんでした（PRF 拡張に未対応）');
   return first;
 }
 
@@ -499,7 +510,11 @@ export async function registerPasskey(passphrase: string): Promise<void> {
     publicKey: {
       challenge: rand(32) as BufferSource,
       rp: { name: 'LLLM Study' },
-      user: { id: rand(16) as BufferSource, name: 'lllm-study', displayName: 'LLLM Study（API キー）' },
+      user: {
+        id: rand(16) as BufferSource,
+        name: 'lllm-study',
+        displayName: 'LLLM Study（API キー）',
+      },
       pubKeyCredParams: [
         { type: 'public-key', alg: -7 },
         { type: 'public-key', alg: -257 },
@@ -563,7 +578,8 @@ export async function addKey(
 ): Promise<CloudKeyId> {
   const key = apiKey.trim();
   if (!key) throw new Error('API キーを入力してください');
-  if (mode === 'vault' && !vaultKey) throw new Error('アプリの合言葉で解除してから登録してください');
+  if (mode === 'vault' && !vaultKey)
+    throw new Error('アプリの合言葉で解除してから登録してください');
   const entry: KeyEntry = {
     id: newKeyId(provider),
     provider,

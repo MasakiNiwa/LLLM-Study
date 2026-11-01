@@ -8,13 +8,24 @@ let unlockedKey: string | null = 'KEY';
 vi.mock('@/lib/llm/client', () => ({
   llm: { generate: localGenerate, cancel: vi.fn(), resetConversation: vi.fn(async () => {}) },
 }));
+// 登録した API キー（以前から登録していたキーは id が会社の id と同じ）
+const KEYS = [
+  { id: 'gemini', provider: 'gemini', label: '', models: [], createdAt: 1 },
+  { id: 'openai', provider: 'openai', label: '仕事用', models: [], createdAt: 1 },
+];
 vi.mock('@/lib/cloud/keyVault', () => ({
+  CLOUD_PROVIDER_ID_LIST: ['gemini', 'openai', 'anthropic', 'openrouter'],
   getUnlockedKey: () => unlockedKey,
   isUnlocked: () => unlockedKey !== null,
   storedKeyInfo: () => null,
   hasPendingKey: () => false,
+  hasPasskey: () => false,
   isLegacyKey: () => false,
   vaultState: () => 'none',
+  listKeys: () => KEYS,
+  getKeyEntry: (id: string) => KEYS.find((k) => k.id === id) ?? null,
+  setAutoLock: () => {},
+  updateKeyEntry: () => {},
   subscribeVault: () => () => {},
 }));
 vi.mock('@/lib/cloud/gemini', async (orig) => ({

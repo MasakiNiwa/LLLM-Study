@@ -21,6 +21,7 @@ import {
   openVault,
   registerPasskey,
   removePasskey,
+  setAutoLock,
   storedKeyInfo,
   subscribeVault,
   takePendingKey,
@@ -131,9 +132,10 @@ const snapshot = () => ({
   vault: vaultState(),
   passkey: hasPasskey(),
   keys: keyInfos(),
-  pending: Object.fromEntries(
-    CLOUD_PROVIDER_ID_LIST.map((p) => [p, hasPendingKey(p)]),
-  ) as Record<CloudProviderId, boolean>,
+  pending: Object.fromEntries(CLOUD_PROVIDER_ID_LIST.map((p) => [p, hasPendingKey(p)])) as Record<
+    CloudProviderId,
+    boolean
+  >,
 });
 
 export const useCloud = create<CloudState>()((set, get) => {
@@ -222,7 +224,9 @@ export const useCloud = create<CloudState>()((set, get) => {
       const e = getKeyEntry(id);
       if (!e) return;
       updateKeyEntry(id, {
-        models: e.models.includes(model) ? e.models.filter((m) => m !== model) : [...e.models, model],
+        models: e.models.includes(model)
+          ? e.models.filter((m) => m !== model)
+          : [...e.models, model],
       });
     },
 
@@ -311,6 +315,13 @@ function chooseModel(id: CloudKeyId, models: CloudModel[]) {
 }
 
 subscribeVault(() => useCloud.setState(snapshot()));
+
+// 自動ロックまでの時間は設定に合わせる
+setAutoLock(useSettings.getState().vaultAutoLockMinutes * 60_000);
+useSettings.subscribe((s, prev) => {
+  if (s.vaultAutoLockMinutes !== prev.vaultAutoLockMinutes)
+    setAutoLock(s.vaultAutoLockMinutes * 60_000);
+});
 
 /** 以前の「OpenRouter の ★」を、OpenRouter のキーのマイモデルに移す */
 {

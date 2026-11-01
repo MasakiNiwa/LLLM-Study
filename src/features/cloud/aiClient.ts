@@ -87,7 +87,9 @@ export const ai = {
     const provider = route?.kind === 'cloud' ? route.provider : asCloud(s.aiProvider);
     const entry = provider ? getKeyEntry(provider) : null;
     if (provider && !entry && !localReady())
-      throw new Error('選んでいた API キーが見つかりません。「AI モデル」画面で選び直してください。');
+      throw new Error(
+        '選んでいた API キーが見つかりません。「AI モデル」画面で選び直してください。',
+      );
     if (provider && entry) {
       const info = { ...CLOUD_PROVIDERS[entry.provider], label: keyLabel(entry) };
       const apiKey = getUnlockedKey(provider);
