@@ -169,7 +169,8 @@ export const useChat = create<ChatState>()((set, get) => {
       threadId: user.threadId,
       role: 'assistant',
       text: '',
-      createdAt: Date.now(),
+      // 同じミリ秒になっても、開き直したときに質問より後ろに並ぶようにする
+      createdAt: Math.max(Date.now(), user.createdAt + 1),
       status: 'streaming',
     };
     set({ messages: [...history, user, assistant], isGenerating: true, toolActivity: null });
