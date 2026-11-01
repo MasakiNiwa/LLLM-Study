@@ -175,5 +175,7 @@ describe('chatStore', () => {
     expect(await db.chat.get('u')).toBeUndefined();
     expect(await db.chat.get('a')).toBeUndefined();
     expect(await db.chat.where('threadId').equals('t1').count()).toBe(2);
+    // 最初の発言を直したので、スレッドの名前も変わる
+    expect(useChat.getState().threads[0].title).toBe('こんにちは');
   });
 });

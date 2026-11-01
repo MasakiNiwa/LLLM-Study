@@ -432,12 +432,15 @@ export const useChat = create<ChatState>()((set, get) => {
       set({ messages: history });
       void (async () => {
         await db.chat.bulkDelete(removed.map((m) => m.id));
+        // 最初の発言を直したときは、スレッドの名前も直した発言に合わせる
+        const threadId = get().threadId;
+        if (i === 0 && threadId) await get().renameThread(threadId, threadTitle(trimmed));
         // 直した発言からは、モデル側の会話も作り直す
         void ai.resetConversation();
-        const threadId = await ensureThread(trimmed);
+        const id = await ensureThread(trimmed);
         const user: ChatMessage = {
           id: createId(),
-          threadId,
+          threadId: id,
           role: 'user',
           text: trimmed,
           context: get().helpMode ? helpContext(trimmed) : await contextFor(history),

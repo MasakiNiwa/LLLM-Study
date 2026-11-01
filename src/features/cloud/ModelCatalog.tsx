@@ -50,7 +50,8 @@ function ModelRow({
 }) {
   const [open, setOpen] = useState(false);
   const meta = [
-    formatPrice(model),
+    // 無料は印で出すので、料金の文字は出さない
+    !model.free && formatPrice(model),
     formatTokens(model.contextLength) && `入力 ${formatTokens(model.contextLength)}`,
     formatTokens(model.maxOutput) && `出力 ${formatTokens(model.maxOutput)}`,
     model.created &&
