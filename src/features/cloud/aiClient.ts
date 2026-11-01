@@ -1,6 +1,6 @@
 /**
  * AI への入口。設定の「AI の接続先」に応じて、端末内のモデル（lib/llm/client.ts）か
- * クラウド AI（lib/cloud/providers.ts の Gemini・OpenAI・Claude・OpenRouter）に振り分ける。呼び出し側は区別しない。
+ * 登録した API キー（会社は lib/cloud/providers.ts の Gemini・OpenAI・Claude・OpenRouter）に振り分ける。呼び出し側は区別しない。
  *
  * - クラウド AI が回数の上限・通信エラーで答えられず、まだ何も出しておらず、端末内のモデルが読み込み済みなら、端末内で答え直す
  * - キーがロック中で端末内のモデルがあれば、端末内で答える（解除はユーザーがモデルのチップの切り替え・「AI モデル」画面で行う）
@@ -8,7 +8,7 @@
 import { toast } from 'sonner';
 import { llm } from '@/lib/llm/client';
 import { CloudError } from '@/lib/cloud/errors';
-import { getUnlockedKey, type CloudProviderId } from '@/lib/cloud/keyVault';
+import { getKeyEntry, getUnlockedKey, type CloudKeyId } from '@/lib/cloud/keyVault';
 import { CLOUD_PROVIDERS } from '@/lib/cloud/providers';
 import type {
   GenerateEvent,
@@ -20,13 +20,13 @@ import type {
 import { useEngine } from '@/features/engine/engineStore';
 import { useSettings, type AiProvider } from '@/features/settings/settingsStore';
 import type { AiTask } from '@/features/ai/aiBusy';
-import { rememberRecentModel, useCloud } from './cloudStore';
+import { keyLabel, rememberRecentModel, useCloud } from './cloudStore';
 
 let current: AbortController | null = null;
 
 const localReady = () => useEngine.getState().status === 'ready';
 
-const asCloud = (p: AiProvider): CloudProviderId | null => (p === 'local' ? null : p);
+const asCloud = (p: AiProvider): CloudKeyId | null => (p === 'local' ? null : p);
 
 /** クラウド AI で生成できる状態か（接続先がクラウドで、キーが解除済みで、モデルが決まっている） */
 export function cloudReady(): boolean {
@@ -48,7 +48,9 @@ export function useAiReady(): boolean {
   const local = useEngine((s) => s.status === 'ready');
   const provider = useSettings((s) => asCloud(s.aiProvider));
   const model = useSettings((s) => (provider ? s.cloudModels[provider] : undefined));
-  const unlocked = useCloud((s) => (provider ? s.unlocked[provider] : false));
+  const unlocked = useCloud((s) =>
+    provider ? !!s.keys.find((k) => k.id === provider)?.unlocked : false,
+  );
   return local || (!!provider && !!model && unlocked);
 }
 
@@ -60,7 +62,7 @@ let notifiedLocked = false;
  */
 export function taskRoute(
   task: AiTask | undefined,
-): { kind: 'local' } | { kind: 'cloud'; provider: CloudProviderId; model: string } | null {
+): { kind: 'local' } | { kind: 'cloud'; provider: CloudKeyId; model: string } | null {
   if (!task) return null;
   const route = useSettings.getState().taskModels[task];
   if (!route) return null;
@@ -83,8 +85,11 @@ export const ai = {
     const route = taskRoute(task);
     if (route?.kind === 'local') return llm.generate(req, onEvent, onToolCall);
     const provider = route?.kind === 'cloud' ? route.provider : asCloud(s.aiProvider);
-    if (provider) {
-      const info = CLOUD_PROVIDERS[provider];
+    const entry = provider ? getKeyEntry(provider) : null;
+    if (provider && !entry && !localReady())
+      throw new Error('選んでいた API キーが見つかりません。「AI モデル」画面で選び直してください。');
+    if (provider && entry) {
+      const info = { ...CLOUD_PROVIDERS[entry.provider], label: keyLabel(entry) };
       const apiKey = getUnlockedKey(provider);
       const model = route?.kind === 'cloud' ? route.model : s.cloudModels[provider];
       if (apiKey && model) {
@@ -120,7 +125,7 @@ export const ai = {
         throw new Error(
           apiKey
             ? `${info.label} のモデルが選ばれていません。「AI モデル」画面で選んでください。`
-            : `${info.label} の API キーがロックされています。画面上のモデルのチップを押して、合言葉で解除してください。`,
+            : `${info.label} の API キーがロックされています。画面上のモデルのチップを押して、合言葉か生体認証で解除してください。`,
         );
       }
       if (!notifiedLocked) {

@@ -35,6 +35,9 @@ export interface OpenRouterModel {
   tools: boolean;
   /** 考える過程に対応しているか */
   reasoning: boolean;
+  created?: number;
+  description?: string;
+  maxOutput?: number;
 }
 
 /** OpenRouter に、どのアプリからの利用かを伝える（任意の項目。キーとは関係ない） */
@@ -89,6 +92,9 @@ interface RawModel {
   pricing?: { prompt?: unknown; completion?: unknown } | null;
   supported_parameters?: unknown;
   architecture?: { output_modalities?: unknown } | null;
+  created?: unknown;
+  description?: unknown;
+  top_provider?: { max_completion_tokens?: unknown } | null;
 }
 
 const perMillion = (v: unknown): number | null => {
@@ -120,6 +126,11 @@ export function parseOpenRouterModels(json: unknown): OpenRouterModel[] {
       free: raw.id.endsWith(':free') || (promptPrice === 0 && completionPrice === 0),
       tools: params.includes('tools'),
       reasoning: params.includes('reasoning') || params.includes('include_reasoning'),
+      ...(typeof raw.created === 'number' && { created: raw.created * 1000 }),
+      ...(typeof raw.description === 'string' && { description: raw.description }),
+      ...(typeof raw.top_provider?.max_completion_tokens === 'number' && {
+        maxOutput: raw.top_provider.max_completion_tokens,
+      }),
     });
   }
   return out;

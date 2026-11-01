@@ -24,6 +24,8 @@ const MIN_OUTPUT_TOKENS_WITH_THINKING = 16384;
 export interface OpenAiModel {
   id: string;
   displayName: string;
+  /** 公開した日時（ms） */
+  created?: number;
 }
 
 /** 推論（考える）モデル。temperature を受け付けず、考える分も出力の上限に数える */
@@ -84,7 +86,8 @@ export async function listOpenAiModels(
     const err = await readError(res);
     throw toCloudError(err.status, err.code, err.detail);
   }
-  const body = (await res.json()) as { data?: { id: string }[] };
+  const body = (await res.json()) as { data?: { id: string; created?: number }[] };
+  const created = new Map((body.data ?? []).map((m) => [m.id, m.created]));
   return (body.data ?? [])
     .map((m) => m.id)
     .filter(
@@ -96,7 +99,10 @@ export async function listOpenAiModels(
         ),
     )
     .sort((a, b) => b.localeCompare(a, 'en', { numeric: true }))
-    .map((id) => ({ id, displayName: id }));
+    .map((id) => {
+      const c = created.get(id);
+      return { id, displayName: id, ...(c && { created: c * 1000 }) };
+    });
 }
 
 /**

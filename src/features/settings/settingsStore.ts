@@ -1,6 +1,6 @@
 import { create } from 'zustand';
 import { persist } from 'zustand/middleware';
-import type { CloudProviderId } from '@/lib/cloud/keyVault';
+import type { CloudKeyId, CloudProviderId } from '@/lib/cloud/keyVault';
 import type { AiTask } from '@/features/ai/aiBusy';
 import { STORAGE_PREFIX } from '@/lib/constants';
 import type { BackendKind, ConversationSettings } from '@/lib/llm/types';
@@ -45,7 +45,8 @@ export const STUDY_COMPACT_LABELS: Record<StudyCompact, string> = {
 };
 
 /** AI の接続先（端末内のモデルか、クラウド AI のどれか） */
-export type AiProvider = 'local' | CloudProviderId;
+/** AI の接続先: 端末内のモデルか、登録した API キー（の id） */
+export type AiProvider = 'local' | CloudKeyId;
 
 /** 応答の種類ごとの接続先（cloud のときはモデルも） */
 export interface TaskRoute {
@@ -113,9 +114,11 @@ export interface Settings extends Omit<ConversationSettings, 'systemPrompt'> {
   /** AI の接続先（端末内のモデルか、クラウド AI の API か） */
   aiProvider: AiProvider;
   /** クラウド AI ごとの使うモデル（無ければ、キーを登録したときに既定のモデルを選ぶ） */
-  cloudModels: Partial<Record<CloudProviderId, string>>;
+  cloudModels: Partial<Record<CloudKeyId, string>>;
   /** クラウド AI ごとに、送る内容の説明に同意したか */
   cloudConsents: Partial<Record<CloudProviderId, boolean>>;
+  /** 使わない時間がこれだけ続いたら API キーをロックする（分。0 でしない） */
+  vaultAutoLockMinutes: number;
   /** 最近使ったクラウド AI のモデル（「接続先|モデル」。新しい順） */
   recentCloudModels: string[];
   /** ★ を付けた OpenRouter のモデル */
@@ -192,6 +195,7 @@ export const DEFAULT_SETTINGS: Settings = {
   backend: 'auto',
   aiProvider: 'local',
   cloudModels: {},
+  vaultAutoLockMinutes: 60,
   cloudConsents: {},
   recentCloudModels: [],
   openrouterFavorites: [],
@@ -279,6 +283,7 @@ const DEVICE_ONLY: (keyof Settings)[] = [
   // クラウド AI の接続はキーと一緒に端末ごとに決める（バックアップから戻しても勝手に接続しない）
   'aiProvider',
   'cloudModels',
+  'vaultAutoLockMinutes',
   'cloudConsents',
   'recentCloudModels',
   'openrouterFavorites',
