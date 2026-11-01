@@ -7,8 +7,15 @@
 import { z } from 'zod';
 import { ITEM_TYPES, ItemSchema, PassageSchema } from '@/lib/packs/schema';
 import { notifyLibraryChange } from './changes';
-import { db } from './db';
-import type { CardRecord, ChatRecord, ItemRecord, PackRecord, ReviewRecord } from './types';
+import { db, LEGACY_THREAD_ID, LEGACY_THREAD_TITLE } from './db';
+import type {
+  CardRecord,
+  ChatRecord,
+  ItemRecord,
+  PackRecord,
+  ReviewRecord,
+  ThreadRecord,
+} from './types';
 
 export const BACKUP_FORMAT = 'lllm-study-backup';
 
@@ -21,6 +28,8 @@ export interface BackupFile {
   cards: unknown[];
   reviews: unknown[];
   chat: unknown[];
+  /** チャットのスレッド（v1.12 から。古いバックアップにはない） */
+  threads?: unknown[];
   /** 端末によらない設定（学習の上限・1 日の始まり・AI の性格など）。古いバックアップにはない */
   settings?: Record<string, unknown>;
 }
@@ -29,12 +38,13 @@ export interface BackupFile {
 export async function exportBackup(
   options: { settings?: Record<string, unknown> } = {},
 ): Promise<BackupFile> {
-  const [packs, items, cards, reviews, chat] = await Promise.all([
+  const [packs, items, cards, reviews, chat, threads] = await Promise.all([
     db.packs.toArray(),
     db.items.toArray(),
     db.cards.toArray(),
     db.reviews.toArray(),
     db.chat.toArray(),
+    db.threads.toArray(),
   ]);
   return {
     format: BACKUP_FORMAT,
@@ -45,6 +55,7 @@ export async function exportBackup(
     cards,
     reviews,
     chat,
+    threads,
     ...(options.settings && { settings: options.settings }),
   };
 }
@@ -150,6 +161,15 @@ const ChatRecordSchema = z.object({
     .optional(),
   createdAt: num,
   error: z.string().optional(),
+  threadId: z.string().optional(),
+  model: z.string().optional(),
+});
+
+const ThreadRecordSchema = z.object({
+  id: str,
+  title: z.string(),
+  createdAt: num,
+  updatedAt: num,
 });
 
 const BackupSchema = z.object({
@@ -161,6 +181,7 @@ const BackupSchema = z.object({
   cards: z.array(CardRecordSchema),
   reviews: z.array(ReviewRecordSchema),
   chat: z.array(ChatRecordSchema),
+  threads: z.array(ThreadRecordSchema).optional(),
   settings: z.record(z.string(), z.unknown()).optional(),
 });
 
@@ -171,6 +192,7 @@ export interface ParsedBackup {
   cards: CardRecord[];
   reviews: ReviewRecord[];
   chat: ChatRecord[];
+  threads: ThreadRecord[];
   settings?: Record<string, unknown>;
   /** 対応するカードがないため除外した学習記録の数 */
   skippedReviews: number;
@@ -216,6 +238,7 @@ export function parseBackup(text: string): ParsedBackup {
     duplicate(b.items, (i) => i.key) ??
     duplicate(b.cards, (c) => c.id) ??
     duplicate(b.chat, (m) => m.id) ??
+    duplicate(b.threads ?? [], (t) => t.id) ??
     duplicate(
       b.reviews.filter((x) => x.id !== undefined),
       (x) => x.id,
@@ -232,13 +255,31 @@ export function parseBackup(text: string): ParsedBackup {
   const cardIds = new Set(b.cards.map((c) => c.id));
   const reviews = b.reviews.filter((x) => cardIds.has(x.cardId));
 
+  // スレッドのない発言（古いバックアップ・スレッドが消えたもの）は「これまでのチャット」にまとめる
+  const threads = [...(b.threads ?? [])] as ThreadRecord[];
+  const threadIds = new Set(threads.map((t) => t.id));
+  const chat = (b.chat as ChatRecord[]).map((m) =>
+    m.threadId && threadIds.has(m.threadId) ? m : { ...m, threadId: LEGACY_THREAD_ID },
+  );
+  const loose = chat.filter((m) => m.threadId === LEGACY_THREAD_ID);
+  if (loose.length && !threadIds.has(LEGACY_THREAD_ID)) {
+    const times = loose.map((m) => m.createdAt);
+    threads.push({
+      id: LEGACY_THREAD_ID,
+      title: LEGACY_THREAD_TITLE,
+      createdAt: Math.min(...times),
+      updatedAt: Math.max(...times),
+    });
+  }
+
   return {
     exportedAt: b.exportedAt,
     packs: b.packs as PackRecord[],
     items: b.items as ItemRecord[],
     cards: b.cards as CardRecord[],
     reviews: reviews as ReviewRecord[],
-    chat: b.chat as ChatRecord[],
+    chat,
+    threads,
     settings: b.settings,
     skippedReviews: b.reviews.length - reviews.length,
   };
@@ -246,20 +287,26 @@ export function parseBackup(text: string): ParsedBackup {
 
 /** 検証済みのバックアップで、今のデータをすべて置き換える（途中で失敗したら元のまま） */
 export async function applyBackup(b: ParsedBackup): Promise<void> {
-  await db.transaction('rw', [db.packs, db.items, db.cards, db.reviews, db.chat], async () => {
-    await Promise.all([
-      db.packs.clear(),
-      db.items.clear(),
-      db.cards.clear(),
-      db.reviews.clear(),
-      db.chat.clear(),
-    ]);
-    await db.packs.bulkAdd(b.packs);
-    await db.items.bulkAdd(b.items);
-    await db.cards.bulkAdd(b.cards);
-    await db.reviews.bulkAdd(b.reviews);
-    await db.chat.bulkAdd(b.chat);
-  });
+  await db.transaction(
+    'rw',
+    [db.packs, db.items, db.cards, db.reviews, db.chat, db.threads],
+    async () => {
+      await Promise.all([
+        db.packs.clear(),
+        db.items.clear(),
+        db.cards.clear(),
+        db.reviews.clear(),
+        db.chat.clear(),
+        db.threads.clear(),
+      ]);
+      await db.packs.bulkAdd(b.packs);
+      await db.items.bulkAdd(b.items);
+      await db.cards.bulkAdd(b.cards);
+      await db.reviews.bulkAdd(b.reviews);
+      await db.chat.bulkAdd(b.chat);
+      await db.threads.bulkAdd(b.threads);
+    },
+  );
   notifyLibraryChange(null);
 }
 
@@ -286,7 +333,7 @@ export async function clearAllProgress(): Promise<void> {
 export async function clearAllData(): Promise<void> {
   await db.transaction(
     'rw',
-    [db.packs, db.items, db.cards, db.reviews, db.chat, db.meta],
+    [db.packs, db.items, db.cards, db.reviews, db.chat, db.threads, db.meta],
     async () => {
       await Promise.all([
         db.packs.clear(),
@@ -294,6 +341,7 @@ export async function clearAllData(): Promise<void> {
         db.cards.clear(),
         db.reviews.clear(),
         db.chat.clear(),
+        db.threads.clear(),
         db.meta.clear(),
       ]);
     },

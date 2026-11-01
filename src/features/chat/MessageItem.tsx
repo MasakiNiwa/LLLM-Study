@@ -1,7 +1,17 @@
 import { lazy, memo, Suspense, useState, type ReactNode } from 'react';
-import { AlertCircle, Brain, Check, ChevronRight, Copy, RotateCcw, Wrench } from 'lucide-react';
+import {
+  AlertCircle,
+  Brain,
+  Check,
+  ChevronRight,
+  Copy,
+  Pencil,
+  RotateCcw,
+  Wrench,
+} from 'lucide-react';
 import { toast } from 'sonner';
 import { ElapsedCounter } from '@/components/ui/ElapsedCounter';
+import { Button } from '@/components/ui/Button';
 import { cn } from '@/lib/utils/cn';
 import { formatDuration } from '@/lib/utils/format';
 import { TOOL_LABELS } from '@/features/ai/tools';
@@ -75,6 +85,66 @@ interface MessageItemProps {
   emoji: string;
 }
 
+/** 自分の発言。直して送り直せる（その発言から後ろは消えて、作り直す） */
+function UserMessage({ message, busy }: { message: ChatMessage; busy: boolean }) {
+  const editAndResend = useChat((s) => s.editAndResend);
+  const [editing, setEditing] = useState(false);
+  const [text, setText] = useState(message.text);
+  if (editing)
+    return (
+      <form
+        onSubmit={(e) => {
+          e.preventDefault();
+          if (editAndResend(message.id, text)) setEditing(false);
+        }}
+        className="ml-auto w-full max-w-[85%] space-y-2"
+      >
+        <textarea
+          value={text}
+          onChange={(e) => setText(e.target.value)}
+          aria-label="発言を直す"
+          rows={Math.min(8, Math.max(2, text.split('\n').length))}
+          autoFocus
+          className="w-full rounded-2xl border border-slate-300 bg-white px-4 py-2.5 text-base dark:border-slate-700 dark:bg-slate-900"
+        />
+        <div className="flex justify-end gap-2">
+          <Button size="sm" variant="ghost" onClick={() => setEditing(false)}>
+            やめる
+          </Button>
+          <Button type="submit" size="sm" variant="primary" disabled={!text.trim() || busy}>
+            送り直す
+          </Button>
+        </div>
+      </form>
+    );
+  return (
+    <div className="group flex flex-col items-end gap-0.5">
+      <div className="max-w-[85%] rounded-2xl rounded-br-sm bg-accent-600 px-4 py-2.5 whitespace-pre-wrap text-white">
+        {message.text}
+        {message.context && (
+          <div className="mt-1 text-[0.65rem] opacity-70" title="学習状況を AI に伝えました">
+            📎 学習状況つき
+          </div>
+        )}
+      </div>
+      <div className="flex opacity-100 transition-opacity md:opacity-0 md:group-focus-within:opacity-100 md:group-hover:opacity-100">
+        <CopyButton text={message.text} />
+        {!busy && (
+          <ActionButton
+            label="直して送り直す"
+            onClick={() => {
+              setText(message.text);
+              setEditing(true);
+            }}
+          >
+            <Pencil />
+          </ActionButton>
+        )}
+      </div>
+    </div>
+  );
+}
+
 export const MessageItem = memo(function MessageItem({
   message,
   isLast,
@@ -89,18 +159,7 @@ export const MessageItem = memo(function MessageItem({
   const [showThought, setShowThought] = useState(false);
 
   if (message.role === 'user') {
-    return (
-      <div className="flex justify-end">
-        <div className="max-w-[85%] rounded-2xl rounded-br-sm bg-accent-600 px-4 py-2.5 whitespace-pre-wrap text-white">
-          {message.text}
-          {message.context && (
-            <div className="mt-1 text-[0.65rem] opacity-70" title="学習状況を AI に伝えました">
-              📎 学習状況つき
-            </div>
-          )}
-        </div>
-      </div>
-    );
+    return <UserMessage message={message} busy={busy} />;
   }
 
   const streaming = message.status === 'streaming';
@@ -186,6 +245,14 @@ export const MessageItem = memo(function MessageItem({
               <ActionButton label="もう一度生成" onClick={() => void regenerate()}>
                 <RotateCcw />
               </ActionButton>
+            )}
+            {message.model && (
+              <span
+                className="ml-1 max-w-48 truncate text-[0.7rem] text-slate-400"
+                title={`答えたモデル: ${message.model}`}
+              >
+                {message.model}
+              </span>
             )}
             {showStats && message.stats && (
               <span className="ml-1 text-[0.7rem] text-slate-400 tabular-nums">
