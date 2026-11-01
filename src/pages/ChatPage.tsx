@@ -1,15 +1,16 @@
 import { useState } from 'react';
-import { Eraser, LifeBuoy, Sparkles, X } from 'lucide-react';
+import { History, LifeBuoy, Sparkles, SquarePen, X } from 'lucide-react';
 import { Link } from 'wouter';
 import { PageHeader } from '@/app/PageHeader';
 import { Button } from '@/components/ui/Button';
-import { ConfirmDialog } from '@/components/ui/ConfirmDialog';
+import { BottomSheet } from '@/components/ui/BottomSheet';
 import { getPersona } from '@/features/ai/personas';
 import { useAiFocus } from '@/features/ai/focusStore';
 import { AttachedCard } from '@/features/chat/AttachedCard';
 import { useChat } from '@/features/chat/chatStore';
 import { Composer } from '@/features/chat/Composer';
 import { MessageList } from '@/features/chat/MessageList';
+import { ThreadList } from '@/features/chat/ThreadList';
 import { LoadProgressCard } from '@/features/models/LoadProgressCard';
 import { ModelStatusChip } from '@/features/engine/ModelStatusChip';
 import { useEngine } from '@/features/engine/engineStore';
@@ -100,23 +101,46 @@ function EmptyState({ onPick }: { onPick: (text: string) => void }) {
 export default function ChatPage() {
   const ready = useChat((s) => s.ready);
   const hasMessages = useChat((s) => s.messages.length > 0);
-  const clear = useChat((s) => s.clear);
+  const newChat = useChat((s) => s.newChat);
+  const thread = useChat((s) => s.threads.find((t) => t.id === s.threadId));
   const helpMode = useChat((s) => s.helpMode);
   const setHelpMode = useChat((s) => s.setHelpMode);
   const personaId = useSettings((s) => s.persona);
   const custom = useSettings((s) => s.customPersona);
-  const [confirming, setConfirming] = useState(false);
+  const [historyOpen, setHistoryOpen] = useState(false);
   const [draft, setDraft] = useState({ text: '', n: 0 });
   const persona = getPersona(personaId, custom);
 
   return (
     <>
       <PageHeader
-        title={`AI · ${persona.name}`}
+        title={thread?.title ?? `AI · ${persona.name}`}
         meta={<ModelStatusChip className="max-w-36 md:hidden" />}
         hideTitleOnMobile
         actions={
           <>
+            <Button
+              variant="ghost"
+              size="sm"
+              onClick={() => setHistoryOpen(true)}
+              aria-label="チャットの履歴"
+              title="チャットの履歴"
+              className="lg:hidden"
+            >
+              <History />
+              <span className="hidden sm:inline">履歴</span>
+            </Button>
+            <Button
+              variant="ghost"
+              size="sm"
+              onClick={newChat}
+              disabled={!hasMessages}
+              aria-label="新しいチャット"
+              title="新しいチャット"
+            >
+              <SquarePen />
+              <span className="hidden sm:inline">新しいチャット</span>
+            </Button>
             <Button
               variant={helpMode ? 'secondary' : 'ghost'}
               size="sm"
@@ -126,61 +150,57 @@ export default function ChatPage() {
               title="アプリの使い方を聞く（ヘルプをもとに答えます）"
             >
               <LifeBuoy />
-              <span className="sm:hidden">使い方</span>
               <span className="hidden sm:inline">使い方を聞く</span>
-            </Button>
-            <Button
-              variant="ghost"
-              size="sm"
-              onClick={() => setConfirming(true)}
-              disabled={!hasMessages}
-              aria-label="会話をクリア"
-              title="会話をクリア"
-            >
-              <Eraser />
-              <span className="hidden sm:inline">クリア</span>
             </Button>
           </>
         }
       />
-      {!ready ? (
-        <div className="flex-1" />
-      ) : hasMessages ? (
-        <MessageList emoji={persona.emoji} />
-      ) : (
-        <EmptyState onPick={(text) => setDraft((d) => ({ text, n: d.n + 1 }))} />
-      )}
-      <div className="shrink-0 space-y-1 pt-1">
-        {helpMode && (
-          <div className="mx-auto flex w-full max-w-3xl items-center gap-2 px-3 sm:px-4">
-            <div className="flex min-w-0 flex-1 items-center gap-2 rounded-xl bg-sky-50 px-3 py-2 text-xs text-sky-900 dark:bg-sky-950/40 dark:text-sky-200">
-              <LifeBuoy className="size-4 shrink-0" />
-              <span className="min-w-0 flex-1">
-                使い方モード: アプリのヘルプから関係する部分を選んで、AI が答えます
-              </span>
-              <button
-                type="button"
-                onClick={() => setHelpMode(false)}
-                aria-label="使い方モードをやめる"
-                className="rounded-md p-0.5 hover:bg-sky-100 dark:hover:bg-sky-900/40"
-              >
-                <X className="size-4" />
-              </button>
-            </div>
+      <div className="flex min-h-0 flex-1">
+        {/* PC: 左にチャットの履歴 */}
+        <aside className="hidden w-64 shrink-0 flex-col border-r border-slate-200 p-3 lg:flex dark:border-slate-800">
+          <ThreadList />
+        </aside>
+        <div className="flex min-w-0 flex-1 flex-col">
+          {!ready ? (
+            <div className="flex-1" />
+          ) : hasMessages ? (
+            <MessageList emoji={persona.emoji} />
+          ) : (
+            <EmptyState onPick={(text) => setDraft((d) => ({ text, n: d.n + 1 }))} />
+          )}
+          <div className="shrink-0 space-y-1 pt-1">
+            {helpMode && (
+              <div className="mx-auto flex w-full max-w-3xl items-center gap-2 px-3 sm:px-4">
+                <div className="flex min-w-0 flex-1 items-center gap-2 rounded-xl bg-sky-50 px-3 py-2 text-xs text-sky-900 dark:bg-sky-950/40 dark:text-sky-200">
+                  <LifeBuoy className="size-4 shrink-0" />
+                  <span className="min-w-0 flex-1">
+                    使い方モード: アプリのヘルプから関係する部分を選んで、AI が答えます
+                  </span>
+                  <button
+                    type="button"
+                    onClick={() => setHelpMode(false)}
+                    aria-label="使い方モードをやめる"
+                    className="rounded-md p-0.5 hover:bg-sky-100 dark:hover:bg-sky-900/40"
+                  >
+                    <X className="size-4" />
+                  </button>
+                </div>
+              </div>
+            )}
+            <AttachedCard />
+            <Composer key={draft.n} initialText={draft.text} />
           </div>
-        )}
-        <AttachedCard />
-        <Composer key={draft.n} initialText={draft.text} />
+        </div>
       </div>
-      <ConfirmDialog
-        open={confirming}
-        title="会話をクリアしますか？"
-        description="AI との会話をすべて削除します。学習記録やモデルはそのままです。"
-        confirmLabel="クリア"
-        danger
-        onConfirm={() => void clear()}
-        onClose={() => setConfirming(false)}
-      />
+      {/* スマホ: 下から出るシートでチャットの履歴 */}
+      <BottomSheet
+        open={historyOpen}
+        onClose={() => setHistoryOpen(false)}
+        title="チャットの履歴"
+        expandable
+      >
+        <ThreadList onPicked={() => setHistoryOpen(false)} />
+      </BottomSheet>
     </>
   );
 }

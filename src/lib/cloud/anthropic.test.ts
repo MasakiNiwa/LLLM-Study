@@ -276,7 +276,13 @@ describe('listAnthropicModels', () => {
       ),
     );
     const models = await listAnthropicModels('k');
-    expect(models[0]).toEqual({ id: 'claude-opus-5-5', displayName: 'Claude Opus 5.5' });
+    expect(models[0]).toMatchObject({
+      id: 'claude-opus-5-5',
+      displayName: 'Claude Opus 5.5',
+      // 料金は API から取れないので参考値
+      promptPrice: 4,
+      priceIsReference: true,
+    });
     expect(pickDefaultAnthropicModel(models)).toBe('claude-haiku-5-5');
   });
 });

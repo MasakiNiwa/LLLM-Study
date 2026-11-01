@@ -27,7 +27,7 @@ const records = [
 beforeEach(async () => {
   await db.delete();
   await db.open();
-  useChat.setState({ messages: [], isGenerating: false });
+  useChat.setState({ messages: [], threads: [], threadId: null, isGenerating: false });
   useAiBusy.setState({ task: null });
   useSettings.setState({ shareStudyState: false, useTools: false });
   vi.mocked(llm.generate).mockReset();
@@ -109,5 +109,73 @@ describe('chatStore', () => {
     expect(vi.mocked(llm.generate).mock.calls[0][0].settings.enableThinking).toBe(true);
     await vi.waitFor(() => expect(useChat.getState().isGenerating).toBe(false));
     useChat.setState({ thinking: null });
+  });
+
+  it('最初の送信でスレッドを作り、新しいチャット・履歴から開くで切り替える', async () => {
+    useEngine.setState({ status: 'ready' });
+    const answer = (text: string) =>
+      vi.mocked(llm.generate).mockImplementationOnce(async (_req, onEvent) => {
+        onEvent({ type: 'delta', text } as never);
+        return { status: 'done', stats: { totalMs: 1 } } as never;
+      });
+    answer('仕訳はこうです');
+    expect(useChat.getState().send('売掛金の仕訳を教えて')).toBe(true);
+    await vi.waitFor(() => expect(useChat.getState().messages).toHaveLength(2));
+    await vi.waitFor(() => expect(useChat.getState().isGenerating).toBe(false));
+    const first = useChat.getState().threadId!;
+    expect(useChat.getState().threads).toMatchObject([
+      { id: first, title: '売掛金の仕訳を教えて' },
+    ]);
+
+    useChat.getState().newChat();
+    await vi.waitFor(() => expect(useChat.getState().threadId).toBeNull());
+    expect(useChat.getState().messages).toEqual([]);
+    answer('違いはこうです');
+    useChat.getState().send('交際費と会議費の違いは？');
+    await vi.waitFor(() => expect(useChat.getState().messages).toHaveLength(2));
+    await vi.waitFor(() => expect(useChat.getState().isGenerating).toBe(false));
+    expect(useChat.getState().threads.map((t) => t.title)).toEqual([
+      '交際費と会議費の違いは？',
+      '売掛金の仕訳を教えて',
+    ]);
+
+    await useChat.getState().openThread(first);
+    expect(useChat.getState().messages.map((m) => m.text)).toEqual([
+      '売掛金の仕訳を教えて',
+      '仕訳はこうです',
+    ]);
+    // 前のスレッドを開いたときは、モデル側の会話（KV キャッシュ）も作り直す
+    expect(llm.resetConversation).toHaveBeenCalled();
+
+    await useChat.getState().deleteThread(first);
+    expect(useChat.getState().threadId).toBeNull();
+    expect(await db.chat.where('threadId').equals(first).count()).toBe(0);
+    expect(useChat.getState().threads).toHaveLength(1);
+  });
+
+  it('自分の発言を直して送り直すと、その発言から後ろを作り直す', async () => {
+    const thread = { id: 't1', title: 'hello', createdAt: 1, updatedAt: 2 };
+    const recs = records.map((r) => ({ ...r, threadId: 't1' }));
+    await db.threads.add(thread);
+    await db.chat.bulkPut(recs);
+    useChat.setState({ threads: [thread], threadId: 't1', messages: recs });
+    useEngine.setState({ status: 'ready' });
+    vi.mocked(llm.generate).mockImplementationOnce(async (_req, onEvent) => {
+      onEvent({ type: 'delta', text: 'こんにちは！' } as never);
+      return { status: 'done', stats: { totalMs: 1 } } as never;
+    });
+    expect(useChat.getState().editAndResend('u', 'こんにちは')).toBe(true);
+    await vi.waitFor(() => expect(useChat.getState().isGenerating).toBe(false));
+    await vi.waitFor(() =>
+      expect(useChat.getState().messages.map((m) => m.text)).toEqual([
+        'こんにちは',
+        'こんにちは！',
+      ]),
+    );
+    expect(await db.chat.get('u')).toBeUndefined();
+    expect(await db.chat.get('a')).toBeUndefined();
+    expect(await db.chat.where('threadId').equals('t1').count()).toBe(2);
+    // 最初の発言を直したので、スレッドの名前も変わる
+    expect(useChat.getState().threads[0].title).toBe('こんにちは');
   });
 });

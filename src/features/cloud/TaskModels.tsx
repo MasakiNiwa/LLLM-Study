@@ -1,16 +1,15 @@
 /**
- * 「応答ごとの AI」: 応答の種類ごとに、使う AI（接続先とモデル）を変える。
+ * 「応答ごとの AI」: 応答の種類ごとに、使う AI（API キーとモデル）を変える。
  * たとえば、回数の多い「ひとこと」は安いモデルや無料のモデル、解説は賢いモデル、のように分けられる。
- * 決めていない種類は、いつもの AI（「AI の接続先」）で答える。
+ * 選べるのは、各キーのマイモデル（★）と今使っているモデル。決めていない種類は、いつもの AI で答える。
  */
 import { SlidersHorizontal } from 'lucide-react';
 import { Card } from '@/components/ui/Card';
 import { Select } from '@/components/ui/Select';
-import { CLOUD_PROVIDERS, CLOUD_PROVIDER_IDS } from '@/lib/cloud/providers';
+import { CLOUD_PROVIDERS } from '@/lib/cloud/providers';
 import type { AiTask } from '@/features/ai/aiBusy';
-import { useSettings, type AiProvider, type TaskRoute } from '@/features/settings/settingsStore';
-import { useCloud } from './cloudStore';
-import { ModelPicker } from './ModelPicker';
+import { useSettings, type TaskRoute } from '@/features/settings/settingsStore';
+import { keyLabel, useCloud } from './cloudStore';
 
 const TASKS: { task: AiTask; label: string; hint: string }[] = [
   {
@@ -29,76 +28,72 @@ const TASKS: { task: AiTask; label: string; hint: string }[] = [
 ];
 
 const DEFAULT = 'default';
+const encode = (r: TaskRoute) =>
+  r.provider === 'local' ? 'local' : `${r.provider}|${r.model ?? ''}`;
 
-function TaskRow({ task, label, hint }: (typeof TASKS)[number]) {
-  const route = useSettings((s) => s.taskModels[task]);
-  const taskModels = useSettings((s) => s.taskModels);
+function useOptions() {
+  const keys = useCloud((s) => s.keys);
   const cloudModels = useSettings((s) => s.cloudModels);
-  const consents = useSettings((s) => s.cloudConsents);
-  const update = useSettings((s) => s.update);
-  const stored = useCloud((s) => s.stored);
-  const unlocked = useCloud((s) => s.unlocked);
-
-  const available = CLOUD_PROVIDER_IDS.filter((p) => (stored[p] || unlocked[p]) && consents[p]);
   const options: { value: string; label: string }[] = [
     { value: DEFAULT, label: 'いつもの AI' },
     { value: 'local', label: '端末内の AI' },
-    ...available.map((p) => ({ value: p, label: CLOUD_PROVIDERS[p].label })),
   ];
-  // 選んであった接続先のキーを消したときも、選択肢に残して分かるようにする
-  if (route && !options.some((o) => o.value === route.provider))
-    options.push({
-      value: route.provider,
-      label: `${route.provider === 'local' ? '端末内の AI' : CLOUD_PROVIDERS[route.provider].label}（キーがありません）`,
-    });
+  for (const k of keys) {
+    const models = [...new Set([cloudModels[k.id], ...k.models].filter(Boolean) as string[])];
+    for (const m of models)
+      options.push({
+        value: `${k.id}|${m}`,
+        label: `${keyLabel(k)} · ${CLOUD_PROVIDERS[k.provider].shortModel(m)}${k.unlocked ? '' : '（ロック中）'}`,
+      });
+  }
+  return options;
+}
 
-  const set = (next: TaskRoute | null) => {
+function TaskRow({
+  task,
+  label,
+  hint,
+  options,
+}: (typeof TASKS)[number] & { options: { value: string; label: string }[] }) {
+  const route = useSettings((s) => s.taskModels[task]);
+  const taskModels = useSettings((s) => s.taskModels);
+  const update = useSettings((s) => s.update);
+  const value = route ? encode(route) : DEFAULT;
+  const all = options.some((o) => o.value === value)
+    ? options
+    : [...options, { value, label: `${route?.model ?? value}（キーがありません）` }];
+
+  const choose = (v: string) => {
     const copy = { ...taskModels };
-    if (next) copy[task] = next;
-    else delete copy[task];
+    if (v === DEFAULT) delete copy[task];
+    else if (v === 'local') copy[task] = { provider: 'local' };
+    else {
+      const i = v.indexOf('|');
+      copy[task] = { provider: v.slice(0, i), model: v.slice(i + 1) };
+    }
     update({ taskModels: copy });
   };
-  const chooseProvider = (v: string) => {
-    if (v === DEFAULT) return set(null);
-    const provider = v as AiProvider;
-    set(provider === 'local' ? { provider } : { provider, model: cloudModels[provider] });
-  };
-  const cloud = route && route.provider !== 'local' ? route.provider : null;
 
   return (
-    <li className="space-y-2 rounded-xl border border-slate-200 p-3 dark:border-slate-700">
-      <div className="flex flex-wrap items-center gap-2">
-        <div className="min-w-0 flex-1 basis-40">
-          <span className="block text-sm font-medium">{label}</span>
-          <span className="block text-xs text-slate-500 dark:text-slate-400">{hint}</span>
-        </div>
-        <Select
-          value={route?.provider ?? DEFAULT}
-          onChange={chooseProvider}
-          options={options}
-          aria-label={`${label}に使う AI`}
-          className="w-40"
-        />
+    <li className="flex flex-col gap-1.5 rounded-xl border border-slate-200 p-3 sm:flex-row sm:items-center sm:gap-3 dark:border-slate-700">
+      <div className="min-w-0 sm:w-48">
+        <span className="block text-sm font-medium">{label}</span>
+        <span className="block text-xs text-slate-500 dark:text-slate-400">{hint}</span>
       </div>
-      {cloud &&
-        (unlocked[cloud] ? (
-          <ModelPicker
-            provider={cloud}
-            value={route?.model ?? cloudModels[cloud] ?? ''}
-            onChange={(model) => set({ provider: cloud, model })}
-          />
-        ) : (
-          <p className="text-xs text-amber-700 dark:text-amber-300">
-            {CLOUD_PROVIDERS[cloud].label} のキーがロック中です。解除するまでは、いつもの AI
-            で答えます。
-          </p>
-        ))}
+      <Select
+        value={value}
+        onChange={choose}
+        options={all}
+        aria-label={`${label}に使う AI`}
+        className="min-w-0 flex-1"
+      />
     </li>
   );
 }
 
 export function TaskModels() {
-  const any = useCloud((s) => CLOUD_PROVIDER_IDS.some((p) => s.stored[p] || s.unlocked[p]));
+  const any = useCloud((s) => s.keys.length > 0);
+  const options = useOptions();
   if (!any) return null;
   return (
     <Card className="space-y-3 p-4">
@@ -109,15 +104,16 @@ export function TaskModels() {
         <div className="min-w-0">
           <h2 className="font-semibold">応答ごとの AI（任意）</h2>
           <p className="text-sm text-slate-600 dark:text-slate-400">
-            応答の種類ごとに、使う AI
-            とモデルを変えられます。たとえば「ひとこと」は安いモデルや無料のモデル、解説は賢いモデルにすると、料金を抑えながら使えます。決めていない種類は、いつもの
-            AI で答えます。
+            応答の種類ごとに、使う API
+            キーとモデルを変えられます。たとえば「ひとこと」は安いモデルや無料のモデル、解説は賢いモデルにすると、料金を抑えながら使えます。選べるのは各キーのマイモデル（モデルの一覧で
+            ★ を付けたもの）と今使っているモデルです。使えないとき（ロック中など）は、いつもの AI
+            で答えます。
           </p>
         </div>
       </div>
       <ul className="space-y-2">
         {TASKS.map((t) => (
-          <TaskRow key={t.task} {...t} />
+          <TaskRow key={t.task} {...t} options={options} />
         ))}
       </ul>
     </Card>

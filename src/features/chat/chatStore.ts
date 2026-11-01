@@ -1,5 +1,6 @@
 /**
- * AI とのチャット（1 本の会話を IndexedDB に保存して続ける）。
+ * AI とのチャット。会話はスレッドに分けて IndexedDB に保存する（Claude・ChatGPT・Gemini のように、
+ * 新しいチャットを始めたり、履歴から前の会話を開いて続けたりできる）。
  *
  * - 送信するたびに、アプリの状態（今日の学習状況・見ているカード）を構造化データにして
  *   ユーザーの発話の前に付ける（前回と同じなら付けない＝KV キャッシュを活かす）
@@ -8,7 +9,8 @@
 import { toast } from 'sonner';
 import { create } from 'zustand';
 import { db } from '@/lib/db/db';
-import type { ChatRecord } from '@/lib/db/types';
+import { useEngine } from '@/features/engine/engineStore';
+import type { ChatRecord, ThreadRecord } from '@/lib/db/types';
 import { ai, aiReadyNow } from '@/features/cloud/aiClient';
 import type { ChatTurn, GenerationStats } from '@/lib/llm/types';
 import { errorMessage } from '@/lib/utils/format';
@@ -33,6 +35,10 @@ export interface ChatMessage extends ChatRecord {
 
 interface ChatState {
   ready: boolean;
+  /** スレッド（新しい順） */
+  threads: ThreadRecord[];
+  /** 開いているスレッド（null: 新しいチャット。最初の送信で作る） */
+  threadId: string | null;
   messages: ChatMessage[];
   isGenerating: boolean;
   /** 実行中のツールの表示名 */
@@ -51,7 +57,16 @@ interface ChatState {
   send: (text: string) => boolean;
   /** 最後の応答を作り直す。新しい応答ができるまで、元の応答は消さない */
   regenerate: () => Promise<void>;
+  /** 自分の発言を直して送り直す（その発言から後ろは消える） */
+  editAndResend: (messageId: string, text: string) => boolean;
+  /** 新しいチャットを始める */
+  newChat: () => void;
+  /** 履歴のスレッドを開く */
+  openThread: (id: string) => Promise<void>;
+  renameThread: (id: string, title: string) => Promise<void>;
+  deleteThread: (id: string) => Promise<void>;
   stop: () => void;
+  /** すべてのスレッドを消す */
   clear: () => Promise<void>;
   /** DB の内容で表示を作り直す（バックアップの復元のあとなど。DB は消さない） */
   reload: () => Promise<void>;
@@ -75,6 +90,41 @@ function lastContext(messages: ChatMessage[]): string | undefined {
     if (messages[i].context) return messages[i].context;
   }
   return undefined;
+}
+
+const THREAD_KEY = 'lllm-study:chat-thread';
+
+function rememberThread(id: string | null) {
+  try {
+    if (id) localStorage.setItem(THREAD_KEY, id);
+    else localStorage.removeItem(THREAD_KEY);
+  } catch {
+    // 覚えられなくても動く
+  }
+}
+
+function rememberedThread(): string | null {
+  try {
+    return localStorage.getItem(THREAD_KEY);
+  } catch {
+    return null;
+  }
+}
+
+/** スレッドの名前（最初の発言から作る） */
+export function threadTitle(text: string): string {
+  const line = text.replace(/\s+/g, ' ').trim();
+  return line.length > 40 ? `${line.slice(0, 40)}…` : line || '新しいチャット';
+}
+
+async function loadThreads(): Promise<ThreadRecord[]> {
+  return (await db.threads.orderBy('updatedAt').reverse().toArray()) as ThreadRecord[];
+}
+
+async function loadMessages(threadId: string | null): Promise<ChatMessage[]> {
+  if (!threadId) return [];
+  const records = await db.chat.where('threadId').equals(threadId).sortBy('createdAt');
+  return records.map((r) => ({ ...r, status: r.error ? 'error' : 'done' }));
 }
 
 function persistMessage(m: ChatMessage): void {
@@ -116,9 +166,11 @@ export const useChat = create<ChatState>()((set, get) => {
     const assistantId = createId();
     const assistant: ChatMessage = {
       id: assistantId,
+      threadId: user.threadId,
       role: 'assistant',
       text: '',
-      createdAt: Date.now(),
+      // 同じミリ秒になっても、開き直したときに質問より後ろに並ぶようにする
+      createdAt: Math.max(Date.now(), user.createdAt + 1),
       status: 'streaming',
     };
     set({ messages: [...history, user, assistant], isGenerating: true, toolActivity: null });
@@ -216,6 +268,11 @@ export const useChat = create<ChatState>()((set, get) => {
         status: result.status,
         stats: result.stats,
         tools: usedTools.length ? usedTools : undefined,
+        // どのモデルが答えたか（履歴を見返したときに分かるように）
+        model:
+          result.stats?.provider ??
+          useEngine.getState().model?.name.replace(/\.litertlm$/, '') ??
+          undefined,
       });
       return { status: result.status, id: assistantId };
     } catch (e) {
@@ -254,8 +311,44 @@ export const useChat = create<ChatState>()((set, get) => {
     }
   };
 
+  /** 開いているスレッドの最終更新を進める（なければ作る） */
+  const ensureThread = async (firstText: string): Promise<string> => {
+    const now = Date.now();
+    const id = get().threadId;
+    if (id) {
+      await db.threads.update(id, { updatedAt: now });
+      set((st) => ({
+        threads: [
+          ...st.threads.filter((t) => t.id === id).map((t) => ({ ...t, updatedAt: now })),
+          ...st.threads.filter((t) => t.id !== id),
+        ],
+      }));
+      return id;
+    }
+    const thread: ThreadRecord = {
+      id: createId(),
+      title: threadTitle(firstText),
+      createdAt: now,
+      updatedAt: now,
+    };
+    await db.threads.add(thread);
+    rememberThread(thread.id);
+    set((st) => ({ threadId: thread.id, threads: [thread, ...st.threads] }));
+    return thread.id;
+  };
+
+  /** 会話の中身が入れ替わる（モデル側の会話・KV キャッシュも作り直す） */
+  const switchTo = async (threadId: string | null) => {
+    if (get().isGenerating) ai.cancel();
+    rememberThread(threadId);
+    void ai.resetConversation();
+    set({ threadId, messages: await loadMessages(threadId) });
+  };
+
   return {
     ready: false,
+    threads: [],
+    threadId: null,
     messages: [],
     isGenerating: false,
     toolActivity: null,
@@ -273,8 +366,11 @@ export const useChat = create<ChatState>()((set, get) => {
     init() {
       initPromise ??= (async () => {
         try {
-          const records = await db.chat.orderBy('createdAt').toArray();
-          set({ messages: records.map((r) => ({ ...r, status: r.error ? 'error' : 'done' })) });
+          const threads = await loadThreads();
+          // 前に開いていたスレッドを開く（なければ新しいチャット）
+          const remembered = rememberedThread();
+          const threadId = threads.some((t) => t.id === remembered) ? remembered : null;
+          set({ threads, threadId, messages: await loadMessages(threadId) });
         } catch (e) {
           console.warn('チャット履歴を読み込めませんでした', e);
         }
@@ -288,8 +384,10 @@ export const useChat = create<ChatState>()((set, get) => {
       if (!trimmed || !canGenerate()) return false;
       void (async () => {
         const history = get().messages;
+        const threadId = await ensureThread(trimmed);
         const user: ChatMessage = {
           id: createId(),
+          threadId,
           role: 'user',
           text: trimmed,
           // 使い方モードでは、アプリの状態の代わりに、質問に関係するヘルプの抜粋を添える
@@ -324,6 +422,61 @@ export const useChat = create<ChatState>()((set, get) => {
       toast.info('元の応答に戻しました');
     },
 
+    editAndResend(messageId, text) {
+      const trimmed = text.trim();
+      const { messages } = get();
+      const i = messages.findIndex((m) => m.id === messageId && m.role === 'user');
+      if (i < 0 || !trimmed || !canGenerate()) return false;
+      const removed = messages.slice(i);
+      const history = messages.slice(0, i);
+      set({ messages: history });
+      void (async () => {
+        await db.chat.bulkDelete(removed.map((m) => m.id));
+        // 最初の発言を直したときは、スレッドの名前も直した発言に合わせる
+        const threadId = get().threadId;
+        if (i === 0 && threadId) await get().renameThread(threadId, threadTitle(trimmed));
+        // 直した発言からは、モデル側の会話も作り直す
+        void ai.resetConversation();
+        const id = await ensureThread(trimmed);
+        const user: ChatMessage = {
+          id: createId(),
+          threadId: id,
+          role: 'user',
+          text: trimmed,
+          context: get().helpMode ? helpContext(trimmed) : await contextFor(history),
+          createdAt: Date.now(),
+          status: 'done',
+        };
+        await generate(history, user);
+      })();
+      return true;
+    },
+
+    newChat() {
+      void switchTo(null);
+    },
+
+    async openThread(id) {
+      if (id === get().threadId) return;
+      await switchTo(id);
+    },
+
+    async renameThread(id, title) {
+      const t = title.replace(/\s+/g, ' ').trim().slice(0, 60);
+      if (!t) return;
+      await db.threads.update(id, { title: t });
+      set((st) => ({ threads: st.threads.map((x) => (x.id === id ? { ...x, title: t } : x)) }));
+    },
+
+    async deleteThread(id) {
+      if (get().threadId === id) await switchTo(null);
+      await db.transaction('rw', [db.chat, db.threads], async () => {
+        await db.chat.where('threadId').equals(id).delete();
+        await db.threads.delete(id);
+      });
+      set((st) => ({ threads: st.threads.filter((t) => t.id !== id) }));
+    },
+
     stop() {
       if (get().isGenerating) ai.cancel();
     },
@@ -352,16 +505,25 @@ export const useChat = create<ChatState>()((set, get) => {
       useAiFocus.getState().attach(null);
       // 会話の内容が入れ替わるので、モデル側の会話（KV キャッシュ）も作り直す
       void ai.resetConversation();
-      const records = await db.chat.orderBy('createdAt').toArray();
-      set({ messages: records.map((r) => ({ ...r, status: r.error ? 'error' : 'done' })) });
+      const threads = await loadThreads();
+      // 開いていたスレッドがなくなっていたら（復元のあとなど）、いちばん新しいスレッドを開く
+      const threadId = threads.some((t) => t.id === get().threadId)
+        ? get().threadId
+        : (threads[0]?.id ?? null);
+      rememberThread(threadId);
+      set({ threads, threadId, messages: await loadMessages(threadId) });
     },
 
     async clear() {
       if (get().isGenerating) ai.cancel();
-      set({ messages: [] });
+      set({ messages: [], threads: [], threadId: null });
+      rememberThread(null);
       useAiFocus.getState().attach(null);
       void ai.resetConversation();
-      await db.chat.clear();
+      await db.transaction('rw', [db.chat, db.threads], async () => {
+        await db.chat.clear();
+        await db.threads.clear();
+      });
     },
   };
 });

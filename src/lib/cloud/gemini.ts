@@ -57,6 +57,9 @@ export interface GeminiModel {
   id: string;
   displayName: string;
   inputTokenLimit?: number;
+  contextLength?: number;
+  maxOutput?: number;
+  description?: string;
 }
 
 function headers(apiKey: string): HeadersInit {
@@ -123,6 +126,8 @@ export async function listGeminiModels(
       displayName?: string;
       supportedGenerationMethods?: string[];
       inputTokenLimit?: number;
+      outputTokenLimit?: number;
+      description?: string;
     }[];
   };
   return (body.models ?? [])
@@ -137,6 +142,9 @@ export async function listGeminiModels(
       id: m.name.replace(/^models\//, ''),
       displayName: m.displayName ?? m.name,
       inputTokenLimit: m.inputTokenLimit,
+      contextLength: m.inputTokenLimit,
+      maxOutput: m.outputTokenLimit,
+      description: m.description,
     }));
 }
 

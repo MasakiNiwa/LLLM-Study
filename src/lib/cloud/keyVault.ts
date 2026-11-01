@@ -1,14 +1,19 @@
 /**
  * クラウド AI の API キーの保管庫（ブラウザ内だけで完結する。サーバーには送らない）。
  *
- * - 既定は「アプリの合言葉で暗号化して、この端末に保存」。合言葉は 1 つで、すべての接続先のキーに共通
- *   - PBKDF2（SHA-256）で合言葉から AES-GCM の鍵を作り、各キーを暗号化する。保存するのは暗号文・ソルト・IV と
- *     「合言葉が合っているかを確かめるための暗号文」だけで、キーそのものも合言葉も保存しない
- *   - 合言葉を入れると、保存したすべてのキーが使える（解除）。メモリーには取り出せない形の鍵（CryptoKey）を置き、
- *     合言葉の文字列は持たない。新しく登録するキーは、解除中ならその鍵でそのまま暗号化する
+ * - 既定は「アプリの合言葉で暗号化して、この端末に保存」。合言葉は 1 つで、すべての API キーに共通
+ *   - ランダムなデータ鍵（DEK, AES-GCM 256bit）で各 API キーを暗号化する
+ *   - DEK は「合言葉から PBKDF2 で作った鍵」で暗号化して保存する（合言葉を変えても API キーは暗号化し直さなくてよい）
+ *   - パスキー（生体認証）を登録すると、WebAuthn の PRF 拡張から得た秘密値でも DEK を暗号化して保存する。
+ *     指紋・顔認証などの 1 回の操作で、すべての API キーが使える
+ *   - 解除中はメモリーに取り出せない形の DEK（CryptoKey）だけを置き、合言葉も DEK の中身も持たない。
+ *     パスキーの登録・合言葉の変更のときだけ、合言葉で DEK の中身を一時的に取り出す
+ *   - 使わない時間が続くと自動でロックする（設定で変えられる）
+ * - API キーは会社（接続先）ごとに何本でも登録できる（個人用・仕事用など）。名前・登録したモデルなどの
+ *   秘密でない情報は一覧（cloud-keys）に、API キーそのものは暗号化して別の場所に置く
  * - 「今回だけ」を選ぶと、どこにも保存せずメモリーにだけ持つ（タブを閉じると消える）
  * - 解除したキーはこのモジュールの変数（メモリー）にだけ置く。状態管理（zustand）・設定・バックアップ・ログには入れない
- * - 以前の形（キーごとに合言葉で暗号化したもの）は、その合言葉で解除したときにアプリの合言葉の形に移す
+ * - 以前の形（キーごとの合言葉・合言葉から直接作った鍵）は、解除したときに今の形に移す
  *
  * 注意: 同じページで悪意のあるスクリプトが動くと、解除中のキーは使われてしまう。
  * 暗号化は「保存中のデータ（端末・同じオリジンのほかのアプリ・書き出したファイル）から読まれない」ための対策で、
@@ -17,18 +22,37 @@
 import { STORAGE_PREFIX } from '@/lib/constants';
 
 export type CloudProviderId = 'gemini' | 'openai' | 'anthropic' | 'openrouter';
+/** 登録した API キーの id（以前から登録していたキーは会社の id と同じ） */
+export type CloudKeyId = string;
 
-const PROVIDER_IDS: CloudProviderId[] = ['gemini', 'openai', 'anthropic', 'openrouter'];
+export const CLOUD_PROVIDER_ID_LIST: CloudProviderId[] = [
+  'gemini',
+  'openai',
+  'anthropic',
+  'openrouter',
+];
+
+/** 登録した API キーの、秘密でない情報 */
+export interface KeyEntry {
+  id: CloudKeyId;
+  provider: CloudProviderId;
+  /** 名前（例: 個人用）。空なら会社の名前で表示する */
+  label: string;
+  /** このキーで使うモデル（マイモデル。選ぶ画面の先頭に出す） */
+  models: string[];
+  createdAt: number;
+  /** 今回だけ（保存していない） */
+  session?: boolean;
+}
 
 interface Cipher {
   iv: string;
   data: string;
 }
 
-/** 以前の形: キーごとに合言葉から鍵を作って暗号化したもの */
+/** 以前の形 1: キーごとに合言葉から鍵を作って暗号化したもの */
 interface LegacySecret extends Cipher {
   v: 1;
-  /** PBKDF2 の繰り返し回数 */
   iterations: number;
   salt: string;
   /** キーの末尾 4 文字（どのキーを保存したか見分けるため。全体は分からない） */
@@ -36,35 +60,61 @@ interface LegacySecret extends Cipher {
   savedAt: number;
 }
 
-/** 今の形: アプリの合言葉の鍵で暗号化したもの */
-interface VaultSecret extends Cipher {
+/** 以前の形 2: 合言葉から直接作った鍵で暗号化したもの */
+interface DirectSecret extends Cipher {
   v: 2;
   hint: string;
   savedAt: number;
 }
 
-type StoredSecret = LegacySecret | VaultSecret;
+/** 今の形: データ鍵（DEK）で暗号化したもの */
+interface DekSecret extends Cipher {
+  v: 3;
+  hint: string;
+  savedAt: number;
+}
 
-/** アプリの合言葉の情報（ソルトと、合言葉が合っているかを確かめる暗号文） */
-interface VaultMeta {
+type StoredSecret = LegacySecret | DirectSecret | DekSecret;
+
+/** 以前の保管庫の情報（合言葉から直接作った鍵の確かめ用） */
+interface VaultMetaV1 {
   v: 1;
   iterations: number;
   salt: string;
   check: Cipher;
 }
 
+interface PasskeyRecord {
+  credentialId: string;
+  prfSalt: string;
+  /** PRF の出力から作った鍵で暗号化した DEK */
+  wrapped: Cipher;
+  createdAt: number;
+}
+
+/** 保管庫の情報: 合言葉で暗号化した DEK と、パスキーで暗号化した DEK */
+interface VaultMetaV2 {
+  v: 2;
+  iterations: number;
+  salt: string;
+  wrapped: Cipher;
+  passkey?: PasskeyRecord;
+}
+
 /** OWASP の推奨（PBKDF2-HMAC-SHA256）に合わせる */
 export const PBKDF2_ITERATIONS = 600_000;
 export const MIN_PASSPHRASE_LENGTH = 8;
 
-const storageKey = (provider: CloudProviderId) => `${STORAGE_PREFIX}:cloud-key:${provider}`;
+const secretKey = (id: CloudKeyId) => `${STORAGE_PREFIX}:cloud-key:${id}`;
 const VAULT_KEY = `${STORAGE_PREFIX}:cloud-vault`;
-/** 合言葉の確かめ用に暗号化する決まった文 */
+const REGISTRY_KEY = `${STORAGE_PREFIX}:cloud-keys`;
 const CHECK_TEXT = 'lllm-study-vault';
 
 /** 解除済みのキー（メモリーにだけ置く） */
-const unlocked = new Map<CloudProviderId, string>();
-/** アプリの合言葉から作った鍵（取り出せない形）。ロック中は null */
+const unlocked = new Map<CloudKeyId, string>();
+/** 今回だけのキーの情報（保存しない） */
+const sessionEntries = new Map<CloudKeyId, KeyEntry>();
+/** データ鍵（取り出せない形）。ロック中は null */
 let vaultKey: CryptoKey | null = null;
 const listeners = new Set<() => void>();
 
@@ -78,10 +128,14 @@ export function subscribeVault(listener: () => void): () => void {
   return () => listeners.delete(listener);
 }
 
+// ---------------------------------------------------------------- 暗号の道具
+
+const rand = (n: number) => crypto.getRandomValues(new Uint8Array(n));
 const toB64 = (buf: ArrayBuffer | Uint8Array) => btoa(String.fromCharCode(...new Uint8Array(buf)));
 const fromB64 = (s: string) => Uint8Array.from(atob(s), (c) => c.charCodeAt(0));
+const toB64Url = (s: string) => s.replace(/\+/g, '-').replace(/\//g, '_').replace(/=+$/, '');
 
-async function deriveKey(passphrase: string, salt: Uint8Array, iterations: number) {
+async function passphraseKey(passphrase: string, salt: Uint8Array, iterations: number) {
   const base = await crypto.subtle.importKey(
     'raw',
     new TextEncoder().encode(passphrase.normalize('NFC')),
@@ -98,29 +152,60 @@ async function deriveKey(passphrase: string, salt: Uint8Array, iterations: numbe
   );
 }
 
-async function encrypt(aes: CryptoKey, text: string): Promise<Cipher> {
-  const iv = crypto.getRandomValues(new Uint8Array(12));
+/** PRF の出力（パスキーごとの秘密値）から、DEK を暗号化する鍵を作る */
+async function prfKey(prf: ArrayBuffer) {
+  const base = await crypto.subtle.importKey('raw', prf, 'HKDF', false, ['deriveKey']);
+  return crypto.subtle.deriveKey(
+    {
+      name: 'HKDF',
+      hash: 'SHA-256',
+      salt: new TextEncoder().encode('lllm-study-vault'),
+      info: new TextEncoder().encode('dek-wrap'),
+    },
+    base,
+    { name: 'AES-GCM', length: 256 },
+    false,
+    ['encrypt', 'decrypt'],
+  );
+}
+
+/** DEK の中身から、取り出せない形の鍵を作る */
+const importDek = (raw: Uint8Array) =>
+  crypto.subtle.importKey('raw', raw as BufferSource, 'AES-GCM', false, ['encrypt', 'decrypt']);
+
+async function encryptBytes(aes: CryptoKey, bytes: Uint8Array): Promise<Cipher> {
+  const iv = rand(12);
   const data = await crypto.subtle.encrypt(
     { name: 'AES-GCM', iv: iv as BufferSource },
     aes,
-    new TextEncoder().encode(text),
+    bytes as BufferSource,
   );
   return { iv: toB64(iv), data: toB64(data) };
 }
 
-/** 復号する。鍵が違えば null */
-async function decrypt(aes: CryptoKey, c: Cipher): Promise<string | null> {
+async function decryptBytes(aes: CryptoKey, c: Cipher): Promise<Uint8Array | null> {
   try {
-    const plain = await crypto.subtle.decrypt(
-      { name: 'AES-GCM', iv: fromB64(c.iv) as BufferSource },
-      aes,
-      fromB64(c.data) as BufferSource,
+    return new Uint8Array(
+      await crypto.subtle.decrypt(
+        { name: 'AES-GCM', iv: fromB64(c.iv) as BufferSource },
+        aes,
+        fromB64(c.data) as BufferSource,
+      ),
     );
-    return new TextDecoder().decode(plain);
   } catch {
     return null;
   }
 }
+
+const encryptText = (aes: CryptoKey, text: string) =>
+  encryptBytes(aes, new TextEncoder().encode(text));
+
+async function decryptText(aes: CryptoKey, c: Cipher): Promise<string | null> {
+  const bytes = await decryptBytes(aes, c);
+  return bytes ? new TextDecoder().decode(bytes) : null;
+}
+
+// ---------------------------------------------------------------- 保存の読み書き
 
 function readJson<T>(key: string): T | null {
   try {
@@ -131,63 +216,127 @@ function readJson<T>(key: string): T | null {
   }
 }
 
-function readStored(provider: CloudProviderId): StoredSecret | null {
-  const s = readJson<StoredSecret>(storageKey(provider));
-  return s && (s.v === 1 || s.v === 2) && s.data ? s : null;
+function readStored(id: CloudKeyId): StoredSecret | null {
+  const s = readJson<StoredSecret>(secretKey(id));
+  return s && (s.v === 1 || s.v === 2 || s.v === 3) && s.data ? s : null;
 }
 
-function readMeta(): VaultMeta | null {
-  const m = readJson<VaultMeta>(VAULT_KEY);
-  return m && m.v === 1 && m.salt && m.check ? m : null;
+function readMeta(): VaultMetaV1 | VaultMetaV2 | null {
+  const m = readJson<VaultMetaV1 | VaultMetaV2>(VAULT_KEY);
+  if (!m?.salt) return null;
+  return (m.v === 1 && m.check) || (m.v === 2 && m.wrapped) ? m : null;
 }
+
+const writeMeta = (m: VaultMetaV2) => localStorage.setItem(VAULT_KEY, JSON.stringify(m));
 
 function checkPassphrase(passphrase: string) {
   if (passphrase.length < MIN_PASSPHRASE_LENGTH)
     throw new Error(`合言葉は ${MIN_PASSPHRASE_LENGTH} 文字以上にしてください`);
 }
 
-async function writeVaultSecret(aes: CryptoKey, provider: CloudProviderId, key: string) {
-  const stored: VaultSecret = {
-    v: 2,
-    ...(await encrypt(aes, key)),
+async function writeSecret(aes: CryptoKey, id: CloudKeyId, key: string) {
+  const stored: DekSecret = {
+    v: 3,
+    ...(await encryptText(aes, key)),
     hint: keyHint(key),
     savedAt: Date.now(),
   };
-  localStorage.setItem(storageKey(provider), JSON.stringify(stored));
+  localStorage.setItem(secretKey(id), JSON.stringify(stored));
 }
+
+// ---------------------------------------------------------------- 登録した API キーの一覧
+
+function writeRegistry(list: KeyEntry[]) {
+  localStorage.setItem(REGISTRY_KEY, JSON.stringify(list.filter((e) => !e.session)));
+}
+
+/** 保存したキーの一覧（一覧がまだなければ、以前の形のキー（会社ごとに 1 本）から作る） */
+function readRegistry(): KeyEntry[] {
+  const list = readJson<KeyEntry[]>(REGISTRY_KEY);
+  if (Array.isArray(list)) return list.filter((e) => e?.id && e.provider);
+  const migrated = CLOUD_PROVIDER_ID_LIST.filter((p) => readStored(p)).map((p): KeyEntry => ({
+    id: p,
+    provider: p,
+    label: '',
+    models: [],
+    createdAt: readStored(p)!.savedAt,
+  }));
+  if (migrated.length) writeRegistry(migrated);
+  return migrated;
+}
+
+/** 登録した API キー（保存したものと今回だけのもの） */
+export function listKeys(): KeyEntry[] {
+  return [...readRegistry(), ...sessionEntries.values()];
+}
+
+export function getKeyEntry(id: CloudKeyId): KeyEntry | null {
+  return listKeys().find((e) => e.id === id) ?? null;
+}
+
+/** 名前・マイモデルを変える */
+export function updateKeyEntry(id: CloudKeyId, patch: Partial<Pick<KeyEntry, 'label' | 'models'>>) {
+  const session = sessionEntries.get(id);
+  if (session) sessionEntries.set(id, { ...session, ...patch });
+  else writeRegistry(readRegistry().map((e) => (e.id === id ? { ...e, ...patch } : e)));
+  emit();
+}
+
+const newKeyId = (provider: CloudProviderId) => `${provider}-${toB64Url(toB64(rand(6)))}`;
+
+// ---------------------------------------------------------------- 状態
 
 export function keyHint(key: string): string {
   return key.trim().slice(-4);
 }
 
 /** 暗号化して保存したキーがあるか（解除しなくても分かる） */
-export function storedKeyInfo(provider: CloudProviderId): { hint: string; savedAt: number } | null {
-  const s = readStored(provider);
+export function storedKeyInfo(id: CloudKeyId): { hint: string; savedAt: number } | null {
+  const s = readStored(id);
   return s ? { hint: s.hint, savedAt: s.savedAt } : null;
 }
 
-/** 以前の形（キーごとの合言葉）で保存したキーか */
-export function isLegacyKey(provider: CloudProviderId): boolean {
-  return readStored(provider)?.v === 1;
+/** 以前の形（キーごとの別の合言葉）で保存したキーか */
+export function isLegacyKey(id: CloudKeyId): boolean {
+  return readStored(id)?.v === 1;
 }
 
-/**
- * アプリの合言葉の状態。none: まだ決めていない（保存したキーもない）、locked: ロック中、open: 解除中
- */
+/** アプリの合言葉の状態。none: まだ決めていない（保存したキーもない）、locked: ロック中、open: 解除中 */
 export function vaultState(): 'none' | 'locked' | 'open' {
   if (vaultKey) return 'open';
-  if (readMeta() || PROVIDER_IDS.some((p) => readStored(p))) return 'locked';
+  if (readMeta() || readRegistry().some((e) => readStored(e.id))) return 'locked';
   return 'none';
 }
 
-export function isUnlocked(provider: CloudProviderId): boolean {
-  return unlocked.has(provider);
+export function isUnlocked(id: CloudKeyId): boolean {
+  return unlocked.has(id);
 }
 
 /** 解除済みのキー。ロック中なら null（呼び出し側でキーを画面や記録に出さないこと） */
-export function getUnlockedKey(provider: CloudProviderId): string | null {
-  return unlocked.get(provider) ?? null;
+export function getUnlockedKey(id: CloudKeyId): string | null {
+  const key = unlocked.get(id) ?? null;
+  if (key) touch();
+  return key;
 }
+
+// ---------------------------------------------------------------- 自動ロック
+
+let autoLockMs = 60 * 60 * 1000;
+let lockTimer: ReturnType<typeof setTimeout> | undefined;
+
+/** 使わない時間がこれだけ続いたらロックする（0 でしない） */
+export function setAutoLock(ms: number) {
+  autoLockMs = ms;
+  touch();
+}
+
+/** 使うたびに自動ロックまでの時間を延ばす */
+function touch() {
+  clearTimeout(lockTimer);
+  if (vaultKey && autoLockMs > 0) lockTimer = setTimeout(lockVault, autoLockMs);
+}
+
+// ---------------------------------------------------------------- 合言葉
 
 /** アプリの合言葉を決める（はじめて保存するとき）。決めたら解除中になる */
 export async function createVault(
@@ -196,165 +345,290 @@ export async function createVault(
 ): Promise<void> {
   checkPassphrase(passphrase);
   if (readMeta()) throw new Error('アプリの合言葉はもう決まっています');
-  const salt = crypto.getRandomValues(new Uint8Array(16));
-  const aes = await deriveKey(passphrase, salt, iterations);
-  const meta: VaultMeta = {
-    v: 1,
-    iterations,
-    salt: toB64(salt),
-    check: await encrypt(aes, CHECK_TEXT),
-  };
-  localStorage.setItem(VAULT_KEY, JSON.stringify(meta));
-  vaultKey = aes;
+  const salt = rand(16);
+  const raw = rand(32);
+  const k = await passphraseKey(passphrase, salt, iterations);
+  writeMeta({ v: 2, iterations, salt: toB64(salt), wrapped: await encryptBytes(k, raw) });
+  vaultKey = await importDek(raw);
+  touch();
   emit();
 }
 
-/** 以前の形のキーを合言葉で取り出す（違えば null） */
 async function decryptLegacy(s: LegacySecret, passphrase: string): Promise<string | null> {
-  const aes = await deriveKey(passphrase, fromB64(s.salt), s.iterations);
-  return decrypt(aes, s);
+  const k = await passphraseKey(passphrase, fromB64(s.salt), s.iterations);
+  return decryptText(k, s);
 }
 
-/**
- * アプリの合言葉で解除し、保存したすべてのキーを使えるようにする。合言葉が違えば例外。
- * 以前の形のキーも同じ合言葉なら取り出して、アプリの合言葉の形に移す。
- * まだアプリの合言葉がなく以前の形のキーだけがあるときは、それを解除できた合言葉をアプリの合言葉にする。
- * 戻り値は、解除できた接続先
- */
-export async function openVault(passphrase: string): Promise<CloudProviderId[]> {
-  const meta = readMeta();
-  const legacyPlain = new Map<CloudProviderId, string>();
-  if (meta) {
-    const aes = await deriveKey(passphrase, fromB64(meta.salt), meta.iterations);
-    if ((await decrypt(aes, meta.check)) !== CHECK_TEXT) throw new Error('合言葉が違います');
-    vaultKey = aes;
-  } else {
-    // 以前の形のキーだけがある: 解除できた合言葉をアプリの合言葉にする
-    let iterations = PBKDF2_ITERATIONS;
-    for (const p of PROVIDER_IDS) {
-      const s = readStored(p);
-      if (s?.v !== 1) continue;
-      const key = await decryptLegacy(s, passphrase);
-      if (key !== null) {
-        legacyPlain.set(p, key);
-        iterations = s.iterations;
-      }
-    }
-    if (!legacyPlain.size) throw new Error('合言葉が違います');
-    await createVault(passphrase, iterations);
-  }
+/** 保存したすべてのキーを DEK で取り出す（以前の形は、渡された鍵・合言葉で取り出して今の形に移す） */
+async function openAll(old?: { direct?: CryptoKey; passphrase?: string }): Promise<CloudKeyId[]> {
   const aes = vaultKey!;
-  const opened: CloudProviderId[] = [];
-  for (const p of PROVIDER_IDS) {
-    const s = readStored(p);
+  const opened: CloudKeyId[] = [];
+  for (const e of readRegistry()) {
+    const s = readStored(e.id);
     if (!s) continue;
-    let key: string | null;
-    if (s.v === 2) key = await decrypt(aes, s);
+    let key: string | null = null;
+    if (s.v === 3) key = await decryptText(aes, s);
     else {
-      key = legacyPlain.get(p) ?? (await decryptLegacy(s, passphrase));
-      // 同じ合言葉だった以前の形のキーは、アプリの合言葉の形に移す
-      if (key !== null) await writeVaultSecret(aes, p, key);
+      if (s.v === 2 && old?.direct) key = await decryptText(old.direct, s);
+      if (s.v === 1 && old?.passphrase) key = await decryptLegacy(s, old.passphrase);
+      if (key !== null) await writeSecret(aes, e.id, key);
     }
     if (key !== null) {
-      unlocked.set(p, key);
-      opened.push(p);
+      unlocked.set(e.id, key);
+      opened.push(e.id);
     }
   }
+  touch();
   emit();
   return opened;
 }
 
 /**
- * 別の合言葉で保存した以前の形のキーを、その合言葉で解除する。
- * アプリの合言葉が解除中なら、アプリの合言葉の形に移す（次からはアプリの合言葉だけで使える）
+ * アプリの合言葉で解除し、保存したすべてのキーを使えるようにする。合言葉が違えば例外。
+ * まだアプリの合言葉がなく以前の形のキーだけがあるときは、それを解除できた合言葉をアプリの合言葉にする。
+ * 戻り値は、解除できたキーの id
  */
-export async function unlockLegacyKey(
-  provider: CloudProviderId,
-  passphrase: string,
-): Promise<void> {
-  const s = readStored(provider);
+export async function openVault(passphrase: string): Promise<CloudKeyId[]> {
+  const meta = readMeta();
+  if (meta?.v === 2) {
+    const k = await passphraseKey(passphrase, fromB64(meta.salt), meta.iterations);
+    const raw = await decryptBytes(k, meta.wrapped);
+    if (!raw) throw new Error('合言葉が違います');
+    vaultKey = await importDek(raw);
+    return openAll({ passphrase });
+  }
+  if (meta?.v === 1) {
+    // 以前の形（合言葉から直接作った鍵）: DEK を作って、合言葉で暗号化した形に移す
+    const direct = await passphraseKey(passphrase, fromB64(meta.salt), meta.iterations);
+    if ((await decryptText(direct, meta.check)) !== CHECK_TEXT) throw new Error('合言葉が違います');
+    const raw = rand(32);
+    writeMeta({
+      v: 2,
+      iterations: meta.iterations,
+      salt: meta.salt,
+      wrapped: await encryptBytes(direct, raw),
+    });
+    vaultKey = await importDek(raw);
+    return openAll({ direct, passphrase });
+  }
+  // 以前の形のキー（キーごとの合言葉）だけがある: 解除できた合言葉をアプリの合言葉にする
+  let iterations = PBKDF2_ITERATIONS;
+  let ok = false;
+  for (const e of readRegistry()) {
+    const s = readStored(e.id);
+    if (s?.v === 1 && (await decryptLegacy(s, passphrase)) !== null) {
+      ok = true;
+      iterations = s.iterations;
+      break;
+    }
+  }
+  if (!ok) throw new Error('合言葉が違います');
+  await createVault(passphrase, iterations);
+  return openAll({ passphrase });
+}
+
+/** 別の合言葉で保存した以前の形のキーを、その合言葉で解除する（解除中なら今の形に移す） */
+export async function unlockLegacyKey(id: CloudKeyId, passphrase: string): Promise<void> {
+  const s = readStored(id);
   if (s?.v !== 1) throw new Error('別の合言葉で保存したキーではありません');
   const key = await decryptLegacy(s, passphrase);
   if (key === null) throw new Error('合言葉が違います');
-  if (vaultKey) await writeVaultSecret(vaultKey, provider, key);
-  unlocked.set(provider, key);
+  if (vaultKey) await writeSecret(vaultKey, id, key);
+  unlocked.set(id, key);
   emit();
 }
 
+/** 合言葉で DEK の中身を一時的に取り出す（パスキーの登録・合言葉の変更のときだけ） */
+async function dekWithPassphrase(
+  passphrase: string,
+): Promise<{ raw: Uint8Array; meta: VaultMetaV2 }> {
+  let meta = readMeta();
+  if (meta?.v === 1) {
+    await openVault(passphrase);
+    meta = readMeta();
+  }
+  if (meta?.v !== 2) throw new Error('アプリの合言葉がまだ決まっていません');
+  const k = await passphraseKey(passphrase, fromB64(meta.salt), meta.iterations);
+  const raw = await decryptBytes(k, meta.wrapped);
+  if (!raw) throw new Error('合言葉が違います');
+  return { raw, meta };
+}
+
+/** アプリの合言葉を変える（DEK を新しい合言葉で暗号化し直す。API キーとパスキーはそのまま使える） */
+export async function changePassphrase(
+  current: string,
+  next: string,
+  iterations = PBKDF2_ITERATIONS,
+): Promise<void> {
+  checkPassphrase(next);
+  const { raw, meta } = await dekWithPassphrase(current);
+  const salt = rand(16);
+  const k = await passphraseKey(next, salt, iterations);
+  writeMeta({ ...meta, iterations, salt: toB64(salt), wrapped: await encryptBytes(k, raw) });
+  emit();
+}
+
+// ---------------------------------------------------------------- パスキー（生体認証）
+
+export const passkeySupported = () =>
+  typeof window !== 'undefined' && typeof window.PublicKeyCredential === 'function';
+
+export function hasPasskey(): boolean {
+  const m = readMeta();
+  return m?.v === 2 && !!m.passkey;
+}
+
+type PrfResults = { prf?: { enabled?: boolean; results?: { first?: ArrayBuffer } } };
+
+async function evalPrf(p: { credentialId: string; prfSalt: string }): Promise<ArrayBuffer> {
+  const assertion = (await navigator.credentials.get({
+    publicKey: {
+      challenge: rand(32) as BufferSource,
+      allowCredentials: [{ type: 'public-key', id: fromB64(p.credentialId) as BufferSource }],
+      userVerification: 'required',
+      extensions: {
+        prf: { evalByCredential: { [toB64Url(p.credentialId)]: { first: fromB64(p.prfSalt) } } },
+      } as AuthenticationExtensionsClientInputs,
+    },
+  })) as PublicKeyCredential | null;
+  if (!assertion) throw new Error('認証がキャンセルされました');
+  const first = (assertion.getClientExtensionResults() as PrfResults).prf?.results?.first;
+  if (!first)
+    throw new Error('この端末のパスキーから秘密値を受け取れませんでした（PRF 拡張に未対応）');
+  return first;
+}
+
 /**
- * キーを登録する。vault ならアプリの合言葉で暗号化してこの端末に保存し（解除中であること）、
- * session なら（今回だけ）メモリーにだけ持つ。どちらの場合も、登録したキーはすぐに使える
+ * パスキー（指紋・顔認証など）を登録する。合言葉で DEK の中身を一時的に取り出し、
+ * パスキーの PRF 拡張の出力から作った鍵で暗号化して保存する（登録し直すと置き換える）
  */
-export async function saveKey(
+export async function registerPasskey(passphrase: string): Promise<void> {
+  if (!passkeySupported()) throw new Error('このブラウザはパスキーに対応していません');
+  const { raw, meta } = await dekWithPassphrase(passphrase);
+  const prfSalt = rand(32);
+  const cred = (await navigator.credentials.create({
+    publicKey: {
+      challenge: rand(32) as BufferSource,
+      rp: { name: 'LLLM Study' },
+      user: {
+        id: rand(16) as BufferSource,
+        name: 'lllm-study',
+        displayName: 'LLLM Study（API キー）',
+      },
+      pubKeyCredParams: [
+        { type: 'public-key', alg: -7 },
+        { type: 'public-key', alg: -257 },
+      ],
+      authenticatorSelection: { userVerification: 'required', residentKey: 'preferred' },
+      extensions: { prf: { eval: { first: prfSalt } } } as AuthenticationExtensionsClientInputs,
+    },
+  })) as PublicKeyCredential | null;
+  if (!cred) throw new Error('登録がキャンセルされました');
+  const ext = cred.getClientExtensionResults() as PrfResults;
+  if (!ext.prf?.enabled && !ext.prf?.results?.first)
+    throw new Error(
+      'この端末・ブラウザのパスキーは PRF 拡張に対応していないため、生体認証での解除は使えません',
+    );
+  const credentialId = toB64(cred.rawId);
+  // 登録のときに PRF の結果を返さない認証器もあるので、そのときは一度認証して受け取る
+  const prf = ext.prf.results?.first ?? (await evalPrf({ credentialId, prfSalt: toB64(prfSalt) }));
+  const k = await prfKey(prf);
+  writeMeta({
+    ...meta,
+    passkey: {
+      credentialId,
+      prfSalt: toB64(prfSalt),
+      wrapped: await encryptBytes(k, raw),
+      createdAt: Date.now(),
+    },
+  });
+  emit();
+}
+
+/** パスキー（生体認証）で解除する */
+export async function unlockWithPasskey(): Promise<CloudKeyId[]> {
+  const meta = readMeta();
+  if (meta?.v !== 2 || !meta.passkey) throw new Error('生体認証が登録されていません');
+  const prf = await evalPrf(meta.passkey);
+  const raw = await decryptBytes(await prfKey(prf), meta.passkey.wrapped);
+  if (!raw) throw new Error('生体認証で解除できませんでした。合言葉で解除してください');
+  vaultKey = await importDek(raw);
+  return openAll();
+}
+
+export function removePasskey(): void {
+  const meta = readMeta();
+  if (meta?.v !== 2) return;
+  const { passkey: _p, ...rest } = meta;
+  writeMeta(rest);
+  emit();
+}
+
+// ---------------------------------------------------------------- キーの登録・削除
+
+/**
+ * API キーを登録する。vault ならアプリの合言葉で暗号化してこの端末に保存し（解除中であること）、
+ * session なら（今回だけ）メモリーにだけ持つ。戻り値は登録したキーの id。登録したキーはすぐに使える
+ */
+export async function addKey(
   provider: CloudProviderId,
   apiKey: string,
   mode: 'vault' | 'session',
-): Promise<void> {
+  info: { label?: string; models?: string[] } = {},
+): Promise<CloudKeyId> {
   const key = apiKey.trim();
   if (!key) throw new Error('API キーを入力してください');
+  if (mode === 'vault' && !vaultKey)
+    throw new Error('アプリの合言葉で解除してから登録してください');
+  const entry: KeyEntry = {
+    id: newKeyId(provider),
+    provider,
+    label: info.label?.trim() ?? '',
+    models: info.models ?? [],
+    createdAt: Date.now(),
+  };
   if (mode === 'vault') {
-    if (!vaultKey) throw new Error('アプリの合言葉で解除してから登録してください');
-    await writeVaultSecret(vaultKey, provider, key);
+    await writeSecret(vaultKey!, entry.id, key);
+    writeRegistry([...readRegistry(), entry]);
   } else {
-    // 今回だけ: 以前に暗号化して保存したキーは残さない（どちらのキーを使っているか分からなくなるため）
-    localStorage.removeItem(storageKey(provider));
+    sessionEntries.set(entry.id, { ...entry, session: true });
   }
-  unlocked.set(provider, key);
+  unlocked.set(entry.id, key);
   emit();
+  return entry.id;
 }
 
 /** ロックする（保存したキーをすべてメモリーから消す。暗号文は残る。今回だけのキーはそのまま） */
 export function lockVault(): void {
   vaultKey = null;
-  for (const p of [...unlocked.keys()]) if (readStored(p)) unlocked.delete(p);
-  emit();
-}
-
-/**
- * アプリの合言葉を変える（保存したすべてのキーを新しい合言葉で暗号化し直す）。
- * 解除中で、保存したキーがすべて解除できていること
- */
-export async function changePassphrase(
-  newPassphrase: string,
-  iterations = PBKDF2_ITERATIONS,
-): Promise<void> {
-  checkPassphrase(newPassphrase);
-  if (!vaultKey) throw new Error('今の合言葉で解除してから変えてください');
-  const stored = PROVIDER_IDS.filter((p) => readStored(p));
-  if (stored.some((p) => !unlocked.has(p)))
-    throw new Error('ロック中のキーがあります。先に解除するか、削除してください');
-  const salt = crypto.getRandomValues(new Uint8Array(16));
-  const aes = await deriveKey(newPassphrase, salt, iterations);
-  for (const p of stored) await writeVaultSecret(aes, p, unlocked.get(p)!);
-  const meta: VaultMeta = {
-    v: 1,
-    iterations,
-    salt: toB64(salt),
-    check: await encrypt(aes, CHECK_TEXT),
-  };
-  localStorage.setItem(VAULT_KEY, JSON.stringify(meta));
-  vaultKey = aes;
+  clearTimeout(lockTimer);
+  for (const id of [...unlocked.keys()]) if (!sessionEntries.has(id)) unlocked.delete(id);
   emit();
 }
 
 /** 保存したキーとメモリーのキーをどちらも消す */
-export function deleteKey(provider: CloudProviderId): void {
-  localStorage.removeItem(storageKey(provider));
-  unlocked.delete(provider);
-  pending.delete(provider);
+export function deleteKey(id: CloudKeyId): void {
+  localStorage.removeItem(secretKey(id));
+  writeRegistry(readRegistry().filter((e) => e.id !== id));
+  sessionEntries.delete(id);
+  unlocked.delete(id);
   emit();
 }
 
-/** アプリの合言葉の情報も消す（すべてのキーを消したあと。合言葉を忘れたときのやり直し） */
+/** 保管庫の情報も消す（すべてのキーを消したあと。合言葉を忘れたときのやり直し） */
 export function deleteVault(): void {
+  for (const e of listKeys()) deleteKey(e.id);
   localStorage.removeItem(VAULT_KEY);
+  localStorage.removeItem(REGISTRY_KEY);
   vaultKey = null;
   emit();
 }
 
+// ---------------------------------------------------------------- ログインで受け取ったキー
+
 /**
  * ログイン（OpenRouter の OAuth）で受け取った、まだ保存していないキー。
- * 合言葉を決めて保存するまでのあいだ、メモリーにだけ置く（画面にもストアにも出さない）
+ * 保存するまでのあいだ、メモリーにだけ置く（画面にもストアにも出さない）
  */
 const pending = new Map<CloudProviderId, string>();
 

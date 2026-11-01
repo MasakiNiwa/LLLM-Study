@@ -30,7 +30,30 @@ const MIN_OUTPUT_TOKENS_WITH_THINKING = 16384;
 export interface AnthropicModel {
   id: string;
   displayName: string;
+  created?: number;
+  contextLength?: number;
+  maxOutput?: number;
+  /** 100 万トークンあたりの料金（USD）。API から取れないので参考値 */
+  promptPrice?: number;
+  completionPrice?: number;
+  priceIsReference?: boolean;
 }
+
+/** 参考の料金（USD / 100 万トークン 入力・出力。変わることがある） */
+const REFERENCE_PRICES: Record<string, [number, number]> = {
+  'claude-fable-5-1': [10, 50],
+  'claude-fable-5': [10, 50],
+  'claude-opus-5-5': [4, 20],
+  'claude-opus-5': [5, 25],
+  'claude-opus-4-8': [5, 25],
+  'claude-opus-4-7': [5, 25],
+  'claude-opus-4-6': [5, 25],
+  'claude-sonnet-5-5': [2, 10],
+  'claude-sonnet-5': [2, 10],
+  'claude-sonnet-4-6': [3, 15],
+  'claude-haiku-5-5': [0.1, 0.5],
+  'claude-haiku-4-5': [1, 5],
+};
 
 /** モデルが返す部分。履歴に戻すときはそのまま送る */
 type Block =
@@ -159,9 +182,28 @@ export async function listAnthropicModels(
     throw networkError(e);
   }
   if (!res.ok) throw await readError(res);
-  const body = (await res.json()) as { data?: { id: string; display_name?: string }[] };
+  const body = (await res.json()) as {
+    data?: {
+      id: string;
+      display_name?: string;
+      created_at?: string;
+      max_input_tokens?: number;
+      max_tokens?: number;
+    }[];
+  };
   // 新しいものから順に返る
-  return (body.data ?? []).map((m) => ({ id: m.id, displayName: m.display_name || m.id }));
+  return (body.data ?? []).map((m) => {
+    const price = REFERENCE_PRICES[m.id];
+    const created = m.created_at ? Date.parse(m.created_at) : NaN;
+    return {
+      id: m.id,
+      displayName: m.display_name || m.id,
+      ...(Number.isFinite(created) && { created }),
+      ...(m.max_input_tokens && { contextLength: m.max_input_tokens }),
+      ...(m.max_tokens && { maxOutput: m.max_tokens }),
+      ...(price && { promptPrice: price[0], completionPrice: price[1], priceIsReference: true }),
+    };
+  });
 }
 
 /** 既定のモデル: いちばん新しい Haiku（速くて安い）。なければ Sonnet、それもなければ先頭 */

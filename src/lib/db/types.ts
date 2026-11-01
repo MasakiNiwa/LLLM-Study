@@ -94,8 +94,19 @@ export interface ReviewRecord {
   prev: FsrsFields & { introducedDay?: string };
 }
 
+/** チャットのスレッド（会話ひとつ分） */
+export interface ThreadRecord {
+  id: string;
+  title: string;
+  createdAt: number;
+  /** 最後に話した日時（履歴の並び順） */
+  updatedAt: number;
+}
+
 export interface ChatRecord {
   id: string;
+  /** どのスレッドの発言か（v1.12 より前の発言は「これまでのチャット」に入れる） */
+  threadId?: string;
   role: 'user' | 'assistant';
   /** 画面に表示する本文 */
   text: string;
@@ -108,6 +119,8 @@ export interface ChatRecord {
   proposals?: { draft: UserItemDraft; added?: boolean }[];
   createdAt: number;
   error?: string;
+  /** 答えたモデル（例: Gemini（gemini-2.5-flash）） */
+  model?: string;
 }
 
 export interface MetaRecord {

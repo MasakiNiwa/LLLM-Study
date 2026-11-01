@@ -21,10 +21,13 @@ import {
   type OpenRouterModel,
 } from './openrouter';
 
-/** モデル。OpenRouter のモデルは料金・ツール対応などの情報も持つ */
+/**
+ * モデル（選ぶ画面に出す情報。取れる範囲で）。料金は 100 万トークンあたりの USD、
+ * priceIsReference なら API から取れない参考値
+ */
 export type CloudModel = { id: string; displayName: string } & Partial<
   Omit<OpenRouterModel, 'id' | 'displayName'>
->;
+> & { priceIsReference?: boolean };
 
 export interface CloudGenerateOptions {
   apiKey: string;
